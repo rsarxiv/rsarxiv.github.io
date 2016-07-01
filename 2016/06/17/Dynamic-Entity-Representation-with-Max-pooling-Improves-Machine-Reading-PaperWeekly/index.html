@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="本文是机器阅读理解系列的第六篇文章，paper的题目是Dynamic Entity Representation with Max-pooling Improves Machine Reading，作者是来自日本东北大学的老师Sosuke Kobayashi，文章发表在NAACL HLT 2016。">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Dynamic Entity Representation with Max-pooling Improves Machine Reading #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Dynamic Entity Representation with Max-pooling Improves Machine Reading #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Dynamic Entity Representation with Max-pooling Improves Machine Reading #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-17
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/Reading-Comprehension/">#Reading Comprehension</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文是机器阅读理解系列的第六篇文章，paper的题目是<a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic Entity Representation with Max-pooling Improves Machine Reading</a>，作者是来自日本东北大学的老师<a href="http://www.sc.isc.tohoku.ac.jp/~koba/" target="_blank" rel="external">Sosuke Kobayashi</a>，文章发表在<a href="http://naacl.org/naacl-hlt-2016/" target="_blank" rel="external">NAACL HLT 2016</a>。本文的代码开源在<a href="https://github.com/soskek/der-network" target="_blank" rel="external">Github</a>。</p>
+<p>本文模型之前的模型都是用一个静态的向量来表示一个entity，与上下文没有关系。而本文最大的贡献在于提出了一种动态表示entity（Dynamic Entity Representation）的模型，根据不同的上下文对同样的entity有不同的表示。</p>
+<p>模型还是采用双向LSTM来构建，这时动态entity表示由四部分构成，包括两个方向上的hidden state，以及表示该entity所在句子的last hidden state，也就是该entity所在的上下文表示。如下图所示：</p>
+<img src="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/fig1.png" width="400" height="400">
+<p>计算出entity的动态表示之后，通过attention mechanism计算得到query与每个entity之间的权重，然后计算每个entity在document和query条件下的概率，找到最终的answer。</p>
+<p>query向量的计算与动态entity计算过程类似，这里需要填空的地方记作placeholder，也是包括四个部分，其中两个是表示placeholder上下文的last hidden state，另外两个是表示placeholder的hidden state。</p>
+<p>模型的整个计算过程就是这样。如果遇到一个entity在document中出现多次的情况，该entity就会会有不同的表示，本文采用CNN中常用的max-pooling从各个表示中的每个维度获取最大的那一个组成该entity最终的表示，这个表示包括了该entity在document中各种context下的信息，具有最全面的信息，即原文中所说的accumulate information。如下图：</p>
+<img src="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/fig2.png" width="400" height="400">
+<p>本文的实验在CNN数据上对模型进行了对比，效果比之前的Attentive Reader好很多，验证了本文的有效性。（当然结果没法和GA Reader比）</p>
+<p>最后，作者给出了一个example，来说明用max-pooling的作用，见下图：</p>
+<img src="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/fig3.png" width="400" height="400">
+<p>由于用了max-pooling模型比起不用它的话，可以关注到第二句和第三句话，因为本文模型可以捕捉到entity0（Downey）和entity2（Iron Man）是关联的（Robert Downey Jr.是Iron Man的扮演者），然后就会注意到entity2出现过的几个句子，而不仅仅是query中entity0出现过的几个句子，这一点帮助了模型找到了最终的正确答案entity26（在第二句中）。</p>
+<p>本文模型的一个好玩之处在于用了一种变化的眼光和态度来审视每一个entity，不同的context会给同样的entity带来不同的意义，因此用一种动态的表示方法来捕捉原文中entity最准确的意思，才能更好地理解原文，找出正确答案。实际体会中，我们做阅读理解的时候，最简单的方法是从问题中找到关键词，然后从原文中找到同样的词所在的句子，然后仔细理解这个句子最终得到答案，这种难度的阅读理解可能是四、六级的水平，再往高一个level的题目，就需要你联系上下文，联系关键词相关联的词或者句子来理解原文，而不是简单地只找到一个句子就可以答对题目。本文的动态表示正是有意在更加复杂的阅读理解题目上做文章，是一个非常好的探索。</p>
+<p>另外，如何衡量阅读理解语料中题目的难度？是否可以按难度分类进行对比测试？如果说现在最好的系统可以做到75%左右的正确率，是否可以给出一些更加有难度的题目来做？比如英语考试中真正的阅读理解或者完形填空。不同的模型具有不同的特点，可以考虑用不同难度的题目来验证模型的适用性。</p>
+<p>本文是这个系列文章在本周的最后一篇单文，周末的时间会整理出本周分享的模型的思路、研究动机和实验结果等各个方面来写一篇综述文章，对机器阅读理解这个点进行一个较系统地总结，敬请期待！（后续还会继续关注这个方向，读更多的paper来分享）</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

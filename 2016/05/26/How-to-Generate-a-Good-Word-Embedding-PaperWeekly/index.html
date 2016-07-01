@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
+之前介绍过几种生成word embedding的方法，那么针对具体的任务该如何选择训练数据？如何选择采用哪个模型？如何选择模型参数？本篇将分享一篇paper来回答上述问题，paper的题目是How to Generate a Good Word Embedd">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="How to Generate a Good Word Embedding #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>How to Generate a Good Word Embedding #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>How to Generate a Good Word Embedding #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-05-26
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/word-embeddings/">#word embeddings</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>之前介绍过几种生成word embedding的方法，那么针对具体的任务该如何选择训练数据？如何选择采用哪个模型？如何选择模型参数？本篇将分享一篇paper来回答上述问题，paper的题目是<a href="http://cn.arxiv.org/pdf/1507.05523.pdf" target="_blank" rel="external">How to Generate a Good Word Embedding</a>，作者是来自中科院大学的来斯惟博士。</p>
+<p>当前，word embedding的模型有很多，性能几乎都是各说纷纭，每个模型在自己选定的数据集和任务上都取得了state-of-the-art结果，导致学术研究和工程应用上难以做出选择。不仅仅在word embedding这个子方向上存在这样的问题，很多方向都有类似的问题，如何公平客观地评价不同的模型是一个很困难的任务。本文作者试着挑战了一下这个难题，并且给出了一些有意义的结果。</p>
+<p>本文所做研究都是一个同一个假设，即：出现在相似上下文的单词具有相似的意思。</p>
+<p>下面来看下不同模型的比较，不同word embedding模型之间主要的区别在于两点：</p>
+<p>1、目标词和上下文的关系</p>
+<p>2、上下文的表示方法</p>
+<p>本文提供探讨了6种模型，并从这两个方面对模型进行了对比，如下图：</p>
+<img src="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/fig1.png" width="500" height="500">
+<p>c表示上下文，w表示目标词。首先看w和c的关系，前五种模型均是用c来预测w，只有C&amp;W模型是给w和c的组合来打分。再看c的表示方法，Order模型是本文为了对比增加的一个虚拟模型，考虑了词序信息，将c中每个单词拼接成一个大向量作为输入，而word2vec的两个模型skip-gram和cbow都是将上下文处理为一个相同维度的向量作为输入，其中skip-gram选择上下文中的一个词作为输入，cbow将上下文的几个词向量作了平均，LBL、NNLM和C&amp;W模型都是在Order模型的基础上加了一层隐藏层，将上下文向量做了一个语义组合。具体见下表：</p>
+<img src="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/fig2.png" width="500" height="500">
+<p>据研究估计，文本含义信息的20%来自于词序，剩下的来自于词的选择。所以忽略词序信息的模型，将会损失约20%的信息。</p>
+<p>本文做了包括三种类型的八组对比实验，分别是：</p>
+<ul>
+<li><p>研究词向量的语义特性。该类实验是为了对比词向量的语义特性，包括：WordSim353，TOEFL，analogy task：semantic和syntactic。</p>
+</li>
+<li><p>将词向量作为特征。该类实验是为了对比词向量作为处理其他任务的特征时，对该任务性能的提升。包括：文本分类和命名实体识别。前者将词向量加权平均得到文本向量来分类，权值是词频，数据集用的是IMDB；后者用CoNLL03数据集做NER任务。</p>
+</li>
+<li><p>用词向量来初始化神经网络模型。该类实验是为了研究词向量作为神经网络的初始值，对NN模型的提升。包括：CNN文本分类和词性标注。前者用了我们之前提到过的Kim的CNN模型，将句子表示成矩阵作为CNN的输入得到句子的表示，进行情感分类，数据集是Stanford Sentiment Treebank；后者用Wall Street Journal数据集进行了POS tagging任务。</p>
+</li>
+</ul>
+<p>经过大量的对比实验，作者回答了以下几个问题：</p>
+<p>Q：哪个模型最好？如何选择c和w的关系以及c的表示方法？</p>
+<p>A：对于一个小型数据集来说，类似skip-gram这样越简单的模型效果越好，对于一个大型数据集来说，稍微复杂一点的模型，比如cbow和order就可以取得非常好的效果。真实数据中，skip-gram、cbow和order这样的模型足够了。在语义任务中，通过c来预测w的模型要更优于C&amp;W这种将c和w都放在输入层的模型。</p>
+<p>Q：数据集的规模和所属领域对词向量的效果有哪些影响？</p>
+<p>A：数据集的领域远比规模重要，给定一个任务之后，选择任务相关的领域数据将会提升性能，相反，如果数据并不相关，将会导致更差的性能。当然，如果数据都属于同一领域，规模越大性能越好。</p>
+<p>Q：在训练模型时迭代多少次可以有效地避免过拟合？</p>
+<p>A：通常的做法是在测试数据集上观察误差，当误差开始上升时即可停止训练，但经过本文的研究，这种方法并不能得到最好的task结果，好的做法是用task data作为early stopping的数据。</p>
+<p>Q：词向量的维度与效果之间的关系？</p>
+<p>A：越大的维度就会有越好的效果，但在一般的任务中50就已经足够了。</p>
+<p>本文作者做了大量的工作，针对当前词向量模型的方方面面问题进行了研究，并且给出了许多有意义的结果，对今后研究和使用词向量的童鞋们搭建了一个非常坚实的平台。并且在github上开源了<a href="https://github.com/licstar/compare" target="_blank" rel="external">实验结果</a>。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

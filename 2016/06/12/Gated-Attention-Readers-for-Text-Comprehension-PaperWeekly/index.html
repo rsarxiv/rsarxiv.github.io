@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="完形填空一直是各大英语考试的常见题型，读一篇短文，填20个空。那么如果是机器来做完形填空，该如何来定义问题，提出模型呢？本周开始将会介绍一系列文本理解的模型。本文分享的题目是Gated-Attention Readers for Text Comprehension，最早于6月5日submit于ar">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Gated-Attention Readers for Text Comprehension #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Gated-Attention Readers for Text Comprehension #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Gated-Attention Readers for Text Comprehension #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-12
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/Text-Comprehension/">#Text Comprehension</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>完形填空一直是各大英语考试的常见题型，读一篇短文，填20个空。那么如果是机器来做完形填空，该如何来定义问题，提出模型呢？本周开始将会介绍一系列文本理解的模型。本文分享的题目是<a href="http://cn.arxiv.org/pdf/1606.01549v1" target="_blank" rel="external">Gated-Attention Readers for Text Comprehension</a>，最早于6月5日submit于arxiv上，作者是CMU的Graduate Research Assistant <a href="https://www.cs.cmu.edu/directory/bdhingra" target="_blank" rel="external">Bhuwan Dhingra</a>。</p>
+<p>首先，介绍一下对完形填空问题的定义。问题可以表述为一个三元组(d,q,a)，这里d是指原文document，q是指完形填空的问题query（这里需要注意一点的是，与我们英语考试中的完形填空不同，更像是只用一个单词来回答的阅读理解），a是问题的答案。这个答案是来自一个固定大小的词汇表A中的一个词。即：给定一个文档-问题对(d,q)，从A中找到最合适的答案a。</p>
+<p>本文精彩的部分有两个，一个是related work写的非常漂亮，另一个是提出了一种新的注意力模型GA（Gate-Attention） Reader，并且取得了领先的结果。</p>
+<p>后续的文本理解系列的文章将会从related work中产生，包括以下几篇：</p>
+<p>[1] <a href="http://arxiv.org/pdf/1506.03340v3.pdf" target="_blank" rel="external">Teaching machines to read and comprehend</a></p>
+<p>[2] <a href="https://arxiv.org/pdf/1406.2710v1.pdf" target="_blank" rel="external">A multiplicative model for learning distributed text-based attribute representations</a></p>
+<p>[3] <a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic entity representations with max-pooling improves machine reading</a></p>
+<p>[4] <a href="http://arxiv.org/pdf/1603.01547v1.pdf" target="_blank" rel="external">Text understanding with the attention sum reader network</a></p>
+<p>[5] <a href="http://arxiv.org/pdf/1511.02301v4.pdf" target="_blank" rel="external">The goldilocks principle: Reading children’s books with explicit memory representations</a></p>
+<p>[6] <a href="http://arxiv.org/pdf/1606.02858v1.pdf" target="_blank" rel="external">A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task</a></p>
+<p>下面来介绍本文的模型，结合下图来看：</p>
+<img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig1.png" width="600" height="600">
+<p><b>step 1</b> document和query通过一个Lookup层，使得每个词都表示成一个低维向量。</p>
+<p><b>step 2</b> 将document中的词向量通过一个双向GRU，将两个方向的state做拼接获得该词的新表示。同时也将query通过一个双向GRU，用两个方向上的last hidden state作为query的表示。</p>
+<p><b>step 3</b> 将document中每个词的新表示与query的新表示逐元素相乘得到下一个GRU层的输入。</p>
+<p><b>step 4</b> 重复step 2和3，直到通过设定的K层，在第K层时，document的每个词向量与query向量做内积，得到一个最终的向量。</p>
+<p><b>step 5</b> 将该向量输入到softmax层中，做概率归一化。</p>
+<p><b>step 6</b> 因为document中有重复出现的词，聚合之后得到最终的分类结果，即确定应该填哪个词。</p>
+<p>模型的计算流程还是很好理解的，下面给出一些可视化的attention结果。</p>
+<img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig2.png" width="400" height="400">
+<p>图中高亮的部分是针对问题时的最后一层注意力所关注的地方。</p>
+<p>注意力模型是一个非常热门的研究领域，很多专家都看好其在今后各大nlp任务中的应用前景，不同版本、不同结构、不同层次的注意力模型丰富了模型，也提升了效果。注意力的本质就是说你关注的输出与你的输入中的哪个元素关系更加紧密，即输出的部分应该更加注意哪个输入细节，在做完形填空、阅读理解的时候，我们也会有这样的感受，就是题目的答案往往就在某一句话或某几句话当中，并不需要回答每个问题都从全文中找一遍答案，而是定位到关键句上。这里的定位就是注意力，剩下的问题就是研究如何更加准确地定义、建模注意力，是用普通的前馈神经网络，还是用GRU，还是用分层模型都需要针对具体问题的特点。</p>
+<p>后续的几篇文章将会继续介绍文本理解，敬请关注。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

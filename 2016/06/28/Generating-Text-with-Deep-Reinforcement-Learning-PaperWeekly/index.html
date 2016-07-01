@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="上一篇介绍了DQN在文字游戏中的应用，本文将分享一篇DQN在文本生成中的应用，将一个领域的知识迁移到其他领域应用的时候，都需要做概念上的等效替换，比如context可以替换为state，被预测的word可以替换为action。本文分享的题目是Generating Text with Deep Rei">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Generating Text with Deep Reinforcement Learning #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Generating Text with Deep Reinforcement Learning #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Generating Text with Deep Reinforcement Learning #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/DQN/">#DQN</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>上一篇介绍了DQN在文字游戏中的应用，本文将分享一篇DQN在文本生成中的应用，将一个领域的知识迁移到其他领域应用的时候，都需要做概念上的等效替换，比如context可以替换为state，被预测的word可以替换为action。本文分享的题目是<a href="http://arxiv.org/pdf/1510.09202v1.pdf" target="_blank" rel="external">Generating Text with Deep Reinforcement Learning</a>，作者是来自National Research Council of Canada的<a href="http://www.site.uottawa.ca/~hguo028/mainpage.htm" target="_blank" rel="external">Hongyu Guo</a>研究员，文章最早于2015年10月30日submit在arxiv上。</p>
+<p>语言模型往往用来生成文本，在很多例子中都有应用，比如：自动文摘、bot、机器翻译、QA等等。本文想要做的事情是用DQN来生成文本，起到一个语言模型的作用，并且这是第一次尝试用DQN来生成文本。仔细想想，DQN在解决video games时遇到的情况和现在不同，state可能还好，可生成的action数量远远大于游戏中action的数量，所以，如何解决action的问题对于DQN在NLP中的应用前景至关重要。目前来看，读此类的paper，需要关注的有两个部分：</p>
+<p>1、action规模的问题如何解决？</p>
+<p>2、DQN中每条数据集包含的元素与NLP问题中各个元素的对应关系。</p>
+<p>本文解决第一个问题采用的方法是，用传统的语言模型decoder来为DQN的action生成candidated actions，虽然这个actions集合是动态，但对于每一条数据来说，action的数量只有很少了，与video games差不太多了。</p>
+<p>NLP不像video games直接可以用游戏画面作为输入，用多层CNN提取feature进行action选择，因为text不仅仅是一个序列，而且是变长度的，所以一般来说也都是RNN来处理。本文模型如下图：</p>
+<img src="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/fig1.png" width="600" height="500">
+<p>首先，回答关心的第二个问题，DQN中各元素的对应关系（transition tuple）。</p>
+<p>DQN中：(s(t),a(t),r(t),s(t+1))<br>本文：([EnSen(t),DeSen(t)],y(t),r(t),[EnSen(t),DeSen(t+1)])</p>
+<p>整个模型是一个迭代decoding的过程，通过LSTM decoder生成最初的DeSen(t)之后，开始不断地迭代。在decoder的每一个time step，DQN会从DeLSTM使用的词表中选择一个可以获得最大reward的action作为该time step新生成的词，用这个新词来代替之前的旧词，生成新的状态DeSen(t+1)，依次迭代下去，每一次迭代都只生成一个新词来代替旧词，直到最后一个新词被生成。这里的reward r(t)是计算target sentence和DeSen(t+1)的相似度得来的。</p>
+<p>本文在这个模型的基础上，尝试了在decoder部分用双向的LSTM来表示，并且用一个光滑的BLEU来做reward。这一点与<a href="http://rsarxiv.github.io/2016/05/17/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">Neural Headline Generation with Minimum Risk Training</a>这篇文章从某一个角度来说有一点点类似，本文是用最终的评价指标BLEU作为reward，而那篇文章是用ROUGE指标作为优化函数，最终取得了非常令人满意的结果。</p>
+<p>整个算法流程大体上都是遵循DQN的框架，只是细节有一些不同，如下图：</p>
+<img src="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/fig2.png" width="600" height="600">
+<p>实验部分，用了10000个sentences作为训练集，source和target是一样的，是一个autoencoder问题，对比了只用LSTM decoder和本文模型的结果，如下表：</p>
+<img src="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/fig3.png" width="300" height="300">
+<p>验证了本文方法的有效性。</p>
+<p>本文较前一篇文字游戏的文章更难的一点是处理大量actions的方法，上一篇其实仍旧是个游戏，actions的数量在一个非常有限的范围内，本篇是做语言模型的，actions和词汇表一样大，这是DQN在NLP中应用最头疼的问题。本文用了DeLSTM在每个time step中使用的Top N个词作为候选actions，很好地解决了这个问题，那么到底有没有更好的方法来减少actions呢？有没有不需要用这么复杂的模型来做处理呢？想到一个idea，用char-level来做语言模型，用到的vocabulary size远远小于word-level，对于DQN来说，actions集合非常固定，并且非常小，只是增大了state的表示。</p>
+<p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
+<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="引机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做Maluuba的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近阅">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="教机器学习阅读"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>教机器学习阅读 - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>教机器学习阅读</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-18
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/Reading-Comprehension/">#Reading Comprehension</a> <a href="/tags/综述/">#综述</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做<a href="http://www.maluuba.com/" target="_blank" rel="external">Maluuba</a>的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近阅读过的相关paper。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>首先定义下机器阅读理解问题的数学模型。</p>
+<p>问题可以表述为一个三元组(d,q,a)，这里d是指原文document，q是指问题query或者question（不同的paper可能称呼不同，但指的是同一回事），a是answer，即问题的答案。这个答案是来自一个固定大小的词汇表A中的一个词。我们要解决的问题就变成了：给定一个document-query对(d,q)，从A中找到最合适的答案a。</p>
+<p>经常听到这么一句话，没有分类解决不了的问题。虽然有一点夸张，但这个问题是一个典型的多分类问题，预测候选列表中每个word或者entity的条件概率，最大的那个就是正确答案。其实很多问题也都是这样，尤其是在生成问题上，给定context，来predict每一个word的概率。</p>
+<p>这里不同的paper在词汇表A中有些不同，有的paper将A定义为document和query中的所有词，而有的将A定义为所有的entity，而有的将会附带一个包括正确答案在内的10个候选答案，并且每个答案的词性都一致。</p>
+<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>语料对于NLP的研究有着十分重要的基础作用，尤其是大规模的语料为研究相关任务带来了革命性的变化。前些年的语料都非常小，比如MCTest。从2015年开始，出现了两大主流的大型数据集。</p>
+<p>1、CNN/Daily Mail[9]</p>
+<p>数据集构建基本的思路是受启发于自动文摘任务，从两个大型的新闻网站CNN和Daily Mail中获取数据源，用abstractive的方法生成每篇新闻的summary，用新闻原文作为document，将summary中去掉一个entity作为query，被去掉的entity作为answer，从而得到阅读理解的数据三元组(document,query,answer)。这里存在一个问题，就是有的query并不需要联系到document，通过query中的上下文就可以predict出answer是什么，也就失去了阅读理解的意义。因此，本文提出了用一些标识替换entity和重新排列的方法将数据打乱，防止上面现象的出现。处理之后的效果见下图：</p>
+<img src="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/fig1.png" width="600" height="600">
+<p>2、Children’s Book Test(CBT)[3]</p>
+<p>CBT的数据均来自Project Gutenberg，使用了其中的与孩子们相关的故事，这是为了保证故事叙述结构的清晰，从而使得上下文的作用更加突出。每篇文章只选用21句话，前20句作为document，将第21句中去掉一个词之后作为query，被去掉的词作为answer，并且给定10个候选答案，每个候选答案是从原文中随机选取的，并且这10个答案的词性是相同的，要是名词都是名词，要是命名实体都是实体，要是动词都是动词。例子看下图：</p>
+<img src="/2016/06/16/THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS-PaperWeekly/fig1.png" width="600" height="600">
+<p>左图为电子书的原文，右图为构建成数据集之后的几个元素，document、query、answer和candidate。数据集根据词性一共分为四类，第一类是Named Entity，第二类是Nouns，第三类是Verbs，第四类是Preposition。其实阅读理解问题的难度在于前两种词性，后面的两种用语言模型通过query的上下文就可以预测出来，不需要借助于document的信息。这个数据集并没有像CNN那样做替换和重排的处理，反而是鼓励大家用更少的信息来做阅读理解。</p>
+<p>说完最流行的两个数据集，接下来介绍一下昨天刚刚在arxiv上submit的一个数据集。</p>
+<p>3、Stanford Question Answering Dataset(SQuAD)[1]</p>
+<p>该数据集的构建分为三个步骤：</p>
+<ul>
+<li><p>在Wikipedia中选取质量排名在10000以内的article，（这里用了 Project Nayuki’s Wikipedia’s internal PageRanks来做rank），从每篇文章中提取出paragraph，经过一系列处理之后得到了23215个paragraph，涉及了很宽泛的话题。</p>
+</li>
+<li><p>然后雇佣了crowdworkers给每个paragraph提问和回答，而且鼓励workers用自己的话来提问。（这一点和CNN中用abstractive的思路很像，只不过是用了人工来做。）</p>
+</li>
+<li><p>第三步是让crowdworkers来用原文中的text（word或者是span）来回答这个问题，如果无法用原文回答的话，直接提交问题。</p>
+</li>
+</ul>
+<p>这个数据集的答案类型非常丰富，看下表：</p>
+<img src="/2016/06/18/教机器学习阅读/fig1.png" width="400" height="400">
+<p>4、LAnguage Modeling Broadened to Account for Discourse Aspects(LAMBADA)[11]</p>
+<p>该数据集的paper于2016年6月20日于arxiv上，特补充在此。</p>
+<p>这个数据集的数据源来自Book Corpus，一共包括10022个passage，平均每个passage包括4.6句话+1句target，每个passage大约75个单词。在选择数据的过程用了很多的人力来做，按照以下的过程：</p>
+<ul>
+<li><p>第一个人阅读全文之后来猜target word，如果猜对了。</p>
+</li>
+<li><p>第二个人继续阅读全文来猜target word，如果猜对了。</p>
+</li>
+<li><p>更多人不让阅读全文，只能读target sentence来猜target word，直到猜对或者达到猜的人数上限，比如说10.如果没有人猜的对，就将该数据归入LAMBADA中。</p>
+</li>
+</ul>
+<p>这种方法很费时费力，但从质量上得到了保证，所获得的数据集都可以保证通过阅读全文之后一定会得到正确结果，不阅读全文一定找不到结果，避免了语言模型通过分析target sentence直接生成target word这种情况，给研究者提供了一个质量更高的数据集。</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>本文所说的模型是指neural模型，人工features的模型就不介绍了。</p>
+<p>1、Deep LSTM Reader / Attentive Reader / Impatient Reader[9]</p>
+<p>这个模型是配套CNN/Daily Mail数据集的模型，只是作为后面研究的baseline，所以效果不会太好。</p>
+<ul>
+<li>Deep LSTM Reader</li>
+</ul>
+<img src="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/fig2.png" width="400" height="400">
+<p>看上图，其实非常简单，就是用一个两层LSTM来encode query|||document或者document|||query，然后用得到的表示做分类。</p>
+<ul>
+<li>Attentive Reader</li>
+</ul>
+<img src="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/fig3.png" width="400" height="400">
+<p>这个模型将document和query分开表示，其中query部分就是用了一个双向LSTM来encode，然后将两个方向上的last hidden state拼接作为query的表示，document这部分也是用一个双向的LSTM来encode，每个token的表示是用两个方向上的hidden state拼接而成，document的表示则是用document中所有token的加权平均来表示，这里的权重就是attention，权重越大表示回答query时对应的token的越重要。然后用document和query的表示做分类。</p>
+<ul>
+<li>Impatient Reader</li>
+</ul>
+<img src="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/fig4.png" width="400" height="400">
+<p>这个模型在Attentive Reader模型的基础上更细了一步，即每个query token都与document tokens有关联，而不是像之前的模型将整个query考虑为整体。感觉这个过程就好像是你读query中的每个token都需要找到document中对应相关的token。这个模型更加复杂一些，但效果不见得不好，从我们做阅读理解的实际体验来说，你不可能读问题中的每一个词之后，就去读一遍原文，这样效率太低了，而且原文很长的话，记忆的效果就不会很好了。</p>
+<p>2、Attention Sum Reader[6]</p>
+<img src="/2016/06/14/Text-Understanding-with-the-Attention-Sum-Reader-Network-PaperWeekly/fig1.png" width="600" height="600">
+<p><b>step 1</b> 通过一层Embedding层将document和query中的word分别映射成向量。</p>
+<p><b>step 2</b> 用一个单层双向GRU来encode document，得到context representation，每个time step的拼接来表示该词。</p>
+<p><b>step 3</b> 用一个单层双向GRU来encode query，用两个方向的last state拼接来表示query。</p>
+<p><b>step 4</b> 每个word vector与query vector作点积后归一化的结果作为attention weights，就query与document中的每个词之前的相关性度量。</p>
+<p><b>step 5</b> 最后做一次相同词概率的合并，得到每个词的概率，最大概率的那个词即为answer。</p>
+<p>3、Memory Networks[3][5]</p>
+<img src="/2016/06/16/THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS-PaperWeekly/fig2.png" width="600" height="600">
+<p>模型将document中的每一个word保存为一个memory m(i)，每个memory本质上就是一个向量，这一点与embedding是一回事，只是换了一个名词。另外每个word还与一个输出向量c(i)相关联。可以理解为每个word表示为两组不同的embedding A和C。同样的道理，query中的每个单词可以用一个向量来表示，即对应着另一个embedding B。</p>
+<p>在Input memory表示层，用query向量与document中每个单词的m(i)作内积，再用softmax归一化得到一组权重，这组权重就是attention，即query与document中每个word的相关度，与昨天的AS Reader模型有些类似。</p>
+<p>接下来，将权重与document中的另一组embedding c(i)作加权平均得到Output memory的表示。</p>
+<p>最后，利用query的表示和output memory的表示去预测answer。</p>
+<p>然后，介绍下右图的多层模型。根据单层模型的结构，非常容易构造出多层模型。每一层的query表示等于上一层query表示与上一层输出memory表示的和。每一层中的A和C embedding有两种模式，第一种是邻接，即A(k+1) = C(k)，依次递推；第二种是类似于RNN中共享权重的模式，A(1) = A(2) = … = A(k),C(1) = C(2) = … = C(k)。其他的过程均和单层模型无异。</p>
+<p>本文模型的特点是易于构造更多层的模型，从而取得更好的效果。后面Gate Attention Reader模型正式借助了这个思想。</p>
+<p>4、Dynamic Entity Representation[7]</p>
+<img src="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/fig1.png" width="400" height="400">
+<p>计算出entity的动态表示之后，通过attention mechanism计算得到query与每个entity之间的权重，然后计算每个entity在document和query条件下的概率，找到最终的answer。</p>
+<p>query向量的计算与动态entity计算过程类似，这里需要填空的地方记作placeholder，也是包括四个部分，其中两个是表示placeholder上下文的last hidden state，另外两个是表示placeholder的hidden state。</p>
+<p>模型的整个计算过程就是这样。如果遇到一个entity在document中出现多次的情况，该entity就会会有不同的表示，本文采用CNN中常用的max-pooling从各个表示中的每个维度获取最大的那一个组成该entity最终的表示，这个表示包括了该entity在document中各种context下的信息，具有最全面的信息，即原文中所说的accumulate information。如下图：</p>
+<img src="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/fig2.png" width="400" height="400">
+<p>5、Gate Attention Reader[8]</p>
+<img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig1.png" width="600" height="600">
+<p><b>step 1</b> document和query通过一个Lookup层，使得每个词都表示成一个低维向量。</p>
+<p><b>step 2</b> 将document中的词向量通过一个双向GRU，将两个方向的state做拼接获得该词的新表示。同时也将query通过一个双向GRU，用两个方向上的last hidden state作为query的表示。</p>
+<p><b>step 3</b> 将document中每个词的新表示与query的新表示逐元素相乘得到下一个GRU层的输入。</p>
+<p><b>step 4</b> 重复step 2和3，直到通过设定的K层，在第K层时，document的每个词向量与query向量做内积，得到一个最终的向量。</p>
+<p><b>step 5</b> 将该向量输入到softmax层中，做概率归一化。</p>
+<p><b>step 6</b> 因为document中有重复出现的词，聚合之后得到最终的分类结果，即确定应该填哪个词。</p>
+<p>6、Iterative Alternating Attention[2]</p>
+<img src="/2016/06/18/教机器学习阅读/fig2.png" width="600" height="600">
+<p><b>step 1</b> 将document和query通过一个Lookup层，使得每个词都表示成一个低维向量。</p>
+<p><b>step 2</b> 将document和query中的词向量通过一个双向GRU，将两个方向的state拼接获得该词的新表示。</p>
+<p><b>step 3</b> 这一步文章中称为Iterative Alternating Attention，1）根据前一个inference状态s(t-1)来计算query的attention，得到query glimpse q(t)，对应图中的1;2)根据前一个状态s(t-1)和当前的query glimpse q(t)来计算document的attention，得到document glimpse d(t)，对应图中的2；3)用GRU来将前一个状态s(t-1)和当前的query glimpse q(t)和当前的document glimpse d(t)做处理得到当前的状态s(t)。</p>
+<p><b>step 4</b> 重复step 3 直到t达到给定的T为止。</p>
+<p><b>step 5</b> 用最后得到的每个词向量进行归一化，并且聚合相同的词概率，得到预测结果。</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>所有模型都是在两大主流数据集上进行对比[2][8]，结果如下：</p>
+<img src="/2016/06/18/教机器学习阅读/fig3.png" width="600" height="600">
+<p>Maluuba公司的模型在CBT数据集上是最好的，在CNN/Daily Mail数据集上并没有最测试，而Gate Attention Reader占据了CNN数据集上的头把交椅。</p>
+<p>model ensemble可以将single model的效果提升很多，是一种非常有效的技术。从第一个模型Attentive Reader到最后一个模型Iterative Alternating Attention时间跨度大概是半年左右的时间，阅读理解的正确率提升了近20个百分点。</p>
+<p>CBT数据集上包含了人工测试的结果，最高的准确率为81.6%，而目前计算机可以达到的最高正确率是72%，离人类仍有不小的差距，需要更多更牛的model涌现出来。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>读了一周的Machine Reading Comprehension paper，有几点思考：</p>
+<p>1、大规模语料的构建是nlp领域研究进步的重要基础和保证，深度学习模型尤其是端到端+注意力模型利用大规模的语料进行训练和学习，极大地提升了计算机阅读理解的效果。而且每出现一个新的数据集，都会弥补之前数据集存在的问题，对模型提出了更高的要求，从而提高了该领域的研究水平。同时，也给很多需要毕业的童鞋提供了一个新的刷榜平台。</p>
+<p>2、模型的提出应该更多地联系人类是如何解决这个问题的，比如attention、copy mechanism等等优秀的模型。attention借助了人类观察一个事物的时候，往往第一眼会先注意那些重要的部分，而不是全部这个行为方式。copy mechanism而是受启发于当人类不了解一个事物或者该事物只是一个named entity，而又需要表达它的时候，需要“死记硬背”，需要从context中copy过来。模型Dynamic Entity Representation用一种变化的眼光和态度来审视每一个entity，不同的context会给同样的entity带来不同的意义，因此用一种动态的表示方法来捕捉原文中entity最准确的意思，才能更好地理解原文，找出正确答案。实际体会中，我们做阅读理解的时候，最简单的方法是从问题中找到关键词，然后从原文中找到同样的词所在的句子，然后仔细理解这个句子最终得到答案，这种难度的阅读理解可能是四、六级的水平，再往高一个level的题目，就需要你联系上下文，联系关键词相关联的词或者句子来理解原文，而不是简单地只找到一个句子就可以答对题目。</p>
+<p>3、[4]和[6]中用简单的模型反而会得到更好的结果，[9]中用了非常复杂的注意力机制反而并没有太好的结果。[2][8]都证明了用多层结构比单层结构更优秀。那么，是不是多层简单的模型会有更好的效果？这是一个需要动手实践来研究的问题。</p>
+<p>4、当前的这些模型都是纯粹的data-driven，并没有考虑人工features进来。我一直坚信，如果做一个准确率非常高的系统的话，neural models+features是必须的，针对具体的问题，做具体的分析；但是如果是对于学术界研究model的话，提出更牛的neural models比纯粹的刷榜更有意义。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1606.05250v1" target="_blank" rel="external">SQuAD: 100,000+ Questions for Machine Comprehension of Text</a></p>
+<p>[2] <a href="http://arxiv.org/pdf/1606.02245v3.pdf" target="_blank" rel="external">Iterative Alternating Neural Attention for Machine Reading</a></p>
+<p>[3] <a href="https://arxiv.org/pdf/1511.02301.pdf" target="_blank" rel="external">THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS</a></p>
+<p>[4] <a href="http://arxiv.org/pdf/1606.02858v1.pdf" target="_blank" rel="external">A Thorough Examination of the CNN Daily Mail Reading Comprehension Task</a></p>
+<p>[5] <a href="http://arxiv.org/pdf/1503.08895v5.pdf" target="_blank" rel="external">End-To-End Memory Networks</a></p>
+<p>[6] <a href="https://arxiv.org/pdf/1603.01547.pdf" target="_blank" rel="external">Text Understanding with the Attention Sum Reader Network</a></p>
+<p>[7] <a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic Entity Representation with Max-pooling Improves Machine Reading</a></p>
+<p>[8] <a href="http://cn.arxiv.org/pdf/1606.01549v1" target="_blank" rel="external">Gated-Attention Readers for Text Comprehension</a></p>
+<p>[9] <a href="http://rsarxiv.github.io/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/">Teaching Machines to Read and Comprehend</a></p>
+<p>[10] <a href="http://cn.arxiv.org/pdf/1606.02270.pdf" target="_blank" rel="external">Natural Language Comprehension with the EpiReader</a></p>
+<p>[11] <a href="http://cn.arxiv.org/pdf/1606.06031" target="_blank" rel="external">The LAMBADA dataset:Word prediction requiring a broad discourse context</a></p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/18/教机器学习阅读/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="前面的博客中有提到过要开源最近写的code，seq2seq-attention，今天正式开源了，欢迎各路大神来fork和star。这是我从5月中旬开始决定用torch框架来写deep learning code以来写的第一个完整的program，在写的过程中走过不少弯路，尤其是在选择demo进行学习">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="My first open source code in deep learning"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>My first open source code in deep learning - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>My first open source code in deep learning</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/seq2seq/">#seq2seq</a> <a href="/tags/open-source/">#open source</a> <a href="/tags/torch/">#torch</a> <a href="/tags/attention/">#attention</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>前面的博客中有提到过要开源最近写的code，<a href="https://github.com/rsarxiv/seq2seq-attention" target="_blank" rel="external">seq2seq-attention</a>，今天正式开源了，欢迎各路大神来fork和star。这是我从5月中旬开始决定用torch框架来写deep learning code以来写的第一个完整的program，在写的过程中走过不少弯路，尤其是在选择demo进行学习的过程中，被HarvardNLP组的<a href="https://github.com/harvardnlp/seq2seq-attn" target="_blank" rel="external">seq2seq-attn</a>难以阅读的代码搞得非常崩溃，差一点就放弃了Torch。后来从<a href="https://github.com/oxford-cs-ml-2015/practical6" target="_blank" rel="external">oxford的课程代码</a>和<a href="https://github.com/karpathy/char-rnn" target="_blank" rel="external">char-rnn</a>中慢慢找到了Torch写code的感觉。本文简单介绍下踩过的坑和一些感受。</p>
+<p>1、最开始想要用的框架是theano，因为之前一直用python写代码，而且theano的开源demo很多，并且有二次封装的框架keras，非常简单易用。但后来在写的时候总是报一些难以定位的错误，就放弃了。接下来，摆在我面前的剩下了两个选择，一个是tensorflow，一个是torch。这里为什么没有其他的上层框架呢？（比如keras等二次框架）因为，我觉得灵活性是我对框架的第一要求，大家都知道框架封装越友好，越高级，灵活性就会越差，在实现自己的model时大多数会捉襟见肘，难以胜任；但如果你选择了一个非框架的方案，也就是说用c/c++来写，虽然运行效率很高，但实现效率就会太低了，时间成本是最贵的成本，绝对不要浪费时间在一些很成熟的东西上面。</p>
+<p>接着说，二选一怎么做选择。tensorflow其实是刚刚发布不久的，而且是python系的，但太新了，存在很多不稳定的地方或者不成熟的地方，而torch已经在facebook、deepmind等公司被使用了很久，尤其是facebook肩负起了维护和开发torch的重任，迷信了权威，选择了更加成熟的torch，尽管用torch先得过lua这关，我也认了。后来，在微博上每天都出现大量tensorflow的分享，有那么一丝动摇，但最终仍然坚持了torch。这个过程和我做PaperWeekly都给我带来了一样的感受和力量，那就是<code>坚持就会让你变得不一样</code>，我特别信这句话。</p>
+<p>2、torch做数据预处理是一个坑，一个很大的坑，用python几行搞定的事情，在torch这里需要大量的代码，十分恶心。所以，就换了一种思路，用python做预处理，将处理好的结果扔到hdf5中，用torch读入hdf5中的数据。其实这里，用hdf5也行，用普通的文本文件也行，毕竟只是一个交换数据的媒介，但hdf5更加高效一些。</p>
+<p>3、demo的问题，忘了是哪个大神说过torch的缺点，之一就是找不到一个特别规范的demo来引导新手，于是我在google上搜到了所有与之相关的torch代码来看，从最简单的开始，后来发现oxford的课程代码和char-rnn很好懂，就靠这个入了门。其实这两个代码做的是同一件事情，都是char-level的语言模型，只不过oxford更加简单，功能没有那么全面，而char-rnn是github上一个知名的code，与karpathy博士的blog配合一起十分有名，殊不知他的很多code都是从oxford的课程中来的，但好像oxford有一些代码是从一个叫<a href="https://github.com/wojciechz/learning_to_execute" target="_blank" rel="external">learning_to_execute</a>的code中来的，大家纷纷继承了优秀的功能代码，在此基础上写自己model这一部分。因为lua是函数式编程语言，函数是第一公民，各种各样的闭包令人难以阅读，这一点让学demo和继承demo的代码变得困难了。</p>
+<p>4、nngraph，代码中所有的model都是用nngraph来写的，刚刚开始用nngraph的时候，总是会出现莫名其妙的错误，告诉你定义的节点并没有被使用。后来慢慢地找到了感觉，这个过程其实就是model的forward过程，特别需要注意的是每个节点的定义是什么，自己一定要标识好，在train的过程中调用时，输入一定要给对，顺序到一定不能错。但如果你踩过了那个坑之后，就会发现用torch写deep learning的model就会很简单了，把整个forward过程梳理清楚，用nngraph写出来，基本上具有你自己特色的model就ok了。</p>
+<p>5、forward、backward函数，这两个函数构成了torch框架的整个计算过程，训练无非就是正向预测、反向梯度传播更新参数，循环往复罢了。使用这两个函数可以自动完成计算，非常地方便。在train的过程中，就是不断地将你的data丢入到model中forward然后backward，直到获得满意的误差。</p>
+<p>6、GPU的使用，这一点也是非常地简单和方便，只需要把整个过程中的torch变量变为cutorch或者cltorch即可。</p>
+<p>7、不建议开始就用高级的库，比如rnn或者dp，而是从最基本的rnn、lstm、gru这些开始写起，对概念、对整个计算流程都会有更深入地理解，同样是解决了问题，从更低层次的东西做起会了解到更多的细节，在灵活性上也有更好的优势。</p>
+<p>这次开源的代码是端到端+注意力模型，用了当下流行的bot来做demo，包括数据预处理，训练，测试，部署到本地服务器等一些功能。欢迎大家多fork，一起改进它，也是一个促进我进步的机会。如果您想交流，可以make一个issue或者直接发邮件给我，mcgrady150318@gmail.com。</p>
+<p><b>推荐</b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+<p>知乎专栏也是<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">PaperWeekly</a>，欢迎大家关注。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/19/My-first-open-source-code-in-deep-learning/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

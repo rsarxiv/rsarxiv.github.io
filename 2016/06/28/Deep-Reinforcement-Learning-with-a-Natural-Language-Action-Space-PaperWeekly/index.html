@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="本文继续分享一篇深度增强学习在NLP中应用的paper，题目是Deep Reinforcement Learning with a Natural Language Action Space，作者是来自微软的Ji He博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-06-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/NLP/">#NLP</a> <a href="/tags/DQN/">#DQN</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文继续分享一篇深度增强学习在NLP中应用的paper，题目是<a href="http://arxiv.org/pdf/1511.04636v5.pdf" target="_blank" rel="external">Deep Reinforcement Learning with a Natural Language Action Space</a>，作者是来自微软的<a href="http://washington.academia.edu/JiHe" target="_blank" rel="external">Ji He</a>博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。</p>
+<p>通过前两篇文章的介绍，基本对DQN在NLP中应用有了一个清晰的认识，与DQN之前应用不同的地方在于两个方面：</p>
+<p>1、actions的量级很大。</p>
+<p>2、transition tuple的具体形式随着模型来变化。</p>
+<p>本文也是以text games为研究背景，将输入从state变为(state,action)对，提出了Deep Reinforcement Relevant Network(DRRN)模型。</p>
+<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig1.png" width="600" height="600">
+<p>上图中，前两个是baseline模型，第三个是本文模型，理解起来都比较简单。</p>
+<p>(a) Max-action DQN</p>
+<p>该模型适用于每一个transition中actions的最大数量是已知的情况，将每个transition中state和actions拼接成一个向量作为输入，通过一个Deep Network得到每个action的Q值。</p>
+<p>(b) Per-action DQN</p>
+<p>该模型将每一对(state,action)拼接成一个向量作为输入，通过network得到每个action的Q值。</p>
+<p>(c) DRRN</p>
+<p>本文模型分别将每对(state,action)中的state和action单独构建network，分别学习出不同的表示，然后用一种逐元素操作方法得到Q值，比如对两个向量作内积。这里，state往往是一个比较长的文本，可能是几句话，而action一般来说是一个动词短语，通过不同的网络结构进行学习，得到相同维度的表示，然后做内积，内积就是相似度的一种表征，也就是本文模型中的relevant。</p>
+<p>其实，对比着看不同DRL paper，只需要仔细对比看算法流程图，就知道哪些地方不同了，本文的如下图：</p>
+<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig2.png" width="600" height="600">
+<p>本文算法中还有一个不同的地方在于，在策略选择上的trade-off，一般的方法均采用ε-greedy策略，本文用了一种softmax selection的方法来做exploration（对应着ε）策略，根据下面计算出的概率来进行选择：</p>
+<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig3.png" width="200" height="200">
+<p>本文模型最大的优点在于可以处理比较复杂的action，不像<a href="http://rsarxiv.github.io/2016/06/27/Language-Understanding-for-Text-based-Games-using-Deep-Reinforcement-Learning-PaperWeekly/">Language Understanding for Text-based Games using Deep Reinforcement Learning</a>文章中只能处理一个action word加一个object word组成的command。</p>
+<p>本文考虑问题的角度不同，不是传统RL给定一个state，然后通过一个最优的Q来确定一个最优的action，而是将state和action放在一个层面上来做计算，虽然最后也是通过最优的Q来选择action，但通过用action和state的相关性来计算Q，使得其具有更广的应用前景。</p>
+<p>这是DQN在NLP中应用系列的最后一篇文章，文章数量比较少，所以不写综述了。整体的感觉是，应用还不太多，也没有看到特别惊艳的表现。不过，可以无穷无尽地构造训练用的样本是一个非常大的优点。三篇文章有两篇是研究text games的，只有一篇是做text generation的，并且DQN的痕迹很重，都是依着同一个框架进行修改和适应，并没有很多特别的地方。很期待，后面的研究可以将Deep Reinforcement Learning在NLP的各个任务中进行应用，像seq2seq+attention模型那样横扫整个NLP任务。</p>
+<p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
+<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

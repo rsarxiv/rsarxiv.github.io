@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="前几天因为去北京参加中文信息学会组织的深度学习“速成班”，一直都没空更新博客。今天分享的paper是昨天刚刚刷出的一篇关于自动文摘的paper，题目是Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Uni">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization #PaperWeekly#"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="RSarXiv"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization #PaperWeekly# - RSarXiv</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">RSarXiv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-07-06
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/自动文摘/">#自动文摘</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>前几天因为去北京参加中文信息学会组织的深度学习“速成班”，一直都没空更新博客。今天分享的paper是昨天刚刚刷出的一篇关于自动文摘的paper，题目是<a href="http://cn.arxiv.org/pdf/1607.00718v1" target="_blank" rel="external">Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization</a>。</p>
+<p>用seq2seq的思路来解决文本摘要问题仍停留在short text的生成水平上，最多到paragraph level。原因也比较简单，rnn也好，gru、lstm也罢，终究都面临着一个长程依赖的问题，虽然说gru、lstm等技术用gate机制在一定程度上缓解了长程依赖和梯度消失、爆炸的问题，但终究文本过长的话，神经网络的深度就会随之变得非常深，训练起来难度就会随之增加。所以，这也是为什么document level或者说multi document level的abstractive式的摘要生成问题至今都是一个难以解决的问题。确实，short text的理解、表示在一定程度上有了很大的突破，也可以在工程上有不错的应用，比如机器翻译。但text变了之后，一篇很长的文章如何更加准确地理解和表示是一个非常难的问题，attention是一个不错的解决方案，在decoder的部分不需要考虑encoder的全部，只需确定需要注意的几个点就可以了，其实人在看一篇长文的时候也是这样一种机制，从某种角度上来讲，attention在decoder时提供了一种降维的手段，让model更能捕捉到关键的信息。</p>
+<p>对于document level的abstractive摘要问题，人是怎么做的呢？比如我写了一篇paper，最后写abstract的部分，基本上是从每个section中提炼出key sentences，组成一段abstract，其实这里有一点extractive的意思，但人和extractive不同的地方在于可以轻松地将each sentence连贯地表达出来，看起来不那么僵硬，更加地顺畅，当然也不会出现指示代词找不到实体的情况。本文的思路正是借鉴了人类在解决这个问题时所采用的一般思路，数据源是arxiv paper中的introduction和abstract部分。</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>将document分解成多个paragraph，然后从每个paragraph中extract出key sentence作为该paragraph的target summary，每个document可以构造出多个(paragraph,key sentence) pair作为seq2seq的训练数据。生成摘要的过程正好相反，将document分解成paragraph，对每个paragraph用model生成summary，将所有的summary拼接起来形成abstract，然后与paper自身的abstract作对比。</p>
+<p>这里从paragraph中提取key sentence用了最简单的TF-IDF来打分排序，当然给n个句子排序有很多的方法，比如textrank。(paragraph,key sentence) pair的训练是通过一个叫Multi Timescale Gated Recurrent Unit(MTGRU)模型来做的，这个模型乍一看好新鲜，其实是N年前一个叫做MTRNN模型将RNN替换为GRU的成果，gru、lstm的变种非常的多，本文的这个模型是其中一个，之所以选择用这个模型来解决问题，是因为多个timescale可以在收敛速度上有更大的优势，并且在自然语言这种层次性的问题上有天然的优势。model的结构如下图</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>在GRU的基础上增加一个时间项tao，用来控制gru的时间尺度，tao越大，表示model可以越好地捕捉序列数据中的slow features，不知道理解的对比对，这里的slow features是不是可以理解为更大的context window，控制着context的颗粒度。MTGRU可以看作是GRU的一般表示，当tao=1时，自动退化为GRU。</p>
+<p>与传统的GRU进行了对比实验，证明了该model在speed和performance上均有更好的表现。下图展示了生成的一些结果：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>输入的是本文的introduction部分，输出的是每段生成的summary。</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>这个是本文算法生成的摘要和纯extractive方法的对比，明显比extractive的方法概括地更加全面。</p>
+<p>本文是一篇占坑的文章，内容并不完整，提出了MTGRU model来替换一般的GRU，但并不是full data driven，用了一些extractive的手段来辅助进行训练，在文章的future work这部分作者也提到了下一步要做成一个真正的data driven的model，每个paragraph的target summary也是data driven的，而不是用extractive的提取出来的，我在想，是否可以构造一个hierarchy model，一个维度在训练paragraph到sentence的mapping，一个维度在训练document到abstract的mapping，这个idea可以认真琢磨下，也欢迎大家讨论。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

@@ -10,13 +10,16 @@
 
     <!--Description-->
     
+        <meta name="description" content="本文是一篇2013年的bot文章，题目是A Dataset for Research on Short-Text Conversation，作者来自中科大和华为诺亚方舟实验室。
+本文最大的贡献在于release出一个大型短文本对话语料，并且提出了一种基于检索的对话生成模型。到底是否是第一个用检索的方">
+    
 
     <!--Author-->
     
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="RSarXiv"/>
+        <meta property="og:title" content="A Dataset for Research on Short-Text Conversation #PaperWeekly#"/>
     
 
     <!--Open Graph Description-->
@@ -27,7 +30,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -38,7 +41,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档：2016 - RSarXiv</title>
+    <title>A Dataset for Research on Short-Text Conversation #PaperWeekly# - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -140,195 +143,102 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2016</h1>
+                <div class="post-heading">
+                    <h1>A Dataset for Research on Short-Text Conversation #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-07-09
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/bot/">#bot</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/05/11/自动文摘（九）/">
-        <h1 class="post-title archive">
-            自动文摘（九）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-11
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2016/05/10/自动文摘（八）/">
-        <h1 class="post-title archive">
-            自动文摘（八）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-10
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文是一篇2013年的bot文章，题目是<a href="http://staff.ustc.edu.cn/~cheneh/paper_pdf/2013/HaoWang.pdf" target="_blank" rel="external">A Dataset for Research on Short-Text Conversation</a>，作者来自中科大和华为诺亚方舟实验室。</p>
+<p>本文最大的贡献在于release出一个大型短文本对话语料，并且提出了一种基于检索的对话生成模型。到底是否是第一个用检索的方式来解决bot问题我不得而知，可以确定的一点是很多现在活跃在市面上的“逗逼”bot都是基于这个模型做的。</p>
+<p>语料的数据来自于新浪微博，大概的收集过程如下图：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>首先选择10个NLP领域比较活跃的用户，然后依次作为种子用户，进行爬取，直到获得3200与NLP和ML相关的用户，然后抓取每个用户的微博和下面的评论，时间跨度为2个月。这样定向爬取的好处是选择的用户和所发表的微博涉及的领域比较窄，而不至于天马行空什么都有。</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>数据准备好了之后，就是模型部分。模型一共分为两步，第一步是选择出评论候选列表，第二步是在候选列表中进行排序。候选列表选择一共分为三个baseline模型，如下：</p>
+<p>1、Post-Response Semantic Matching</p>
+<p>根据微博和评论之间的语义匹配程度选择出10个候选评论。</p>
+<p>2、Post-Response Similarity</p>
+<p>根据微博和评论之间的相似度选择出10个候选评论。</p>
+<p>3、Post-Post Similarity</p>
+<p>根据微博和微博之间的相似度选择出10个候选评论，即用相似微博的评论作为候选评论。</p>
+<p>给定一条微博之后，模型会通过三个baseline各选择10条评论，构成一个&lt;=30的评论候选列表，然后进行标注。标注工作是将评论分为两类，即suitable和unsuitable，即正样和负样。判断一个评论是否是suitable一共有三个准则：（1）semantic relevance，这个准则是判断微博和评论是否语义相关；（2）logic consistency，这个准则是判断微博和评论是否在逻辑上是一致的；（3）speech act alignment，这个准则是判断微博和评论在act方面是否是对齐的。</p>
+<p>接下来就是通过标注数据进行排序，排序学习的目标是让正例的score比负例的score更大。</p>
+<p>基于检索的bot解决方案是一种常见的方案，这种方案的重点在于知识库的质量，也就是那个database，一个query对应多个reply。如果只是简单的对话，效果会不错，而且如果知识库很有特点的话，reply经常会有一些意想不到的好玩的话，小黄鸡当年在人人网上火了好一阵子。但稍微复杂的问题，知识库的应变能力差的缺点就暴露出来了，比如query中有named entity，并且这个entity在知识库中没有出现过，这时reply就会出现牛头不对马嘴的情况，解决单轮对话都存在很大的缺陷，那么解决多轮对话就会更困难。虽然说，可以通过做query和reply、query和query之间语义层面相似度的计算，比如用一些成熟的deep learning技术来做。但根本上并没有解决这种方法的弊端，倒是非常垂直的闭域bot可以考虑用这个方案加上一些策略来解决，比如企业客服bot，因为知识库规模小，根据企业的资料和一些过往的用户对话数据可以建设一个质量不错的知识库，从而得到质量不错的bot。</p>
+<p>一点思考，欢迎交流。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2016/05/07/自动文摘（七）/">
-        <h1 class="post-title archive">
-            自动文摘（七）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-07
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/04/30/自动文摘（六）/">
-        <h1 class="post-title archive">
-            自动文摘（六）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/24/自动文摘（五）/">
-        <h1 class="post-title archive">
-            自动文摘（五）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-24
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/17/自动文摘（四）/">
-        <h1 class="post-title archive">
-            自动文摘（四）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-17
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/06/自动文摘（三）/">
-        <h1 class="post-title archive">
-            自动文摘（三）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/30/自动文摘（二）/">
-        <h1 class="post-title archive">
-            自动文摘（二）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/26/RSarXiv-Web版/">
-        <h1 class="post-title archive">
-            RSarXiv Web版
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-26
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/20/自动文摘（一）/">
-        <h1 class="post-title archive">
-            自动文摘（一）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-20
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/06/RSarXiv前世今生/">
-        <h1 class="post-title archive">
-            RSarXiv前世今生
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/02/27/intro/">
-        <h1 class="post-title archive">
-            RSarXiv
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-02-27
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/2016/">&larr;  下一页</a></li>
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />

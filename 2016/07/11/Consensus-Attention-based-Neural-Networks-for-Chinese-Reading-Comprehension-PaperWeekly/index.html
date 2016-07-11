@@ -10,13 +10,15 @@
 
     <!--Description-->
     
+        <meta name="description" content="本文分享的是今天刚刚刷出的一篇paper，是研究阅读理解的同学们的福音，因为要放出新的而且是中文的数据集。本文的题目是Consensus Attention-based Neural Networks for Chinese Reading Comprehension，作者均来自哈工大讯飞联合实验室">
+    
 
     <!--Author-->
     
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="RSarXiv"/>
+        <meta property="og:title" content="Consensus Attention-based Neural Networks for Chinese Reading Comprehension #PaperWeekly#"/>
     
 
     <!--Open Graph Description-->
@@ -27,7 +29,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -38,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档：2016 - RSarXiv</title>
+    <title>Consensus Attention-based Neural Networks for Chinese Reading Comprehension #PaperWeekly# - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -140,234 +142,92 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2016</h1>
+                <div class="post-heading">
+                    <h1>Consensus Attention-based Neural Networks for Chinese Reading Comprehension #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-07-11
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/reading-comprehension/">#reading comprehension</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/05/13/Paper翻译列表/">
-        <h1 class="post-title archive">
-            Paper翻译列表
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-13
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2016/05/12/自动文摘（十一）/">
-        <h1 class="post-title archive">
-            自动文摘（十一）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-12
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文分享的是今天刚刚刷出的一篇paper，是研究阅读理解的同学们的福音，因为要放出新的而且是中文的数据集。本文的题目是<a href="http://cn.arxiv.org/pdf/1607.02250" target="_blank" rel="external">Consensus Attention-based Neural Networks for Chinese Reading Comprehension</a>，作者均来自哈工大讯飞联合实验室。</p>
+<p>对于机器阅读理解的基本内容就不作介绍了，感兴趣的同学可以参考之前写的一篇摘要<a href="http://rsarxiv.github.io/2016/06/18/%E6%95%99%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%98%85%E8%AF%BB/">教机器学习阅读</a>。本文最大的亮点在于构建了中文机器阅读语料，语料分为两个部分，一个是训练集和自测试集，一个是领域外的测试集，包括人工的提问和自动获取的提问两种。（<a href="http://hfl.iflytek.com/chinese-rc/" target="_blank" rel="external">语料地址</a>，可能过段时间会publish出来）</p>
+<p>第一个部分是从人民日报获取的新闻语料，构建方法比较简单，先用POS工具对每篇新闻的词性进行标注，选择出现过两次以上的名词作为候选答案词。从候选词总随机选择一个词作为答案词，用包含答案词的句子作为问题query，剩下的部分作为document，从而构造出一个<document,query,answer>对。这种做法的好处是基于一个不太多的语料都可以构建出大量的<document,query,answer>对用来训练，这样也迎合了deep learning的需求。</document,query,answer></document,query,answer></p>
+<p>第二个部分也是非常有意思的部分，就是提出了用一个训练数据领域外的数据集作为测试集，构造的方法分为两种，一种是自动的方法和第一部分相同，第二种是基于人工的提问，而且是对于机器来说难度较大的问题。之所以采用领域外的数据进行测试，是为了防止新闻数据中很多问题可以通过外部知识库来进行回答，导致问题变得简单，如果用一个儿童读物的数据作为测试集，就会将这个问题变得更加纯粹和有挑战性。</p>
+<p>既然提出了新数据，baseline模型也省不了，本文提出的模型叫Consensus Attention Sum Reader，没有太多的新东西，效果也没有之前文章中Gate Attention Reader和Iterative Alternating Attention那么好，所以就不再介绍了。</p>
+<p>训练数据的自动标注和生成是deep learning应用的关键，很多领域发展缓慢或者在工程中应用不好都是因为data的量不够多，且没有太多好的方法来生成或者标注。机器阅读这个领域，相对来说，dataset的自动构建还是很容易做的，操作也比较简单，抠掉一个核心词就可以。而bot，自动文摘，在实际的工程应用中都难以用流行的data driven方案来解决，因为代价太大了。</p>
+<p>一点思考，欢迎交流。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2016/05/12/自动文摘（十）/">
-        <h1 class="post-title archive">
-            自动文摘（十）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-12
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/11/Consensus-Attention-based-Neural-Networks-for-Chinese-Reading-Comprehension-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/05/11/自动文摘（九）/">
-        <h1 class="post-title archive">
-            自动文摘（九）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-11
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/10/自动文摘（八）/">
-        <h1 class="post-title archive">
-            自动文摘（八）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-10
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/07/自动文摘（七）/">
-        <h1 class="post-title archive">
-            自动文摘（七）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/30/自动文摘（六）/">
-        <h1 class="post-title archive">
-            自动文摘（六）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/24/自动文摘（五）/">
-        <h1 class="post-title archive">
-            自动文摘（五）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-24
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/17/自动文摘（四）/">
-        <h1 class="post-title archive">
-            自动文摘（四）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-17
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/06/自动文摘（三）/">
-        <h1 class="post-title archive">
-            自动文摘（三）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/30/自动文摘（二）/">
-        <h1 class="post-title archive">
-            自动文摘（二）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/26/RSarXiv-Web版/">
-        <h1 class="post-title archive">
-            RSarXiv Web版
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-26
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/20/自动文摘（一）/">
-        <h1 class="post-title archive">
-            自动文摘（一）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-20
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/06/RSarXiv前世今生/">
-        <h1 class="post-title archive">
-            RSarXiv前世今生
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/02/27/intro/">
-        <h1 class="post-title archive">
-            RSarXiv
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-02-27
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/2016/">&larr;  下一页</a></li>
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />

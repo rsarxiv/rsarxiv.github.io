@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="前面的博客中有提到过要开源最近写的code，seq2seq-attention，今天正式开源了，欢迎各路大神来fork和star。这是我从5月中旬开始决定用torch框架来写deep learning code以来写的第一个完整的program，在写的过程中走过不少弯路，尤其是在选择demo进行学习">
+        <meta name="description" content="构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task">
     
 
     <!--Author-->
@@ -18,7 +18,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="My first open source code in deep learning"/>
+        <meta property="og:title" content="A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#"/>
     
 
     <!--Open Graph Description-->
@@ -40,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>My first open source code in deep learning - RSarXiv</title>
+    <title>A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly# - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -150,12 +150,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>My first open source code in deep learning</h1>
+                    <h1>A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                        2016-06-19
+                        2016-07-12
                     </span>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                         
 
 
-<a href="/tags/nlp/">#nlp</a> <a href="/tags/seq2seq/">#seq2seq</a> <a href="/tags/open-source/">#open source</a> <a href="/tags/torch/">#torch</a> <a href="/tags/attention/">#attention</a>
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/bot/">#bot</a>
 
 
                     
@@ -190,20 +190,42 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>前面的博客中有提到过要开源最近写的code，<a href="https://github.com/rsarxiv/seq2seq-attention" target="_blank" rel="external">seq2seq-attention</a>，今天正式开源了，欢迎各路大神来fork和star。这是我从5月中旬开始决定用torch框架来写deep learning code以来写的第一个完整的program，在写的过程中走过不少弯路，尤其是在选择demo进行学习的过程中，被HarvardNLP组的<a href="https://github.com/harvardnlp/seq2seq-attn" target="_blank" rel="external">seq2seq-attn</a>难以阅读的代码搞得非常崩溃，差一点就放弃了Torch。后来从<a href="https://github.com/oxford-cs-ml-2015/practical6" target="_blank" rel="external">oxford的课程代码</a>和<a href="https://github.com/karpathy/char-rnn" target="_blank" rel="external">char-rnn</a>中慢慢找到了Torch写code的感觉。本文简单介绍下踩过的坑和一些感受。</p>
-<p>1、最开始想要用的框架是theano，因为之前一直用python写代码，而且theano的开源demo很多，并且有二次封装的框架keras，非常简单易用。但后来在写的时候总是报一些难以定位的错误，就放弃了。接下来，摆在我面前的剩下了两个选择，一个是tensorflow，一个是torch。这里为什么没有其他的上层框架呢？（比如keras等二次框架）因为，我觉得灵活性是我对框架的第一要求，大家都知道框架封装越友好，越高级，灵活性就会越差，在实现自己的model时大多数会捉襟见肘，难以胜任；但如果你选择了一个非框架的方案，也就是说用c/c++来写，虽然运行效率很高，但实现效率就会太低了，时间成本是最贵的成本，绝对不要浪费时间在一些很成熟的东西上面。</p>
-<p>接着说，二选一怎么做选择。tensorflow其实是刚刚发布不久的，而且是python系的，但太新了，存在很多不稳定的地方或者不成熟的地方，而torch已经在facebook、deepmind等公司被使用了很久，尤其是facebook肩负起了维护和开发torch的重任，迷信了权威，选择了更加成熟的torch，尽管用torch先得过lua这关，我也认了。后来，在微博上每天都出现大量tensorflow的分享，有那么一丝动摇，但最终仍然坚持了torch。这个过程和我做PaperWeekly都给我带来了一样的感受和力量，那就是<code>坚持就会让你变得不一样</code>，我特别信这句话。</p>
-<p>2、torch做数据预处理是一个坑，一个很大的坑，用python几行搞定的事情，在torch这里需要大量的代码，十分恶心。所以，就换了一种思路，用python做预处理，将处理好的结果扔到hdf5中，用torch读入hdf5中的数据。其实这里，用hdf5也行，用普通的文本文件也行，毕竟只是一个交换数据的媒介，但hdf5更加高效一些。</p>
-<p>3、demo的问题，忘了是哪个大神说过torch的缺点，之一就是找不到一个特别规范的demo来引导新手，于是我在google上搜到了所有与之相关的torch代码来看，从最简单的开始，后来发现oxford的课程代码和char-rnn很好懂，就靠这个入了门。其实这两个代码做的是同一件事情，都是char-level的语言模型，只不过oxford更加简单，功能没有那么全面，而char-rnn是github上一个知名的code，与karpathy博士的blog配合一起十分有名，殊不知他的很多code都是从oxford的课程中来的，但好像oxford有一些代码是从一个叫<a href="https://github.com/wojciechz/learning_to_execute" target="_blank" rel="external">learning_to_execute</a>的code中来的，大家纷纷继承了优秀的功能代码，在此基础上写自己model这一部分。因为lua是函数式编程语言，函数是第一公民，各种各样的闭包令人难以阅读，这一点让学demo和继承demo的代码变得困难了。</p>
-<p>4、nngraph，代码中所有的model都是用nngraph来写的，刚刚开始用nngraph的时候，总是会出现莫名其妙的错误，告诉你定义的节点并没有被使用。后来慢慢地找到了感觉，这个过程其实就是model的forward过程，特别需要注意的是每个节点的定义是什么，自己一定要标识好，在train的过程中调用时，输入一定要给对，顺序到一定不能错。但如果你踩过了那个坑之后，就会发现用torch写deep learning的model就会很简单了，把整个forward过程梳理清楚，用nngraph写出来，基本上具有你自己特色的model就ok了。</p>
-<p>5、forward、backward函数，这两个函数构成了torch框架的整个计算过程，训练无非就是正向预测、反向梯度传播更新参数，循环往复罢了。使用这两个函数可以自动完成计算，非常地方便。在train的过程中，就是不断地将你的data丢入到model中forward然后backward，直到获得满意的误差。</p>
-<p>6、GPU的使用，这一点也是非常地简单和方便，只需要把整个过程中的torch变量变为cutorch或者cltorch即可。</p>
-<p>7、不建议开始就用高级的库，比如rnn或者dp，而是从最基本的rnn、lstm、gru这些开始写起，对概念、对整个计算流程都会有更深入地理解，同样是解决了问题，从更低层次的东西做起会了解到更多的细节，在灵活性上也有更好的优势。</p>
-<p>这次开源的代码是端到端+注意力模型，用了当下流行的bot来做demo，包括数据预处理，训练，测试，部署到本地服务器等一些功能。欢迎大家多fork，一起改进它，也是一个促进我进步的机会。如果您想交流，可以make一个issue或者直接发邮件给我，mcgrady150318@gmail.com。</p>
-<p><b>推荐</b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-<p>知乎专栏也是<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">PaperWeekly</a>，欢迎大家关注。</p>
+                <p>构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task中，因为这类模型无法做到与数据库交互以及整合其他有用的信息，从而生成实用的response。还有一种非常流行的方案是reinforcement learning，上一篇分享的paper<a href="http://rsarxiv.github.io/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation</a>将两者有机地结合在了一起，增强学习可以使得response生成时考虑更长远的影响。</p>
+<p>本文将分享的这篇paper，针对task-oriented的bot问题，平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。paper的题目是<a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a>，本文于2016年5月20日发表于arxiv上，作者是来自剑桥大学Dialogue System Group的博士生<a href="http://mi.eng.cam.ac.uk/~thw28/" target="_blank" rel="external">Tsung-Hsien Wen</a>，该组专门研究chatbot相关技术，发表过大量与之相关的paper，后续会更多地关注该组的工作。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>上图是本文方案的架构示意图，分为五个部分。下面分别进行介绍：</p>
+<p>1、Intent Network</p>
+<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector z(t)。encoder部分分别用了lstm和cnn两种模型对该输入进行建模。这两种句子表示的方法在之前的文章中都有介绍。</p>
+<p>2、Belief Trackers</p>
+<p>这个部分又被称作是Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
+<ul>
+<li><p>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</p>
+</li>
+<li><p>追踪bot的state，避免去学习那些没有信息量的数据。</p>
+</li>
+<li><p>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</p>
+</li>
+<li><p>易扩展新的组件。</p>
+</li>
+</ul>
+<p><img src="media/2.png" alt="2"></p>
+<p>这个组件的输入时用户的input，输出是一个informable slot和requestable slot的概率分布，这里的informable slot是指food，price range和area（以订餐为例），用来约束数据库中的查询，requestable slot是指address，phone，postcode等一些可以被询问的值。这里会定义一个针对具体task的知识图谱，来表示这些slot之间的关系，每个slot都会定义一个tracker，tracker的模型如上图所示，包括一个CNN特征提取模块和一个Jordan型的RNN模块，CNN不仅仅对当前的input进行处理，还对上一轮的user input进行处理，综合起来作为RNN的输入。</p>
+<p>这个组件的意义在于获取到预先定好的知识图谱中每个slot的分布，就是说弄清楚用户在这轮对话中的需求是哪个词或者词组。</p>
+<p>3、Database Operator</p>
+<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
+<p>4、Policy Network</p>
+<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
+<p>5、Generation Network </p>
+<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。生成部分用简单的LSTM-LM可以做，用Attention Model也可以做，效果会更好。</p>
+<p>数据的准备这部分，利用了众包进行收集，一共采用了680轮对话作为训练数据，数据库中保存了99个饭馆，3个informable slots和7个requestable slots。</p>
+<p>训练分为两个阶段，第一阶段是训练belief trackers，得到模型之后，更新参数，对生成网络中的语言模型进行训练，得到full model，batch size取1。</p>
+<p>bot模型自动评价这块是一个非常难的事情，本文选择了BLEU score、entity matching rate和objective task success rate，本文模型均取得了不错的结果。另外，通过人工评价对本文模型和rule-based进行了对比，结果看下图：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>最后paper给出了一种生成的句子向量的二维图，如下图：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>几乎同一类话都被聚集到了相似的位置上，验证了模型的有效性。</p>
+<p>开放域的bot只是根据query生成一句response，虽然质量可以做到很高，但实用价值不大。面向具体业务的闭域bot一直难以应用seq2seq的解决方案在于，无法将大量的专业信息建模到模型中来，包括：历史信息，用户身份信息，业务信息等等，本文打开了一扇窗，就是将具体的业务信息和历史信息加到了模型中，并且通过将对话中的slot词转换为一些slot表示，就好比构建了很多的模板，降低了对训练数据的需求，避免了seq2seq在应用时存在的问题。如果再考虑上Jiwei Li的那篇<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>中对用户信息的建模，bot的实用价值就会更大，用data来解决真正的业务问题就会更进一步。</p>
+<p>一点思考，欢迎交流。</p>
 
 
                 
@@ -228,7 +250,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/19/My-first-open-source-code-in-deep-learning/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
 
                 </div>
             

@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="本文继续分享一篇深度增强学习在NLP中应用的paper，题目是Deep Reinforcement Learning with a Natural Language Action Space，作者是来自微软的Ji He博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。">
+        <meta name="description" content="这篇文章的题目有些难产，一直想不出叫一个什么名字好。想写写最近看的东西的一点思考，也想写写一些别的东西，很纠结。以前写文章都喜欢用豆瓣fm推荐的第一首歌作为题目，然后开始写，虽然写的内容可能与题目毫无关系，但却不纠结。听着豆瓣fm，写着blog，是一种很多年的习惯了，习惯是一种可怕的东西，养成了之后">
     
 
     <!--Author-->
@@ -18,7 +18,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#"/>
+        <meta property="og:title" content="随笔"/>
     
 
     <!--Open Graph Description-->
@@ -40,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly# - RSarXiv</title>
+    <title>随笔 - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -150,12 +150,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#</h1>
+                    <h1>随笔</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                        2016-06-28
+                        2016-07-14
                     </span>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                         
 
 
-<a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/DQN/">#DQN</a> <a href="/tags/NLP/">#NLP</a>
+<a href="/tags/随笔/">#随笔</a>
 
 
                     
@@ -190,30 +190,13 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>本文继续分享一篇深度增强学习在NLP中应用的paper，题目是<a href="http://arxiv.org/pdf/1511.04636v5.pdf" target="_blank" rel="external">Deep Reinforcement Learning with a Natural Language Action Space</a>，作者是来自微软的<a href="http://washington.academia.edu/JiHe" target="_blank" rel="external">Ji He</a>博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。</p>
-<p>通过前两篇文章的介绍，基本对DQN在NLP中应用有了一个清晰的认识，与DQN之前应用不同的地方在于两个方面：</p>
-<p>1、actions的量级很大。</p>
-<p>2、transition tuple的具体形式随着模型来变化。</p>
-<p>本文也是以text games为研究背景，将输入从state变为(state,action)对，提出了Deep Reinforcement Relevant Network(DRRN)模型。</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig1.png" width="600" height="600">
-<p>上图中，前两个是baseline模型，第三个是本文模型，理解起来都比较简单。</p>
-<p>(a) Max-action DQN</p>
-<p>该模型适用于每一个transition中actions的最大数量是已知的情况，将每个transition中state和actions拼接成一个向量作为输入，通过一个Deep Network得到每个action的Q值。</p>
-<p>(b) Per-action DQN</p>
-<p>该模型将每一对(state,action)拼接成一个向量作为输入，通过network得到每个action的Q值。</p>
-<p>(c) DRRN</p>
-<p>本文模型分别将每对(state,action)中的state和action单独构建network，分别学习出不同的表示，然后用一种逐元素操作方法得到Q值，比如对两个向量作内积。这里，state往往是一个比较长的文本，可能是几句话，而action一般来说是一个动词短语，通过不同的网络结构进行学习，得到相同维度的表示，然后做内积，内积就是相似度的一种表征，也就是本文模型中的relevant。</p>
-<p>其实，对比着看不同DRL paper，只需要仔细对比看算法流程图，就知道哪些地方不同了，本文的如下图：</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig2.png" width="600" height="600">
-<p>本文算法中还有一个不同的地方在于，在策略选择上的trade-off，一般的方法均采用ε-greedy策略，本文用了一种softmax selection的方法来做exploration（对应着ε）策略，根据下面计算出的概率来进行选择：</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig3.png" width="200" height="200">
-<p>本文模型最大的优点在于可以处理比较复杂的action，不像<a href="http://rsarxiv.github.io/2016/06/27/Language-Understanding-for-Text-based-Games-using-Deep-Reinforcement-Learning-PaperWeekly/">Language Understanding for Text-based Games using Deep Reinforcement Learning</a>文章中只能处理一个action word加一个object word组成的command。</p>
-<p>本文考虑问题的角度不同，不是传统RL给定一个state，然后通过一个最优的Q来确定一个最优的action，而是将state和action放在一个层面上来做计算，虽然最后也是通过最优的Q来选择action，但通过用action和state的相关性来计算Q，使得其具有更广的应用前景。</p>
-<p>这是DQN在NLP中应用系列的最后一篇文章，文章数量比较少，所以不写综述了。整体的感觉是，应用还不太多，也没有看到特别惊艳的表现。不过，可以无穷无尽地构造训练用的样本是一个非常大的优点。三篇文章有两篇是研究text games的，只有一篇是做text generation的，并且DQN的痕迹很重，都是依着同一个框架进行修改和适应，并没有很多特别的地方。很期待，后面的研究可以将Deep Reinforcement Learning在NLP的各个任务中进行应用，像seq2seq+attention模型那样横扫整个NLP任务。</p>
-<p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
+                <p>这篇文章的题目有些难产，一直想不出叫一个什么名字好。想写写最近看的东西的一点思考，也想写写一些别的东西，很纠结。以前写文章都喜欢用豆瓣fm推荐的第一首歌作为题目，然后开始写，虽然写的内容可能与题目毫无关系，但却不纠结。听着豆瓣fm，写着blog，是一种很多年的习惯了，习惯是一种可怕的东西，养成了之后就会一直这么做，一点都不能变，不然就会不舒服。</p>
+<p>人之所以开心地活在这个世界上是因为大家有很多有意思的事情要做，人之所以害怕离开这个世界是因为很多有意思的事情还没做就结束了。不管现在的状况是怎样，心中充满希望就会不一样。有的人说生活不重要，家庭不重要，只有事业最重要，顾及儿女情长没有什么出息，实在不敢苟同，没有了坚实的地基，空中楼阁再漂亮又有何用？生活的目的就是生活本身，而不是虚伪地活给谁看，和谁比较，与谁相争，向谁证明。</p>
+<p>我想用一个比喻来形容我遇到我的爱人可能会比较恰当。从前，有一只在一个无形的笼子里飞来飞去的鸟，他看着地上的人们心中总是有一种优越感，以为自己看得到整个世界，浑然不知自己身在牢笼中。后来来了另外一只鸟，一只特别好看的鸟，帮他打开了笼子，带着他飞向了一个真正广阔的天空，带着他到处飞翔，他才恍然大悟，原来世界可以这么大，于是他们开始了属于他们的旅途。世界很大，而我们很小，我们的格局很小，我们的心胸很小，我们看到的世界很小。世界很有趣，生活也不只是油盐酱醋，也不只是眼前的苟且，还有诗和远方。她用心准备婚礼的每一个细节，请帖用了一种古代西方信件的方式，用融化的蜡块来粘合信封，并且盖上我们俩专属的印章；回礼是一个精美的多肉植物，一盆一盆地种下、包好；喜糖是精心挑选的几种糖果，用一个手工纸袋包装好，过程很麻烦，但是她很享受，你要知道，可不是只做一份、十份，是要只做150份左右，她很享受这样的过程，因为她在用她的双手实现她感兴趣的事情，乐在其中。</p>
+<p>世界可以灰暗，也可以很美好，决定于你是一个怎样的人，遇见一个怎样的人。很多人的生活每天都是在钱钱钱的争吵中度过的，永远没一个够，多少钱算多呢？人的欲望又能用多少钱来满足呢？生活可以很糟糕，也可以很美好，取决于你的追求，你所追求的是一种怎样的状态。欲望简单但不乏丰富多彩的生活才是真正高质量的生活，你内心保留地纯粹和纯真越多，生活质量就会越高，相反都会生活地很累，觉得生活都是负担。生活的目的就是生活本身，享受生活就是享受生活中的每一个细节，做一顿大餐，开一个小型音乐party，到录音棚录一首歌曲，看一场演唱会，听一场相声，看一场话剧，拍一些照片，吃一些好吃的垃圾食品，带着hare到处走走，吐槽一些烂剧，开始一场说走就走的旅行。生活中如果只有一个目的，只有工作这一件事情重要的话，那么生活本身就失去了意义，你赚钱也就失去了意义，有的人会说我不努力工作，不赚更多的钱怎么生活，完全可以40或50岁之后再开始享受生活。</p>
+<p>最近看bot方面的paper，简单说一下对bot的一点naive的理解。bot火是不争的事实，也是一个必然的趋势，可能做成一个true ai的bot是一件遥不可及的事情，但做出一个能够解决实际问题，提升大家效率的bot是指日可待的事情。我觉得大家对bot的期许不应该是一个什么都能解决的通用工具或者通用技术，如果媒体地热炒加上民众过高的期待会造成新一轮的人工智能寒潮，对这个领域并不是好事。大家可以认为bot是一种新的交互方式，是一种新的操作入口，就像互联网，就像操作系统一样，是一种新的模式，在这种模式背后有大量先进的人工智能技术在做支撑。用户在任何一个地方都不再需要一个特定的终端来做一些常规的事情（不是所有的事情），只需要找一个联网的bot（可能是一个手机，可能是一面镜子，可能是一个电话亭，只要能联网并识别用户身份）就可以完成了，bot执行的过程不需要透明，只需要给出一个结果反馈就可以了，大家的生活围绕着各种各样垂直的bot来展开，只需要最简单的交互就可以完成之前需要复杂操作的事情，比如办个护照，买个机票。如果一个事情很难做的话，我们通常会将其分解成多个容易的事情，逐个攻破，不用期许过高，但相信bot一定会给大家的生活带来一次革命。</p>
+<p>bot是一个很大的市场，如果真的能做成一个入口式的平台，相当于重新开辟了一个新的市场，重新定义了这个世界，任何的软件和应用都需要换一种形式，来为用户提供服务。bot确实是一个很美好的梦想，也不是那么遥不可及，但也不是那么容易，那么触手可及。还是需要大量的研究人员不断地努力，攻克难题。现在很多公司都在做bot领域的技术积累和市场占坑，以方便在日后新的一轮机会到来之时，分一杯羹。当前bot的平台有几家大企业在做，但整体来说还是将bot作为一种交互方式，将命令菜单化，并不是真正的对话，有一点iffft的感觉，但确实很多企业也在用这样的平台，大家都是在占坑。bot虽热，但并不是媒体热炒的那样，还是有很多的坑在里面，只有对其进行深入地思考和理解，保持一种冷静和独立地思考，才能真正地抓到痛点和需求，而不是一味地盲目跟随。技术的积累非常重要，因为真正要瓜分市场还是要很高门槛的，不是说你做一个简单的陪聊、逗乐用的机器人就掌握了bot核心技术，真的没有这么简单。周末的时候，准备对最近读bot paper的一些思考，写一篇survey。</p>
+<p>美好的生活就是做喜欢的事情，比如亲手构建一个美好的世界，一个bot化的世界，一个更加简便、纯粹的世界。</p>
 
 
                 
@@ -238,7 +221,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/14/随笔/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
 
                 </div>
             

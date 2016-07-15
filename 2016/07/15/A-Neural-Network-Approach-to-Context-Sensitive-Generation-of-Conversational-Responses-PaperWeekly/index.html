@@ -10,13 +10,15 @@
 
     <!--Description-->
     
+        <meta name="description" content="本文分享的这篇paper是旨在训练一个data driven open-domain的bot，在生成response的时候不仅仅考虑user message（query），而且考虑past history作为context。paper的题目是A Neural Network Approach to ">
+    
 
     <!--Author-->
     
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="RSarXiv"/>
+        <meta property="og:title" content="A Neural Network Approach to Context-Sensitive Generation of Conversational Responses #PaperWeekly#"/>
     
 
     <!--Open Graph Description-->
@@ -27,7 +29,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -38,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>bot - RSarXiv</title>
+    <title>A Neural Network Approach to Context-Sensitive Generation of Conversational Responses #PaperWeekly# - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -140,206 +142,101 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>#bot</h1>
+                <div class="post-heading">
+                    <h1>A Neural Network Approach to Context-Sensitive Generation of Conversational Responses #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-07-15
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/bot/">#bot</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Neural Network Approach to Context-Sensitive Generation of Conversational Responses #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-15
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2016/07/15/Incorporating-Unstructured-Textual-Knowledge-Sources-into-Neural-Dialogue-Systems-PaperWeekly/">
-        <h1 class="post-title archive">
-            Incorporating Unstructured Textual Knowledge Sources into Neural Dialogue Systems #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-15
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文分享的这篇paper是旨在训练一个data driven open-domain的bot，在生成response的时候不仅仅考虑user message（query），而且考虑past history作为context。paper的题目是<a href="https://michaelauli.github.io/papers/chitchat.pdf" target="_blank" rel="external">A Neural Network Approach to Context-Sensitive Generation of Conversational Responses</a>，作者来自蒙特利尔大学、乔治亚理工、facebook和微软研究院，本文最早发于2015年6月。</p>
+<p>开放域的端到端response生成在今年已经不是什么新鲜事了，各种复杂的网络，考虑各种各样的信息，然而在去年的这个时候，本文就提出了一种data driven的解决方案，是一篇有开创性的paper。</p>
+<p>bot的几大核心问题，包括：</p>
+<p>1、response generation（或者selection）</p>
+<p>2、dialogue state tracking</p>
+<p>3、user modeling</p>
+<p>不管是开域的还是闭域的bot都需要解决好以上三个问题才能做出一个高质量的bot。本文针对的问题是第一个，用的思路也是现在看来比较自然的一种，用语言模型来生成response。</p>
+<p>考虑history utterances的responses生成问题，先定义一些参数，m表示message（query），c表示context，r表示response。本文要解决的其实是下面这个问题：</p>
+<p><img src="media/1-1.png" alt="1"></p>
+<p>1、Tripled Language Model </p>
+<p>将c，m，r作为一句话来理解，给定c和m之后，不断地生成r的内容。<br>这个模型存在一个比较严重的问题是c如果过长的话，用BPTT训练不了RNNLM。（其实换作LSTM或者GRU单元就会好很多。）</p>
+<p>2、Dynamic-Context Generative Model I<br><img src="media/2-1.png" alt="2"></p>
+<p>将c和m用词袋模型表示，然后拼接起来，作为输入，通过一个简单的FNN，得到输出，即c和m vector representation。</p>
+<p>3、Dynamic-Context Generative Model II<br><img src="media/3-1.png" alt="3"></p>
+<p>与2不同的地方在于，将c和m单独作为输入，通过一个简单的FNN，得到c和m的vector representation。</p>
+<p>这篇paper针对的问题很有意义，history information的建模对于bot在解决实际工程应用的时候意义重大，会让你的bot看起来更加的智能，和分析了用户日志的web应用会带来更好的服务是一个道理。本文的将具体的context包含到了模型中，在真正应用的时候，离线系统根据user conversation logs build一个user profile会更加实用，因为确实不可能把所有的history都丢到模型中一起来算。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2016/07/14/The-Ubuntu-Dialogue-Corpus-A-Large-Dataset-for-Research-in-Unstructured-Multi-Turn-Dialogue-Systems-PaperWeekly/">
-        <h1 class="post-title archive">
-            The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-14
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/07/14/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">
-        <h1 class="post-title archive">
-            End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/13/A-Hierarchical-Latent-Variable-Encoder-Decoder-Model-for-Generating-Dialogues-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-12
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">
-        <h1 class="post-title archive">
-            Deep Reinforcement Learning for Dialogue Generation #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-11
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Diversity-Promoting Objective Function for Neural Conversation Models #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-11
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Persona-Based Neural Conversation Model #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-10
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Dataset for Research on Short-Text Conversation #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/07/09/Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation-PaperWeekly/">
-        <h1 class="post-title archive">
-            Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-07-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/06/05/Multiresolution-Recurrent-Neural-Networks-An-Application-to-Dialogue-Response-Generation-PaperWeekly/">
-        <h1 class="post-title archive">
-            Multiresolution Recurrent Neural Networks: An Application to Dialogue Response Generation #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-06-05
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Neural Conversational Model #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-06-04
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />

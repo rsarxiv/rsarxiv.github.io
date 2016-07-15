@@ -193,7 +193,7 @@
                 <p>本文分享的paper构建了一组大型非结构化的、多轮的对话系统语料，使用的原始数据来自<a href="https://irclogs.ubuntu.com/" target="_blank" rel="external">Ubuntu IRC Logs</a>，是一些关于Ubuntu的讨论组聊天数据。paper的题目是<a href="http://arxiv.org/pdf/1506.08909v3.pdf" target="_blank" rel="external">The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems</a>，作者是来自蒙特利尔大学的博士生<a href="http://cs.mcgill.ca/~rlowe1/" target="_blank" rel="external">Ryan Lowe</a>。</p>
 <p>数据规模在100万左右，平均每组数据有8轮对话，最少包括3轮对话。之前的bot语料包括：Dialogue State Tracking Challenge(DSTC)、SwitchBoard这类结构化的数据和Twitter、Sina Weibo这种非结构化的数据，前者专注于预测用户的需求和状态，而后者数据中包括了一定数量的非“conversational in nature”，做bot的训练数据并不那么合适。本文构建的数据集是一个特定领域内的数据，ubuntu technical conversations，规模很大，对话轮数很多，质量很高，也是后续很多paper在研究bot response问题时常常采用的corpus。</p>
 <p><img src="media/1.png" alt="1"></p>
-<p>语料的构建非常有意义，大型的语料可以训练更加复杂的、偏向open domain的bot model，小型的语料可以解决具体的工程应用问题，如何从杂乱无章的unlabelled data中提取出有用的信息，构造出一个适合训练、测试的数据集是一个很难却十分有意义的工作。</p>
+<p>语料的构建非常有意义，大型的语料可以训练更加复杂的、偏向open domain的bot model，小型的语料可以解决具体的工程应用问题，如何从杂乱无章的unstructured data中提取出有用的信息，构造出一个适合训练、测试的数据集是一个很难却十分有意义的工作。</p>
 <p>本文需要的数据是多轮的、两人的对话数据，但原始的数据是多人无序的对话数据，作者采用了一些小的技巧，并且忽略了一些不合适的数据，将原始数据处理成一个四元组：</p>
 <p>(time,sender,recipient,utterance)</p>
 <p>在构造模型的训练和测试集时，作者将上面的四元组处理成下面的三元组：</p>

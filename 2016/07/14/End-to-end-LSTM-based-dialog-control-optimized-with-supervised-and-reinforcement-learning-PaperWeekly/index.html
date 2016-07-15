@@ -10,13 +10,15 @@
 
     <!--Description-->
     
+        <meta name="description" content="本文介绍的paper一个实用性非常强的解决方案，作者来自于微软研究院，毕业于剑桥大学Spoken Dialogue Group，研究bot很多很多年了。paper的题目是End-to-end LSTM-based dialog control optimized with supervised an">
+    
 
     <!--Author-->
     
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="RSarXiv"/>
+        <meta property="og:title" content="End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly#"/>
     
 
     <!--Open Graph Description-->
@@ -27,7 +29,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -38,7 +40,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档：2016 - RSarXiv</title>
+    <title>End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly# - RSarXiv</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -140,299 +142,101 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2016</h1>
+                <div class="post-heading">
+                    <h1>End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly#</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-07-14
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a> <a href="/tags/bot/">#bot</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/">
-        <h1 class="post-title archive">
-            GloVe: Global Vectors for Word Representation #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-22
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/">
-        <h1 class="post-title archive">
-            Efficient Estimation of Word Representations in Vector Space #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-21
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>本文介绍的paper一个实用性非常强的解决方案，作者来自于微软研究院，毕业于剑桥大学Spoken Dialogue Group，研究bot很多很多年了。paper的题目是<a href="http://arxiv.org/pdf/1606.01269v1.pdf" target="_blank" rel="external">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning</a>，最早发表于今年的6月3日。</p>
+<p>文章的开头很有意思，先是从一个大家熟知的场景开始介绍，一个经验丰富的客服是如何带一个新入职的客服。四个阶段：</p>
+<p>1、告诉新客服哪些”controls”是可用的，比如：如何查找客户的信息，如何确定客户身份等等。</p>
+<p>2、新客服从老客服做出的good examples中模仿学习。</p>
+<p>3、新客服开始试着服务客户，老客服及时纠正他的错误。</p>
+<p>4、老客服放手不管，新客服独自服务客户，不断学习，不断积累经验。</p>
+<p>本文的框架就是依照上面的过程进行设计的：</p>
+<p>1、开发者提供一系列备选的actions，包括response模板和一些API函数，用来被bot调用。</p>
+<p>2、由专家提供一系列example dialogues，用RNN来学习。</p>
+<p>3、用一个模拟user随机产生query，bot进行response，专家进行纠正。</p>
+<p>4、bot上线服务，与真实客户进行对话，通过反馈来提高bot服务质量。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>一个完整的工作流程由上图描述：</p>
+<p><b>step 1</b> user输入请求。<br><b>step 2</b> 从输入提取entity。<br><b>step 3</b> 将提取出的entity对应到事先准备好的数据库中的entity。<br><b>step 4</b> 这是LSTM的输入部分，一共分为四块：（2）（12）（10）和刚刚的entity，构造成一个vector。<br><b>step 5</b> 将（4）的vector放到LSTM中，得到一个每个template action概率分布。<br><b>step 6</b> 由开发者给出一个action mask。<br><b>step 7</b> 用action mask将template action中还没被identified的部分mask掉。<br><b>step 8</b> 把（7）重新归一化处理。<br><b>step 9</b> 从template actions中选择action。<br><b>step 10</b> 替换template中的entity，作为输出，这一部分也是LSTM的输入。<br><b>step 11</b> 判断action类型，是API的话，到（12），否则到（13）。<br><b>step 12</b> 调用开发者写好的API，这一部分也作为LSTM的输入。<br><b>step 13</b> 生成response，返回给用户。</p>
+<p>本文在训练的时候是用一部分高质量的数据进行监督学习SL，用增强学习RL来优化模型，得到质量更高的结果。并且文中以打电话给指定联系人为应用场景，举了一个实际的例子，来帮助理解本文的思路。</p>
+<p>一般来说，很多文章提到end-to-end的模型，都是基于大量训练数据用seq2seq来做response的生成，本文并不是这样，本文的神经网络模型是用来训练action selection的，包括后面用RL policy gradient来提升效果也都是为了选择action。虽然本文不是一个纯粹的end-to-end解决方案，但确实一个非常实用的解决方案，尤其是对于task-oriented bot的业务来说，这样的解决方案更加高效，值得复现，值得在一些细节的地方进行改善，从而真正地减少人工features和人工成本。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">
-        <h1 class="post-title archive">
-            A Neural Probabilistic Language Model #PaperWeekly#
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-20
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/14/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2016/05/18/自动文摘（十三）/">
-        <h1 class="post-title archive">
-            自动文摘（十三）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-18
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/17/自动文摘（十二）/">
-        <h1 class="post-title archive">
-            自动文摘（十二）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-17
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/13/Paper翻译列表/">
-        <h1 class="post-title archive">
-            Paper翻译列表
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/12/自动文摘（十一）/">
-        <h1 class="post-title archive">
-            自动文摘（十一）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-12
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/12/自动文摘（十）/">
-        <h1 class="post-title archive">
-            自动文摘（十）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-12
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/11/自动文摘（九）/">
-        <h1 class="post-title archive">
-            自动文摘（九）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-11
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/10/自动文摘（八）/">
-        <h1 class="post-title archive">
-            自动文摘（八）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-10
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/05/07/自动文摘（七）/">
-        <h1 class="post-title archive">
-            自动文摘（七）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-05-07
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/30/自动文摘（六）/">
-        <h1 class="post-title archive">
-            自动文摘（六）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/24/自动文摘（五）/">
-        <h1 class="post-title archive">
-            自动文摘（五）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-24
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/17/自动文摘（四）/">
-        <h1 class="post-title archive">
-            自动文摘（四）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-17
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/04/06/自动文摘（三）/">
-        <h1 class="post-title archive">
-            自动文摘（三）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-04-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/30/自动文摘（二）/">
-        <h1 class="post-title archive">
-            自动文摘（二）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/26/RSarXiv-Web版/">
-        <h1 class="post-title archive">
-            RSarXiv Web版
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-26
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/20/自动文摘（一）/">
-        <h1 class="post-title archive">
-            自动文摘（一）
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-20
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/03/06/RSarXiv前世今生/">
-        <h1 class="post-title archive">
-            RSarXiv前世今生
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-03-06
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2016/02/27/intro/">
-        <h1 class="post-title archive">
-            RSarXiv
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2016-02-27
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/2016/">&larr;  下一页</a></li>
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr />

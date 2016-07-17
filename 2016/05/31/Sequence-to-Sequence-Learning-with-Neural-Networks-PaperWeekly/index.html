@@ -199,12 +199,9 @@ seq2seq+各种形式的attention近期横扫了nlp的很多任务，本篇将分
 <img src="/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/fig2.png" width="300" height="300">
 <p>模型非常简单，就是最普通的多层lstm，实际实现的时候有几点不同：</p>
 <ul>
-<li><p>用了两种不同的lstm，一种是处理输入序列，一种是处理输出序列。</p>
-</li>
-<li><p>更深的lstm会比浅的lstm效果更好，所以本文选择了四层。</p>
-</li>
-<li><p>将输入的序列翻转之后作为输入效果更好一些。</p>
-</li>
+<li><p>用了两种不同的lstm，一种是处理输入序列，一种是处理输出序列。</p></li>
+<li><p>更深的lstm会比浅的lstm效果更好，所以本文选择了四层。</p></li>
+<li><p>将输入的序列翻转之后作为输入效果更好一些。</p></li>
 </ul>
 <p>这里在decoder部分中应用了beam search来提升效果，beam search大概的思路是每次生成词是取使得整个概率最高的前k个词作为候选，这里显然beam size越大，效果越好，但是beam size越大会造成计算的代价也增大，所以存在一个trade off。</p>
 <p>最后通过机器翻译的数据集验证了了seq2seq模型的有效性。</p>

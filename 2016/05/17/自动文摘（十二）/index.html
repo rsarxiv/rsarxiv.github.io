@@ -11,10 +11,11 @@
     <!--Description-->
     
         <meta name="description" content="引
- 心是自由的，世界就是自由的 
+
+** 心是自由的，世界就是自由的 **
 
 今天分享的paper是Neural Headline Generation with Minimum Risk Training。
-本文通过将评价指标融入目标函数来训练模型，在中文和英文数据集上均取得了超过之前所有模型的结果。结果一点也不意外，因为传统的MLE并">
+本文通过将评价指标融入目标函数来训练模型，在中文和英文数据集上均取得了超过之前所有模型的结果。结果一点也不意外，因为传统">
     
 
     <!--Author-->
@@ -194,42 +195,54 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
-<p><strong> 心是自由的，世界就是自由的 </strong></p>
+                <h1 id="引">引</h1>
+<blockquote>
+<p>** 心是自由的，世界就是自由的 **</p>
 </blockquote>
 <p>今天分享的paper是<b>Neural Headline Generation with Minimum Risk Training</b>。</p>
 <p><code>本文通过将评价指标融入目标函数来训练模型，在中文和英文数据集上均取得了超过之前所有模型的结果。结果一点也不意外，因为传统的MLE并不是以ROUGE评价指标最大为目标函数，而本文的方法针对了评价指标来做文章，一定会得到不错的结果。反过来，我们需要思考一个问题，如果文本摘要领域中出现了一个更加科学和准确的评价指标，不仅仅简单的比共现n-gram，那么本文的模型会不会得到一个优于其他模型的结果呢？个人觉得本文的方法很好地利用了评价指标，但对于研究摘要问题的本质并无太多的帮助，只是获得了更好的指标。有一点投其所好的感觉。</code></p>
-<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>本文研究<code>NHG</code>(Neural Headline Generation)模型。</p>
+<h1 id="综述">综述</h1>
+<p>本文研究<code>NHG</code>(Neural Headline Generation)模型。</p>
 <p>用Neural的思路来解决HG问题有以下优势：</p>
 <p>1、完全数据驱动，不依赖与人工标注和语言学特征。</p>
 <p>2、完全端到端，引入注意力机制会得到更好的效果。</p>
 <p>存在以下弊端：</p>
 <p>1、当前的优化方法都是用最大似然估计（<code>MLE</code>）来训练数据，没有将评价指标考虑在内。</p>
 <p>本文用Minimum Risk Training(<code>MRT</code>)来改善NHG模型，将评价指标考虑在优化目标内，在中文和英文两个真实数据集上取得了不错的结果。</p>
-<h1 id="NHG模型"><a href="#NHG模型" class="headerlink" title="NHG模型"></a>NHG模型</h1><img src="/2016/05/17/自动文摘（十二）/fig1.png" width="400" height="400">
+<h1 id="nhg模型">NHG模型</h1>
+<img src="/2016/05/17/自动文摘（十二）/fig1.png" width="400" height="400">
 <p>模型采用encoder-decoder框架，encoder和decoder都采用rnn作为模型。</p>
-<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>Encoder包括两种：<code>GRU</code>和<code>Bi-RNN</code>。</p>
+<h2 id="encoder">Encoder</h2>
+<p>Encoder包括两种：<code>GRU</code>和<code>Bi-RNN</code>。</p>
 <p>Bi-RNN克服了传统RNN的语义偏置最后一个词的缺点。</p>
-<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><p>Decoder采用GRU，在生成结果时引入了注意力模型。</p>
-<h1 id="MRT-NHG"><a href="#MRT-NHG" class="headerlink" title="MRT+NHG"></a>MRT+NHG</h1><h2 id="MLE"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h2><p>传统的训练方法都是采用最大似然估计来做，目标函数如下：</p>
+<h2 id="decoder">Decoder</h2>
+<p>Decoder采用GRU，在生成结果时引入了注意力模型。</p>
+<h1 id="mrtnhg">MRT+NHG</h1>
+<h2 id="mle">MLE</h2>
+<p>传统的训练方法都是采用最大似然估计来做，目标函数如下：</p>
 <img src="/2016/05/17/自动文摘（十二）/fig2.png" width="300" height="300">
-<h2 id="MRT"><a href="#MRT" class="headerlink" title="MRT"></a>MRT</h2><p>本文采用了最小风险训练方法来训练模型，目的是减少期望的损失。目标函数如下：</p>
+<h2 id="mrt">MRT</h2>
+<p>本文采用了最小风险训练方法来训练模型，目的是减少期望的损失。目标函数如下：</p>
 <img src="/2016/05/17/自动文摘（十二）/fig3.png" width="300" height="300">
 <p>进一步可以推出：</p>
 <img src="/2016/05/17/自动文摘（十二）/fig4.png" width="300" height="300">
 <p>作进一步近似处理：</p>
 <img src="/2016/05/17/自动文摘（十二）/fig5.png" width="300" height="300">
 <p>公式中的<img src="/2016/05/17/自动文摘（十二）/fig6.png" width="100" height="100">用来计算误差，这样训练处的模型将会将评价指标考虑在内。ROUGE是最常见的评价方法，所以本文考虑将ROUGE评价方法融入到目标函数中。</p>
-<h2 id="ROUGE"><a href="#ROUGE" class="headerlink" title="ROUGE"></a>ROUGE</h2><p>本文考虑两种ROUGE指标，ROUGE-N和ROUGE-L。本文为了将ROUGE评价指标融入到目标函数中，定义了</p>
+<h2 id="rouge">ROUGE</h2>
+<p>本文考虑两种ROUGE指标，ROUGE-N和ROUGE-L。本文为了将ROUGE评价指标融入到目标函数中，定义了</p>
 <img src="/2016/05/17/自动文摘（十二）/fig7.png" width="200" height="300">
-<h1 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h1><p>DUC2004评测对比结果：</p>
+<h1 id="实验结果">实验结果</h1>
+<p>DUC2004评测对比结果：</p>
 <img src="/2016/05/17/自动文摘（十二）/t1.png" width="400" height="400">
 <p>英文数据集上，本文模型的结果明显优于其他模型，包括之前的ABS+模型。</p>
 <p>中文LCSTS数据上平尺对比结果：</p>
 <img src="/2016/05/17/自动文摘（十二）/t2.png" width="400" height="400">
 <p>采用MRT目标函数的模型远优于MLE作为目标函数的模型。</p>
-<h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1604.01904.pdf" target="_blank" rel="external">Neural Headline Generation with Minimum Risk Training</a></p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h1 id="link">Link</h1>
+<p>[1] <a href="http://cn.arxiv.org/pdf/1604.01904.pdf" target="_blank" rel="external">Neural Headline Generation with Minimum Risk Training</a></p>
+<h1 id="工具推荐">工具推荐</h1>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p><code>PaperWeekly</code>，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

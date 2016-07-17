@@ -10,7 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="引机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做Maluuba的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近阅">
+        <meta name="description" content="引
+机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做Maluuba的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近">
     
 
     <!--Author-->
@@ -190,12 +191,15 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做<a href="http://www.maluuba.com/" target="_blank" rel="external">Maluuba</a>的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近阅读过的相关paper。</p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>首先定义下机器阅读理解问题的数学模型。</p>
+                <h1 id="引">引</h1>
+<p>机器学会阅读将是人工智能在处理和理解人类语言进程中一个里程碑式的事件，是一个真正AI必须达到的标准。最近一家叫做<a href="http://www.maluuba.com/" target="_blank" rel="external">Maluuba</a>的科技公司，号称开发了目前最领先的机器阅读理解系统EpiReader[10]，成为了业界的领跑者，也被媒体盛赞。本文是一篇机器阅读理解的综述文章，系统地总结和对比一下最近阅读过的相关paper。</p>
+<h1 id="问题描述">问题描述</h1>
+<p>首先定义下机器阅读理解问题的数学模型。</p>
 <p>问题可以表述为一个三元组(d,q,a)，这里d是指原文document，q是指问题query或者question（不同的paper可能称呼不同，但指的是同一回事），a是answer，即问题的答案。这个答案是来自一个固定大小的词汇表A中的一个词。我们要解决的问题就变成了：给定一个document-query对(d,q)，从A中找到最合适的答案a。</p>
 <p>经常听到这么一句话，没有分类解决不了的问题。虽然有一点夸张，但这个问题是一个典型的多分类问题，预测候选列表中每个word或者entity的条件概率，最大的那个就是正确答案。其实很多问题也都是这样，尤其是在生成问题上，给定context，来predict每一个word的概率。</p>
 <p>这里不同的paper在词汇表A中有些不同，有的paper将A定义为document和query中的所有词，而有的将A定义为所有的entity，而有的将会附带一个包括正确答案在内的10个候选答案，并且每个答案的词性都一致。</p>
-<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>语料对于NLP的研究有着十分重要的基础作用，尤其是大规模的语料为研究相关任务带来了革命性的变化。前些年的语料都非常小，比如MCTest。从2015年开始，出现了两大主流的大型数据集。</p>
+<h1 id="语料">语料</h1>
+<p>语料对于NLP的研究有着十分重要的基础作用，尤其是大规模的语料为研究相关任务带来了革命性的变化。前些年的语料都非常小，比如MCTest。从2015年开始，出现了两大主流的大型数据集。</p>
 <p>1、CNN/Daily Mail[9]</p>
 <p>数据集构建基本的思路是受启发于自动文摘任务，从两个大型的新闻网站CNN和Daily Mail中获取数据源，用abstractive的方法生成每篇新闻的summary，用新闻原文作为document，将summary中去掉一个entity作为query，被去掉的entity作为answer，从而得到阅读理解的数据三元组(document,query,answer)。这里存在一个问题，就是有的query并不需要联系到document，通过query中的上下文就可以predict出answer是什么，也就失去了阅读理解的意义。因此，本文提出了用一些标识替换entity和重新排列的方法将数据打乱，防止上面现象的出现。处理之后的效果见下图：</p>
 <img src="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/fig1.png" width="600" height="600">
@@ -207,12 +211,9 @@
 <p>3、Stanford Question Answering Dataset(SQuAD)[1]</p>
 <p>该数据集的构建分为三个步骤：</p>
 <ul>
-<li><p>在Wikipedia中选取质量排名在10000以内的article，（这里用了 Project Nayuki’s Wikipedia’s internal PageRanks来做rank），从每篇文章中提取出paragraph，经过一系列处理之后得到了23215个paragraph，涉及了很宽泛的话题。</p>
-</li>
-<li><p>然后雇佣了crowdworkers给每个paragraph提问和回答，而且鼓励workers用自己的话来提问。（这一点和CNN中用abstractive的思路很像，只不过是用了人工来做。）</p>
-</li>
-<li><p>第三步是让crowdworkers来用原文中的text（word或者是span）来回答这个问题，如果无法用原文回答的话，直接提交问题。</p>
-</li>
+<li><p>在Wikipedia中选取质量排名在10000以内的article，（这里用了 Project Nayuki’s Wikipedia’s internal PageRanks来做rank），从每篇文章中提取出paragraph，经过一系列处理之后得到了23215个paragraph，涉及了很宽泛的话题。</p></li>
+<li><p>然后雇佣了crowdworkers给每个paragraph提问和回答，而且鼓励workers用自己的话来提问。（这一点和CNN中用abstractive的思路很像，只不过是用了人工来做。）</p></li>
+<li><p>第三步是让crowdworkers来用原文中的text（word或者是span）来回答这个问题，如果无法用原文回答的话，直接提交问题。</p></li>
 </ul>
 <p>这个数据集的答案类型非常丰富，看下表：</p>
 <img src="/2016/06/18/教机器学习阅读/fig1.png" width="400" height="400">
@@ -220,15 +221,13 @@
 <p>该数据集的paper于2016年6月20日于arxiv上，特补充在此。</p>
 <p>这个数据集的数据源来自Book Corpus，一共包括10022个passage，平均每个passage包括4.6句话+1句target，每个passage大约75个单词。在选择数据的过程用了很多的人力来做，按照以下的过程：</p>
 <ul>
-<li><p>第一个人阅读全文之后来猜target word，如果猜对了。</p>
-</li>
-<li><p>第二个人继续阅读全文来猜target word，如果猜对了。</p>
-</li>
-<li><p>更多人不让阅读全文，只能读target sentence来猜target word，直到猜对或者达到猜的人数上限，比如说10.如果没有人猜的对，就将该数据归入LAMBADA中。</p>
-</li>
+<li><p>第一个人阅读全文之后来猜target word，如果猜对了。</p></li>
+<li><p>第二个人继续阅读全文来猜target word，如果猜对了。</p></li>
+<li><p>更多人不让阅读全文，只能读target sentence来猜target word，直到猜对或者达到猜的人数上限，比如说10.如果没有人猜的对，就将该数据归入LAMBADA中。</p></li>
 </ul>
 <p>这种方法很费时费力，但从质量上得到了保证，所获得的数据集都可以保证通过阅读全文之后一定会得到正确结果，不阅读全文一定找不到结果，避免了语言模型通过分析target sentence直接生成target word这种情况，给研究者提供了一个质量更高的数据集。</p>
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>本文所说的模型是指neural模型，人工features的模型就不介绍了。</p>
+<h1 id="模型">模型</h1>
+<p>本文所说的模型是指neural模型，人工features的模型就不介绍了。</p>
 <p>1、Deep LSTM Reader / Attentive Reader / Impatient Reader[9]</p>
 <p>这个模型是配套CNN/Daily Mail数据集的模型，只是作为后面研究的baseline，所以效果不会太好。</p>
 <ul>
@@ -282,27 +281,30 @@
 <p><b>step 3</b> 这一步文章中称为Iterative Alternating Attention，1）根据前一个inference状态s(t-1)来计算query的attention，得到query glimpse q(t)，对应图中的1;2)根据前一个状态s(t-1)和当前的query glimpse q(t)来计算document的attention，得到document glimpse d(t)，对应图中的2；3)用GRU来将前一个状态s(t-1)和当前的query glimpse q(t)和当前的document glimpse d(t)做处理得到当前的状态s(t)。</p>
 <p><b>step 4</b> 重复step 3 直到t达到给定的T为止。</p>
 <p><b>step 5</b> 用最后得到的每个词向量进行归一化，并且聚合相同的词概率，得到预测结果。</p>
-<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>所有模型都是在两大主流数据集上进行对比[2][8]，结果如下：</p>
+<h1 id="结果">结果</h1>
+<p>所有模型都是在两大主流数据集上进行对比[2][8]，结果如下：</p>
 <img src="/2016/06/18/教机器学习阅读/fig3.png" width="600" height="600">
 <p>Maluuba公司的模型在CBT数据集上是最好的，在CNN/Daily Mail数据集上并没有最测试，而Gate Attention Reader占据了CNN数据集上的头把交椅。</p>
 <p>model ensemble可以将single model的效果提升很多，是一种非常有效的技术。从第一个模型Attentive Reader到最后一个模型Iterative Alternating Attention时间跨度大概是半年左右的时间，阅读理解的正确率提升了近20个百分点。</p>
 <p>CBT数据集上包含了人工测试的结果，最高的准确率为81.6%，而目前计算机可以达到的最高正确率是72%，离人类仍有不小的差距，需要更多更牛的model涌现出来。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>读了一周的Machine Reading Comprehension paper，有几点思考：</p>
+<h1 id="思考">思考</h1>
+<p>读了一周的Machine Reading Comprehension paper，有几点思考：</p>
 <p>1、大规模语料的构建是nlp领域研究进步的重要基础和保证，深度学习模型尤其是端到端+注意力模型利用大规模的语料进行训练和学习，极大地提升了计算机阅读理解的效果。而且每出现一个新的数据集，都会弥补之前数据集存在的问题，对模型提出了更高的要求，从而提高了该领域的研究水平。同时，也给很多需要毕业的童鞋提供了一个新的刷榜平台。</p>
 <p>2、模型的提出应该更多地联系人类是如何解决这个问题的，比如attention、copy mechanism等等优秀的模型。attention借助了人类观察一个事物的时候，往往第一眼会先注意那些重要的部分，而不是全部这个行为方式。copy mechanism而是受启发于当人类不了解一个事物或者该事物只是一个named entity，而又需要表达它的时候，需要“死记硬背”，需要从context中copy过来。模型Dynamic Entity Representation用一种变化的眼光和态度来审视每一个entity，不同的context会给同样的entity带来不同的意义，因此用一种动态的表示方法来捕捉原文中entity最准确的意思，才能更好地理解原文，找出正确答案。实际体会中，我们做阅读理解的时候，最简单的方法是从问题中找到关键词，然后从原文中找到同样的词所在的句子，然后仔细理解这个句子最终得到答案，这种难度的阅读理解可能是四、六级的水平，再往高一个level的题目，就需要你联系上下文，联系关键词相关联的词或者句子来理解原文，而不是简单地只找到一个句子就可以答对题目。</p>
 <p>3、[4]和[6]中用简单的模型反而会得到更好的结果，[9]中用了非常复杂的注意力机制反而并没有太好的结果。[2][8]都证明了用多层结构比单层结构更优秀。那么，是不是多层简单的模型会有更好的效果？这是一个需要动手实践来研究的问题。</p>
 <p>4、当前的这些模型都是纯粹的data-driven，并没有考虑人工features进来。我一直坚信，如果做一个准确率非常高的系统的话，neural models+features是必须的，针对具体的问题，做具体的分析；但是如果是对于学术界研究model的话，提出更牛的neural models比纯粹的刷榜更有意义。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1606.05250v1" target="_blank" rel="external">SQuAD: 100,000+ Questions for Machine Comprehension of Text</a></p>
-<p>[2] <a href="http://arxiv.org/pdf/1606.02245v3.pdf" target="_blank" rel="external">Iterative Alternating Neural Attention for Machine Reading</a></p>
-<p>[3] <a href="https://arxiv.org/pdf/1511.02301.pdf" target="_blank" rel="external">THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS</a></p>
-<p>[4] <a href="http://arxiv.org/pdf/1606.02858v1.pdf" target="_blank" rel="external">A Thorough Examination of the CNN Daily Mail Reading Comprehension Task</a></p>
-<p>[5] <a href="http://arxiv.org/pdf/1503.08895v5.pdf" target="_blank" rel="external">End-To-End Memory Networks</a></p>
-<p>[6] <a href="https://arxiv.org/pdf/1603.01547.pdf" target="_blank" rel="external">Text Understanding with the Attention Sum Reader Network</a></p>
-<p>[7] <a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic Entity Representation with Max-pooling Improves Machine Reading</a></p>
-<p>[8] <a href="http://cn.arxiv.org/pdf/1606.01549v1" target="_blank" rel="external">Gated-Attention Readers for Text Comprehension</a></p>
-<p>[9] <a href="http://rsarxiv.github.io/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/">Teaching Machines to Read and Comprehend</a></p>
-<p>[10] <a href="http://cn.arxiv.org/pdf/1606.02270.pdf" target="_blank" rel="external">Natural Language Comprehension with the EpiReader</a></p>
-<p>[11] <a href="http://cn.arxiv.org/pdf/1606.06031" target="_blank" rel="external">The LAMBADA dataset:Word prediction requiring a broad discourse context</a></p>
+<h1 id="参考文献">参考文献</h1>
+<p>[1] [SQuAD: 100,000+ Questions for Machine Comprehension of Text](http://cn.arxiv.org/pdf/1606.05250v1)</p>
+<p>[2] [Iterative Alternating Neural Attention for Machine Reading](http://arxiv.org/pdf/1606.02245v3.pdf)</p>
+<p>[3] [THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS](https://arxiv.org/pdf/1511.02301.pdf)</p>
+<p>[4] [A Thorough Examination of the CNN Daily Mail Reading Comprehension Task](http://arxiv.org/pdf/1606.02858v1.pdf)</p>
+<p>[5] [End-To-End Memory Networks](http://arxiv.org/pdf/1503.08895v5.pdf)</p>
+<p>[6] [Text Understanding with the Attention Sum Reader Network](https://arxiv.org/pdf/1603.01547.pdf)</p>
+<p>[7] [Dynamic Entity Representation with Max-pooling Improves Machine Reading](http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf)</p>
+<p>[8] [Gated-Attention Readers for Text Comprehension](http://cn.arxiv.org/pdf/1606.01549v1)</p>
+<p>[9] [Teaching Machines to Read and Comprehend](http://rsarxiv.github.io/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/)</p>
+<p>[10] [Natural Language Comprehension with the EpiReader](http://cn.arxiv.org/pdf/1606.02270.pdf)</p>
+<p>[11] [The LAMBADA dataset:Word prediction requiring a broad discourse context](http://cn.arxiv.org/pdf/1606.06031)</p>
 <p><b>工具推荐</b></p>
 <p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>

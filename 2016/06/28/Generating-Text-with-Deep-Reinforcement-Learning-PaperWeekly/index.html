@@ -198,7 +198,7 @@
 <p>NLP不像video games直接可以用游戏画面作为输入，用多层CNN提取feature进行action选择，因为text不仅仅是一个序列，而且是变长度的，所以一般来说也都是RNN来处理。本文模型如下图：</p>
 <img src="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/fig1.png" width="600" height="500">
 <p>首先，回答关心的第二个问题，DQN中各元素的对应关系（transition tuple）。</p>
-<p>DQN中：(s(t),a(t),r(t),s(t+1))<br>本文：([EnSen(t),DeSen(t)],y(t),r(t),[EnSen(t),DeSen(t+1)])</p>
+<p>DQN中：(s(t),a(t),r(t),s(t+1)) 本文：([EnSen(t),DeSen(t)],y(t),r(t),[EnSen(t),DeSen(t+1)])</p>
 <p>整个模型是一个迭代decoding的过程，通过LSTM decoder生成最初的DeSen(t)之后，开始不断地迭代。在decoder的每一个time step，DQN会从DeLSTM使用的词表中选择一个可以获得最大reward的action作为该time step新生成的词，用这个新词来代替之前的旧词，生成新的状态DeSen(t+1)，依次迭代下去，每一次迭代都只生成一个新词来代替旧词，直到最后一个新词被生成。这里的reward r(t)是计算target sentence和DeSen(t+1)的相似度得来的。</p>
 <p>本文在这个模型的基础上，尝试了在decoder部分用双向的LSTM来表示，并且用一个光滑的BLEU来做reward。这一点与<a href="http://rsarxiv.github.io/2016/05/17/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">Neural Headline Generation with Minimum Risk Training</a>这篇文章从某一个角度来说有一点点类似，本文是用最终的评价指标BLEU作为reward，而那篇文章是用ROUGE指标作为优化函数，最终取得了非常令人满意的结果。</p>
 <p>整个算法流程大体上都是遵循DQN的框架，只是细节有一些不同，如下图：</p>
@@ -208,7 +208,8 @@
 <p>验证了本文方法的有效性。</p>
 <p>本文较前一篇文字游戏的文章更难的一点是处理大量actions的方法，上一篇其实仍旧是个游戏，actions的数量在一个非常有限的范围内，本篇是做语言模型的，actions和词汇表一样大，这是DQN在NLP中应用最头疼的问题。本文用了DeLSTM在每个time step中使用的Top N个词作为候选actions，很好地解决了这个问题，那么到底有没有更好的方法来减少actions呢？有没有不需要用这么复杂的模型来做处理呢？想到一个idea，用char-level来做语言模型，用到的vocabulary size远远小于word-level，对于DQN来说，actions集合非常固定，并且非常小，只是增大了state的表示。</p>
 <p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
+<h1 id="工具推荐">工具推荐</h1>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 <p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
 

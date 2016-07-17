@@ -194,12 +194,12 @@
 <p>首先，介绍一下对完形填空问题的定义。问题可以表述为一个三元组(d,q,a)，这里d是指原文document，q是指完形填空的问题query（这里需要注意一点的是，与我们英语考试中的完形填空不同，更像是只用一个单词来回答的阅读理解），a是问题的答案。这个答案是来自一个固定大小的词汇表A中的一个词。即：给定一个文档-问题对(d,q)，从A中找到最合适的答案a。</p>
 <p>本文精彩的部分有两个，一个是related work写的非常漂亮，另一个是提出了一种新的注意力模型GA（Gate-Attention） Reader，并且取得了领先的结果。</p>
 <p>后续的文本理解系列的文章将会从related work中产生，包括以下几篇：</p>
-<p>[1] <a href="http://arxiv.org/pdf/1506.03340v3.pdf" target="_blank" rel="external">Teaching machines to read and comprehend</a></p>
-<p>[2] <a href="https://arxiv.org/pdf/1406.2710v1.pdf" target="_blank" rel="external">A multiplicative model for learning distributed text-based attribute representations</a></p>
-<p>[3] <a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic entity representations with max-pooling improves machine reading</a></p>
-<p>[4] <a href="http://arxiv.org/pdf/1603.01547v1.pdf" target="_blank" rel="external">Text understanding with the attention sum reader network</a></p>
-<p>[5] <a href="http://arxiv.org/pdf/1511.02301v4.pdf" target="_blank" rel="external">The goldilocks principle: Reading children’s books with explicit memory representations</a></p>
-<p>[6] <a href="http://arxiv.org/pdf/1606.02858v1.pdf" target="_blank" rel="external">A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task</a></p>
+<p>[1] [Teaching machines to read and comprehend](http://arxiv.org/pdf/1506.03340v3.pdf)</p>
+<p>[2] [A multiplicative model for learning distributed text-based attribute representations](https://arxiv.org/pdf/1406.2710v1.pdf)</p>
+<p>[3] [Dynamic entity representations with max-pooling improves machine reading](http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf)</p>
+<p>[4] [Text understanding with the attention sum reader network](http://arxiv.org/pdf/1603.01547v1.pdf)</p>
+<p>[5] [The goldilocks principle: Reading children’s books with explicit memory representations](http://arxiv.org/pdf/1511.02301v4.pdf)</p>
+<p>[6] [A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task](http://arxiv.org/pdf/1606.02858v1.pdf)</p>
 <p>下面来介绍本文的模型，结合下图来看：</p>
 <img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig1.png" width="600" height="600">
 <p><b>step 1</b> document和query通过一个Lookup层，使得每个词都表示成一个低维向量。</p>

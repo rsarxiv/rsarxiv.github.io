@@ -194,9 +194,15 @@
                 <p>本文是一篇2013年的bot文章，题目是<a href="http://staff.ustc.edu.cn/~cheneh/paper_pdf/2013/HaoWang.pdf" target="_blank" rel="external">A Dataset for Research on Short-Text Conversation</a>，作者来自中科大和华为诺亚方舟实验室。</p>
 <p>本文最大的贡献在于release出一个大型短文本对话语料，并且提出了一种基于检索的对话生成模型。到底是否是第一个用检索的方式来解决bot问题我不得而知，可以确定的一点是很多现在活跃在市面上的“逗逼”bot都是基于这个模型做的。</p>
 <p>语料的数据来自于新浪微博，大概的收集过程如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
+<div class="figure">
+<img src="media/1.png" alt="1">
+<p class="caption">1</p>
+</div>
 <p>首先选择10个NLP领域比较活跃的用户，然后依次作为种子用户，进行爬取，直到获得3200与NLP和ML相关的用户，然后抓取每个用户的微博和下面的评论，时间跨度为2个月。这样定向爬取的好处是选择的用户和所发表的微博涉及的领域比较窄，而不至于天马行空什么都有。</p>
-<p><img src="media/2.png" alt="2"></p>
+<div class="figure">
+<img src="media/2.png" alt="2">
+<p class="caption">2</p>
+</div>
 <p>数据准备好了之后，就是模型部分。模型一共分为两步，第一步是选择出评论候选列表，第二步是在候选列表中进行排序。候选列表选择一共分为三个baseline模型，如下：</p>
 <p>1、Post-Response Semantic Matching</p>
 <p>根据微博和评论之间的语义匹配程度选择出10个候选评论。</p>

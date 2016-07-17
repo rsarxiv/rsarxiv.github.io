@@ -10,7 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="引自动文摘的方法主要分为两大类，extractive和abstractive。前者是目前最主流、应用最多、最容易的方法，后者相对来说更有一种真正人工智能的味道。还有另外一种分类方法是，单文档摘要和多文档摘要，前者是后者的基础，但后者不只是前者结果简单叠加那么简单。本文只介绍单文档的extractiv">
+        <meta name="description" content="引
+自动文摘的方法主要分为两大类，extractive和abstractive。前者是目前最主流、应用最多、最容易的方法，后者相对来说更有一种真正人工智能的味道。还有另外一种分类方法是，单文档摘要和多文档摘要，前者是后者的基础，但后者不只是前者结果简单叠加那么简单。本文只介绍单文档的extracti">
     
 
     <!--Author-->
@@ -190,16 +191,21 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>自动文摘的方法主要分为两大类，extractive和abstractive。前者是目前最主流、应用最多、最容易的方法，后者相对来说更有一种真正人工智能的味道。还有另外一种分类方法是，单文档摘要和多文档摘要，前者是后者的基础，但后者不只是前者结果简单叠加那么简单。本文只介绍单文档的extractive方法。</p>
-<h1 id="Extractive-Summarization"><a href="#Extractive-Summarization" class="headerlink" title="Extractive Summarization"></a>Extractive Summarization</h1><p>抽取式的方法基于一个假设，一篇文档的核心思想可以用文档中的某一句或几句话来概括。那么摘要的任务就变成了找到文档中最重要的几句话，也就是一个排序的问题。</p>
+                <h1 id="引">引</h1>
+<p>自动文摘的方法主要分为两大类，extractive和abstractive。前者是目前最主流、应用最多、最容易的方法，后者相对来说更有一种真正人工智能的味道。还有另外一种分类方法是，单文档摘要和多文档摘要，前者是后者的基础，但后者不只是前者结果简单叠加那么简单。本文只介绍单文档的extractive方法。</p>
+<h1 id="extractive-summarization">Extractive Summarization</h1>
+<p>抽取式的方法基于一个假设，一篇文档的核心思想可以用文档中的某一句或几句话来概括。那么摘要的任务就变成了找到文档中最重要的几句话，也就是一个排序的问题。</p>
 <p>排序是一个非常经典的问题，也是一个非常多解决方案的问题。比如：Google根据用户的query生成的网页列表，就是一个排序之后的结果；再比如Amazon的推荐系统推荐给用户的N个可能感兴趣的产品，也都是通过算法做了排序输出的。</p>
 <p>排序针对不同的问题，需要提出不同的指标，比如有的应用关心的是相关性，有的关心的是时效性，有的关心的是新颖性等等，在这个层面上来讨论排序，会有不同的模型。</p>
 <p>一般的抽取式摘要问题，会考虑相关性和新颖性两个指标。相关性是指摘要所用的句子最能够代表本文档的意思，而新颖性是指候选句子包含的冗余信息要少，尽可能每句话都可以独立地表达出一种独立的意思。</p>
 <p>下面简单介绍一些思路。</p>
-<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><p>NLP任务的标准流程中第一步都是预处理，将拿到的文本做分句，这里有两种可能性，一是用句点或者其他可以表达一句话结尾的符号作为分隔，另外一种是用逗号作为分隔符获取句子。</p>
-<h2 id="词、句表示"><a href="#词、句表示" class="headerlink" title="词、句表示"></a>词、句表示</h2><p>这一步的思路是：将词、句子表示成计算机能理解的量，然后计算一些指标进行排序。这个地方也是各种算法、模型最大的不同之处：</p>
-<p>1、Bag Of Words。词袋模型将词定义为一个维度，一句话表示成在所有词张成的空间中的一个高维稀疏向量。<br>2、TFIDF。可以理解为带权重的词袋模型，计算出每个词的TFIDF值，作为该词的权重。<br>3、LDA/LSI。将整篇文档利用TFIDF模型表示成一个矩阵，做SVD降维分解，生成两个矩阵，一个是文档-话题矩阵、另一个是词-话题矩阵。得到词-话题矩阵之后，可以得到句子-话题矩阵。<br>4、Word Embedding。Tomas Mikolov提出的Word2Vec，用了很多技巧和近似的思路让word很容易地表示成一个低维稠密向量，在很多情况下都可以达到不错的效果。词成为了一个向量，句子也可有很多种方法表示成一个向量。</p>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>这里介绍两种常见的方法。</p>
+<h2 id="预处理">预处理</h2>
+<p>NLP任务的标准流程中第一步都是预处理，将拿到的文本做分句，这里有两种可能性，一是用句点或者其他可以表达一句话结尾的符号作为分隔，另外一种是用逗号作为分隔符获取句子。</p>
+<h2 id="词句表示">词、句表示</h2>
+<p>这一步的思路是：将词、句子表示成计算机能理解的量，然后计算一些指标进行排序。这个地方也是各种算法、模型最大的不同之处：</p>
+<p>1、Bag Of Words。词袋模型将词定义为一个维度，一句话表示成在所有词张成的空间中的一个高维稀疏向量。 2、TFIDF。可以理解为带权重的词袋模型，计算出每个词的TFIDF值，作为该词的权重。 3、LDA/LSI。将整篇文档利用TFIDF模型表示成一个矩阵，做SVD降维分解，生成两个矩阵，一个是文档-话题矩阵、另一个是词-话题矩阵。得到词-话题矩阵之后，可以得到句子-话题矩阵。 4、Word Embedding。Tomas Mikolov提出的Word2Vec，用了很多技巧和近似的思路让word很容易地表示成一个低维稠密向量，在很多情况下都可以达到不错的效果。词成为了一个向量，句子也可有很多种方法表示成一个向量。</p>
+<h2 id="排序">排序</h2>
+<p>这里介绍两种常见的方法。</p>
 <p>1、基于图排序</p>
 <p>将文档的每句话作为节点，句子之间的相似度作为边权值构建图模型，用pagerank算法进行求解，得到每个句子的得分。</p>
 <p>代表算法有TextRank和LexRank。</p>
@@ -210,17 +216,21 @@
 <p>3）句子是否包含标题词，根据句子中包含标题词的多少来打分。</p>
 <p>4）句子关键词打分，文本进行预处理之后，按照词频统计出排名前10的关键词，通过比较句子中包含关键词的情况，以及关键词分布的情况来打分。</p>
 <p>代表算法是TextTeaser。</p>
-<h2 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h2><p>排序之后的结果只考虑了相关性并没有考虑新颖性，非常有可能出现排名靠前的几句话表达的都是相似的意思。所以需要引入一个惩罚因子，将新颖性考虑进去。对所有的句子重新打分，如下公式：</p>
+<h2 id="后处理">后处理</h2>
+<p>排序之后的结果只考虑了相关性并没有考虑新颖性，非常有可能出现排名靠前的几句话表达的都是相似的意思。所以需要引入一个惩罚因子，将新颖性考虑进去。对所有的句子重新打分，如下公式：</p>
 <p>a x score(i) + (1-a) x similarity(i,i-1), i = 2,3,….N</p>
 <p>序号i表示排序后的顺序，从第二句开始，排第一的句子不需要重新计算，后面的句子必须被和前一句的相似度进行惩罚。</p>
 <p>这个算法就是所谓的MMR（Maximum Margin Relevance）</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出的结果一般是取排序后的前N句话，这里涉及到一个非常重要的问题，也是一直自动文摘质量被诟病的问题，可读性。因为各个句子都是从不同的段落中选择出来的，如果只是生硬地连起来生成摘要的话，很难保证句子之间的衔接和连贯。保证可读性是一件很难的事情。</p>
+<h2 id="输出">输出</h2>
+<p>输出的结果一般是取排序后的前N句话，这里涉及到一个非常重要的问题，也是一直自动文摘质量被诟病的问题，可读性。因为各个句子都是从不同的段落中选择出来的，如果只是生硬地连起来生成摘要的话，很难保证句子之间的衔接和连贯。保证可读性是一件很难的事情。</p>
 <p>这里有一个取巧的方法，就是将排序之后的句子按照原文中的顺序输出，可以在一定程度下保证一点点连贯性。</p>
 <blockquote>
 <p><strong>路漫漫其修远兮，吾将上下而求索</strong></p>
 </blockquote>
-<h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>[1] <a href="https://gist.github.com/rsarxiv/11470a8d763b2845f671061c21230435" target="_blank" rel="external">TextRank源码阅读笔记</a><br>[2] <a href="https://gist.github.com/rsarxiv/4e949264b3bda98828b84cf2991e57e4" target="_blank" rel="external">TextTeaser源码阅读笔记</a></p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h1 id="link">Link</h1>
+<p>[1] <a href="https://gist.github.com/rsarxiv/11470a8d763b2845f671061c21230435" target="_blank" rel="external">TextRank源码阅读笔记</a> [2] <a href="https://gist.github.com/rsarxiv/4e949264b3bda98828b84cf2991e57e4" target="_blank" rel="external">TextTeaser源码阅读笔记</a></p>
+<h1 id="工具推荐">工具推荐</h1>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

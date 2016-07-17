@@ -204,9 +204,17 @@
 </div>
 <p>1、Tripled Language Model</p>
 <p>将c，m，r作为一句话来理解，给定c和m之后，不断地生成r的内容。 这个模型存在一个比较严重的问题是c如果过长的话，用BPTT训练不了RNNLM。（其实换作LSTM或者GRU单元就会好很多。）</p>
-<p>2、Dynamic-Context Generative Model I <img src="media/2-1.png" alt="2"></p>
+<p>2、Dynamic-Context Generative Model I</p>
+<div class="figure">
+<img src="media/2-1.png" alt="2">
+<p class="caption">2</p>
+</div>
 <p>将c和m用词袋模型表示，然后拼接起来，作为输入，通过一个简单的FNN，得到输出，即c和m vector representation。</p>
-<p>3、Dynamic-Context Generative Model II <img src="media/3-1.png" alt="3"></p>
+<p>3、Dynamic-Context Generative Model II</p>
+<div class="figure">
+<img src="media/3-1.png" alt="3">
+<p class="caption">3</p>
+</div>
 <p>与2不同的地方在于，将c和m单独作为输入，通过一个简单的FNN，得到c和m的vector representation。</p>
 <p>这篇paper针对的问题很有意义，history information的建模对于bot在解决实际工程应用的时候意义重大，会让你的bot看起来更加的智能，和分析了用户日志的web应用会带来更好的服务是一个道理。本文的将具体的context包含到了模型中，在真正应用的时候，离线系统根据user conversation logs build一个user profile会更加实用，因为确实不可能把所有的history都丢到模型中一起来算。</p>
 

@@ -202,7 +202,7 @@
 <p>在word这一层，用一个标准的LSTM作为encoder，每一句中的最后一个word的hidden state作为该句的state，在sentence这一层，文档中所有的句子构成一个序列，用一个标准的LSTM作为encoder，得到整个文档的表示。decoder部分同样是一个分层结构，初始state就是刚刚生成的文档表示向量，然后先decoder出sentence这一层的表示，然后再进入该sentence对其内部的word进行decoder。</p>
 <p>3、分层LSTM+Attention，这里的Attention机制和之前分享的是一样的，并且只在sentence这一层用了attention，参看下图：</p>
 <img src="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/fig3.png" width="600" height="600">
-<p>在decoder部分中生成句子表示时，会重点注意输入中与该句子相关的句子，也就是输入中与之相同的句子。这里注意力的权重与<a href="http://rsarxiv.github.io/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/">Neural Machine Translation by Jointly Learning to Align and Translate</a>中的计算方法一样。</p>
+<p>在decoder部分中生成句子表示时，会重点注意输入中与该句子相关的句子，也就是输入中与之相同的句子。这里注意力的权重与<a href="http://rsarxiv.github.io/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/">Neural Machine Translation by Jointly Learning to Align and Translate </a>中的计算方法一样。</p>
 <p>在实验中验证了本文模型的有效性，并且经过对比验证了第三种模型的效果最好，其次是第二种，最差的第一种，也与预期的相符。</p>
 <p>昨天分享的也是一个分层模型，相比于单层的模型效果更好一些，这是否可以引起一些思考？本文也提到后面可以将本文的这种思想应用到自动文摘、对话系统、问答系统上。虽然seq2seq+attention已经在这几大领域中取得了不错的成绩，但如果改成分层模型呢，是不是可以取得更好的成绩？是不是可以将本文的input和output换作自动文摘中的input和target，然后用同样的方法来解决呢？我想应该是可以的。</p>
 <p>另外，因为我个人比较关注自动文摘技术，自动文摘中abstractive类的方法一般都会涉及到Paraphrase（转述，换句话说），本文的自动编码器模型正好很适合做Paraphrase，输入一句话或者一段话，得到一个带有“误差”的语句通顺的版本。一种最简单的思路，用传统的方法提取出文中最重要的几句话（extractive式的方法），用Paraphrase处理一下得到文本摘要。</p>

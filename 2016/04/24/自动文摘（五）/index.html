@@ -11,10 +11,9 @@
     <!--Description-->
     
         <meta name="description" content="引
-
 读万卷书 行万里路
 
-最近读了几篇关于deep learning在summarization领域应用的paper，主要的方法是借鉴机器翻译中seq2seq的技术，然后加上attention model提升效果。今天来分享其中一篇paper，Generating News Headlines w">
+最近读了几篇关于deep learning在summarization领域应用的paper，主要的方法是借鉴机器翻译中seq2seq的技术，然后加上attention model提升效果。今天来分享其中一篇paper，Generating News Headlines wi">
     
 
     <!--Author-->
@@ -194,8 +193,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引">引</h1>
-<blockquote>
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
 <p><strong>读万卷书 行万里路</strong></p>
 </blockquote>
 <p>最近读了几篇关于deep learning在summarization领域应用的paper，主要的方法是借鉴机器翻译中seq2seq的技术，然后加上attention model提升效果。今天来分享其中一篇paper，<b>Generating News Headlines with Recurrent Neural Networks</b></p>
@@ -203,12 +201,9 @@
 <p><code>深度学习是一门研究表示学习的技术，用一张巨大的网来表征给入的数据，使得模型不依赖于领域的特征，是一种full data driven的模型，听起来像是一种银弹，尤其是近几年的在各大领域的都收获了state-of-the-art的结果，但模型的参数调优不没有太多的理论依据，之前的神经网络规模小调参数时间代价会小一些，但deep learning动不动就需要几天甚至几周的训练时间，调参数代价太大；中间层的表示如何解释，也是一个十分头疼的事情，对于cv领域来说还好，总可以将matrix显示成一幅图片来看效果，比较直观，但对于nlp领域，hidden state到底是什么，表示哪个词？表示哪种关系？词向量的每一个维度代表什么？具体真说不清楚，只有在输出的那一层才能看到真正的意义。</code></p>
 <p><code>一个领域的发展需要很多种不同思路的试错，应该是一种百家争鸣的态势，而不是大家一股脑地都用一种技术，一种思路来解决问题，理论模型都趋于大同，这样对这个领域的发展不会有太积极的意义。</code></p>
 <p><code>machine translation是最活跃的一个研究领域，seq2seq框架就是从该领域中提炼出来的，attention model也是借鉴于soft alignment，对于文本摘要这个问题来说，套用seq2seq只能解决headlines generation的问题，面对传统的single document summarization和multi document summarization任务便束手无策了，因为输入部分的规模远大于输出部分的话，seq2seq的效果不会很好，因此说abstractive summarization的研究还长路漫漫。不过这里可以将extractive和abstractive结合在一起来做，用extractive将一篇文档中最重要的一句话提取出来作为输入，套用seq2seq来做abstractive，本质上是一个paraphrase的任务，在工程中可以试一下这种思路。在后续的研究中也可以尝试将extractive和abstractive的思路结合在一起做文本摘要。</code></p>
-<h1 id="abstract">Abstract</h1>
-<p>本文的思路是用LSTM RNN作为encoder-decoder框架的模型，并且使用了attention模型来生成新闻文章的标题，效果很好。并且提出了一种简化版的attention mechanism，相比于复杂版的注意力机制在解决headline generation问题上有更好的效果。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>本文的思路是用LSTM RNN作为encoder-decoder框架的模型，并且使用了attention模型来生成新闻文章的标题，效果很好。并且提出了一种简化版的attention mechanism，相比于复杂版的注意力机制在解决headline generation问题上有更好的效果。</p>
 <p><code>本文定义的文本摘要问题是给新闻文章命题，为了套用seq2seq技术，一般都会将source定义为新闻的第一句话，target定义为标题。本文的亮点在于提出了一种简化版的注意力机制，并且得到了不错的结果。</code></p>
-<h1 id="model">Model</h1>
-<h2 id="overview">Overview</h2>
-<img src="/2016/04/24/自动文摘（五）/model.png" width="600" height="800">
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><img src="/2016/04/24/自动文摘（五）/model.png" width="600" height="800">
 <p>encoder使用文章内容作为输入，一个时间点表示一个单词，每个单词先通过embedding层将词转换为一个分布式向量（<code>word embedding</code>）。每个词向量都由前一个词向量生成，第一个词定义为0向量。</p>
 <p>decoder将encoder中最后一个词向量作为输入，decoder本质是一个rnnlm，使用softmax和attention mechanism来生成每个词。</p>
 <p>损失函数：</p>
@@ -216,53 +211,39 @@
 <p>这里y是输出的词，x是输入的词。</p>
 <p>本文采用了4层LSTM，每层有600个单元，使用Dropout控制过拟合，所有参数的初始值都服从-0.1到0.1的平均分布，训练方法是RMSProp，学习速率0.01，动量项0.9，衰减项0.9，训练9个回合，在第5个回合之后，每个回合都将训练速率减半。batch训练，384组训练数据为一个batch。</p>
 <p><code>模型的定义和训练方法都是借鉴于其他文章，模型参数的不同并不是什么创新，别人用gru或者birnn，你用lstm，或者别人用2层，你用3层、4层更多层，不同的模型参数可能会有不同的state-of-the-art结果，但并不会对大家认识abstractive summarization问题有什么实质性的帮助，也不会促进这个领域的发展，只是用着现有的方法在这个领域刷了一篇paper罢了。</code></p>
-<h2 id="attention">Attention</h2>
-<p>注意力机制可以用来帮助神经网络更好地理解输入数据，尤其是一些专有名词和数字。attention在decoder阶段起作用，通过将输出与所有输入的词建立一个权重关系来让decoder决定当前输出的词与哪个输入词的关系更大（即应该将注意力放到哪个词上）。</p>
+<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p>注意力机制可以用来帮助神经网络更好地理解输入数据，尤其是一些专有名词和数字。attention在decoder阶段起作用，通过将输出与所有输入的词建立一个权重关系来让decoder决定当前输出的词与哪个输入词的关系更大（即应该将注意力放到哪个词上）。</p>
 <p>本文采用两种不同的注意力机制，第一种称作复杂注意力模型（<code>complex attention</code>），与Minh-Thang采用的点乘机制（<code>dot mechanism</code>）一样，看下图：</p>
 <img src="/2016/04/24/自动文摘（五）/complex.png" width="400" height="650">
 <p>第二种称作简单注意力模型（<code>simple attention</code>），是第一种模型的变种，该种模型使得分析神经网络学习注意力权重更加容易。看下图：</p>
 <img src="/2016/04/24/自动文摘（五）/simple.png" width="400" height="650">
 <p>对比两幅图可以看出区别在于隐藏层的最后一层的表示上，简单模型将encoder部分在该层的表示分为两块，一小块用来计算注意力权重（<code>attention weight</code>），另一大块用来作为上下文（<code>context vector</code>）；decoder部分在该层的表示也分为两块，一小块用来计算注意力权重，另一大块用来导入softmax，进行输出预测。</p>
 <p><code>simple attention mechanism的提出可以算作本文的主要贡献，但是感觉贡献量并不大。修改所谓的理论模型，而不仅仅是对模型参数进行修改，本质上是对encoder的context vector进行了更换，用了一些技巧，比如文中的方法，将隐藏层最后一层的表示分为两部分，一部分用来表示context，一部分用来表示attention weight，就有了新的模型。</code></p>
-<h1 id="dataset">Dataset</h1>
-<h2 id="overview-1">Overview</h2>
-<p>本文用English Gigaword数据集，该数据集包括了六大主流媒体机构的新闻文章，包括纽约时报和美联社，每篇文章都有清晰的内容和标题，并且内容被划分为段落。经过一些预处理之后，训练集包括5.5M篇新闻和236M单词。</p>
-<h2 id="preprocessing">Preprocessing</h2>
-<p>headlines作为target，news text的第一段内容作为source，预处理包括：小写化，分词，从词中提取标点符号，标题结尾和文本结尾都会加上一个自定义的结束标记<code>&lt;eos&gt;</code>，那些没有标题或者没有内容或者标题内容超过25个tokens或者文本内容超过50个tokens都会被过滤掉，按照token出现频率排序，取top 40000个tokens作为词典，低频词用符号<code>&lt;unk&gt;</code>进行替换。</p>
+<h1 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h1><h2 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h2><p>本文用English Gigaword数据集，该数据集包括了六大主流媒体机构的新闻文章，包括纽约时报和美联社，每篇文章都有清晰的内容和标题，并且内容被划分为段落。经过一些预处理之后，训练集包括5.5M篇新闻和236M单词。</p>
+<h2 id="Preprocessing"><a href="#Preprocessing" class="headerlink" title="Preprocessing"></a>Preprocessing</h2><p>headlines作为target，news text的第一段内容作为source，预处理包括：小写化，分词，从词中提取标点符号，标题结尾和文本结尾都会加上一个自定义的结束标记<code>&lt;eos&gt;</code>，那些没有标题或者没有内容或者标题内容超过25个tokens或者文本内容超过50个tokens都会被过滤掉，按照token出现频率排序，取top 40000个tokens作为词典，低频词用符号<code>&lt;unk&gt;</code>进行替换。</p>
 <p>数据集被划分为训练集和保留集，训练集将会被随机打乱。</p>
 <p><code>数据的预处理是一件重要的事情，处理的好坏直接影响结果的好坏。本文的每一个处理细节都交代的很清楚，有希望做相同实验的童鞋可以借鉴他的处理方法</code></p>
-<h2 id="dataset-issues">Dataset Issues</h2>
-<p>训练集中会出现标题与所输入文本关系不大的情况，比如：标题包括以下字样For use by New York Times service clients，或者包括一些代码，biz-cover-1等等，本文对此不作处理，因为一个理想的模型可以处理这些问题。‘</p>
+<h2 id="Dataset-Issues"><a href="#Dataset-Issues" class="headerlink" title="Dataset Issues"></a>Dataset Issues</h2><p>训练集中会出现标题与所输入文本关系不大的情况，比如：标题包括以下字样For use by New York Times service clients，或者包括一些代码，biz-cover-1等等，本文对此不作处理，因为一个理想的模型可以处理这些问题。‘</p>
 <p><code>数据集本身会有一些错误，但一个好的模型是可以处理好这些错误的数据，所以本文对此种数据并不做处理。</code></p>
-<h1 id="evaluation">Evaluation</h1>
-<p>模型的优劣用两种方法进行评价。第一种，将训练集和保留集<code>损失值</code>作为评价指标；第二种，将<code>BLEU</code>作为评价指标，为了保证效率，保留集仅仅用了384个样本进行计算。</p>
+<h1 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h1><p>模型的优劣用两种方法进行评价。第一种，将训练集和保留集<code>损失值</code>作为评价指标；第二种，将<code>BLEU</code>作为评价指标，为了保证效率，保留集仅仅用了384个样本进行计算。</p>
 <p><code>评价指标也是常规的两种，两种数据集上的loss值直观地反应了训练和测试效果，BLEU是机器翻译领域中常用的评价标准。</code></p>
-<h1 id="analysis">Analysis</h1>
-<p>计算硬件是GTX 980 Ti GPU，每种模型的计算都会花费4.5天时间。效果直接看下图：</p>
+<h1 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h1><p>计算硬件是GTX 980 Ti GPU，每种模型的计算都会花费4.5天时间。效果直接看下图：</p>
 <img src="/2016/04/24/自动文摘（五）/evaluation.png" width="600" height="800">
 <p>在应用模型结果做保留集的预测时，不同新闻来源的文章预测效果不一样。比如：在BBC、华尔街日报、卫报的效果就非常好，但是在赫芬顿邮报和福布斯的效果就很差。</p>
 <p><code>结果看上图也是一目了然，本文的simple attention mechanism更胜一筹。</code></p>
-<h2 id="understanding-information-stored-in-last-layer-of-the-neural-network">Understanding information stored in last layer of the neural network</h2>
-<p>存在有许多思路来理解注意力机制函数，考虑下面的公式，从输入计算到softmax输出：</p>
+<h2 id="Understanding-information-stored-in-last-layer-of-the-neural-network"><a href="#Understanding-information-stored-in-last-layer-of-the-neural-network" class="headerlink" title="Understanding information stored in last layer of the neural network"></a>Understanding information stored in last layer of the neural network</h2><p>存在有许多思路来理解注意力机制函数，考虑下面的公式，从输入计算到softmax输出：</p>
 <img src="/2016/04/24/自动文摘（五）/formula.png" width="600" height="650">
 <p>第一个部分表示attention context vector对decoder输出的影响，由于context是从input计算得来的，可以理解为encoder的每个输入对decoder输出的影响；第二个部分表示decoder当前隐藏层最后一层对输出的影响；第三个部分表示偏置项。</p>
-<h2 id="understanding-how-the-attention-weight-vector-is-computed">Understanding how the attention weight vector is computed</h2>
-<p><code>注意到这一点很重要，encoder部分的神经元对docoder部分的神经元起作用，也就是attention weight的本质。</code></p>
-<h2 id="errors">Errors</h2>
-<p>本文的模型中存在几种类型的错误，包括：</p>
+<h2 id="Understanding-how-the-attention-weight-vector-is-computed"><a href="#Understanding-how-the-attention-weight-vector-is-computed" class="headerlink" title="Understanding how the attention weight vector is computed"></a>Understanding how the attention weight vector is computed</h2><p><code>注意到这一点很重要，encoder部分的神经元对docoder部分的神经元起作用，也就是attention weight的本质。</code></p>
+<h2 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h2><p>本文的模型中存在几种类型的错误，包括：</p>
 <p>1、神经网络机制在填充细节时细节发生丢失。比如：target是 72 people died when a truck plunged into a gorge on Friday，而模型的预测是 72 killed in truck accident in Russia。这种错误经常出现在decoder beam很小的情况下。</p>
 <p>2、生成的headline与输入的文本没有太大的关系，这些headline在训练集中出现太多次。这种错误常出现在decoder beam很大的情况下。</p>
 <p>上述两种错误反映了本文的模型对decoder beam非常敏感。</p>
 <p><code>个人感觉本文的重点在于动手实践seq2seq+attention在自动文摘中的应用，对很多模型层面上的研究很少，对效果分析上的研究也很浅。</code></p>
-<h1 id="future-work">Future Work</h1>
-<p>使用BiRNN来代替RNN配合attention model效果可能会更好一些。</p>
+<h1 id="Future-Work"><a href="#Future-Work" class="headerlink" title="Future Work"></a>Future Work</h1><p>使用BiRNN来代替RNN配合attention model效果可能会更好一些。</p>
 <p><code>将模型更换为Bi-RNN会得到一个新的结果，不知道会不会有人拿这个来刷paper，个人觉得好无趣。</code></p>
-<h1 id="conclusions">Conclusions</h1>
-<p>本文提出的simple attention mechanism效果很不错。</p>
-<h1 id="link">Link</h1>
-<p>[1] <a href="http://cn.arxiv.org/pdf/1512.01712" target="_blank" rel="external">Generating News Headlines with Recurrent Neural Networks</a></p>
-<h1 id="工具推荐">工具推荐</h1>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h1 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h1><p>本文提出的simple attention mechanism效果很不错。</p>
+<h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1512.01712" target="_blank" rel="external">Generating News Headlines with Recurrent Neural Networks</a></p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

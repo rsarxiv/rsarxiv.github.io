@@ -10,8 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="引
-最近读的几篇paper都是用seq2seq的思路来解决问题，有点读厌烦了，今天换个口味。分享一篇extractive式的paper，AttSum: Joint Learning of Focusing and Summarization with Neural Attention，AttSum是">
+        <meta name="description" content="引最近读的几篇paper都是用seq2seq的思路来解决问题，有点读厌烦了，今天换个口味。分享一篇extractive式的paper，AttSum: Joint Learning of Focusing and Summarization with Neural Attention，AttSum是本">
     
 
     <!--Author-->
@@ -191,14 +190,11 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引">引</h1>
-<p>最近读的几篇paper都是用seq2seq的思路来解决问题，有点读厌烦了，今天换个口味。分享一篇extractive式的paper，<b>AttSum: Joint Learning of Focusing and Summarization with Neural Attention</b>，AttSum是本文所阐述的摘要系统的名称。</p>
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>最近读的几篇paper都是用seq2seq的思路来解决问题，有点读厌烦了，今天换个口味。分享一篇extractive式的paper，<b>AttSum: Joint Learning of Focusing and Summarization with Neural Attention</b>，AttSum是本文所阐述的摘要系统的名称。</p>
 <p><code>本文用了CNN+word embedding来表示sentence，然后将sentence vector加权求和作为document vector，通过将sentence和document映射到同一空间中，更容易在语义层上计算相似度。CNN之前多用于CV领域，后来在NLP中也应用了起来，尤其是各种各样的sentence classification任务中。在这个层面上将deep learning应用到了extractive summarization中，与之前seq2seq的paper有着本质的区别。整体来看，本文并没有太出众的创新点和突出的结果，反倒是提到了Attention机制，但并没有从模型体现地很充分，所以有炒概念的嫌疑。将文本中表示文本的方法应用在seq2seq的encoder部分，是本文的一种扩展和未来要做的工作。</code></p>
-<h1 id="abstract">Abstract</h1>
-<p>基于查询的抽取式文本摘要系统通常需要解决好相关性和显著性两个方面的任务，但一般的系统通常将两者分开考虑。而本文将两个任务合并考虑。本文的算法可以自动学习sentence和document cluster的embedding，并且当查询给定之后，可以应用注意力机制来模拟人类阅读行为。算法的有效性在DUC基于查询的文本摘要任务中进行了验证，得到了有竞争力的结果。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>基于查询的抽取式文本摘要系统通常需要解决好相关性和显著性两个方面的任务，但一般的系统通常将两者分开考虑。而本文将两个任务合并考虑。本文的算法可以自动学习sentence和document cluster的embedding，并且当查询给定之后，可以应用注意力机制来模拟人类阅读行为。算法的有效性在DUC基于查询的文本摘要任务中进行了验证，得到了有竞争力的结果。</p>
 <p><code>本文是将最近比较火的注意力模型应用到了extractive文摘系统中，同时也用了sentence embedding来解决语义层面的相关性问题，并没有像之前的文章在改动seq2seq+attention的细节上做文章，而是切换到了另外一种思路上。</code></p>
-<h1 id="introduction">Introduction</h1>
-<p>基于查询的文本摘要系统一般应用于多文档摘要任务，既需要考虑摘要中句子的相关性，又要考虑句子的显著性，相关性反应了文档的主题思想，显著性避免了重复和冗余。很长一段时间，逻辑斯特回归是解决这类问题的热门方法，但是类似的大多数的监督学习方法都是将两个问题分开考虑，通过一些feature对相关性和显著性分开打分排序。但是人在写摘要的时候，往往会将相关性和显著性合并起来考虑。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>基于查询的文本摘要系统一般应用于多文档摘要任务，既需要考虑摘要中句子的相关性，又要考虑句子的显著性，相关性反应了文档的主题思想，显著性避免了重复和冗余。很长一段时间，逻辑斯特回归是解决这类问题的热门方法，但是类似的大多数的监督学习方法都是将两个问题分开考虑，通过一些feature对相关性和显著性分开打分排序。但是人在写摘要的时候，往往会将相关性和显著性合并起来考虑。</p>
 <p>另外，相关性打分的方法也存在弊端，用类似TF-IDF的指标来打分有时并不能得到非常相似的结果，尽管可能匹配到了核心词，但检索出的结果并不一定可以满足用户的要求。</p>
 <p>用深度学习的技术来表示feature，会比用简单的feature去打分排序更加科学，将两个指标融合在一个模型中解决文本摘要问题将会是一个不错的方案。本文提出了一个名叫AttSum的文摘系统，联合了相关性和显著性两个指标。</p>
 <p>注意力模型已经成功应用在学习多模态对齐问题中，也可以借鉴到本问题当中。人类总是会将注意力放在他们query的东西上面。</p>
@@ -206,54 +202,41 @@
 <p>1、应用了注意力机制在基于查询的文摘任务中。</p>
 <p>2、提出了一种联合查询相关性和句子显著性的神经网络模型。</p>
 <p><code>相关性的打分问题是搜索引擎的基本问题，传统的方案是用一些简单的feature，比如TF-IDF来打分排序，但经常会得不到满意的结果，原因在于feature太过肤浅，并没有考虑语义层面的东西，换句话说并没有真正理解用户需要查什么。当然，有一段时间推荐系统扮演着搜索引擎助手的角色，当一个用户通过留下一些蛛丝马迹给网站，网站就会给他做一些个性化的推荐来辅助搜索引擎，但并不能从根本上解决这个问题。于是本文用了sentence embedding，document embedding来解决这个问题，就像当初的word embedding 一样，将语义映射到一个空间中，然后计算距离来测量相关性。</code></p>
-<h1 id="query-focused-sentence-ranking">Query-Focused Sentence Ranking</h1>
-<img src="/2016/05/10/自动文摘（八）/arch.png" width="600" height="600">
+<h1 id="Query-Focused-Sentence-Ranking"><a href="#Query-Focused-Sentence-Ranking" class="headerlink" title="Query-Focused Sentence Ranking"></a>Query-Focused Sentence Ranking</h1><img src="/2016/05/10/自动文摘（八）/arch.png" width="600" height="600">
 <p>AttSum系统一共分为三层：</p>
 <p>1、CNN Layer，用卷积神经网络将句子和query映射到embedding上。</p>
 <p>2、Pooling Layer，用注意力机制配合sentence embeddings构造document cluster embeddings。</p>
 <p>3、Ranking Layer，计算sentence和document cluster之间的相似度，然后排序。</p>
-<h2 id="cnn-layer">CNN Layer</h2>
-<p>这一层的输入是用word embeddings构造的sentence matrix，然后在该矩阵上用一个卷积filter，之后再应用一个max pooliing获取到features，得到输出。</p>
+<h2 id="CNN-Layer"><a href="#CNN-Layer" class="headerlink" title="CNN Layer"></a>CNN Layer</h2><p>这一层的输入是用word embeddings构造的sentence matrix，然后在该矩阵上用一个卷积filter，之后再应用一个max pooliing获取到features，得到输出。</p>
 <p><code>这个方法非常简单，是一个典型的CNN的应用，需要注意的是filter的宽度和词向量的宽度一致，看起来和n-gram类似，但是用了卷积神经网络来捕捉sentence matrix中的最大特征。将变长的句子都统一映射到同一个空间中，为后续计算相似度提供了极大的方便。</code></p>
-<h2 id="pooling-layer">Pooling Layer</h2>
-<p>这一层用sentence embedding加权求和来得到document cluster embedding。首先计算句子和query的相关性：</p>
+<h2 id="Pooling-Layer"><a href="#Pooling-Layer" class="headerlink" title="Pooling Layer"></a>Pooling Layer</h2><p>这一层用sentence embedding加权求和来得到document cluster embedding。首先计算句子和query的相关性：</p>
 <img src="/2016/05/10/自动文摘（八）/formula1.png" width="300" height="300">
 <p>这里的相关性计算和相似度是两回事，其中M矩阵是一个tensor function，可以用来计算sentence embedding和query embedding之间的相互影响，两个相同的句子会得到一个较低的分数。然后加权求和得到document cluster embedding：</p>
 <img src="/2016/05/10/自动文摘（八）/formula2.png" width="300" height="300">
 <p>这里，sentence embedding扮演两个角色，既是pooling项，又是pooling权重。一方面，如果一个句子与query高度相关，则权重会很大；另一方面，如果一个句子在文档中是显著的，该句子的embedding也应被表示在其中。</p>
 <p>本文强调了attention机制在Rush等人的工作中依赖于手工feature，不是那么自然地模拟人类的注意力，而本文是真正地无干预地在模拟人类的注意力。</p>
 <p><code>感觉这一层的模型中只有M比较神秘一些，但整体来说思路还是非常简单，sentence表示出来了，document用sentence加权求和的方式来表示。只是说权重的计算方法很玄乎，还鄙视了其他人在用attention机制时并不自然。</code></p>
-<h2 id="ranking-layer">Ranking Layer</h2>
-<p>打分排序层同样简单，用了余弦公式来计算sentence和document之间的相似度。在训练的过程中用了<code>pairwise ranking strategy</code>，选择样本的时候，用了ROUGE-2计算了所有句子的score，高分的作为正样本，低分的作为负样本。</p>
+<h2 id="Ranking-Layer"><a href="#Ranking-Layer" class="headerlink" title="Ranking Layer"></a>Ranking Layer</h2><p>打分排序层同样简单，用了余弦公式来计算sentence和document之间的相似度。在训练的过程中用了<code>pairwise ranking strategy</code>，选择样本的时候，用了ROUGE-2计算了所有句子的score，高分的作为正样本，低分的作为负样本。</p>
 <p>根据pairwise ranking的标准，相比于负样本，AttSum应该给正样本打出更高的分数，因此损失函数定义如下：</p>
 <img src="/2016/05/10/自动文摘（八）/formula3.png" width="300" height="300">
 <p>训练方式采用mini-batch SGD。</p>
 <p><code>排序层也没什么特别的地方，用了最简单的余弦公式来计算相似度，通过结对排序的方法，先用ROUGE-2指标将所有的句子进行了打分，高分的句子作为正样本，低分的作为负样本，构造损失函数，让正样本的分数尽可能高，负样本的分数尽可能低。</code></p>
-<h1 id="sentence-selection">Sentence Selection</h1>
-<p>本文在选择句子时采用了一种类似于MMR的简单贪婪算法（MMR在之前的博客中有介绍）。具体过程如下：</p>
+<h1 id="Sentence-Selection"><a href="#Sentence-Selection" class="headerlink" title="Sentence Selection"></a>Sentence Selection</h1><p>本文在选择句子时采用了一种类似于MMR的简单贪婪算法（MMR在之前的博客中有介绍）。具体过程如下：</p>
 <p>1、去掉少于8个词的句子。因为摘要不可能少于8个词。</p>
 <p>2、用之前计算好的score对所有的句子进行降序排列。</p>
 <p>3、迭代地将排名靠前的且不冗余的句子添加到队列中。这里的冗余定义为该句子相比进入队列的句子有更新的内容。</p>
 <p>具体算法流程如下：</p>
 <img src="/2016/05/10/自动文摘（八）/select.png" width="600" height="600">
 <p><code>句子的选择算法几乎就是MMR，也是一种贪心的思路。不同的地方在于对冗余的定义不如MMR，MMR是用当前句子与已经在队列中的句子的相似度作为冗余判断，其实这样更加科学。</code></p>
-<h1 id="experiments">Experiments</h1>
-<h2 id="dataset">Dataset</h2>
-<p>数据集用DUC2005-2007三年的数据，用两年的数据作为训练集，一年的数据作为测试集。</p>
-<h2 id="model-setting">Model Setting</h2>
-<p>CNN层：50维词向量，用gensim实现，训练过程中不更新词向量，窗口尺寸选择2，即2-gram，和ROUGE-2保持一致，句子向量维度用5-100进行试验，最终用50作为句子向量维度。</p>
-<h2 id="evaluation-metric">Evaluation Metric</h2>
-<p>评价指标用ROUGE-2。</p>
-<h2 id="baselines">Baselines</h2>
-<p>使用了之前成绩不错的MultiMR和SVR系统作为baselines，同时为了验证本文模型的有效性，构造了一个ISOLATION系统，单独考虑相关性和显著性。</p>
-<h2 id="summarization-performance">Summarization Performance</h2>
-<p>对比结果看下图：</p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>数据集用DUC2005-2007三年的数据，用两年的数据作为训练集，一年的数据作为测试集。</p>
+<h2 id="Model-Setting"><a href="#Model-Setting" class="headerlink" title="Model Setting"></a>Model Setting</h2><p>CNN层：50维词向量，用gensim实现，训练过程中不更新词向量，窗口尺寸选择2，即2-gram，和ROUGE-2保持一致，句子向量维度用5-100进行试验，最终用50作为句子向量维度。</p>
+<h2 id="Evaluation-Metric"><a href="#Evaluation-Metric" class="headerlink" title="Evaluation Metric"></a>Evaluation Metric</h2><p>评价指标用ROUGE-2。</p>
+<h2 id="Baselines"><a href="#Baselines" class="headerlink" title="Baselines"></a>Baselines</h2><p>使用了之前成绩不错的MultiMR和SVR系统作为baselines，同时为了验证本文模型的有效性，构造了一个ISOLATION系统，单独考虑相关性和显著性。</p>
+<h2 id="Summarization-Performance"><a href="#Summarization-Performance" class="headerlink" title="Summarization Performance"></a>Summarization Performance</h2><p>对比结果看下图：</p>
 <img src="/2016/05/10/自动文摘（八）/result.png" width="600" height="600">
 <p><code>整体来看本文的算法结果具有竞争性，但没有绝对竞争性。训练数据用ROUGE-2指标做了预处理分析，目标函数也是朝着ROUGE-2最大的方向，最后的评价指标也是ROUGE-2，在DUC2005和2006上很容易出现过拟合的情况，比其他结果表现好也是正常情况。整体感觉模型的效果很一般。</code></p>
-<h1 id="links">Links</h1>
-<p>[1] <a href="http://cn.arxiv.org/pdf/1604.00125v1.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></p>
-<h1 id="工具推荐">工具推荐</h1>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h1 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1604.00125v1.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

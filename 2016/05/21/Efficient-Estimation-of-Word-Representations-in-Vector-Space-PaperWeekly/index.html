@@ -208,7 +208,7 @@
 </ul>
 <img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f3.png" width="200" height="200">
 <p>两个模型的输出层都可以用<code>hierarchical softmax</code>来替换，V的复杂度可以降为log2(V)</p>
-<p>NNLM模型的计算瓶颈在于N * D * H，而RNNLM的计算瓶颈在与H * H。</p>
+<p>NNLM模型的计算瓶颈在于N <em> D </em> H，而RNNLM的计算瓶颈在与H * H。</p>
 <p>本文提出的两种模型架构图如下：</p>
 <img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/arch.png" width="600" height="600">
 <p>从架构图中可以看出本文的模型并没有隐藏层，直接由输入层做一次映射，就进行分类。</p>

@@ -208,10 +208,14 @@
 <p>最后，作者在Semantic relateness、Paraphrase detection、Image-sentence ranking和classification任务中进行了测试和对比，验证了本文模型的效果。最后还给出了在多个数据集上对句子聚类的可视化结果，以及用decoder部分生成一段话。</p>
 <p>关于未来的改进，作者有几点想法：</p>
 <ul>
-<li><p>用更深的encoder和decoder网络。</p></li>
-<li><p>用更大的窗口，而不仅仅预测上一句和下一句。</p></li>
-<li><p>试着将sentence替换成paragraph。</p></li>
-<li><p>换一些别的encoder来做，比如用CNN。</p></li>
+<li><p>用更深的encoder和decoder网络。</p>
+</li>
+<li><p>用更大的窗口，而不仅仅预测上一句和下一句。</p>
+</li>
+<li><p>试着将sentence替换成paragraph。</p>
+</li>
+<li><p>换一些别的encoder来做，比如用CNN。</p>
+</li>
 </ul>
 <p>每个想法都可能会是未来另一篇牛paper的思路。</p>
 <p><code>看过了很多的decoder，有char-level，word-level和sentence-level，我有一个小小的想法是，到底哪种level生成的paragraph更出色呢？速度方面，不必比较了，sentence-level一定要快一些，但是质量方面呢？</code>文中最后给出了一个本文模型生成的demo，如下：</p>

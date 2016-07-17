@@ -195,8 +195,10 @@ sentence representation的文章已经分享了几篇，包括了supervise和uns
 <p>sentence representation的文章已经分享了几篇，包括了supervise和unsupervise的方法，但并没有对各种model进行系统地对比和分析，今天分享的这篇文章对现有各种各样的distributed representations of sentences model进行了分类、对比和分析，为了增强对比效果，还提出了两种虚拟的模型。最后将所有的模型在supervised和unsupervised评价任务中进行对比，得出了一些有意义的结论。本文的题目是：<a href="http://arxiv.org/pdf/1602.03483v1.pdf" target="_blank" rel="external">Learning Distributed Representations of Sentences from Unlabelled Data</a>，作者是来自剑桥大学的<a href="https://www.cl.cam.ac.uk/~fh295/" target="_blank" rel="external">Felix Hill</a>博士。</p>
 <p>首先对现有模型进行了分类描述。</p>
 <ul>
-<li><p>直接在纯文本上进行训练的模型，模型包括：<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vector</a>、<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Paragraph Vector</a>，两种模型都在之前分享过。</p></li>
-<li><p>在结构化资源上进行训练的模型，这种模型借助了一些纯文本之外的资源进行辅助训练。模型包括：DictRep、CaptionRep、NMT。</p></li>
+<li><p>直接在纯文本上进行训练的模型，模型包括：<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vector</a>、<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Paragraph Vector</a>，两种模型都在之前分享过。</p>
+</li>
+<li><p>在结构化资源上进行训练的模型，这种模型借助了一些纯文本之外的资源进行辅助训练。模型包括：DictRep、CaptionRep、NMT。</p>
+</li>
 </ul>
 <p><code>DictRep</code>是本文作者之前提出的一个模型，模型训练了一个从词典定义到预训练好的词向量之间的映射。</p>
 <p><code>CaptionRep</code>模型架构与DictRep一样，采用的数据集不同而已，这里使用了COCO数据集，训练一个从图像vector representation到图像caption的映射。</p>
@@ -211,11 +213,16 @@ sentence representation的文章已经分享了几篇，包括了supervise和uns
 <p>其中，OS是指是否需要保留句子在语料中的顺序；R表示需要结构化的训练资源；WO：对词序敏感；SD：句子向量维度；WD：词向量维度；TR：训练时间；TE：编码50w句子需要的时间。</p>
 <p>任务评价一共分为两类，监督学习任务和无监督学习任务。通过大量实验的比较，得出了一下的结论：</p>
 <ul>
-<li><p>不同的任务适合不同的表示模型，这听起来像一句废话，也就是说没有哪种模型可以通吃所有的任务。比如：Skip-Thought Vector模型在TREC任务中最好，是因为句子和句子之间的衔接非常好，非常适合这个模型的特点。而Paraphrase detection任务更加适合于SDAE模型。</p></li>
-<li><p>监督学习和无监督学习任务的表现存在差异，在监督学习任务中表现好的模型在无监督学习模型中表现的就会很一般，带有非线性网络结构的Skip Thought Vector、SDAE、NMT模型在监督学习中表现更好，而log-linear类的模型FastSent则在无监督学习任务中表现更好。</p></li>
-<li><p>额外的资源会影响到训练处模型的通用性和实用性，比如一个在线demo需要很快的查询最近邻速度，用fastsent可能就没有问题，但用其他模型就达不到快速的要求。</p></li>
-<li><p>词序的重要性并没有得到体现。本文的结果给出了一个与常识相左的结论，词序在决定句子意思表示时并没有想象中的那么重要。作者说到，可能是因为当前的评价方式并不能反映出词序的重要性，所以这个问题得不出一个明确的答案。（这点很有意思，在前面分享的一篇文章<a href="http://rsarxiv.github.io/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">How to Generate a Good Word Embedding</a>中，引用了一个结论，词序信息占了语义信息的20%，那么到底词序对于句子语义有多大的影响？需要好好研究一番）</p></li>
-<li><p>评价指标存在缺陷，并不能绝对准确的对比出各个模型的差异。</p></li>
+<li><p>不同的任务适合不同的表示模型，这听起来像一句废话，也就是说没有哪种模型可以通吃所有的任务。比如：Skip-Thought Vector模型在TREC任务中最好，是因为句子和句子之间的衔接非常好，非常适合这个模型的特点。而Paraphrase detection任务更加适合于SDAE模型。</p>
+</li>
+<li><p>监督学习和无监督学习任务的表现存在差异，在监督学习任务中表现好的模型在无监督学习模型中表现的就会很一般，带有非线性网络结构的Skip Thought Vector、SDAE、NMT模型在监督学习中表现更好，而log-linear类的模型FastSent则在无监督学习任务中表现更好。</p>
+</li>
+<li><p>额外的资源会影响到训练处模型的通用性和实用性，比如一个在线demo需要很快的查询最近邻速度，用fastsent可能就没有问题，但用其他模型就达不到快速的要求。</p>
+</li>
+<li><p>词序的重要性并没有得到体现。本文的结果给出了一个与常识相左的结论，词序在决定句子意思表示时并没有想象中的那么重要。作者说到，可能是因为当前的评价方式并不能反映出词序的重要性，所以这个问题得不出一个明确的答案。（这点很有意思，在前面分享的一篇文章<a href="http://rsarxiv.github.io/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">How to Generate a Good Word Embedding</a>中，引用了一个结论，词序信息占了语义信息的20%，那么到底词序对于句子语义有多大的影响？需要好好研究一番）</p>
+</li>
+<li><p>评价指标存在缺陷，并不能绝对准确的对比出各个模型的差异。</p>
+</li>
 </ul>
 <p>最后，展示一个各模型训练之后的应用效果。</p>
 <img src="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/fig2.png" width="600" height="600">

@@ -197,17 +197,11 @@
 <p>本文也是以text games为研究背景，将输入从state变为(state,action)对，提出了Deep Reinforcement Relevant Network(DRRN)模型。</p>
 <img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig1.png" width="600" height="600">
 <p>上图中，前两个是baseline模型，第三个是本文模型，理解起来都比较简单。</p>
-<ol style="list-style-type: lower-alpha">
-<li>Max-action DQN</li>
-</ol>
+<p>(a) Max-action DQN</p>
 <p>该模型适用于每一个transition中actions的最大数量是已知的情况，将每个transition中state和actions拼接成一个向量作为输入，通过一个Deep Network得到每个action的Q值。</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Per-action DQN</li>
-</ol>
+<p>(b) Per-action DQN</p>
 <p>该模型将每一对(state,action)拼接成一个向量作为输入，通过network得到每个action的Q值。</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>DRRN</li>
-</ol>
+<p>(c) DRRN</p>
 <p>本文模型分别将每对(state,action)中的state和action单独构建network，分别学习出不同的表示，然后用一种逐元素操作方法得到Q值，比如对两个向量作内积。这里，state往往是一个比较长的文本，可能是几句话，而action一般来说是一个动词短语，通过不同的网络结构进行学习，得到相同维度的表示，然后做内积，内积就是相似度的一种表征，也就是本文模型中的relevant。</p>
 <p>其实，对比着看不同DRL paper，只需要仔细对比看算法流程图，就知道哪些地方不同了，本文的如下图：</p>
 <img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig2.png" width="600" height="600">
@@ -217,8 +211,7 @@
 <p>本文考虑问题的角度不同，不是传统RL给定一个state，然后通过一个最优的Q来确定一个最优的action，而是将state和action放在一个层面上来做计算，虽然最后也是通过最优的Q来选择action，但通过用action和state的相关性来计算Q，使得其具有更广的应用前景。</p>
 <p>这是DQN在NLP中应用系列的最后一篇文章，文章数量比较少，所以不写综述了。整体的感觉是，应用还不太多，也没有看到特别惊艳的表现。不过，可以无穷无尽地构造训练用的样本是一个非常大的优点。三篇文章有两篇是研究text games的，只有一篇是做text generation的，并且DQN的痕迹很重，都是依着同一个框架进行修改和适应，并没有很多特别的地方。很期待，后面的研究可以将Deep Reinforcement Learning在NLP的各个任务中进行应用，像seq2seq+attention模型那样横扫整个NLP任务。</p>
 <p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
-<h1 id="工具推荐">工具推荐</h1>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 <p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
 

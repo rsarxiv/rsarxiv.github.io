@@ -11,11 +11,10 @@
     <!--Description-->
     
         <meta name="description" content="引
-
 蜀道之难 难于上青天
 
 虽然有很多SaaS提供Summarization的服务，虽然有很多App尤其是新闻类App标榜自己拥有多么牛的技术做Summarization，我们还是不得不承认自动文摘的技术离一个高水平的AI还有一段距离，很长的一段距离。都说自动文摘很难，到底难在哪里？
-Abstra">
+Abstrac">
     
 
     <!--Author-->
@@ -195,33 +194,26 @@ Abstra">
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引">引</h1>
-<blockquote>
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
 <p><strong>蜀道之难 难于上青天</strong></p>
 </blockquote>
 <p>虽然有很多SaaS提供Summarization的服务，虽然有很多App尤其是新闻类App标榜自己拥有多么牛的技术做Summarization，我们还是不得不承认自动文摘的技术离一个高水平的AI还有一段距离，很长的一段距离。都说自动文摘很难，到底难在哪里？</p>
-<h1 id="abstractive">Abstractive</h1>
-<p>上一篇博客分享了Extraction方法的一些思路，本篇简单聊一点Abstractive的想法。 Abstractive是一个True AI的方法，要求系统理解文档所表达的意思，然后用可读性强的人类语言将其简练地总结出来。这里包含这么几个难点：</p>
+<h1 id="Abstractive"><a href="#Abstractive" class="headerlink" title="Abstractive"></a>Abstractive</h1><p>上一篇博客分享了Extraction方法的一些思路，本篇简单聊一点Abstractive的想法。<br>Abstractive是一个True AI的方法，要求系统理解文档所表达的意思，然后用可读性强的人类语言将其简练地总结出来。这里包含这么几个难点：</p>
 <p>1、理解文档。所谓理解，和人类阅读一篇文章一样，可以说明白文档的中心思想，涉及到的话题等等。</p>
 <p>2、可读性强。可读性是指生成的摘要要能够连贯（Coherence）与衔接（Cohesion），通俗地讲就是人类读起来几乎感觉不出来是AI生成的（通过图灵测试）。</p>
 <p>3、简练总结。在理解了文档意思的基础上，提炼出最核心的部分，用最短的话讲明白全文的意思。</p>
 <p>上述三个难点对于人类来说都不是一件容易的事情，何况是发展没太多年的自然语言处理技术。人工智能领域中AI能够领先人类的例子很多，包括前不久很火的Alpha狗，图片识别，主要是利用计算机远强于人类的计算能力，但也有很多的领域，AI离人类的水平还有很远，比如paper的survey，summarization，机器翻译等等。</p>
 <p>近几年随着Deep Learning的火爆，研究者们利用一些最新的研究成果来做summarization，比如attention model，比如rnn encoder-decoder框架，在一定程度上实现了abstractive，但还是处于研究初期，效果还不算很好。</p>
-<h1 id="evaluation">Evaluation</h1>
-<p>自动文摘最大的一个难点是评价问题，如何有效地、合理地评价一篇文摘的效果是一个很难的问题。</p>
-<h2 id="人工评价">人工评价</h2>
-<blockquote>
+<h1 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h1><p>自动文摘最大的一个难点是评价问题，如何有效地、合理地评价一篇文摘的效果是一个很难的问题。</p>
+<h2 id="人工评价"><a href="#人工评价" class="headerlink" title="人工评价"></a>人工评价</h2><blockquote>
 <p><strong>一千个读者，有一千个哈姆雷特</strong></p>
 </blockquote>
 <p>不同的人理解一篇文档会有很大的不同，基于人工评价的方法有类似于评价开放的文科辨析题目答案一样，需要从答案中寻找一些所谓的要点，计算要点覆盖率，打分。人工评价结果在很大程度上都是可信的，因为人可以推理、复述并使用世界知识将具有类似意思但形式不同的文本单元关联起来，更加灵活一些，但时间成本太高，效率太低。</p>
-<h2 id="自动评价">自动评价</h2>
-<p>计算机评价效果，需要给定参考摘要作为标准答案，通过制定一些规则来给生成的摘要打分。目前，使用最广泛的是ROUGH系统（Recall-Oriented Understudy for Gisting Evaluation），基本思想是将待审摘要和参考摘要的n元组共现统计量作为评价依据，然后通过一系列标准进行打分。包括：ROUGH-N、ROUGH-L、ROUGH-W、ROUGH-S和ROUGH-SU几个类型。通俗地将就是通过一些定量化的指标来描述待审摘要和参考文摘之间的相似性，维度考虑比较多，在一定程度上可以很好地评价Extracive产生的摘要。</p>
+<h2 id="自动评价"><a href="#自动评价" class="headerlink" title="自动评价"></a>自动评价</h2><p>计算机评价效果，需要给定参考摘要作为标准答案，通过制定一些规则来给生成的摘要打分。目前，使用最广泛的是ROUGH系统（Recall-Oriented Understudy for Gisting Evaluation），基本思想是将待审摘要和参考摘要的n元组共现统计量作为评价依据，然后通过一系列标准进行打分。包括：ROUGH-N、ROUGH-L、ROUGH-W、ROUGH-S和ROUGH-SU几个类型。通俗地将就是通过一些定量化的指标来描述待审摘要和参考文摘之间的相似性，维度考虑比较多，在一定程度上可以很好地评价Extracive产生的摘要。</p>
 <p>这里涉及到一个重要的问题，就是标注语料问题。自动评价需要给定一系列文档已经他们的参考文摘，用来测试不同的算法效果。TAC（Text Analysis Conference）和TREC（Text REtrieval Conference）两个会议提供了相关的评测数据集，自动文摘领域的paper都是以这些数据集为baseline，与其他paper的算法进行对比。会议的数据集毕竟有限，新的领域中做自动文摘需要建立自己的数据集作为标准。</p>
 <p>现有的评价标准存在的一个重要问题在于没有考虑语义层面上的相似，评价extractive还好，但评价abstractive就会效果不好了。Deep Learning其实就是一个representation learning，将世界万物表示成数字，然后作分析。在词、句子甚至段落这个层面上的表示学习研究的非常多，也有很多的state-of-the-art的结果，所以做语义层面上的评价并不难。</p>
-<h2 id="重要性">重要性</h2>
-<p>评价对于一个研究领域非常重要，是牵引这个领域前进的首要因素，评价需要制定标准，标准的好坏关系到这个领域的研究质量，尤其是研究者们的paper质量，因为大家相互比较算法的优劣就十分依赖这样的标准。标准数据集的建立以及baseline的提出，是最首要的任务。</p>
-<h1 id="工具推荐">工具推荐</h1>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h2 id="重要性"><a href="#重要性" class="headerlink" title="重要性"></a>重要性</h2><p>评价对于一个研究领域非常重要，是牵引这个领域前进的首要因素，评价需要制定标准，标准的好坏关系到这个领域的研究质量，尤其是研究者们的paper质量，因为大家相互比较算法的优劣就十分依赖这样的标准。标准数据集的建立以及baseline的提出，是最首要的任务。</p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

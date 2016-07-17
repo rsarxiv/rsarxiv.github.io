@@ -11,10 +11,9 @@
     <!--Description-->
     
         <meta name="description" content="引
-
 万事开头难，其实之后的事情可能会更难，但开好了头，就会有充足的信心来面对后面的困难。
 
-记得Andrew Ng在一个采访中曾经说过：“当我和研究人员，或是想创业的人交谈时，我告诉他们如果你不断地阅读论文，每周认真研究六篇论文，坚持两年。然后，你会学到很多东西。这是对你长期发展一个极好的投资。”">
+记得Andrew Ng在一个采访中曾经说过：“当我和研究人员，或是想创业的人交谈时，我告诉他们如果你不断地阅读论文，每周认真研究六篇论文，坚持两年。然后，你会学到很多东西。这是对你长期发展一个极好的投资。”，">
     
 
     <!--Author-->
@@ -194,8 +193,7 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h1 id="引">引</h1>
-<blockquote>
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
 <p><strong>万事开头难，其实之后的事情可能会更难，但开好了头，就会有充足的信心来面对后面的困难。</strong></p>
 </blockquote>
 <p>记得Andrew Ng在一个采访中曾经说过：“当我和研究人员，或是想创业的人交谈时，我告诉他们如果你不断地阅读论文，每周认真研究六篇论文，坚持两年。然后，你会学到很多东西。这是对你长期发展一个极好的投资。”，这个投资将会是一个回报非常高的投资。其实，不仅仅是坚持读论文，当你将任何一件不起眼但却有一些意义的事情坚持做很长的时间都会得到不错的回报，比如健身，比如跑步，比如写博客，比如摄影，每一个这样的习惯看起来都不会立刻产生很明显的效果，但坚持久了对我们的生活和工作都会带来一个质的飞跃。</p>
@@ -203,28 +201,18 @@
 <p><code>世上没有什么所谓的银弹，每种方法存在都有其存在的意义。第一篇paper尝试将seq2seq+attention应用在summarization任务上，但并未取得比较令人满意的结果，反而增加了一些人工特征之后，才得到了很大的提升，虽然第二篇模型依旧是一个data-driven的模型，但我想如果给其添加上人工特征也会得到更好的效果。综合多种方法的优点来解决一个问题才是王道，而不是一味地、粗暴地套用某个范式，某个框架。</code></p>
 <p><code>两篇文章从同一个角度入手，采用了不同难度的模型，非常好地解决了这个问题。联想到上周看的paper，他所采用的是多层lstm作为encoder和decoder，但数据集使用的并不相同，所以并不知道与本周的两篇paper哪个效果更好。但这也给出了一种发paper的思路，多去尝试一些encoder和decoder模型，不断地组合和对比，一定会有不错的发现。但这样的解决方案对于提升层次上没有太多溢出，因为大家都是照着模板去做，并没有真正地更深地理解到这个问题的本质。</code></p>
 <p><code>一个系统的构建需要处理好方方面面的细节，比如数据的预处理，比如评测的实现，比如模型的参数调优，每个方面想要做好做精都是一门学问。</code></p>
-<h1 id="abstract">Abstract</h1>
-<h2 id="paper-1">Paper 1</h2>
-<p>本文提出了一种<code>data-driven</code>的方法来做句子摘要，使用了一种基于局部注意力模型（<code>local attention-based model</code>），在给定输入句子的情况下，生成摘要的每个词。模型结构非常简单，可以套用流行的<code>end2end</code>框架来训练，并且很容易扩展到大型训练数据集上。模型在DUC-2004任务中效果优于几个不错的baselines。</p>
-<h2 id="paper-2">Paper 2</h2>
-<p>本文使用一种conditional RNN来生成摘要，条件是卷积注意力模型（<code>convolutional attention-based encoder</code>），用来确保每一步生成词的时候都可以聚焦到合适的输入上。模型仅仅依赖于学习到的features，并且很容易在大规模数据上进行end2end式地训练，并且在Gigaword语料上和DUC-2004任务中取得了更好的效果。</p>
+<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><h2 id="Paper-1"><a href="#Paper-1" class="headerlink" title="Paper 1"></a>Paper 1</h2><p>本文提出了一种<code>data-driven</code>的方法来做句子摘要，使用了一种基于局部注意力模型（<code>local attention-based model</code>），在给定输入句子的情况下，生成摘要的每个词。模型结构非常简单，可以套用流行的<code>end2end</code>框架来训练，并且很容易扩展到大型训练数据集上。模型在DUC-2004任务中效果优于几个不错的baselines。</p>
+<h2 id="Paper-2"><a href="#Paper-2" class="headerlink" title="Paper 2"></a>Paper 2</h2><p>本文使用一种conditional RNN来生成摘要，条件是卷积注意力模型（<code>convolutional attention-based encoder</code>），用来确保每一步生成词的时候都可以聚焦到合适的输入上。模型仅仅依赖于学习到的features，并且很容易在大规模数据上进行end2end式地训练，并且在Gigaword语料上和DUC-2004任务中取得了更好的效果。</p>
 <p><code>两篇paper的模型框架都是seq2seq+attention，最大的区别在于选择encoder和decoder的模型，第一篇的模型偏容易一些，第二篇用了rnn来做。seq2seq或者说end2end现在火的不得了，最初在机器翻译开始使用，后面推广到多模态学习，对话生成，自动问答，文本摘要等等诸多领域。</code></p>
-<h1 id="introduction">Introduction</h1>
-<p>文本摘要有几种类型的任务，本文属于<code>headlines generation</code>，输入的是一段话，输出的是一句话或者一个标题。</p>
-<h2 id="paper-1-1">Paper 1</h2>
-<p>受最近机器翻译中seq2seq技术的启发，本文将<code>Neural Language Model</code>和带有上下文的encoder结合起来，其中encoder与Bahdanau（<b>Neural machine translation by jointly learning to align and translate</b>）的attention-based encoder一样。encoder和decoder在句子摘要任务中共同训练。另外，decoder中也使用了beam search进行摘要生成。本文的方法简称ABS（<code>Attention-Based Summarization</code>），可以轻易扩展到大规模数据集进行训练，而且可以在任何document-summary对中进行使用。本文采用Gigaword语料集进行训练，包括大约400万篇新闻文章。为了检验模型的效果，与多种类型的文摘系统进行了对比，并且在DUC-2004任务上获得了最高分。</p>
-<h2 id="paper-2-1">Paper 2</h2>
-<p>本文的decoder是一个<code>RNN LM</code>，生成摘要依赖的条件是encoder的输出，encoder会计算输入中每个词的分数，这个分数可以理解为对输入作软对齐（<code>soft alignment</code>），也就是说decoder在生成下一个单词时需要注意输入中的哪些单词。encoder和decoder要在一个sentence-summary数据集中进行共同训练。本文的模型可以看作第一篇ABS模型的扩展，ABS模型中decoder是用FNN LM，而本文使用RNN，encoder部分本文更加复杂，将输入单词的位置信息考虑在内，并且使用了卷积网络来编码输入单词。本文模型效果优于第一篇paper。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>文本摘要有几种类型的任务，本文属于<code>headlines generation</code>，输入的是一段话，输出的是一句话或者一个标题。</p>
+<h2 id="Paper-1-1"><a href="#Paper-1-1" class="headerlink" title="Paper 1"></a>Paper 1</h2><p>受最近机器翻译中seq2seq技术的启发，本文将<code>Neural Language Model</code>和带有上下文的encoder结合起来，其中encoder与Bahdanau（<b>Neural machine translation by jointly learning to align and translate</b>）的attention-based encoder一样。encoder和decoder在句子摘要任务中共同训练。另外，decoder中也使用了beam search进行摘要生成。本文的方法简称ABS（<code>Attention-Based Summarization</code>），可以轻易扩展到大规模数据集进行训练，而且可以在任何document-summary对中进行使用。本文采用Gigaword语料集进行训练，包括大约400万篇新闻文章。为了检验模型的效果，与多种类型的文摘系统进行了对比，并且在DUC-2004任务上获得了最高分。</p>
+<h2 id="Paper-2-1"><a href="#Paper-2-1" class="headerlink" title="Paper 2"></a>Paper 2</h2><p>本文的decoder是一个<code>RNN LM</code>，生成摘要依赖的条件是encoder的输出，encoder会计算输入中每个词的分数，这个分数可以理解为对输入作软对齐（<code>soft alignment</code>），也就是说decoder在生成下一个单词时需要注意输入中的哪些单词。encoder和decoder要在一个sentence-summary数据集中进行共同训练。本文的模型可以看作第一篇ABS模型的扩展，ABS模型中decoder是用FNN LM，而本文使用RNN，encoder部分本文更加复杂，将输入单词的位置信息考虑在内，并且使用了卷积网络来编码输入单词。本文模型效果优于第一篇paper。</p>
 <p><code>两篇paper都是seq2seq在sentence-level abstractive summarization任务中早期的尝试，给文本摘要方法带来了新鲜血液，第一篇paper中encoder和decoder都用了比较简单的模型，但已经得到了优于传统方法的结果，再一次地证明了deep learning在解决问题上的优势，第二篇paper升级了encoder和decoder，考虑了更复杂的细节，得到了更好的效果，相信后面会有大量的paper套用seq2seq+attention，再配合一些其他的技术来提升模型的效果，但整体的思路基本已固定下来，如果想要更大的突破，可能还需要提出另外一种框架来解决问题。</code></p>
-<h1 id="related-work">Related Work</h1>
-<p>这部分内容是初入门径的研究者最喜欢的工作，尤其是这个领域中最新研究的paper还没有出survey的情况下，大家想最快地了解这个领域中新技术的应用情况，读高水平paper中的相关工作是最有效的。</p>
-<h2 id="paper-1-2">Paper 1</h2>
-<p>文本摘要任务在sentence这个level可以等同于headlines generation，某种程度上与paraphrase相近。seq2seq于2014年在机器翻译领域中提出并流行开来，之前的研究大多都是基于extractive的思路，借助一些人工features来提升效果。seq2seq的意义在于完全基于数据本身，从数据中学习feature出来，并且得到了更好的效果。本文的方法比较简单，decoder也只用了NNLM（2003年由Bengio提出），而seq2seq在机器翻译中应用时都采用的是RNNLM，所以在Future Work中作者会用RNNLM，于是就有了第二篇paper。</p>
-<h2 id="paper-2-2">Paper 2</h2>
-<p>由于都是一个组出的paper，还有共同的作者，这个部分写的差不多，只是多提了第一篇paper做的工作。</p>
+<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><p>这部分内容是初入门径的研究者最喜欢的工作，尤其是这个领域中最新研究的paper还没有出survey的情况下，大家想最快地了解这个领域中新技术的应用情况，读高水平paper中的相关工作是最有效的。</p>
+<h2 id="Paper-1-2"><a href="#Paper-1-2" class="headerlink" title="Paper 1"></a>Paper 1</h2><p>文本摘要任务在sentence这个level可以等同于headlines generation，某种程度上与paraphrase相近。seq2seq于2014年在机器翻译领域中提出并流行开来，之前的研究大多都是基于extractive的思路，借助一些人工features来提升效果。seq2seq的意义在于完全基于数据本身，从数据中学习feature出来，并且得到了更好的效果。本文的方法比较简单，decoder也只用了NNLM（2003年由Bengio提出），而seq2seq在机器翻译中应用时都采用的是RNNLM，所以在Future Work中作者会用RNNLM，于是就有了第二篇paper。</p>
+<h2 id="Paper-2-2"><a href="#Paper-2-2" class="headerlink" title="Paper 2"></a>Paper 2</h2><p>由于都是一个组出的paper，还有共同的作者，这个部分写的差不多，只是多提了第一篇paper做的工作。</p>
 <p><code>都说 读书破万卷，下笔如有神。在做一个领域的研究之前，免不了读大量相关的paper来做一些积累，related work这个部分就是大家写的小型survey，经常会提到一些该领域最经典的paper。感觉Rush他们组应该是比较新的NLP研究力量，将一个新的技术用在了自动文摘领域中，攒了两篇paper，也是数量上的一种积累。不过他们share了paper相关的code，用Torch来写模型部分，用python作数据处理。组里也包括那位将CNN用在sentence classification中的Yoon Kim，相信他们日后会有更多更好的成果。</code></p>
-<h1 id="background">Background</h1>
-<p>本节是用数学语言定义句子摘要问题，两篇文章解决的问题相同。给定一个输入句子，目标是生成一个压缩版的摘要。句子级别的摘要问题可以定义如下：</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>本节是用数学语言定义句子摘要问题，两篇文章解决的问题相同。给定一个输入句子，目标是生成一个压缩版的摘要。句子级别的摘要问题可以定义如下：</p>
 <img src="/2016/04/30/自动文摘（六）/formula1.png" width="300" height="400">
 <p>x表示输入句子，y表示生成的摘要句子集合，定义一个系统是abstractive的，就是从生成句子集合中找到score最大的那一个。而extractive摘要系统可以定义如下：</p>
 <img src="/2016/04/30/自动文摘（六）/formula2.png" width="300" height="400">
@@ -232,11 +220,8 @@
 <img src="/2016/04/30/自动文摘（六）/formula3.png" width="300" height="400">
 <p>然而abstractive summarization存在一个更加困难的生成过程。</p>
 <p><code>用了一个简单的数学公式将问题描述地非常清楚，包括一些细节，比如输入长度大于输出长度，输出长度为固定值，输入输出拥有相同的词汇表等等。从数学公式来看score函数的定义很重要，考虑的参数类型不同会有不同的score，也就是不同的模型，明显看得出abstractive要远难于extractive和sentence compression。</code></p>
-<h1 id="model">Model</h1>
-<p>模型部分是paper的重头戏，分为Objective，Encoder，Decoder，Generation，Training五个子部分来讨论。</p>
-<h2 id="paper-1-3">Paper 1</h2>
-<h3 id="objective">Objective</h3>
-<p>目标函数是Negative Log-Likelihood（NLL），decoder中生成摘要单词的条件是encoder的输出和当前生成词的窗口词向量，具体如下：</p>
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p>模型部分是paper的重头戏，分为Objective，Encoder，Decoder，Generation，Training五个子部分来讨论。</p>
+<h2 id="Paper-1-3"><a href="#Paper-1-3" class="headerlink" title="Paper 1"></a>Paper 1</h2><h3 id="Objective"><a href="#Objective" class="headerlink" title="Objective"></a>Objective</h3><p>目标函数是Negative Log-Likelihood（NLL），decoder中生成摘要单词的条件是encoder的输出和当前生成词的窗口词向量，具体如下：</p>
 <img src="/2016/04/30/自动文摘（六）/formula4.png" width="300" height="400">
 <p>这里当前生成词的窗口词向量由下式表示：</p>
 <img src="/2016/04/30/自动文摘（六）/formula5.png" width="100" height="100">
@@ -244,48 +229,37 @@
 <img src="/2016/04/30/自动文摘（六）/formula6.png" width="300" height="400">
 <p>对于i&lt;1的情况，在句子前padding几个开始符号。接下来建模的部分就是研究如何表达条件概率。</p>
 <p><code>目标函数用生成词的条件概率的对数来表示是NLP中非常常用的做法。不同的模型都在研究如何表示条件，比如encoder的表示，encoder输出的表示，decoder中当前词前序词的表示等等。</code></p>
-<h3 id="encoder">Encoder</h3>
-<p>本文一共提出了三种encoder模型。</p>
-<h4 id="bag-of-words-encoder">Bag-of-Words Encoder</h4>
-<p>词袋模型是最简单的一个模型，将输入的句子用词袋模型降维到H，生成一个word embedding层。模型如下：</p>
+<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>本文一共提出了三种encoder模型。</p>
+<h4 id="Bag-of-Words-Encoder"><a href="#Bag-of-Words-Encoder" class="headerlink" title="Bag-of-Words Encoder"></a>Bag-of-Words Encoder</h4><p>词袋模型是最简单的一个模型，将输入的句子用词袋模型降维到H，生成一个word embedding层。模型如下：</p>
 <img src="/2016/04/30/自动文摘（六）/bow.png" width="300" height="400">
 <p><code>词袋模型并不会考虑词序的关系，效果并不会太好，但是作为paper中的一个baseline模型会有很好的对比结果。</code></p>
-<h4 id="convolutional-encoder">Convolutional Encoder</h4>
-<p>卷积模型是一个深度网络模型，可以很好地捕捉输入的特征。模型如下：</p>
+<h4 id="Convolutional-Encoder"><a href="#Convolutional-Encoder" class="headerlink" title="Convolutional Encoder"></a>Convolutional Encoder</h4><p>卷积模型是一个深度网络模型，可以很好地捕捉输入的特征。模型如下：</p>
 <img src="/2016/04/30/自动文摘（六）/CNN.png" width="300" height="400">
 <p>其中矩阵F是输入句子的word embedding矩阵，Q包括了一系列过滤层，并且采用了最大池化技术来处理。</p>
 <p><code>CNN通过结合word embedding将句子表示成一个matrix，通过不同尺寸的卷积核来filter出句子中的feature，本质上和N-gram一样，N-gram的N就是卷积核的尺寸，构建出多种feature maps，然后max pooling，然后filter，然后pooling，最终采用一个MLP得出结果。</code></p>
-<h4 id="attention-based-encoder">Attention-Based Encoder</h4>
-<p>虽然卷积模型比词袋模型更能捕捉句子的特征，却同样需要对整个句子做表示，机器翻译领域在解决相同问题时采用了注意力模型来构建context，然后基于生成的context来构建representation。本文采用一种类似于词袋模型的注意力模型，模型如下：</p>
+<h4 id="Attention-Based-Encoder"><a href="#Attention-Based-Encoder" class="headerlink" title="Attention-Based Encoder"></a>Attention-Based Encoder</h4><p>虽然卷积模型比词袋模型更能捕捉句子的特征，却同样需要对整个句子做表示，机器翻译领域在解决相同问题时采用了注意力模型来构建context，然后基于生成的context来构建representation。本文采用一种类似于词袋模型的注意力模型，模型如下：</p>
 <img src="/2016/04/30/自动文摘（六）/attention.png" width="300" height="400">
 <p>其中矩阵G是context的word embedding矩阵，P是一个权重矩阵，权重连接着输入word embedding和context embedding，Q是一个光滑窗口，流程如下图：</p>
 <img src="/2016/04/30/自动文摘（六）/attention2.png" width="300" height="400">
 <p><code>本文的注意力模型可以视作将词袋模型中的P向量用一个待学习的soft alignment来替换了。</code></p>
 <p><code>三种encoder模型给出了input sentence的表示，第三种还给出了summary和input之间的关系，encoder的输出将作为decoder的输入，来生成summary。</code></p>
-<h3 id="decoder">Decoder</h3>
-<p>decoder的本质就是一个神经网络语言模型，本文用了2003年Bengio提出的NNLM，模型如下：</p>
+<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>decoder的本质就是一个神经网络语言模型，本文用了2003年Bengio提出的NNLM，模型如下：</p>
 <img src="/2016/04/30/自动文摘（六）/NNLM.png" width="300" height="400">
 <p>Bengio的模型是一个FNN（Feed-Forward Neural Network），通过上文（当前词的前N个词）来预测当前词，流程如下图：</p>
 <img src="/2016/04/30/自动文摘（六）/NNLM2.png" width="300" height="400">
 <p>待求的参数是word embedding矩阵E，输入层到隐藏层的权重矩阵U，隐藏层到decoder输出层的权重矩阵V，encoder输出层到decoder输出层的权重矩阵W。</p>
 <p><code>NNLM是一个经典的语言模型，本质上就是一个神经网络多分类器，文中也提到可以考虑用RNNLM来作decoder，也就有了第二篇paper的模型。</code></p>
-<h3 id="generation">Generation</h3>
-<p>一般的语言模型都是基于上下文生成概率最高的一个词，但对于生成摘要句子来说还不够。通常的做法是用一种搜索算法在一定的可行域之内找到几组可行的解。本文采用<code>beam search</code>，也是之前机器翻译领域生成翻译结果时常用的算法，算法描述如下：</p>
+<h3 id="Generation"><a href="#Generation" class="headerlink" title="Generation"></a>Generation</h3><p>一般的语言模型都是基于上下文生成概率最高的一个词，但对于生成摘要句子来说还不够。通常的做法是用一种搜索算法在一定的可行域之内找到几组可行的解。本文采用<code>beam search</code>，也是之前机器翻译领域生成翻译结果时常用的算法，算法描述如下：</p>
 <img src="/2016/04/30/自动文摘（六）/beamsearch.png" width="300" height="400">
 <p><code>给定一个beam size K，在生成每一个summary word时，都保留概率最大的K个词，从生成第二个词开始，计算所有路径的概率，只保留概率最大的前K个分枝，裁剪掉剩余的分枝，继续生成第三个词，依次进行下去，直到生成的词是EOS或者达到最大句子长度限制。最后得到的结果是K个最好的sentence summary。</code></p>
-<h3 id="training">Training</h3>
-<p>本文采用mini batch SGD算法对训练集进行训练，使得NLL最小。</p>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><p>本文采用mini batch SGD算法对训练集进行训练，使得NLL最小。</p>
 <p><code>因为在生成summary时并没有什么约束条件，所以本方法可以拓展到任意input-output pairs中使用。</code></p>
-<h3 id="abs">ABS+</h3>
-<p>作者提出了一个纯数据驱动的模型之后，又提出了一个abstractive与extractive融合的模型，在ABS模型的基础上增加了feature function，修改了score function，也就是结果对比中的<code>ABS+</code>模型。</p>
-<h2 id="paper-2-3">Paper 2</h2>
-<p>本文模型简称为RAS（<code>Recurrent Attentive Summarizer</code>）</p>
-<h3 id="objective-1">Objective</h3>
-<p>目标函数如下：</p>
+<h3 id="ABS"><a href="#ABS" class="headerlink" title="ABS+"></a>ABS+</h3><p>作者提出了一个纯数据驱动的模型之后，又提出了一个abstractive与extractive融合的模型，在ABS模型的基础上增加了feature function，修改了score function，也就是结果对比中的<code>ABS+</code>模型。</p>
+<h2 id="Paper-2-3"><a href="#Paper-2-3" class="headerlink" title="Paper 2"></a>Paper 2</h2><p>本文模型简称为RAS（<code>Recurrent Attentive Summarizer</code>）</p>
+<h3 id="Objective-1"><a href="#Objective-1" class="headerlink" title="Objective"></a>Objective</h3><p>目标函数如下：</p>
 <img src="/2016/04/30/自动文摘（六）/NLL2.png" width="300" height="400">
 <p>两篇paper都是采用NLL，但不同的是第二篇paper目标函数条件概率中的条件与第一篇不同，本文采用decoder的所有上文，而不是一个窗口内的上文。</p>
-<h3 id="encoder-1">Encoder</h3>
-<p>encoder的输出是decoder的输入，对于每一个time step，encoder都需要给出一个context vector，本文encoder的重点在于如何计算时间相关的context。</p>
+<h3 id="Encoder-1"><a href="#Encoder-1" class="headerlink" title="Encoder"></a>Encoder</h3><p>encoder的输出是decoder的输入，对于每一个time step，encoder都需要给出一个context vector，本文encoder的重点在于如何计算时间相关的context。</p>
 <p>输入句子每个词最终的embedding是各词的embedding与各词位置的embedding之和，经过一层卷积处理得到aggregate vector：</p>
 <img src="/2016/04/30/自动文摘（六）/formula21.png" width="300" height="400">
 <p>根据<code>aggregate vector</code>计算context（encoder的输出）：</p>
@@ -293,62 +267,45 @@
 <p>其中权重由下式计算：</p>
 <img src="/2016/04/30/自动文摘（六）/formula23.png" width="300" height="400">
 <p><code>Rush组的paper有一个特点，喜欢用CNN多一些，包括那位用CNN做句子分类的童鞋。可能的原因是，Rush是Facebook AI Research的研究人员，Lecun是Leader，所以他们对CNN的理解也更深一些，在model中使用的也就更多一些。</code></p>
-<h3 id="decoder-1">Decoder</h3>
-<p>decoder的部分是一个RNNLM，这里的RNN Hidden Layer使用的是LSTM单元。decoder的输出由下式计算：</p>
+<h3 id="Decoder-1"><a href="#Decoder-1" class="headerlink" title="Decoder"></a>Decoder</h3><p>decoder的部分是一个RNNLM，这里的RNN Hidden Layer使用的是LSTM单元。decoder的输出由下式计算：</p>
 <img src="/2016/04/30/自动文摘（六）/formula24.png" width="300" height="400">
 <p>其中c(t)是encoder的输出，h(t)是RNN隐藏层，由下式计算：</p>
 <img src="/2016/04/30/自动文摘（六）/formula25.png" width="300" height="400">
 <p>这里隐藏层的单元有两种思路，一种是常规的Elman RNN，一种是LSTM。</p>
 <p><code>RNNLM的Hidden Unit可以不用LSTM或者GRU这么复杂，普通的隐藏层Elman RNN可以解决问题，采用Truncate-BPTT对RNN进行训练（详见Tomas Mikolov的PhD Thesis）。况且LSTM和GRU会带来更多的参数，造成overfit。</code></p>
-<h3 id="generation-1">Generation</h3>
-<p>生成过程中也采用<code>beam search</code>算法进行summary生成。</p>
-<h3 id="training-1">Training</h3>
-<p>给定一个训练集，包括大量的sentence-summary pairs，用SGD将NLL函数最小化得到最优的参数集，参数包含encoder和decoder两个部分的参数。</p>
+<h3 id="Generation-1"><a href="#Generation-1" class="headerlink" title="Generation"></a>Generation</h3><p>生成过程中也采用<code>beam search</code>算法进行summary生成。</p>
+<h3 id="Training-1"><a href="#Training-1" class="headerlink" title="Training"></a>Training</h3><p>给定一个训练集，包括大量的sentence-summary pairs，用SGD将NLL函数最小化得到最优的参数集，参数包含encoder和decoder两个部分的参数。</p>
 <p><code>SGD是一种常用的优化算法，在解决NLP问题中非常有效，其中最常见的mini batch训练方法。</code></p>
-<h1 id="experiment">Experiment</h1>
-<h2 id="paper-1-4">Paper 1</h2>
-<h3 id="dataset">Dataset</h3>
-<p>本文采用经过处理的约400万Gigaword数据集作为训练集和验证集，在DUC2004数据集上进行评测，评测使用ROUGE方法。</p>
+<h1 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h1><h2 id="Paper-1-4"><a href="#Paper-1-4" class="headerlink" title="Paper 1"></a>Paper 1</h2><h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><p>本文采用经过处理的约400万Gigaword数据集作为训练集和验证集，在DUC2004数据集上进行评测，评测使用ROUGE方法。</p>
 <p><code>DUC的比赛经常会包括文本摘要，所以常常用来比较每个模型或系统的优劣。</code></p>
-<h3 id="baselines">Baselines</h3>
-<p>1、PREFIX，这个baseline是取输入的前75个字符作为headline。</p>
+<h3 id="Baselines"><a href="#Baselines" class="headerlink" title="Baselines"></a>Baselines</h3><p>1、PREFIX，这个baseline是取输入的前75个字符作为headline。</p>
 <p>2、TOPIARY。</p>
 <p>3、COMPRESS。</p>
 <p>4、IR。</p>
 <p>5、W&amp;L。</p>
 <p>6、MOSES+。</p>
 <p><code>baselines选择了几组非常有代表性的系统。</code></p>
-<h3 id="implementation">Implementation</h3>
-<p>本文的程序用Torch实现，并且开源在Github上，处理1000个mini batch大概用时160s，最好的验证集参数出现在第15个epoch。</p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p>本文的程序用Torch实现，并且开源在Github上，处理1000个mini batch大概用时160s，最好的验证集参数出现在第15个epoch。</p>
 <p><code>Torch是一个使用率非常高的开源工具，尤其是在研究领域。相比于Theano的难以调试，Torch具有非常简单、易用、灵活、易调试的特点。</code></p>
-<h2 id="paper-2-4">Paper 2</h2>
-<h3 id="dataset-1">Dataset</h3>
-<p>与第一篇相同的训练集和处理方法，同样使用DUC2004作为评测数据，ROUGE作为评测方法。</p>
-<h3 id="baselines-1">Baselines</h3>
-<p>1、ABS（第一篇paper中的方法） 2、ABS+（第一篇paper中的方法）</p>
-<h3 id="implementation-1">Implementation</h3>
-<p>同样使用Torch开发，在训练时用摘要的混乱度（<code>perplexity</code>）作为评价指标控制训练过程。</p>
-<h1 id="result">Result</h1>
-<h2 id="paper-1-5">Paper 1</h2>
-<img src="/2016/04/30/自动文摘（六）/result1.png" width="300" height="400">
+<h2 id="Paper-2-4"><a href="#Paper-2-4" class="headerlink" title="Paper 2"></a>Paper 2</h2><h3 id="Dataset-1"><a href="#Dataset-1" class="headerlink" title="Dataset"></a>Dataset</h3><p>与第一篇相同的训练集和处理方法，同样使用DUC2004作为评测数据，ROUGE作为评测方法。</p>
+<h3 id="Baselines-1"><a href="#Baselines-1" class="headerlink" title="Baselines"></a>Baselines</h3><p>1、ABS（第一篇paper中的方法）<br>2、ABS+（第一篇paper中的方法）</p>
+<h3 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h3><p>同样使用Torch开发，在训练时用摘要的混乱度（<code>perplexity</code>）作为评价指标控制训练过程。</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><h2 id="Paper-1-5"><a href="#Paper-1-5" class="headerlink" title="Paper 1"></a>Paper 1</h2><img src="/2016/04/30/自动文摘（六）/result1.png" width="300" height="400">
 <p>分别在DUC2004和Gigaword数据集上进行了对比，本文的ABS模型在DUC2004上评测结果相比于最好的baseline MOSES+并不如意，MOSES+是一个基于短语的统计机器翻译系统（Koehn，2007），在Gigaword训练集上比MOSES+好一些。但增加了人工feature的ABS+模型比ABS模型和MOSES+系统表现好了非常多。</p>
 <img src="/2016/04/30/自动文摘（六）/result11.png" width="300" height="400">
 <p>5种不同的模型在混乱度这个指标上比较，ABS具有明显的优势。</p>
 <p><code>ABS模型实际上的效果并不理想，所以本文作者又提出了一种所谓的ABS+模型，将人工feature融合到了ABS模型中，得到了不错的效果。如果只看这一篇paper，可能会觉得不理想的原因是seq2seq在自动文摘中的效果一般，但看过第二篇paper之后，就会明白是因为本文的模型太过简单，第二篇paper也就有了意义。从另一个角度来看，纯粹的data-driven方法如果配合上一些extractive的方法会得到更好的结果，这点对于实际系统的开发非常有意义。</code></p>
-<h2 id="paper-2-5">Paper 2</h2>
-<img src="/2016/04/30/自动文摘（六）/result21.png" width="300" height="400">
+<h2 id="Paper-2-5"><a href="#Paper-2-5" class="headerlink" title="Paper 2"></a>Paper 2</h2><img src="/2016/04/30/自动文摘（六）/result21.png" width="300" height="400">
 <p>在Gigaword数据集上对比各个模型，RAS-Elman模型表现最好，说明了seq2seq相比于传统的文摘系统和算法，可以更好地解决问题，又一次证明了deep learning的强大。同时也验证了普通的RNN不见得比LSTM活着GRU表现差，尤其是当序列长度不是特别长的情况。</p>
 <img src="/2016/04/30/自动文摘（六）/result22.png" width="300" height="400">
 <p>在DUC2004数据集上对比各个模型，得到了相同的结论。</p>
 <img src="/2016/04/30/自动文摘（六）/result23.png" width="300" height="400">
 <p>5种不同的模型在混乱度这个指标上比较，本文算法RAS-Elman具有明显的优势。</p>
-<h1 id="links">Links</h1>
-<p>[1] <a href="http://cn.arxiv.org/pdf/1509.00685.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a> <b>Proceedings of EMNLP 2015</b></p>
+<h1 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1509.00685.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a> <b>Proceedings of EMNLP 2015</b></p>
 <p>[2] <a href="http://harvardnlp.github.io/papers/naacl16_summary.pdf" target="_blank" rel="external">Abstractive Sentence Summarization with Attentive Recurrent Neural Networks</a> <b>Proceedings of NAACL 2016</b></p>
 <p>[3] <a href="https://github.com/harvardnlp/NAMAS" target="_blank" rel="external">ABS Torch Code</a></p>
 <p>[4] <a href="https://github.com/harvardnlp/seq2seq-attn" target="_blank" rel="external">Seq2Seq Torch Code</a></p>
-<h1 id="工具推荐">工具推荐</h1>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 

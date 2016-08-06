@@ -5,10 +5,68 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-08-02T20:33:40.000Z</updated>
+  <updated>2016-08-06T00:03:20.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 2016.08.05 第一期</title>
+    <link href="http://rsarxiv.github.io/2016/08/05/PaperWeekly-2016-08-05-%E7%AC%AC%E4%B8%80%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/08/05/PaperWeekly-2016-08-05-第一期/</id>
+    <published>2016-08-05T18:22:47.000Z</published>
+    <updated>2016-08-06T00:03:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>学术界和工业界的需求和关注点不同，学术界更加注重未知领域的探索和方法的创新，研究的问题比较抽象，而工业界更加关注实际问题，方法不管是否创新，只要能够解决问题就是好方法，所面对的问题比paper中提炼出的数学问题更加具体，需要处理的细节更多。</p>
+<p>paper的水平也是良莠不齐，尤其是arxiv上刷出来的paper更是水平各异。但整体来说，读paper会带来很多的启发，可以跟踪学术界对某一类问题的研究进展，不断地更新技术。关注工业界技术的应用和产品的更迭，可以不断地提炼出新的需求、新的数学问题，从而促进学术地发展，两者其实关系非常紧密。</p>
+<p>本周开始，将paperweekly进行改版，从之前的每天一篇paper，改为每周一篇，内容包括多篇paper，这些paper可能相关、也可能不那么相关，但会说清每篇paper解决的问题和解决的方法，旨在拓宽视野，带来启发。本期是改版后的第一期，形式会一直不断地改进，希望工业界和学术界的朋友都能够有所收获。</p>
+<h1 id="DeepIntent-Learning-Attentions-for-Online-Advertising-with-Recurrent-Neural-Networks"><a href="#DeepIntent-Learning-Attentions-for-Online-Advertising-with-Recurrent-Neural-Networks" class="headerlink" title="DeepIntent: Learning Attentions for Online Advertising with Recurrent Neural Networks"></a><a href="http://www.kdd.org/kdd2016/papers/files/rfp0289-zhaiA.pdf" target="_blank" rel="external">DeepIntent: Learning Attentions for Online Advertising with Recurrent Neural Networks</a></h1><h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>在线广告、RNN、Attention</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>kdd2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何用deep learning模型挖掘click logs来理解用户Intent？</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1.png" alt="1"></p>
+<p>对于一个(query,ad)数据对，分别用LSTM encode，然后用下图的方法计算一个attention，得到最终的query和ad vector，构造loss function，取logs中(query,ad)作为正例d+，将ad替换为其他无关ad作为负例d-，训练的目标是让d+的score尽量大，让d-的score尽量小。</p>
+<p><img src="media/2.png" alt="2"></p>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>工业界有着学术界无法比拟的数据，大规模的真实数据是做deep learning的基础，大型商业搜索引擎积累了大量的ad click logs，利用好这些logs可以赚到更多的钱。attention机制在2015年开始逐渐成为一种流行趋势，借鉴于人类的注意力机制，让model将更多的注意力放在需要注意的地方，而不是每一个地方。本文并没有太多model上的创新，只是简单地将流行的model应用了自己研究的领域中，对工业界更有参考价值。</p>
+<h1 id="A-Neural-Knowledge-Language-Model"><a href="#A-Neural-Knowledge-Language-Model" class="headerlink" title="A Neural Knowledge Language Model"></a><a href="http://120.52.73.76/arxiv.org/pdf/1608.00318v1.pdf" target="_blank" rel="external">A Neural Knowledge Language Model</a></h1><h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>语言模型、知识图谱</p>
+<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv cs.CL 2016.08.01</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>在自然语言生成(NLG)问题中，出现次数非常少的entity该如何生成呢？</p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1-2.png" alt="1"></p>
+<p>四个步骤：</p>
+<p>1、Input Representation<br><img src="media/2-1.png" alt="2"></p>
+<p>输入由三个部分拼接而成，第一部分是上一个time step的fact表示，第二部分是上一个time step的词表中的词表示，第三部分是上一个time step的fact description表示，这里fact就是(subject,relation,object)，知识图谱中的一条事实，而后两个部分一定会有一个全为0，因为是二选一的关系，但为了保证每一次的输入都是等长向量，所以用拼接来做。得到输入之后，用LSTM来encode。</p>
+<p>2、Fact Prediction</p>
+<p>通过1的结果来预测当前word可能相关的fact，得到的结果是一个index，然后从topic knowledge中获得相应的表示，这里的knowledge embedding都是用transE训练好的，在整个模型训练中并不更新。</p>
+<p>3、Knowledge-Copy Switch</p>
+<p>根据1和2的结果，共同来预测当前要生成的词是从词表中获取的高频词还是从knowledge中获取的entity，典型的二分类问题。</p>
+<p>4、Word Generation</p>
+<p>根据3的结果，来生成当前time step的词。对于词表中的高频词，和之前的生成方法一致；对于fact description中的entity词，通过预测词的position来copy这个词。</p>
+<h2 id="评论-1"><a href="#评论-1" class="headerlink" title="评论"></a>评论</h2><p>语言模型是一个基本问题，传统的方法都有着一个尴尬之处是，会生成大量的<unk>出来，只要是涉及到NLU的问题，基本都会遇到这个问题。本文提供了一个很有启发性的方法，借助于知识图谱这种外部知识来帮助生成效果更好的话，单纯地靠model来提升效果是一件比较困难的事情，但增加一些外部信息进来则会带来更多的可能性。由于知识图谱的构建本身就是一件不易的事情，因此本文的学术意义远大于实际应用意义，为后续这种交叉式研究（知识图谱+深度学习）打开了一扇门，大家可以尝试更多的组合和可能。</unk></p>
+<h1 id="Neural-Sentence-Ordering"><a href="#Neural-Sentence-Ordering" class="headerlink" title="Neural Sentence Ordering"></a><a href="https://arxiv.org/pdf/1607.06952v1.pdf" target="_blank" rel="external">Neural Sentence Ordering</a></h1><h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>句子排序</p>
+<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>arXiv cs.CL 2016.07.23</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>给定乱序的N句话，如何将其按照逻辑排列好？（貌似是英语考试中的一种题型）</p>
+<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1-3.png" alt="1"></p>
+<p>本文定义的问题是给定n句话，找出最优排序，将这个问题降维到二维，就是如何排列两句话的顺序。上图给出了model的思路，对两句话分别进行encode，得到两个向量表示，然后进行打分，分数表示当前顺序是正确顺序的概率。这里的encode部分，分别用了每句话中word embeddings的加权平均、RNN和CNN来表示。</p>
+<p>得到两两的排序之后，本文用beam search来得到整体最优的排序。</p>
+<h2 id="评论-2"><a href="#评论-2" class="headerlink" title="评论"></a>评论</h2><p>多文档摘要问题中通用的一种做法是从每篇文档中都提取出一句或几句重要的话，然后进行排序。在英语考试中，有一种题型是给定你打乱顺序的几段话，然后根据逻辑将其排序。本文在学术上没有什么新的东西，但本文在构建neural model的时候，用到的数据集却非常容易构建，这意味着你在工程中应用这个方法来解决排序问题是可行的方案，所以本文更加适合有句子排序应用需求的工程人员来精读。</p>
+<h1 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h1><p>计算机的会议非常多，各种level的都有，arXiv上每天都可以刷出一些paper，不同类型、不同level的paper适合不同需求的人来读，我觉得好东西的标准是适合而不是在某一个具体指标上达到最大，对你有用的东西才是适合你的好东西，有些特别牛逼的东西，有着极高学术价值的东西不见得适合工程人员来读，但也不应该是那种觉得学术上的东西离工程太远，没有什么具体用的态度，从各种各样的东西汲取养分，丰富和充实自己才是硬道理。读了一些paper，也该思考一些问题了，这里提出一些比较naive的问题，欢迎大家踊跃留言和讨论。</p>
+<p>1、<unk>这种out-of-vocabulary的问题是一个非常常见的问题，有哪些不错的思路可以来解决这个问题呢？</unk></p>
+<p>2、attention model几乎满大街都是，最早在机器翻译领域中开始用这种模型，虽然在其他nlp领域中都取得了不错的成绩，但目前的attention真的适合每一类具体问题吗？是不是有一点为了attention而attention的感觉？neural summarization和machine translation真的可以完全类比吗？或者说attention适合解决具有什么特征的问题呢？</p>
+<p>3、信息越多，model的效果一定会越好。现在外部信息非常丰富，但是如何融合到当前流行的model中来呢？如何将特定领域内构建的知识图谱完美地与特定任务中的model进行结合呢？以task-oriented bot为例，能够将客户的领域知识与bot response功能结合起来，做成一个更加高级的bot呢？</p>
+<p>这里，我抛个砖，引个玉，希望更多的人能够参与讨论和提出问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;学术界和工业界的需求和关注点不同，学术界更加注重未知领域的探索和方法的创新，研究的问题比较抽象，而工业界更加关注实际问题，方法不管是否创新，只要能够
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>旧幕落下，新幕升起</title>
@@ -899,62 +957,6 @@
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
       <category term="reading comprehension" scheme="http://rsarxiv.github.io/tags/reading-comprehension/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>A Diversity-Promoting Objective Function for Neural Conversation Models #PaperWeekly#</title>
-    <link href="http://rsarxiv.github.io/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/"/>
-    <id>http://rsarxiv.github.io/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/</id>
-    <published>2016-07-11T18:06:42.000Z</published>
-    <updated>2016-07-11T18:59:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本篇分享的文章是前一篇分享<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>的pre-paper，题目是<a href="http://arxiv.org/pdf/1510.03055v1.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a>，作者是Jiwei Li，最早于2015年10月11日发在arxiv上。</p>
-<p>本文针对的问题是seq2seq方案在解决bot问题上容易生成一些“呵呵”的reply，比如“I don’t know”之类的非常safe，grammatical的reply，但是营养太少，没有太多实际的意义。造成这种情况的原因是目标函数不合适，在最近流行的自然语言生成任务中一般都采用MLE作为目标函数，这个目标函数可以保证生成出最自然的语言，但diversity太差，当然如果在decoding部分生成大量的N-best list的话，也是有很多不错的reply但都排名很靠后。</p>
-<p>本文就是针对这样的一个问题，提出了用Maximum Mutual Information（MMI）作为目标函数来提高reply的diversity和实用性。MMI这个目标函数在Jiwei Li的多篇文章中都出现过，他很喜欢用这个来代替MLE作为目标函数来解决问题。互信息的方程如下：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>经过简单的推导，可得出下式作为目标函数：</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>而，一般的seq2seq采用MLE，如下式：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>本文方法比传统seq2seq多了后面的一项。</p>
-<p>p(T)其实是一个语言模型，为了在目标中控制reply的多样性，添加一个惩罚系数，如下式：</p>
-<p><img src="media/3-1.png" alt="3"></p>
-<p>这个式子记作(4)，经过简单的推导得到下式：</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>记作(5)</p>
-<p>作者根据式子(4)和(5)提出了两种MMI，分别是MMI-antiLM和MMI-bidi。</p>
-<p>首先是antiLM，单看-log p(T)这一项，其实就是一个语言模型，anti表示反着的，因为有个负号。这一项不仅仅可以影响到你生成reply的diversity，同时也可以影响到你生成的reply是否是grammatical的，其实是一把双刃剑，需要做好控制，一般来说lambda小于1之后，后一项的影响相对较小了。</p>
-<p>本文用一个带权重的语言模型U(T)来替换当前的p(T)，如下式：</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>这里g(k)是权重，k是index，g(k)的特点是随着k的增加单调递减。这样做有两个目的：</p>
-<p>1、decoding时对先生成的词的惩罚比后生成的词的惩罚对diversity的影响更大。</p>
-<p>2、随着decoding部分的输入对后续生成影响的减弱，语言模型U(T)将会占主导地位，reply后面的部分也会非常grammatical。</p>
-<p>bidi这个目标函数的思路是，先从第一项来生成N-Best List，然后用第二项对其进行排序，将diversity更好的reply放在前面。</p>
-<p>在训练过程中，仍旧是采用MLE，但在测试的时候，用本文提到的MMI来做测试。</p>
-<p>这个结果是由MMI-antiLM产生的：</p>
-<p><img src="media/7.png" alt="7"></p>
-<p>这个结果是MMI-bidi产生的：</p>
-<p><img src="media/8.png" alt="8"></p>
-<p>生成的reply确实seq2seq更加有营养。</p>
-<p>本文解决问题的一个思路是很有借鉴意义的，正如abstractive summarization中有一篇paper用MRT来替换传统的MLE作为目标函数，将评价指标考虑进了目标函数中进行优化，起码在benchmark上得到非常好的结果。这其实是一条不错的路，就是将你当前的评价指标融入到你的优化目标中进行优化学习，自然会得到比单纯地用MLE来优化要好的多，也有很多的paper在用这样的思路解决问题。我们不仅仅满足于可以生成一个grammatical的reply，我们更需要的是有意义的、有实际使用价值的bot。另外就是具体到目标函数的建模，如果你希望目标中减小哪些因素对目标的影响，就增加一项惩罚项，这也是做优化时候的一般方案，但在解决具体问题时会非常有效。本文虽然针对的是bot reply的生成问题，其实可以推广到一般的自然语言生成问题上来，只是要涉及到MLE做生成都可以换成本文的方法来提升相应的指标。</p>
-<p>一点思考，欢迎交流。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本篇分享的文章是前一篇分享&lt;a href=&quot;http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/&quot;&gt;A Persona-Based Neural 
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-      <category term="seq2seq" scheme="http://rsarxiv.github.io/tags/seq2seq/"/>
     
   </entry>
   

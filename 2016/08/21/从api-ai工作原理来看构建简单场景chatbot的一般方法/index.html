@@ -217,7 +217,7 @@
 <p>step 3 简单测试，在界面的右侧有一个console，用来测试当前chatbot的效果，我输入update cs.CL，得到下面的效果：<br><img src="media/8.png" alt="8"><br>chatbot识别出Intent是Update，Action是update，Parameter是date和subject，并且subject的值是cs.CL，下面的Show JSON是api.ai为developer生成的，用来与developer自己的web service进行数据交换。</p>
 <p>step 4 训练。训练包括两个部分，一是训练NER，二是训练Intent Classification。训练器是api.ai提供的，但是标注数据是developer自己提供的，当然训练数据越多，标注越准，分类器的准确率就越高，chatbot的NLU准确率越高。至于训练方法，docs中没有细说，我简单猜测一下，NER可以当做Sequence Labeling任务，和Intent Recognition类似，都可以看作是多分类问题，不管是传统的分类方法还是当下流行的deep learning方法都能得到不错的准确率。随着user logs的增多，训练数据会越来越多，chatbot通过学习就会变得越来越“聪明”。但这里有个问题，training data越多，需要标注或者修改标注的数据就会越多，也是一个麻烦事儿。</p>
 <p>step 5 整合、发布。api.ai支持的平台非常多，包括当下流行的message平台，还有各种操作系统平台。在message平台上提供了一键整合的功能，在操作系统上提供了SDK。这里我用了slack平台，api.ai打通了和slack的接口，也提供了webhook，连接了我之前写好的web service，只需要按照它给定的消息接口进行定义即可。</p>
-<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>目前RSarXiv只提供两个简单的功能，一个是update今天最新的arxiv paper，你可以通过show me new papers in cs.CL等类似的话来获取cs.CL这个领域中最新的paper；一个是search功能，你可以通过search LSTM等类似的话来获取包括LSTM这个关键词的paper。由于是一个测试用的demo，就没做什么复杂的功能。</p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>目前RSarXiv只提供两个简单的功能，一个是update今天最新的arxiv paper，你可以通过show me new papers in cs.CL等类似的话来获取cs.CL这个领域中最新的paper；一个是search功能，你可以通过search LSTM等类似的话来获取包括LSTM这个关键词的paper。由于是一个测试用的demo，就没做什么复杂的功能。<br><img src="media/10.png" alt="10"></p>
 <p>大家如果感兴趣的话，可以留言给我或者发邮件给我(mcgrady150318@gmail.com/mcgrady150318@163.com)，我邀请大家到这个slack team中。</p>
 <h1 id="简单场景chatbot构建方法"><a href="#简单场景chatbot构建方法" class="headerlink" title="简单场景chatbot构建方法"></a>简单场景chatbot构建方法</h1><p>介绍了下api.ai提供的服务，下面简单地提炼一下。</p>
 <p>chatbot = NLU + NLG</p>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-08-23T01:11:53.000Z</updated>
+  <updated>2016-08-23T04:19:22.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/08/21/%E4%BB%8Eapi-ai%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%9D%A5%E7%9C%8B%E6%9E%84%E5%BB%BA%E7%AE%80%E5%8D%95%E5%9C%BA%E6%99%AFchatbot%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95/"/>
     <id>http://rsarxiv.github.io/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/</id>
     <published>2016-08-22T02:05:52.000Z</published>
-    <updated>2016-08-23T01:11:53.000Z</updated>
+    <updated>2016-08-23T04:19:22.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot无疑是当前非常火的一个研究领域和产品方向，简单地可以分为两类，开放域bot和封闭域bot，开放域bot倾向于解决所有的事情，而封闭域bot倾向于解决某一个细分领域中的事情，旨在用AI技术提高效率，提高生产力。现阶段的开放域bot我个人感觉更像是多个常用封闭域bot的叠加，当用户发起一个请求，系统会判断出属于哪个细分领域，然后转到相应的程序中去执行并给出反馈，顺着这个逻辑来看，研究简单场景下的chatbot是个重要的基础工作，这类研究或者产品的质量直接决定了复杂场景或者开放域bot的质量。当然逗乐型的bot并不属于本文讨论的范围。<br><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
 <p>chatbot是场交互革命，也是一个多技术融合的平台。上图给出了构建一个chatbot需要具备的组件，简单地说chatbot = NLU(Natural Language Understanding) + NLG(Natural Language Generation).(本文只关注NLP相关的技术，对语音识别并无讨论)</p>
@@ -66,6 +66,7 @@
 <p>知乎专栏：<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">PaperWeekly</a></p>
 <p>微信交流群：</p>
 <p><img src="media/paperweekly.jpg" alt="paperweekly"></p>
+<p>群已满100人，无法扫码加群，大家加zhangjun168305，我拉大家入群。</p>
 ]]></content>
     
     <summary type="html">

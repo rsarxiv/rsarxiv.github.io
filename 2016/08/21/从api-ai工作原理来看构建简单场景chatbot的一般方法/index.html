@@ -134,6 +134,14 @@
                         </a>
                     </li>
                 
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -233,7 +241,7 @@
 <p>NLU不是一个简单的事情，尤其是标注大量的examples不是那么容易；NLG同样也不是一个好解决的问题，预先定义的template会让chatbot受限制于template的多少，手工痕迹太重，需要一种更牛的解决方案来代替。（其实挺多paper都在做这件事情，PaperWeekly也分享过几篇相关的paper，data driven的NLG方案同样需要大量的examples做训练。）</p>
 <p>Context是个挺难的事情，现有的、成熟的解决方案仍是手工来定义条件，然后根据条件来trigger。我在想，能否构建一个动态的DST，可以是一张动态hash table，也可以是一个动态graph，记录着某一个user方方面面的状态，而不仅仅是某一轮对话中抽取出的信息，而是多轮对话中的信息，不仅在intent识别中可以用到context，在生成response时也可以用到，多轮对话和个性化对话都将不是什么问题了。或者，用现在流行的表示学习思维来想这个问题的话，也许context可以是一个分布式表示，user profile也是一个表示，NLG时以context distribution为condition来做generatation。</p>
 <p>本文介绍了构建简单场景下chatbot的一般方法，用api.ai确实很容易做一个chatbot，而对于复杂场景，我觉得用api.ai来开发也没有太大问题，最费时的可能是构建context trigger。api.ai因为是面向developer的，所以对于普通的用户并不适合，但对于有一定经验的developer来说，使用起来就非常简单，提供的web界面也很好用，如果说chatbot是一个平台的话，那么api.ai正像是一个开发工具，提高了开发chatbot的效率，虽然NLG和context这两个问题可以做的更好，但整体来说降低了开发chatbot的门槛，是个很有意义和钱景的服务。</p>
-
+<h1 id="PaperWeekly招人广告"><a href="#PaperWeekly招人广告" class="headerlink" title="PaperWeekly招人广告"></a>PaperWeekly招人广告</h1>
 
                 
             </div>

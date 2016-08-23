@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-08-22T23:36:33.000Z</updated>
+  <updated>2016-08-22T23:49:20.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/08/21/%E4%BB%8Eapi-ai%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%9D%A5%E7%9C%8B%E6%9E%84%E5%BB%BA%E7%AE%80%E5%8D%95%E5%9C%BA%E6%99%AFchatbot%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95/"/>
     <id>http://rsarxiv.github.io/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/</id>
     <published>2016-08-22T02:05:52.000Z</published>
-    <updated>2016-08-22T23:36:33.000Z</updated>
+    <updated>2016-08-22T23:49:20.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot无疑是当前非常火的一个研究领域和产品方向，简单地可以分为两类，开放域bot和封闭域bot，开放域bot倾向于解决所有的事情，而封闭域bot倾向于解决某一个细分领域中的事情，旨在用AI技术提高效率，提高生产力。现阶段的开放域bot我个人感觉更像是多个常用封闭域bot的叠加，当用户发起一个请求，系统会判断出属于哪个细分领域，然后转到相应的程序中去执行并给出反馈，顺着这个逻辑来看，研究简单场景下的chatbot是个重要的基础工作，这类研究或者产品的质量直接决定了复杂场景或者开放域bot的质量。当然逗乐型的bot并不属于本文讨论的范围。<br><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
 <p>chatbot是场交互革命，也是一个多技术融合的平台。上图给出了构建一个chatbot需要具备的组件，简单地说chatbot = NLU(Natural Language Understanding) + NLG(Natural Language Generation).(本文只关注NLP相关的技术，对语音识别并无讨论)</p>
@@ -60,7 +60,7 @@
 <p>NLU不是一个简单的事情，尤其是标注大量的examples不是那么容易；NLG同样也不是一个好解决的问题，预先定义的template会让chatbot受限制于template的多少，手工痕迹太重，需要一种更牛的解决方案来代替。（其实挺多paper都在做这件事情，PaperWeekly也分享过几篇相关的paper，data driven的NLG方案同样需要大量的examples做训练。）</p>
 <p>Context是个挺难的事情，现有的、成熟的解决方案仍是手工来定义条件，然后根据条件来trigger。我在想，能否构建一个动态的DST，可以是一张动态hash table，也可以是一个动态graph，记录着某一个user方方面面的状态，而不仅仅是某一轮对话中抽取出的信息，而是多轮对话中的信息，不仅在intent识别中可以用到context，在生成response时也可以用到，多轮对话和个性化对话都将不是什么问题了。或者，用现在流行的表示学习思维来想这个问题的话，也许context可以是一个分布式表示，user profile也是一个表示，NLG时以context distribution为condition来做generatation。</p>
 <p>本文介绍了构建简单场景下chatbot的一般方法，用api.ai确实很容易做一个chatbot，而对于复杂场景，我觉得用api.ai来开发也没有太大问题，最费时的可能是构建context trigger。api.ai因为是面向developer的，所以对于普通的用户并不适合，但对于有一定经验的developer来说，使用起来就非常简单，提供的web界面也很好用，如果说chatbot是一个平台的话，那么api.ai正像是一个开发工具，提高了开发chatbot的效率，虽然NLG和context这两个问题可以做的更好，但整体来说降低了开发chatbot的门槛，是个很有意义和钱景的服务。</p>
-]]></content>
+<h1 id="PaperWeekly招人广告"><a href="#PaperWeekly招人广告" class="headerlink" title="PaperWeekly招人广告"></a>PaperWeekly招人广告</h1>]]></content>
     
     <summary type="html">
     

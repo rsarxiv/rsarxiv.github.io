@@ -206,17 +206,17 @@
 <h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>ACL 2016</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>语义分析的表现形式是将自然语言（natural language）转化成逻辑形式（logic form）。因语言表达多样性的问题导致两者间存在mismatch problem。</p>
 <h2 id="文章思路"><a href="#文章思路" class="headerlink" title="文章思路"></a>文章思路</h2><p>先给出一个语义分析的例子：</p>
-<p><img src="media/14727694139554.jpg" alt=""></p>
+<p><img src="media/14727920453411.jpg" alt=""></p>
 <p>给句子换个表达（How many people live in Berlin?），对应的逻辑形式就变得复杂很多(count(λx.person(x)∧live(x,Berlin)))。</p>
 <p>作者认为，原句子和逻辑形式之间存在的结构不匹配导致了语义分析的困难，而结构不匹配的核心是词汇的不匹配。作者率先提出先把句子重写再转成目标逻辑形式的语义分析方案，如下图：</p>
-<p><img src="media/14727696839967.jpg" alt=""></p>
+<p><img src="media/14727921250895.jpg" alt=""></p>
 <p>针对词汇不匹配问题的两种情况分别给出基于字典和基于模板两种方法。</p>
 <p>1）问题一：1-N mismatch<br>是指一个单词（word）对应一个复合的逻辑形式（compound formula）。</p>
 <p>例如daughter对应 child ∩ female。但在开放域的知识体系下，制定这些规则十分困难。于是作者提出将句子中的常用名词替换为字典（Wiktionary）中的解释，比如先把刚才的daughter转换为female child，接着再转换为逻辑形式child ∩ female就十分自然了。</p>
 <p>2）问题二：N-1 mismatch<br>是指将复杂的自然语言表达对应为单个逻辑表达。</p>
 <p>例如将How many people live in Berlin?转化为λx.population(Berlin,x)的分析过程中，How many people live in被对应为逻辑式常量population。如同问题一，这样的规则实在过多，作者的思路是将复杂的表达式转化为简单的形式。</p>
 <p>沿用之前的句子来了解算法流程。</p>
-<p><img src="media/14727699781622.jpg" alt=""></p>
+<p><img src="media/14727921375652.jpg" alt=""></p>
 <p>Step 1 替换实体生成候选template，例如得到模板how many people live in #y。<br>Step 2 检索template pairs来替换模板，例如找到(a：how many people live in #y, b：what is the population of #y)的模板对，于是将b作为新模板，<br>Step 3 把实体替换回去得到容易生成逻辑形式的what is the population of Berlin。 </p>
 <h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14727701471302.jpg" alt=""></p>
 <h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>如今深度学习在自然语言处理领域大红大紫，也给语义分析的方法带来更多的思考。比如ACL2016另外一篇文章Language to Logical Form with Neural Attention，就把语义分析转换为seq2seq问题，进而使用深度学习的方法来解决。如果我们把词向量这样的表示形式比喻为粗糙的连结主义，那么逻辑表达就好比精细的形式主义。两者各有优势，希望以后会有更多结合两种思想的工作出现。</p>

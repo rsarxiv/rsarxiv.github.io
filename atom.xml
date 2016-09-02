@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-02T05:04:47.000Z</updated>
+  <updated>2016-09-02T17:21:41.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/09/01/PaperWeekly-%E7%AC%AC%E4%B8%89%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/09/01/PaperWeekly-第三期/</id>
     <published>2016-09-01T21:58:14.000Z</published>
-    <updated>2016-09-02T05:04:47.000Z</updated>
+    <updated>2016-09-02T17:21:41.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>历经半个月时间终于发布了新一期PaperWeekly，大家久等了。在这个半个月里，PaperWeekly发生了一些明显的变化。维护和运营从我一个人变成了一个十人左右的团队来一起做，小伙伴们来自全球各地，颠倒着黑夜和白天进行沟通。团队中的每个人都有一颗热爱知识和分享知识的心，都认为分享是一种美德，是一种付出，更是一种回报。可能我们不完美，但我们相信我们正在追求完美的路上坚定地走着。</p>
 <p>有了更多的同学加入，PaperWeekly会更加多元化，不再受限于我个人感兴趣的方向和阅读、写作习惯。PaperWeekly会坚持每周发布一期文章，每一期的文章尽量围绕同一个topic展开，在微信公众号、官方微博和知乎专栏会同步更新，除了这一篇文章，我们还会坚持在微博上提供一个新的服务，cs.CL daily，帮助大家过滤掉arXiv cs.CL上比较水的paper，留下质量高的paper，并且用简评的方式分享在微博上，每周末会更新一篇cs.CL weekly出来，将一周值得读的cs.CL paper汇总发布。</p>
@@ -114,8 +114,8 @@
 <p><img src="media/14727735567000.png" alt=""></p>
 <p>可以看出来自教师网络的反馈作为regularization加到了目标函数里，通过这种方式两个网络的信息就结合在了一起。注意教师网络在每次训练迭代中都要构建，因此整个过程被称之为iterative knowledge distillation.</p>
 <p>2、教师网络</p>
-<p>教师网络使用软逻辑(soft logic)来编码first-order logic的信息。soft logic在[0,1]之间的连续取值，而不是二元值{0, 1}。逻辑运算也用max, min, sum, -代替原来的与或非。</p>
-<p>神经网络数学模型为pθ(y|x) 教师网络数学模型假设为q(y|x)。我们实际上是用基于逻辑规则的教师网络来模拟神经网络输出，因此我们希望能找到一个最优的p，使得输入尽可能满足逻辑规则的要求，同时p要尽可能接近qθ。详细推导可以参见原文，最后的优化结果就是</p>
+<p>教师网络使用软逻辑(soft logic)来编码first-order logic的信息。soft logic在[0,1]之间的连续取值，而不是二元值{0, 1}。逻辑运算也用max, min, sum代替原来的与或非。</p>
+<p>神经网络数学模型为pθ(y|x) 教师网络数学模型假设为q(y|x)。我们实际上是用基于逻辑规则的教师网络来模拟神经网络输出，因此我们希望能找到一个最优的q，使得输入尽可能满足逻辑规则的要求，同时q要尽可能接近pθ。详细推导可以参见原文，最后的优化结果就是</p>
 <p><img src="media/14727736225787.png" alt=""></p>
 <p>λl 是每个规则的自信度(confidence)，而rl, gl 是某个规则应用于某一输入时的逻辑结果，介于0,1之间。可以看到自信度比较高的规则可以使输入更容易通过规则。</p>
 <p>3、应用</p>
@@ -157,7 +157,7 @@
 <p>感谢大家地辛勤付出。</p>
 <h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
 <p>微信公众号：PaperWeekly<br><img src="media/14727755950469.jpg" alt=""></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863）" target="_blank" rel="external">http://weibo.com/u/2678093863）</a><br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly）" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly）</a><br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
 ]]></content>
     
     <summary type="html">

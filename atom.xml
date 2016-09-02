@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-02T04:55:42.000Z</updated>
+  <updated>2016-09-02T05:04:47.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/09/01/PaperWeekly-%E7%AC%AC%E4%B8%89%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/09/01/PaperWeekly-第三期/</id>
     <published>2016-09-01T21:58:14.000Z</published>
-    <updated>2016-09-02T04:55:42.000Z</updated>
+    <updated>2016-09-02T05:04:47.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>历经半个月时间终于发布了新一期PaperWeekly，大家久等了。在这个半个月里，PaperWeekly发生了一些明显的变化。维护和运营从我一个人变成了一个十人左右的团队来一起做，小伙伴们来自全球各地，颠倒着黑夜和白天进行沟通。团队中的每个人都有一颗热爱知识和分享知识的心，都认为分享是一种美德，是一种付出，更是一种回报。可能我们不完美，但我们相信我们正在追求完美的路上坚定地走着。</p>
 <p>有了更多的同学加入，PaperWeekly会更加多元化，不再受限于我个人感兴趣的方向和阅读、写作习惯。PaperWeekly会坚持每周发布一期文章，每一期的文章尽量围绕同一个topic展开，在微信公众号、官方微博和知乎专栏会同步更新，除了这一篇文章，我们还会坚持在微博上提供一个新的服务，cs.CL daily，帮助大家过滤掉arXiv cs.CL上比较水的paper，留下质量高的paper，并且用简评的方式分享在微博上，每周末会更新一篇cs.CL weekly出来，将一周值得读的cs.CL paper汇总发布。</p>
@@ -37,16 +37,16 @@
 <p>沿用之前的句子来了解算法流程。</p>
 <p><img src="media/14727921375652.jpg" alt=""></p>
 <p>Step 1 替换实体生成候选template，例如得到模板how many people live in #y。<br>Step 2 检索template pairs来替换模板，例如找到(a：how many people live in #y, b：what is the population of #y)的模板对，于是将b作为新模板，<br>Step 3 把实体替换回去得到容易生成逻辑形式的what is the population of Berlin。 </p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14727701471302.jpg" alt=""></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14727925154995.jpg" alt=""></p>
 <h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>如今深度学习在自然语言处理领域大红大紫，也给语义分析的方法带来更多的思考。比如ACL2016另外一篇文章Language to Logical Form with Neural Attention，就把语义分析转换为seq2seq问题，进而使用深度学习的方法来解决。如果我们把词向量这样的表示形式比喻为粗糙的连结主义，那么逻辑表达就好比精细的形式主义。两者各有优势，希望以后会有更多结合两种思想的工作出现。</p>
 <h1 id="Language-to-Logical-Form-with-Neural-Attention"><a href="#Language-to-Logical-Form-with-Neural-Attention" class="headerlink" title="Language to Logical Form with Neural Attention"></a><a href="http://aclweb.org/anthology/P/P16/P16-1004.pdf" target="_blank" rel="external">Language to Logical Form with Neural Attention</a></h1><h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Logical Forms, Sequence to Sequence</p>
 <h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>ACL 2016</p>
 <h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>如何把自然语言转化成Structured Logical Forms？</p>
-<h2 id="文章思路-1"><a href="#文章思路-1" class="headerlink" title="文章思路"></a>文章思路</h2><p><img src="media/14727704697205.jpg" alt=""></p>
+<h2 id="文章思路-1"><a href="#文章思路-1" class="headerlink" title="文章思路"></a>文章思路</h2><p><img src="media/14727925632141.jpg" alt=""></p>
 <p>模型总体是一个encoder-decoder架构，input sequence首先通过LSTM encoder转化成一个vector，然后这个vector通过LSTM decoder被转化成Logical Forms。在decode过程中用到了一个attention layer去获取context信息。</p>
 <p><img src="media/14727705332596.jpg" alt=""></p>
 <p>和encoder-decoder模型类似，作者提出了一种hierarchical decoder。与普通的decoder不同，首先，decode之后的sequence中存在一个特殊字符<n>代表nonterminal。在nonterminal的基础上，decoder可以继续进行下一个layer的decoding。每一次decoding的输入不仅包含current hidden state,还包含这一个parent nonterminal的hidden state。</n></p>
-<p><img src="media/14727705519930.jpg" alt=""></p>
+<p><img src="media/14727925854664.jpg" alt=""></p>
 <p>作者还使用了一种attention机制，在构建current hidden state的时候将hidden state与所有encoder中的hidden state进行对比，给每一个encoder hidden state一个weight。</p>
 <h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>代码：<a href="https://github.com/donglixp/lang2logic" target="_blank" rel="external">https://github.com/donglixp/lang2logic</a><br>Jobs和GEO数据集：<a href="http://www.cs.columbia.edu/~mcollins/papers/uai05.pdf" target="_blank" rel="external">http://www.cs.columbia.edu/~mcollins/papers/uai05.pdf</a></p>
 <h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>之前的大部分工作都采用一些parsing models，string-to-tree transformation rules，文中没有提到之前有人采用seq2seq/deep learning的方法。本文中使用的seq2seq方法主要来自Kalchbrenner, Blunsom, Cho, Sutskever 在machine translation中提出的模型。</p>
@@ -74,7 +74,7 @@
 <p><img src="media/14727714252636.jpg" alt=""></p>
 <p>Step 2 基于seq2seq generation technique生出语句或句法依赖树。<br>Step 3 结合beam search和n-best列表重排序（list reranker）以减少输出中的不相关信息。</p>
 <h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>代码: <a href="https://github.com/UFAL-DSG/tgen" target="_blank" rel="external">https://github.com/UFAL-DSG/tgen</a></p>
-<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14727715801109.jpg" alt=""></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14727926849132.jpg" alt=""></p>
 <h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>该方法基于广泛使用的seq2seq模型，可以用未对齐的MR对(pair of  meaning representation)和句子进行训练，且只要小规模的语料就可以有很好的效果。生成器可以从数据中学会slot的对齐和值，生成流利的domain style)语句，虽然语义错误还是很频繁，但还是取得了不错的成绩。</p>
 <h1 id="On-line-Active-Reward-Learning-for-Policy-Optimisation-in-Spoken-Dialogue-Systems"><a href="#On-line-Active-Reward-Learning-for-Policy-Optimisation-in-Spoken-Dialogue-Systems" class="headerlink" title="On-line Active Reward Learning for Policy Optimisation in Spoken Dialogue Systems"></a><a href="http://aclweb.org/anthology/P/P16/P16-1230.pdf" target="_blank" rel="external">On-line Active Reward Learning for Policy Optimisation in Spoken Dialogue Systems</a></h1><h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>Dialogue System、Reinforcement Learning、Online Active Reward Learning</p>
 <h2 id="来源-4"><a href="#来源-4" class="headerlink" title="来源"></a>来源</h2><p>ACL 2016</p>

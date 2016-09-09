@@ -214,8 +214,8 @@
 <h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>NIPS2015 Workshop (2015.10.30)</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文提出将Deep Q-Network作为生成模型用于改善seq2seq模型，将decoding修改为迭代式的过程，实验表明本模型具有更好的泛化性。</p>
 <h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>对seq2seq模型改进的论文层出不穷，本文率先引入深度强化学习的思想，将DQN用于文本生成。对DQN还不了解的同学可以先阅读DeepMind的论文Playing Atari with Deep Reinforcement Learning。本文的模型如下：</p>
-<pre><code>![](media/14734508069657.jpg)
-</code></pre><p>如同一般的神经网络，我们也可以把DQN当做一个黑盒来使用。只需要准备好DQN需要的四个元素s(i),a(i),r(i),s(i+1)，分别代表i时刻下state,action,reword和i+1时刻的state。</p>
+<p><img src="media/14734508069657.jpg" alt=""></p>
+<p>如同一般的神经网络，我们也可以把DQN当做一个黑盒来使用。只需要准备好DQN需要的四个元素s(i),a(i),r(i),s(i+1)，分别代表i时刻下state,action,reword和i+1时刻的state。</p>
 <p>对照上图我们把算法解剖分为4个步骤：</p>
 <p>Step 1 先是传统的seq2seq模型。通过LSTM先把输入序列encode为一个定长向量EnSen(i)，然后作为decode阶段的初始状态依次生成新的序列DeSen(i)（decoding search使用beam search算法来 expand next words）。经过第一步我们得到初始state：(EnSen(i), DeSen(i))和action集合：每个位置的hypotheses。</p>
 <p>Step 2 接下来从hypotheses（actions）中选择一个可以获得最大reward的单词（action）作为该位置新生成的词，用新单词来代替之前的旧词，于是生成新的state：(EnSen(i), DeSen(i+1))。</p>
@@ -227,7 +227,7 @@
 <h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734510298695.jpg" alt=""></p>
 <h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的思想其实非常符合写作的一种情况，就像贾岛推敲的故事，回想小时候刚学习写句子时，也不能一次写好，总会不断对一些词语进行修改。Google DeepMind的文章《DRAW：A Recurrent Neural Network For Image》也和本文异曲同工：画画也不是一次画好，也要不断的完善。不同之处在于本文率先引入DQN做文本生成。在机器学习各个分支下，强化学习和人类与环境的交互方式非常相似，在许多领域开始初露头角，期待看到更多将强化学习结合语言模型的应用。</p>
 <h1 id="Deep-Reinforcement-Learning-for-Dialogue-Generation"><a href="#Deep-Reinforcement-Learning-for-Dialogue-Generation" class="headerlink" title="Deep Reinforcement Learning for Dialogue Generation"></a><a href="http://120.52.73.76/arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe, Alan Ritter, Michel Galley, Jianfeng Gao, Dan Jurafsky</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford </p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>(1) Stanford University, Stanford, CA, USA<br>(2) Microsoft Research, Redmond, WA, USA<br>(3) Ohio State University, OH, USA</p>
 <h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Reinforcement Learning、Seq2Seq、Text Generation</p>
 <h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv.org(2016.06.25)</p>
 <h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文提出利用强化学习进行开放领域的文本生成任务，并对比了有监督的seq2seq加attention模型和基于最大互信息的模型</p>
@@ -247,7 +247,7 @@
 <h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734513827800.jpg" alt=""></p>
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文作者提出了一个强化学习框架，模拟两个agent让其自动对话训练神经网络SEQ2SEQ模型，将Encoder-Decoder模型和强化学习整合，从而能保证使对话轮数增加。文中使用的模型非常简洁，reward函数定义清晰，评价指标也较为科学，可以生成信息更为丰富、易于响应的对话系统。</p>
 <h1 id="Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation"><a href="#Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation" class="headerlink" title="Hierarchical Reinforcement Learning for Adaptive Text Generation"></a><a href="http://www.aclweb.org/anthology/W10-4204" target="_blank" rel="external">Hierarchical Reinforcement Learning for Adaptive Text Generation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Nina Dethlefs, Heriberto Cuay´ahuitl</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>德国不莱梅大学</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>University of Bremen, Germany</p>
 <h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NLG, 分层强化学习, 文本生成, wayfinding</p>
 <h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>国际自然语言生成会议INLG(2010)</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在wayfinding（户内导航对话系统）领域利用分层强化学习进行文本生成。该方法的目标是对wayfinding的NLG任务整合进行优化，并在模拟系统中验证该方法的有效性。</p>
@@ -261,8 +261,10 @@
 <p>每个agent定义为半马尔科夫决策过程，可以表示成一个四元组</p>
 <p><img src="media/14734517382304.jpg" alt=""></p>
 <p>分别为状态集，动作集，转换函数，奖励函数。</p>
-<p>奖励函数表示agent在时间t状态s是执行动作a转换到新的状态s’所获得的奖励。半马尔科夫的目标是找到policy π*，<br><img src="media/14734517951453.jpg" alt=""></p>
-<p>使得在从当前状态转换到新的状态获得的累计奖励最多<br>本文使用两种奖励函数，一种着重在 interaction length， 另一种着重在alignment and variation之间的平衡（具体公式可见论文）。</p>
+<p>奖励函数表示agent在时间t状态s是执行动作a转换到新的状态s’所获得的奖励。半马尔科夫的目标是找到policy π*，</p>
+<p><img src="media/14734524023811.jpg" alt=""></p>
+<p>使得在从当前状态转换到新的状态获得的累计奖励最多。</p>
+<p>本文使用两种奖励函数，一种着重在 interaction length， 另一种着重在alignment and variation之间的平衡（具体公式可见论文）。</p>
 <p>本文是在模拟环境中进行试验，其中模拟环境包括user type（熟悉环境，不熟悉环境）， information need（高，低），length of the current route（短，中长，长），next action to perform（转，直走），current focus of attention（继续走，关注标识）。baseline为为部分agent随机选择action，即不考虑用户类型，导航距离等因素。经与baseline比较，效果较好。</p>
 <h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>词性标注工具：<a href="http://nlp.stanford.edu/software/tagger.shtml" target="_blank" rel="external">http://nlp.stanford.edu/software/tagger.shtml</a></p>
 <h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>将来的工作：将分层强化学习应用于其他NLG任务<br>不足之处：实验是在模拟环境下进行的，未来应该在真实环境进行评估。</p>

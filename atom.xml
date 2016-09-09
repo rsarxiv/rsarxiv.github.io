@@ -5,10 +5,109 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-03T17:13:19.000Z</updated>
+  <updated>2016-09-09T20:16:59.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly第四期</title>
+    <link href="http://rsarxiv.github.io/2016/09/09/PaperWeekly%E7%AC%AC%E5%9B%9B%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/09/09/PaperWeekly第四期/</id>
+    <published>2016-09-09T19:48:42.000Z</published>
+    <updated>2016-09-09T20:16:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>2013年以来Deep mind团队相继在NIPS和Natures上发表了用深度增强（强化）学习玩Atari游戏，并取得良好的效果，随后Alpha go与李世乭的一战更使得深度增强学习家喻户晓。在游戏上取得了不错的成果后，深度增强学习也逐渐被引入NLP领域。本期介绍目前NLP领域较为热点的研究方向，基于强化学习的文本生成技术（NLG），共选择了三篇文章，分别为：</p>
+<ol>
+<li><p>《Generating Text with Deep Reinforcement Learning》<br>应用Deep Q-Network作为生成模型用于改善seq2seq模型</p>
+</li>
+<li><p>《Deep Reinforcement Learning for Dialogue Generation》<br>应用强化学习进行开放领域的文本生成任务，并对比了有监督的seq2seq加attention模型和基于最大互信息的模型</p>
+</li>
+<li><p>《Hierarchical Reinforcement Learning for Adaptive Text Generation_lshowway》<br>以任务为导向的户内导航对话系统用分层强化学习进行文本生成</p>
+</li>
+</ol>
+<p>以下为三篇文章的主要信息：</p>
+<h1 id="Generating-Text-with-Deep-Reinforcement-Learning"><a href="#Generating-Text-with-Deep-Reinforcement-Learning" class="headerlink" title="Generating Text with Deep Reinforcement Learning"></a><a href="http://120.52.73.76/arxiv.org/pdf/1510.09202v1.pdf" target="_blank" rel="external">Generating Text with Deep Reinforcement Learning</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Hongyu Guo</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>National Research Council Canada</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Reinforcement Learning、Seq2Seq、Text Generation</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>NIPS2015 Workshop (2015.10.30)</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文提出将Deep Q-Network作为生成模型用于改善seq2seq模型，将decoding修改为迭代式的过程，实验表明本模型具有更好的泛化性。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>对seq2seq模型改进的论文层出不穷，本文率先引入深度强化学习的思想，将DQN用于文本生成。对DQN还不了解的同学可以先阅读DeepMind的论文Playing Atari with Deep Reinforcement Learning。本文的模型如下：</p>
+<pre><code>![](media/14734508069657.jpg)
+</code></pre><p>如同一般的神经网络，我们也可以把DQN当做一个黑盒来使用。只需要准备好DQN需要的四个元素s(i),a(i),r(i),s(i+1)，分别代表i时刻下state,action,reword和i+1时刻的state。</p>
+<p>对照上图我们把算法解剖分为4个步骤：</p>
+<p>Step 1 先是传统的seq2seq模型。通过LSTM先把输入序列encode为一个定长向量EnSen(i)，然后作为decode阶段的初始状态依次生成新的序列DeSen(i)（decoding search使用beam search算法来 expand next words）。经过第一步我们得到初始state：(EnSen(i), DeSen(i))和action集合：每个位置的hypotheses。</p>
+<p>Step 2 接下来从hypotheses（actions）中选择一个可以获得最大reward的单词（action）作为该位置新生成的词，用新单词来代替之前的旧词，于是生成新的state：(EnSen(i), DeSen(i+1))。</p>
+<p>Step 3 接着就是标准的DQN的部分，计算Loss函数并对其应用梯度下降。</p>
+<p>Step 4 回到Step 2，对得到的state继续迭代，每一次迭代都只生成一个新词来代替旧词，直到迭代次数达到设好的值（作者将次数定为句子长度的两倍，同学们可以思考一下理由）。</p>
+<p>总结DQN所需的四个元素对应如下：<br>1 i时刻下的state：(EnSen(i), DeSen(i))；<br>2 i时刻下的action：beam search得到的每个位置的hypotheses；<br>3    i时刻下的reword：target sentence和DeSen(i+1)的相似度（BLEU score）；<br>4    i+1时刻下的state：(EnSen(i), DeSen(i+1))；</p>
+<p>为了更好的提取句子的特征，作者在decode阶段使用了双向LSTM。同时还在reinforcement learning中加入attention机制，可以达到先decode比较简单的部分再处理困难部分的效果。最后在生成相似句子的实验中得到了比只用LSTM decoder效果更好的结论：</p>
+<p><img src="media/14734509263452.jpg" alt=""></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734510298695.jpg" alt=""></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的思想其实非常符合写作的一种情况，就像贾岛推敲的故事，回想小时候刚学习写句子时，也不能一次写好，总会不断对一些词语进行修改。Google DeepMind的文章《DRAW：A Recurrent Neural Network For Image》也和本文异曲同工：画画也不是一次画好，也要不断的完善。不同之处在于本文率先引入DQN做文本生成。在机器学习各个分支下，强化学习和人类与环境的交互方式非常相似，在许多领域开始初露头角，期待看到更多将强化学习结合语言模型的应用。</p>
+<h1 id="Deep-Reinforcement-Learning-for-Dialogue-Generation"><a href="#Deep-Reinforcement-Learning-for-Dialogue-Generation" class="headerlink" title="Deep Reinforcement Learning for Dialogue Generation"></a><a href="http://120.52.73.76/arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe, Alan Ritter, Michel Galley, Jianfeng Gao, Dan Jurafsky</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford </p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Reinforcement Learning、Seq2Seq、Text Generation</p>
+<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv.org(2016.06.25)</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文提出利用强化学习进行开放领域的文本生成任务，并对比了有监督的seq2seq加attention模型和基于最大互信息的模型</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>强化学习中的reward</p>
+<p><img src="media/14734512073402.jpg" alt=""></p>
+<p>易被响应（Ease of answering），不容易出现对话僵局，其中 S 是无意义回答合集，s是某一时刻的响应</p>
+<p><img src="media/14734512278456.jpg" alt=""></p>
+<p>信息流，若开辟新的话题，有利于对话的继续发展，隐层表示 hpi 和 hpi+1 的夹角余弦</p>
+<p><img src="media/14734512443645.jpg" alt=""></p>
+<p>语义连贯性，减少与对话无关问题的影响，其中，pseq2seq(a|pi,qi) 是由上一轮状态得到响应的概率，后一项是由当前产生响应通过网络生成之前的 qi 的概率。</p>
+<p><img src="media/14734512828474.jpg" alt=""></p>
+<p>最终的reward是对三者加权求和，系数分别为：0.25、0.25、0.5.</p>
+<p>对比试验：<br>1 对话初始状态为一个SEQ2SEQ加attention的模型作为强化学习的初始状态。</p>
+<p>2 在前面的基础上将最大互信息加入其中作为reward，对于一个给定的输入[pi,qi]，可以根据模型生成一个候选回答集合A。对于A中的每一个回答a,从预训练模型中得到的概率分布上可以计算出互信息的值 m(a,[pi,qi])。</p>
+<p>3 将互信息训练过的模型作为初始模型，用策略梯度更新参数并加入课程学习策略，最终最多限定五轮对话。</p>
+<p><img src="media/14734513584870.jpg" alt=""></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734513827800.jpg" alt=""></p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文作者提出了一个强化学习框架，模拟两个agent让其自动对话训练神经网络SEQ2SEQ模型，将Encoder-Decoder模型和强化学习整合，从而能保证使对话轮数增加。文中使用的模型非常简洁，reward函数定义清晰，评价指标也较为科学，可以生成信息更为丰富、易于响应的对话系统。</p>
+<h1 id="Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation"><a href="#Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation" class="headerlink" title="Hierarchical Reinforcement Learning for Adaptive Text Generation"></a><a href="http://www.aclweb.org/anthology/W10-4204" target="_blank" rel="external">Hierarchical Reinforcement Learning for Adaptive Text Generation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Nina Dethlefs, Heriberto Cuay´ahuitl</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>德国不莱梅大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NLG, 分层强化学习, 文本生成, wayfinding</p>
+<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>国际自然语言生成会议INLG(2010)</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在wayfinding（户内导航对话系统）领域利用分层强化学习进行文本生成。该方法的目标是对wayfinding的NLG任务整合进行优化，并在模拟系统中验证该方法的有效性。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文任务在wayfinding中的NLG任务有多个，且各个任务之间并非独立。从而提出应该根据用户类型，导航距离， 环境条件等作出不同的导航策略，介绍了分层强化学习。</p>
+<p>文章将户内导航对话系统的文本生成问题分为四块：</p>
+<p>1 Content Selection：给不熟悉环境的用户的导航要比熟悉环境的用户的导航更细致<br>2 Text Structure：根据导航距离以及用户熟悉环境程度给予不同类型的导航，如大白话的，以fisrt， second…表达或者示意性的。<br>3 Referring Expression Generation：一间房间可以叫“A203”，也可以叫“办公室”或者“小白楼”<br>4 Surface Realisation：往前走可以用“go”也可以用“walk”等。</p>
+<p>强化学习示意图如下，分层强化学习的思想与强化学习类似，但在强化学习的基础上加上层次，不同层次的模型处理不同层次的问题。<br><img src="media/14734516131737.jpg" alt=""></p>
+<p>agent根据当前状态，执行动作a与环境交互，之后环境产生一个新的状态s并返回给agent一个奖赏r（可正可负），强化学习的目标函数便是使agent获得奖赏r最大。</p>
+<p>分层增强学习包含L个层，每层N个模型，如Figure 1是有15个agents的hierarchy，其中不同的agent负责不同的层次。</p>
+<p><img src="media/14734516802648.jpg" alt=""></p>
+<p>每个agent定义为半马尔科夫决策过程，可以表示成一个四元组</p>
+<p><img src="media/14734517382304.jpg" alt=""></p>
+<p>分别为状态集，动作集，转换函数，奖励函数。</p>
+<p>奖励函数表示agent在时间t状态s是执行动作a转换到新的状态s’所获得的奖励。半马尔科夫的目标是找到policy π*，<br><img src="media/14734517951453.jpg" alt=""></p>
+<p>使得在从当前状态转换到新的状态获得的累计奖励最多<br>本文使用两种奖励函数，一种着重在 interaction length， 另一种着重在alignment and variation之间的平衡（具体公式可见论文）。</p>
+<p>本文是在模拟环境中进行试验，其中模拟环境包括user type（熟悉环境，不熟悉环境）， information need（高，低），length of the current route（短，中长，长），next action to perform（转，直走），current focus of attention（继续走，关注标识）。baseline为为部分agent随机选择action，即不考虑用户类型，导航距离等因素。经与baseline比较，效果较好。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>词性标注工具：<a href="http://nlp.stanford.edu/software/tagger.shtml" target="_blank" rel="external">http://nlp.stanford.edu/software/tagger.shtml</a></p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>将来的工作：将分层强化学习应用于其他NLG任务<br>不足之处：实验是在模拟环境下进行的，未来应该在真实环境进行评估。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这三篇文章皆是强化学习在NLP领域的应用，第一篇主要侧重点在于应用DQN进行文本生成，并用BLUE指标进行评价，对比传统的LSTM-decoder和加入DQN之后的结果；第二篇文章侧重点在于虚拟两个Agent，在传统Seq2Seq的基础上加入强化学习从而使得聊天能够持续下去；第三篇文章侧重点在于任务驱动的对话系统应用分层强化学习，针对不同情况进行分层处理。</p>
+<p>以上为本期Paperweekly的主要内容，感谢lshowway、美好时光海苔、Tonya三位同学的整理。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;2013年以来Deep mind团队相继在NIPS和Natures上发表了用深度增强（强化）学习玩Atari游戏，并取得良好的效果，随后Alpha 
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="paperweekly" scheme="http://rsarxiv.github.io/tags/paperweekly/"/>
+    
+      <category term="chatbot" scheme="http://rsarxiv.github.io/tags/chatbot/"/>
+    
+      <category term="reinforcement learning" scheme="http://rsarxiv.github.io/tags/reinforcement-learning/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.08.29-2016.09.02</title>
@@ -310,9 +409,9 @@
     
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
-      <category term="api.ai" scheme="http://rsarxiv.github.io/tags/api-ai/"/>
-    
       <category term="chatbot" scheme="http://rsarxiv.github.io/tags/chatbot/"/>
+    
+      <category term="api.ai" scheme="http://rsarxiv.github.io/tags/api-ai/"/>
     
   </entry>
   
@@ -1039,39 +1138,6 @@
     <summary type="html">
     
       &lt;p&gt;本文分享的这篇paper是旨在训练一个data driven open-domain的bot，在生成response的时候不仅仅考虑user message（query），而且考虑past history作为context。paper的题目是&lt;a href=&quot;https:/
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Incorporating Unstructured Textual Knowledge Sources into Neural Dialogue Systems #PaperWeekly#</title>
-    <link href="http://rsarxiv.github.io/2016/07/15/Incorporating-Unstructured-Textual-Knowledge-Sources-into-Neural-Dialogue-Systems-PaperWeekly/"/>
-    <id>http://rsarxiv.github.io/2016/07/15/Incorporating-Unstructured-Textual-Knowledge-Sources-into-Neural-Dialogue-Systems-PaperWeekly/</id>
-    <published>2016-07-15T19:44:07.000Z</published>
-    <updated>2016-07-15T20:07:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文是Ubuntu Dialogue Corpus贡献者的一篇文章，是接着Ubuntu数据集benchmark的model继续改进了一下。本文的题目是<a href="http://media.wix.com/ugd/b6d786_137894b7b3a341a09ed0c0b45b46dbb6.pdf" target="_blank" rel="external">Incorporating Unstructured Textual Knowledge Sources into Neural Dialogue</a>。作者是来自麦吉尔大学的博士生<a href="http://cs.mcgill.ca/~rlowe1/" target="_blank" rel="external">Ryan Lowe</a>。</p>
-<p>作者将bot任务定义为next utterance classification，有一点像question answering任务，给定一个context和一个response candidate list作为备选答案，通过context来从candidate list中选择正确的response。本文的贡献在于在context的基础上，引入了task相关的外部专业知识库，并且这个知识库是非结构化的。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>这个模型是ubuntu corpus中的baseline模型，称为dual encoder，一个rnn来encode context，一个rnn来encode response，然后综合起来做预测。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>本文模型相当于在dual encoder基础上增加了一个knowledge部分。模型是三个rnn encoder组成，一个rnn来encode context，一个rnn来encode response，还有一个rnn来encode knowledge，然后综合起来做预测，选出最合适的response。模型被称作knowledge encoder。</p>
-<p>因为是ubuntu technical support相关的数据集，外部资源就选用了Ubuntu Manpages，各种命令的手册，通过从context中提取entity来匹配最相关的command manpage，为了快速定位manpage，用了hash的方法，先做了一个command entity hashtable和relation hashtable，一个是为了完全匹配，一个是为了相关匹配。得到相关的manpage之后，所包括的文本就是knowledge。效果如下图：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>本文定义的问题太过简单，与实际应用相去甚远。但本文用非结构化的外部知识来解决task-oriented bot问题的思路值得借鉴，不仅仅是bot问题，在问答系统中，外部知识如何应用，如何与神经网络模型结合起来使用都是一个非常重要的topic，也是真正可以用来解决实际问题的一种重要手段。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文是Ubuntu Dialogue Corpus贡献者的一篇文章，是接着Ubuntu数据集benchmark的model继续改进了一下。本文的题目是&lt;a href=&quot;http://media.wix.com/ugd/b6d786_137894b7b3a341a09ed0c
     
     </summary>
     

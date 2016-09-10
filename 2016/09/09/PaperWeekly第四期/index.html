@@ -212,10 +212,10 @@
 <p><img src="media/14734508069657.jpg" alt=""></p>
 <p>如同一般的神经网络，我们也可以把DQN当做一个黑盒来使用。只需要准备好DQN需要的四个元素s(i),a(i),r(i),s(i+1)，分别代表i时刻下state,action,reword和i+1时刻的state。</p>
 <p>对照上图我们把算法解剖分为4个步骤：</p>
-<p>Step 1 先是传统的seq2seq模型。通过LSTM先把输入序列encode为一个定长向量EnSen(i)，然后作为decode阶段的初始状态依次生成新的序列DeSen(i)（decoding search使用beam search算法来 expand next words）。经过第一步我们得到初始state：(EnSen(i), DeSen(i))和action集合：每个位置的hypotheses。</p>
-<p>Step 2 接下来从hypotheses（actions）中选择一个可以获得最大reward的单词（action）作为该位置新生成的词，用新单词来代替之前的旧词，于是生成新的state：(EnSen(i), DeSen(i+1))。</p>
-<p>Step 3 接着就是标准的DQN的部分，计算Loss函数并对其应用梯度下降。</p>
-<p>Step 4 回到Step 2，对得到的state继续迭代，每一次迭代都只生成一个新词来代替旧词，直到迭代次数达到设好的值（作者将次数定为句子长度的两倍，同学们可以思考一下理由）。</p>
+<p>Step 1: 先是传统的seq2seq模型。通过LSTM先把输入序列encode为一个定长向量EnSen(i)，然后作为decode阶段的初始状态依次生成新的序列DeSen(i)（decoding search使用beam search算法来 expand next words）。经过第一步我们得到初始state：(EnSen(i), DeSen(i))和action集合：每个位置的hypotheses。</p>
+<p>Step 2: 接下来从hypotheses（actions）中选择一个可以获得最大reward的单词（action）作为该位置新生成的词，用新单词来代替之前的旧词，于是生成新的state：(EnSen(i), DeSen(i+1))。</p>
+<p>Step 3: 接着就是标准的DQN的部分，计算Loss函数并对其应用梯度下降。</p>
+<p>Step 4: 回到Step 2，对得到的state继续迭代，每一次迭代都只生成一个新词来代替旧词，直到迭代次数达到设好的值（作者将次数定为句子长度的两倍，同学们可以思考一下理由）。</p>
 <p>总结DQN所需的四个元素对应如下：<br>(1) i时刻下的state：(EnSen(i), DeSen(i))；<br>(2) i时刻下的action：beam search得到的每个位置的hypotheses；<br>(3) i时刻下的reword：target sentence和DeSen(i+1)的相似度（BLEU score）；<br>(4) i+1时刻下的state：(EnSen(i), DeSen(i+1))；</p>
 <p>为了更好的提取句子的特征，作者在decode阶段使用了双向LSTM。同时还在reinforcement learning中加入attention机制，可以达到先decode比较简单的部分再处理困难部分的效果。最后在生成相似句子的实验中得到了比只用LSTM decoder效果更好的结论：</p>
 <p><img src="media/14734509263452.jpg" alt=""></p>

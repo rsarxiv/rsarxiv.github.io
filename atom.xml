@@ -5,10 +5,56 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-10T02:52:47.000Z</updated>
+  <updated>2016-09-10T19:56:33.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cs.CL weekly 2016.09.05-2016.09.09</title>
+    <link href="http://rsarxiv.github.io/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/"/>
+    <id>http://rsarxiv.github.io/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/</id>
+    <published>2016-09-10T19:38:13.000Z</published>
+    <updated>2016-09-10T19:56:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：<br>（点击标题可看原文）</p>
+<h1 id="Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level"><a href="#Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level" class="headerlink" title="Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.00718v1.pdf" target="_blank" rel="external">Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level</a></h1><p>张潼老师的文章，通过实验对比了shallow word-level CNN（本文工作）和deep char-level CNN模型在而文本分类任务上的表现，结论是本文工作又快又准。</p>
+<p>（这篇文章对于选择char-level还是word-level做文本分类非常有指导意义）</p>
+<h1 id="Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering"><a href="#Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering" class="headerlink" title="Skipping Word: A Character-Sequential Representation based Framework for Question Answering"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00565v1.pdf" target="_blank" rel="external">Skipping Word: A Character-Sequential Representation based Framework for Question Answering</a></h1><p>本文用char-level CNN模型来做句子表示，然后进行question和answer之间的相关匹配学习，CIKM2016 short paper accepted。</p>
+<h1 id="End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00777v1.pdf" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h1><p>本文是微软研究软邓力老师的文章，构建了一种从知识图谱中形成response的聊天机器人KB-InfoBot，并且提出了一种端到端的增强学习训练方案。</p>
+<p>（本文对于构建一个端到端的KB + task-oriented chatbot非常有启发和指导意义）</p>
+<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><p>本文提出一种模型，将intent detection、slot filling和language modeling融合在一起进行学习，用于解决对话系统中的SLU task。本文是SIGDIAL 2016 paper。</p>
+<p>用到的数据集在Dropbox有一份<a href="http://t.cn/Rcbcpfl" target="_blank" rel="external">copy</a></p>
+<h1 id="Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling"><a href="#Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling" class="headerlink" title="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01454v1.pdf" target="_blank" rel="external">Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling</a></h1><p>和上一篇paper是同一个作者，解决的是同一个问题。将RNN换成了attention-based RNN，被另外一个会议录取。(有点灌水的意思)</p>
+<h1 id="Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations"><a href="#Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations" class="headerlink" title="Ask the GRU: Multi-task Learning for Deep Text Recommendations"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.02116v1.pdf" target="_blank" rel="external">Ask the GRU: Multi-task Learning for Deep Text Recommendations</a></h1><p>本文提出了用端到端的解决方案来做paper的推荐任务，用GRU将文本序列（标题、摘要等）encode到一个latent vector中。并且通过多任务学习来完成内容推荐和条目预测两个task，取得了不错的效果。</p>
+<p>以下内容为arXiv外的<b>优质内容</b>：</p>
+<h1 id="Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems"><a href="#Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems" class="headerlink" title="Discriminative Methods for Statistical Spoken Dialogue Systems"></a><a href="http://www.matthen.com/research/papers/Discriminative_Methods_for_Statistical_Spoken_Dialogue_Systems_Matthew_Henderson_PhD_Thesis.pdf" target="_blank" rel="external">Discriminative Methods for Statistical Spoken Dialogue Systems</a></h1><p>剑桥大学Spoken Dialogue System组毕业的Matthew Henderson博士，师从于Steve Young教授，研究领域是对话系统中的Dialogue State Tracking，主要特色是用transfer learning来解决discriminative model的扩展性和通用性。</p>
+<p>如果你对chatbot感兴趣，强烈建议好好研读一下这篇博士论文。</p>
+<h1 id="CONNECTING-IMAGES-AND-NATURAL-LANGUAGE"><a href="#CONNECTING-IMAGES-AND-NATURAL-LANGUAGE" class="headerlink" title="CONNECTING IMAGES AND NATURAL LANGUAGE"></a><a href="http://cs.stanford.edu/people/karpathy/main.pdf" target="_blank" rel="external">CONNECTING IMAGES AND NATURAL LANGUAGE</a></h1><p>斯坦福大学Feifei Li的博士生Andrej Karpathy的PhD thesis，Karpathy维护着几个非常流行的开源代码库，并且有着一个影响力非常大的博客。名师出高徒，这篇博士博士论文值得一看！</p>
+<p>最近，他更新了一篇博客，谈论了一些自己对读博的思考和建议。 <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="external">A Survival Guide to a PhD</a></p>
+<h1 id="Mendeley-Docs"><a href="#Mendeley-Docs" class="headerlink" title="Mendeley Docs"></a><a href="https://pan.baidu.com/share/link?shareid=317480&amp;uk=1594817379" target="_blank" rel="external">Mendeley Docs</a></h1><p>paper越看越多，一个优秀的paper管理工具就变得非常必要了，Mendeley是其中最优秀的代表之一。</p>
+<p>Easily organize your papers, read &amp; annotate your PDFs, collaborate in private or open groups, and securely access your research from everywhere.</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly</p>
+<p><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：&lt;br&gt;（点击标题可看原文）&lt;/p&gt;
+&lt;h1 id=&quot;Convolutional-Neural-Networks-for-Text-Categorization-Shallo
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="arXiv" scheme="http://rsarxiv.github.io/tags/arXiv/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly第四期</title>
@@ -1093,48 +1139,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;chatbot是最近一段时间非常火的一个词或者一个应用，不仅仅各大新闻媒体在热炒bot的概念，各大巨头也投入巨大的资源进行研发，arxiv上刷出bo
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>A Neural Network Approach to Context-Sensitive Generation of Conversational Responses #PaperWeekly#</title>
-    <link href="http://rsarxiv.github.io/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/"/>
-    <id>http://rsarxiv.github.io/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/</id>
-    <published>2016-07-15T22:56:35.000Z</published>
-    <updated>2016-07-17T06:49:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文分享的这篇paper是旨在训练一个data driven open-domain的bot，在生成response的时候不仅仅考虑user message（query），而且考虑past history作为context。paper的题目是<a href="https://michaelauli.github.io/papers/chitchat.pdf" target="_blank" rel="external">A Neural Network Approach to Context-Sensitive Generation of Conversational Responses</a>，作者来自蒙特利尔大学、乔治亚理工、facebook和微软研究院，本文最早发于2015年6月。</p>
-<p>开放域的端到端response生成在今年已经不是什么新鲜事了，各种复杂的网络，考虑各种各样的信息，然而在去年的这个时候，本文就提出了一种data driven的解决方案，是一篇有开创性的paper。</p>
-<p>bot的几大核心问题，包括：</p>
-<p>1、response generation（或者selection）</p>
-<p>2、dialogue state tracking</p>
-<p>3、user modeling</p>
-<p>不管是开域的还是闭域的bot都需要解决好以上三个问题才能做出一个高质量的bot。本文针对的问题是第一个，用的思路也是现在看来比较自然的一种，用语言模型来生成response。</p>
-<p>考虑history utterances的responses生成问题，先定义一些参数，m表示message（query），c表示context，r表示response。本文要解决的其实是下面这个问题：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>1、Tripled Language Model </p>
-<p>将c，m，r作为一句话来理解，给定c和m之后，不断地生成r的内容。<br>这个模型存在一个比较严重的问题是c如果过长的话，用BPTT训练不了RNNLM。（其实换作LSTM或者GRU单元就会好很多。）</p>
-<p>2、Dynamic-Context Generative Model I </p>
-<p><img src="media/2-1.png" alt="2"></p>
-<p>将c和m用词袋模型表示，然后拼接起来，作为输入，通过一个简单的FNN，得到输出，即c和m vector representation。</p>
-<p>3、Dynamic-Context Generative Model II</p>
-<p><img src="media/3-1.png" alt="3"></p>
-<p>与2不同的地方在于，将c和m单独作为输入，通过一个简单的FNN，得到c和m的vector representation。</p>
-<p>这篇paper针对的问题很有意义，history information的建模对于bot在解决实际工程应用的时候意义重大，会让你的bot看起来更加的智能，和分析了用户日志的web应用会带来更好的服务是一个道理。本文的将具体的context包含到了模型中，在真正应用的时候，离线系统根据user conversation logs build一个user profile会更加实用，因为确实不可能把所有的history都丢到模型中一起来算。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文分享的这篇paper是旨在训练一个data driven open-domain的bot，在生成response的时候不仅仅考虑user message（query），而且考虑past history作为context。paper的题目是&lt;a href=&quot;https:/
     
     </summary>
     

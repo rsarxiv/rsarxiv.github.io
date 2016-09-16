@@ -5,10 +5,70 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-10T19:56:33.000Z</updated>
+  <updated>2016-09-16T19:38:34.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第五期</title>
+    <link href="http://rsarxiv.github.io/2016/09/16/PaperWeekly-%E7%AC%AC%E4%BA%94%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/09/16/PaperWeekly-第五期/</id>
+    <published>2016-09-16T18:14:40.000Z</published>
+    <updated>2016-09-16T19:38:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>Word2Vec从提出至今，已经成为了深度学习在自然语言处理中的基础部件，大大小小、形形色色的DL模型在表示词、短语、句子、段落等文本要素时都需要用word2vec来做word-level的embedding。Word2Vec的作者Tomas Mikolov是一位产出多篇高质量paper的学者，从RNNLM、Word2Vec再到最近流行的FastText都与他息息相关。一个人对同一个问题的研究可能会持续很多年，而每一年的研究成果都可能会给同行带来新的启发，本期的PaperWeekly将会分享其中三篇代表作，分别是：</p>
+<p>1、Efficient Estimation of Word Representation in Vector Space, 2013<br>2、Distributed Representations of Sentences and Documents, 2014<br>3、Enriching Word Vectors with Subword Information, 2016</p>
+<h1 id="Efficient-Estimation-of-Word-Representation-in-Vector-Space"><a href="#Efficient-Estimation-of-Word-Representation-in-Vector-Space" class="headerlink" title="Efficient Estimation of Word Representation in Vector Space"></a><a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="external">Efficient Estimation of Word Representation in Vector Space</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Google Inc., Mountain View, CA</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Word Representation, Word Embedding, Neural Network, Syntactic Similarity, and Semantic Similarity</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201309</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何在一个大型数据集上快速、准确地学习出词表示？</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>传统的NNLM模型包含四层，即输入层、映射层、隐含层和输出层，计算复杂度很大程度上依赖于映射层到隐含层之间的计算，而且需要指定上下文的长度。RNNLM模型被提出用来改进NNLM模型，去掉了映射层，只有输入层、隐含层和输出层，计算复杂度来源于上一层的隐含层到下一层隐含层之间的计算。</p>
+<p>本文提出的两个模型CBOW (Continuous Bag-of-Words Model)和Skip-gram (Continuous Skip-gram Model)结合了上面两个模型的特点，都是只有三层，即输入层、映射层和输出层。CBOW模型与NNLM模型类似，用上下文的词向量作为输入，映射层在所有的词间共享，输出层为一个分类器，目标是使当前词的概率最大。Skip-gram模型与CBOW的输入跟输出恰好相反，输入层为当前词向量，输出层是使得上下文的预测概率最大，如下图所示。训练采用SGD。<br><img src="media/14740499814306.jpg" alt=""></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Code: <a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="external">C++代码</a><br>Dataset: <a href="https://sites.google.com/site/semeval2012task2/" target="_blank" rel="external">SemEval-2012</a>,用来评估语义相关性。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Bengio[1]在2003年就提出了language model的思路，同样是三层（输入层，隐含层和输出层）用上下文的词向量来预测中间词，但是计算复杂度较高，对于较大的数据集运行效率低；实验中也发现将上下文的n-gram出现的频率结合进去会提高性能，这个优点体现在CBOW和Skip-gram模型的输出层中，用hierarchical softmax（with huffman trees）来计算词概率。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的实验结果显示CBOW比NNLM在syntactic和semantic上的预测都要好，而Skip-gram在semantic上的性能要优于CBOW，但是其计算速度要低于CBOW。结果显示用较大的数据集和较少的epoch，可以取得较好的效果，并且在速度上有所提升。与LSI和LDA相比，word2vec利用了词的上下文，语义信息更加丰富。基于word2vec，出现了phrase2vec, sentence2vec和doc2vec，仿佛一下子进入了embedding的世界。NLP的这些思想也在用于recommendation等方面，并且与image结合，将image跟text之间进行转换。</p>
+<h1 id="Distributed-Representations-of-Sentences-and-Documents"><a href="#Distributed-Representations-of-Sentences-and-Documents" class="headerlink" title="Distributed Representations of Sentences and Documents"></a><a href="http://120.52.73.76/arxiv.org/pdf/1405.4053v2.pdf" target="_blank" rel="external">Distributed Representations of Sentences and Documents</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Quoc V. Le, Tomas Mikolov</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Google Inc, Mountain View, CA</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>sentence representation</p>
+<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>ICML 2014</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于word2vec的思路，如何表示sentence和document？</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14740512129190.jpg" alt=""><br>利用one-hot的表示方法作为网络的输入，乘以词矩阵W，然后将得到的每个向量通过平均或者拼接的方法得到整个句子的表示，最后根据任务要求做一分类，而这过程中得到的W就是词向量矩阵，基本上还是word2vec的思路。</p>
+<p>接下来是段落的向量表示方法：<br><img src="media/14740512491434.jpg" alt=""><br>依旧是相同的方法，只是在这里加上了一个段落矩阵，用以表示每个段落，当这些词输入第i个段落时，通过段落id就可以从这个矩阵中得到相对应的段落表示方法。需要说明的是，在相同的段落中，段落的表示是相同的。文中这样表示的动机就是段落矩阵D可以作为一个memory记住在词的context中遗失的东西，相当于增加了一个额外的信息。这样经过训练之后，我们的就得到了段落表示D，当然这个段落就可以是一段或者一篇文章。</p>
+<p>最后一种就是没有词序的段落向量表示方法：<br><img src="media/14740512902836.jpg" alt=""><br>从图中就可以感觉到这个方法明显和skip-gram非常相似，这里只是把重点放在了段落的表示中，通过段落的表示，来预测相应的context 词的表示。最后我们依然可以得到段落矩阵D，这样就可以对段落进行向量化表示了。但是输入起码是句子级别的表示，而输出则是词的向量表示，因此个人比较怀疑这种方法的合理性。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章是word2vec的方法提出一年后提出的方法，因此本文并没有使用目前非常流行的word2vec的训练方法来训练词向量，而是利用word2vec的思路，提出了一种更加简单的网络结构来训练任意长度的文本表示方法。这样一方面好训练，另一方面减少了参数，避免模型过拟合。优点就是在训练paragraph vector的时候加入了一个paragraph matrix，这样在训练过程中保留了一部分段落或者文档信息。这点在目前看来也是有一定优势的。但是目前深度学习发展迅速，可以处理非常大的计算量，同时word2vec以及其变种被应用得非常普遍，因此该文章提出的方法思路大于模型，思路我们可以借鉴，模型就不具有优势了。</p>
+<h1 id="Enriching-Word-Vectors-with-Subword-Information"><a href="#Enriching-Word-Vectors-with-Subword-Information" class="headerlink" title="Enriching Word Vectors with Subword Information"></a><a href="http://120.52.73.80/arxiv.org/pdf/1607.04606v1.pdf" target="_blank" rel="external">Enriching Word Vectors with Subword Information</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Word embedding, morphological, character n-gram</p>
+<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201607</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何解决word2vec方法中罕见词效果不佳的问题，以及如何提升词形态丰富语言的性能？</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>word2vec在词汇建模方面产生了巨大的贡献，然而其依赖于大量的文本数据进行学习，如果一个word出现次数较少那么学到的vector质量也不理想。针对这一问题作者提出使用subword信息来弥补这一问题，简单来说就是通过词缀的vector来表示词。比如unofficial是个低频词，其数据量不足以训练出高质量的vector，但是可以通过un+official这两个高频的词缀学习到不错的vector。</p>
+<p>方法上，本文沿用了word2vec的skip-gram模型，主要区别体现在特征上。word2vec使用word作为最基本的单位，即通过中心词预测其上下文中的其他词汇。而subword model使用字母n-gram作为单位，本文n取值为3~6。这样每个词汇就可以表示成一串字母n-gram，一个词的embedding表示为其所有n-gram的和。这样我们训练也从用中心词的embedding预测目标词，转变成用中心词的n-gram embedding预测目标词。</p>
+<p>实验分为三个部分，分别是（1）计算两个词之间的语义相似度，与人类标注的相似度进行相关性比较；（2）与word2vec一样的词类比实验；（3）与其他考虑morphology的方法比较。结果是本文方法在语言形态丰富的语言（土耳其语，法语等）及小数据集上表现优异，与预期一致。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>源码公布在Facebook的fastText项目中： <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">https://github.com/facebookresearch/fastText</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>利用语言形态学来改进nlp的研究源远流长，本文提及的许多关于character-level和morphology的有趣工作值得参考。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>文章中提出的思路对于morphologically rich languages（例如土耳其语，词缀的使用极为普遍而有趣）来说十分有意义。词缀作为字母与单词之间的中层单位，本身具有一定的语义信息。通过充分利用这种中层语义来表征罕见词汇，直观上讲思路十分合理，也是应用了compositionality的思想。</p>
+<p>利用形态学改进word embedding的工作十分丰富，但中文NLP似乎很难利用这一思路。其实个人感觉中文中也有类似于词缀的单位，比如偏旁部首等等，只不过不像使用字母系统的语言那样容易处理。期待今后也有闪光的工作出现在中文环境中。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从Word2Vec到FastText，从word representation到sentence classification，Tomas Mikolov的工作影响了很多人。虽然有个别模型和实验结果曾遭受质疑，但终究瑕不掩瑜。word2vec对NLP的研究起到了极大地推动作用，其实不仅仅是在NLP领域中，在其他很多领域中都可以看到word2vec的思想和作用，也正是从word2vec开始，这个世界变得都被vector化了，person2vec，sentence2vec，paragraph2vec，anything2vec，world2vec。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"><br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;Word2Vec从提出至今，已经成为了深度学习在自然语言处理中的基础部件，大大小小、形形色色的DL模型在表示词、短语、句子、段落等文本要素时都需要用
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="Representation" scheme="http://rsarxiv.github.io/tags/Representation/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.09.05-2016.09.09</title>
@@ -1003,142 +1063,6 @@
     <summary type="html">
     
       &lt;p&gt;本文介绍的paper一个实用性非常强的解决方案，作者来自于微软研究院，毕业于剑桥大学Spoken Dialogue Group，研究bot很多很多年了。paper的题目是&lt;a href=&quot;http://arxiv.org/pdf/1606.01269v1.pdf&quot; targ
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>也说bot</title>
-    <link href="http://rsarxiv.github.io/2016/07/16/%E4%B9%9F%E8%AF%B4bot/"/>
-    <id>http://rsarxiv.github.io/2016/07/16/也说bot/</id>
-    <published>2016-07-17T05:02:39.000Z</published>
-    <updated>2016-07-17T17:40:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot是最近一段时间非常火的一个词或者一个应用，不仅仅各大新闻媒体在热炒bot的概念，各大巨头也投入巨大的资源进行研发，arxiv上刷出bot相关的paper也更是家常便饭。炒作归炒作，PR归PR，不得不说一个尴尬的事实是市面上确实难以找到一个真正好用的bot。bot按照涉及的领域，分为开放域(open-domain)和面向具体任务(task-oriented)的bot。开放域要做的事情很大，更像是一个什么都能搞的平台，不管你提什么样的需求，它都能够解决，有点true AI的意思，而面向任务的bot则专注做好一件事情，订机票，订餐，办护照等等。</p>
-<p>说到开放域bot，大家接触最多的也就是一些回答非常无厘头的娱乐用bot，比如很多年前活跃在各大社交网站上的小黄鸡，现在市面上活跃着很多号称掌握了bot技术，在用深度学习解决bot技术的bot公司，都是这种，解决不了什么实际问题，就是能和大家聊上两句，而且很多时候回答都是牛头不对马嘴的，十分可笑。</p>
-<p>再说task-oriented bot，市面上最多的就是客服机器人，银行也好，电商也罢，不想重复性地回答用户的问题，就用一个客服机器人来应对，且不说效果如何，开发一个具体task的bot需要费不少工夫，而且后期还要大量的维护，因为太多的hand crafted features被用到，整个bot的框架横向扩展性相对来说较差，换一个场景基本上就需要重新开发一套，人力成本太高了。</p>
-<p>bot的理想非常丰满，大公司描绘的场景也确实很美，但现实的bot却狠狠地浇了一盆冷水下来。期望越高，失望越大。如果媒体一味地吹捧bot，仿佛整个世界明天就会是bot的了，对bot的发展并无益处，捧杀只会带来气泡，破裂之后，一切如初。</p>
-<p>功能强大的、开放域的bot在短期内是比较难实现的，但是如果降低期望，将bot不应当做是一种技术层面的革命，而应当做交互层面的革新才是理性的态度，bot作为一种入口，可能大家都不再需要一个随身携带的终端，只需要找到一个可以识别身份，可以联网的硬件，比如一面镜子，就可以执行很多的task，订机票、买东西等等等等。bot这个时候起到的是一个操作的入口和背后执行各种不同task的黑箱，我们不需要看到整个执行过程，也不需要知道原理是什么，通过一些简单的语言交互，就能完成一些复杂的task，终端要做的事情就是反馈结果和接收输入，执行的过程都在云端，各种bot云。</p>
-<p>而这一切的关键是解决好task-oriented bot，用更多data driven的解决方案来代替传统的人工features和templates。</p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>bot是一个综合性的问题，涉及到下面三个主要问题：</p>
-<p>1、response generation(selection)</p>
-<p>对话生成是最后一个步骤，是输出的部分。简单总结下，有四种solutions：</p>
-<p><b>solution 1</b> 直接根据context来生成对话，这方面最近的paper非常地多，尤其是seq2seq+attention框架席卷了NLP的很多任务之后，对话生成的benchmark也一次又一次地被各种model刷新着。对话生成的问题，被定义为基于某个条件下的生成模型，典型的根据context来predict words，涉及到句子生成的问题，评价问题就会是一个比较难的问题。</p>
-<p><b>solution 2</b> 当然有的paper并不是将对话生成定义为语言模型问题，而是一个next utterance selection的问题，一个多选一的问题，给定一个context，给定一个utterance candidate list，从list中选择一个作为response，当然这类问题的难度会小很多，评价起来也非常容易，但是数据集准备起来要多花一些功夫，而且在实际应用中不好被借鉴。</p>
-<p><b>solution 3</b> rule-based或者说template-based，response的最终形式其实是填充了一个模板而成的，大多数的东西是给定的，只有一些具体的value需要来填充。这一类解决方案很适合做task-oriented bot，但过多的人工features和templates导致了其难以移植到其他task上。</p>
-<p><b>solution 4</b> query-based或者说example-based，response是来自于一个叫做知识库的数据库，里面包含了大量的、丰富的example，根据用户的query，找到最接近的example，将对应的response返回出来作为输出。这一类解决方案非常适合做娱乐、搞笑用的bot，核心技术在于找更多的数据来丰富知识库，来清洗知识库。但毕竟respnose是从别人那里拿出来的，可能会很搞笑，但大多数会牛头不对马嘴。</p>
-<p>2、dialog state tracking(DST)</p>
-<p>有的paper称DST为belief trackers，这个部件其实是bot的核心，它的作用在于理解或者捕捉user intention或者goal，只有当你真的知道用户需要什么，你才能做出正确的action或者response。关于这个部分，会有Dialog State Tracking Challenge比赛。一般来说都会给定一个state的范围，通过context来predict用户属于哪个state，有什么样的需求，是需要查询天气还是要查询火车票。</p>
-<p>3、user modeling</p>
-<p>bot面向具体的业务，都是和真实的user来打交道的，如果只是简单的FAQ bot，回答几个常见的问题可能不需要这块，但如果是其他更加复杂、细致的业务，都需要给用户建模，相同的问题，bot给每个人的response一定是不同的，这个道理非常简单。user modeling，需要涉及的不仅仅是简单的用户基本信息和用户的一些显式反馈信息，而更重要的是用户的history conversations，这些隐式的反馈信息。就像是推荐系统火起来之前，大家都是中规中矩地卖东西，但是有一些聪明人开始分析用户的行为，不仅是那些点赞行为，更多的是那些用户不经意间留下的“蛛丝马迹”，从而知道了用户对哪些东西潜在地感兴趣，也就是后来推荐系统在做的事情。对user进行建模，就是做一个个性化的bot，生成的每一个response都有这个user鲜明的特点。</p>
-<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>大型的语料都是用来训练开放域bot对话生成模型的，数据源一般都是来自社交网站。而对于task-oriented bot来说，客户的数据一般规模都非常地小，这也正是难以将data driven的方案直接套用到task-oriented bot上的一个主要原因。</p>
-<p>[1]中给出了bot训练语料的survey，感兴趣的同学可以读一下这篇survey。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>图来自文章[13]，英文的语料确实比较多，Sina Weibo那个语料是华为诺亚方舟实验室release的[12]。从twitter或者微博上产生bot数据的话，“conversational in nature”效果不如从ubuntu chat logs这种聊天室产生的数据更加适合训练response生成模型，因为更加天然无公害。文章[5]也用了一个大型中文语料，数据来自百度贴吧。</p>
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p> 研究bot的paper是在太多了，这是一个非常活跃的研究领域，细分的方向也非常的多，接下来按照所针对的研究问题来分别介绍一些模型。</p>
-<h2 id="seq2seq生成模型"><a href="#seq2seq生成模型" class="headerlink" title="seq2seq生成模型"></a>seq2seq生成模型</h2><p> 现在最流行的解决方案是seq2seq+attention，encoder将user query feed进来，输出一个vector representation来表示整个query，然后作为decoder的condition，而decoder本质上就是一个语言模型，一步一步地生成response，[2]采用就是这种方案，google用了海量的参数训练出这么一个模型，得到了一个不错的bot。</p>
-<p><img src="media/8.png" alt="8"></p>
-<p> 而典型的seq2seq存在一个问题，就是说容易生成一些“呵呵”的response，即一些非常safe，grammatical但没有实际意义的response，比如”I don’t know!”之类的。原因在于传统的seq2seq在decoding过程中都是以MLE(Maximum Likelihood Estimate)为目标函数，即生成最grammatical的话，而不是最有用的话，这些safe句子大量地出现在训练语料中，模型学习了之后，无可避免地总是生成这样的response，而文章[3]借鉴了语音识别的一些经验，在decoding的时候用MMI（Maximum Mutual Information）作为目标函数，提高了response的diversity。</p>
-<p> 文章[4]认为类似于RNNLM这样的语言模型在生成人话质量不高的根本原因在于，没有处理好隐藏在utterance中的随机feature或者说noise，从而在生成next token（short term goal）和future tokens（long term goal）效果一般。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p> 在生成每一个utterance时，需要用到四个部分，encoder RNN、context RNN、latent variable、decoder RNN，按顺序依次输入和输出。这里的latent variable和IR中的LSI有一点异曲同工，latent表明我们说不清他们到底具体是什么，但可能是代表一种topic或者sentiment，是一种降维的表示。</p>
-<p> 文章[5]提出了一种叫做content introducing的方法来生成短文本response。</p>
-<p><img src="media/4.png" alt="4"></p>
-<p><b>step 1</b> 给定query之后，预测一个keyword作为response的topic，这个topic词性是名词，这里的keyword并不能捕捉复杂的语义和语法，而只是根据query的每个词来预估出一个PMI（Pointwise Mutual Information）最高的名词作为keyword.</p>
-<p><b>step 2</b> [5]的模型叫做Sequence To Backward and Forward Sequences，首先进行backward step，给定一个query，用encoder表示出来得到一个context，decoder的部分首先给定keyword作为第一个词，然后进行decoding，生成的这部分相当于keyword词前面的部分；接下来进行的是forward step，也是一个典型的seq2seq，用encoder将query表示成context，然后给定backward生成的话和keyword作为decoder的前半部分，继续decoding生成后半部分。整个的流程这样简单描述下：</p>
-<p><b>step 1</b> query + keyword =&gt; backward sequence</p>
-<p><b>step 2</b> query + keyword + backward sequence(reverse) =&gt; forward sequence</p>
-<p><b>step 3</b> response = backward (reverse) sequence + keyword + forward sequence</p>
-<h2 id="user-modeling模型"><a href="#user-modeling模型" class="headerlink" title="user modeling模型"></a>user modeling模型</h2><p>文章[6]针对的问题是多轮对话中response不一致的问题，将user identity（比如背景信息、用户画像，年龄等信息）考虑到model中，构建出一个个性化的seq2seq模型，为不同的user，以及同一个user对不同的请将中生成不同风格的response。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>[6]的模型叫Speaker Model，是一个典型的seq2seq模型，不同的地方在于在decoding部分增加了一个speaker embedding，类似于word embedding，只是说这里对用户进行建模。因为无法对用户的信息显式地进行建模，所以用了一种embedding的方法，通过训练来得到speaker向量，下面左边的图是speaker向量在二维平面上的表示，具有相似背景信息的user就会很接近，与word向量一个道理。</p>
-<h2 id="reinforcement-learning模型"><a href="#reinforcement-learning模型" class="headerlink" title="reinforcement learning模型"></a>reinforcement learning模型</h2><p>用增强学习来解决人机对话问题具有很悠久的历史，只不过随着AlphaGo的炒作，deepmind公司将增强学习重新带回了舞台上面，结合着深度学习来解决一些更难的问题。</p>
-<p>增强学习用long term reward作为目标函数，会使得模型通过训练之后可以predict出质量更高的response，文章[7]提出了一个模型框架，具有下面的能力：</p>
-<p>1、整合开发者自定义的reward函数，来达到目标。</p>
-<p>2、生成一个response之后，可以定量地描述这个response对后续阶段的影响。</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>两个bot在对话，初始的时候给定一个input message，然后bot1根据input生成5个候选response，依次往下进行，因为每一个input都会产生5个response，随着turn的增加，response会指数增长，这里在每轮对话中，通过sample来选择出5个作为本轮的response。</p>
-<p>在一个大型数据集上训练一个效果不错的seq2seq作为初始值，用增强学习来提升模型实现自定义reward函数的能力，以达到期待的效果。</p>
-<p>文章[7]的模型可以生成更多轮数的对话，而不至于过早地陷入死循环中，而且生成的对话diversity非常好。</p>
-<h2 id="task-oriented-seq2seq模型"><a href="#task-oriented-seq2seq模型" class="headerlink" title="task-oriented seq2seq模型"></a>task-oriented seq2seq模型</h2><p>现有的task-oriented bot多是采用rule-based、template-based或者example-based或者是综合起来用，用data driven的解决方案十分稀有。文章[8]和[9]就是尝试在bot的个别部件上采用深度学习的技术来做，并且给出了切实可行的方案。</p>
-<p>文章[8]先是从一个大家熟知的场景开始介绍，一个经验丰富的客服是如何带一个新入职的客服，分为四个阶段：</p>
-<p>1、告诉新客服哪些”controls”是可用的，比如：如何查找客户的信息，如何确定客户身份等等。</p>
-<p>2、新客服从老客服做出的good examples中模仿学习。</p>
-<p>3、新客服开始试着服务客户，老客服及时纠正他的错误。</p>
-<p>4、老客服放手不管，新客服独自服务客户，不断学习，不断积累经验。</p>
-<p>[8]的模型框架就是依照上面的过程进行设计的：</p>
-<p>1、开发者提供一系列备选的actions，包括response模板和一些API函数，用来被bot调用。</p>
-<p>2、由专家提供一系列example dialogues，用RNN来学习。</p>
-<p>3、用一个模拟user随机产生query，bot进行response，专家进行纠正。</p>
-<p>4、bot上线服务，与真实客户进行对话，通过反馈来提高bot服务质量。</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>一个完整的工作流程由上图描述，具体步骤看下图：</p>
-<p><img src="media/12.png" alt="12"></p>
-<p>训练的时候是用一部分高质量的数据进行监督学习SL，用增强学习RL来优化模型，得到质量更高的结果。</p>
-<p>文章[9]平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。</p>
-<p><img src="media/10.png" alt="10"></p>
-<p>一共五个组件：</p>
-<p>1、 Intent Network</p>
-<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector。</p>
-<p>2、 Belief Trackers</p>
-<p>又被称为Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
-<ul>
-<li>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</li>
-<li>追踪bot的state，避免去学习那些没有信息量的数据。</li>
-<li>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</li>
-<li>易扩展新的组件。</li>
-</ul>
-<p>3、 Database Operator</p>
-<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
-<p>4、 Policy Network</p>
-<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
-<p>5、 Generation Network</p>
-<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。这一步和文章[8]的step 10一样，将具体的值还原到entity上。</p>
-<p>完全用end-to-end来解决task-oriented是不可能的事情，一定是在一个框架或者体系内用这种seq2seq的解决方案来做这件事情，文章[8]和[9]给出了很大的启发。</p>
-<h2 id="Knowledge-Sources-based模型"><a href="#Knowledge-Sources-based模型" class="headerlink" title="Knowledge Sources based模型"></a>Knowledge Sources based模型</h2><p>纯粹的seq2seq可以解决很多问题，但如果针对具体的任务，在seq2seq的基础上增加一个相关的knowledge sources会让效果好很多。这里的knowledge可以是非结构化的文本源，比如文章[10]中的ubuntu manpages，也可以是结构化的业务数据，比如文章[9]中的database，也可以是一个从源数据和业务数据中提取出的knowledge graph。</p>
-<p>文章[10]作者将bot任务定义为next utterance classification，有一点像question answering任务，给定一个context和一个response candidate list作为备选答案，通过context来从candidate list中选择正确的response。本文的贡献在于在context的基础上，引入了task相关的外部专业知识库，并且这个知识库是非结构化的。</p>
-<p><img src="media/11.png" alt="11"></p>
-<p>模型是三个rnn encoder组成，一个rnn来encode context，一个rnn来encode response，还有一个rnn来encode knowledge，然后综合起来做预测，选出最合适的response。模型被称作knowledge encoder。因为数据集采用的是ubuntu technical support相关的数据集，外部资源就选用了ubuntu manpages。</p>
-<h2 id="context-sensitive模型"><a href="#context-sensitive模型" class="headerlink" title="context sensitive模型"></a>context sensitive模型</h2><p>文章[11]的模型比较简单，但考虑的问题意义很大，history information的建模对于bot在解决实际工程应用的帮助很大，也直接决定了你的bot是否能够work。作者将history context用词袋模型表示，而不是我们经常采用的rnn，然后将context和用户query经过一个简单的FNN，得到一个输出。</p>
-<p><img src="media/9.png" alt="9"> </p>
-<h1 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h1><p>bot response评价很难，虽然说可以借鉴机器翻译的自动评价方法BLEU来做，但效果不会太好。几乎每篇paper都是会花钱雇人来做人工评价，设计一套评价机制来打分，人工的评价更具有说服力。对于实际工程应用更是如此，用户说好才是真的好。而不是简单地拿着自己提的、有偏的指标，和几个方法或者其他公司的bot进行对比，来说明自己好。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>读了一些paper，也和一线在做bot应用的工程师交流之后，有了一点思考，总结如下：</p>
-<p>1、要不要做bot？流行一种说法是市面上没有好用的bot，要解决bot的问题需要很多技术同时进步，可能还需要非常长的一段时间，现在用这个东西来做business，简直荒谬。我个人的看法是，解决具体task的bot，结合当前先进的技术，做一些框架性的工具，并不是那么遥远的事情，虽然不容易，但却非常有意义，解决了垂直领域的bot问题，才有可能解决open domain的bot问题。也正是因为不容易，提高了门槛，才会出现真正的机会，诞生一些很牛的技术公司。</p>
-<p>2、open domain还是task-oriented？如果是我，我会选后者，因为前者只是一个梦想，一个遥不可及的梦想，需要更多的技术层面上的大突破。task-oriented更加具体，更加实用，针对具体的业务，提供一些解决方案，已经有很多企业在做了，虽然一个通用性或者扩展性强的解决方案还没有出现，但一定是一个趋势，也是新一代做bot的公司的机会。</p>
-<p>3、task-oriented bot为什么难，该朝哪个方向来发力？end-to-end是一种理想化的模型，用深度学习模型从大量训练数据中来“捕捉”一些features，“拟合”一些函数，虽然可以得到很不错的效果，而且使用起来确实很方便，但尴尬就尴尬在具体的task中是拿不到海量数据的，数据规模小了之后，纯粹的end-to-end就变得非常鸡肋了。然而真实的场景中，很多企业又有一定的数据，也有bot的需求，所以现在成熟的解决方案就是针对你的具体业务，来设计一些features，templates和rules，当客户的业务发生更改时，需要不断地维护现有的bot系统，十分费时费力。真实的场景中往往涉及到很多结构化的业务数据，纯粹地、暴力地直接根据context生成response是不可能做到的，文章[8][9]都给出了非常有启发性的解决方案，将end-to-end应用在局部，而非整体上，配合上Information Extraction和Knowledge Graph等技术，实现一个高可用的框架体系，这个应该是task-oriented bot的发展方向。</p>
-<p>4、response的生成应该与哪些因素有关呢？response质量的好坏，需要联系到这几个features：（1）user query，用户的提问，用户在这轮对话中到底在问什么，准确地理解用户的意图，这是至关重要的。（2）user modeling，对用户进行建模，包括用户的基本信息，还有更重要的是用户history conversation logs的mining，这个工作很难，但同时也很见水平，也是一家技术公司证明自己技术牛逼的一种途径。logs的挖掘现在很常见，不见得大家都做的很好，而这里的logs不是一般的设定好的、结构化的指标，而是非结构化的文本logs，挖掘起来难度更大。另外一点，也是paper种看到的，user emotion，情感分析是nlp中研究比较多的task，用户的情绪直接关系到销售的成败，如果技术足够牛，可以考虑的因素就可以足够多，对user的分析也就足够清晰。将history生挂在模型中不是一个好办法，因为history是不断增长，会导致模型在捕捉信息时出现问题，更好的办法可能是build user profile之类的东西，将history沉淀出来，作为一个vector representation，或者一种knowledge graph来表征一个user。有了这种能力的bot，说的冠冕堂皇一点就是个性化的bot。（3）knowledge，外部知识源，涉及到具体业务的时候，业务数据也是一种knowledge，如何将knowledge建模到模型中，在生成对话的时候可以更加专业和准确也是一个非常重要的问题。bot是一个综合性的难题，不仅仅是系统框架上的难，而且是建模上的难。</p>
-<p>5、我一直觉得做人和看问题都不可以极端，世界并非非黑即白，而是介于两者之间的连续值。不可能说要么做成一个open-domain巨无霸的bot，要么就是一个什么具体功能都没有的bot，不能只看到现有的bot不成熟，以及幻想中的bot遥不可及，就开始黑这个领域，还嘲笑人家能够居然拿到投资。争吵这些毫无意义，真正有意义的是深挖这个领域，找到痛点和难点，逐个击破，不断地推进这个领域的发展，而不是像一些街边看热闹的人一样，简直无趣！在很多领域突破之前，仿佛都看不到曙光，但几年之后很多当时难以解决的问题不都是红海一片，满大街都是了么？做一个通用的bot可能很长一段时间内都是一件比较困难的事情，但做一个高可用、扩展性不错的bot解决方案还是有盼头的，不必过度自信，也不必妄自菲薄，踏踏实实地做就是了。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://arxiv.org/pdf/1512.05742.pdf" target="_blank" rel="external">A Survey of Available Corpora for Building Data-Driven Dialogue Systems</a></p>
-<p>[2] <a href="http://cn.arxiv.org/pdf/1506.05869.pdf" target="_blank" rel="external">A Neural Conversational Model</a></p>
-<p>[3] <a href="http://arxiv.org/pdf/1510.03055v1.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></p>
-<p>[4] <a href="https://arxiv.org/pdf/1605.06069v3.pdf" target="_blank" rel="external">A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues</a></p>
-<p>[5] <a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></p>
-<p>[6] <a href="https://arxiv.org/pdf/1603.06155.pdf" target="_blank" rel="external">A Persona-Based Neural Conversation Model</a></p>
-<p>[7] <a href="http://arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a></p>
-<p>[8] <a href="http://arxiv.org/pdf/1606.01269v1.pdf" target="_blank" rel="external">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning</a></p>
-<p>[9] <a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a></p>
-<p>[10] <a href="http://media.wix.com/ugd/b6d786_137894b7b3a341a09ed0c0b45b46dbb6.pdf" target="_blank" rel="external">Incorporating Unstructured Textual Knowledge Sources into Neural Dialogue Systems</a></p>
-<p>[11] <a href="https://michaelauli.github.io/papers/chitchat.pdf" target="_blank" rel="external">A Neural Network Approach to Context-Sensitive Generation of Conversational Responses</a></p>
-<p>[12] <a href="http://staff.ustc.edu.cn/~cheneh/paper_pdf/2013/HaoWang.pdf" target="_blank" rel="external">A Dataset for Research on Short-Text Conversation</a></p>
-<p>[13] <a href="http://arxiv.org/pdf/1506.08909v3.pdf" target="_blank" rel="external">The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems</a></p>
-<h1 id="研究组和研究人员"><a href="#研究组和研究人员" class="headerlink" title="研究组和研究人员"></a>研究组和研究人员</h1><p>bot是一个非常活跃的研究领域，全世界有很多的人都在做相关的研究。下面列的是最近所读paper的作者或者所在的group：</p>
-<p>[1] <a href="http://mi.eng.cam.ac.uk/research/dialogue/" target="_blank" rel="external">Cambridge Dialogue Systems Group</a></p>
-<p>[2] <a href="http://www.noahlab.com.hk/topics/ShortTextConversation" target="_blank" rel="external">Huawei NOAH’S ARK LAB</a></p>
-<p>[3] <a href="http://web.stanford.edu/~jiweil/" target="_blank" rel="external">Jiwei Li</a></p>
-<p>[4] <a href="http://cs.mcgill.ca/~rlowe1/" target="_blank" rel="external">Ryan Lowe</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;chatbot是最近一段时间非常火的一个词或者一个应用，不仅仅各大新闻媒体在热炒bot的概念，各大巨头也投入巨大的资源进行研发，arxiv上刷出bo
     
     </summary>
     

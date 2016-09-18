@@ -5,10 +5,53 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-17T04:49:28.000Z</updated>
+  <updated>2016-09-18T06:02:59.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>paperweekly用户投票总结</title>
+    <link href="http://rsarxiv.github.io/2016/09/17/paperweekly%E7%94%A8%E6%88%B7%E6%8A%95%E7%A5%A8%E6%80%BB%E7%BB%93/"/>
+    <id>http://rsarxiv.github.io/2016/09/17/paperweekly用户投票总结/</id>
+    <published>2016-09-18T05:05:11.000Z</published>
+    <updated>2016-09-18T06:02:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>参与投票131人，远超我个人的预期，证明了发红包是一个非常有效的手段，感谢各位的参与。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>从第一个问题的回答来看，群里的童鞋基本上都喜欢读paper，并且大多数一周内可以读1-3篇，更有甚者可以读到6篇以上。关于读paper，以及从最开始做paperweekly，也是受了Ng一次采访内容的启发，他大概的意思是说，每天坚持读篇paper是一种长期投资，坚持做一年、两年之后会有显著地提高。（虽然不确定这话是不是Ng本人说的，但我比较认同这个观点）</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>第二个问题是关于paper类型的，是一个多选题。群里的童鞋有的是学生，有的是工业界的朋友，有的大厂的工程师，有的是创业公司的大拿，不同的背景决定了导向不同。从结果分布来看，工程性强、热门的paper更受欢迎，这个结果可以也比较好理解，毕竟大众化的东西是更受大家欢迎，工程性强的文章一般来说可操作性都比较强，适合复现，并且可以有选择地应用在生产环境中；热门的文章是大家热议的话题，AlphaGo热炒那会，出门不聊几句增强学习都不好意思和人打招呼，甚至这个PR行为带动了一大批人开始学习下围棋，热门、话题性是是媒体感兴趣的，也是大众喜欢津津乐道的；理论性强的paper通常来说不好读，因为很难，需要很深的基础在那儿，不是一句、两句说得清的，但正是这些理论性强的paper真正地推动着AI在往前走；每个人的兴趣点可能都不是很相同，所以有28个童鞋选择了最后一个选项，也符合小众这个词的特点。</p>
+<p>chatbot是当下可能最火的方向之一，但说句实话，10年前paper提出的方法可能在现在的系统中仍然是非常好用的，记得微博上看到过一个人说用正则可以解决大多数的问题，仔细想想rule-based是一个多么神通广大的事情啊。既然rule-based这么好，干嘛还研究那么多新东西、新概念呢？不就是因为人工智能太偏重于人工一词，离智能太远，离智障太近嘛。我一直是这么看待paper这个事儿的，paper针对的可能不是当下的问题，而是未来的问题，但不意味着当下的paper对于当下的问题没有参考和借鉴的意义。paperweekly的一个初衷是希望大家可以通过简单、清晰地描述来看看某一篇或者某几篇paper到底解决了什么问题，用了什么方法，结果如何，当然结果的可信度是另外一回事，但终究是会有启发的。</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>这个问题少打两个字，但是感觉根据上下文大家应该是理解了我提的问题。我想了解，到底paperweekly写的文章有没有真正地解决了一点点需求，或者给大家带来那么一点点启发。答案告诉了我，确实有，某些细节或者思路确实很有借鉴意义，这件事情值得做。谢谢。</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>这是一个多选题，初衷是想了解下哪种方式或者哪几种方式可以让交流变得更加高效率。毫无疑问，微信群是最多的答案，说句实话，微信群排第一是因为大家对微信的依赖强，黏性大，bbs排第二，其实bbs是更加好的讨论方式，但是黏性很差，讨论起来操作会麻烦一些，所以我这边有个非常naive的想法，就是想将bbs和微信群打通，群里有几个技术大牛也愿意一起来做这件事情，希望可以有一个方便大家的东西出来。</p>
+<p><img src="media/5.png" alt="5"></p>
+<p>复现别人paper这个事儿，我个人会选一般有。原因如下：1、首先paper的结果可能没有那么地好，只是说写的或者选的比较好而已；2、paper里的算法不见得适合你的问题；3、paper中的实验在实现过程中可能有很多的trick，并没有写明在paper中，这都是一个又一个的坑啊；4、有些paper有开源的code，可以拿来跑一跑看看效果再说。</p>
+<p><img src="media/6.png" alt="6"></p>
+<p>这个答案也是我预想之中的，摘要就是为了解决信息过载问题的。群里每天会产生一定数量的消息（不是很多其实），但没有赶上实时聊天的话，很容易错过一些精彩的对话或者干货分享。从这个角度来看，做digest这件事情就显得很有意义了。关于如何做，群里之前也有过不错的讨论，我也尝试标注了下数据，感觉难度不小，现在的想法是，我每天晚上花点时间手工摘要出来，分享在bbs和群里。（日后有机会可以将这个事情自动化）</p>
+<p><img src="media/7.png" alt="7"></p>
+<p>这个问题的结果基本上和我上面的想法吻合了。</p>
+<p><img src="media/8.png" alt="8"></p>
+<p>目前paperweekly运营团队里有四个活跃的小组，分别是chatbot、NMT、QA和representation，每个组每周负责出一期文章，包括3-5篇paper，KG这个组建立了，但是一直不够活跃，需要大牛的加入，来写KG方面的文章。</p>
+<p>投票的结果和总结基本是这样的情况，投票可能设计的不科学也有些仓促，但基本达到了预期的目的，得到了充分的反馈，这里感谢各位的支持。谢谢大家！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参与投票131人，远超我个人的预期，证明了发红包是一个非常有效的手段，感谢各位的参与。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;media/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;从第一个问题的回答来看，群里的童鞋基本上都喜欢读paper，并且大多数一周内可以读1-3篇，更
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="paperweekly" scheme="http://rsarxiv.github.io/tags/paperweekly/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.09.12-2016.09.16</title>
@@ -1036,52 +1079,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Attention-over-Attention Neural Networks for Reading Comprehension #PaperWeekly#</title>
-    <link href="http://rsarxiv.github.io/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/"/>
-    <id>http://rsarxiv.github.io/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/</id>
-    <published>2016-07-19T00:21:22.000Z</published>
-    <updated>2016-07-19T01:03:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文分享的文章是arxiv今天刚刚新鲜出炉的paper，来自哈工大讯飞联合实验室。前不久，他们构建了一个大型阅读理解语料，今天也发布出来了。(<a href="http://hfl.iflytek.com/chinese-rc/" target="_blank" rel="external">下载地址</a>)</p>
-<p>Cloze-style Reading Comprehension这个领域竞争太过激烈了，半年时间把benchmark刷了一遍又一遍，今天的这篇paper又一次刷新了记录。如果对这个领域不太熟悉的话，可以读这篇<a href="http://rsarxiv.github.io/2016/06/18/%E6%95%99%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%98%85%E8%AF%BB/">教机器学习阅读</a>。</p>
-<p>本文的模型被称作Attention over Attention(AoA)，和之前的工作不同，不仅仅考虑query-to-document attention，而且考虑了document-to-query attention。模型架构示意图如下：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p><b>Contextual Embedding</b> 将query和document都embedding化，用Bi-GRU将query和document分别encode，将两个方向的hidden state拼接起来作为该词的state，此时document和query可以分别用一个Dxd和Qxd的矩阵来表示，这里D是document的词数，Q是query的词数，d是embedding的维度。</p>
-<p><b>Pair-wise Matching Score</b> </p>
-<p><img src="media/2.png" alt="2"></p>
-<p>这一步是本质上就是对两个矩阵做矩阵乘法，得到所谓的Matching Score矩阵M，这里的M矩阵的维度是DxQ，矩阵中的每个元素表示对应document和query中的词之间的matching score。</p>
-<p><b>Individual Attentions</b> 对M矩阵中的每一列做softmax归一化，得到所谓的query-to-document attention，即给定一个query词，对document中每个词的attention，本文用下式进行表示：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p><b>Attention-over-Attention</b> 前三个步骤都是很多模型采用的通用做法，这一步是本文的亮点。首先，第三步是对M矩阵的每一列做了softmax归一化，这里对M矩阵的每一行做softmax归一化，即得到所谓的document-to-query attention，用下式来表示：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>然后，将document-to-query attention作平均得到最终的query-level attention，如下式：</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>最后，用每个query-to-document attention和刚刚得到的query-level attention做点乘，得到document中每个词的score。</p>
-<p><b>Final Predictions</b> 将相同词的score合并，得到每个词的score，如下式：</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>从而得到最终的答案。</p>
-<p>实验部分用了英文语料CNN和CBT，在没用pre-trained embedding情况下，单模型得到了state-of-the-art结果。</p>
-<p><img src="media/7.png" alt="7"></p>
-<p>本文模型最大的特点就是不仅仅考虑query到document的attention，而且考虑了document到query的attention，即所谓的attention over attention，在Cloze-style阅读理解任务中取得了更好的结果。同时，作者在未来的工作中，准备将该模型拓展到其他任务中。</p>
-<p>attention是一个非常好的机制，将很多任务的benchmark都提高到了很高的水平，是一个革命性的模型。围绕attention的变种做工作，提出各种各样的attention，虽然可以刷新各种任务，但终究不再能够将研究水平提升一个level，需要一个新的机制、新的思想来推动nlp的发展。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文分享的文章是arxiv今天刚刚新鲜出炉的paper，来自哈工大讯飞联合实验室。前不久，他们构建了一个大型阅读理解语料，今天也发布出来了。(&lt;a href=&quot;http://hfl.iflytek.com/chinese-rc/&quot; target=&quot;_blank&quot; rel=&quot;
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="Reading Comprehension" scheme="http://rsarxiv.github.io/tags/Reading-Comprehension/"/>
     
   </entry>
   

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="引本期paper weekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解决此类dataset可以给AI理解人类语言很好的insights。问题的定义大致是，给定较长一段话的context和一个较短的问题，以及一些cand">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="PaperWeekly 第六期"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="PaperWeekly"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>PaperWeekly 第六期 - PaperWeekly</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-77933764-1', 'auto');
+        ga('send', 'pageview');
+
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">PaperWeekly</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/rsarxiv">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/atom.xml">
+                            
+                                Rss
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>PaperWeekly 第六期</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        2016-09-22
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/nlp/">#nlp</a> <a href="/tags/PaperWeekly/">#PaperWeekly</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期paper weekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解决此类dataset可以给AI理解人类语言很好的insights。问题的定义大致是，给定较长一段话的context和一个较短的问题，以及一些candidate answers，训练一些可以准确预测正确答案的模型。</p>
+<p>此问题也存在一些变种，例如context可以是非常大块的knowledge base，可以不提供candidate answers而是在所有的vocabulary中搜索答案，或者是在context中提取答案。</p>
+<p>基于(Recurrent) Neural Network的一些模型在这一类问题上给出了state of the art models，本期paperweekly就带领大家欣赏这一领域有趣的工作。</p>
+<h1 id="Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="Attention-over-Attention Neural Networks for Reading Comprehension"></a><a href="https://arxiv.org/abs/1607.04423" target="_blank" rel="external">Attention-over-Attention Neural Networks for Reading Comprehension</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yiming Cui, Zhipeng Chen, Si Wei, Shijin Wang, Ting Liu and Guoping Hu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>iFLYTEK Research, China<br>Research Center for Social Computing and Information Retrieval, Harbin Institute of Technology, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Attentive Readers</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201608</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文优化了attention机制，同时apply question-to-document and document-to-question attention，提升了已有模型在Cloze-Style Question Answering Task上的准确率。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文解决的是Cloze-style question answering的问题，给定一个Document和一个Query，以及一个list的candidate answers，模型需要给出一个正确答案。</p>
+<p>已有的模型大都通过比较每一个Query + candidate answer和context document的相似性来找出正确答案，这种相似性measure大都通过把query 投射到context document每个单词及所在context的相似性来获得。本文的不同之处在于模型还计算了context投射到每个query单词的相似度，进一步丰富了context和query相似度的计算。</p>
+<p>首先，document和query都会被model成biGRU。<br><img src="media/embedding_and_encoding.png" alt="embedding_and_encoding"></p>
+<p>然后使用document biGRU和query biGRU的每一个position做inner product计算，可以得到一个similarity matrix。<br><img src="media/similarity_matrix.png" alt="similarity_matrix"></p>
+<p>对这个matrix做一个column-wise softmax，可以得到每个query单词在每个document单词上的similarity。<br><img src="media/column_softmax.png" alt="column_softmax"></p>
+<p>similarly，对这个matrix做一个row-wise softmax，可以得到每个document单词在每个query单词上的similarity。<br><img src="media/row_softmax.png" alt="row_softmax"></p>
+<p>取个平均就得到了每个query单词在整个context document上的similarity。<br><img src="media/average.png" alt="average"></p>
+<p>然后把alpha和beta做个inner product就得到了每个context document word的probability。<br><img src="media/context_word_probability.png" alt="context_word_probability"></p>
+<p>每个candidate answer的probability就是它出现在上述s中的probability之和。<br><img src="media/attention_sum.png" alt="attention_su"></p>
+<p>Loss Function可以定义为正确答案的log probability之和。<br><img src="media/loss_function.png" alt="loss_function"></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
+<li><a href="https://github.com/deepmind/rc-data" target="_blank" rel="external">cnn和daily mail datasets</a></li>
+<li><a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">Children’s book test</a></li>
+</ul>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>利用attentive readers解决question answering问题最早出自deep mind: teaching machines to read and comprehend。后来又有Bhuwan Dhingra: Gated-Attention Readers for Text Comprehension和Danqi Chen: A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task，以及其他相关工作，在此不一一赘述。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文很好地完善了attentive reader的工作，同时考虑了query to document and document to query attentions，在几个data set上都取得了state of the art效果，思路非常清晰，在question answering问题上很有参考价值。</p>
+<h1 id="MACHINE-COMPREHENSION-USING-MATCH-LSTM-AND-ANSWER-POINTER"><a href="#MACHINE-COMPREHENSION-USING-MATCH-LSTM-AND-ANSWER-POINTER" class="headerlink" title="MACHINE COMPREHENSION USING MATCH-LSTM AND ANSWER POINTER"></a><a href="http://120.52.73.76/arxiv.org/pdf/1608.07905v1.pdf" target="_blank" rel="external">MACHINE COMPREHENSION USING MATCH-LSTM AND ANSWER POINTER</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Shuohang Wang, Jing Jiang</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Singapore Management University</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Machine comprehension, Match-LSTM, Pointer Net</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv，201608</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>提出一种结合match-LSTM和Pointer Net的端到端神经网络结构，来解决SQuAD数据集这类没有候选项且答案可能是多个词的machine comprehension问题。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型结合了match-LSTM(mLSTM)和Pointer Net(Ptr-Net)两种网络结构。</p>
+<p>1、match-LSTM</p>
+<p>mLSTM是由Wang和Jiang提出的一种解决文本蕴含识别（RTE）问题的一种神经网络结构。模型结构见下图，该模型首先将premise和hypothesis两句话分别输入到两个LSTM中，用对应LSTM的隐层输出作为premise和hypothesis中每个位置对应上下文信息的一种表示（分别对应图中的Hs和Ht）。对于hypothesis中的某个词的表示ht_i，与premise中的每个词的表示Hs计算得到一个权重向量，然后再对premise中的词表示进行加权求和，得到hti对应的上下文向量a_i（attention过程）。最后把hypothesis中该词的表示ht_i和其对应的context向量a_i拼接在一起，输入到一个新的LSTM中。该模型将两个句子的文本蕴含任务拆分成词和短语级别的蕴含识别，因此可以更好地识别词之间的匹配关系。<br><img src="media/mLSTM.png" alt="mLST"></p>
+<p>2、 Pointer networks</p>
+<p>该模型与基于attention的生成模型类似。区别之处在于，pointer networks生成的结果都在输入序列中，因此pointer networks可以直接将attention得到的align向量中的每个权重直接作为预测下一个词对应的概率值。</p>
+<p>3、 Sequence Model &amp; Boundary Model</p>
+<p>本文提出的模型结构见下图，具体到本文的神经网络结构，可以简单分为下面两部分：<br><img src="media/Seq_Bound.png" alt="Seq_Bound"><br>（1）Match-LSTM层：该部分将machine comprehension任务中的question作为premise，而passage作为hypothesis。直接套用上述的mLSTM模型得到关于passage每个位置的一种表示。为了将前后方向的上下文信息全部编码进来，还用相同的方法得到一个反向mLSTM表示，将两个正反方向的表示拼接在一起作为最终passage的表示。</p>
+<p>（2）生成答案序列部分，论文中提出了两种生成方法：</p>
+<ul>
+<li><p>Sequence方法与Pointer Net相同，即根据每一个时刻attention的align向量生成一个词位置，直到生成终止符为止。</p>
+</li>
+<li><p>Boundary方法则是利用SQuAD数据集的答案均是出现在passage中连续的序列这一特点，该方法仅生成首尾两个位置，依据起始位置和终止位置来截取passage的一部分作为最终的答案。</p>
+</li>
+</ul>
+<p>本文在SQuAD数据集上进行实验，两种方法实验结果较之传统LR方法均有大幅度提升。其中Boundary方法比Sequence方法效果更好。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><ul>
+<li>[SQuAD]<br>(<a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">https://rajpurkar.github.io/SQuAD-explorer/</a>)</li>
+</ul>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>数据集相关论文<br>SQuAD: 100,000+ Questions for Machine Comprehension of Text<br>模型相关论文<br>Learning Natural Language Inference with LSTM<br>Pointer networks</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出的模型是第一个在SQuAD语料上应用端到端神经网络的模型，该模型将Match-LSTM和Pointer Networks结合在一起，利用了文本之间的蕴含关系更好地预测答案。<br>本文提出了两种方法来生成答案，其中Boundary方法巧妙地利用SQuAD数据集的答案均是文本中出现过的连续序列这一特点，只生成答案的起始和终止位置，有效地提升了模型的效果。</p>
+<h1 id="Dataset-and-Neural-Recurrent-Sequence-Labeling-Model-for-Open-Domain-Factoid-Question-Answering"><a href="#Dataset-and-Neural-Recurrent-Sequence-Labeling-Model-for-Open-Domain-Factoid-Question-Answering" class="headerlink" title="Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering"></a><a href="https://arxiv.org/pdf/1607.06275v2.pdf" target="_blank" rel="external">Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Peng Li, Wei Li, Zhengyan He, Xuguang Wang, Ying Cao, Jie Zhou, Wei Xu</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Baidu IDL</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Sequence Labeling, CRF</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 201609</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>作者给出了一个新的中文的QA数据集, 并且提出了一个非常有意思的baseline model.</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>1、WebQA Dataset</p>
+<p>作者来自百度IDL, 他们利用百度知道和一些其他的资源, 构建了这个中文的QA数据集. 这个数据集里所有的问题都是factoid类型的问题, 并且问题的答案都只包含一个entity (但是一个entity可能会包含多个单词). 对于每个问题, 数据集提供了若干个’evidence’, 这些evidence是利用搜索引擎在网络中检索的.</p>
+<p>2、Recurrent Sequence Labeling Model</p>
+<p>作者把QA类型的问题看做sequence labeling问题, 给出的模型大概分三部分:<br><img src="media/ericyuan_graph.png" alt="ericyuan_graph"></p>
+<p>（1）Question LSTM:<br>这部分很简单, 就是普通的单向LSTM, 对整个Question sequence进行encoding, 之后计算self-attention, 并用attention对question encoding求加权平均作为问题的representation.</p>
+<p>（2）Evidence LSTMs:<br>这部分比较有意思, 首先, 作者从数据中提取出两种feature: 每个词是否在question和evidence中共同出现, 以及每个词是否同时在多个evidence中出现. 之后, 模型用一个三层的单向LSTM对evidence/quesiton/feature进行编码. </p>
+<ul>
+<li>第一层: 将evidence/question representation/feature进行连接, 放进一个正向LSTM.</li>
+<li>第二层: 将第一层的结果放入一个反向LSTM.</li>
+<li>第三层: 将第一层和第二层的结果进行连接, 放进一个正向LSTM.</li>
+</ul>
+<p>（3）CRF:<br>经过evidence LSTMs, question和evidence的representation已经揉在一起, 所以并不需要其他QA模型(主要是Attention Sum Reader)广泛用的, 用question representation和story representation进行dot product, 求cosine similarity. 这时候只需要对evidence representation的每一个time step进行分类就可以了, 这也是为什么作者将数据标注成IOB tagging的格式, 我们可以直接用一个CRF层对数据进行预测. 在一些实验中, 作者将答案之前的词用O1, 答案之后的词用O2进行标注, 这又给了模型关于非答案词的位置信息(正确答案是在这个词的前面还是后面). </p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><ul>
+<li><a href="http://idl.baidu.com/webqa.html" target="_blank" rel="external">WebQA dataset</a></li>
+<li><a href="https://github.com/baidu/Paddle" target="_blank" rel="external">Baidu Paddle</a></li>
+</ul>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><ul>
+<li>关于CRF进行序列标注的问题, 可以参考这篇文章.<br>Zhiheng Huang, Wei Xu, and Kai Yu. 2015. Bidirectional LSTM-CRF models for sequence tagging. arXiv:1508.01991v1.</li>
+<li>关于multi-word答案选择在SQuAD dataset上的模型, 可以参考这篇.<br>Shuohang Wang, Jing Jiang. 2016. Machine Comprehension Using Match_LSTM and Answer Pointer. arXiv: 1608.07905v1.</li>
+</ul>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>首先对所有release数据集的人表示感谢.<br>关于dataset部分, 百度利用了自己庞大的资源收集数据. 第一, 百度知道里的问题都是人类问的问题, 这一点相比于今年前半年比较流行的CNN/CBT等等cloze style的问题, 要强很多. 第二, 数据集中包含了很多由多个词组成的答案, 这也使数据集的难度大于CNN/CBT这种单个词作为答案的数据. 第三, 对于每个问题, 并没有给出备选答案, 这使得对于答案的搜索空间变大(可以把整个evidence看做是备选答案). 第四, 对于每一个问题, dataset中可能有多个supporting evidence, 这也迎合了最近multi-supporting story的趋势, 因为对于有些问题, 答案并不只在某一个单一的文章中(对于百度来说, 如果搜索一个问题, 那么答案并不一定在单一的搜索结果网页中), 那么一个好的model需要在有限的时间内对尽可能多的搜索结果进行检索. </p>
+<p>关于model部分, 本文尝试将QA问题看做是序列标注问题, 某种意义上解决了multiword answer的难点. 熟悉前半年QA paper的人都会对Attention Sum Reader以及延伸出来的诸多模型比较熟悉, 由于用了类似Pointer Network的机制, 一般的模型只能从文中选择story和question的cosine similarity最高的词作为答案, 这使得multiple word answer很难处理, 尤其是当multiple answer word不连续的时候, 更难处理. 而CRF是大家都熟知的简单高效的序列标注工具, 把它做成可训练的, 并且放在end to end模型中, 看起来是非常实用的. 在Evidence LSTM的部分, 加入的两个feature据作者说非常有帮助, 看起来在deep learning 模型中加入一些精心设计的feature, 或者IR的要素, 有可能能够对模型的performance给予一定的提升. 在entropy的角度, 虽然不一定是entropy reduction, 因为这些信息其实本来已经包含在question/evidence中了, 但是有可能因为你提供给模型这些信息, 它就可以把更多精力用在一些其他的特征上?</p>
+<p>另外值得一提的是, 最近Singapore Management University的Wang and Jiang也有所突破, 在SQuAD dataset(也是multiple word answer)上一度取得了state of the art的结果, 他们用的mLSTM模型也十分有趣. </p>
+<h1 id="Teaching-Machines-to-Read-and-Comprehend"><a href="#Teaching-Machines-to-Read-and-Comprehend" class="headerlink" title="Teaching Machines to Read and Comprehend"></a><a href="http://arxiv.org/pdf/1506.03340v3.pdf" target="_blank" rel="external">Teaching Machines to Read and Comprehend</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Karl Moritz Hermann , Tomas Kocisky, Edward Grefenstette, Lasse Espeholt, Will Kay,Mustafa Suleyman, Phil Blunsom</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Google DeepMind, University of Oxford</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>attention、bidirectional RNN、QA</p>
+<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>《Computer science》 2015</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>如何让机器阅读理解？</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>根据查询（query）和一篇文档（documnet）,最后得出相关的答案，即<br><img src="media/3-2.png" alt="3"><br>其中，W是单词a的权重，g返回文档查询对的词嵌入(embedding)</p>
+<p>论文一共介绍了3中不同的模型，本文着重介绍与本期topic相关的第二个模型：The Attentive Reader，本模型同样利用了encoder-decoder机制：</p>
+<p>1、 在encoder阶段，作者对document和query分开计算，都采用了双向单层LSTM。传统的单向RNN只能获得在它之前的单词的有关信息，所以作者就用了一种双向RNN，以对输入序列进行反序操作以获得当前单词之后的所有信息。由于RNN有对越近的单词表达更好的的倾向。比如矩阵u的向量u_j 将会关注于(focus on)输入序列x对应的x_j 及周围的单词。<br><img src="media/1.png" alt="1"></p>
+<p>2、 在decoder 阶段，最终结果g的计算是对文档向量r进行加权求和。即<br><img src="media/2-1.png" alt="2"><br>s(t)就是词条t的归一化attention，注意yd和u分别是文档和查询经过双向LSTM生成的。权值的计算以查询向量u为条件（如上图），这些权重可以被解释为网络对输入序列的特定词条的关注程度，这种在查询语句比起其他词条偏爱某一词条的机制就是传统的attention机制。 </p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、 RNN-LSTM:A Critical Review of Recurrent Neural Networks for Sequence Learning<br>2、 Encode-decode:Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation<br>3、 Attention:Neural Machine Translation by Jointly Learning to Align and Translate </p>
+<h2 id="简评："><a href="#简评：" class="headerlink" title="简评："></a>简评：</h2><p>通过RNN应用于问答，其效果明显超过了传统的rule-base方法和基于搜索引擎的检索方法，attention机制也得到了更好的效果。不过这种方法还是局限于简单的完型类问题，想要处理多文档查询等任务，还需要继续付出更多努力。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一类model都大量使用了Recurrent Neural Network(LSTM或者GRU)对text进行encoding，得到一个sequence的hidden state vector。然后通过inner product或者bilinear term比较不同位置hidden state vector之间的similarity来计算它们是正确答案的可能性。可见Recurrent Neural Network以及对于Similarity的定义依旧是解决此类问题的关键所在，更好地改良这一类模型也是提升准确率的主流方法。笔者认为，similarity的计算给了模型从原文中搜索答案的能力，然而模型非常缺乏的是推理和思考的能力（其实也有相关工作<a href="http://arxiv.org/abs/1508.05508" target="_blank" rel="external">Towards Neural Network-based Reasoning</a>），如果模型能够配备逻辑思考能力，那么解决问题的能力会大大增强。非常期待有新的思路能够出现在这一领域中，令AI能够更好地理解人类语言。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+    <hr />
+    <h3>留言:</h3>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="fb-comments" data-href="http://rsarxiv.github.io/2016/09/22/PaperWeekly-第六期/index.html" data-num-posts="5" data-width="100%" data-colorscheme="light"></div>
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/rsarxiv" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+    <a class="jiathis_button_qzone"></a>
+    <a class="jiathis_button_tsina"></a>
+    <a class="jiathis_button_tqq"></a>
+    <a class="jiathis_button_weixin"></a>
+    <a class="jiathis_button_renren"></a>
+    <a class="jiathis_button_xiaoyou"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+    <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-23T04:59:09.000Z</updated>
+  <updated>2016-09-23T05:07:49.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/09/22/PaperWeekly-%E7%AC%AC%E5%85%AD%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/09/22/PaperWeekly-第六期/</id>
     <published>2016-09-23T03:51:47.000Z</published>
-    <updated>2016-09-23T04:59:09.000Z</updated>
+    <updated>2016-09-23T05:07:49.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期paperweekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解决此类dataset可以给AI理解人类语言很好的insights。问题的定义大致是，给定较长一段话的context和一个较短的问题，以及一些candidate answers，训练一些可以准确预测正确答案的模型。</p>
 <p>此问题也存在一些变种，例如context可以是非常大块的knowledge base，可以不提供candidate answers而是在所有的vocabulary中搜索答案，或者是在context中提取答案。</p>
@@ -27,6 +27,7 @@
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文优化了attention机制，同时apply question-to-document and document-to-question attention，提升了已有模型在Cloze-Style Question Answering Task上的准确率。</p>
 <h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文解决的是Cloze-style question answering的问题，给定一个Document和一个Query，以及一个list的candidate answers，模型需要给出一个正确答案。</p>
 <p>已有的模型大都通过比较每一个Query + candidate answer和context document的相似性来找出正确答案，这种相似性measure大都通过把query 投射到context document每个单词及所在context的相似性来获得。本文的不同之处在于模型还计算了context投射到每个query单词的相似度，进一步丰富了context和query相似度的计算。</p>
+<p><img src="media/model_image.png" alt="model_image"></p>
 <p>首先，document和query都会被model成biGRU。<br><img src="media/embedding_and_encoding.png" alt="embedding_and_encoding"></p>
 <p>然后使用document biGRU和query biGRU的每一个position做inner product计算，可以得到一个similarity matrix。<br><img src="media/similarity_matrix.png" alt="similarity_matrix"></p>
 <p>对这个matrix做一个column-wise softmax，可以得到每个query单词在每个document单词上的similarity。<br><img src="media/column_softmax.png" alt="column_softmax"></p>
@@ -62,7 +63,7 @@
 </ul>
 <p>本文在SQuAD数据集上进行实验，两种方法实验结果较之传统LR方法均有大幅度提升。其中Boundary方法比Sequence方法效果更好。</p>
 <h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><ul>
-<li>[SQuAD]<br>(<a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">https://rajpurkar.github.io/SQuAD-explorer/</a>)</li>
+<li><a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">SQuAD</a></li>
 </ul>
 <h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>数据集相关论文<br>SQuAD: 100,000+ Questions for Machine Comprehension of Text<br>模型相关论文<br>Learning Natural Language Inference with LSTM<br>Pointer networks</p>
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出的模型是第一个在SQuAD语料上应用端到端神经网络的模型，该模型将Match-LSTM和Pointer Networks结合在一起，利用了文本之间的蕴含关系更好地预测答案。<br>本文提出了两种方法来生成答案，其中Boundary方法巧妙地利用SQuAD数据集的答案均是文本中出现过的连续序列这一特点，只生成答案的起始和终止位置，有效地提升了模型的效果。</p>

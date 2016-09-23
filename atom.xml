@@ -122,44 +122,6 @@
   </entry>
   
   <entry>
-    <title>chatbot 研究近况</title>
-    <link href="http://rsarxiv.github.io/2016/09/22/chatbot-%E7%A0%94%E7%A9%B6%E8%BF%91%E5%86%B5/"/>
-    <id>http://rsarxiv.github.io/2016/09/22/chatbot-研究近况/</id>
-    <published>2016-09-22T22:46:35.000Z</published>
-    <updated>2016-09-23T01:16:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>昨天晚上网络上曝出微信开始内测“小程序”的消息，哗然一片，大家都非常期待微信平台可以成为一个入口级的东西，将流行的c/s模式再次带回到b/s模式，开始幻想，一切的一切都可以在微信上完成，从此以后只需要装一个微信就ok了。幻想是幻想，有点不切实际，但也令人向往，国外的Slack、Facebook等消息平台在较早的时间就已经开放，大量的bot驻扎在各大消息平台上，虽然很多的bot名不副实，也没有太大实际的意义，但终归形成了一种生态，形形色色的公司在这个市场上的不同层面上开始圈地。<br><img src="media/bot.png" alt="bot"><br>听到了微信准备大规模开放平台的消息，我第一时间想到的就是可能半年或者一年之内，国内也会形成这样的一个生态环境，不同业务的公司纷纷转型成bot公司，市面上充满了各种各样的bot框架、平台和提供各种技术服务的SaaS公司，非常壮观的蓝图，想想就让人激动。（大家可以开始圈地了）</p>
-<p>But，在这个人人都聊人工智能的年代，我们到底离真正的人工智能还有多远呢？bot到底是不是人工智能的产物呢？我想上面描述美好愿景中的bot可能大多数与智能关系不太大，大多数可能是一些自动化的工具，方便人们在微信群里做更多的事情，更好玩的事情。毕竟很多的研究难题都没有被攻破，所以离AI还挺远，那么问题来了，到底还有多远呢？下面来介绍一下近期的研究情况。</p>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>根据bot的针对领域简单分类为：开放域bot和特定领域bot。</p>
-<h2 id="开放域"><a href="#开放域" class="headerlink" title="开放域"></a>开放域</h2><p>开放域的问题针对的面非常广，旨在解决用户方方面面的需求，非常理想化，有点true AI的意思，但难度也非常大。小冰的定位正是做一个具有情感的开放域bot，也是目前来看效果最佳的，开放域面临着用户输入的不确定性，以及领域的未知性，非常地难处理，要求bot有真正的学习能力和感知能力。</p>
-<p>目前研究开放域的paper也有一些，比如[1][2][3][4][5]，通过在大量数据集上建立seq2seq模型，用supervised learning、reinforcement learning或者两者结合对模型进行训练，数据集的规模和质量直接影响了最终的效果，所以相比模型来说，数据是更大的壁垒。</p>
-<p>开放域意味着方方面面，难度很大，如果将问题降解一步，考虑多领域问题，这里的多领域具有比较接近的特征，比如：订酒店、订机票、订餐等等类似的问题。正是由于特征比较接近，所以这里可以考虑将不同领域的模型进行迁移学习，用数据规模较大的领域训练出一个初步模型，将其作为数据规模小的领域模型的初值进行训练，关于这个方面，剑桥大学Steve Young组有几篇文章[2][6][7][8][9]非常值得一读，通过几个不同领域的组合探索，验证了这种迁移方法的有效性，并且在Dialogue State Tracking和Natural Language Generation两个任务上都取得了不错的结果。</p>
-<p>在实际应用中，尤其是做api.ai那样的平台时，可能某几个领域积累了大规模的训练数据，也取得了不错的效果，但用户在平台上构建自己领域内bot的时候，数据规模可能不会太大，这个场景下，将已有领域训练好的模型迁移过来是一种不错的思路。</p>
-<h2 id="特定领域"><a href="#特定领域" class="headerlink" title="特定领域"></a>特定领域</h2><p>特定领域的bot研究是一个基础而且容易落地的工作，只有单个领域做的很好了，才能保证多个领域甚至是开放域的效果。因为是基础，所以研究的人就特别多，paper也就特别多了，涵盖了其中的方方面面，比如：[10]研究了复杂特定任务领域中的Dialogue Act建模，[11]研究如何构建一个端到端训练的特定领域对话系统，[12]研究了如何从数据中学习一个特定领域的对话管理模型等等。</p>
-<p>国内做bot的公司中很大一批都是做所谓的智能客服机器人，帮助企业降低人工客服的成本，很大程度上可以看做是一个FAQ bot，帮助人工客服来回答一些常见的问题，可能售前咨询这个场景会更加合适一些，售后问题太复杂，还是非常依赖人工的。国外做bot的公司分门别类，特定功能的智能助手，特定功能的平台bot，多多少少都会用到一些自然语言理解和自然语言生成的技术。国内有几家做智能助手的，后续随着微信平台的开放，平台bot也会雨后春笋般地到来，将会涵盖订酒店、订餐、订机票、买东西等等各种业务。</p>
-<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><p>简单介绍了下分类情况，下面来介绍下构成bot的各组件研究情况，本节着重介绍特定领域的组件。</p>
-<h2 id="语言理解模块"><a href="#语言理解模块" class="headerlink" title="语言理解模块"></a>语言理解模块</h2><p>Natural(Spoken) Language Understanding(SLU或NLU)是每一个bot系统的第一个组件，用来处理用户端的输入信息（文本或者语音），通常将NLU的任务分解成两个不同的任务:意图检测(intent detect)和槽填充(slot filling)。意图检测是将用户输入根据意图进行分类，用户的这句话是打招呼，还是询问，还是预订等等，是一个典型的多分类问题，而槽填充是从用户输入中抽取一些系统自定义的slot value(其实就是一种自定义的entity)，比如想要预订的酒店位置，价格，预订的时间等等，一般是用来作为约束条件，以便后续bot执行查询或者执行其他动作，槽填充是一个典型的序列标注问题，标注的类别需要系统自定义好本体，相比命名实体识别、词性标注等任务来说，label的类别非常多。</p>
-<p>单独考虑两个任务，多分类问题是机器学习中的一个基础问题，经典的算法和解决方案特别多，进入到深度学习时代之后，形形色色的Neural模型也非常多，而且效果也不错；序列标注问题同样是一个经典的基础问题，CRF、HMM以及各种Neural模型都非常多，效果也很不错。[18][19]最早探索了RNN模型在slot filling任务上的效果，并且在ATIS数据集上验证了RNN模型的准确率非常高，为后人的研究打下了基础，[14]将自然语言理解和语言模型联合成一个模型进行训练，一方面提高了意图检测和槽填充的正确率，另一方面降低了语言模型的混乱度，[15]提出了一种基于注意力机制的RNN模型来建模联合意图检测和槽填充任务，[16]认为前人方法太过专注于挖掘大规模数据中features，而忽略了外部知识的重要性，在Neural模型的基础上引入了先验知识提升了NLU的效果，而[17]认为传统方法关注于一个领域提出一个模型的方法，而没有考虑联合多个领域和任务来做文章，作者提出了一种端到端的学习多任务、多领域的模型，[13]提出一种端到端的记忆网络模型来做多轮对话的理解，依赖的是微软小娜收集的用户对话数据。</p>
-<h2 id="状态管理模块"><a href="#状态管理模块" class="headerlink" title="状态管理模块"></a>状态管理模块</h2><p><strong>DST和对话管理的区别？？？</strong><br><strong>是否需要一个policy network模块？？？</strong></p>
-<p>Dialogue State Tracking(DST)是整个bot系统的核心部件，起着承上启下的作用。NLU将用户的输入转化为明确的意图和约束参数，DST负责跟踪用户所有的输入转化来的状态，然后将当前最新的状态输入给下一个组件，或者执行一次查询，或者执行一个操作，或者直接生成合适的对话。DST常常表示成如下的形式：多个Act(slot=value)对。[20]Word-Based Dialog State Tracking with Recurrent Neural Networks提出了一种直接将语言识别结果映射到对话状态的RNN模型，省去了很多的特征工程，[21]Multi-domain Dialog State Tracking using Recurrent Neural Networks从不同领域的组合数据中训练出一个通用RNN模型，反作用于每一个领域，效果好于单独领域训练处单个模型，并且将外领域的数据训练出的模型迁移到指定领域中作为初值，取得了很好的效果。[22]</p>
-<h2 id="语言生成模块"><a href="#语言生成模块" class="headerlink" title="语言生成模块"></a>语言生成模块</h2><p>Natural Language Generation(NLG)是整个bot的最后一个部件，根据之前的状态和策略来生成合适的对话，返回给用户。</p>
-<h1 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h1><h2 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h2><h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><h2 id="Transfer-Learning"><a href="#Transfer-Learning" class="headerlink" title="Transfer Learning"></a>Transfer Learning</h2><h2 id="Active-Learning"><a href="#Active-Learning" class="headerlink" title="Active Learning"></a>Active Learning</h2><h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><h2 id="数据源思路"><a href="#数据源思路" class="headerlink" title="数据源思路"></a>数据源思路</h2><h2 id="开放数据集"><a href="#开放数据集" class="headerlink" title="开放数据集"></a>开放数据集</h2><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]Building End-To-End Dialogue Systems Using Generative Hierarchical Neural Network Models<br>[2]DISTRIBUTED DIALOGUE POLICIES FOR MULTI-DOMAIN STATISTICAL DIALOGUE MANAGEMENT<br>[3]A Persona-Based Neural Conversation Model<br>[4]A Neural Conversational Model<br>[5]A Neural Network Approach to Context-Sensitive Generation of Conversational Responses<br>[6]Multi-agent learning in multi-domain spoken dialogue systems<br>[7]Toward Multi-domain Language Generation using Recurrent Neural Networks<br>[8]Multi-domain Dialog State Tracking using Recurrent Neural Networks<br>[9]Multi-domain Neural Network Language Generation for Spoken Dialogue Systems<br>[10]Dialogue Act Modeling in a Complex Task-Oriented Domain<br>[11]A Network-based End-to-End Trainable Task-oriented Dialogue System<br>[12]Learning Dialogue Management Models for Task-Oriented Dialogue with Parallel Dialogue and Task Streams<br>[13]End-to-End Memory Networks with Knowledge Carryover for Multi-Turn Spoken Language Understanding<br>[14]Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks<br>[15]Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling<br>[16]Knowledge as a Teacher:Knowledge-Guided Structural Attention Networks [17]Multi-Domain Joint Semantic Frame Parsing using Bi-directional RNN-LSTM [18]Investigation of Recurrent-Neural-Network Architectures and Learning Methods for Spoken Language Understanding<br>[19]Using Recurrent Neural Networks for Slot Filling in Spoken Language </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;昨天晚上网络上曝出微信开始内测“小程序”的消息，哗然一片，大家都非常期待微信平台可以成为一个入口级的东西，将流行的c/s模式再次带回到b/s模式，开
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="paperweekly" scheme="http://rsarxiv.github.io/tags/paperweekly/"/>
-    
-  </entry>
-  
-  <entry>
     <title>paperweekly用户投票总结</title>
     <link href="http://rsarxiv.github.io/2016/09/17/paperweekly%E7%94%A8%E6%88%B7%E6%8A%95%E7%A5%A8%E6%80%BB%E7%BB%93/"/>
     <id>http://rsarxiv.github.io/2016/09/17/paperweekly用户投票总结/</id>
@@ -1200,6 +1162,20 @@
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Attention with Intention for a Neural Network Conversation Model #PaperWeekly#</title>
+    <link href="http://rsarxiv.github.io/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/"/>
+    <id>http://rsarxiv.github.io/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/</id>
+    <published>2016-07-22T00:27:46.000Z</published>
+    <updated>2016-07-22T00:27:46.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
     
   </entry>
   

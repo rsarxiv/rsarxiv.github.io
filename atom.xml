@@ -5,10 +5,24 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-23T04:15:58.000Z</updated>
+  <updated>2016-09-23T04:21:53.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://rsarxiv.github.io/2016/09/22/test/"/>
+    <id>http://rsarxiv.github.io/2016/09/22/test/</id>
+    <published>2016-09-23T04:21:53.000Z</published>
+    <updated>2016-09-23T04:21:53.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第六期</title>
@@ -1162,20 +1176,6 @@
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Attention with Intention for a Neural Network Conversation Model #PaperWeekly#</title>
-    <link href="http://rsarxiv.github.io/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/"/>
-    <id>http://rsarxiv.github.io/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/</id>
-    <published>2016-07-22T00:27:46.000Z</published>
-    <updated>2016-07-22T00:27:46.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
     
   </entry>
   

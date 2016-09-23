@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-23T04:56:43.000Z</updated>
+  <updated>2016-09-23T04:59:09.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/09/22/PaperWeekly-%E7%AC%AC%E5%85%AD%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/09/22/PaperWeekly-第六期/</id>
     <published>2016-09-23T03:51:47.000Z</published>
-    <updated>2016-09-23T04:56:43.000Z</updated>
+    <updated>2016-09-23T04:59:09.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期paperweekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解决此类dataset可以给AI理解人类语言很好的insights。问题的定义大致是，给定较长一段话的context和一个较短的问题，以及一些candidate answers，训练一些可以准确预测正确答案的模型。</p>
 <p>此问题也存在一些变种，例如context可以是非常大块的knowledge base，可以不提供candidate answers而是在所有的vocabulary中搜索答案，或者是在context中提取答案。</p>
@@ -75,14 +75,14 @@
 <p>作者来自百度IDL, 他们利用百度知道和一些其他的资源, 构建了这个中文的QA数据集. 这个数据集里所有的问题都是factoid类型的问题, 并且问题的答案都只包含一个entity (但是一个entity可能会包含多个单词). 对于每个问题, 数据集提供了若干个’evidence’, 这些evidence是利用搜索引擎在网络中检索的.</p>
 <p>2、Recurrent Sequence Labeling Model</p>
 <p>作者把QA类型的问题看做sequence labeling问题, 给出的模型大概分三部分:<br><img src="media/ericyuan_graph.png" alt="ericyuan_graph"></p>
-<p>（1）Question LSTM:<br>这部分很简单, 就是普通的单向LSTM, 对整个Question sequence进行encoding, 之后计算self-attention, 并用attention对question encoding求加权平均作为问题的representation.</p>
-<p>（2）Evidence LSTMs:<br>这部分比较有意思, 首先, 作者从数据中提取出两种feature: 每个词是否在question和evidence中共同出现, 以及每个词是否同时在多个evidence中出现. 之后, 模型用一个三层的单向LSTM对evidence/quesiton/feature进行编码. </p>
+<p>（1）Question LSTM<br>这部分很简单, 就是普通的单向LSTM, 对整个Question sequence进行encoding, 之后计算self-attention, 并用attention对question encoding求加权平均作为问题的representation.</p>
+<p>（2）Evidence LSTMs<br>这部分比较有意思, 首先, 作者从数据中提取出两种feature: 每个词是否在question和evidence中共同出现, 以及每个词是否同时在多个evidence中出现. 之后, 模型用一个三层的单向LSTM对evidence/quesiton/feature进行编码. </p>
 <ul>
 <li>第一层: 将evidence/question representation/feature进行连接, 放进一个正向LSTM.</li>
 <li>第二层: 将第一层的结果放入一个反向LSTM.</li>
 <li>第三层: 将第一层和第二层的结果进行连接, 放进一个正向LSTM.</li>
 </ul>
-<p>（3）CRF:<br>经过evidence LSTMs, question和evidence的representation已经揉在一起, 所以并不需要其他QA模型(主要是Attention Sum Reader)广泛用的, 用question representation和story representation进行dot product, 求cosine similarity. 这时候只需要对evidence representation的每一个time step进行分类就可以了, 这也是为什么作者将数据标注成IOB tagging的格式, 我们可以直接用一个CRF层对数据进行预测. 在一些实验中, 作者将答案之前的词用O1, 答案之后的词用O2进行标注, 这又给了模型关于非答案词的位置信息(正确答案是在这个词的前面还是后面). </p>
+<p>（3）CRF<br>经过evidence LSTMs, question和evidence的representation已经揉在一起, 所以并不需要其他QA模型(主要是Attention Sum Reader)广泛用的, 用question representation和story representation进行dot product, 求cosine similarity. 这时候只需要对evidence representation的每一个time step进行分类就可以了, 这也是为什么作者将数据标注成IOB tagging的格式, 我们可以直接用一个CRF层对数据进行预测. 在一些实验中, 作者将答案之前的词用O1, 答案之后的词用O2进行标注, 这又给了模型关于非答案词的位置信息(正确答案是在这个词的前面还是后面). </p>
 <h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><ul>
 <li><a href="http://idl.baidu.com/webqa.html" target="_blank" rel="external">WebQA dataset</a></li>
 <li><a href="https://github.com/baidu/Paddle" target="_blank" rel="external">Baidu Paddle</a></li>
@@ -96,7 +96,7 @@
 <p>另外值得一提的是, 最近Singapore Management University的Wang and Jiang也有所突破, 在SQuAD dataset(也是multiple word answer)上一度取得了state of the art的结果, 他们用的mLSTM模型也十分有趣. </p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一类model都大量使用了Recurrent Neural Network(LSTM或者GRU)对text进行encoding，得到一个sequence的hidden state vector。然后通过inner product或者bilinear term比较不同位置hidden state vector之间的similarity来计算它们是正确答案的可能性。可见Recurrent Neural Network以及对于Similarity的定义依旧是解决此类问题的关键所在，更好地改良这一类模型也是提升准确率的主流方法。笔者认为，similarity的计算给了模型从原文中搜索答案的能力，然而模型非常缺乏的是推理和思考的能力（其实也有相关工作<a href="http://arxiv.org/abs/1508.05508" target="_blank" rel="external">Towards Neural Network-based Reasoning</a>），如果模型能够配备逻辑思考能力，那么解决问题的能力会大大增强。非常期待有新的思路能够出现在这一领域中，令AI能够更好地理解人类语言。</p>
 <h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
 <p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
 ]]></content>
     

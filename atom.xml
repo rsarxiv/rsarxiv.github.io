@@ -5,10 +5,128 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-24T17:53:29.000Z</updated>
+  <updated>2016-09-30T01:13:35.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第七期</title>
+    <link href="http://rsarxiv.github.io/2016/09/29/PaperWeekly-%E7%AC%AC%E4%B8%83%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/09/29/PaperWeekly-第七期/</id>
+    <published>2016-09-30T00:58:47.000Z</published>
+    <updated>2016-09-30T01:13:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>神经网络机器翻译(NMT)是seq2seq模型的典型应用，从2014年提出开始，其性能就接近于传统的基于词组的机器翻译方法，随后，研究人员不断改进seq2seq模型，包括引入注意力模型、使用外部记忆机制、使用半监督学习和修改训练准则等方法，在短短2年时间内使得NMT的性能超过了传统的基于词组的机器翻译方法。在27号谷歌宣布推出谷歌神经网络机器翻译系统，实现了NMT的首个商业化部署，使得NMT真正从高校实验室走向了实际应用。本期Paperweekly的主题是神经网络机器翻译下的字符级方法，主要用来解决NMT中的out-of-vocabulary词问题，分别是：</p>
+<ol>
+<li>A Character-Level Decoder without Explicit Segmentation for Neural Machine Translation，2016</li>
+<li>Achieving Open Vocabulary Neural Machine Translation with Hybrid Word-Character Models，2016</li>
+<li>Character-based Neural Machine Translation，Costa-Jussa, 2016</li>
+<li>Character-based Neural Machine Translation，Ling, 2016</li>
+<li>Neural Machine Translation of Rare Words with Subword Units，2016</li>
+</ol>
+<h1 id="A-Character-Level-Decoder-without-Explicit-Segmentation-for-Neural-Machine-Translation"><a href="#A-Character-Level-Decoder-without-Explicit-Segmentation-for-Neural-Machine-Translation" class="headerlink" title="A Character-Level Decoder without Explicit Segmentation for Neural Machine Translation"></a><a href="https://arxiv.org/abs/1603.06147" target="_blank" rel="external">A Character-Level Decoder without Explicit Segmentation for Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Junyoung Chung, Kyunghyun Cho, Yoshua Bengio</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Universite de Montreal</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Segmentation, Character-level, Bi-scale recurrent network</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>能否在不需要分词的前提下直接在字符级进行神经机器翻译。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>在讲模型之前，本文花了大量篇幅论证为何需要在不分词的前提下进行字符级翻译，首先作者总结了词级翻译的缺点。</p>
+<p>词级翻译的缺点包括：</p>
+<ol>
+<li>任何一个语言都没有完美的分词算法，完美的分词算法应该能够将任意句子划分为lexemes和morphemes组成的序列</li>
+<li>导致的问题就是在词典中经常充斥着许多共享一个lexeme但有着不同morphology的词，比如run,runs,ran,running可能都存在于词典中，每个词都对应一个词向量，但是它们明显共享相同的lexeme——run</li>
+<li>存在unknown word问题和rare word问题，rare word问题是指某些词典中词在训练集中出现次数过少，导致无法训练得到很好的词向量；unknown word问题是指不在词典中的词被标记为UNK（OOV词）</li>
+</ol>
+<p>接着作者指出使用字符集翻译可以解决上述问题：</p>
+<ol>
+<li>使用LSTM或GRU可以解决长时依赖问题</li>
+<li>使用字符级建模可以避免许多词态变形词出现在词典中</li>
+</ol>
+<p>然而上述字符级方法依然需要进行分词，然后对每个词的字符序列进行编码，因此引出了本文的motivation，即是否能直接在不分词的字符序列上进行翻译。</p>
+<p>本文使用的模型同样是经典的seq2seq模型，其创新点主要在decoder端，引入了一种新的网络结构biscale RNN，来捕获字符和词两个timescale上的信息。具体来说，主要分为faster层和slower层，faster层的gated激活值取决于上一步的faster和slower层的激活值，faster层要想影响slower层，则必须要是faster层处理完当前数据，并且进行重置。换句话说，slower层无法接受faster层输入，直到faster层处理完其数据，因此比faster层要慢，而这样的层次结构也对应字符和词在timescale上的关系。下图为网络结构示意图。</p>
+<p> <img src="media/1-figure1.png" alt="1-figure1"></p>
+<p>在4种语言翻译任务上的实验显示完全可以在不分词的情况下进行字符级翻译，性能优于state-of-the-art的非神经翻译系统</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Sennrich ACL2016提出使用BPE算法对subword建模。Kim AAAI2016中提出直接对字符进行encode，Costa-jussa ICLR2016中将该模型用在了NMT任务中。Ling ICLR2016的工作中使用Bi-RNN来编码字符序列。以上工作基于字符级展开，但它们都依赖于知道如何将字符分为词，即分词。本文研究能否在不分词的情况下进行字符级翻译。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文是Bengio组工作，Bi-scale RNN受启发于该组之前提出的GF-RNN，本文创新点主要是提出了一种新的RNN结构，可以在字符和词两个timescales上进行处理，输出字符序列不需要进行分词。不足是未考虑encoder端是否也可以直接使用未分词的字符序列，而是仅仅使用了分词后的BPE序列。</p>
+<h1 id="Achieving-Open-Vocabulary-Neural-Machine-Translation-with-Hybrid-Word-Character-Models"><a href="#Achieving-Open-Vocabulary-Neural-Machine-Translation-with-Hybrid-Word-Character-Models" class="headerlink" title="Achieving Open Vocabulary Neural Machine Translation with Hybrid Word-Character Models"></a><a href="https://arxiv.org/pdf/1604.00788v2.pdf" target="_blank" rel="external">Achieving Open Vocabulary Neural Machine Translation with Hybrid Word-Character Models</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Minh-Thang Luong and Christopher D. Manning</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford University</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>OOV, hybrid word-character models, NMT</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>机器翻译里面的OOV问题, 如何处理UNK</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>提出了一种混合word-character的NMT模型.在训练难度和复杂度不是很高的情况下,同时解决源语言和目标语言的OOV问题.<br><img src="media/2-1.png" alt="2-1"></p>
+<p>这个图表达了模型的整体思路. 大多数情况下,模型在word-level进行translation. 当出现<unk>的时候,则会启用character-level的模型. 对source <unk>, 由character-level模型来得到它的representation; 对target <unk>, 用character-level模型来产生word.</unk></unk></unk></p>
+<ol>
+<li>整体上采用他们组以前提出的基于global attention的encoder-decoder模型. RNN采用的是deep LSTM. </li>
+<li>源语言端和目标语言端的character-level模型都是基于character的deep LSTM. 对源语言端来说, 它的character-level模型是context independent的. 隐层状态全部初始化为0, 因此在训练时可以预先计算mini-batch里的每一个rare word的representation. 而对于目标语言端来说, 它的character-level模型是context dependent的.它的第一层的hidden state要根据当前context来初始化, 其它部分都初始化为0.训练时, 在目标语言的decoder阶段, 首先用word-level的decoder产生句子, 这时句子里包含了一些<unk>. 接着对这些<unk>, 用character-level模型以batch mode来产生rare word.</unk></unk></li>
+<li>对于目标语言端character-level模型的初始化问题, 作者提出了两种方法来表示当前的context. 一种叫做same-path, 用预测<unk>的softmax层之前的ht来表达. 但是因为ht是用来预测unk的, 所以所有ht的值都会比较相似,这样很难用来产生不同的目标rare word. 因此作者提出了第二种表达叫做separate-path, 用ht’来表达context. ht’不用预测unk, 是专门作为context在character-level的输入的. 它的计算方法和ht’相同,只是用了一个不一样的矩阵.</unk></li>
+<li>模型训练的目标函数是cross-entropy loss, 同时考虑了word level和character level的loss. </li>
+</ol>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>NMT的模型分为word-level和character-level的. 对于word-level模型,要解决OOV问题, 之前的工作提出了unk replacement(Luong et al. 2015b), 使用大字典并在softmax时进行采样(Jean et al. 2015), 对unk进行Huffman编码(Chitnis et al. 2015)等方法. 而对于character-level的模型, 本身可以处理OOV词, 但是训练难度和复杂度会增加.</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文的创新之处在于提出了混合word-character model的NMT模型. 这个混合模型结合了二者的优点, 在保证模型复杂度较低的同时,实现了很好的效果.因为加入了character, 特别适合单词有丰富变形的语言. </p>
+<h1 id="Character-based-Neural-Machine-Translation"><a href="#Character-based-Neural-Machine-Translation" class="headerlink" title="Character-based Neural Machine Translation"></a><a href="http://arxiv.org/abs/1511.04586" target="_blank" rel="external">Character-based Neural Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Marta R. Costa-jussa and Jose A. R. Fonollosa </p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>TALP Research Center<br>Universitat Politecnica de Catalunya, Barcelona</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NMT，character-based word embeddings，CNN</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>本文提出使用character-based word embeddings的NMT，可以在一定程度上克服机器翻译中OOV问题。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/3-encoder_decoder.png" alt="3-encoder_decode"></p>
+<p>如上图所示，这篇论文使用的基本模型架构是一个带attention机制的seq2seq的encoder-decoder的架构，使用的神经网络单元是GRU。encoder把源句子转化成一个向量（双向），使用attention的机制来捕获context信息，decoder把context解码成目标句子。网络的输入仍然使用word embedding，但是作者在获取word embedding的时候使用的方法不同。本文是基于词中的character来生成word embedding的，具体方法如下图所示。<br><img src="media/3-embedding.png" alt="3-embedding"></p>
+<p>上图中，最底层是一个character-based embedding组成的序列，对应的是每个词中的字母。然后这个序列被送入一个由不同长度的一维卷积过滤器组成的集合中进行处理，不同的长度对应单词中不同数量的字母（从1到7）。对于每个卷积过滤器，只取最大的值作为输出。然后把每个卷积过滤器输出的最大值连接起来组成一个向量。最后这个向量再通过两层Highway layer的处理作为最终的word embeddings。这个方法的详细信息可以参考Kim的论文<a href="http://arxiv.org/abs/1508.06615" target="_blank" rel="external">Character-Aware Neural Language Models</a>(2016)。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ol>
+<li>本文数据集[German-English WMT data] (<a href="http://www.statmt.org/wmt15/translation-task.html" target="_blank" rel="external">http://www.statmt.org/wmt15/translation-task.html</a>) <br></li>
+<li>建立对比模型使用的软件包<a href="http://dl4mt.computing.dcu.ie/" target="_blank" rel="external">DL4MT</a> </li>
+</ol>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>（1）2003年，基于短语的统计机器翻译模型。Statistical Phrase-Based Translation <br><br>（2）2013年，基于神经网络的机器翻译模型。Recurrent continuous translation models <br><br>（3）2014年，seq2seq的神经网络模型用于机器翻译。Sequence to sequence learning with neural networks </p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文作者将基于character来产生word embedding的方法应用于机器翻译，可以在一定程度上克服OOV的问题。同时，由于利用了单词内部的信息，这篇论文提出的方法对于词形变化丰富的语言的翻译也产生了更好的效果。但是，作者只是在source side使用了上述方法，对于target side，仍然面临词典大小的限制。</p>
+<h1 id="CHARACTER-BASED-NEURAL-MACHINE-TRANSLATION"><a href="#CHARACTER-BASED-NEURAL-MACHINE-TRANSLATION" class="headerlink" title="CHARACTER-BASED NEURAL MACHINE TRANSLATION"></a><a href="http://arxiv.org/abs/1511.04586" target="_blank" rel="external">CHARACTER-BASED NEURAL MACHINE TRANSLATION</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者:"></a>作者:</h2><p>Wang Ling, Isabel Trancoso, Chris Dyer, Alan W Black</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><ol>
+<li>LF Spoken Systems Lab,Instituto Superior Tecnico Lisbon, Portugal</li>
+<li>Language Technologies Institute, Carnegie Mellon University Pittsburga, PA 15213, USA</li>
+</ol>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, Character-Based</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>尝试在字符级别上应用神经机器学习方法</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>在带注意力机制的神经机器学习模型的前后端增加字符到词（C2W)和词向量到字符（V2C）的模块。</p>
+<p><img src="media/4-C2W.png" alt="4-C2"></p>
+<p>图中，小矩形是一个双向LSTM，双向LSTM的前向和后向的最终状态以及bias之和为词的向量表示。</p>
+<p><img src="media/4-V2C-1.png" alt="4-V2"></p>
+<p>这个模块主要由三个步骤组成：</p>
+<ol>
+<li>将字符转换为向量表示。</li>
+<li>将字符向量和之前模型产生注意力向量的a和目标词在前向LSTM中产生的向量表示做拼接并输入到LSTM。</li>
+<li>将得到的向量输入到softmax层得到结果。</li>
+</ol>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><ol>
+<li>Neural machine translation by jointly learning to align and translate. </li>
+</ol>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>这篇文章在基于注意力机制的机器翻译模型上增加了两个模块。由于是基于字符集别的模型，该模型自然可以学得一些语言中的前后缀在翻译中的关系。此外，基于字符级别的模型在翻译未知词时有灵活性。可是，文中也提到，该模型为能够准确的翻译未知词。并且该文也没有明确表明该模型和其他模型相比具有哪些明显的优势。从实际上来说，该模型在V2C部分的训练速度慢是一个很大的弱点，因此若仅根据文章的表述，该模型的实际应用价值应该有限。</p>
+<h1 id="Neural-Machine-Translation-of-Rare-Words-with-Subword-Units"><a href="#Neural-Machine-Translation-of-Rare-Words-with-Subword-Units" class="headerlink" title="Neural Machine Translation of Rare Words with Subword Units"></a><a href="https://arxiv.org/abs/1508.07909" target="_blank" rel="external">Neural Machine Translation of Rare Words with Subword Units</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Rico Sennrich and Barry Haddow and Alexandra Birch</p>
+<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>School of Informatics, University of Edinburgh</p>
+<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>NMT;Rare Words;Subword Units;BPE</p>
+<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>NMT中的OOV（集外词）和罕见词（Rare Words）问题通常用back-off 词典的方式来解决，本文尝试用一种更简单有效的方式（Subword Units）来表示开放词表。</p>
+<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>本文从命名实体、同根词、外来语、组合词（罕见词有相当大比例是上述几种）的翻译策略中得到启发，认为把这些罕见词拆分为“子词单元”(subword units)的组合，可以有效的缓解NMT的OOV和罕见词翻译的问题。<br>子词单元的拆分策略，则是借鉴了一种数据压缩算法：Byte Pair Encoding(BPE)(Gage,1994)算法。该算法的操作过程和示例如Figure1所示。<br><img src="media/5-Fig1.jpg" alt="5-Fig1"></p>
+<p>不同于(Chitnis and DeNero,2015)提出的霍夫曼编码，这里的压缩算法不是针对于词做变长编码，而是对于子词来操作。这样，即使是训练语料里未见过的新词，也可以通过子词的拼接来生成翻译。<br>本文还探讨了BPE的两种编码方式：一种是源语言词汇和目标语言词汇分别编码，另一种是双语词汇联合编码。前者的优势是让词表和文本的表示更紧凑，后者则可以尽可能保证原文和译文的子词切分方式统一。从实验结果来看，在音译或简单复制较多的情形下（比如英德）翻译，联合编码的效果更佳。<br>实验结果分别在WMT15英德和英俄的任务上得到1.1和1.3个BLEU值的提升。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>本文提出的子词拆分算法代码在 <a href="https://github.com/rsennrich/subword-nmt" target="_blank" rel="external">https://github.com/rsennrich/subword-nmt</a><br>实验所用的NMT系统为Groundhog: github.com/sebastien-j/LV_groundhog<br>实验数据来自WMT 2015</p>
+<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>OOV的处理一直是机器翻译研究的重点。<br>基于字符的翻译在短语SMT模型中就已被提出，并在紧密相关的语种对上验证是成功的(Vilar et al., 2007; Tiedemann,2009; Neubig et al., 2012)。  此外还有各种形态素切分方法应用于短语模型，(Nießen and Ney,2000; Koehn and Knight, 2003; Virpioja et al.,2007; Stallard et al., 2012)。<br>对于NMT，也有很多基于字符或形态素的方法用于生成定长连续词向量(Luong et al., 2013; Botha and Blunsom, 2014; Ling et al., 2015a; Kim et al., 2015)。与本文类似的一项工作 (Ling et al., 2015b)发现在基于词的方法上没有明显提升。其与本文的一个区别在于，attention机制仍然在词层级进行操作，而本文在子词层级上。</p>
+<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>这篇文章的创新点在于提出了一种介乎字符和单词之间，也不同于字符n-gram的文本表示单元，并借鉴BPE压缩算法，在词表大小和文本长度两个方面取得一个较为平衡的状态。应用在非同源/近源的语言对（如英汉）是否可以有类似的效果，尚待研究。在NMT模型的优化上，也还有探讨的空间。<br>本文的实验评价方法值得学习，单看BLEU值并不觉得有惊艳之处，但加上CHR F3和(对所有词、罕见词和集外词分别统计的)unigram F1这两个评价指标，尤其是Figure2和3画出来的效果，还是让人比较信服的。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>OOV词对于翻译性能和实用性的影响非常巨大，如何处理OOV词并达到open vocabulary一直是NMT的主要研究方向。传统方法基于单词级别来处理该问题，比如使用UNK替换、扩大词典规模等方法，往往治标不治本。因此最近一些研究者提出基于字符的NMT模型，取得了不错的成绩，字符级方法的主要优势包括不受语言的形态变化、能预测出词典中未出现的单词并降低词典大小等。值得一提的是，基于字符的模型不仅局限于NMT上，任何生成模型都面临OOV词问题，因此是否能够将字符级方法用在其他NLP任务，比如阅读理解或文本摘要上，让我们拭目以待。</p>
+<p>以上为本期Paperweekly的主要内容，感谢EdwardHux、Mygod9、Jaylee1992、Susie和AllenCai五位同学的整理。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"><br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;神经网络机器翻译(NMT)是seq2seq模型的典型应用，从2014年提出开始，其性能就接近于传统的基于词组的机器翻译方法，随后，研究人员不
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.09.19-2016.09.23</title>
@@ -1160,51 +1278,6 @@
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>国内bot产品试用总结</title>
-    <link href="http://rsarxiv.github.io/2016/07/22/%E5%9B%BD%E5%86%85bot%E4%BA%A7%E5%93%81%E8%AF%95%E7%94%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://rsarxiv.github.io/2016/07/22/国内bot产品试用总结/</id>
-    <published>2016-07-22T20:14:05.000Z</published>
-    <updated>2016-07-22T21:18:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>理想很丰满，现实却很骨感。用这句话来形容当前国内的bot客服机器人最合适不过。本文考察了国内规模较大的6家做bot企业客服业务的公司，从功能描述、客户范围到实际案例进行一下对比和总结。</p>
-<h1 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h1><p>在各自的网站上都会介绍公司的优势，基本都会包括下面的字眼：</p>
-<p>1、海量的知识库储备</p>
-<p>2、精准的语义理解能力</p>
-<p>3、快速部署能力</p>
-<p>4、减轻人工客服压力，节约人力成本</p>
-<p>5、无缝衔接人工客服</p>
-<p>6、回答准确高极高</p>
-<p>7、多渠道</p>
-<p>看起来都是非常厉害，都是很牛的技术，理解语义没有任何难度，仿佛真正的bot已经实现了一样，但现实是这样的吗？可能还并不是，可能还需要多年的学术研究来推动这个行业的进步。</p>
-<h1 id="客户范围"><a href="#客户范围" class="headerlink" title="客户范围"></a>客户范围</h1><p>客服是一个很大的市场，在各行各业都需要大量的客服人员来做售前和售后咨询，传统的客服面临着一个很尴尬的问题是，总是在回答大量重复的问题，效率很低。很多问题的答案其实可以在企业网站上的FAQ找到，但是消费者仍是喜欢去问客服。在这个背景下，客服bot应运而生，覆盖的行业领域包括：电子商务、游戏网站、政府网站、一般企业等等各行各业。</p>
-<h1 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h1><p>使用了他们6家的案例，简单总结一下：</p>
-<p>1、大家规模不同，但有一个共同的特点是，宣传中提到为多少多少客户提供服务，但是很多客户的网站中并不能找到相应的bot服务，而且bot公司的网站上并没有给出直接的链接过去，只是说这家客户在用他们的服务。这一点来说，我觉得水分比较大，不够透明。</p>
-<p>2、采用的解决方案基本上都是example-based，即bot公司自己的通用知识库+客户的业务知识库。一个用户在使用企业的客服时，很少有无聊的人去调戏人家bot，都是来咨询相关问题的，所以一般来说，bot公司自己的知识库作用非常小，当企业的知识库回答不了现有的问题，bot公司的这种所谓“海量知识库”可以派上用场，和客户逗趣一会，但本质上没有意义。</p>
-<p>example-based方案本质上就是信息检索，根据用户的query来找到最合适的example，然后将example中的response返回给用户。用这种方法做一个企业客服bot的话，核心就在构建业务知识库，主要的技术点也在这个地方，最简单的方法是将客户给的历史聊天记录和faq经过一定预处理，生成一个高可用的知识库，扯太多的新概念就有点过分了。明明“快速建知识库”才是核心技术，非要说自己拥有超强的“语义理解”能力。What a shame！</p>
-<p>这种方案做出来的效果基本上是一个自动版的faq，可以回到非常有限的问题，如果是企业新遇到的问题，则需要添加知识库，编辑知识库就是个简单的数据库操作，并无高大上，在faq这个层面上，bot确实减少了人力成本。</p>
-<p>大多数对用户提出的在知识库范围内的问题都是可以不错地回答，其他的都是在呵呵呵了。但如果在query的理解上有更加深入地研究，比如在语义层面上对query和example进行对比，而不是简单的keyword匹配，在某种程度上会更好地提高服务质量。</p>
-<p>大多数的bot将faq写在右侧，鼓励大家选择这样的问法，这其实是一种trick，回避了自身理解query能力的欠缺。有一个网站做的不错，你每次提一个query，他会给你返回四个similar query，这四个都是example中的，让你从中选一个，4选1，正确的几率还是很大的，尤其是他的知识库做的不错的情况下。</p>
-<p>3、完全依靠bot是不现实的，毕竟知识库有限，很容易遇到新的问题，每个公司bot都会和人工服务无缝衔接，用户发现bot不靠谱了，可以直接点击人工服务与人沟通。很多企业的bot客服基本上还是主要依靠人工服务，bot的作用太有限了。</p>
-<p>4、大家的模式都差不多，可能有的公司技术稍微领先一点，资源多，拿到了一些大单子，行业的名气大，但实际效果来看，媒体的报道和其他一些场合的PR，只是在鼓吹，实际的体验还是很差的。虽然大家的单子很多，利润也可能不少，但能做的事情实在太有限了，一单接一单地做，都说自己是技术公司，但真正的前沿技术很难看到被应用上，用的技术和10年前的研究成果并无太大不同。比如，context的处理，是一个非常有必要但却没有一家做的很好的公司，用户和bot聊了几轮话了，什么信息量都保存和学习不到，只是做了个小型的搜索引擎就敢说是bot了？智能如何体现呢？有点讽刺啊！大家都说学术界太虚，出的paper难用，只能用10年前的技术来做，旧汤换新药而已，但学术界很多的研究都是前瞻性，也很有启发性，不能直接套用并不代表不能借鉴啊，一概而论地说paper无意义有一点短视，有一点为自己技术不过硬找借口了。如果只是这么简单、浮躁的bot解决方案，我觉得在市场上不会有太强的生命力和长远的发展，因为这点技术，大公司稍微做一下都会比这个强，SaaS的特点就是容易接入，技术但凡领先于现在的专业做bot的企业，自然就会取而代之。当然，如果只是为了赚点快钱，这样做是合理的。</p>
-<p>5、关于机会，我觉得bot是一个很大的机会，很多人不看好bot的原因是目前做bot采用的技术太过陈旧，效果太差导致。这么说来，机会其实也是从这里来的，正是因为大家的技术都不是太先进，所以才有机会，专注地做好新技术的研发，改善现有bot存在的问题，带给企业客户更优质的服务。先赢都不算赢，最后赢的才是真的赢。</p>
-<p>大家都很急着占一个又一个的客户，好像真的占领了这个市场一样。用了这几家的服务之后，感觉有点失望，欲速则不达。 </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;理想很丰满，现实却很骨感。用这句话来形容当前国内的bot客服机器人最合适不过。本文考察了国内规模较大的6家做bot企业客服业务的公司，从功能描述、客户范围到实际案例进行一下对比和总结。&lt;/p&gt;
-&lt;h1 id=&quot;功能描述&quot;&gt;&lt;a href=&quot;#功能描述&quot; class=&quot;hea
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
     

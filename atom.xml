@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-09-30T01:13:35.000Z</updated>
+  <updated>2016-09-30T01:38:30.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/09/29/PaperWeekly-%E7%AC%AC%E4%B8%83%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/09/29/PaperWeekly-第七期/</id>
     <published>2016-09-30T00:58:47.000Z</published>
-    <updated>2016-09-30T01:13:35.000Z</updated>
+    <updated>2016-09-30T01:38:30.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>神经网络机器翻译(NMT)是seq2seq模型的典型应用，从2014年提出开始，其性能就接近于传统的基于词组的机器翻译方法，随后，研究人员不断改进seq2seq模型，包括引入注意力模型、使用外部记忆机制、使用半监督学习和修改训练准则等方法，在短短2年时间内使得NMT的性能超过了传统的基于词组的机器翻译方法。在27号谷歌宣布推出谷歌神经网络机器翻译系统，实现了NMT的首个商业化部署，使得NMT真正从高校实验室走向了实际应用。本期Paperweekly的主题是神经网络机器翻译下的字符级方法，主要用来解决NMT中的out-of-vocabulary词问题，分别是：</p>
 <ol>
@@ -58,10 +58,10 @@
 <ol>
 <li>整体上采用他们组以前提出的基于global attention的encoder-decoder模型. RNN采用的是deep LSTM. </li>
 <li>源语言端和目标语言端的character-level模型都是基于character的deep LSTM. 对源语言端来说, 它的character-level模型是context independent的. 隐层状态全部初始化为0, 因此在训练时可以预先计算mini-batch里的每一个rare word的representation. 而对于目标语言端来说, 它的character-level模型是context dependent的.它的第一层的hidden state要根据当前context来初始化, 其它部分都初始化为0.训练时, 在目标语言的decoder阶段, 首先用word-level的decoder产生句子, 这时句子里包含了一些<unk>. 接着对这些<unk>, 用character-level模型以batch mode来产生rare word.</unk></unk></li>
-<li>对于目标语言端character-level模型的初始化问题, 作者提出了两种方法来表示当前的context. 一种叫做same-path, 用预测<unk>的softmax层之前的ht来表达. 但是因为ht是用来预测unk的, 所以所有ht的值都会比较相似,这样很难用来产生不同的目标rare word. 因此作者提出了第二种表达叫做separate-path, 用ht’来表达context. ht’不用预测unk, 是专门作为context在character-level的输入的. 它的计算方法和ht’相同,只是用了一个不一样的矩阵.</unk></li>
+<li>对于目标语言端character-level模型的初始化问题, 作者提出了两种方法来表示当前的context. 一种叫做same-path, 用预测<unk>的softmax层之前的ht来表达. 但是因为ht是用来预测<unk>的, 所以所有ht的值都会比较相似,这样很难用来产生不同的目标rare word. 因此作者提出了第二种表达叫做separate-path, 用ht’来表达context. ht’不用预测<unk>, 是专门作为context在character-level的输入的. 它的计算方法和ht’相同,只是用了一个不一样的矩阵.</unk></unk></unk></li>
 <li>模型训练的目标函数是cross-entropy loss, 同时考虑了word level和character level的loss. </li>
 </ol>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>NMT的模型分为word-level和character-level的. 对于word-level模型,要解决OOV问题, 之前的工作提出了unk replacement(Luong et al. 2015b), 使用大字典并在softmax时进行采样(Jean et al. 2015), 对unk进行Huffman编码(Chitnis et al. 2015)等方法. 而对于character-level的模型, 本身可以处理OOV词, 但是训练难度和复杂度会增加.</p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>NMT的模型分为word-level和character-level的. 对于word-level模型,要解决OOV问题, 之前的工作提出了<unk> replacement(Luong et al. 2015b), 使用大字典并在softmax时进行采样(Jean et al. 2015), 对unk进行Huffman编码(Chitnis et al. 2015)等方法. 而对于character-level的模型, 本身可以处理OOV词, 但是训练难度和复杂度会增加.</unk></p>
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文的创新之处在于提出了混合word-character model的NMT模型. 这个混合模型结合了二者的优点, 在保证模型复杂度较低的同时,实现了很好的效果.因为加入了character, 特别适合单词有丰富变形的语言. </p>
 <h1 id="Character-based-Neural-Machine-Translation"><a href="#Character-based-Neural-Machine-Translation" class="headerlink" title="Character-based Neural Machine Translation"></a><a href="http://arxiv.org/abs/1511.04586" target="_blank" rel="external">Character-based Neural Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Marta R. Costa-jussa and Jose A. R. Fonollosa </p>
 <h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>TALP Research Center<br>Universitat Politecnica de Catalunya, Barcelona</p>

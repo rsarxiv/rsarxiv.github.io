@@ -3,16 +3,13 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Sequence to Sequence Learning with Neural Networks #PaperWeekly# | PaperWeekly</title>
+  <title>归档：2016/10 | PaperWeekly</title>
   
-  
-  <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
-seq2seq+各种形式的attention近期横扫了nlp的很多任务，本篇将分享的文章是比较早（可能不是最早）提出用seq2seq来解决机器翻译任务的，并且取得了不错的效果。本文的题目是Sequence to Sequence Learning with ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Sequence to Sequence Learning with Neural Networks #PaperWeekly#"/>
+  
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -61,101 +58,25 @@ seq2seq+各种形式的attention近期横扫了nlp的很多任务，本篇将分
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-31T15:22:43.000Z"><a href="/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">2016-05-31</a></time>
-      
-      
-  
-    <h1 class="title">Sequence to Sequence Learning with Neural Networks #PaperWeekly#</h1>
-  
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2016/10</h2>
 
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>seq2seq+各种形式的attention近期横扫了nlp的很多任务，本篇将分享的文章是比较早（可能不是最早）提出用seq2seq来解决机器翻译任务的，并且取得了不错的效果。本文的题目是<a href="http://cn.arxiv.org/pdf/1409.3215.pdf" target="_blank" rel="external">Sequence to Sequence Learning with Neural Networks</a>，作者是来自Google的<a href="http://www.cs.toronto.edu/~ilya/" target="_blank" rel="external">Ilya Sutskever</a>博士（现在OpenAI）。可以说这篇文章较早地探索了seq2seq在nlp任务中的应用，后续的研究者在其基础上进行了更广泛的应用，比如自动文本摘要，对话机器人，问答系统等等。</p>
-<p>这里看一张很经典的图，如下：</p>
-<img src="/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/fig1.png" width="600" height="600">
-<p>图的左半边是encoder，右半边是decoder，两边都采用lstm模型，decoder本质上是一个rnn语言模型，不同的是在生成词的时候依赖于encoder的最后一个hidden state，可以用下式来表示：</p>
-<img src="/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/fig2.png" width="300" height="300">
-<p>模型非常简单，就是最普通的多层lstm，实际实现的时候有几点不同：</p>
-<ul>
-<li><p>用了两种不同的lstm，一种是处理输入序列，一种是处理输出序列。</p>
-</li>
-<li><p>更深的lstm会比浅的lstm效果更好，所以本文选择了四层。</p>
-</li>
-<li><p>将输入的序列翻转之后作为输入效果更好一些。</p>
-</li>
-</ul>
-<p>这里在decoder部分中应用了beam search来提升效果，beam search大概的思路是每次生成词是取使得整个概率最高的前k个词作为候选，这里显然beam size越大，效果越好，但是beam size越大会造成计算的代价也增大，所以存在一个trade off。</p>
-<p>最后通过机器翻译的数据集验证了了seq2seq模型的有效性。</p>
-<p>这里需要讨论的一点是，为什么将输入倒序效果比正序好？文中并没有说，只是说这是一个trick。但后面读了关于attention的文章之后，发现soft attention或者说alignment对于seq2seq这类问题有着很大的提升，我们都知道rnn是一个有偏模型，顺序越靠后的单词在最终占据的信息量越大，那么如果是正序的话，最后一个词对应的state作为decoder的输入来预测第一个词，显然在alignment上来看，这两个词并不是对齐的，反过来，如果用倒序的话，之前的一个词成了最后一个词，在last state中占据了主导，用这个词来预测decoder的第一个词，从某种意义上来说实现了alignment，所以效果会好一些。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
 
-      
-    </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/seq2seq/">seq2seq</a>
+  <div class="archive">
+    
+      <article class="post">
+        <div class="post-content">
+          <header>
+            <div class="icon"></div>
+            <time datetime="2016-10-07T18:22:30.000Z"><a href="/2016/10/07/PaperWeekly-第八期/">2016-10-07</a></time>
+            
+              <h1 class="title"><a href="/2016/10/07/PaperWeekly-第八期/">PaperWeekly 第八期</a></h1>
+            
+          </header>
+        </div>
+      </article>
+    
   </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">留言</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">

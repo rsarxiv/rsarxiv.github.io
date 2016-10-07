@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第八期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引言SIGDIAL是ACL所属的关于对话系统的兴趣小组，SIG的文章针对性比较强，但文章的质量良莠不齐，本期给大家精心挑选了4篇SIGDIAL 2016的文章，带着大家一起来看看对话系统最新的研究成果。4篇文章分别是：
+1、Joint Online Spoken Language Understan">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第八期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-10-07T18:22:30.000Z"><a href="/2016/10/07/PaperWeekly-第八期/">2016-10-07</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第八期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>SIGDIAL是ACL所属的关于对话系统的兴趣小组，SIG的文章针对性比较强，但文章的质量良莠不齐，本期给大家精心挑选了4篇SIGDIAL 2016的文章，带着大家一起来看看对话系统最新的研究成果。4篇文章分别是：</p>
+<p>1、Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks, 2016<br>2、Neural Utterance Ranking Model for Conversational Dialogue Systems, 2016<br>3、A Context-aware Natural Language Generator for Dialogue Systems, 2016<br>4、Task Lineages: Dialog State Tracking for Flexible Interaction, 2016</p>
+<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Bing Liu, Ian Lane</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Carnegie Mellon University, Electrical and Computer Engineering</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Spoken Language Understanding, RNN</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何将自然语言理解的两大问题和语言模型结合在同一个模型中进行训练，以达到实时理解语言的目的？</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>特定任务下的Chatbot在理解人类语言时需要重点解决好两个问题：意图识别(Intent Detection)和槽填充(Slot Filling)，本文提出一种融合Intent Detection、Slot Filling和Language Model的模型，相比于之前的模型，本文模型的一大优势在于做自然语言理解的时候不需要等待整个word sequence完整展现，而是可以在线处理每一个arrived word。如下图：<br><img src="media/3.png" alt="3"></p>
+<p>意图识别是个典型的多分类任务，而槽填充是个典型的序列标注任务。RNN的每个step都以当前word作为输入，输出是意图class、该word的label和下一个word，每个step的隐层都包含了之前所有的word、class、label信息。此模型为基本模型，在此基础上做了一些变形，得到下面四个变种：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>文章在Airline Travel Information Systems(ATIS)数据集上进行了实验，在语言模型评测指标和意图识别分类准确率上相比之前的模型都得到了一定地提升。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>本文Code: <a href="http://speech.sv.cmu.edu/software.html" target="_blank" rel="external">http://speech.sv.cmu.edu/software.html</a><br>ATIS Dataset: <a href="https://github.com/mesnilgr/is13" target="_blank" rel="external">https://github.com/mesnilgr/is13</a></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的创新点在于将意图分类、槽填充和语言模型三者合一，相比之前的独立模型来说，每一步产生的信息更多，在预测下一步的时候context内容更加丰富，从而提高了识别的准确率和降低了语言模型的混乱度。</p>
+<p>NLP中的很多任务都可以归纳为根据context来预测某一个word、label或者class这种范式，解决的思路也都基本类似，RNN或者GRU、LSTM作为encoder和decoder，配上attention机制来提升结果，context的信息量和质量直接影响着预测的效果，user information、user profile等等都可能作为context来构建模型，得到更好的结果。</p>
+<h1 id="Neural-Utterance-Ranking-Model-for-Conversational-Dialogue-Systems"><a href="#Neural-Utterance-Ranking-Model-for-Conversational-Dialogue-Systems" class="headerlink" title="Neural Utterance Ranking Model for Conversational Dialogue Systems"></a><a href="http://www.sigdial.org/workshops/conference17/proceedings/pdf/SIGDIAL48.pdf" target="_blank" rel="external">Neural Utterance Ranking Model for Conversational Dialogue Systems</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Michimasa Inaba, Kenichi Takahashi</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Hiroshima City University, 3-4-1 Ozukahigashi, Asaminami-ku</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Ranking Model, Utterance Selection</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>在做检索式对话时，对话语句该怎样表示，context信息该怎样引入到模型中？</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>本文实现的是一个检索式的对话模型，模型分为两部分，分别是：<br>1、Utterance Encoding<br>检索式对话，对话语句的encoding是很重要的一部分，文中使用了RNN encoder模型来实现对语句的encoding。在训练过程中，作者把encoder生成的向量，在decode成一个目标语句，即通过一个完整的seq2seq模型来训练encoder。<br>2、Ranking Candidate Utterances<br>在对候选语句排序时，作者考虑到了context的问题，他把前几次说的语句分别encode成向量，并依次输入到LSTM。如下图所示：</p>
+<p><img src="media/5.png" alt="5"></p>
+<p>图中u1到un是整个对话中的前n句话，ai是第i个候选语句。模型中，分别把u1…un以及ai分成用户说的和系统本身输出的，在输入到各自的RNN encoder中，得到向量vu1…vu和vai。最后将向量依次输入到RNN中，得到yai作为候选语句ai在当前context中的得分。<br>因为本文是一个ranking model，更关注的是候选语句的排序，最后候选集分数列表会转换成TOP 1的概率分布。并使用cross-entropy作为loss function。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文有两个创新点，首先通过单独训练seq2seq模型，来学习对话语句的encoder，从而降低了整个模型的学习成本，减少了需要标注的数据量。然后在排序模型中将对话的前几句语句有序输入到LSTM，达到融入了context信息的目的。</p>
+<h1 id="A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems"><a href="#A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems" class="headerlink" title="A Context-aware Natural Language Generator for Dialogue Systems"></a><a href="https://arxiv.org/pdf/1608.07076" target="_blank" rel="external">A Context-aware Natural Language Generator for Dialogue Systems</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Ondrej Dusek, Filip Jurcicek</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Charles University</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Context-aware, Seq2seq</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何使得task-oriented的对话生成系统中生成更加自然的回复？</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文是ACL2016 short paper Sequence-to-Sequence Generation for Spoken Dialogue via Deep Syntax Trees and Strings一文的拓展。原文提出基于seq2seq模型的将DA(dialogue acts)生成response的方案，其中输入是三元组(DA type,slot,value)的one-hot representation，输出是对应的response。如下图：</p>
+<p><img src="media/6.png" alt="6"></p>
+<p>延续原文的工作，作者为了使得生成的回复更加自然，将前面用户的提问也encode进来，具体是在原来模型的基础上加了两个encode的部分。Prepending context是把用户的问题和DA三元组前后拼接成新的表示再feed into encoder（这里要注意问题的dictionary和DA是不一样的）。Context encoder则是把单独把问题encode成和Prepending context相同大小的向量，再将两个encoder得到的向量拼接就得到最后的hidden states。最后decode部分仍然沿用lstm+attention的方法。如下图：</p>
+<p><img src="media/7.png" alt="7"></p>
+<p>文章在Alex Context NLG Dataset数据集上进行了实验，在BLEU/NIST scores和人工评价两方面成绩都得到了一定地提升。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>本文Code: <a href="https://github.com/UFAL-DSG/tgen" target="_blank" rel="external">https://github.com/UFAL-DSG/tgen</a><br>Alex Context NLG Dataset: <a href="https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-1675" target="_blank" rel="external">https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-1675</a></p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的创新点在于将用户的问题也就是context显式的加入到模型中，相比之前的模型来说，生成的回复会更符合语境。先前的工作旨在将rule-based符号和seq2seq模型结合自动生成回复，本文的改进让一部分context得到保留，使得生成的回复内容更加丰富，从而显得自然不突兀。</p>
+<h1 id="Task-Lineages-Dialog-State-Tracking-for-Flexible-Interaction"><a href="#Task-Lineages-Dialog-State-Tracking-for-Flexible-Interaction" class="headerlink" title="Task Lineages: Dialog State Tracking for Flexible Interaction"></a><a href="http://aclweb.org/anthology/W16-3602" target="_blank" rel="external">Task Lineages: Dialog State Tracking for Flexible Interaction</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Sungjin Lee, Amanda Stent</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Yahoo Research</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>complex interactions in spoken dialog system, Task Lineage-based Dialog State Tracking</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>口语对话系统中包含Automatic Speech Recognition（ASR）， Spoken Language Understanding（SLU）， Dialog State Tracker（DST）， Dialog policy， Natural Language Generation（NLG）， （Text to Speech）TTS组件， 其中DST以到目前时刻为止所有的history state作为输入， 并输出当前dialog state的估计。之前的Spoken dialog system所用的方法大多是session-based， single task， simple goal的task-oriented方法。而本文基于并拓展Dialog State Tracking技术的discriminative models，将其应用到complex goal， cross domains， continuous interaction的真实Spoken dialog system中</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>本文在之前Dialog State Tracking方法的基础上提出了Task Lineage-based Dialog State Tracking（TL—DST）。本模型包括三个组成部分：<br>1、Task Frame Parsing，返回K-best task frame parses， task frame parses结构如下图：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>2、Context Fetching，在不同的phenomena中，根据不同的conversation history返回不同的相关信息。<br>3、Task State Update，可以通过调节context window参数选择使用不同的dialog state tracking方法。  </p>
+<p>本文模型（TL-DST）处理流程如下图所示：<br><img src="media/2.png" alt="2"></p>
+<p>在t轮，给定句子u，利用task frame parsing生成K-best task frame parses H，给定task frame f，task lineage l， agent output m，利用context features返回相关信息c。</p>
+<p>本文在Dialog State Tracking Challenge 的DSTC2和DSTC3数据集上进行了实验，均取得了较baseline好的结果。</p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>Dialog State Tracking Challenge比赛介绍: <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf</a></p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>本文基于DST的方法来处理口语对话系统中的多任务，跨领域，复杂目标的问题，由于缺乏多任务，跨领域，复杂目标的口语对话系统的数据集，本文实验在DSTC2和DSTC3上进行， 并取得了比baseline好的效果。将来的工作是要将TL-DST方法应用于真实环境中的多领域对话评估。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统(Dialogue Systems)是当前工业界最热门的方向之一，去掉语音部分，该问题退化为聊天机器人(chatbot)问题，两者虽然在输入处理中存在一定的差异，但自然语言理解、对话管理和自然语言生成等核心部件都是一样的，面临的很多问题都是共同的，所以相关的研究或多或少都会有参考意义。上下文(context)的理解和处理是一个重要的环节，直接决定了该bot是智能还是智障，挺多的paper都是针对这一问题进行研究的，但在实际应用当中，context的处理仍然不尽如人意，过多依赖人工设置，更像是一种触发开关，存在大量的if…else…。</p>
+<p>seq2seq生成式的解决方案初见效果，但离真正应用还有很长的路要走，template-based和rule-based仍是主流解决方案，尤其是在面向具体任务的bot情景中。那么，直接生成回答很难的话，退一步来想这个问题，能否将seq2seq用在template或者rule的自动生成上？能否将paper中多信息融合（比如：user profile、dialogue context）的成果应用在当前bot的某一个阶段？能否训练一个bot simulator来丰富训练数据？每一篇paper都会有一些创新点，可能有的创新点是为了创新而创新，但总归会带来一定的思考和借鉴，尤其是针对某一个细节问题，我想这是paper对于工业界的参考意义，而不是说从paper中完全抠出一个成熟的解决方案来套，甚至把dataset和code都release出来，典型的“拿来主义”。</p>
+<p>以上为本期Paperweekly的主要内容，感谢lshowway、zhangjun、zhangboyu和suhui四位同学的整理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/10/07/PaperWeekly-第八期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>70</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>89</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

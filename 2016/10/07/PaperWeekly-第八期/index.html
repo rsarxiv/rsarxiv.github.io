@@ -116,7 +116,7 @@
 <h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Yahoo Research</p>
 <h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
 <h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>complex interactions in spoken dialog system, Task Lineage-based Dialog State Tracking</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>口语对话系统中包含Automatic Speech Recognition（ASR）， Spoken Language Understanding（SLU）， Dialog State Tracker（DST）， Dialog policy， Natural Language Generation（NLG）， （Text to Speech）TTS组件， 其中DST以到目前时刻为止所有的history state作为输入， 并输出当前dialog state的估计。之前的Spoken dialog system所用的方法大多是session-based， single task， simple goal的task-oriented方法。而本文基于并拓展Dialog State Tracking技术的discriminative models，将其应用到complex goal， cross domains， continuous interaction的真实Spoken dialog system中</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>​如何将复杂的判别式模型来做DST，并且应用于复杂场景对话系统？</p>
 <h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>本文在之前Dialog State Tracking方法的基础上提出了Task Lineage-based Dialog State Tracking（TL—DST）。本模型包括三个组成部分：<br>1、Task Frame Parsing，返回K-best task frame parses， task frame parses结构如下图：</p>
 <p><img src="media/1.png" alt="1"></p>
 <p>2、Context Fetching，在不同的phenomena中，根据不同的conversation history返回不同的相关信息。<br>3、Task State Update，可以通过调节context window参数选择使用不同的dialog state tracking方法。  </p>
@@ -128,6 +128,9 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统(Dialogue Systems)是当前工业界最热门的方向之一，去掉语音部分，该问题退化为聊天机器人(chatbot)问题，两者虽然在输入处理中存在一定的差异，但自然语言理解、对话管理和自然语言生成等核心部件都是一样的，面临的很多问题都是共同的，所以相关的研究或多或少都会有参考意义。上下文(context)的理解和处理是一个重要的环节，直接决定了该bot是智能还是智障，挺多的paper都是针对这一问题进行研究的，但在实际应用当中，context的处理仍然不尽如人意，过多依赖人工设置，更像是一种触发开关，存在大量的if…else…。</p>
 <p>seq2seq生成式的解决方案初见效果，但离真正应用还有很长的路要走，template-based和rule-based仍是主流解决方案，尤其是在面向具体任务的bot情景中。那么，直接生成回答很难的话，退一步来想这个问题，能否将seq2seq用在template或者rule的自动生成上？能否将paper中多信息融合（比如：user profile、dialogue context）的成果应用在当前bot的某一个阶段？能否训练一个bot simulator来丰富训练数据？每一篇paper都会有一些创新点，可能有的创新点是为了创新而创新，但总归会带来一定的思考和借鉴，尤其是针对某一个细节问题，我想这是paper对于工业界的参考意义，而不是说从paper中完全抠出一个成熟的解决方案来套，甚至把dataset和code都release出来，典型的“拿来主义”。</p>
 <p>以上为本期Paperweekly的主要内容，感谢lshowway、zhangjun、zhangboyu和suhui四位同学的整理。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
 
       
     </div>

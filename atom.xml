@@ -5,10 +5,45 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-10-07T19:08:52.000Z</updated>
+  <updated>2016-10-08T02:18:53.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cs.CL weekly 2016.10.03-2016.10.07</title>
+    <link href="http://rsarxiv.github.io/2016/10/07/cs-CL-weekly-2016-10-03-2016-10-07/"/>
+    <id>http://rsarxiv.github.io/2016/10/07/cs-CL-weekly-2016-10-03-2016-10-07/</id>
+    <published>2016-10-08T02:06:28.000Z</published>
+    <updated>2016-10-08T02:18:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读（偏学术）"><a href="#一周值得读（偏学术）" class="headerlink" title="一周值得读（偏学术）"></a>一周值得读（偏学术）</h1><h2 id="Controlling-Output-Length-in-Neural-Encoder-Decoders"><a href="#Controlling-Output-Length-in-Neural-Encoder-Decoders" class="headerlink" title="Controlling Output Length in Neural Encoder-Decoders"></a><a href="https://arxiv.org/pdf/1609.09552v1.pdf" target="_blank" rel="external">Controlling Output Length in Neural Encoder-Decoders</a></h2><p>本文针对encoder-decoder框架在应用时无法控制生成序列长度（比如文本摘要）的问题，作者提出了一种基于学习的模型来解决这个问题。encoder-decoder框架已经被成功应用于各大任务中，加上attention，不同变种的attention，研究的人很多。本文也是属于变种之一，考虑了在实际应用中文本摘要长度需要被控制的问题，提出了本文的模型。</p>
+<h2 id="Embracing-data-abundance-BookTest-Dataset-for-Reading-Comprehension"><a href="#Embracing-data-abundance-BookTest-Dataset-for-Reading-Comprehension" class="headerlink" title="Embracing data abundance: BookTest Dataset for Reading Comprehension"></a><a href="https://arxiv.org/pdf/1610.00956v1.pdf" target="_blank" rel="external">Embracing data abundance: BookTest Dataset for Reading Comprehension</a></h2><p>【数据福利】本文发布了一个新的机器阅读理解数据集BookTest，该数据集最大的亮点是规模大，是Facebook发布的Children’s Book Test的60倍之大。</p>
+<h2 id="Visual-Question-Answering-Datasets-Algorithms-and-Future-Challenges"><a href="#Visual-Question-Answering-Datasets-Algorithms-and-Future-Challenges" class="headerlink" title="Visual Question Answering: Datasets, Algorithms, and Future Challenges"></a><a href="https://arxiv.org/pdf/1610.01465v1.pdf" target="_blank" rel="external">Visual Question Answering: Datasets, Algorithms, and Future Challenges</a></h2><p>【综述】这是一篇Visual Question Answer任务的综述性文章，系统地总结、讨论和对比了近几年该领域的数据集和算法，并给出了一些该领域未来的研究方向。</p>
+<h2 id="Multi-View-Representation-Learning-A-Survey-from-Shallow-Methods-to-Deep-Methods"><a href="#Multi-View-Representation-Learning-A-Survey-from-Shallow-Methods-to-Deep-Methods" class="headerlink" title="Multi-View Representation Learning: A Survey from Shallow Methods to Deep Methods"></a><a href="https://arxiv.org/pdf/1610.01206v1.pdf" target="_blank" rel="external">Multi-View Representation Learning: A Survey from Shallow Methods to Deep Methods</a></h2><p>【综述】本文是一篇2015年出版的多模态表示学习的综述文章，非常适合刚刚了解或者准备进入这个领域的童鞋来读。 </p>
+<h2 id="Neural-based-Noise-Filtering-from-Word-Embeddings"><a href="#Neural-based-Noise-Filtering-from-Word-Embeddings" class="headerlink" title="Neural-based Noise Filtering from Word Embeddings"></a><a href="https://arxiv.org/pdf/1610.01874v1.pdf" target="_blank" rel="external">Neural-based Noise Filtering from Word Embeddings</a></h2><p>词向量已经是NLP中各任务的基础部件，对词向量的研究工作也非常多。本文研究的切入点是从语料中的噪声入手，提出了两种无监督去噪模型，取得了不错的效果。</p>
+<h1 id="一周值得读（偏应用）"><a href="#一周值得读（偏应用）" class="headerlink" title="一周值得读（偏应用）"></a>一周值得读（偏应用）</h1><h2 id="Learning-to-Translate-in-Real-time-with-Neural-Machine-Translation"><a href="#Learning-to-Translate-in-Real-time-with-Neural-Machine-Translation" class="headerlink" title="Learning to Translate in Real-time with Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1610.00388v2.pdf" target="_blank" rel="external">Learning to Translate in Real-time with Neural Machine Translation</a></h2><p>本文研究的内容实时机器翻译，与传统的翻译问题不同，该任务需要在翻译质量和速度两个方面寻找一个平衡点，NMT已经证明了其强大的实<br>力，在此基础上用增强学习做训练，以满足两个方面的需求。</p>
+<h2 id="A-Tour-of-TensorFlow"><a href="#A-Tour-of-TensorFlow" class="headerlink" title="A Tour of TensorFlow"></a><a href="https://arxiv.org/pdf/1610.01178v1.pdf" target="_blank" rel="external">A Tour of TensorFlow</a></h2><p>本文系统的剖析了TensorFlow的计算图架构和分布式执行模型，并且系统地对比了TF和其他框架的性能。本文的结论对于框架选择困难的童鞋有一定参考意义，内容对于有志于深挖TF原理和想开发框架的童鞋具有较强的指导意义。对于立志于成为一名TFBoys（TensorFlow）的童鞋，本文是一篇不错的文章。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Chatbots-–-Conversational-UI-and-the-Future-of-Online-Interaction-Swat-io-Blog"><a href="#Chatbots-–-Conversational-UI-and-the-Future-of-Online-Interaction-Swat-io-Blog" class="headerlink" title="Chatbots – Conversational UI and the Future of Online Interaction | Swat.io Blog"></a><a href="https://pan.baidu.com/s/1nuT9qnZ" target="_blank" rel="external">Chatbots – Conversational UI and the Future of Online Interaction | Swat.io Blog</a></h2><p>研究chatbot的童鞋，这本电子书值得一看，或许会有一些思考和启发！ </p>
+<h2 id="王威廉老师关于如何做科研的微博"><a href="#王威廉老师关于如何做科研的微博" class="headerlink" title="王威廉老师关于如何做科研的微博"></a><a href="http://weibo.com/1657470871/EbJnqBBJ5?type=comment#_rnd1475892970397" target="_blank" rel="external">王威廉老师关于如何做科研的微博</a></h2><p>“什么是研究？本科生如何做好研究？我今天在组会上简单地给组里的本科生介绍了一点个人做研究的经验，与大家分享一下。”</p>
+<h2 id="Configuring-Eclipse-with-Torch-–-Lighting-Torch"><a href="#Configuring-Eclipse-with-Torch-–-Lighting-Torch" class="headerlink" title="Configuring Eclipse with Torch – Lighting Torch"></a><a href="http://www.lighting-torch.com/2015/07/27/configuring-eclipse-with-torch/" target="_blank" rel="external">Configuring Eclipse with Torch – Lighting Torch</a></h2><p>将Torch配置到Eclipse中进行开发和调试。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读（偏学术）&quot;&gt;&lt;a href=&quot;#一周值得读（偏学术）&quot; class=&quot;headerlink&quot; title=&quot;一周值得读（偏学术）&quot;&gt;&lt;/a&gt;一周值得读（偏学术）&lt;/h1&gt;&lt;h2 id=&quot;Controlling-Output-Length-in-Neur
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第八期</title>
@@ -1198,42 +1233,6 @@
     
       &lt;p&gt;最近初步地研究了下bot这个领域，有了一点浅薄的理解，于是开始想，如果我也做bot的话，解决好哪些问题才会做好这件事情？&lt;/p&gt;
 &lt;p&gt;1、创业是一件严肃的事情，不是儿戏，需要做好充足的准备，调研和积累都是非常重要的，只有做好100分的准备，才可能在面对各种未知的困难时不慌
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>bot,bot</title>
-    <link href="http://rsarxiv.github.io/2016/07/25/bot-bot/"/>
-    <id>http://rsarxiv.github.io/2016/07/25/bot-bot/</id>
-    <published>2016-07-25T23:12:32.000Z</published>
-    <updated>2016-07-26T00:05:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>科技媒体的文章有一个明显的好处，就是会报道很多不易被人发现、但却非常有意思的startups，帮助大家拓宽视野；同时也有一个明显的坏处，文章容易标题党，不够专业的编辑容易写出一些极端的结论，比如xxx一定会取代yyy，炒作概念。所以，这里借助了科技类媒体的优势，考察了下国外的bot startups所覆盖的业务和现状，总结如下：</p>
-<p>1、外国的月亮比较圆。有一种常见的误区，也是由来很久的一种偏见，那就是国外的东西一定优质于国内的东西，单纯地从startups的主页来看，国外的风格整体更加清爽和小清新一点，而国内的主页整体来说，充满了一种网站模板没用心选的既视感，有些startups充满了乡土气息。但并不意味着，背后的技术一定比国内好，只是门脸做的不错，slogan喊得不错，每一个startup都有一个改变人类现有生活的理想，仔细看有可能只是一个驻扎在slack或者messenger平台上的小bot。</p>
-<p>2、国外的bot startups种类比较多，各个level的企业都有，从最上面的应用层来说，slack、messenger、telegram、kik等各个message平台上都有大量的bot，包括各种各样的服务。这类bot门槛较低，缺乏核心技术，通常是一个idea来支撑整个企业，容易同质化，来源可能是各种bot比赛的产物，域名都是.ai，稍微大一点的支持多个平台，很多都是只在slack上使用，有一种bot成海的感觉，什么样的服务都可以用bot来做，强行改变交互方式。有的slack bot服务于team，有的是将slack与其他服务，比如google analytics，以bot的形式进行桥接。</p>
-<p>3、有挺多的startups都在做app store的事情，聚合了大量不同类别的bot，统一进行管理，开发者开发好的bot都放在store中进行展示和销售。这类企业也是平台的性质，但没有自己独立的平台，所以做各大平台的聚合。</p>
-<p>4、有的startups做的是降低开发bot门槛的事情，和平台提供接入服务不同，这类企业更具有技术性，将bot开发封装成简单的接口或者界面，供“开发者”甚至是小白来开发属于自己的bot，不管是新闻app还是天气、还是旅游都是几分钟配置的事情，完全没有难度。这类公司相比于平台上的简单bot来说，更加底层一些，也更有技术门槛，但结果却是让bot变得没有技术门槛了。</p>
-<p>5、有的startups是独立于几大平台的，提供一种私人助理服务，包括会议、日程、旅行、金融各种服务，为了保证服务质量，常常采用AI+人工的模式。这类公司通常都有核心的技术和垂直领域的经验，对该领域地理解比较深，而且跟得上时代的潮流，用chat作为交互是一个大趋势，索性就早一点进入，确立市场地位。</p>
-<p>6、有的startups专门做B2B的技术支持服务，提供NLP、知识抽取方面的服务，为上述的各类企业提供技术支撑，没有直接参与bot，但保证了bot的质量。</p>
-<p>7、从各个startups成立时间和融资情况来看，平台上的bot都是2015年底或者2016年初开始热起来的，而2013、2014年就开始朝着这个方向做的企业，基本都是做技术平台、企业客服bot或者私人助理app的，相对来说技术壁垒大一些，门槛高，不容易被模仿和抄袭，所以融资情况较好，当然这个只是现在还存活的企业，死掉地可能也有很多。整体来看，slack之类的平台上做个好玩的bot难度不大，数量如雨后春笋般、井喷式地增长，质量良莠不齐，核心技术少，门槛低，从目前的融资情况看不是很好。而开始早并且技术壁垒大的startups有着更好的市场前景，融资情况也比较乐观。</p>
-<p>8、可能是因为考察的startups还比较少，并没有发现像国内有那么多家bot企业都挤在客服这个领域，其他领域的bot企业相对较少，（也有可能是关注的比较少）。国内的微信并没有开放这么彻底，或者说没有一个类似的平台可以做类似的事情，所以各种小bot还没有井喷式地出现，但这是一个趋势，今后一定会有类似的平台出来。</p>
-<p>9、bot在全球都很火，国内和国外的侧重点感觉不是很一样，国外的形式比较丰富，各个level的蛋糕都有人在吃，简直无孔不入，反观国内，大家都忙于抢客服这块大蛋糕，其他的蛋糕没有太多的人来吃，这样看来可能也是国内的一个机会，只要不做客服bot，做一些别的业务可能都会有几乎吧。</p>
-<p>10、不是什么场景都适合用chatbot来解决的，很多时候我们简单操作下软件比和一个不怎么聪明的bot聊半天效率要高很多的，做bot的话，应该首先分析用哪个场景chat会比操作更加简单，而不是盲目地什么都搞成bot。这一点很重要，媒体的炒作，以及大公司的PR都容易蒙蔽双眼，失去理性判断，清醒地分析一下哪些方向是适合做bot的，而不是一味地去为了bot而bot。</p>
-<p>注：所有的数据都是来自于<a href="https://www.crunchbase.com/" target="_blank" rel="external">CrouchBase</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;科技媒体的文章有一个明显的好处，就是会报道很多不易被人发现、但却非常有意思的startups，帮助大家拓宽视野；同时也有一个明显的坏处，文章容易标题党，不够专业的编辑容易写出一些极端的结论，比如xxx一定会取代yyy，炒作概念。所以，这里借助了科技类媒体的优势，考察了下国外
     
     </summary>
     

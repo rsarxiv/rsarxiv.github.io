@@ -106,11 +106,11 @@
 <h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
 <h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于深度卷积网络的生成对抗模型(DCGAN)实现</p>
 <h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在GAN的论文中提出的对抗模型的原型，但是对抗模型是一个大的框架，并不局限于某种网络实现。本文给出了基于卷机网的实现。</p>
-<p>生成网络</p>
-<p><img src="media/discrim-architecture.png" alt="discrim-architecture"></p>
+<p>生成网络<br><img src="media/gen-architecture-1.png" alt="gen-architecture"></p>
 <p>其中反卷积的过程是</p>
 <p><img src="media/padding_strides_transposed-1.gif" alt="padding_strides_transposed"></p>
-<p>识别网络是传统的CNN<br><img src="media/gen-architecture-1.png" alt="gen-architecture"></p>
+<p>识别网络是传统的CNN</p>
+<p><img src="media/discrim-architecture.png" alt="discrim-architecture"></p>
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文紧密承接上篇论文，描述了实现过程中的细节，比如参数设置。也提到了解决GAN中训练不稳定的措施，但是并非完全解决。文中还提到利用对抗生成网络来做半监督学习。在训练结束后，识别网络可以用来提取图片特征，输入有标签的训练图片，可以将卷基层的输出特征作为X，标签作为y做训练。</p>
 <h1 id="Improved-Techniques-for-Training-GANs"><a href="#Improved-Techniques-for-Training-GANs" class="headerlink" title="Improved Techniques for Training GANs"></a><a href="https://arxiv.org/abs/1606.03498" target="_blank" rel="external">Improved Techniques for Training GANs</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, Xi Chen</p>
 <h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>OpenAI</p>

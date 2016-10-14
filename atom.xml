@@ -5,10 +5,81 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-10-08T02:18:53.000Z</updated>
+  <updated>2016-10-14T04:57:15.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第九期</title>
+    <link href="http://rsarxiv.github.io/2016/10/13/PaperWeekly-%E7%AC%AC%E4%B9%9D%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/10/13/PaperWeekly-第九期/</id>
+    <published>2016-10-14T04:09:21.000Z</published>
+    <updated>2016-10-14T04:57:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>深度生成模型基本都是以某种方式寻找并表达（多变量）数据的概率分布。有基于无向图模型（马尔可夫模型）的联合概率分布模型，另外就是基于有向图模型（贝叶斯模型）的条件概率分布。前者的模型是构建隐含层(latent)和显示层（visible)的联合概率，然后去采样。基于有向图的则是寻找latent和visible之间的条件概率分布，也就是给定一个随机采样的隐含层，模型可以生成数据。</p>
+<p>生成模型的训练是一个非监督过程，输入只需要无标签的数据。除了可以生成数据，还可以用于半监督的学习。比如，先利用大量无标签数据训练好模型，然后利用模型去提取数据特征（即从数据层到隐含层的编码过程），之后用数据特征结合标签去训练最终的网络模型。另一种方法是利用生成模型网络中的参数去初始化监督训练中的网络模型，当然，两个模型需要结构一致。</p>
+<p>由于实际中，更多的数据是无标签的，因此非监督和半监督学习非常重要，因此生成模型也非常重要。本篇主要介绍一种基于对抗模式的生成模型，GAN － 从第一篇提出此模型的论文开始，之后紧接着两篇基于它的实现以及改进。三篇文章一脉相承，可以看到结合这种模型的研究进展及方向。</p>
+<h1 id="Generative-Adversarial-Nets-https-arxiv-org-abs-1406-2661"><a href="#Generative-Adversarial-Nets-https-arxiv-org-abs-1406-2661" class="headerlink" title="Generative Adversarial Nets (https://arxiv.org/abs/1406.2661)"></a>Generative Adversarial Nets (<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="external">https://arxiv.org/abs/1406.2661</a>)</h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Universite of Montreal</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>生成模型 （Generative model）</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2014</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>通过模拟对抗过程，提出一种新的生成模型框架</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ul>
+<li>建模</li>
+</ul>
+<p>在对抗生成模型中，同时训练两个网络，第一个网络是生成网络，G(z)，输入z一般是来自常见概率分布函数的样本向量，维度一般比较低，比如100。生成网络输入向量z，输出图片样例，如果使用卷机网实现的话，整个网络可以看过一个反向的CNN，其中的卷积层替换成 transposed convolution layer。第二个网络是识别网络discriminator net - D(x)，输入为一张图片x，而输出为一个标量，用来代表x来自真实图片的概率。</p>
+<ul>
+<li>训练</li>
+</ul>
+<p>整个网络的loss定义为</p>
+<p>V = E’[log D(x)] + E’’[log (1 - D(G(z)) )]<br>E’ - 当x来自真实数据的期望<br>E’’ - 当x来自生成网络的期望</p>
+<p>很显然，在对抗网络中，生成模型希望能够增大D(G(z))，即，希望生成的图片越真实而让识别模型“误以为”是来自真实的图片集。</p>
+<p>如果生成网络G的参数用theta表示，识别模型的参数用theta_d表示，在使用SGD训练的时候，两组参数分别进行训练，对于D来说，需要对上面的公式求Gradient，但是只更新自己的参数。对G来说，只有第二项是相关的，而且可以等效的转换为maximize log D(G(z))。两个网络的参数更新交替进行。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>网上有很多实现，比如:</p>
+<p><a href="https://github.com/goodfeli/adversarial" target="_blank" rel="external">goodfeli/adversarial</a>: Theano GAN implementation released by the authors of the GAN paper.<br><a href="https://github.com/Newmu/dcgan_code" target="_blank" rel="external">Newmu/dcgan_code</a>: Theano DCGAN implementation released by the authors of the DCGAN paper.<br><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="external">carpedm20/DCGAN-tensorflow</a>: Unofficial TensorFlow DCGAN implementation.</p>
+<p>这些实现一般都会包含MNIST测试集。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>其他的生成模型包括restricted Boltzmann machine (RBM), deep Boltzmann machine (DBM) 以及 variational autoencoder</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>其他生成模型中训练过程涉及intractable的计算，在实际实现时往往采取马尔可夫链模特卡洛采样(MCMC)。对抗生成模型(GAN)则不需要，整个网络的训练可以使用backpropagation来实现。</p>
+<p>缺点包括训练不稳定，生成网络会塌陷到某些数据点（比如这些数据点目前看最像真实数据，生成网络会不停生成这些数据点），接下来的几篇中将提及如何改进。</p>
+<h1 id="Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434"><a href="#Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434" class="headerlink" title="Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks (https://arxiv.org/abs/1511.06434)"></a>Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks (<a href="https://arxiv.org/abs/1511.06434" target="_blank" rel="external">https://arxiv.org/abs/1511.06434</a>)</h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Alec Radford, Luke Metz, Soumith Chintala</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>facebook</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN, Representation Learning</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于深度卷积网络的生成对抗模型(DCGAN)实现</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在GAN的论文中提出的对抗模型的原型，但是对抗模型是一个大的框架，并不局限于某种网络实现。本文给出了基于卷机网的实现。</p>
+<p>生成网络</p>
+<p><img src="media/discrim-architecture.png" alt="discrim-architecture"></p>
+<p>其中反卷积的过程是</p>
+<p><img src="media/padding_strides_transposed-1.gif" alt="padding_strides_transposed"></p>
+<p>识别网络是传统的CNN<br><img src="media/gen-architecture-1.png" alt="gen-architecture"></p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文紧密承接上篇论文，描述了实现过程中的细节，比如参数设置。也提到了解决GAN中训练不稳定的措施，但是并非完全解决。文中还提到利用对抗生成网络来做半监督学习。在训练结束后，识别网络可以用来提取图片特征，输入有标签的训练图片，可以将卷基层的输出特征作为X，标签作为y做训练。</p>
+<h1 id="Improved-Techniques-for-Training-GANs-https-arxiv-org-abs-1606-03498"><a href="#Improved-Techniques-for-Training-GANs-https-arxiv-org-abs-1606-03498" class="headerlink" title="Improved Techniques for Training GANs (https://arxiv.org/abs/1606.03498)"></a>Improved Techniques for Training GANs (<a href="https://arxiv.org/abs/1606.03498" target="_blank" rel="external">https://arxiv.org/abs/1606.03498</a>)</h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, Xi Chen</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>OpenAI</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>提出改进DCGAN的措施</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>这篇论文同样跟前文非常紧密，具体针对DCGAN中的问题，提出了改进方法。具体有</p>
+<ul>
+<li>feature matching 解决训练不稳定instability的问题</li>
+<li>minibatch discrimination 解决生成网络生成图片集中的问题，原理是让识别网络一次看一组图片，而不是一张图片</li>
+<li>如果对实现感兴趣，其他改进细节可以参见论文</li>
+</ul>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>对抗生成网络的模型很有意思，Bengio, Hinton等都表达了很高的评价。相对其他生成模式而言，对抗生成模式模型清晰简单，目前来看效果也比较不错。但是目前对抗生成网络也有很多问题，比如生成模型是通过来自概率分布的向量生成样本，而不是直接表示输入的概率分布，因此，生成的图片可能不稳定之类。此外，希望能看到GAN在语言模型中的应用。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>GAN这种模型非常新颖，从论文中的结果来看，在图像生成上取得了不错的效果，对于MNIST这种简单的图形数据集，生成的图片已经可以“以假乱真”。对于另外的图片，比如在第二篇论文中的LSUN bedroom图片集以及人脸图片集上，生成的图片效果也不错（分辨率64×64）。<br>GAN目前来看已经卷积网络图像生成中取得了不错的效果，但是还有很多问题需要继续研究改进， 比如<br>如何生成高像素高质量的图片。目前一般像素不超过64。<br>如何提高复杂图片的质量。目前在CIFAR，ILSVRC等图片集上训练生成的图片还是很糟糕。<br>如何提高整个模型的稳定性。在实际中，尤其对于复杂图形，生成器经常很快收敛到某些单个数据集，使得整个模型的训练陷入僵局。<br>如何在其他领域，比如NLP使用GAN，如何将GAN和LSTM结合的。目前来看，还没有成功的应用。原文作者在reddit上回答内容来看，由于GAN的输入是采样自连续分布，而NLP中，每个单词的表达往往是离散的，作者提到NLP可以用增强训练的方法替代。但是也不排除可以有其他方法将GAN和LSTM结合起来的，这也是以后的一个研究点。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;深度生成模型基本都是以某种方式寻找并表达（多变量）数据的概率分布。有基于无向图模型（马尔可夫模型）的联合概率分布模型，另外就是基于有向图模型
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.10.03-2016.10.07</title>
@@ -1203,45 +1274,6 @@
     
     
       <category term="随笔" scheme="http://rsarxiv.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如果我也做bot</title>
-    <link href="http://rsarxiv.github.io/2016/07/25/%E5%A6%82%E6%9E%9C%E6%88%91%E4%B9%9F%E5%81%9Abot/"/>
-    <id>http://rsarxiv.github.io/2016/07/25/如果我也做bot/</id>
-    <published>2016-07-26T00:06:49.000Z</published>
-    <updated>2016-07-26T00:55:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近初步地研究了下bot这个领域，有了一点浅薄的理解，于是开始想，如果我也做bot的话，解决好哪些问题才会做好这件事情？</p>
-<p>1、创业是一件严肃的事情，不是儿戏，需要做好充足的准备，调研和积累都是非常重要的，只有做好100分的准备，才可能在面对各种未知的困难时不慌乱。所以，第一步就是调研，研究bot，从方方面面，比如：</p>
-<p>（1）bot为什么会火？<br>（2）国内哪些企业在做bot？他们的产品有哪些优缺点？<br>（3）国外哪些企业在做bot？有哪些优缺点？<br>（4）投资情况如何？投资人怎么看待这个方向？<br>（5）bot需要哪些技术积累？</p>
-<p>2、从媒体、投资人的观点来看，bot整个大方向没有错，那么到底应该做哪个子领域呢？是客服？还是技术支持？技术平台？垂直私人助理？平台上应用？可做的事情其实很多，16年开始才井喷式地炒作bot这个概念，所以今年可以当做是bot元年，既然是刚刚起步的一个领域，就有一个天然的好处，蛋糕足够大，品类足够多，看你想吃哪一块？当然也有一个天然的坏处，就是无章可循，大家都是摸着石头过河。</p>
-<p>（1）国内的情况是，客服已经有很多家企业在做了，做的模式大同小异，技术方面各有特色吧，可能起步早的现在规模大一些，晚的小一些，但整体来看差异化不大。如果选择这个方向的话，必须做出差异化，研究现有方案的缺点，之前写过一篇文章，简单剖析了现有方案的缺点和可改进的点，让目前的客服bot更进一步，要么就是做一家客服bot，产品更完美、技术更好，和大家分一杯羹；要么就是提供技术支持，帮现有的bot企业更进一步，赚他们的钱。</p>
-<p>（2）如果是做技术支持，典型的SaaS+B2B，用自己的技术服务来为别的企业提供支持，response generation、user modeling、context modeling、information extraction都是不错的方向，每一个做好了都有广阔的前景，以为技术支持不直接面对业务，而是帮助改进现有企业提升算法和建模能力，应用的面比较广，可以用在各种类型的bot上以及其他应用背景上。</p>
-<p>（3）平台上的应用，比如slack上的bot，做一个有趣的小功能，提高team的工作效率。这个在国外非常地火，平台也很多，就像是现在ios上开发app一样，每个app都有自己的功能。我觉得这块要是做的话，很容易做出差异化，现在已经有各式各样的startups做着各式各样的bot。但整体来说，技术门槛比较低，有一点API整合的意思，但如果你将自己的技术封装成API，在上面做一个bot提供服务也是一种不错的尝试，而且产品周期特别短，但终究卖点应该还是你的技术支持，而不是这个bot。</p>
-<p>（4）技术平台的话，类似的有很多帮助企业或个人构建bot在各种平台上跑，假如微信现在开放了这一块，技术平台一定大有用处，这个属于基础的工具类产品，将很复杂的技术做成人人可以轻松使用的工具是一件很有意义的事情，像是IDE的感觉，不管什么背景，只要是有想法，就可以通过这个工具来实现一个bot，如果复杂的，可能需要定制。</p>
-<p>（5）特定任务的私人助理，比如帮忙管理日程、制定旅行计划之类的，术业有专攻嘛，这个最好是之前在其他平台上做类似功能的企业转型到bot这里来，有着足够的积淀，融入一些新的交互和技术来提升产品体验。</p>
-<p>上面的每个子领域在国外都有模板可以参考，国内的话还比较少，所以是很大的机会，关键在于判断，在于具体情况具体分析。因为有些东西并不适合做成bot这种聊天式的交互方式，简单的几个按钮操作就可以轻松完成的事情，为什么非要打很多的字来做呢？</p>
-<p>3、壁垒。你的核心竞争力是什么？什么是你会别人不会的？如果腾讯也做这个事情，你们该怎么办？你的企业增长点在哪里？如何做大？</p>
-<p>这些问题是投资人最关注的问题，其实也是创业前最应该想明白的问题，如果自己都想不明白，或者很多问题难以回答的话，说明现在的情况还不适合创业或者拿投资。我认为，无论什么时候人都是最核心的竞争力，技术和交互形式日新月异，更迭很快，团队只要具有很强的学习能力，永远都不会落于下风。没有什么技术一定是只有你一人才会的，工程上的技术壁垒不应是你提出了一个举世无双、天下无敌的算法，而是你在这个领域内实践各种各样算法的经验积累。为什么说一定要专注地做好一个事情，只做这一件事情，将这件事情做到精，因为对这么细小的领域理解地如此之深的人没有几个，这是你的技术壁垒，也是企业的生存之道，也是其他大公司难以抄袭的重要原因。这个问题一定要想清楚，最重要的是人，在技术层面上，不要想着找到一个独门秘籍来打天下，而是对你所研究的问题有非常深入地理解和见解，这是最基本的也是最核心的；接下来才是如何发展和壮大的问题，这个问题需要讲故事的能力，描绘出一幅美好画面的能力。</p>
-<p>我觉得人的能力是最根本的壁垒，当然会有不同看法。有的企业快速扩张，积累客户，可能觉得积累的数据和客户资源是壁垒，但我觉得如果一个新的更好用的技术出来了，而你的企业技术却没跟上的话，很容易就会被取代的，不管你是5w+，还是10w+的客户。</p>
-<p>一点思考，欢迎交流。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近初步地研究了下bot这个领域，有了一点浅薄的理解，于是开始想，如果我也做bot的话，解决好哪些问题才会做好这件事情？&lt;/p&gt;
-&lt;p&gt;1、创业是一件严肃的事情，不是儿戏，需要做好充足的准备，调研和积累都是非常重要的，只有做好100分的准备，才可能在面对各种未知的困难时不慌
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
     
   </entry>
   

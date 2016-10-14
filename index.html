@@ -65,6 +65,91 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-10-14T04:09:21.000Z"><a href="/2016/10/13/PaperWeekly-第九期/">2016-10-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/10/13/PaperWeekly-第九期/">PaperWeekly 第九期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>深度生成模型基本都是以某种方式寻找并表达（多变量）数据的概率分布。有基于无向图模型（马尔可夫模型）的联合概率分布模型，另外就是基于有向图模型（贝叶斯模型）的条件概率分布。前者的模型是构建隐含层(latent)和显示层（visible)的联合概率，然后去采样。基于有向图的则是寻找latent和visible之间的条件概率分布，也就是给定一个随机采样的隐含层，模型可以生成数据。</p>
+<p>生成模型的训练是一个非监督过程，输入只需要无标签的数据。除了可以生成数据，还可以用于半监督的学习。比如，先利用大量无标签数据训练好模型，然后利用模型去提取数据特征（即从数据层到隐含层的编码过程），之后用数据特征结合标签去训练最终的网络模型。另一种方法是利用生成模型网络中的参数去初始化监督训练中的网络模型，当然，两个模型需要结构一致。</p>
+<p>由于实际中，更多的数据是无标签的，因此非监督和半监督学习非常重要，因此生成模型也非常重要。本篇主要介绍一种基于对抗模式的生成模型，GAN － 从第一篇提出此模型的论文开始，之后紧接着两篇基于它的实现以及改进。三篇文章一脉相承，可以看到结合这种模型的研究进展及方向。</p>
+<h1 id="Generative-Adversarial-Nets-https-arxiv-org-abs-1406-2661"><a href="#Generative-Adversarial-Nets-https-arxiv-org-abs-1406-2661" class="headerlink" title="Generative Adversarial Nets (https://arxiv.org/abs/1406.2661)"></a>Generative Adversarial Nets (<a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="external">https://arxiv.org/abs/1406.2661</a>)</h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Universite of Montreal</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>生成模型 （Generative model）</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2014</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>通过模拟对抗过程，提出一种新的生成模型框架</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ul>
+<li>建模</li>
+</ul>
+<p>在对抗生成模型中，同时训练两个网络，第一个网络是生成网络，G(z)，输入z一般是来自常见概率分布函数的样本向量，维度一般比较低，比如100。生成网络输入向量z，输出图片样例，如果使用卷机网实现的话，整个网络可以看过一个反向的CNN，其中的卷积层替换成 transposed convolution layer。第二个网络是识别网络discriminator net - D(x)，输入为一张图片x，而输出为一个标量，用来代表x来自真实图片的概率。</p>
+<ul>
+<li>训练</li>
+</ul>
+<p>整个网络的loss定义为</p>
+<p>V = E’[log D(x)] + E’’[log (1 - D(G(z)) )]<br>E’ - 当x来自真实数据的期望<br>E’’ - 当x来自生成网络的期望</p>
+<p>很显然，在对抗网络中，生成模型希望能够增大D(G(z))，即，希望生成的图片越真实而让识别模型“误以为”是来自真实的图片集。</p>
+<p>如果生成网络G的参数用theta表示，识别模型的参数用theta_d表示，在使用SGD训练的时候，两组参数分别进行训练，对于D来说，需要对上面的公式求Gradient，但是只更新自己的参数。对G来说，只有第二项是相关的，而且可以等效的转换为maximize log D(G(z))。两个网络的参数更新交替进行。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>网上有很多实现，比如:</p>
+<p><a href="https://github.com/goodfeli/adversarial" target="_blank" rel="external">goodfeli/adversarial</a>: Theano GAN implementation released by the authors of the GAN paper.<br><a href="https://github.com/Newmu/dcgan_code" target="_blank" rel="external">Newmu/dcgan_code</a>: Theano DCGAN implementation released by the authors of the DCGAN paper.<br><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="external">carpedm20/DCGAN-tensorflow</a>: Unofficial TensorFlow DCGAN implementation.</p>
+<p>这些实现一般都会包含MNIST测试集。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>其他的生成模型包括restricted Boltzmann machine (RBM), deep Boltzmann machine (DBM) 以及 variational autoencoder</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>其他生成模型中训练过程涉及intractable的计算，在实际实现时往往采取马尔可夫链模特卡洛采样(MCMC)。对抗生成模型(GAN)则不需要，整个网络的训练可以使用backpropagation来实现。</p>
+<p>缺点包括训练不稳定，生成网络会塌陷到某些数据点（比如这些数据点目前看最像真实数据，生成网络会不停生成这些数据点），接下来的几篇中将提及如何改进。</p>
+<h1 id="Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434"><a href="#Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434" class="headerlink" title="Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks (https://arxiv.org/abs/1511.06434)"></a>Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks (<a href="https://arxiv.org/abs/1511.06434" target="_blank" rel="external">https://arxiv.org/abs/1511.06434</a>)</h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Alec Radford, Luke Metz, Soumith Chintala</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>facebook</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN, Representation Learning</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于深度卷积网络的生成对抗模型(DCGAN)实现</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在GAN的论文中提出的对抗模型的原型，但是对抗模型是一个大的框架，并不局限于某种网络实现。本文给出了基于卷机网的实现。</p>
+<p>生成网络</p>
+<p><img src="media/discrim-architecture.png" alt="discrim-architecture"></p>
+<p>其中反卷积的过程是</p>
+<p><img src="media/padding_strides_transposed-1.gif" alt="padding_strides_transposed"></p>
+<p>识别网络是传统的CNN<br><img src="media/gen-architecture-1.png" alt="gen-architecture"></p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文紧密承接上篇论文，描述了实现过程中的细节，比如参数设置。也提到了解决GAN中训练不稳定的措施，但是并非完全解决。文中还提到利用对抗生成网络来做半监督学习。在训练结束后，识别网络可以用来提取图片特征，输入有标签的训练图片，可以将卷基层的输出特征作为X，标签作为y做训练。</p>
+<h1 id="Improved-Techniques-for-Training-GANs-https-arxiv-org-abs-1606-03498"><a href="#Improved-Techniques-for-Training-GANs-https-arxiv-org-abs-1606-03498" class="headerlink" title="Improved Techniques for Training GANs (https://arxiv.org/abs/1606.03498)"></a>Improved Techniques for Training GANs (<a href="https://arxiv.org/abs/1606.03498" target="_blank" rel="external">https://arxiv.org/abs/1606.03498</a>)</h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, Xi Chen</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>OpenAI</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>提出改进DCGAN的措施</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>这篇论文同样跟前文非常紧密，具体针对DCGAN中的问题，提出了改进方法。具体有</p>
+<ul>
+<li>feature matching 解决训练不稳定instability的问题</li>
+<li>minibatch discrimination 解决生成网络生成图片集中的问题，原理是让识别网络一次看一组图片，而不是一张图片</li>
+<li>如果对实现感兴趣，其他改进细节可以参见论文</li>
+</ul>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>对抗生成网络的模型很有意思，Bengio, Hinton等都表达了很高的评价。相对其他生成模式而言，对抗生成模式模型清晰简单，目前来看效果也比较不错。但是目前对抗生成网络也有很多问题，比如生成模型是通过来自概率分布的向量生成样本，而不是直接表示输入的概率分布，因此，生成的图片可能不稳定之类。此外，希望能看到GAN在语言模型中的应用。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>GAN这种模型非常新颖，从论文中的结果来看，在图像生成上取得了不错的效果，对于MNIST这种简单的图形数据集，生成的图片已经可以“以假乱真”。对于另外的图片，比如在第二篇论文中的LSUN bedroom图片集以及人脸图片集上，生成的图片效果也不错（分辨率64×64）。<br>GAN目前来看已经卷积网络图像生成中取得了不错的效果，但是还有很多问题需要继续研究改进， 比如<br>如何生成高像素高质量的图片。目前一般像素不超过64。<br>如何提高复杂图片的质量。目前在CIFAR，ILSVRC等图片集上训练生成的图片还是很糟糕。<br>如何提高整个模型的稳定性。在实际中，尤其对于复杂图形，生成器经常很快收敛到某些单个数据集，使得整个模型的训练陷入僵局。<br>如何在其他领域，比如NLP使用GAN，如何将GAN和LSTM结合的。目前来看，还没有成功的应用。原文作者在reddit上回答内容来看，由于GAN的输入是采样自连续分布，而NLP中，每个单词的表达往往是离散的，作者提到NLP可以用增强训练的方法替代。但是也不排除可以有其他方法将GAN和LSTM结合起来的，这也是以后的一个研究点。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-10-08T02:06:28.000Z"><a href="/2016/10/07/cs-CL-weekly-2016-10-03-2016-10-07/">2016-10-07</a></time>
       
       
@@ -3072,116 +3157,6 @@
 <p>其实这个问题从某个角度上来看可以等同于Deep Learning与经典的机器学习相比，优势在哪里？一方面是神经网络模型强大地非线性函数近似，另一方面就是不需要人工feature，所有的feature都是从data中学习来的，典型的data-driven。</p>
 <p>3、DQN在NLP中的应用，相比于DQN几乎没有什么新的东西，只是做了一些概念的替换。比如：在生成问题上，都是计算一个P(word|context)，这里将DQN中的state理解为context，将word理解为action。不过非常不同的一点是，nlp中的action space会非常大，因为对于生成问题来说，词汇表会变得非常大。这个问题该如何解决呢？大家可以期待明天的分享<a href="http://arxiv.org/pdf/1510.09202v1.pdf" target="_blank" rel="external">Generating Text with Deep Reinforcement Learning</a>。</p>
 <p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-06-25T17:59:44.000Z"><a href="/2016/06/25/教机器学习摘要/">2016-06-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/06/25/教机器学习摘要/">教机器学习摘要</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>文本摘要是自然语言处理中比较难的一个任务，别说是用机器来做文摘了，就连人类做文摘的时候都需要具备很强的语言阅读理解能力和归纳总结能力。新闻的摘要要求编辑能够从新闻事件中提取出最关键的信息点，重新组织语言来写摘要；paper的摘要需要作者从全文中提取出最核心的工作，然后用更加精炼的语言写成摘要；综述性的paper需要作者通读N篇相关topic的paper之后，用最概括的语言将每篇文章的贡献、创新点写出来，并且对比每篇文章的方法各有什么优缺点。自动文摘本质上做的一件事情是信息过滤，从某种意义上来说，和推荐系统的功能有一点像，都是为了让大家更快地找到感兴趣的东西，只是用了不同的手段而已。</p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>文本摘要问题按照文档数量可以分为单文档摘要和多文档摘要问题，按照实现方式可以分为提取式（extractive）和摘要式（abstractive）。摘要问题的特点是输出的文本要比输入的文本少很多很多，但却蕴藏着非常多的有效信息在内。有一点点感觉像是主成分分析（PCA），作用也与推荐系统有一点像，都是为了解决信息过载的问题。现在绝大多数应用的系统都是extractive的，这个方法比较简单但存在很多的问题，简单是因为只需要从原文中找出相对来说重要的句子来组成输出即可，系统只需要用模型来选择出信息量大的句子然后按照自然序组合起来就是摘要了。但是摘要的连贯性、一致性很难保证，比如遇到了句子中包含了代词，简单的连起来根本无法获知代词指的是什么，从而导致效果不佳。研究中随着deep learning技术在nlp中的深入，尤其是seq2seq+attention模型的“横行”，大家将abstractive式的摘要研究提高了一个level，并且提出了copy mechanism等机制来解决seq2seq模型中的OOV问题。</p>
-<p>本文探讨的是用abstractive的方式来解决sentence-level的文本摘要问题，问题的定义比较简单，输入是一个长度为M的文本序列，输出是一个长度为N的文本序列，这里M&gt;&gt;N，并且输出文本的意思和输入文本的意思基本一致，输入可能是一句话，也可能是多句话，而输出都是一句话，也可能是多句话。</p>
-<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>这里的语料分为两种，一种是用来训练深度学习模型的大型语料，一种是用来参加评测的小型语料。</p>
-<p>1、<a href="http://duc.nist.gov/" target="_blank" rel="external">DUC</a></p>
-<p>这个网站提供了文本摘要的比赛，2001-2007年在这个网站，2008年开始换到这个网站<a href="http://www.nist.gov/tac/" target="_blank" rel="external">TAC</a>。很官方的比赛，各大文本摘要系统都会在这里较量一番，一决高下。这里提供的数据集都是小型数据集，用来评测模型的。</p>
-<p>2、<a href="https://catalog.ldc.upenn.edu/LDC2003T05" target="_blank" rel="external">Gigaword</a></p>
-<p>该语料非常大，大概有950w篇新闻文章，数据集用headline来做summary，即输出文本，用first sentence来做input，即输入文本，属于单句摘要的数据集。</p>
-<p>3、CNN/Daily Mail</p>
-<p>该语料就是我们在机器阅读理解中用到的语料，该数据集属于多句摘要。</p>
-<p>4、Large Scale Chinese Short Text Summarization Dataset（<a href="http://icrc.hitsz.edu.cn/Article/show/139.html" target="_blank" rel="external">LCSTS</a>）[6]</p>
-<p>这是一个中文短文本摘要数据集，数据采集自新浪微博，给研究中文摘要的童鞋们带来了福利。</p>
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>本文所说的模型都是abstractive式的seq2seq模型。nlp中最早使用seq2seq+attention模型来解决问题的是machine translation领域，现如今该方法已经横扫了诸多领域的排行榜。</p>
-<p>seq2seq的模型一般都是如下的结构[1]：</p>
-<img src="/2016/04/24/自动文摘（五）/model.png" width="600" height="800">
-<p>encoder部分用单层或者多层rnn/lstm/gru将输入进行编码，decoder部分是一个语言模型，用来生成摘要。这种生成式的问题都可以归结为求解一个条件概率问题p(word|context)，在context条件下，将词表中每一个词的概率值都算出来，用概率最大的那个词作为生成的词，依次生成摘要中的所有词。这里的关键在于如何表示context，每种模型最大的不同点都在于context的不同，这里的context可能只是encoder的表示，也可能是attention和encoder的表示。decoder部分通常采用beam search算法来做生成。</p>
-<p>1、Complex Attention Model[1]</p>
-<img src="/2016/04/24/自动文摘（五）/complex.png" width="400" height="650">
-<p>模型中的attention weights是用encoder中每个词最后一层hidden layer的表示与当前decoder最新一个词最后一层hidden layer的表示做点乘，然后归一化来表示的。</p>
-<p>2、Simple Attention Model[1]</p>
-<img src="/2016/04/24/自动文摘（五）/simple.png" width="400" height="650">
-<p>模型将encoder部分在每个词最后一层hidden layer的表示分为两块，一小块用来计算attention weights的，另一大块用来作为encoder的表示。这个模型将最后一层hidden layer细分了不同的作用。</p>
-<p>3、Attention-Based Summarization(ABS)[2]</p>
-<p>这个模型用了三种不同的encoder，包括：Bag-of-Words Encoder、Convolutional Encoder和Attention-Based Encoder。Rush是HarvardNLP组的，这个组的特点是非常喜欢用CNN来做nlp的任务。这个模型中，让我们看到了不同的encoder，从非常简单的词袋模型到CNN，再到attention-based模型，而不是千篇一律的rnn、lstm和gru。而decoder部分用了一个非常简单的NNLM，就是Bengio[10]于2003年提出来的前馈神经网络语言模型，这一模型是后续神经网络语言模型研究的基石，也是后续对于word embedding的研究奠定了基础。可以说，这个模型用了最简单的encoder和decoder来做seq2seq，是一次非常不错的尝试。</p>
-<p>4、ABS+[2]</p>
-<p>Rush提出了一个纯数据驱动的模型ABS之后，又提出了一个abstractive与extractive融合的模型，在ABS模型的基础上增加了feature function，修改了score function，得到了这个效果更佳的ABS+模型。</p>
-<p>5、Recurrent Attentive Summarizer(RAS)[3]</p>
-<p>这个模型是Rush的学生提出来的，输入中每个词最终的embedding是各词的embedding与各词位置的embedding之和，经过一层卷积处理得到aggregate vector：</p>
-<img src="/2016/04/30/自动文摘（六）/formula21.png" width="300" height="400">
-<p>根据aggregate vector计算context（encoder的输出）：</p>
-<img src="/2016/04/30/自动文摘（六）/formula22.png" width="300" height="400">
-<p>其中权重由下式计算：</p>
-<img src="/2016/04/30/自动文摘（六）/formula23.png" width="300" height="400">
-<p>decoder部分用RNNLM来做生成，RNNLM是在Bengio提出的NNLM基础上提出的改进模型，也是一个主流的语言模型。</p>
-<p>6、big-words-lvt2k-1sent模型[4]</p>
-<p>这个模型引入了large vocabulary trick(LVT)技术到文本摘要问题上。本方法中，每个mini batch中decoder的词汇表受制于encoder的词汇表，decoder词汇表中的词由一定数量的高频词构成。这个模型的思路重点解决的是由于decoder词汇表过大而造成softmax层的计算瓶颈。本模型非常适合解决文本摘要问题，因为摘要中的很多词都是来自于原文之中。</p>
-<p>7、words-lvt2k-2sent-hieratt模型[4]</p>
-<img src="/2016/05/07/自动文摘（七）/Pointer.png" width="600" height="800">
-<p>文本摘要中经常遇到这样的问题，一些关键词出现很少但却很重要，由于模型基于word embedding，对低频词的处理并不友好，所以本文提出了一种decoder/pointer机制来解决这个问题。模型中decoder带有一个开关，如果开关状态是打开generator，则生成一个单词；如果是关闭，decoder则生成一个原文单词位置的指针，然后拷贝到摘要中。pointer机制在解决低频词时鲁棒性比较强，因为使用了encoder中低频词的隐藏层表示作为输入，是一个上下文相关的表示，而仅仅是一个词向量。这个pointer机制和后面有一篇中的copy机制思路非常类似。</p>
-<p>8、feats-lvt2k-2sent-ptr模型[4]</p>
-<img src="/2016/05/07/自动文摘（七）/Attention.png" width="600" height="800">
-<p>数据集中的原文一般都会很长，原文中的关键词和关键句子对于形成摘要都很重要，这个模型使用两个双向RNN来捕捉这两个层次的重要性，一个是word-level，一个是sentence-level，并且该模型在两个层次上都使用attention，权重如下：</p>
-<img src="/2016/05/07/自动文摘（七）/formula1.png" width="300" height="300">
-<p>9、COPYNET[8]</p>
-<img src="/2016/05/18/自动文摘（十三）/fig2.png" width="600" height="600">
-<p>encoder采用了一个双向RNN模型，输出一个隐藏层表示的矩阵M作为decoder的输入。decoder部分与传统的Seq2Seq不同之处在于以下三部分：</p>
-<ul>
-<li><b>预测</b>：在生成词时存在两种模式，一种是生成模式，一种是拷贝模式，生成模型是一个结合两种模式的概率模型。</li>
-<li><b>状态更新</b>：用t-1时刻的预测出的词来更新t时刻的状态，COPYNET不仅仅词向量，而且使用M矩阵中特定位置的hidden state。</li>
-<li><b>读取M</b>：COPYNET也会选择性地读取M矩阵，来获取混合了内容和位置的信息。</li>
-</ul>
-<p>这个模型与第7个模型思想非常的类似，因为很好地处理了OOV的问题，所以结果都非常好。</p>
-<p>10、MRT+NHG[7]</p>
-<p>这个模型的特别之处在于用了Minimum Risk Training训练数据，而不是传统的MLE（最大似然估计），将评价指标包含在优化目标内，更加直接地对评价指标做优化，得到了不错的结果。</p>
-<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>评价指标是否科学可行对于一个研究领域的研究水平有着直接的影响，目前在文本摘要任务中最常用的评价方法是ROUGE(Recall-Oriented Understudy for Gisting Evaluation)。ROUGE受到了机器翻译自动评价方法BLEU的启发，不同之处在于，采用召回率来作为指标。基本思想是将模型生成的摘要与参考摘要的n元组贡献统计量作为评判依据。</p>
-<p>在英文数据集DUC-2004上进行评测，结果如下：</p>
-<img src="/2016/06/25/教机器学习摘要/fig1.png" width="500" height="500">
-<p>在中文数据集LCSTS上进行评测，结果如下：</p>
-<img src="/2016/06/25/教机器学习摘要/fig2.png" width="500" height="500">
-<p>不管是中文数据集还是英文数据集上，最好的结果都是来自于模型10[7],并且该模型只是采用最普通的seq2seq+attention模型，都没有用到效果更好的copy机制或者pointer机制。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>自动文摘是我关注的第一个nlp领域，早期了很多相关的paper，从方方面面都有所了解，也有一些比较浅薄的想法，现在总结一下。</p>
-<p>1、为什么MRT那篇文章的结果会比其他各种各样的模型都要好呢？因为他直接将ROUGE指标包含在了待优化的目标中，而不是与其他模型一样，采用传统的MLE来做，传统的目标评价的是你的生成质量如何，但与我们最终评价的指标ROUGE并无直接关系。所以说，换了一种优化目标，直接定位于评价指标上做优化，效果一定会很好。这点不仅仅在自动文摘中出现过，我记得在bot相关的paper中还有机器阅读理解相关的paper中都有出现，只是具体的评价指标不同而已。这一点很有启发性，如果在文章[7]中采用copy机制来解决OOV问题，会不会有更加惊人的效果呢？我们拭目以待。</p>
-<p>2、OOV(out of vocabulary)的问题。因为文本摘要说到底，都是一个语言生成的问题，只要是涉及到生成的问题，必然会遇到OOV问题，因为不可能将所有词都放到词表中来计算概率，可行的方法是用选择topn个高频词来组成词表。文章[4]和[8]都采用了相似的思路，从input中拷贝原文到output中，而不仅仅是生成，这里需要设置一个gate来决定这个词是copy来还是generate出来。显然，增加了copy机制的模型会在很大程度上解决了OOV的问题，就会显著地提升评价结果。这种思路不仅仅在文摘问题上适用，在一切生成问题上都适用，比如bot。</p>
-<p>3、关于评价指标的问题。一个评价指标是否科学直接影响了这个领域的发展水平，人工评价我们就不提了，只说自动评价。ROUGE指标在2003年就被Lin提出了[9]，13年过去了，仍然没有一个更加合适的评价体系来代替它。ROUGE评价太过死板，只能评价出output和target之间的一些表面信息，并不涉及到语义层面上的东西，是否可以提出一种更加高层次的评价体系，从语义这个层面来评价摘要的效果。其实技术上问题不大，因为计算两个文本序列之间的相似度有无数种解决方案，有监督、无监督、半监督等等等等。很期待有一种新的体系来评价摘要效果，相信新的评价体系一定会推动自动文摘领域的发展。</p>
-<p>4、关于数据集的问题。LCSTS数据集的构建给中文文本摘要的研究奠定了基础，将会很大程度地推动自动文摘在中文领域的发展。现在的互联网最不缺少的就是数据，大量的非结构化数据。但如何构建一个高质量的语料是一个难题，如何尽量避免用过多的人工手段来保证质量，如何用自动的方法来提升语料的质量都是难题。所以，如果能够提出一种全新的思路来构建自动文摘语料的话，将会非常有意义。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1512.01712" target="_blank" rel="external">Generating News Headlines with Recurrent Neural Networks</a></p>
-<p>[2] <a href="http://cn.arxiv.org/pdf/1509.00685.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></p>
-<p>[3] <a href="http://harvardnlp.github.io/papers/naacl16_summary.pdf" target="_blank" rel="external">Abstractive Sentence Summarization with Attentive Recurrent Neural Networks</a></p>
-<p>[4] <a href="http://cn.arxiv.org/pdf/1602.06023" target="_blank" rel="external">Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</a></p>
-<p>[5] <a href="http://cn.arxiv.org/pdf/1604.00125v1.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></p>
-<p>[6] <a href="http://cn.arxiv.org/pdf/1506.05865" target="_blank" rel="external">LCSTS: A Large Scale Chinese Short Text Summarization Dataset</a></p>
-<p>[7] <a href="http://cn.arxiv.org/pdf/1604.01904.pdf" target="_blank" rel="external">Neural Headline Generation with Minimum Risk Training</a></p>
-<p>[8] <a href="http://cn.arxiv.org/pdf/1603.06393v2.pdf" target="_blank" rel="external">Incorporating Copying Mechanism in Sequence-to-Sequence Learning Training</a></p>
-<p>[9] <a href="http://research.microsoft.com/en-us/people/cyl/naacl2003.pdf" target="_blank" rel="external">Automatic Evaluation of Summaries Using N-gram Co-Occurrence Statistics</a></p>
-<p>[10] <a href="http://jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">A Neural Probabilistic Language Model</a></p>
 <h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
 <p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>

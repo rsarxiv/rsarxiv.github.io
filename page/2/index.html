@@ -65,6 +65,116 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-06-25T17:59:44.000Z"><a href="/2016/06/25/教机器学习摘要/">2016-06-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/25/教机器学习摘要/">教机器学习摘要</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>文本摘要是自然语言处理中比较难的一个任务，别说是用机器来做文摘了，就连人类做文摘的时候都需要具备很强的语言阅读理解能力和归纳总结能力。新闻的摘要要求编辑能够从新闻事件中提取出最关键的信息点，重新组织语言来写摘要；paper的摘要需要作者从全文中提取出最核心的工作，然后用更加精炼的语言写成摘要；综述性的paper需要作者通读N篇相关topic的paper之后，用最概括的语言将每篇文章的贡献、创新点写出来，并且对比每篇文章的方法各有什么优缺点。自动文摘本质上做的一件事情是信息过滤，从某种意义上来说，和推荐系统的功能有一点像，都是为了让大家更快地找到感兴趣的东西，只是用了不同的手段而已。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>文本摘要问题按照文档数量可以分为单文档摘要和多文档摘要问题，按照实现方式可以分为提取式（extractive）和摘要式（abstractive）。摘要问题的特点是输出的文本要比输入的文本少很多很多，但却蕴藏着非常多的有效信息在内。有一点点感觉像是主成分分析（PCA），作用也与推荐系统有一点像，都是为了解决信息过载的问题。现在绝大多数应用的系统都是extractive的，这个方法比较简单但存在很多的问题，简单是因为只需要从原文中找出相对来说重要的句子来组成输出即可，系统只需要用模型来选择出信息量大的句子然后按照自然序组合起来就是摘要了。但是摘要的连贯性、一致性很难保证，比如遇到了句子中包含了代词，简单的连起来根本无法获知代词指的是什么，从而导致效果不佳。研究中随着deep learning技术在nlp中的深入，尤其是seq2seq+attention模型的“横行”，大家将abstractive式的摘要研究提高了一个level，并且提出了copy mechanism等机制来解决seq2seq模型中的OOV问题。</p>
+<p>本文探讨的是用abstractive的方式来解决sentence-level的文本摘要问题，问题的定义比较简单，输入是一个长度为M的文本序列，输出是一个长度为N的文本序列，这里M&gt;&gt;N，并且输出文本的意思和输入文本的意思基本一致，输入可能是一句话，也可能是多句话，而输出都是一句话，也可能是多句话。</p>
+<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>这里的语料分为两种，一种是用来训练深度学习模型的大型语料，一种是用来参加评测的小型语料。</p>
+<p>1、<a href="http://duc.nist.gov/" target="_blank" rel="external">DUC</a></p>
+<p>这个网站提供了文本摘要的比赛，2001-2007年在这个网站，2008年开始换到这个网站<a href="http://www.nist.gov/tac/" target="_blank" rel="external">TAC</a>。很官方的比赛，各大文本摘要系统都会在这里较量一番，一决高下。这里提供的数据集都是小型数据集，用来评测模型的。</p>
+<p>2、<a href="https://catalog.ldc.upenn.edu/LDC2003T05" target="_blank" rel="external">Gigaword</a></p>
+<p>该语料非常大，大概有950w篇新闻文章，数据集用headline来做summary，即输出文本，用first sentence来做input，即输入文本，属于单句摘要的数据集。</p>
+<p>3、CNN/Daily Mail</p>
+<p>该语料就是我们在机器阅读理解中用到的语料，该数据集属于多句摘要。</p>
+<p>4、Large Scale Chinese Short Text Summarization Dataset（<a href="http://icrc.hitsz.edu.cn/Article/show/139.html" target="_blank" rel="external">LCSTS</a>）[6]</p>
+<p>这是一个中文短文本摘要数据集，数据采集自新浪微博，给研究中文摘要的童鞋们带来了福利。</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>本文所说的模型都是abstractive式的seq2seq模型。nlp中最早使用seq2seq+attention模型来解决问题的是machine translation领域，现如今该方法已经横扫了诸多领域的排行榜。</p>
+<p>seq2seq的模型一般都是如下的结构[1]：</p>
+<img src="/2016/04/24/自动文摘（五）/model.png" width="600" height="800">
+<p>encoder部分用单层或者多层rnn/lstm/gru将输入进行编码，decoder部分是一个语言模型，用来生成摘要。这种生成式的问题都可以归结为求解一个条件概率问题p(word|context)，在context条件下，将词表中每一个词的概率值都算出来，用概率最大的那个词作为生成的词，依次生成摘要中的所有词。这里的关键在于如何表示context，每种模型最大的不同点都在于context的不同，这里的context可能只是encoder的表示，也可能是attention和encoder的表示。decoder部分通常采用beam search算法来做生成。</p>
+<p>1、Complex Attention Model[1]</p>
+<img src="/2016/04/24/自动文摘（五）/complex.png" width="400" height="650">
+<p>模型中的attention weights是用encoder中每个词最后一层hidden layer的表示与当前decoder最新一个词最后一层hidden layer的表示做点乘，然后归一化来表示的。</p>
+<p>2、Simple Attention Model[1]</p>
+<img src="/2016/04/24/自动文摘（五）/simple.png" width="400" height="650">
+<p>模型将encoder部分在每个词最后一层hidden layer的表示分为两块，一小块用来计算attention weights的，另一大块用来作为encoder的表示。这个模型将最后一层hidden layer细分了不同的作用。</p>
+<p>3、Attention-Based Summarization(ABS)[2]</p>
+<p>这个模型用了三种不同的encoder，包括：Bag-of-Words Encoder、Convolutional Encoder和Attention-Based Encoder。Rush是HarvardNLP组的，这个组的特点是非常喜欢用CNN来做nlp的任务。这个模型中，让我们看到了不同的encoder，从非常简单的词袋模型到CNN，再到attention-based模型，而不是千篇一律的rnn、lstm和gru。而decoder部分用了一个非常简单的NNLM，就是Bengio[10]于2003年提出来的前馈神经网络语言模型，这一模型是后续神经网络语言模型研究的基石，也是后续对于word embedding的研究奠定了基础。可以说，这个模型用了最简单的encoder和decoder来做seq2seq，是一次非常不错的尝试。</p>
+<p>4、ABS+[2]</p>
+<p>Rush提出了一个纯数据驱动的模型ABS之后，又提出了一个abstractive与extractive融合的模型，在ABS模型的基础上增加了feature function，修改了score function，得到了这个效果更佳的ABS+模型。</p>
+<p>5、Recurrent Attentive Summarizer(RAS)[3]</p>
+<p>这个模型是Rush的学生提出来的，输入中每个词最终的embedding是各词的embedding与各词位置的embedding之和，经过一层卷积处理得到aggregate vector：</p>
+<img src="/2016/04/30/自动文摘（六）/formula21.png" width="300" height="400">
+<p>根据aggregate vector计算context（encoder的输出）：</p>
+<img src="/2016/04/30/自动文摘（六）/formula22.png" width="300" height="400">
+<p>其中权重由下式计算：</p>
+<img src="/2016/04/30/自动文摘（六）/formula23.png" width="300" height="400">
+<p>decoder部分用RNNLM来做生成，RNNLM是在Bengio提出的NNLM基础上提出的改进模型，也是一个主流的语言模型。</p>
+<p>6、big-words-lvt2k-1sent模型[4]</p>
+<p>这个模型引入了large vocabulary trick(LVT)技术到文本摘要问题上。本方法中，每个mini batch中decoder的词汇表受制于encoder的词汇表，decoder词汇表中的词由一定数量的高频词构成。这个模型的思路重点解决的是由于decoder词汇表过大而造成softmax层的计算瓶颈。本模型非常适合解决文本摘要问题，因为摘要中的很多词都是来自于原文之中。</p>
+<p>7、words-lvt2k-2sent-hieratt模型[4]</p>
+<img src="/2016/05/07/自动文摘（七）/Pointer.png" width="600" height="800">
+<p>文本摘要中经常遇到这样的问题，一些关键词出现很少但却很重要，由于模型基于word embedding，对低频词的处理并不友好，所以本文提出了一种decoder/pointer机制来解决这个问题。模型中decoder带有一个开关，如果开关状态是打开generator，则生成一个单词；如果是关闭，decoder则生成一个原文单词位置的指针，然后拷贝到摘要中。pointer机制在解决低频词时鲁棒性比较强，因为使用了encoder中低频词的隐藏层表示作为输入，是一个上下文相关的表示，而仅仅是一个词向量。这个pointer机制和后面有一篇中的copy机制思路非常类似。</p>
+<p>8、feats-lvt2k-2sent-ptr模型[4]</p>
+<img src="/2016/05/07/自动文摘（七）/Attention.png" width="600" height="800">
+<p>数据集中的原文一般都会很长，原文中的关键词和关键句子对于形成摘要都很重要，这个模型使用两个双向RNN来捕捉这两个层次的重要性，一个是word-level，一个是sentence-level，并且该模型在两个层次上都使用attention，权重如下：</p>
+<img src="/2016/05/07/自动文摘（七）/formula1.png" width="300" height="300">
+<p>9、COPYNET[8]</p>
+<img src="/2016/05/18/自动文摘（十三）/fig2.png" width="600" height="600">
+<p>encoder采用了一个双向RNN模型，输出一个隐藏层表示的矩阵M作为decoder的输入。decoder部分与传统的Seq2Seq不同之处在于以下三部分：</p>
+<ul>
+<li><b>预测</b>：在生成词时存在两种模式，一种是生成模式，一种是拷贝模式，生成模型是一个结合两种模式的概率模型。</li>
+<li><b>状态更新</b>：用t-1时刻的预测出的词来更新t时刻的状态，COPYNET不仅仅词向量，而且使用M矩阵中特定位置的hidden state。</li>
+<li><b>读取M</b>：COPYNET也会选择性地读取M矩阵，来获取混合了内容和位置的信息。</li>
+</ul>
+<p>这个模型与第7个模型思想非常的类似，因为很好地处理了OOV的问题，所以结果都非常好。</p>
+<p>10、MRT+NHG[7]</p>
+<p>这个模型的特别之处在于用了Minimum Risk Training训练数据，而不是传统的MLE（最大似然估计），将评价指标包含在优化目标内，更加直接地对评价指标做优化，得到了不错的结果。</p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>评价指标是否科学可行对于一个研究领域的研究水平有着直接的影响，目前在文本摘要任务中最常用的评价方法是ROUGE(Recall-Oriented Understudy for Gisting Evaluation)。ROUGE受到了机器翻译自动评价方法BLEU的启发，不同之处在于，采用召回率来作为指标。基本思想是将模型生成的摘要与参考摘要的n元组贡献统计量作为评判依据。</p>
+<p>在英文数据集DUC-2004上进行评测，结果如下：</p>
+<img src="/2016/06/25/教机器学习摘要/fig1.png" width="500" height="500">
+<p>在中文数据集LCSTS上进行评测，结果如下：</p>
+<img src="/2016/06/25/教机器学习摘要/fig2.png" width="500" height="500">
+<p>不管是中文数据集还是英文数据集上，最好的结果都是来自于模型10[7],并且该模型只是采用最普通的seq2seq+attention模型，都没有用到效果更好的copy机制或者pointer机制。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>自动文摘是我关注的第一个nlp领域，早期了很多相关的paper，从方方面面都有所了解，也有一些比较浅薄的想法，现在总结一下。</p>
+<p>1、为什么MRT那篇文章的结果会比其他各种各样的模型都要好呢？因为他直接将ROUGE指标包含在了待优化的目标中，而不是与其他模型一样，采用传统的MLE来做，传统的目标评价的是你的生成质量如何，但与我们最终评价的指标ROUGE并无直接关系。所以说，换了一种优化目标，直接定位于评价指标上做优化，效果一定会很好。这点不仅仅在自动文摘中出现过，我记得在bot相关的paper中还有机器阅读理解相关的paper中都有出现，只是具体的评价指标不同而已。这一点很有启发性，如果在文章[7]中采用copy机制来解决OOV问题，会不会有更加惊人的效果呢？我们拭目以待。</p>
+<p>2、OOV(out of vocabulary)的问题。因为文本摘要说到底，都是一个语言生成的问题，只要是涉及到生成的问题，必然会遇到OOV问题，因为不可能将所有词都放到词表中来计算概率，可行的方法是用选择topn个高频词来组成词表。文章[4]和[8]都采用了相似的思路，从input中拷贝原文到output中，而不仅仅是生成，这里需要设置一个gate来决定这个词是copy来还是generate出来。显然，增加了copy机制的模型会在很大程度上解决了OOV的问题，就会显著地提升评价结果。这种思路不仅仅在文摘问题上适用，在一切生成问题上都适用，比如bot。</p>
+<p>3、关于评价指标的问题。一个评价指标是否科学直接影响了这个领域的发展水平，人工评价我们就不提了，只说自动评价。ROUGE指标在2003年就被Lin提出了[9]，13年过去了，仍然没有一个更加合适的评价体系来代替它。ROUGE评价太过死板，只能评价出output和target之间的一些表面信息，并不涉及到语义层面上的东西，是否可以提出一种更加高层次的评价体系，从语义这个层面来评价摘要的效果。其实技术上问题不大，因为计算两个文本序列之间的相似度有无数种解决方案，有监督、无监督、半监督等等等等。很期待有一种新的体系来评价摘要效果，相信新的评价体系一定会推动自动文摘领域的发展。</p>
+<p>4、关于数据集的问题。LCSTS数据集的构建给中文文本摘要的研究奠定了基础，将会很大程度地推动自动文摘在中文领域的发展。现在的互联网最不缺少的就是数据，大量的非结构化数据。但如何构建一个高质量的语料是一个难题，如何尽量避免用过多的人工手段来保证质量，如何用自动的方法来提升语料的质量都是难题。所以，如果能够提出一种全新的思路来构建自动文摘语料的话，将会非常有意义。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1512.01712" target="_blank" rel="external">Generating News Headlines with Recurrent Neural Networks</a></p>
+<p>[2] <a href="http://cn.arxiv.org/pdf/1509.00685.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></p>
+<p>[3] <a href="http://harvardnlp.github.io/papers/naacl16_summary.pdf" target="_blank" rel="external">Abstractive Sentence Summarization with Attentive Recurrent Neural Networks</a></p>
+<p>[4] <a href="http://cn.arxiv.org/pdf/1602.06023" target="_blank" rel="external">Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</a></p>
+<p>[5] <a href="http://cn.arxiv.org/pdf/1604.00125v1.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></p>
+<p>[6] <a href="http://cn.arxiv.org/pdf/1506.05865" target="_blank" rel="external">LCSTS: A Large Scale Chinese Short Text Summarization Dataset</a></p>
+<p>[7] <a href="http://cn.arxiv.org/pdf/1604.01904.pdf" target="_blank" rel="external">Neural Headline Generation with Minimum Risk Training</a></p>
+<p>[8] <a href="http://cn.arxiv.org/pdf/1603.06393v2.pdf" target="_blank" rel="external">Incorporating Copying Mechanism in Sequence-to-Sequence Learning Training</a></p>
+<p>[9] <a href="http://research.microsoft.com/en-us/people/cyl/naacl2003.pdf" target="_blank" rel="external">Automatic Evaluation of Summaries Using N-gram Co-Occurrence Statistics</a></p>
+<p>[10] <a href="http://jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">A Neural Probabilistic Language Model</a></p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
+<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-23T18:19:43.000Z"><a href="/2016/06/23/如果我也做一家公司/">2016-06-23</a></time>
       
       
@@ -3080,71 +3190,6 @@
 <h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
 <p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
 <img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-03-06T23:40:40.000Z"><a href="/2016/03/06/RSarXiv前世今生/">2016-03-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/03/06/RSarXiv前世今生/">RSarXiv前世今生</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="RSarXiv是什么？"><a href="#RSarXiv是什么？" class="headerlink" title="RSarXiv是什么？"></a>RSarXiv是什么？</h1><p>RSarXiv是我的一个side project，甚至有一段时间几乎做成了main project，从开始利用课余时间做设计，写代码到后面的每天全天时间都在写代码。</p>
-<p>RSarXiv是一个让人用起来很愉快的论文推荐App，在其简单的操作背后，蕴藏着复杂的、有趣的智能算法作为支撑。</p>
-<p>RSarXiv的目的是让用户可以轻松、快乐地获得感兴趣的论文。</p>
-<h1 id="为什么要做RSarXiv？"><a href="#为什么要做RSarXiv？" class="headerlink" title="为什么要做RSarXiv？"></a>为什么要做RSarXiv？</h1><blockquote>
-<p><strong>博观而约取 厚积而薄发</strong></p>
-</blockquote>
-<p>11年开始，断断续续地关注过推荐系统算法及相关的应用，也亲眼见证了从11年开始国内互联网界如雨后春笋般地涌现出大量的推荐系统应用，最早的是豆瓣猜，猜你喜欢的电影、书籍、歌曲，亚马逊、淘宝等一些电商的猜你可能喜欢的商品，无觅网、指阅到今日头条猜你感兴趣的新闻事件，以及12年一位该领域的大神为了写书而推出的paperlens项目，也是推荐用户论文等等。</p>
-<p>大约两三年的时间，推荐系统几乎成了各大网站的标配系统，甚至一度出现了一种声音，推荐系统可能会将搜索引擎替代了。实践证明，将推荐系统作为搜索引擎的一种补充和增强是一种更加理智的选择。那个时候，也可以看得出概念的炒作，很多的人写博客、写书来鼓吹某一项技术可以打遍天下无敌手。现在，回头看看都是一个笑话。</p>
-<p>世界上没有完美的技术，只有完美的产品。千万不要有一招武功吃遍天下鲜的想法，只有产品真真正正、踏踏实实地好用，给用户提供了方便才是真理！给自己身上贴满了热门标签的产品，只能表现出其浮夸的内心。</p>
-<p>当时，做RSarXiv这个产品的想法其实早几年就在心里种下了种子，可能没有做出来那么具体，只是想着能够做一个好用的推荐系统，让自己真正地享受一把人工智能带来的乐趣。</p>
-<p>时间定格在15年9月底，在烟台出差的无聊日子中，终于忍不住想做一些实实在在的事情了，于是写下了一个很粗糙的计划，包括搭建爬虫系统，学习swift ios app开发，API服务器的开发等等相关的东西。要推荐什么内容？这个问题想了一段时间，后来决定是论文，因为那段时间需要多读一些论文准备开题的工作，真正地感觉找论文，尤其是真正感兴趣的论文和质量高的论文是一件很难的事情，所以这个事情就这样开始了。</p>
-<h1 id="如何做RSarXiv？"><a href="#如何做RSarXiv？" class="headerlink" title="如何做RSarXiv？"></a>如何做RSarXiv？</h1><h2 id="Version-1-0"><a href="#Version-1-0" class="headerlink" title="Version 1.0"></a>Version 1.0</h2><p>第一个版本的RSarXiv其实主要是做了一个前端的APP，功能非常简单，输入自己感兴趣的tag，提交给服务器，返回与这几个tag相关的paper，如果对哪篇paper感兴趣，通过点赞的方式反馈给系统，系统将这篇paper的tag分解出来，推荐给用户，用户通过管理这些tag，删除不感兴趣的tag，留下感兴趣的tag，重新提交给服务器，获取感兴趣的paper，就这样循环迭代地使用这个APP。</p>
-<p>当时主要的目的是练习写APP，检验一下前一段时间学习swift的成果，最后还提交了一个版本到App Store，因为各种不规范的原因，没有能够发布出来。</p>
-<p>这个版本非常简单，因为只需要做前端的APP，后端的算法使用的 <a href="http://lateral.io" target="_blank" rel="external">http://lateral.io</a> 这个网站的API，因为人家服务器在欧洲，所以每次返回的结果都需要花费3s以上，根本无法忍受。</p>
-<h2 id="Version-2-0"><a href="#Version-2-0" class="headerlink" title="Version 2.0"></a>Version 2.0</h2><p>通过1.0的版本学习到了如何写一个简单的APP，但离真正地实现自己想做的事情还有好大一步。</p>
-<p>于是，酝酿了几天的时间，终于下了狠心说，这次要做就做一个大的，决不草草了事。从11月初开始，从构建一个高可靠的爬虫系统开始，开始了一段main project生涯。那个时候开始，用teambition来管理任务和添加每天的感受，每天做完前一天晚上定下的task，然后晚上再定出第二天的task，day by day，task by task，隔三差五地写一篇心得，记录一下最近的想法和进步。</p>
-<p>回过头看，那段时间打下了很扎实的基础，动手使用了很多以前望而却步的技术，攻克了许多以前想都不敢想的难题。感觉自己每天都在进步，很大的进步，人生简直充满了力量，当然体重也跟着增长了起来。</p>
-<p>当然，现在看来，那段时间的很多实现方法还是有些幼稚，但正说明现在还在进步。</p>
-<p>2.0版本最终的产品形式是微信公众号，提供了查询服务和推荐服务，还有一些其他好玩的东西。在后端技术上有了一个非常大的飞跃，打下了坚实的基础，极大地提升了自信心。</p>
-<p>做完这个版本之后，我深深地感受到了一点，自信是做好事情最重要的一个因素。</p>
-<h2 id="Version-2-3"><a href="#Version-2-3" class="headerlink" title="Version 2.3"></a>Version 2.3</h2><p>之所以没有将版本改为3.0，是因为后端的技术大多数沿用了2.0的基础，并没有做出太多的新的内容。这个版本最大的特点是技术性，这里说的技术不是开发的技术，而是对算法的学习、理解和应用，是一个将应用推向了一个新高度的技术。</p>
-<p>这段时间里，我读了大量的paper、博客和代码，很多也很杂，有语言模型相关的，关键词提取相关的，词表示相关的，句子表示相关的，深度学习框架相关的，情感分析相关的等等等等。因为，这个阶段，我想让自己的APP真正的具有智能，让APP中用的信息都是高质量的，比如一篇paper中的关键词提取，用了很多方法；比如paper之间按照title来计算相似度，不仅仅是基于词袋模型来做，而是用了一些语义上的表示，比如用了word2vec将keywords，authors，subjects映射到了同一个空间中，输入一个tag，可以得到多个与之相关的tag，这里的tag是keywords，authors，subjects。</p>
-<p>真正地接触到了这些知识之后，才慢慢感觉到了人工智能这个神秘的词汇在我们生活中的每一个角落里都发着光，每一次使用Google的时候，看新闻的时候，回复邮件的时候，都在使用着人工智能带给我们的方便。以前觉得CNN，RNN，LSTM这些词多么牛逼，多么难懂，看过paper，看过code，看过别人的分享之后，尤其是自己动手用过之后，觉得这些神奇就在不远处。用w2v训练出paper graph的时候，让我感到疯狂，那是我一直想做的事情，原来做起来就是那么地简单。</p>
-<p>这个版本，开创了一个新纪元，不仅仅具备上述的技术含量，而且成功地在App Store中发布了，并且报名参加了一个App比赛。</p>
-<h1 id="RSarXiv的未来如何？"><a href="#RSarXiv的未来如何？" class="headerlink" title="RSarXiv的未来如何？"></a>RSarXiv的未来如何？</h1><p>万事开头难，开了一个好头，现在说一说RSarXiv的未来如何。</p>
-<ul>
-<li><p>丰富数据源。目前RSarXiv只包括arXiv上cs领域的paper，因为之前的2.0版本包括了所有领域，感觉很多功能无法融合进去，比如code。所以，我考虑只做cs方向，但是不仅仅是arXiv的数据，还要包括ACM、citeseer等其他一些数据源。而且，如果只有paper，服务还是不够，因为在看paper的时候，很希望知道这个算法如何实现的，github或者一些其他代码收录平台的数据就会很重要，paper的评论和讨论，相关的news和blog也是一些非常好的数据。</p>
-</li>
-<li><p>提升技术性。因为刚刚迈入NLP的大门，刚刚找到一点门道，很多问题的理解和解决方法并不是最好的，所以这里我仍然需要利用大量的业余时间来学习相关的理论和解决方法，丰富自己的认知。比如，关键词的提取怎么做到更加高质量；title的表示可以不仅仅是word表示的加权线性组合，而是通过借助CNN来提取特征来表示title，来找相似paper；如何将N篇paper做一个自动摘要，就像专家写的survey一样，将用户的查询结果，以一个概括性的总结呈现给用户等等。一个东西做到很宽其实并不难，真正挖掘很深很细致才是最难的。</p>
-</li>
-<li><p>前端多样性。现在的产品版本其实是参加比赛的一个简化版本，很多有用的功能都没做进去，而且只有ios版本。当然手机操作有自己的好处，简单方便，但却真的不如电脑上可以做的那么丰富，所以之后会添加一个网站版本，提供更多更强大的功能。</p>
-</li>
-</ul>
 
       
     </div>

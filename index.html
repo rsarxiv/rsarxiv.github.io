@@ -105,7 +105,7 @@
 <h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL2015</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>知识图谱中的link prediction。</p>
 <h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>在link prediction上的TransE扩展模型，函数仍然为:   </p>
-<p> <img src="meida/TransD_1.PNG" alt=""> </p>
+<p> <img src="media/TransD_1.PNG" alt=""> </p>
 <p>但h丄和t丄为entity向量h和entity向量t在该relation r上的投影表示。投影定义为：</p>
 <p> <img src="media/TransD_2.PNG" alt=""></p>
 <p>其中(h_p)^T为某entity的投影向量，h为该entity的表示向量。</p>
@@ -123,7 +123,7 @@
 <p>通过增加一个矩阵Wr​，首先利用了一个椭圆等价超平面，解决了上述问题1，具体见图1(b)；同时利用LDL分解，公式变为:</p>
 <p><img src="media/TransA-3.PNG" alt=""></p>
 <p>其中D_r就是一个对角阵，而对角阵中的每个值的大小，正好说明了每一维的不同重要程度，也就解决了上述问题2，具体减图2(b)。</p>
-<p><img src="meida/TransA-4.JPG" alt="figure 1"><br>图1<br><img src="media/TransA-5.JPG" alt="figure 2"><br>图2</p>
+<p><img src="media/TransA-4.JPG" alt="figure 1"><br>图1<br><img src="media/TransA-5.JPG" alt="figure 2"><br>图2</p>
 <h2 id="资源-3"><a href="#资源-3" class="headerlink" title="资源"></a>资源</h2><p>数据集 Wordnet <a href="http://wordnet.princeton.edu/" target="_blank" rel="external">http://wordnet.princeton.edu/</a><br>数据集 FreeBase <a href="https://developers.google.com/freebase/" target="_blank" rel="external">https://developers.google.com/freebase/</a></p>
 <h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>如模型部分介绍的，当前的一些现有模型都是基于一个准则h+r=t，因此就使用了同一个损失度量h_r+r=t_r，只是在h_r和t_r的表示上有不同：</p>
 <p>（1）TransE  h_r = h, t_r = t<br>（2）TransH  h_r = h - (w_r)^T.h.w_r,  t_r = t - (w_r)^T.t.w_r<br>（3）TransR  h_r = M_r.h,  t_r = M_r.t<br>（4）TransM则是预先计算了出每一个训练三元组的直接权重</p>

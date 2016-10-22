@@ -5,10 +5,65 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-10-21T06:39:56.000Z</updated>
+  <updated>2016-10-22T20:48:03.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cs.CL weekly 2016.10.17-2016.10.21</title>
+    <link href="http://rsarxiv.github.io/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/"/>
+    <id>http://rsarxiv.github.io/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/</id>
+    <published>2016-10-22T20:11:20.000Z</published>
+    <updated>2016-10-22T20:48:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification"><a href="#Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification" class="headerlink" title="Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification"></a><a href="https://arxiv.org/pdf/1610.04989v1.pdf" target="_blank" rel="external">Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification</a></h2><p>【情感分析】RNN处理文本这样的序列数据有天然优势，但对于长文本效果却不尽人意。本文针对这个问题，提出了一种新的LSTM结构Cached LSTM。通过cache机制，来捕捉整体语义信息，将memory分成几组，对应不同的forget门，在文档集情感分析任务中取得了不错的结果。其实，RNN处理长文本信息都面临这个问题，chatbot中对context信息的处理也可以考虑借鉴这个思路。本文是FudanvNLP的工作。</p>
+<h2 id="Lexicon-Integrated-CNN-Models-with-Attention-for-Sentiment-Analysis"><a href="#Lexicon-Integrated-CNN-Models-with-Attention-for-Sentiment-Analysis" class="headerlink" title="Lexicon Integrated CNN Models with Attention for Sentiment Analysis"></a><a href="https://arxiv.org/pdf/1610.06272v1.pdf" target="_blank" rel="external">Lexicon Integrated CNN Models with Attention for Sentiment Analysis</a></h2><p>【情感分析】本文研究的内容是情感分析，论文的亮点在于提出了一种新的CNN+attention模型。本文适合在情感分析模型上有所突破的童鞋来读，从事相关工作的工程师或数据科学家也适合粗读一下。</p>
+<h2 id="A-Language-independent-and-Compositional-Model-for-Personality-Trait-Recognition-from-Short-Texts"><a href="#A-Language-independent-and-Compositional-Model-for-Personality-Trait-Recognition-from-Short-Texts" class="headerlink" title="A Language-independent and Compositional Model for Personality Trait Recognition from Short Texts"></a><a href="https://arxiv.org/pdf/1610.04345v1.pdf" target="_blank" rel="external">A Language-independent and Compositional Model for Personality Trait Recognition from Short Texts</a></h2><p>【用户画像】本文研究的问题是从短文本中学习用户画像，提出了一种深度学习模型，模型上从学术上讲没有太多亮点，适合工业界从事相关工作的童鞋阅读。</p>
+<h2 id="Neural-Machine-Translation-Advised-by-Statistical-Machine-Translation"><a href="#Neural-Machine-Translation-Advised-by-Statistical-Machine-Translation" class="headerlink" title="Neural Machine Translation Advised by Statistical Machine Translation"></a><a href="https://arxiv.org/pdf/1610.05150v1.pdf" target="_blank" rel="external">Neural Machine Translation Advised by Statistical Machine Translation</a></h2><p>【机器翻译】NMT翻译流利但有时翻译不准，SMT翻译准确但不够流利，两者各有优劣。本文结合了两种方法的优点，提出了在NMT解码阶段，用SMT来做辅助，通过一种门机制来选择用SMT还是NMT生成。</p>
+<h2 id="Interactive-Attention-for-Neural-Machine-Translation"><a href="#Interactive-Attention-for-Neural-Machine-Translation" class="headerlink" title="Interactive Attention for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1610.05011v1.pdf" target="_blank" rel="external">Interactive Attention for Neural Machine Translation</a></h2><p>【机器翻译】【注意力模型】注意力模型证明了其强大威力，本文提出了一种新的注意力模型，INTERACTIVE ATTENTION，在encoder和decoder之间通过读和写操作进行交互，实验中对比了其他注意力模型，结果不错。</p>
+<h2 id="A-General-Framework-for-Content-enhanced-Network-Representation-Learning"><a href="#A-General-Framework-for-Content-enhanced-Network-Representation-Learning" class="headerlink" title="A General Framework for Content-enhanced Network Representation Learning"></a><a href="https://arxiv.org/pdf/1610.02906v3.pdf" target="_blank" rel="external">A General Framework for Content-enhanced Network Representation Learning</a></h2><p>【社交网络】本文研究的是社交网络中各个节点的表示问题，亮点在于考虑了node（比如：用户）的相关文本信息，从文本中挖掘出node的一些特性（比如：性别、职业、爱好等），对node的刻画更精准。利用富文本信息来刻画社交网络中的各个node，在广告、推荐系统等应用方面都会带来很大的价值，这也正是nlp的价值所在，从杂乱无章的非结构文本中挖掘出大量的有用信息，本文适合研究社交网络价值、推荐系统的童鞋深入阅读。本文工作来自哈工大刘挺老师组。</p>
+<h2 id="Reasoning-with-Memory-Augmented-Neural-Networks-for-Language-Comprehension"><a href="#Reasoning-with-Memory-Augmented-Neural-Networks-for-Language-Comprehension" class="headerlink" title="Reasoning with Memory Augmented Neural Networks for Language Comprehension"></a><a href="https://arxiv.org/pdf/1610.06454v1.pdf" target="_blank" rel="external">Reasoning with Memory Augmented Neural Networks for Language Comprehension</a></h2><p>【机器阅读】本文提出了一种做假设检验的神经网络方法（Neural Semantic Encoders），并且应用在机器阅读任务上，取得了不错的效果，涉及的数据集是CBT和WDW。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="STC短文本对话数据"><a href="#STC短文本对话数据" class="headerlink" title="STC短文本对话数据"></a><a href="http://ntcirstc.noahlab.com.hk/STC2/stc-cn.htm" target="_blank" rel="external">STC短文本对话数据</a></h2><p>【中文对话数据】对话很热，但依然很难！华为诺亚方舟实验室在NTCIR-13组织的关于短文本对话(Short-Text Conversation)的比赛已经开始注册了，让我们一起从大数据中探求人类对话的本质！比赛有两个任务，一个是基于检索给出response，一个是直接生成response。数据来自微博，输入是微博内容，输出是评论内容。13年华为的文章提到的短文本对话数据集可能就是指该数据集，一直愁对话数据的各位可以看过来，你们等的数据来了！</p>
+<h2 id="DataHub"><a href="#DataHub" class="headerlink" title="DataHub"></a><a href="https://datahub.io/dataset" target="_blank" rel="external">DataHub</a></h2><p>一个收集各种数据集的网站。</p>
+<h2 id="t-SNE可视化工具的python和torch封装"><a href="#t-SNE可视化工具的python和torch封装" class="headerlink" title="t-SNE可视化工具的python和torch封装"></a><a href="https://github.com/DmitryUlyanov/Multicore-TSNE" target="_blank" rel="external">t-SNE可视化工具的python和torch封装</a></h2><p>DmitryUlyanov/Multicore-TSNE: Parallel t-SNE implementation with Python and Torch wrappers</p>
+<h2 id="Jiwei-Li关于聊天机器人NLG问题的slide"><a href="#Jiwei-Li关于聊天机器人NLG问题的slide" class="headerlink" title="Jiwei Li关于聊天机器人NLG问题的slide"></a><a href="http://web.stanford.edu/class/cs224u/materials/cs224u-2016-li-chatbots.pdf" target="_blank" rel="external">Jiwei Li关于聊天机器人NLG问题的slide</a></h2><p>分享一个斯坦福大学Jiwei Li关于聊天机器人NLG问题的slide，Jiwei Li是一个非常高产的作者，这个slide包括了非常多精彩的内容。 </p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Cached-Long-Short-Term-Memory-Neural-Networks-for-Doc
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PaperWeekly十期总结</title>
+    <link href="http://rsarxiv.github.io/2016/10/21/PaperWeekly%E5%8D%81%E6%9C%9F%E6%80%BB%E7%BB%93/"/>
+    <id>http://rsarxiv.github.io/2016/10/21/PaperWeekly十期总结/</id>
+    <published>2016-10-22T00:42:53.000Z</published>
+    <updated>2016-10-22T00:53:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><h1 id="一些时间点"><a href="#一些时间点" class="headerlink" title="一些时间点"></a>一些时间点</h1><h1 id="一些数字"><a href="#一些数字" class="headerlink" title="一些数字"></a>一些数字</h1><h1 id="接下来"><a href="#接下来" class="headerlink" title="接下来"></a>接下来</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;h1 id=&quot;一些时间点&quot;&gt;&lt;a href=&quot;#一些时间点&quot; class=&quot;headerlink&quot; title=&quot;一些时间点&quot;&gt;&lt;/a&gt;一些时间点&lt;/h
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十期</title>
@@ -1257,91 +1312,6 @@
       <category term="chatbot" scheme="http://rsarxiv.github.io/tags/chatbot/"/>
     
       <category term="api.ai" scheme="http://rsarxiv.github.io/tags/api-ai/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第二期</title>
-    <link href="http://rsarxiv.github.io/2016/08/16/PaperWeekly-%E7%AC%AC%E4%BA%8C%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/08/16/PaperWeekly-第二期/</id>
-    <published>2016-08-16T23:53:50.000Z</published>
-    <updated>2016-08-17T05:50:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
-<p>人机对话系统通常包括上面的几个部分，task-oriented chatbot重点关注的是DST和NLG问题，其中DST是核心问题，没有太多关注这个比赛，但个人理解DST的作用类似于一张user conversation logs状态表，记录着用户当前的状态，以订机票为例，这张表的key是预先设定好的slots，比如目的地、出发地、出发时间等等，与系统背后的业务数据表中的attributes相关联，不断地从user conversation中抽取相应的values来填充这个表格，或者将其定义为一个多分类任务，不断地从对话中判断这句话中包括哪些slots和values（这里的values是多个分类结果），当状态表中的信息存在空白时，bot会根据空白的slots来提问并获取values，直到获取到足够的slots，给出用户suggestion，或者进行相应的服务。</p>
-<p>DST的问题解决之后，就是NLG的问题。传统的NLG采用rule-based或者template-based的方法，需要很多的手动设置，横向扩展性较差，维护成本高。最近流行的end-to-end方案很适合解决这个问题，给定用户的query，结合着当前DST，自动生成response，完全的data driven，不需要什么人工干预。</p>
-<p>生成response除了rule-based和end-to-end的方法之外，工业界中更加常见的是retrieve-based的方法，即从庞大的example base中进行retrieve，一方面避免了NLG生成response时常遇到的grammatical问题，另一方面当前的IR技术很容易集成到此类bot系统中，降低了门槛。</p>
-<p>本期的三篇paper中前两篇都是关于task-oriented bot的NLG问题，第三篇是在retrieve-based bot的每个细小环节中应用了deep learning技术，并且将外部的非结构化文本作为数据源，从中select responses。</p>
-<h1 id="Semantically-Conditioned-LSTM-based-Natural-Language-Generation-for-Spoken-Dialogue-Systems"><a href="#Semantically-Conditioned-LSTM-based-Natural-Language-Generation-for-Spoken-Dialogue-Systems" class="headerlink" title="Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems"></a><a href="http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP199.pdf" target="_blank" rel="external">Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems</a></h1><h2 id="关键词：NLG、bot、自定义LSTM"><a href="#关键词：NLG、bot、自定义LSTM" class="headerlink" title="关键词：NLG、bot、自定义LSTM"></a>关键词：NLG、bot、自定义LSTM</h2><h2 id="来源：EMNLP-2015"><a href="#来源：EMNLP-2015" class="headerlink" title="来源：EMNLP 2015"></a>来源：EMNLP 2015</h2><h2 id="问题：task-oriented-bot-NLG问题，给定了user-query和DST，如何生成一个更好的response？"><a href="#问题：task-oriented-bot-NLG问题，给定了user-query和DST，如何生成一个更好的response？" class="headerlink" title="问题：task-oriented bot NLG问题，给定了user query和DST，如何生成一个更好的response？"></a>问题：task-oriented bot NLG问题，给定了user query和DST，如何生成一个更好的response？</h2><h2 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h2><p>首先定义了两个概念delexicalisation和lexicalisation，前一个的意思是将句子中的slot-value用特定的token来替换，像是一种抽象，比如用food来代替对话中的各种食物名称；后一个的意思是将句子中的特定token还原回具体的value。</p>
-<p>本文最大的亮点在于将传统的LSTM重新定义，针对这个具体问题在LSTM cell部分中添加了一层，Dialogue Act Cell，通过gate机制来保留合适的信息，比如slot keywords，如下图：</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>这一层cell更像是一个keyword detectors，整个NLG仍是采用encoder-decoder框架。</p>
-<h2 id="评论："><a href="#评论：" class="headerlink" title="评论："></a>评论：</h2><p>这层Dialogue Act Cell的目的是确保在decoding部分，不会遗漏任何一个slot，所以专门增加了一层cell来encoding act、slot-value信息，在生成时作为context vector。我觉得model的这个设计与attention机制有一点类似，只是attention更加地平滑，对每个word都有一个weight，而不是本文中的gate，非0即1。整体来说，自定义的cell是一个很有启发性的思路，针对具体问题的特点，修改现有的cell结构，也许会起到非常关键的作用。</p>
-<h1 id="Natural-Language-Generation-in-Dialogue-using-Lexicalized-and-Delexicalized-Data"><a href="#Natural-Language-Generation-in-Dialogue-using-Lexicalized-and-Delexicalized-Data" class="headerlink" title="Natural Language Generation in Dialogue using Lexicalized and Delexicalized Data"></a><a href="http://101.110.118.75/128.84.21.199/pdf/1606.03632v1.pdf" target="_blank" rel="external">Natural Language Generation in Dialogue using Lexicalized and Delexicalized Data</a></h1><h2 id="关键词：NLG、bot、自定义LSTM-1"><a href="#关键词：NLG、bot、自定义LSTM-1" class="headerlink" title="关键词：NLG、bot、自定义LSTM"></a>关键词：NLG、bot、自定义LSTM</h2><h2 id="来源：arXiv-2016-06-11-cs-CL"><a href="#来源：arXiv-2016-06-11-cs-CL" class="headerlink" title="来源：arXiv 2016.06.11 cs.CL"></a>来源：arXiv 2016.06.11 cs.CL</h2><h2 id="问题：task-oriented-bot-NLG问题，是第一篇的升级版。"><a href="#问题：task-oriented-bot-NLG问题，是第一篇的升级版。" class="headerlink" title="问题：task-oriented bot NLG问题，是第一篇的升级版。"></a>问题：task-oriented bot NLG问题，是第一篇的升级版。</h2><h2 id="方法：-1"><a href="#方法：-1" class="headerlink" title="方法："></a>方法：</h2><p>本文是针对第一篇文章进行的改进版，改进的地方在于不仅仅利用了delexicalisation进行训练，而且利用了lexicalisation数据，从而提高了准确率，基本的模型框架与第一篇文章类似，不同的在于输入的处理，就是dialogue act的表示，如下图：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>每一个act representation由两部分组成，一部分是act、slots的one-hot表示，与文章一类似的结构，另一部分是由value的每个word embedding组合而成。</p>
-<p>task-oriented bot NLG存在的一个更加现实的问题是data规模太小，cover的features太少，生成质量不高，本文针对这一问题，用相似domain的、大量的reviews或者其他相关数据作为corpus预训练出一个效果不错的LM，在decoding部分采用预训练好的LM模型权重进行NLG。</p>
-<h2 id="评论：-1"><a href="#评论：-1" class="headerlink" title="评论："></a>评论：</h2><p>本文中最值得借鉴的地方在于transfer learning，虽然DL效果很好，但实际应用中常常遇到data规模太小的问题，DL难以发挥作用，但如果从大量相似的domain data中学习一些表示模型，然后迁移到待解决的问题上，这是一件幸事，也就是人们常说的举一反三。混合大量的相似domain数据，会cover到更丰富的features，为DL提供了广阔的舞台。</p>
-<h1 id="DocChat-An-Information-Retrieval-Approach-for-Chatbot-Engines-Using-Unstructured-Documents"><a href="#DocChat-An-Information-Retrieval-Approach-for-Chatbot-Engines-Using-Unstructured-Documents" class="headerlink" title="DocChat: An Information Retrieval Approach for Chatbot Engines Using Unstructured Documents"></a><a href="http://aclweb.org/anthology/P16-1049" target="_blank" rel="external">DocChat: An Information Retrieval Approach for Chatbot Engines Using Unstructured Documents</a></h1><h2 id="关键词：Retrieve-Based-Bot，Unstructured-Documents"><a href="#关键词：Retrieve-Based-Bot，Unstructured-Documents" class="headerlink" title="关键词：Retrieve-Based Bot，Unstructured Documents"></a>关键词：Retrieve-Based Bot，Unstructured Documents</h2><h2 id="来源：ACL-2016"><a href="#来源：ACL-2016" class="headerlink" title="来源：ACL 2016"></a>来源：ACL 2016</h2><h2 id="问题：如何从大量非结构化文本中select出合适的response返回给用户？"><a href="#问题：如何从大量非结构化文本中select出合适的response返回给用户？" class="headerlink" title="问题：如何从大量非结构化文本中select出合适的response返回给用户？"></a>问题：如何从大量非结构化文本中select出合适的response返回给用户？</h2><h2 id="方法：-2"><a href="#方法：-2" class="headerlink" title="方法："></a>方法：</h2><p>本文研究的问题是给定大量的非结构化的documents和用户的query，从中选择并返回一个满意的response，典型的IR问题，作者将解决方案分为三步：</p>
-<p>1、response检索，根据query，从documents中找到合适的N句话作为候选。</p>
-<p>2、response排序，将候选中的utterances进行排序。</p>
-<p>本文大多数的工作在ranking model上，提出了7种level的features来对candidate进行打分，通过实验发现sentence-level feature最有区分度。</p>
-<p>3、response触发，并不是一定可以从documents找到合适的response，所以最后添加一个分类器，来判断最优的response是否合适，合适则输出，不合适则输出空。</p>
-<h2 id="评论：-2"><a href="#评论：-2" class="headerlink" title="评论："></a>评论：</h2><p>本文解决的问题思路比较简单，但中间用到了很多复杂的DL model，个人感觉有点杀鸡用牛刀。本文的思路更加适合informative式的query，并不适合娱乐和闲聊。但用外部知识，尤其是大量的非结构化的、可能还带有噪声的资源来提供response，是一个很不错的思路，弥补了只用training data或者很有限的examples存在的局限性问题，如果可以将两者进行结合，是一个非常好的实用方案。</p>
-<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><p>引起大家的讨论是一件挺难的事情，所以这一期不再提出问题。之前有同学问如何读paper，这里简单分享一个简单的tip，后续的每一期可能都会分享一个tip。</p>
-<p>1、如果刚刚进入一个领域，建议读一些这个领域的survey或review类型的paper，这类型的paper基本上会将最近的方法归类进行总结，从一个较高的层次来解读每一篇paper的贡献和优缺点，对快速了解一个领域很有帮助。如果你关注的这个领域没有survey，那么恭喜你，说明你可能走到了前沿，用关键词去google一篇或者几篇相关的new paper，读Related Work那一节，相信你会有所收获。（注：这个方法是从清华大学刘知远博士那里学来的）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;media/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;图片来自paper &lt;a href=&quot;https://www.microsof
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pet,baby and bot</title>
-    <link href="http://rsarxiv.github.io/2016/08/16/pat-baby-and-bot/"/>
-    <id>http://rsarxiv.github.io/2016/08/16/pat-baby-and-bot/</id>
-    <published>2016-08-16T16:06:36.000Z</published>
-    <updated>2016-08-16T21:07:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文的想法来源于某一天对家里狗子Hare一些行为以及身边两个不到3岁的小朋友一些聪明行为的观察和思考，然后将这些行为和思考与当前流行的bot联系一下，形成了本文的内容。</p>
-<p>首先，从pet聊起。我家养了一只聪明的小泰迪狗，心眼特别多，会撒娇会打滚会安慰人，非常聪明，他叫Hare。Hare从两个月大到了家里，从开始什么都不会，通过一天天地训练，学会了走、跑、跳、吃饭、喝水、上厕所、坐下、握手和哭。因为他的外婆（我的丈母娘）每天都和他说很多话，教他认识很多东西，所以他可以轻松地分辨出哪个玩具叫什么名字，可以轻松地理解我们说的很多话，不只是一些口令。当我说出门不带他玩的话，他会非常悲伤、可怜地开始哭泣（真的和小孩子哭一模一样）；当我说带他出去的时候，他就会非常兴奋地上蹿下跳；当我说我要出门办事不可以带他的时候，他就乖乖坐在门口目送你走，不哭不闹。所以，我在想Hare应该不是简单地通过观察我们的脸色和语气来识别我们的情绪，他可能真的听得明白很多的话，但一定不是全部，因为他的知识很有限，对这个世界的认识也很有限。Hare的学习绝大多数是监督学习，通过一些正例和负例进行训练，大多数的训练用正例效果非常明显，唯独训练他上厕所，用了不少负例，让他吃了不少苦头，这也带来不少的好处，监督学习很花费时间，样本的量级很重要，通过大量的训练+激励让Hare养成了良好的习惯，成为了一只听话的pet。</p>
-<p>我一直在思考一个问题，pet在听主人说话的时候，是听懂了某些他可以理解的关键词还是他确实听懂了整句话，到底是字面意思还是semantic level呢？我想他应该有一定的自主学习能力，做到举一反三可能很难，但举一反二还是有可能的，而不仅仅是从大量的examples中进行学习，确实能够理解一些简单的话，同一个意思的不同说法他都可以理解。科学的解释需要做些实验来研究，这里我有一些简单的解释，第一，他有大脑，虽然没有人类发达，但智商可以和5、6岁的孩子相媲美；第二，他的监督学习不仅仅是从query-response pairs这样的examples中进行，而是更多的维度，包括每一次action之后的激励reward，做对一次动作之后赢得一个奖励，做错了受到惩罚，他不仅仅从主人的语言中来理解意思，还会结合别的因素，比如语调、语境、前一个时刻他的状态等等，而且他可以看到主人的表情和动作，这些因素都可以抽象成一种context。Hare如果前一秒刚刚犯了低级错误，这一秒如果我拿一个零食的叫他过来来吃的话，他就会明白，这其中一定有诈，他一定不会过来，虽然我并没有表现出生气的样子。</p>
-<p>pet的事情我们先聊到这里，接下来聊一聊baby的事情。</p>
-<p>身边正好可以接触到两个不到三岁的小宝宝，一个男孩一个女孩，他们有很多聪明的行为都让我感到吃惊。先从小男孩说起，小男孩每次来一起吃饭的时候，都会给大家表演他的绝技——认车牌。走在路上，你随意指一辆车，他几乎可以不出错地说出这辆车是本田还是丰田、还是起亚，这是一个典型的有监督多分类学习任务，他的父母有意无意地教他认识各种各样的车，经过一定时间和example的积累，他不断地将准确率提升，可能大脑的发育和将deep learning模型不断地复杂化道理类似吧。学习的过程是积累知识的过程，小男孩慢慢地认识了越来越多的车子，当然这需要不断地教和学，但无疑他本身就是一个知识库（knowledge base），而且认识很多我都不认识的车子，所以当我问他那是什么车的时候，他总是能够给我一个不错的答案。</p>
-<p>说完小男孩的事情，再聊一聊小女孩的事情。小女孩语言能力很强，可以说很多的话，而且很多话都非常的funny。基本上和小女孩聊天，就是一个有趣的问答过程，这里的问答不只是我问她答，还有她问我答。小女孩经常和我妈妈在一起，妈妈会教她认识各种东西，因为妈妈信基督教，会教她做祷告，保佑自己一生平安，所以说她不仅仅可以回答一些基本的认知问题，而且有自己的特殊技能，表演“祷告”，而且做的有模有样。她是个求知欲非常强的问题宝宝，她总是指着一个东西，然后开始问我，“这是个什么东西？”，她主动学习的欲望很强，这意味着她的知识库积累地很快。以上都是比较常规的，最值得思考的是她的创造力。她认识很多的动物，也知道怎么称呼这些动物，她根据家里每一个人的名字，起了相应的动物外号，这个不是谁教她的，是她自己说出来的东西；之前提到的祷告词中，原话应该是希望上帝可以赐给她一些聪明智慧，那天在给我们“表演”的时候说出来的是“给她弄一些聪明智慧”，我想这个“弄一些”一定是其他的地方学来的，但她迁移到了这个语境中，这个迁移能力是值得思考的。我们都说理解一个东西不算厉害，如果能够掌握或者控制一个东西才算真正的厉害，她如果只是简单地重复已经学会的知识，也并不稀奇，但她偶尔会有意地装糊涂，故意地说一些错的东西看你能不能识别出来她的错误，她对一些信息的掌握程度很高。</p>
-<p>小盆友的创造力让人惊奇，有很多值得思考的地方，相比于pet来说，baby的学习能力更强，带给人的惊喜度更大。chatbot，一个热门的topic，一个大家每天都在谈论的东西，确实还有很长的路要走，太多的地方不能令人满意。</p>
-<p>1、最简单的一问一答现在都没有做的很好，example-based和rule-based虽然可以work，但限制太大，前者被example所限制，而后者被rule所限制，而paper中近一段时间流行的所谓generative式的bot看起来好像非常智能，读过paper之后会发现仍是基于example统计的，不管多么牛的模型，都是从example中学习features，example的规模和类型都会严重制约model，而且在生成response时面临着连贯性和语言学的问题，这也是被诟病最多的地方，也就是为什么example-based retrieve式的方法仍是主流的原因。</p>
-<p>2、bot应该像人一样具有学习能力，尤其是主动学习能力。现在的bot有self-taught的能力，通常比较被动，并不具备主动学习的意识和能力。bot公司宣传的学习能力也通常是指对log的挖掘，从中找到一些有用的东西存在知识库里，丰富现有的example base。bot可以试着多提一些question，而不仅仅是做answer，主动地学习一些东西。</p>
-<p>3、对context的利用和分析还有很长的路要走，context有很多种，如果是纯粹的语言bot，那么就是user之前说过的话，user的情绪，user的意图等等，如果不仅仅是语言的话，正如前面在说pet时提到的，context可以包括图像、语调等等。考虑的东西越多，bot的回答质量就会越高。</p>
-<p>4、前几天看了几家科技媒体对新一代微软小冰的报道，说实话丢出挺多概念的，仔细看了下是用增强学习的思路来做，和训练pet比较类似，用一个reward作为牵引，带着bot学习programmer希望bot学习的action。</p>
-<p>5、人会举一反三，聪明的动物会举一反二，迁移能力很重要，bot学习过类似的东西，就应该可以做类似的事情，而不是每次都需要重新从头开始学习，如何将已经学习到的知识迁移到新的领域也是一个非常有意义的topic。</p>
-<p>从pet到baby，再到bot，从动物到人类，再到机器人，有着难以跨越的鸿沟，但pet、baby的行为可以带来启发和思考，给目前仍停留在初步阶段的bot带来一丝春风，一丝希望。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文的想法来源于某一天对家里狗子Hare一些行为以及身边两个不到3岁的小朋友一些聪明行为的观察和思考，然后将这些行为和思考与当前流行的bot联系一下，形成了本文的内容。&lt;/p&gt;
-&lt;p&gt;首先，从pet聊起。我家养了一只聪明的小泰迪狗，心眼特别多，会撒娇会打滚会安慰人，非常聪明
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="bot" scheme="http://rsarxiv.github.io/tags/bot/"/>
     
   </entry>
   

@@ -50,7 +50,7 @@
     <link href="http://rsarxiv.github.io/2016/10/21/PaperWeekly%E5%8D%81%E6%9C%9F%E6%80%BB%E7%BB%93/"/>
     <id>http://rsarxiv.github.io/2016/10/21/PaperWeekly十期总结/</id>
     <published>2016-10-22T00:42:53.000Z</published>
-    <updated>2016-10-23T01:47:22.000Z</updated>
+    <updated>2016-10-23T02:38:00.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>首先，感谢大家关注PaperWeekly和阅读本文，本文的阅读大概花费您10分钟时间，来看一下PaperWeekly这十期（两个多月）内容走过来所经历的一些。</p>
 <h1 id="一开始"><a href="#一开始" class="headerlink" title="一开始"></a>一开始</h1><p>PaperWeekly的第一步是从一篇对Andrew Ng的采访开始的，大概的意思是经常读论文是一种非常好的长期投资，回报率也会非常高。虽然之前也在博客上写过一系列《文本文摘》的文章，并有幸得到爱可可老师的转发，但并没有系统地将自己所读的paper进行整理，并写成清晰、简短的文章分享出来。</p>
@@ -86,6 +86,9 @@
 <p>感谢帮忙分享和推广的各种大牛们，谢谢你们让更多的人知道了PW。</p>
 <p>感谢留言提意见的童鞋们，有时时间紧张，不能一一回复，有时精力有限，无法满足每一位的需求，但还是感谢你们的期待和支持！</p>
 <p>第一个十期结束了，我不知道后面会有多少个十期，希望可以一直坚持做下去。放弃可以找到很多种借口，但坚持下来只需要一个理由，因为热爱！</p>
+<h1 id="PW-Ebook"><a href="#PW-Ebook" class="headerlink" title="PW Ebook"></a>PW Ebook</h1><p>我将PW的十期内容汇总成一本电子书，大家可以从<a href="http://www.kancloud.cn/mcgrady164/paperweekly" target="_blank" rel="external">http://www.kancloud.cn/mcgrady164/paperweekly</a> 下载阅读，里面的文章会随着PW的更新不断地更新。</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly<br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
 ]]></content>
     
     <summary type="html">

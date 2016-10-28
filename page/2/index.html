@@ -65,6 +65,52 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-06T18:49:03.000Z"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">2016-07-06</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前几天因为去北京参加中文信息学会组织的深度学习“速成班”，一直都没空更新博客。今天分享的paper是昨天刚刚刷出的一篇关于自动文摘的paper，题目是<a href="http://cn.arxiv.org/pdf/1607.00718v1" target="_blank" rel="external">Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization</a>。</p>
+<p>用seq2seq的思路来解决文本摘要问题仍停留在short text的生成水平上，最多到paragraph level。原因也比较简单，rnn也好，gru、lstm也罢，终究都面临着一个长程依赖的问题，虽然说gru、lstm等技术用gate机制在一定程度上缓解了长程依赖和梯度消失、爆炸的问题，但终究文本过长的话，神经网络的深度就会随之变得非常深，训练起来难度就会随之增加。所以，这也是为什么document level或者说multi document level的abstractive式的摘要生成问题至今都是一个难以解决的问题。确实，short text的理解、表示在一定程度上有了很大的突破，也可以在工程上有不错的应用，比如机器翻译。但text变了之后，一篇很长的文章如何更加准确地理解和表示是一个非常难的问题，attention是一个不错的解决方案，在decoder的部分不需要考虑encoder的全部，只需确定需要注意的几个点就可以了，其实人在看一篇长文的时候也是这样一种机制，从某种角度上来讲，attention在decoder时提供了一种降维的手段，让model更能捕捉到关键的信息。</p>
+<p>对于document level的abstractive摘要问题，人是怎么做的呢？比如我写了一篇paper，最后写abstract的部分，基本上是从每个section中提炼出key sentences，组成一段abstract，其实这里有一点extractive的意思，但人和extractive不同的地方在于可以轻松地将each sentence连贯地表达出来，看起来不那么僵硬，更加地顺畅，当然也不会出现指示代词找不到实体的情况。本文的思路正是借鉴了人类在解决这个问题时所采用的一般思路，数据源是arxiv paper中的introduction和abstract部分。</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>将document分解成多个paragraph，然后从每个paragraph中extract出key sentence作为该paragraph的target summary，每个document可以构造出多个(paragraph,key sentence) pair作为seq2seq的训练数据。生成摘要的过程正好相反，将document分解成paragraph，对每个paragraph用model生成summary，将所有的summary拼接起来形成abstract，然后与paper自身的abstract作对比。</p>
+<p>这里从paragraph中提取key sentence用了最简单的TF-IDF来打分排序，当然给n个句子排序有很多的方法，比如textrank。(paragraph,key sentence) pair的训练是通过一个叫Multi Timescale Gated Recurrent Unit(MTGRU)模型来做的，这个模型乍一看好新鲜，其实是N年前一个叫做MTRNN模型将RNN替换为GRU的成果，gru、lstm的变种非常的多，本文的这个模型是其中一个，之所以选择用这个模型来解决问题，是因为多个timescale可以在收敛速度上有更大的优势，并且在自然语言这种层次性的问题上有天然的优势。model的结构如下图</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>在GRU的基础上增加一个时间项tao，用来控制gru的时间尺度，tao越大，表示model可以越好地捕捉序列数据中的slow features，不知道理解的对比对，这里的slow features是不是可以理解为更大的context window，控制着context的颗粒度。MTGRU可以看作是GRU的一般表示，当tao=1时，自动退化为GRU。</p>
+<p>与传统的GRU进行了对比实验，证明了该model在speed和performance上均有更好的表现。下图展示了生成的一些结果：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>输入的是本文的introduction部分，输出的是每段生成的summary。</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>这个是本文算法生成的摘要和纯extractive方法的对比，明显比extractive的方法概括地更加全面。</p>
+<p>本文是一篇占坑的文章，内容并不完整，提出了MTGRU model来替换一般的GRU，但并不是full data driven，用了一些extractive的手段来辅助进行训练，在文章的future work这部分作者也提到了下一步要做成一个真正的data driven的model，每个paragraph的target summary也是data driven的，而不是用extractive的提取出来的，我在想，是否可以构造一个hierarchy model，一个维度在训练paragraph到sentence的mapping，一个维度在训练document到abstract的mapping，这个idea可以认真琢磨下，也欢迎大家讨论。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-29T17:54:35.000Z"><a href="/2016/06/29/教机器学习表示/">2016-06-29</a></time>
       
       
@@ -3204,65 +3250,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-04-18T02:06:18.000Z"><a href="/2016/04/17/自动文摘（四）/">2016-04-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/04/17/自动文摘（四）/">自动文摘（四）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>这篇博客是自动文摘系列的第四篇，重点介绍近期abstractive summarization的一些研究情况。abstractive是学术界研究的热点，尤其是Machine Translation中的encoder-decoder框架和attention mechanism十分火热，大家都试着将abstractive问题转换为sequence-2-sequence问题，套用上面两种技术，得到state-of-the-art结果，2015年来已经有许多篇paper都是这种套路，于是就有了下面的吐槽：</p>
-<img src="http://ww4.sinaimg.cn/mw690/62caff97jw1f2qam97d3tj20sg0nd775.jpg" width="400" height="650">
-<h1 id="Encoder-Decoder"><a href="#Encoder-Decoder" class="headerlink" title="Encoder-Decoder"></a>Encoder-Decoder</h1><p>Encoder-Decoder不是一种模型，而是一种框架，一种处理问题的思路，最早应用于机器翻译领域，输入一个序列，输出另外一个序列。机器翻译问题就是将一种语言序列转换成另外一种语言序列，将该技术扩展到其他领域，比如输入序列可以是文字，语音，图像，视频，输出序列可以是文字，图像，可以解决很多别的类型的问题。这一大类问题就是上图中的sequence-to-sequence问题。这里以输入为文本，输出也为文本作为例子进行介绍：</p>
-<img src="/2016/04/17/自动文摘（四）/seq2seq.png" width="400" height="650">
-<p>encoder部分是将输入序列表示成一个带有语义的向量，使用最广泛的表示技术是Recurrent Neural Network，RNN是一个基本模型，在训练的时候会遇到gradient explode或者gradient vanishing的问题，导致无法训练，所以在实际中经常使用的是经过改良的LSTM RNN或者GRU RNN对输入序列进行表示，更加复杂一点可以用BiRNN、BiRNN with LSTM、BiRNN with GRU、多层RNN等模型来表示，输入序列最终表示为最后一个word的hidden state vector。</p>
-<p>decoder部分是以encoder生成的hidden state vector作为输入“解码”出目标文本序列，本质上是一个语言模型，最常见的是用Recurrent Neural Network Language Model(RNNLM)，只要涉及到RNN就会有训练的问题，也就需要用LSTM、GRU和一些高级的model来代替。目标序列的生成和LM做句子生成的过程类似，只是说计算条件概率时需要考虑encoder向量。</p>
-<p>这里，每一种模型几乎都可以出一篇paper，尤其是在这个技术刚刚开始应用在各个领域中的时候，大家通过尝试不同的模型组合，得到state-of-the-art结果。</p>
-<p>该框架最早被应用在Google Translation中，paper详情可以见[1]，2014年12月发在arxiv上。</p>
-<h1 id="Attention-Mechanism"><a href="#Attention-Mechanism" class="headerlink" title="Attention Mechanism"></a>Attention Mechanism</h1><p>注意力机制在NLP中的使用也就是2015年的事情，也是从机器翻译领域开始。我们仔细看decoder中生成目标文本序列这部分，第一个word的生成完全依赖于encoder的last hidden state vector，而这个vector更多的是表示输入序列的最后一个word的意思，也就是说rnn一般来说都是一个有偏的模型。</p>
-<p>打个比方，rnn可以理解为一个人看完了一段话，他可能只记得最后几个词说明的意思，但是如果你问他前面的信息，他就不能准确地回答，attention可以理解为，提问的信息只与之前看完的那段话中一部分关系密切，而其他部分关系不大，这个人就会将自己的注意力锁定在这部分信息中。这个就是所谓attention mechanism的原理，每个hidden state vector对于decoder生成每个单词都有影响，但影响分布并不相同，请看下图：</p>
-<img src="/2016/04/17/自动文摘（四）/attention.png" width="400" height="650">
-<p>图中行文本代表输出，列文本代表输入，颜色越深表示两个词相关性越强，即生成该词时需要多注意对应的输入词。不同的paper在使用attention上会有不同的技巧，这里不一一赘述了。</p>
-<h1 id="Neural-Summarization"><a href="#Neural-Summarization" class="headerlink" title="Neural Summarization"></a>Neural Summarization</h1><p>使用deep learning技术来做abstractive summarization的paper屈指可数，大体的思路也类似，大概如下：</p>
-<p>0、首先将自动文摘的问题构造成一个seq2seq问题，通常的做法是将某段文本的first sentence作为输入，headlines作为输出，本质上变成了一个headlines generative问题。</p>
-<p>1、选择一个big corpus作为训练、测试集。自动文摘的技术没有太成熟的一个重要原因在于没有一个成熟的大规模语料。一般来说都选择Gigawords作为训练、测试集，然后用DUC的数据集进行验证和对比。</p>
-<p>2、选择一个合适的encoder，这里可以选simple rnn，lstm rnn，gru rnn，simple birnn，lstm birnn，gru birnn，deep rnn，cnn，以及各种各样的cnn。不同model之间的组合都是一种创新，只不过创新意义不太大。用encoder将输入文本表示成一个向量。</p>
-<p>3、选择一个合适的decoder，decoder的作用是一个language model，用来生成summary words。</p>
-<p>4、设计一个合适的attention model。不仅仅基于encoder last hidden state vector和上文来预测输出文本序列，更要基于输入中“注意力”更高的词来预测相应的词。</p>
-<p>5、设计一个copy net。只要是语言模型都会存在相同的问题，比如out-of-vocabulary词的处理，尤其是做新闻类摘要的生成时，很多词都是人名、机构名等专有名词，所以这里需要用copy net 将输入中的词copy过来生成输出。在生成中文摘要问题上，将words降维到characters可以避免oov的问题，并且取得不错的结果。</p>
-<p>接下来想做的事情是将neural summarization相关的paper精读之后写成blog。</p>
-<h1 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1409.3215" target="_blank" rel="external">Sequence to Sequence Learning with Neural Networks</a></p>
-<p>[2] <a href="http://cn.arxiv.org/pdf/1509.00685" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></p>
-<p>[3] <a href="http://cn.arxiv.org/pdf/1506.05865" target="_blank" rel="external">LCSTS: A Large Scale Chinese Short Text Summarization Dataset</a></p>
-<p>[4] <a href="http://cn.arxiv.org/pdf/1603.06393" target="_blank" rel="external">Incorporating Copying Mechanism in Sequence-to-Sequence Learning</a></p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3298,7 +3285,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>75</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>76</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3334,7 +3321,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>93</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>94</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

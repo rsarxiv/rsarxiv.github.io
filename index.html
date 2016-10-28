@@ -65,6 +65,128 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-10-28T04:54:20.000Z"><a href="/2016/10/27/PaperWeekly-第十一期/">2016-10-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/10/27/PaperWeekly-第十一期/">PaperWeekly 第十一期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Memory Networks是由Facebook的Jason Weston等人提出的一个神经网络框架，通过引入长期记忆组件(long-term memory component)来解决神经网络长程记忆困难的问题。在此框架基础上，发展出许多Memory Networks的变体模型，本期精选了5篇Memory Networks相关的论文，分别如下：</p>
+<p>1、Memory Networks<br>2、End-To-End Memory Networks<br>3、Ask Me Anything: Dynamic Memory Networks for Natural Language Processing<br>4、THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS<br>5、Key-Value Memory Networks for Directly Reading Documents</p>
+<h1 id="Memory-Networks"><a href="#Memory-Networks" class="headerlink" title="Memory Networks"></a><a href="https://arxiv.org/abs/1410.3916" target="_blank" rel="external">Memory Networks</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jason Weston, Sumit Chopra, Antoine Bordes</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Memory Network</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2015</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>为解决长期记忆问题, 提出一类称为Memory Networks的模型框架, 基于该框架构造的模型可以拥有长期(大量)和易于读写的记忆。</p>
+<h2 id="模型和思路"><a href="#模型和思路" class="headerlink" title="模型和思路"></a>模型和思路</h2><p>Memory Networks可以理解为一种构造模型的框架, 该类模型由如下五部分组成:</p>
+<p>1、记忆m: 模型记忆的表示,由一个记忆槽列表[m<sub>1</sub>-m<sub>i</sub>]组成,可被G,O组件读写<br>2、组件I (input feature map): 将模型输入转化模型内部特征空间中特征表示<br>3、组件G (generalization): 在模型获取新输入时更新记忆m，可以理解为记忆存储<br>4、组件O (output feature map): 根据模型输入和记忆m输出对应于模型内部特征空间中特征表示，可以理解为读取记忆<br>5、组件R(response): 将O组件输出的内部特征空间的表示转化为特定格式，比如文本。可以理解为把读取到抽象的记忆转化为具象的表示。</p>
+<p>假设模型输入为x:</p>
+<ul>
+<li>记忆的更新过程表示为 m<sub>H(x)</sub> = G(m<sub>i</sub>, I(X), m), ∀i, H(x)为选择记忆和遗忘机制</li>
+<li>记忆的读取过程表示为 r = R(O(I(x), m))</li>
+</ul>
+<p>再次强调Memory Networks是一类模型框架, 组件I,G,R,O可以使用不同的实现</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
+<li><a href="https://github.com/facebook/MemNN" target="_blank" rel="external">facebook MemNN实现</a></li>
+</ul>
+<h2 id="相关工作及引用"><a href="#相关工作及引用" class="headerlink" title="相关工作及引用"></a>相关工作及引用</h2><ul>
+<li>Facebook AI的进一步工作, 基于Memory Networks框架和神经网络实现了End-To-End的训练学习<br>Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus. End-To-End Memory Networks. arXiv:1503.08895  </li>
+</ul>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>文章提出了一个通用的解决长期记忆问题的算法框架, 框架中的每一个模块都可以变更成新的实现, 可以根据不同的应用场景进行适配。 </p>
+<h1 id="End-To-End-Memory-Networks"><a href="#End-To-End-Memory-Networks" class="headerlink" title="End-To-End Memory Networks"></a><a href="https://arxiv.org/pdf/1503.08895v5.pdf" target="_blank" rel="external">End-To-End Memory Networks</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston,  Rob Fergus</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Dept. of Computer Science Courant Institute, New York University<br>Facebook AI Research</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, End-to-end, Question Answer</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2015</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文提出了一个可以端到端训练的Memory Networks，并且在训练阶段比原始的Memory Networks需要更少的监督信息。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型包括单层和多层两种情况。下面先介绍单层情况，<br>1、单层<br>如图(a)所示，输入的序列可以通过不同的Embedding矩阵A和C分别被表示成Input和Output向量的集合。同样的，通过Embedding矩阵B，我们将Question表示成一个向量u，向量u和Input向量集合中的每个向量计算内积，然后通过softmax得到一个概率向量p（attention过程），概率向量p中的每一个概率值表示每个Output向量对应输出的权重大小。通过p和Output向量集合，对Output中的向量进行加权求和得到输出向量o，将输出向量o和问题向量u相加，再最后通过一个权值矩阵W和softmax来预测最终的label。</p>
+<p><img src="media/end_to_end.png" alt="end_to_end"></p>
+<p>2、 多层<br>多层的情况如图(b)所示，每层的输出向量o<sup>i</sup>和问题向量u<sup>i</sup>相加获得新的问题表示u<sup>i+1</sup>，然后重复上述单层的过程,直到最后一层通过softmax来预测label。</p>
+<p>本文在bAbi数据集、Penn Treebank以及Text8三个数据集上进行实验，均取得了较好的实验效果。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><ul>
+<li>[bAbi]<br>(<a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">https://research.facebook.com/research/babi/</a>)</li>
+</ul>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Memory Networks<br>Neural Turing Machines</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出的模型是在Facebook提出的原始Memory networks基础上进行的改进。在Memory networks的框架下，将原来依赖于中间监督信息的非端到端Memory networks改进为端到端的Memory networks。基础模型之外，本文针对时序编码提出了一些有趣的trick，可作参考。</p>
+<h1 id="Ask-Me-Anything-Dynamic-Memory-Networks-for-Natural-Language-Processing"><a href="#Ask-Me-Anything-Dynamic-Memory-Networks-for-Natural-Language-Processing" class="headerlink" title="Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"></a><a href="https://arxiv.org/abs/1506.07285" target="_blank" rel="external">Ask Me Anything: Dynamic Memory Networks for Natural Language Processing</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>MetaMind</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, Neural Networks, Question Answering</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>Question Answering: 给定一段Context，一个与此Context相关的Question，利用模型生成一个单词的Answer。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>下图给出了dynamic memory networks的框架。</p>
+<p><img src="media/model-image.png" alt="model-image"></p>
+<p>首先Context和Question都经过Gated Recurrent Unit(GRU)转换成成vector形式，分别作为episodic memories e和m储存下来。e代表的是一连串vectors，Context中每句话都会被转换成一个e vector，然而Question只会被转换成一个m vector。</p>
+<p>下一步是episodic memory updates，在每一个episode, 每一个e vector会和m计算一个attention，本文中使用一个two layer feed forward neural network计算attention score。然后利用attention scores来update episodic memories。</p>
+<p><img src="media/gate.png" alt="gate"></p>
+<p><img src="media/episodic-memory.png" alt="episodic-memory"></p>
+<p>输出答案也采用了一个GRU decoder</p>
+<p><img src="media/output.png" alt="output"></p>
+<p>这里的a0是最后一个memory state m。</p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p><a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">Facebook bAbI dataset</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><a href="https://arxiv.org/abs/1410.3916" target="_blank" rel="external">Memory Networks</a><br><a href="https://papers.nips.cc/paper/5846-end-to-end-memory-networks.pdf" target="_blank" rel="external">Eng-to-End Memory Networks</a><br><a href="https://arxiv.org/abs/1511.02301" target="_blank" rel="external">The Goldilocks Principle: Reading Children’s Books with Explicit Memory Representations</a></p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>总体来说这是一篇很有趣的文章。其中应用了episodically update memory的想法，期望模型能够借此学到一些logical reasoning的能力。并且模型中多次用的GRU，每一层都使用GRU的encoding或者decoding，比较有趣。</p>
+<p>然后我认为本文的写作有一些问题，比如我自始至终也没有找到e的下标究竟代表什么，我的理解是每一句话都被encode成一个e作为episodic memory，那么每次Update 其中一个e都要经过所有其他的e是为了更好的融合所有context sentences的信息吗？looks reasonable to me. </p>
+<p>那么每一层的hidden states h究竟又是什么？上一层的hidden state如何更新到下一层？文章中似乎没有给出明确的公式，也没有在model figure中展示出来，似乎写作不够明确。既然e是有h穿过层层GRU得到，我会揣测下一层的h是上一层e的一个function。总之感觉model这一块的解释不够清晰到位，变量太多有些混乱。</p>
+<p>然而总体来说，我觉得本文还是非常值得一读的。</p>
+<h1 id="THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS"><a href="#THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS" class="headerlink" title="THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS"></a><a href="https://arxiv.org/pdf/1511.02301v4.pdf" target="_blank" rel="external">THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Felix Hill, Antoine Bordes, Sumit Chopra &amp; JasonWeston</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks,self-supervised training,window-based memories,The Children’s Book Test(CBT)</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>本文对于语言模型（RNN/LSTM/Memory Network生成）到底能够多好或者在多大程度上表示The Children’s Book做了一项测试。测试结果表面Memor　Network上的效果最好。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>文中主要对比了一系列state-of-the-art的模型，每个用不同的方式对之前已经读过的文本进行编码，然后进行CBT评比。<br>实验中使用的模型以及结果如下：</p>
+<p><img src="media/CBT.png" alt="CBT"></p>
+<p>CBT简介：数据来自Project Gutenburg所创建的数据集，里面的内容都选自儿童书籍。每20句话产生一个问题，让不同的语言模型去进行预测，看谁预测的效果更好。<br>问题产生于20句话中的某一句话抠掉一个词A。候选集产生分为如下两步:<br>(1)从构成20句话的词表中随机选出和抠掉词A具有相同词性的词集合C 。<br>(2)从C中随机抽选10个词作为答案的备选集。<br>实验最后在CNN QA的语料上进行测试，在新闻文章中识别命名实体，得到的准确率能到<br>69.4%</p>
+<h2 id="资源-3"><a href="#资源-3" class="headerlink" title="资源"></a>资源</h2><p>n-gram language model:the KenLM toolkit (Scalable modified Kneser-Ney language<br>model estimation.)</p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>(1) MN:arXiv2015,Bordes,Large-scale simple question answering with memory networks.文中关于end to end的训练方法以及memory network的模型主要来自本篇<br>(2) NIPS2015,Sukhbaatar,End-to-end memory networks.<br>(3)EMNLP2015,Rush,A neural attention model for abstractive sentence summarization. Contextual LSTM模型的参考文章</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>本文提供了一种测试语言模型效果的测试方法，这对于语言模型的评判做出了贡献。<br>在做实验过程中，作者还发现在单层记忆表示中文本被编码的数量对结果有很大的影响：存在一个范围，使得单个词信息和整个句子的信息都得以较好的保留。</p>
+<h1 id="Key-Value-Memory-Networks-for-Directly-Reading-Documents"><a href="#Key-Value-Memory-Networks-for-Directly-Reading-Documents" class="headerlink" title="Key-Value Memory Networks for Directly Reading Documents"></a><a href="https://arxiv.org/pdf/1606.03126v2.pdf" target="_blank" rel="external">Key-Value Memory Networks for Directly Reading Documents</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Alexander H. Miller, Adam Fisch, Jesse Dodge, Amir-Hossein Karimi, Antoine Bordes, Jason Weston</p>
+<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research<br>Language Technologies Institute, Carnegie Mellon University</p>
+<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, Key-Value, Question Answering, Knowledge Bases</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv 2016</p>
+<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>鉴于知识库有知识稀疏、形式受限等问题，本文提出了一种可以通过直接读取文档来解决QA问题的新方法Key-Value Memory Networks。</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>如下图所示，Key-Value Memory Networks(KV-MemNNs)模型结构与End-to-end Memory Networks(MemN2N)基本相同，区别之处在于KV-MemNNs的寻址（addressing）阶段和输出阶段采用不同的编码（key和value）。<br><img src="media/key_value.png" alt="key_value"></p>
+<p>本文主要提出了以下几种Key-value方法：</p>
+<ol>
+<li>KB Triple<br>针对知识库中的三元组(subject, relation, object),将subject和relation作为Key，object作为Value。</li>
+<li>Sentence Level<br>将文档分割成多个句子，每个句子即作为Key也作为Value，该方法与MemN2N相同。</li>
+<li>Window Level<br>以文档中每个实体词为中心开一个窗口，将整个窗口作为Key，中间的实体词作为Value。</li>
+<li>Window + Center Encoding<br>该方法与Window Level基本相同，区别之处在于中心实体词与窗口中的其他词采用不同的Embedding。</li>
+<li>Window + Titile<br>很多情况下文章的题目可能包含答案，因此在上述提出的Window方法基础上，再添加如下Key-value对：Key为窗口，Value为文档对应的title。</li>
+</ol>
+<p>本文为了比较使用知识库、信息抽取和直接采用维基百科文档方法之间的效果，构建了新的语料WIKIMOVIES。实验结果表明，KV-MemNNs直接从文档读取信息比信息抽取方法的效果好，却仍比直接利用知识库的方法差不少。其中几种Key-Value方法中，“Window + Center Encoding”方法效果最好。此外，本文还在WikiQA上进行实验，验证了KV-MemNNs的效果。</p>
+<h2 id="资源-4"><a href="#资源-4" class="headerlink" title="资源"></a>资源</h2><ul>
+<li>[WikiQA]<br>(<a href="https://www.microsoft.com/en-us/download/details.aspx?id=52419" target="_blank" rel="external">https://www.microsoft.com/en-us/download/details.aspx?id=52419</a>)</li>
+<li>[WikiMovies]<br>(<a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">https://research.facebook.com/research/babi/</a>)</li>
+</ul>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>Memory Networks<br>End-TO-End Memory Networks<br>The Goldilocks Principle: Reading Children’s Books with Explicit Memory Representations</p>
+<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出了一个在新的Memory Networks变体Key-Value Memory Networks，旨在探索在QA过程中，如何消除采用知识库和自由文本（维基百科）之间的效果差距（gap），并为此构建了一个新的数据集WikiMovies。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>长程记忆（long-term memory）问题一直是深度学习中的一个难点，Attention机制就是解决这一问题的经典方法。本文介绍的几篇Memory Networks试图通过构建长期存储记忆组件来解决过去神经网络无法存储过长内容的问题。如何存储大量的外部信息以及如何利用这些外部信息推断是Memory Networks乃至很多NLP任务的难点。本期引入的这几篇论文中，Memory Networks提出了一个整体的框架，End-To-End Memory Networks使memory networks可以端到端的训练学习。Key-Value Memory Networks主要解决外部信息如何存储表示，而THE GOLDILOCKS PRINCIPLE这篇论文则在推理方面有所创新，直接利用attention的打分来预测答案。目前深度学习方法中，无论是存储更新长期记忆的方法还是结合长期记忆进行推理的方法都还很初级，仍需诸君努力前行。</p>
+<p>以上为本期Paperweekly的主要内容，感谢cain、destinwang、zeweichu、chunhualiu等四位同学的整理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-10-22T20:11:20.000Z"><a href="/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/">2016-10-22</a></time>
       
       
@@ -3154,52 +3276,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-06T18:49:03.000Z"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">2016-07-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>前几天因为去北京参加中文信息学会组织的深度学习“速成班”，一直都没空更新博客。今天分享的paper是昨天刚刚刷出的一篇关于自动文摘的paper，题目是<a href="http://cn.arxiv.org/pdf/1607.00718v1" target="_blank" rel="external">Towards Abstraction from Extraction: Multiple Timescale Gated Recurrent Unit for Summarization</a>。</p>
-<p>用seq2seq的思路来解决文本摘要问题仍停留在short text的生成水平上，最多到paragraph level。原因也比较简单，rnn也好，gru、lstm也罢，终究都面临着一个长程依赖的问题，虽然说gru、lstm等技术用gate机制在一定程度上缓解了长程依赖和梯度消失、爆炸的问题，但终究文本过长的话，神经网络的深度就会随之变得非常深，训练起来难度就会随之增加。所以，这也是为什么document level或者说multi document level的abstractive式的摘要生成问题至今都是一个难以解决的问题。确实，short text的理解、表示在一定程度上有了很大的突破，也可以在工程上有不错的应用，比如机器翻译。但text变了之后，一篇很长的文章如何更加准确地理解和表示是一个非常难的问题，attention是一个不错的解决方案，在decoder的部分不需要考虑encoder的全部，只需确定需要注意的几个点就可以了，其实人在看一篇长文的时候也是这样一种机制，从某种角度上来讲，attention在decoder时提供了一种降维的手段，让model更能捕捉到关键的信息。</p>
-<p>对于document level的abstractive摘要问题，人是怎么做的呢？比如我写了一篇paper，最后写abstract的部分，基本上是从每个section中提炼出key sentences，组成一段abstract，其实这里有一点extractive的意思，但人和extractive不同的地方在于可以轻松地将each sentence连贯地表达出来，看起来不那么僵硬，更加地顺畅，当然也不会出现指示代词找不到实体的情况。本文的思路正是借鉴了人类在解决这个问题时所采用的一般思路，数据源是arxiv paper中的introduction和abstract部分。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>将document分解成多个paragraph，然后从每个paragraph中extract出key sentence作为该paragraph的target summary，每个document可以构造出多个(paragraph,key sentence) pair作为seq2seq的训练数据。生成摘要的过程正好相反，将document分解成paragraph，对每个paragraph用model生成summary，将所有的summary拼接起来形成abstract，然后与paper自身的abstract作对比。</p>
-<p>这里从paragraph中提取key sentence用了最简单的TF-IDF来打分排序，当然给n个句子排序有很多的方法，比如textrank。(paragraph,key sentence) pair的训练是通过一个叫Multi Timescale Gated Recurrent Unit(MTGRU)模型来做的，这个模型乍一看好新鲜，其实是N年前一个叫做MTRNN模型将RNN替换为GRU的成果，gru、lstm的变种非常的多，本文的这个模型是其中一个，之所以选择用这个模型来解决问题，是因为多个timescale可以在收敛速度上有更大的优势，并且在自然语言这种层次性的问题上有天然的优势。model的结构如下图</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>在GRU的基础上增加一个时间项tao，用来控制gru的时间尺度，tao越大，表示model可以越好地捕捉序列数据中的slow features，不知道理解的对比对，这里的slow features是不是可以理解为更大的context window，控制着context的颗粒度。MTGRU可以看作是GRU的一般表示，当tao=1时，自动退化为GRU。</p>
-<p>与传统的GRU进行了对比实验，证明了该model在speed和performance上均有更好的表现。下图展示了生成的一些结果：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>输入的是本文的introduction部分，输出的是每段生成的summary。</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>这个是本文算法生成的摘要和纯extractive方法的对比，明显比extractive的方法概括地更加全面。</p>
-<p>本文是一篇占坑的文章，内容并不完整，提出了MTGRU model来替换一般的GRU，但并不是full data driven，用了一些extractive的手段来辅助进行训练，在文章的future work这部分作者也提到了下一步要做成一个真正的data driven的model，每个paragraph的target summary也是data driven的，而不是用extractive的提取出来的，我在想，是否可以构造一个hierarchy model，一个维度在训练paragraph到sentence的mapping，一个维度在训练document到abstract的mapping，这个idea可以认真琢磨下，也欢迎大家讨论。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3233,7 +3309,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>75</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>76</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3269,7 +3345,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>93</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>94</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

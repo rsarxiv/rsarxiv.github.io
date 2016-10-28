@@ -65,6 +65,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-10-28T23:35:04.000Z"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">2016-10-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">cs.CL weekly 2016.10.24-2016.10.28</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Iterative-Refinement-for-Machine-Translation"><a href="#Iterative-Refinement-for-Machine-Translation" class="headerlink" title="Iterative Refinement for Machine Translation"></a><a href="https://arxiv.org/pdf/1610.06602v2.pdf" target="_blank" rel="external">Iterative Refinement for Machine Translation</a></h2><p>【机器翻译】本文的研究内容针对机器翻译在解码阶段单调总是单调、不回溯地生成翻译结果的问题，作者提出了一种翻译方案，在解码时不断地回溯并且修正先前生成的结果。模型是CNN+attention。本文工作来自Facebook AI Research。</p>
+<h2 id="Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries"><a href="#Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries" class="headerlink" title="Bridging Neural Machine Translation and Bilingual Dictionaries"></a><a href="https://arxiv.org/pdf/1610.07272v1.pdf" target="_blank" rel="external">Bridging Neural Machine Translation and Bilingual Dictionaries</a></h2><p>【机器翻译】本文研究的内容是机器翻译中如何应用两门语言中罕见词和未登录词词典的问题，本文针对这一问题提出了两种方法。本文工作来自中科院@张家俊MT 老师。</p>
+<h2 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems</a></h2><p>【chatbot】开放域聊天机器人在回复时有两种常见的思路：1、基于检索 2、基于生成。第一种方法比较简单但答案相对死板，第二种方法灵活但常常出现“呵呵”式的回答。本文提出了一种集成方法，检索到的答案和用户的query一起作为输入，喂入模型（RNN）中，然后生成回答，新生成的回答作为candidate一起重排序来决定最终的回复。实验结果证明了本文的方法要比单种方法更有效。每个模型都有其优点和缺点，这种集成式的方法将各个模型的优点集成起来，效果会很不错。</p>
+<h2 id="EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji"><a href="#EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji" class="headerlink" title="EmojiNet: Building a Machine Readable Sense Inventory for Emoji"></a><a href="https://arxiv.org/pdf/1610.07710v1.pdf" target="_blank" rel="external">EmojiNet: Building a Machine Readable Sense Inventory for Emoji</a></h2><p>【语义网】本文构建的EmojiNet类似于词的WordNet，同一个Emoji表情在不同的上下文中有着不同的意思，而社交网络非常流行Emoji表情，构建这么一个语义网非常有意义。项目地址：<a href="http://emojinet.knoesis.org./" target="_blank" rel="external">http://emojinet.knoesis.org./</a></p>
+<h2 id="Can-Active-Memory-Replace-Attention"><a href="#Can-Active-Memory-Replace-Attention" class="headerlink" title="Can Active Memory Replace Attention?"></a><a href="https://arxiv.org/pdf/1610.08613v1.pdf" target="_blank" rel="external">Can Active Memory Replace Attention?</a></h2><p>【Memory Networks】Memory Networks和Attention是解决长距离依赖问题的两大方法，Attention模型在NLP的很多任务中都有更好的表现，本文对Memory Networks类模型的缺点进行了分析，并且提出了一种改进模型。改进版的memory模型有不错的表现，并且在长句子机器翻译任务中得到了验证。本文作者来自Google Brain。建议关注自然语言处理的童鞋，不管是关注什么任务，都应该精读一下本文。</p>
+<h2 id="CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases"><a href="#CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases" class="headerlink" title="CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases"></a><a href="https://arxiv.org/pdf/1610.08763v1.pdf" target="_blank" rel="external">CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases</a></h2><p>【信息抽取】本文提出了一种基于Distant Supervision对文本中命名实体和关系联合抽取的框架，克服了之前将两个任务分开做带来的误差影响，框架具有较强的扩展性和迁移性，建议精读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Reddit大型评论数据集"><a href="#Reddit大型评论数据集" class="headerlink" title="Reddit大型评论数据集"></a><a href="https://www.reddit.com/r/datasets/comments/59039y/updated_reddit_comment_dataset_up_to_201608/" target="_blank" rel="external">Reddit大型评论数据集</a></h2><p>【数据集】Reddit大型评论数据集，用于情感分析研究。</p>
+<h2 id="微软lightGBM框架的python接口"><a href="#微软lightGBM框架的python接口" class="headerlink" title="微软lightGBM框架的python接口"></a><a href="https://github.com/ArdalanM/pyLightGBM" target="_blank" rel="external">微软lightGBM框架的python接口</a></h2><p>【开源框架】ArdalanM/pyLightGBM: Python binding for Microsoft LightGBM </p>
+<h2 id="中文对白语料：可用作聊天机器人训练语料"><a href="#中文对白语料：可用作聊天机器人训练语料" class="headerlink" title="中文对白语料：可用作聊天机器人训练语料"></a><a href="https://github.com/rustch3n/dgk_lost_conv" target="_blank" rel="external">中文对白语料：可用作聊天机器人训练语料</a></h2><p>【数据集】chinese conversation corpus by BiNgFeng GitHub</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-10-28T04:54:20.000Z"><a href="/2016/10/27/PaperWeekly-第十一期/">2016-10-27</a></time>
       
       
@@ -3238,44 +3279,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-06T20:08:50.000Z"><a href="/2016/07/06/cips总结和思考/">2016-07-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/06/cips总结和思考/">cips总结和思考</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>前几天在北京参加了一个深度学习的“速成班”，由中文信息学会（cips）举办的。一共分为四天，上午由一名老师讲授理论和前沿技术的发展情况，下午由一名刚刚毕业的博士讲授用tensorflow来实现上午的部分内容。覆盖的范围包括神经网络与表示学习，以及应用于自然语言处理中的神经网络模型。都是国内一线的老师在讲，所以内容的质量非常高，来参加课程的同学也都非常的热情，去的晚了连个像样的座位都找不到，每次茶歇时间，老师都会被围得水泄不通。</p>
-<p>深度学习非常火爆，很多人都在传言学会了深度学习就可以拿到高薪，甚至都可以to be someone，说的神乎其神，将深度学习等价于几十万、几百万的年薪。个人感觉这样的说法并不负责任，有点过度宣传的意思，与之相关的培训班也跟着水涨船高，且不论教学质量如何，确实涌现出了很多的教学、培训班来为学生们提供捷径，质量良莠不齐，学生们觉得上了你这个基础班、提高班之后就会有一份特别棒的工作和薪水。这样的事情有点像迷信神一样，传教士们将舆论造好，说的神乎其神，然后开始传教，让大家来信教，小白们本身就没有太多的判断力，只是单纯地相信传教士们，相信这个世界有捷径通往成功。其实，仔细想一想，怎么可能？不管火的是深度学习还是别的技术，让你能够找到一个不错的工作或者不错的薪水都是需要具备很强的数学基础和编程实现能力，以及超强的学习能力，从而跟得上技术的发展，而不是说跟着几个班学过之后，就能够如何如何。大家盲目地追逐捷径，却忽略了本质问题，实在是令人觉得可笑，微博上总能看到一些懂deep learning的人可以拿到多少多少薪水，会用什么工具或者开发过什么工具的人可以拿到多少多少薪水，这些言论会让大家变得浮躁。虽然说deep learning很火，大家也看的很热闹，那么到底有多少人可以从深层次的角度上或者说数学层面上理解了deep learning？</p>
-<p>随波逐流不难，难的是坚持自我。tensorflow很火，所以大家都开始转tensorflow，mxnet在微博上被人转来转去，再加上“mxnet的主创人员都拿到了几百万的年薪”这一微博发出之后，有一种mxnet暗流涌动的感觉。这个问题，我是这么看的，流行确实有流行的原因，但公关的因素也不少，但是往往大家分不清真的好用还是大公司在公关，但工具毕竟是工具，选择了一个趁手的兵器就应该坚持用下去，而不是根据别人的言论而改变自己的初衷。因为工具只是工具，目的就是为了快速地实现模型，得到结果，torch、theano、tf、mxnet、caffee哪种用熟练了，用到了极致都是高手，不需要那么地盲目崇拜。</p>
-<p>上面的言论是我自己的一些观点，并不针对特定的人和工具，世上没有偏见，只是角度不同、理解不同产生了偏见。对一个事物的认识和学习，都是要经历一个迷信和质疑的过程，所谓尽信书则不如无书，有自己的观点和态度不仅仅是一个严肃的媒体应该具备的特质，一个有独立思考能力的人都应该有自己的态度和认知。</p>
-<p>这次的课程上午的内容都非常的棒，下午的内容个人觉得有一点鸡肋，用tf来实现一些model，像是编程实验课，但课时太短，大家没有太多动手和思考的时间，有一点点填鸭地感觉。编程从来都应该是一个实践课，编程能力都是自己一行一行写出来的，不是从谁那里听来的，从0开始学，照着docs和demo一边写一边学，遇到不懂的地方，在github上发起issue来讨论或者在其他的论坛上进行讨论，step by step地学习，或早或晚地一定会get到这个技能。我个人觉得下午的时间还不如将上午的内容进行更加深入地讲解，因为明显感觉地到上午老师讲的有一点点赶，讲的不够充分和透彻，时间快到了12点的时候，开始慌张地收尾，还真如下午继续讲呢。</p>
-<p>学习这个事情，没有什么捷径，理解一个概念，理解一行代码，理解一个框架都需要你扎扎实实地去实践、去体会，不是谁能够给你的。这次所谓的“速成班”就是帮你打开一扇窗，让你在一个更大的空间里来理解这个世界，至于怎么理解和理解地怎么样都只有靠自己。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3309,7 +3312,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>76</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>77</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3345,7 +3348,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>94</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>95</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

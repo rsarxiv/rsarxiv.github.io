@@ -3,16 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION #PaperWeekly# | PaperWeekly</title>
+  <title>cs.CL weekly 2016.10.24-2016.10.28 | PaperWeekly</title>
   
   
-  <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
-前面几篇文章分享的都是seq2seq和attention model在机器翻译领域中的应用，在自动文摘系列文章中也分享了六七篇在自动文摘领域中的应用。本文将分享的这篇文章研究了seq2seq+attention在textual entailment领域的应用">
+  <meta name="description" content="一周值得读Iterative Refinement for Machine Translation【机器翻译】本文的研究内容针对机器翻译在解码阶段单调总是单调、不回溯地生成翻译结果的问题，作者提出了一种翻译方案，在解码时不断地回溯并且修正先前生成的结果。模型是CNN+attention。本文工作来自">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION #PaperWeekly#"/>
+  <meta property="og:title" content="cs.CL weekly 2016.10.24-2016.10.28"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -67,39 +66,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-03T14:06:55.000Z"><a href="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/">2016-06-03</a></time>
+        <time datetime="2016-10-28T23:35:04.000Z"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">2016-10-28</a></time>
       
       
   
-    <h1 class="title">REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION #PaperWeekly#</h1>
+    <h1 class="title">cs.CL weekly 2016.10.24-2016.10.28</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>前面几篇文章分享的都是seq2seq和attention model在机器翻译领域中的应用，在自动文摘系列文章中也分享了六七篇在<a href="http://rsarxiv.github.io/tags/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98/">自动文摘</a>领域中的应用。本文将分享的这篇文章研究了seq2seq+attention在<a href="https://en.wikipedia.org/wiki/Textual_entailment" target="_blank" rel="external">textual entailment</a>领域的应用。本文题目是<a href="http://arxiv.org/pdf/1509.06664.pdf" target="_blank" rel="external">REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION</a>，作者是来自英国伦敦大学学院的<a href="http://rockt.github.io/" target="_blank" rel="external">Tim Rocktaschel</a>博士（后面两个作者来自Google Deepmind），文章于2015年9月放在arxiv上，被ICLR 2016录用。</p>
-<p>首先，介绍一下文本蕴藏（textual entailment）是一个怎样的任务，简单点说就是用来判断两个文本序列之间的是否存在推断关系，是一个分类问题（具体可参见Wikipedia）。两个文本序列分别称为premise和hypothesis。</p>
-<p>本文最大的贡献在于：</p>
-<p>1、将end2end的思想应用到了文本蕴藏领域，取得了不错的效果。</p>
-<p>2、提出了一种seq2seq模型、两种attention模型和一种trick模型。</p>
-<p>本篇关注的重点在于四种模型的构建，来看模型架构图：</p>
-<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig1.png" width="600" height="600">
-<p>图中A是我们最熟悉的简单seq2seq模型，本文称为conditional encoding模型；B是本文提出的Attention模型，context与之前分享的都不一样；C是我们之前介绍过的attention模型，本文称为word-by-word attention模型。</p>
-<p>1、首先介绍A模型。将premise和hypothesis认为是source和target，即用encoder来处理premise，用decoder来处理hypothesis，只不过这里的decoder并不是一个语言模型，而只是一个和encoder一样的LSTM，decoder的输入是encoder的最后一个hidden state，对应图中的c5和h5。最后decoder的输出是一个联合表示premise和hypothesis的向量，用于最终的分类。</p>
-<p>2、介绍B模型。该任务和机器翻译不同，并不一定需要做所谓的soft alignment，而是只需要表示好两个句子之间的关系即可，因此这个模型的想法是将hypothesis的句子表示与premise建立注意力机制，而不是将hypothesis的每个单词都与premise做alignment。从上图中标记B的地方也可以看出，attention仅仅依赖于hypothesis的last hidden state。结果可以参看下图：</p>
-<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig2.png" width="600" height="600">
-<p>从图中可以看出hypothesis与premise中哪些词相关性更强。</p>
-<p>3、介绍C模型。这个模型与我们之前一直分享的attention模型一致，模型对hypothesis和premise每个单词做了alignment，所以这里称为word-by-word attention，从模型架构图中也可以看出，hypothesis中的每个词都与premise中对应的词进行了alignment。这里并不是生成单词，而是建立起两个文本序列之间的关系。结果可以参看下图：</p>
-<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig3.png" width="600" height="600">
-<p>图中表示的是alignment矩阵，更暗的地方表示这两个词更加相关。</p>
-<p>4、最后一种模型称为two-way模型，其实是一个trick，借鉴了BiRNN的思想，使用两个相同参数的LSTM，第一个LSTM从一个方向上对基于hypothesis的premise进行表示，而第二个LSTM从相反的方向上对基于premise的hypothesis进行表示，最终得到两个句子表示，拼接起来作为分类的输入。（过程与BiRNN类似，从两个方向上对hypothesis-premise进行了表示，可与前面的模型组合使用，从结果上来看并没有什么明显的作用）</p>
-<p>最后的实验结果表明，采用模型C，即word-by-word attention模型效果最好，其次是B模型，最差的是A模型。结果与预期基本符合，但加了two-way的效果并没有更好，反而更差。作者分析说用了相同的参数来做two-way可能会给训练给来更多的噪声影响，所以效果并不好。</p>
-<p>整体上来说，seq2seq+attention的组合给很多研究领域带来了春天，给了研究者们更多的启发，attention的形式有多种，可能针对不同的问题，不同的attention会带来不同的效果，也不好说哪一种一定更加适合某一个特定的任务，所以需要去不断地探索。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Iterative-Refinement-for-Machine-Translation"><a href="#Iterative-Refinement-for-Machine-Translation" class="headerlink" title="Iterative Refinement for Machine Translation"></a><a href="https://arxiv.org/pdf/1610.06602v2.pdf" target="_blank" rel="external">Iterative Refinement for Machine Translation</a></h2><p>【机器翻译】本文的研究内容针对机器翻译在解码阶段单调总是单调、不回溯地生成翻译结果的问题，作者提出了一种翻译方案，在解码时不断地回溯并且修正先前生成的结果。模型是CNN+attention。本文工作来自Facebook AI Research。</p>
+<h2 id="Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries"><a href="#Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries" class="headerlink" title="Bridging Neural Machine Translation and Bilingual Dictionaries"></a><a href="https://arxiv.org/pdf/1610.07272v1.pdf" target="_blank" rel="external">Bridging Neural Machine Translation and Bilingual Dictionaries</a></h2><p>【机器翻译】本文研究的内容是机器翻译中如何应用两门语言中罕见词和未登录词词典的问题，本文针对这一问题提出了两种方法。本文工作来自中科院@张家俊MT 老师。</p>
+<h2 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems</a></h2><p>【chatbot】开放域聊天机器人在回复时有两种常见的思路：1、基于检索 2、基于生成。第一种方法比较简单但答案相对死板，第二种方法灵活但常常出现“呵呵”式的回答。本文提出了一种集成方法，检索到的答案和用户的query一起作为输入，喂入模型（RNN）中，然后生成回答，新生成的回答作为candidate一起重排序来决定最终的回复。实验结果证明了本文的方法要比单种方法更有效。每个模型都有其优点和缺点，这种集成式的方法将各个模型的优点集成起来，效果会很不错。</p>
+<h2 id="EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji"><a href="#EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji" class="headerlink" title="EmojiNet: Building a Machine Readable Sense Inventory for Emoji"></a><a href="https://arxiv.org/pdf/1610.07710v1.pdf" target="_blank" rel="external">EmojiNet: Building a Machine Readable Sense Inventory for Emoji</a></h2><p>【语义网】本文构建的EmojiNet类似于词的WordNet，同一个Emoji表情在不同的上下文中有着不同的意思，而社交网络非常流行Emoji表情，构建这么一个语义网非常有意义。项目地址：<a href="http://emojinet.knoesis.org./" target="_blank" rel="external">http://emojinet.knoesis.org./</a></p>
+<h2 id="Can-Active-Memory-Replace-Attention"><a href="#Can-Active-Memory-Replace-Attention" class="headerlink" title="Can Active Memory Replace Attention?"></a><a href="https://arxiv.org/pdf/1610.08613v1.pdf" target="_blank" rel="external">Can Active Memory Replace Attention?</a></h2><p>【Memory Networks】Memory Networks和Attention是解决长距离依赖问题的两大方法，Attention模型在NLP的很多任务中都有更好的表现，本文对Memory Networks类模型的缺点进行了分析，并且提出了一种改进模型。改进版的memory模型有不错的表现，并且在长句子机器翻译任务中得到了验证。本文作者来自Google Brain。建议关注自然语言处理的童鞋，不管是关注什么任务，都应该精读一下本文。</p>
+<h2 id="CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases"><a href="#CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases" class="headerlink" title="CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases"></a><a href="https://arxiv.org/pdf/1610.08763v1.pdf" target="_blank" rel="external">CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases</a></h2><p>【信息抽取】本文提出了一种基于Distant Supervision对文本中命名实体和关系联合抽取的框架，克服了之前将两个任务分开做带来的误差影响，框架具有较强的扩展性和迁移性，建议精读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Reddit大型评论数据集"><a href="#Reddit大型评论数据集" class="headerlink" title="Reddit大型评论数据集"></a><a href="https://www.reddit.com/r/datasets/comments/59039y/updated_reddit_comment_dataset_up_to_201608/" target="_blank" rel="external">Reddit大型评论数据集</a></h2><p>【数据集】Reddit大型评论数据集，用于情感分析研究。</p>
+<h2 id="微软lightGBM框架的python接口"><a href="#微软lightGBM框架的python接口" class="headerlink" title="微软lightGBM框架的python接口"></a><a href="https://github.com/ArdalanM/pyLightGBM" target="_blank" rel="external">微软lightGBM框架的python接口</a></h2><p>【开源框架】ArdalanM/pyLightGBM: Python binding for Microsoft LightGBM </p>
+<h2 id="中文对白语料：可用作聊天机器人训练语料"><a href="#中文对白语料：可用作聊天机器人训练语料" class="headerlink" title="中文对白语料：可用作聊天机器人训练语料"></a><a href="https://github.com/rustch3n/dgk_lost_conv" target="_blank" rel="external">中文对白语料：可用作聊天机器人训练语料</a></h2><p>【数据集】chinese conversation corpus by BiNgFeng GitHub</p>
 
       
     </div>
@@ -109,7 +94,7 @@
         
   
   <div class="tags">
-    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/attention/">attention</a>
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
   </div>
 
         
@@ -152,7 +137,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

@@ -5,10 +5,41 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-10-28T04:57:41.000Z</updated>
+  <updated>2016-10-28T23:46:21.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cs.CL weekly 2016.10.24-2016.10.28</title>
+    <link href="http://rsarxiv.github.io/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/"/>
+    <id>http://rsarxiv.github.io/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/</id>
+    <published>2016-10-28T23:35:04.000Z</published>
+    <updated>2016-10-28T23:46:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Iterative-Refinement-for-Machine-Translation"><a href="#Iterative-Refinement-for-Machine-Translation" class="headerlink" title="Iterative Refinement for Machine Translation"></a><a href="https://arxiv.org/pdf/1610.06602v2.pdf" target="_blank" rel="external">Iterative Refinement for Machine Translation</a></h2><p>【机器翻译】本文的研究内容针对机器翻译在解码阶段单调总是单调、不回溯地生成翻译结果的问题，作者提出了一种翻译方案，在解码时不断地回溯并且修正先前生成的结果。模型是CNN+attention。本文工作来自Facebook AI Research。</p>
+<h2 id="Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries"><a href="#Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries" class="headerlink" title="Bridging Neural Machine Translation and Bilingual Dictionaries"></a><a href="https://arxiv.org/pdf/1610.07272v1.pdf" target="_blank" rel="external">Bridging Neural Machine Translation and Bilingual Dictionaries</a></h2><p>【机器翻译】本文研究的内容是机器翻译中如何应用两门语言中罕见词和未登录词词典的问题，本文针对这一问题提出了两种方法。本文工作来自中科院@张家俊MT 老师。</p>
+<h2 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems</a></h2><p>【chatbot】开放域聊天机器人在回复时有两种常见的思路：1、基于检索 2、基于生成。第一种方法比较简单但答案相对死板，第二种方法灵活但常常出现“呵呵”式的回答。本文提出了一种集成方法，检索到的答案和用户的query一起作为输入，喂入模型（RNN）中，然后生成回答，新生成的回答作为candidate一起重排序来决定最终的回复。实验结果证明了本文的方法要比单种方法更有效。每个模型都有其优点和缺点，这种集成式的方法将各个模型的优点集成起来，效果会很不错。</p>
+<h2 id="EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji"><a href="#EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji" class="headerlink" title="EmojiNet: Building a Machine Readable Sense Inventory for Emoji"></a><a href="https://arxiv.org/pdf/1610.07710v1.pdf" target="_blank" rel="external">EmojiNet: Building a Machine Readable Sense Inventory for Emoji</a></h2><p>【语义网】本文构建的EmojiNet类似于词的WordNet，同一个Emoji表情在不同的上下文中有着不同的意思，而社交网络非常流行Emoji表情，构建这么一个语义网非常有意义。项目地址：<a href="http://emojinet.knoesis.org./" target="_blank" rel="external">http://emojinet.knoesis.org./</a></p>
+<h2 id="Can-Active-Memory-Replace-Attention"><a href="#Can-Active-Memory-Replace-Attention" class="headerlink" title="Can Active Memory Replace Attention?"></a><a href="https://arxiv.org/pdf/1610.08613v1.pdf" target="_blank" rel="external">Can Active Memory Replace Attention?</a></h2><p>【Memory Networks】Memory Networks和Attention是解决长距离依赖问题的两大方法，Attention模型在NLP的很多任务中都有更好的表现，本文对Memory Networks类模型的缺点进行了分析，并且提出了一种改进模型。改进版的memory模型有不错的表现，并且在长句子机器翻译任务中得到了验证。本文作者来自Google Brain。建议关注自然语言处理的童鞋，不管是关注什么任务，都应该精读一下本文。</p>
+<h2 id="CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases"><a href="#CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases" class="headerlink" title="CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases"></a><a href="https://arxiv.org/pdf/1610.08763v1.pdf" target="_blank" rel="external">CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases</a></h2><p>【信息抽取】本文提出了一种基于Distant Supervision对文本中命名实体和关系联合抽取的框架，克服了之前将两个任务分开做带来的误差影响，框架具有较强的扩展性和迁移性，建议精读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Reddit大型评论数据集"><a href="#Reddit大型评论数据集" class="headerlink" title="Reddit大型评论数据集"></a><a href="https://www.reddit.com/r/datasets/comments/59039y/updated_reddit_comment_dataset_up_to_201608/" target="_blank" rel="external">Reddit大型评论数据集</a></h2><p>【数据集】Reddit大型评论数据集，用于情感分析研究。</p>
+<h2 id="微软lightGBM框架的python接口"><a href="#微软lightGBM框架的python接口" class="headerlink" title="微软lightGBM框架的python接口"></a><a href="https://github.com/ArdalanM/pyLightGBM" target="_blank" rel="external">微软lightGBM框架的python接口</a></h2><p>【开源框架】ArdalanM/pyLightGBM: Python binding for Microsoft LightGBM </p>
+<h2 id="中文对白语料：可用作聊天机器人训练语料"><a href="#中文对白语料：可用作聊天机器人训练语料" class="headerlink" title="中文对白语料：可用作聊天机器人训练语料"></a><a href="https://github.com/rustch3n/dgk_lost_conv" target="_blank" rel="external">中文对白语料：可用作聊天机器人训练语料</a></h2><p>【数据集】chinese conversation corpus by BiNgFeng GitHub</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Iterative-Refinement-for-Machine-Translation&quot;&gt;&lt;a href
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十一期</title>
@@ -1344,40 +1375,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;历经半个月时间终于发布了新一期PaperWeekly，大家久等了。在这个半个月里，PaperWeekly发生了一些明显的变化。维护和运营从我一个人变
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.08.22-2016.08.26</title>
-    <link href="http://rsarxiv.github.io/2016/08/26/cs-CL-weekly-2016-08-22-2016-08-26/"/>
-    <id>http://rsarxiv.github.io/2016/08/26/cs-CL-weekly-2016-08-22-2016-08-26/</id>
-    <published>2016-08-26T16:20:19.000Z</published>
-    <updated>2016-08-26T16:36:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这个栏目是将一周内arxiv cs.CL刷出的好文进行一个简单的汇总，并配有一句话总结，旨在帮助大家过滤掉cs.CL上的水文，并且为PaperWeekly团队选文提供高质量paper。</p>
-<h1 id="Learning-Word-Embeddings-from-Intrinsic-and-Extrinsic-Views"><a href="#Learning-Word-Embeddings-from-Intrinsic-and-Extrinsic-Views" class="headerlink" title="Learning Word Embeddings from Intrinsic and Extrinsic Views"></a><a href="http://120.52.73.78/arxiv.org/pdf/1608.05852v1.pdf" target="_blank" rel="external">Learning Word Embeddings from Intrinsic and Extrinsic Views</a></h1><p>本文提出了一种依靠intrinsic (descriptive) and extrinsic (contextual) information来学习词向量的方法，有效解决了传统方法中对低频词学习存在的问题。 </p>
-<h1 id="Context-Gates-for-Neural-Machine-Translation"><a href="#Context-Gates-for-Neural-Machine-Translation" class="headerlink" title="Context Gates for Neural Machine Translation"></a><a href="http://120.52.73.78/arxiv.org/pdf/1608.06043v1.pdf" target="_blank" rel="external">Context Gates for Neural Machine Translation</a></h1><p>本文提出了一种context gate来动态地控制机器翻译中source、target context对word generation的影响，实验证明在BLEU指标下比attention-based的方法提高了2.3。</p>
-<h1 id="Topic-Sensitive-Neural-Headline-Generation"><a href="#Topic-Sensitive-Neural-Headline-Generation" class="headerlink" title="Topic Sensitive Neural Headline Generation"></a><a href="http://120.52.73.80/arxiv.org/pdf/1608.05777v1.pdf" target="_blank" rel="external">Topic Sensitive Neural Headline Generation</a></h1><p>本文针对传统模型中忽略topical similarities和differences of documents的问题，提出了一种新方案，先将documents按照topics分类，每一类中的pattern比较接近，然后再做sentence level summary，得到了更好的效果。 </p>
-<h1 id="Towards-Machine-Comprehension-of-Spoken-Content-Initial-TOEFL-Listening-Comprehension-Test-by-Machine"><a href="#Towards-Machine-Comprehension-of-Spoken-Content-Initial-TOEFL-Listening-Comprehension-Test-by-Machine" class="headerlink" title="Towards Machine Comprehension of Spoken Content: Initial TOEFL Listening Comprehension Test by Machine"></a><a href="http://120.52.73.77/arxiv.org/pdf/1608.06378v1.pdf" target="_blank" rel="external">Towards Machine Comprehension of Spoken Content: Initial TOEFL Listening Comprehension Test by Machine</a></h1><p>本文以托福听力题作为数据集，尝试对多媒体信息进行理解。听力问题是听完一段话，理解之后，进行4选1，而不是之前常见的cloze-style理解任务。</p>
-<h1 id="A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems"><a href="#A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems" class="headerlink" title="A Context-aware Natural Language Generator for Dialogue Systems"></a><a href="http://120.52.73.79/arxiv.org/pdf/1608.07076v1.pdf" target="_blank" rel="external">A Context-aware Natural Language Generator for Dialogue Systems</a></h1><p>本文的模型是一种端到端的模型，根据上下文和用户说话的方式来生成对话。是一篇SIGDIAL 2016 short paper。配套的代码已发布于<a href="https://github.com/UFAL-DSG/tgen" target="_blank" rel="external">Github</a></p>
-<h1 id="About"><a href="#About" class="headerlink" title="About"></a>About</h1><p>对NLP高质量原创内容和讨论感兴趣的你，赶快来关注：</p>
-<p>1、PaperWeekly<a href="http://weibo.com/2678093863/" target="_blank" rel="external">官方微博</a></p>
-<p>2、PaperWeekly官方微信</p>
-<p><img src="media/qrcode_for_gh_5138cebd4585_430.jpg" alt="qrcode_for_gh_5138cebd4585_430"></p>
-<p>3、PaperWeekly<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">知乎专栏</a></p>
-<p>4、PaperWeekly微信交流群（+微信zhangjun168305入群）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;这个栏目是将一周内arxiv cs.CL刷出的好文进行一个简单的汇总，并配有一句话总结，旨在帮助大家过滤掉cs.CL上的水文，并且为Pape
     
     </summary>
     

@@ -65,6 +65,113 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-04T02:47:13.000Z"><a href="/2016/11/03/PaperWeekly-第十二期/">2016-11-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/03/PaperWeekly-第十二期/">PaperWeekly 第十二期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>文本摘要是自然语言处理的一大经典任务，研究的历史比较长。随着目前互联网生产出的文本数据越来越多，文本信息过载问题越来越严重，对各类文本进行一个“降维”处理显得非常必要，文本摘要便是其中一个重要的手段。传统的文本摘要方法，不管是句子级别、单文档还是多文档摘要，都严重依赖特征工程，随着深度学习的流行以及seq2seq+attention模型在机器翻译领域中的突破，文本摘要任务也迎来了一种全新的思路。本期PaperWeekly将会分享4篇在这方面做得非常出色的paper：</p>
+<p>1、A Neural Attention Model for Abstractive Sentence Summarization, 2015<br>2、Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond, 2016<br>3、Neural Summarization by Extracting Sentences and Words, 2016<br>4、AttSum: Joint Learning of Focusing and Summarization with Neural Attention, 2016</p>
+<h1 id="A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization"><a href="#A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization" class="headerlink" title="A Neural Attention Model for Abstractive Sentence Summarization"></a><a href="https://aclweb.org/anthology/D/D15/D15-1044.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Rush, A. M., Chopra, S., &amp; Weston, J.</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research / Harvard SEAS</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Neural Attention, Abstractive Sentence Summarization</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇来自Facebook的paper的主题是基于attention based NN的生成式句子摘要/压缩。</p>
+<p><img src="media/emnlp.JPG" alt="1"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该工作使用提出了一种encoder-decoder框架下的句子摘要模型。</p>
+<p><img src="media/emnlp2.JPG" alt="encoder"></p>
+<p>作者在文章中介绍了三种不同的encoding方法，分别为：</p>
+<ol>
+<li>Bag-of-Words Encoder。词袋模型即将输入句子中词的词向量进行平均。</li>
+<li>CNN encoder</li>
+<li>Attention-Based Encoder。该encoder使用CNN对已生成的最近c（c为窗口大小）个词进行编码,再用编码出来的context向量对输入句子做attention，从而实现对输入的加权平均。</li>
+</ol>
+<p>模型中的decoder为修改过的NNLM，具体地：</p>
+<p><img src="media/emnlp3.JPG" alt="1"></p>
+<p>式中$$y_c$$为已生成的词中大小为c的窗口，与encoder中的Attention-Based Encoder同义。</p>
+<p>与目前主流的基于seq2seq的模型不同，该模型中encoder并未采用流行的RNN。</p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>该文章使用了English Gigaword作为语料，选择新闻中的首句作为输入，新闻标题作为输出，以此构建平行语料。<br>具体的数据构建方法参见文章。</p>
+<p>此外，该文章还使用了DUC2004作为测试集。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>在调研范围内，该文章是使用attention机制进行摘要的第一篇。且作者提出了利用Gigaword构建大量平行句对的方法，使得利用神经网络训练成为可能，之后多篇工作都使用了该方法构建训练数据。</p>
+<h1 id="Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond"><a href="#Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond" class="headerlink" title="Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond"></a><a href="https://aclweb.org/anthology/K/K16/K16-1028.pdf" target="_blank" rel="external">Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Nallapati, Ramesh, et al.</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>IBM Watson</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, Summarization</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>In CoNLL 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>该工作主要研究了基于seq2seq模型的生成式文本摘要。<br>该文章不仅包括了句子压缩方面的工作，还给出了一个新的文档到多句子的数据集。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/conll.jpg" alt=""></p>
+<p>该文章使用了常用的seq2seq作为基本模型，并在其基础上添加了很多feature：</p>
+<ol>
+<li>Large Vocabulary Trick。<br>参见Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. 2014. On using very large target vocabulary for neural machine translation. CoRR, abs/1412.2007.</li>
+<li><p>添加feature。例如POS tag， TF、IDF， NER tag等。这些feature会被embed之后与输入句子的词向量拼接起来作为encoder的输入。</p>
+</li>
+<li><p>pointing / copy 机制。使用一个gate来判断是否要从输入句子中拷贝词或者使用decoder生成词。参见ACL 2016的两篇相关paper。</p>
+</li>
+<li><p>Hierarchical Attention。这是用于文章摘要中多句子的attention，思路借鉴了Jiwei Li的一篇auto encoder的工作。大致思路为使用句子级别的weight对句子中的词进行re-scale。</p>
+</li>
+</ol>
+<h2 id="数据-1"><a href="#数据-1" class="headerlink" title="数据"></a>数据</h2><ol>
+<li>English Gigaword</li>
+<li>DUC 2004</li>
+<li>提出了CNN/Daily Mail Corpus</li>
+</ol>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>该工作为在第一篇文章基础上的改进工作，做了大量的实验，非常扎实。文章提出的feature-rich encoder对其他工作也有参考意义，即将传统方法中的特征显示地作为神经网络的输入，提高了效果。</p>
+<h1 id="Neural-Summarization-by-Extracting-Sentences-and-Words"><a href="#Neural-Summarization-by-Extracting-Sentences-and-Words" class="headerlink" title="Neural Summarization by Extracting Sentences and Words"></a><a href="https://aclweb.org/anthology/P/P16/P16-1046.pdf" target="_blank" rel="external">Neural Summarization by Extracting Sentences and Words</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Cheng, Jianpeng, and Mirella Lapata.</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>University of Edinburgh</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Extractive Summarization, Neural Attention</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>使用神经网络进行抽取式摘要，分别为句子抽取和单词抽取。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/extractModel1.jpg" alt=""></p>
+<h3 id="句子抽取"><a href="#句子抽取" class="headerlink" title="句子抽取"></a>句子抽取</h3><p>由于该工作为文档的摘要，故其使用了两层encoder，分别为：</p>
+<ol>
+<li>词级别的encoder，基于CNN。即对句子做卷积再做max pooling从而获得句子的表示。</li>
+<li>句子级别的encoder，基于RNN。将句子的表示作为输入，即获得文档的表示。</li>
+</ol>
+<p>由于是抽取式摘要，其使用了一个RNN decoder，但其作用并非生成，而是用作sequence labeling，对输入的句子判断是否进行抽取，类似于pointer network。</p>
+<h3 id="词的抽取"><a href="#词的抽取" class="headerlink" title="词的抽取"></a>词的抽取</h3><p>对于词的抽取，该模型同样适用了hierarchical attention。与句子抽取不同，词的抽取更类似于生成，只是将输入文档的单词作为decoder的词表。</p>
+<h2 id="数据-2"><a href="#数据-2" class="headerlink" title="数据"></a>数据</h2><p>从DailyMail news中根据其highlight构建抽取式摘要数据集。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该工作的特别之处在于对attention机制的使用。该paper之前的许多工作中的attention机制都与Bahdanau的工作相同，即用attention对某些向量求weighted sum。该工作则直接使用attention的分数进行对文档中句子进行选择，实际上与pointer networks意思相近。</p>
+<h1 id="AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention"><a href="#AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention" class="headerlink" title="AttSum: Joint Learning of Focusing and Summarization with Neural Attention"></a><a href="http://www4.comp.polyu.edu.hk/~cszqcao/data/attsum.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Cao, Ziqiang, et al.</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p> The Hong Kong Polytechnic University, Peking University, Microsoft Research</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Query-focused Summarization</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>Query-focused多文档抽取式摘要</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/coling.jpg" alt=""></p>
+<p>由于该任务为针对某个query抽取出可以回答该query的摘要，模型使用了attention机制对句子进行加权，加权的依据为文档句子对query的相关性（基于attention），从而对句子ranking，进而抽取出摘要。具体地：</p>
+<ol>
+<li>使用CNN对句子进行encoding</li>
+<li>利用query，对句子表示进行weighted sum pooling。</li>
+<li>使用cosine similarity对句子排序。</li>
+</ol>
+<h2 id="数据-3"><a href="#数据-3" class="headerlink" title="数据"></a>数据</h2><p>DUC 2005 ∼ 2007 query-focused summarization benchmark datasets</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>该文章的亮点之处在于使用attention机制对文档中句子进行weighted-sum pooling，以此完成query-focused的句子表示和ranking。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本次主要介绍了四篇文本摘要的工作，前两篇为生成式（abstractive）摘要，后两篇为抽取式（extractive）摘要。对于生成式摘要，目前主要是基于encoder-decoder模式的生成，但这种方法受限于语料的获得，而Rush等提出了利用English Gigaword（即新闻数据）构建平行句对语料库的方法。IBM在Facebook工作启发下，直接使用了seq2seq with attention模型进行摘要的生成，获得了更好的效果。对于抽取式摘要，神经网络模型的作用多用来学习句子表示进而用于后续的句子ranking。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-10-28T23:35:04.000Z"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">2016-10-28</a></time>
       
       
@@ -3239,46 +3346,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-07T00:16:17.000Z"><a href="/2016/07/06/关于创业的几点思考/">2016-07-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/06/关于创业的几点思考/">关于创业的几点思考</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>北京之行非常充实，白天上课，晚上和业界一线的创业者们交流，收获颇丰。自己之前对创业有一些朦胧的感觉和认识，但并不成熟，这次交流之后，有了一个更加清晰的认识，在这里做个总结。</p>
-<p>1、SaaS（Software as a Service）+ B2B的模式确实很棒，这里讲的SaaS服务比较狭隘，特指用一些算法和模型来帮助中小企业解决他们解决不了的问题，并不包括工具类的SaaS。这种商业模式对创业团队的学习能力和研发能力有非常高的要求，团队短小精悍，可以快速对问题进行建模，快速开发出原型系统和产品。这种模式可以做成Private解决方案式的业务，此种业务对需求的分析和对自身的定位非常重要，一定要做的非常精和细，抓住企业用户的需求来展开业务；还有一种是做Public，提供算法API供企业用户调用，算是一种平台。SaaS+B2B最关键的是技术能力，不需要太多无关的人。SaaS是一种趋势，你公司中的很多业务其实都是不需要自己来打理，只需要找到做相应工作的SaaS公司即可，比如：会计和税务，报账，HR等等。他们做这个比你更加专业，也比你花钱雇人更加实惠。所以，这个世界是合作的，你做好、做精你的事情，其他耗时但有用的事情可以找专业的人来做，各赚各的钱。</p>
-<p>2、创业最难的是人才，是如何招到靠谱的人才。创业公司太多了，而且创业都是在用时间赌未来，不一定会成功，所以对人才的吸引力不如成熟的大公司那么大。初期的招人很难，也很重要，基本上就是从熟人下手，从身边的人下手，或者找一些志同道合的人才。我个人觉得，如果你不是特别急着追一个所谓的创业机会的话，招人这事是宁缺毋滥，就和找女朋友类似，看条件合适不合适根本没用，创业是很实在的事情，合适的人比牛逼的人更加重要，因为牛的人性格一般都不会那么地随性，都是有个性的人，性格合适会让这个团队走向一个正确的方向，而不是说凑了几个大牛校或者海龟，大家听起来title都不错，但合作起来却问题百出。说道人才，我觉得不论什么出身，什么专业背景，只要是学习能力特别强，这里不是说你GPA多少，高考分多少之类的，而是给你一个新的topic，你能在多短的时间对这个topic有一个不错的理解；动手能力特别强，毕竟产品需要编程实现，模型系统也需要编程实现，纸上学来终觉浅嘛；沟通能力特别强，听得懂别人在说什么，也让别人听得懂自己在说什么，谦虚谨慎才会有利于沟通和交流，才会让团队更加高效。</p>
-<p>3、创业环境，这一点颠覆了之前的认识。一直不喜欢北京，一个像吸血鬼一样的城市，一个没有生活质量的城市。但不得不说，是最好的创业城市，因为资源都在这里。深圳虽然好，但人才方面相对匮乏，软件创业环境不如北京，可能硬件够好一些吧，做机器人创业的比较适合在那里。和来自硅谷的创业咖聊过之后，感觉美国的创业环境更加规范，毕竟人家做了那么多年，体制机制都非常规范，不会像中国这样出现一些诓骗的事情，违法的成本太高，所以大家都规规矩矩在一个框架内做事情，环境比较纯粹一些。当然，硅谷也面临着招人的问题，创业公司太多，大家都想要最好的人，所以都很难。现在的创业支持和各种资源都非常充分，环境非常好，难的不是找投资，不是组建公司，因为现在有很多的孵化器，各个阶段的孵化器，他们会帮你解决好各种各样的事情，难是难在你自己到底有没有这个能力，做好这件事情。</p>
-<p>4、创业方向，我个人关注的是自然语言处理技术，所以对这个方向观察和思考的多一些。首先说，bot热，大热，从arxiv上paper的数量也可以看得出，bot这个领域是最火的，从各大公司对bot研发的投入力度来看，bot是下一个big thing，facebook甚至希望将bot作为入口，代替现在的操作系统，想一想都觉得这个世界是多么地美好和神奇。bot这个大理想非常丰满，现实中nlp技术的不成熟却显得非常骨感，bot paper发的热火朝天，但在工程应用上却难以被用到，世界上最远的距离就是从research到engineering的距离。bot是大趋势，但技术确实不成熟，所以带来了大量的机会，每个有积累、有准备的人都是公平的，大家都有机会在下一个big thing上分一杯羹。让机器来理解和灵活应用人类语言是一件非常难的事情，也是实现true AI中非常关键的一步，所以我看好这个方向。当然，如果你着急开始赚钱，nlp并不适合你，因为nlp是未来。</p>
-<p>5、是否该创业，这个问题如果你犹豫了，那么其实也就有了明确的答案。太多的顾虑是做不成一件事情的，不如安心地做好现在的工作，一步一步地在现在的地方踏踏实实地混下去，混到更高的title，直到退休。如果你在这个问题上不犹豫，那么恭喜你，你是天生的创业者，但这离创业成功还有十万八千里。那天问了谷哥（clickstone）为什么创业这个问题，他是这么回答我的，就是想按照自己的方式去努力做成一件事情，得到一个不错的回报，这里的回报更多的是成就感，而不只是money。可能，我们踏踏实实在一家大公司工作，或者在体制内工作，会为很多举世瞩目的事情做出贡献，但个人太微不足道了，在这样的环境中，自己做的事情太小了，能够决策的东西也太少了，就像一颗螺丝钉一样，事情成功了，也没有什么成就感。所以说，做爱做的事情，并且做成。</p>
-<p>6、厚积薄发，打好基础，放平心态，不要急着去和谁比较。谷哥说他的同学有的都已经是教授级别了，但近况没那么理想吧，创业者要耐得住寂寞，不去和人比，因为每个人都不一样，拿同一标尺来衡量是很幼稚的事情。既然，选择了这条路，就是要一直走下去，而不是瞻前顾后、犹豫不决。你过去放弃的、现在放弃的种种都会在未来的某一个时间换一种形式回报给你的。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3312,7 +3379,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>77</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>78</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3348,7 +3415,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>95</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>96</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

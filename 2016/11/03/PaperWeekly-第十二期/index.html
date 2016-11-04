@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第十二期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引文本摘要是自然语言处理的一大经典任务，研究的历史比较长。随着目前互联网生产出的文本数据越来越多，文本信息过载问题越来越严重，对各类文本进行一个“降维”处理显得非常必要，文本摘要便是其中一个重要的手段。传统的文本摘要方法，不管是句子级别、单文档还是多文档摘要，都严重依赖特征工程，随着深度学习的流行以">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第十二期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-04T02:47:13.000Z"><a href="/2016/11/03/PaperWeekly-第十二期/">2016-11-03</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第十二期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>文本摘要是自然语言处理的一大经典任务，研究的历史比较长。随着目前互联网生产出的文本数据越来越多，文本信息过载问题越来越严重，对各类文本进行一个“降维”处理显得非常必要，文本摘要便是其中一个重要的手段。传统的文本摘要方法，不管是句子级别、单文档还是多文档摘要，都严重依赖特征工程，随着深度学习的流行以及seq2seq+attention模型在机器翻译领域中的突破，文本摘要任务也迎来了一种全新的思路。本期PaperWeekly将会分享4篇在这方面做得非常出色的paper：</p>
+<p>1、A Neural Attention Model for Abstractive Sentence Summarization, 2015<br>2、Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond, 2016<br>3、Neural Summarization by Extracting Sentences and Words, 2016<br>4、AttSum: Joint Learning of Focusing and Summarization with Neural Attention, 2016</p>
+<h1 id="A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization"><a href="#A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization" class="headerlink" title="A Neural Attention Model for Abstractive Sentence Summarization"></a><a href="https://aclweb.org/anthology/D/D15/D15-1044.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Rush, A. M., Chopra, S., &amp; Weston, J.</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research / Harvard SEAS</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Neural Attention, Abstractive Sentence Summarization</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇来自Facebook的paper的主题是基于attention based NN的生成式句子摘要/压缩。</p>
+<p><img src="media/emnlp.JPG" alt="1"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该工作使用提出了一种encoder-decoder框架下的句子摘要模型。</p>
+<p><img src="media/emnlp2.JPG" alt="encoder"></p>
+<p>作者在文章中介绍了三种不同的encoding方法，分别为：</p>
+<ol>
+<li>Bag-of-Words Encoder。词袋模型即将输入句子中词的词向量进行平均。</li>
+<li>CNN encoder</li>
+<li>Attention-Based Encoder。该encoder使用CNN对已生成的最近c（c为窗口大小）个词进行编码,再用编码出来的context向量对输入句子做attention，从而实现对输入的加权平均。</li>
+</ol>
+<p>模型中的decoder为修改过的NNLM，具体地：</p>
+<p><img src="media/emnlp3.JPG" alt="1"></p>
+<p>式中$$y_c$$为已生成的词中大小为c的窗口，与encoder中的Attention-Based Encoder同义。</p>
+<p>与目前主流的基于seq2seq的模型不同，该模型中encoder并未采用流行的RNN。</p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>该文章使用了English Gigaword作为语料，选择新闻中的首句作为输入，新闻标题作为输出，以此构建平行语料。<br>具体的数据构建方法参见文章。</p>
+<p>此外，该文章还使用了DUC2004作为测试集。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>在调研范围内，该文章是使用attention机制进行摘要的第一篇。且作者提出了利用Gigaword构建大量平行句对的方法，使得利用神经网络训练成为可能，之后多篇工作都使用了该方法构建训练数据。</p>
+<h1 id="Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond"><a href="#Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond" class="headerlink" title="Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond"></a><a href="https://aclweb.org/anthology/K/K16/K16-1028.pdf" target="_blank" rel="external">Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Nallapati, Ramesh, et al.</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>IBM Watson</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, Summarization</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>In CoNLL 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>该工作主要研究了基于seq2seq模型的生成式文本摘要。<br>该文章不仅包括了句子压缩方面的工作，还给出了一个新的文档到多句子的数据集。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/conll.jpg" alt=""></p>
+<p>该文章使用了常用的seq2seq作为基本模型，并在其基础上添加了很多feature：</p>
+<ol>
+<li>Large Vocabulary Trick。<br>参见Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. 2014. On using very large target vocabulary for neural machine translation. CoRR, abs/1412.2007.</li>
+<li><p>添加feature。例如POS tag， TF、IDF， NER tag等。这些feature会被embed之后与输入句子的词向量拼接起来作为encoder的输入。</p>
+</li>
+<li><p>pointing / copy 机制。使用一个gate来判断是否要从输入句子中拷贝词或者使用decoder生成词。参见ACL 2016的两篇相关paper。</p>
+</li>
+<li><p>Hierarchical Attention。这是用于文章摘要中多句子的attention，思路借鉴了Jiwei Li的一篇auto encoder的工作。大致思路为使用句子级别的weight对句子中的词进行re-scale。</p>
+</li>
+</ol>
+<h2 id="数据-1"><a href="#数据-1" class="headerlink" title="数据"></a>数据</h2><ol>
+<li>English Gigaword</li>
+<li>DUC 2004</li>
+<li>提出了CNN/Daily Mail Corpus</li>
+</ol>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>该工作为在第一篇文章基础上的改进工作，做了大量的实验，非常扎实。文章提出的feature-rich encoder对其他工作也有参考意义，即将传统方法中的特征显示地作为神经网络的输入，提高了效果。</p>
+<h1 id="Neural-Summarization-by-Extracting-Sentences-and-Words"><a href="#Neural-Summarization-by-Extracting-Sentences-and-Words" class="headerlink" title="Neural Summarization by Extracting Sentences and Words"></a><a href="https://aclweb.org/anthology/P/P16/P16-1046.pdf" target="_blank" rel="external">Neural Summarization by Extracting Sentences and Words</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Cheng, Jianpeng, and Mirella Lapata.</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>University of Edinburgh</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Extractive Summarization, Neural Attention</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>使用神经网络进行抽取式摘要，分别为句子抽取和单词抽取。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/extractModel1.jpg" alt=""></p>
+<h3 id="句子抽取"><a href="#句子抽取" class="headerlink" title="句子抽取"></a>句子抽取</h3><p>由于该工作为文档的摘要，故其使用了两层encoder，分别为：</p>
+<ol>
+<li>词级别的encoder，基于CNN。即对句子做卷积再做max pooling从而获得句子的表示。</li>
+<li>句子级别的encoder，基于RNN。将句子的表示作为输入，即获得文档的表示。</li>
+</ol>
+<p>由于是抽取式摘要，其使用了一个RNN decoder，但其作用并非生成，而是用作sequence labeling，对输入的句子判断是否进行抽取，类似于pointer network。</p>
+<h3 id="词的抽取"><a href="#词的抽取" class="headerlink" title="词的抽取"></a>词的抽取</h3><p>对于词的抽取，该模型同样适用了hierarchical attention。与句子抽取不同，词的抽取更类似于生成，只是将输入文档的单词作为decoder的词表。</p>
+<h2 id="数据-2"><a href="#数据-2" class="headerlink" title="数据"></a>数据</h2><p>从DailyMail news中根据其highlight构建抽取式摘要数据集。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该工作的特别之处在于对attention机制的使用。该paper之前的许多工作中的attention机制都与Bahdanau的工作相同，即用attention对某些向量求weighted sum。该工作则直接使用attention的分数进行对文档中句子进行选择，实际上与pointer networks意思相近。</p>
+<h1 id="AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention"><a href="#AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention" class="headerlink" title="AttSum: Joint Learning of Focusing and Summarization with Neural Attention"></a><a href="http://www4.comp.polyu.edu.hk/~cszqcao/data/attsum.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Cao, Ziqiang, et al.</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p> The Hong Kong Polytechnic University, Peking University, Microsoft Research</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Query-focused Summarization</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>Query-focused多文档抽取式摘要</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/coling.jpg" alt=""></p>
+<p>由于该任务为针对某个query抽取出可以回答该query的摘要，模型使用了attention机制对句子进行加权，加权的依据为文档句子对query的相关性（基于attention），从而对句子ranking，进而抽取出摘要。具体地：</p>
+<ol>
+<li>使用CNN对句子进行encoding</li>
+<li>利用query，对句子表示进行weighted sum pooling。</li>
+<li>使用cosine similarity对句子排序。</li>
+</ol>
+<h2 id="数据-3"><a href="#数据-3" class="headerlink" title="数据"></a>数据</h2><p>DUC 2005 ∼ 2007 query-focused summarization benchmark datasets</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>该文章的亮点之处在于使用attention机制对文档中句子进行weighted-sum pooling，以此完成query-focused的句子表示和ranking。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本次主要介绍了四篇文本摘要的工作，前两篇为生成式（abstractive）摘要，后两篇为抽取式（extractive）摘要。对于生成式摘要，目前主要是基于encoder-decoder模式的生成，但这种方法受限于语料的获得，而Rush等提出了利用English Gigaword（即新闻数据）构建平行句对语料库的方法。IBM在Facebook工作启发下，直接使用了seq2seq with attention模型进行摘要的生成，获得了更好的效果。对于抽取式摘要，神经网络模型的作用多用来学习句子表示进而用于后续的句子ranking。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/11/03/PaperWeekly-第十二期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>78</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>96</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

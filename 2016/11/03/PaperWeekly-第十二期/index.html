@@ -104,7 +104,7 @@
 <h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, Summarization</p>
 <h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>In CoNLL 2016</p>
 <h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>该工作主要研究了基于seq2seq模型的生成式文本摘要。<br>该文章不仅包括了句子压缩方面的工作，还给出了一个新的文档到多句子的数据集。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/conll.jpg" alt=""></p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/conll.JPG" alt=""></p>
 <p>该文章使用了常用的seq2seq作为基本模型，并在其基础上添加了很多feature：</p>
 <ol>
 <li>Large Vocabulary Trick。<br>参见Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. 2014. On using very large target vocabulary for neural machine translation. CoRR, abs/1412.2007.</li>
@@ -126,7 +126,7 @@
 <h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Extractive Summarization, Neural Attention</p>
 <h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>使用神经网络进行抽取式摘要，分别为句子抽取和单词抽取。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/extractModel1.jpg" alt=""></p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/extractModel1.JPG" alt=""></p>
 <h3 id="句子抽取"><a href="#句子抽取" class="headerlink" title="句子抽取"></a>句子抽取</h3><p>由于该工作为文档的摘要，故其使用了两层encoder，分别为：</p>
 <ol>
 <li>词级别的encoder，基于CNN。即对句子做卷积再做max pooling从而获得句子的表示。</li>
@@ -141,7 +141,7 @@
 <h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Query-focused Summarization</p>
 <h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
 <h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>Query-focused多文档抽取式摘要</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/coling.jpg" alt=""></p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/coling.JPG" alt=""></p>
 <p>由于该任务为针对某个query抽取出可以回答该query的摘要，模型使用了attention机制对句子进行加权，加权的依据为文档句子对query的相关性（基于attention），从而对句子ranking，进而抽取出摘要。具体地：</p>
 <ol>
 <li>使用CNN对句子进行encoding</li>

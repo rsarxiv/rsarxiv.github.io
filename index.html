@@ -65,6 +65,49 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-05T16:40:05.000Z"><a href="/2016/11/05/cs-CL-weekly-2016-10-31-2016-11-04/">2016-11-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/05/cs-CL-weekly-2016-10-31-2016-11-04/">cs.CL weekly 2016.10.31-2016.11.04</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Neural-Machine-Translation-in-Linear-Time"><a href="#Neural-Machine-Translation-in-Linear-Time" class="headerlink" title="Neural Machine Translation in Linear Time"></a><a href="https://arxiv.org/pdf/1610.10099v1.pdf" target="_blank" rel="external">Neural Machine Translation in Linear Time</a></h2><p>【机器翻译】本文提出了一种新的encoder-decoder模型ByteNet。它是由两个扩张（dilated）卷积神经网络堆叠起来的。ByteNet的优势在于时间复杂度是线性的。工作来自deepmind。建议研究机器翻译以及使用MT模型做其他任务的童鞋精读。</p>
+<h2 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/pdf/1611.00179v1.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h2><p>【机器翻译】【增强学习】本文解决的问题是机器翻译中双语训练语料需求过多的问题，旨在通过一种手段来减少数据标注工作。作者采用的方法是现在重新流行的增强学习方法，翻译通常是一个对偶过程，比如：英翻法和法翻英。整个学习过程可以简单的描述如下：对偶的两个翻译任务可以当做是两个agent A和B，通过少量的双语标注数据可以学习出一个初级的翻译模型，同时通过大量的单语数据（无需标注）来学习出相应的语言模型；A将单语数据翻译成B，B通过自身的语言模型对A的翻译结果进行误差反馈，A进行学习；同理，B也可以向A学习，直到收敛。整个学习过程中，训练了A-&gt;B和B-&gt;A两个翻译模型，但是用到的双语标注数据就会比较少。</p>
+<h2 id="End-to-End-Reading-Comprehension-with-Dynamic-Answer-Chunk-Ranking"><a href="#End-to-End-Reading-Comprehension-with-Dynamic-Answer-Chunk-Ranking" class="headerlink" title="End-to-End Reading Comprehension with Dynamic Answer Chunk Ranking"></a><a href="https://arxiv.org/pdf/1610.09996v2.pdf" target="_blank" rel="external">End-to-End Reading Comprehension with Dynamic Answer Chunk Ranking</a></h2><p>【机器阅读】本文研究的问题是最近一年非常流行的机器阅读理解问题，给定一段文本和一个问题，输出一个答案（选择、生成）。本文提出了一种新的模型，相比之前模型来说，改进的地方是可以给出变长度的答案。在之前模型的基础上，添加了一个entity表示模块，并且对候选的entity进行排序，得到正确答案。本文在SQuAD上进行了测试，拿到了最好的结果。建议研究QA和机器阅读的童鞋来精读这篇文章，并且开始新一轮SQuAD刷榜。</p>
+<h2 id="Knowledge-Questions-from-Knowledge-Graphs"><a href="#Knowledge-Questions-from-Knowledge-Graphs" class="headerlink" title="Knowledge Questions from Knowledge Graphs"></a><a href="https://arxiv.org/pdf/1610.09935v2.pdf" target="_blank" rel="external">Knowledge Questions from Knowledge Graphs</a></h2><p>【问题生成】【知识图谱】本文研究的内容是从知识图谱中自动生成一些具有一定难度且答案唯一的问题，用于教育或评估。问题的第一个难点在于如何确保从图谱中选择的答案具有唯一性，第二个难点是如何评价所生成问题的难度。这个任务非常有趣，也是知识图谱在实际中的一个应用场景。任务本身比文章的模型和方法更值得思考。还是说回chatbot，QA chatbot，都说缺少数据，已构建好的知识图谱本身就是一个很大的数据源，如何利用它，如何将其更好地用于生成有用的训练数据，本文的任务也许会带来一些启发。这个任务也不算首创，之前KBQA的工作都有通过知识库出发来生成问题，且通过平行语料扩展，包括Percy liang等不少大牛的工作都考虑了这点，这里相当于延续，量化了难度确保了答案唯一性等</p>
+<h2 id="LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Networks"><a href="#LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Networks" class="headerlink" title="LightRNN: Memory and Computation-Efficient Recurrent Neural Networks"></a><a href="https://arxiv.org/pdf/1610.09893v1.pdf" target="_blank" rel="external">LightRNN: Memory and Computation-Efficient Recurrent Neural Networks</a></h2><p>【新RNN】本文提出了一种新的思路来提高RNN的效果，包括时间和空间上的。最核心的点在于构建了一种全新的word embedding表示方式，传统的方法是词表中的每个词都用一个向量表示。将每个词都放入到一张二维表中，表中的每个词都有其所在的行向量和列向量共同表示，如图1所示。从而将词表示的规模从|V|个向量降到了2*sqrt(V)。本文还针对这种表示方法，构建了一种新的RNN模型LightRNN，并在大型数据集上进行了语言模型任务的评测，验证了本文方法在时间和空间上的性能提升。 </p>
+<h2 id="Chinese-Poetry-Generation-with-Planning-based-Neural-Network"><a href="#Chinese-Poetry-Generation-with-Planning-based-Neural-Network" class="headerlink" title="Chinese Poetry Generation with Planning based Neural Network"></a><a href="https://arxiv.org/pdf/1610.09889v1.pdf" target="_blank" rel="external">Chinese Poetry Generation with Planning based Neural Network</a></h2><p>【诗词生成】本文研究的任务非常有趣，通过神经网络模型来生成唐诗，类似地可以开展宋词等任务。端到端地训练、学习具有很强的应用性，只要能够给定输入序列和输出序列，打开脑洞，做任何好玩的任务都有可能。</p>
+<h2 id="MusicMood-Predicting-the-mood-of-music-from-song-lyrics-using-machine-learning"><a href="#MusicMood-Predicting-the-mood-of-music-from-song-lyrics-using-machine-learning" class="headerlink" title="MusicMood: Predicting the mood of music from song lyrics using machine learning"></a><a href="https://arxiv.org/pdf/1611.00138v1.pdf" target="_blank" rel="external">MusicMood: Predicting the mood of music from song lyrics using machine learning</a></h2><p>【音乐推荐系统】本文研究内容为通过机器学习方法从歌词中来预测音乐的情绪，算是自然语言处理在音乐中的应用。这种简单的应用，可以为音乐推荐系统提供一些特征，现有的音乐推荐系统可以做参考。</p>
+<h2 id="Detecting-Context-Dependent-Messages-in-a-Conversational-Environment"><a href="#Detecting-Context-Dependent-Messages-in-a-Conversational-Environment" class="headerlink" title="Detecting Context Dependent Messages in a Conversational Environment"></a><a href="https://arxiv.org/pdf/1611.00483v2.pdf" target="_blank" rel="external">Detecting Context Dependent Messages in a Conversational Environment</a></h2><p>【chatbot】【上下文】chatbot的难点之一在于如何准确理解“人话”，“人话”有个显著的特点是简短而且非正式，常见的NLP分析方法，词性标注、句法分析等都不好用。理解“人话”需要结合上下文。那么，第一个问题来了，理解某句话应该取哪几句history作为上下文，第二个问题是如何理解上下文？本文旨在解决第一个问题，这个问题研究空间比较大，本文做了初步尝试。对chatbot感兴趣的童鞋，不管是学术界还是工业界的童鞋都可以读一下本文，或许会带来一些启发和思考。</p>
+<h2 id="Natural-Parameter-Networks-A-Class-of-Probabilistic-Neural-Networks"><a href="#Natural-Parameter-Networks-A-Class-of-Probabilistic-Neural-Networks" class="headerlink" title="Natural-Parameter Networks: A Class of Probabilistic Neural Networks"></a><a href="https://arxiv.org/pdf/1611.00448v1.pdf" target="_blank" rel="external">Natural-Parameter Networks: A Class of Probabilistic Neural Networks</a></h2><p>【NIPS2016】本文提出了一类概率神经网络（贝叶斯），旨在解决现有神经网络在数据规模小的时候容易过拟合的问题。</p>
+<h2 id="Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks"><a href="#Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks" class="headerlink" title="Collaborative Recurrent Autoencoder: Recommend while Learning to Fill in the Blanks"></a><a href="https://arxiv.org/pdf/1611.00454v1.pdf" target="_blank" rel="external">Collaborative Recurrent Autoencoder: Recommend while Learning to Fill in the Blanks</a></h2><p>【推荐系统】本文的亮点在于将RNN和协同过滤无缝结合起来。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="聊天机器人资料汇总"><a href="#聊天机器人资料汇总" class="headerlink" title="聊天机器人资料汇总"></a><a href="https://www.52ml.net/20510.html" target="_blank" rel="external">聊天机器人资料汇总</a></h2><p>来自52ml汇总的聊天机器人资料</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-04T02:47:13.000Z"><a href="/2016/11/03/PaperWeekly-第十二期/">2016-11-03</a></time>
       
       
@@ -3304,48 +3347,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-09T04:35:03.000Z"><a href="/2016/07/08/生活毕竟不是一场秀/">2016-07-08</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/08/生活毕竟不是一场秀/">生活毕竟不是一场秀</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>生活毕竟是生活，生活的本质应该是生活本身，而不是一场秀。事业再好，终究还是为了有一个更好的生活，而家庭是生活中最重要的环节，永远都是应该是最重要的，抛去家庭来谈事业，简直滑稽。</p>
-<p>为什么要伪装自己，在别人的面前表现出一个不同的自己？人与人为什么会不平等，就因为你现在处在更好的位置？一堆长者围着一个年轻人转，就因为年轻人是领导的秘书？说好的人生而平等呢？人的特征那么多，为什么只在乎地位这一个feature呢？才华、修养都是人的重要feature，为什么大家在地位面前都变得那么地低三下四呢？这不是生活的意义。</p>
-<p>在酒桌之上，在领导面前，在地位和权势面前，为什么大家都变了一个模样？都在表演自己的人生，都在说一些虚伪的假话，都在迎合着一些人的需求。</p>
-<p>忘了吗？每个人其实都是独立的，是一个活生生的个体，独立地活在这个世界上。难道家庭和事业比起来不重要吗？我一点都不认同，我觉得人都是平等的、独立的。</p>
-<p>感谢我的妻子，我一直觉得自己就像是一只牢笼里的小鸟，在一个非常狭窄的区域内飞来飞去，我自以为我是在广阔的天空里，后来遇到了另外一只美丽的小鸟，带着一起飞，飞向了真正的天空，看到了更大的世界，明白了真正的人生。</p>
-<p>我希望自己以后的孩子可以自由自在、不卑不亢地活在这个世界上，并不会因为自己的富有或贫穷而对这个世界和这个世界上的人产生偏见，我希望他爱读书，希望他可以看到更大的世界、真正的世界，而不是为了一个目的和身份苟活在这个世界上。</p>
-<p>自由不只是身体上的自由，更是心灵的自由，一种真正的独立和平等，大家不论身份的高低都可以坐在一起进行平等地交流，没有半点虚伪，没有半点惶恐，只有最简单的纯真。</p>
-<p>此刻，我想哭，因为有太多的无奈，但此刻，我也想笑，因为未来的生活会更加美好，因为我知道了美好的世界是可以通过自身的努力得来的，而不需要谁的恩赐和施舍。</p>
-<p>生活毕竟不是一场秀，而是自己最真实、最纯粹、最华丽的人生。</p>
-<p>献给那些生活在种种挣扎中的人们。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3379,7 +3380,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>78</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>79</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3415,7 +3416,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>96</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>97</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

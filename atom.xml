@@ -5,10 +5,89 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-11-05T16:52:40.000Z</updated>
+  <updated>2016-11-11T03:58:54.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第十三期</title>
+    <link href="http://rsarxiv.github.io/2016/11/10/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%B8%89%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/11/10/PaperWeekly-第十三期/</id>
+    <published>2016-11-11T02:50:42.000Z</published>
+    <updated>2016-11-11T03:58:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本期的PaperWeekly一共分享四篇最近arXiv上放出的高质量paper，包括：机器翻译、表示学习、推荐系统和聊天机器人。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：</p>
+<p>1、A General Framework for Content-enhanced Network Representation Learning, 2016.10</p>
+<p>2、Collaborative Recurrent Autoencoder: Recommend while Learning to Fill in the Blanks, 2016.11</p>
+<p>3、Dual Learning for Machine Translation, 2016.11</p>
+<p>4、Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems, 2016.10</p>
+<h1 id="A-General-Framework-for-Content-enhanced-Network-Representation-Learning"><a href="#A-General-Framework-for-Content-enhanced-Network-Representation-Learning" class="headerlink" title="A General Framework for Content-enhanced Network Representation Learning"></a><a href="https://arxiv.org/abs/1610.02906" target="_blank" rel="external">A General Framework for Content-enhanced Network Representation Learning</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Xiaofei Sun, Jiang Guo, Xiao Ding and Ting Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Center for Social Computing and Information Retrieval, Harbin Institute of Technology, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>network representation, content-enhanced</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>同时利用网络结构特征和文本特征来学习网络中节点的embedding</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>总的来说这篇paper的思路比较清晰，学习的方法上很大程度上参考了word2vec的方法。对于一个节点v，将与v相连的节点当做正例，不想连的节点当做负例。那么如何融入内容呢？在网络中设置虚拟的内容节点c，将描述v节点的文本内容c_v当做正例，其他的当做负例c_v’。在优化时同时考虑网络相似性和文本相似性，让v的向量靠近正例远离负例。</p>
+<p><img src="media/network-illustration.png" alt="network-illustration"></p>
+<p>总的优化函数如下所示，由两个部分L_nn(节点与节点连接)和L_nc(节点与内容连接)线性组合而成，\alpha越大则考虑网络结构越多文本内容越少。</p>
+<p><img src="media/joint-learning.png" alt="joint-learning"></p>
+<p>L_nn和L_nc大体思想如上面所言，两者损失函数一致，尽量接近正例远离反例。但是两者在描述节点概率（相似度）上会有所不同。</p>
+<p><img src="media/node-node-link.png" alt="node-node-link"></p>
+<p>对于节点与节点之间的概率，由于网络结构要考虑有向性，因此将节点的embedding切分成in和out两半，用sigmoid算两个节点的相似度。</p>
+<p><img src="media/node-node-probability.png" alt="node-node-probability"></p>
+<p>节点与内容的概率也是类似，不过内容节点的embedding是固定的，通过额外的文本模型训练出来的。这里尝试的文本model包括word2vec，RNN和BiRNN。</p>
+<p><img src="media/node-content-probability.png" alt="node-content-probability"></p>
+<p>最后在节点分类任务上进行了评测，同时结合网络结构特征和文本特征确实带来了明显的提高。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>用到的数据集是DBLP（cn.aminer.org/citation）和自己采集的知乎用户网络。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>这两年network representation的工作如雨后春笋，在DeepWalk之后有十余篇论文出现。这篇文章在相关工作里有相对全面的覆盖，对这方面工作有兴趣的同学值得参考。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>尽管相关模型层出迭见，但略感遗憾的是感觉目前并没有在network embedding之上的较为成功的应用，大多benchmark都是节点分类和链接预测，应用价值有限。十分期待一些更为新颖的benchmark的出现。</p>
+<h1 id="Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks"><a href="#Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks" class="headerlink" title="Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks"></a><a href="https://arxiv.org/pdf/1611.00454v1.pdf" target="_blank" rel="external">Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Hao Wang, Xingjian Shi, Dit-Yan Yeung</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>HKUST</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Recommendation, Collaborative Filtering, RNN</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>Arxiv, to appear at NIPS’16</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文的主要贡献是提出collaborative recurrent autoencoder (CRAE)，将CF (collaborative filtering)跟RNN结合在一起，提高推荐的准确率，并且可以用于sequence generation task。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>传统的LSTM模型没有考虑进噪声，对不足的训练数据稳定性不好，文章提出RRN (robust recurrent networks)，为RNN的加噪版本，RRN中的噪声直接在网络中向前或者向后传播，不需要分开的网络来估计latent variables的分布，更容易实现且效率高。CARE的模型如下图所示，序列处理的信息保存在cell state s_t和输出状态h_t中，两个RRN可以组合形成编码译码结构。</p>
+<p><img src="media/collaborative1.png" alt="collaborative1"></p>
+<p>Wildcard denoising的目的是缓解overfitting，做法是随机选择一些词，替换成<wildcard>，而不是直接扔掉词，实验验证准确率会提成20%左右。Beta-pooling的目的是将向量序列pool成固定长度为2K_W的单向量，帮助rating matrix的矩阵分解；因为不同序列可能需要不同大小的权重，所以需要变长的beta向量来帮助pooling，文章采用beta分布。</wildcard></p>
+<p>Learning的过程采用MAP，类似于CDL和DTR。学到矩阵U和V之后，我们可以预计评分矩阵R。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、<a href="http://www.citeulike.org/faq/data.adp" target="_blank" rel="external">CiteULike</a><br>2、<a href="http://www.wanghao.in/" target="_blank" rel="external">Netflix</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>选取当中两个比较有意思的work。<br>1、CTR (collaborative topic reguression)<br>将topic model和probabilistic matrix factorization (PMF)，但是CTR采用bag-of-words的表示形式，忽略了词序和每个词的局部语境，而这些对文章表示和word embeddings能提供有价值的信息。<br>2、CDL (collaborative deep learning)<br>将CF和probabilistic stacked denoising autoencoder (SDAE)结合起来，是一个以bag-of-words为输入的feedforward模型，并不能解决sequence generation的问题。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章将RNN用于recommendation，并且与rating matrix结合起来，比较有意思，而且考虑了数据稀疏的情况，pooling的方法也值得借鉴。</p>
+<h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia1, Di He, Tao Qin, Liwei Wang, Nenghai Yu1, Tie-Yan Liu, Wei-Ying Ma</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>1.University of Science and Technology of China<br>2.Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>3.Microsoft Research</p>
+<h2 id="关键词（必选）"><a href="#关键词（必选）" class="headerlink" title="关键词（必选）"></a>关键词（必选）</h2><p>Dual Learning, Machine Translation, Deep Reinforcement Learning</p>
+<h2 id="文章来源（必选）"><a href="#文章来源（必选）" class="headerlink" title="文章来源（必选）"></a>文章来源（必选）</h2><p>arXiv, 1 Nov 2016 </p>
+<h2 id="问题（必选）"><a href="#问题（必选）" class="headerlink" title="问题（必选）"></a>问题（必选）</h2><p>文章针对机器翻译时需要的人工标注的双语平行语料获取代价高的问题，提出了Dual Learning Model使用单语语料来进行训练，取得了比使用双语平行语料训练的模型更好的结果。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的核心思想见下图：<br><img src="media/Dual_Learning.png" alt="Dual_Learning"></p>
+<p>(注:上图来自CCL2016马维英老师PPT)<br>对上图的详细解释：<br>模型中有两个Agent，Agengt_A和Agent_B,Agent_A只能够理解A语言，Agent_B只能理解B语言，model f是将A语言翻译成B语言的翻译模型，model f是将B语言翻译成A语言的翻译模<br>型。上图的执行过程可以按照下面的解释进行：<br>1、Agent_A 发送一句A语言的自然语言的话X1<br>2、model f将X转换成为B语言的自然语言Y<br>3、Agent_B收到Y，并将Y 传送给model g<br>4、model g将Y转换成源语言A的自然语言X2<br>5、比较X1和X2的差异性，并给出反馈.并进行1到4的反复训练</p>
+<p>模型的算法过程：<br><img src="media/Dual_Learning_Algorithm.png" alt="Dual_Learning_Algorith"></p>
+<p>在step8的时候对翻译模型翻译的结果使用语言模型做了一个判定，判定一个句子在多大程度上是自然语言。step9是给communication一个reward，step10将step8和step9加权共同作为样例的reward.然后使用policy gradient进行优化。<br>需要说明的model f和model g是已有的模型或者说在刚开始的时候使用少量的双语语料进行训练得到吗，然后逐渐加大单语语料的比例。</p>
+<h2 id="资源-（可选）"><a href="#资源-（可选）" class="headerlink" title="资源 （可选）"></a>资源 （可选）</h2><p>NMT code:<a href="https://github.com/nyu-dl" target="_blank" rel="external">https://github.com/nyu-dl</a><br>compute BLEU score by the multi-bleu.perl:<a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="external">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、the standard NMT, Neural machine translation by jointly learning to align<br>and translate. ICLR, 2015.<br>2、pseudo-NMT, Improving neural machine translation models with monolingual data. In ACL, 2016.</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的思想很创新，利用了机器翻译中的dual mechinism，仅仅利用少部分双语语料和大部分单语语料就可以达到之前NMT的效果，甚至还高了2到3个百分点。<br>dual的思想不仅可以用于机器翻译中，还可以用于图片、语音、文字等多种语言的共同学习，这样的相互作用共同学习更接近于人类对周围世界认识的方式，接受来自各个方面的信心，综合进行学习。</p>
+<h1 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yiping Song, Rui Yan, Xiang Li, Dongyan Zhao, Ming Zhang</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>北京大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>对话系统、open domain、chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>对话系统中可将问题和检索的结果同时作为输入Encoder之后进行解码Decoder，再将生成的结果和原检索结果重排序</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14788352072241.jpg" alt=""><br><img src="media/14788352189655.jpg" alt=""></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14788352485111.jpg" alt=""><br><img src="media/14788352559281.jpg" alt=""></p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>作者的思路非常简单，原来的回复生成模型容易发生回复内容短或者回复信息无意义的问题，在此作者将候选结果和原来的问句同时作为RNN生成器的输入，生成结果后再将本次生成的结果加入原检索候选集中，进行重新排序，实验结果证明此种方法比单独使用检索或单独使用生成效果有大幅提升。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>新的研究成果不见得可以直接应用于工程中，但新的paper，尤其是高质量paper中，一定会有很多的创新点，每一个创新点都可能会为后续的研究、工程实现等带来启发，甚至是一些技术上的突破。从本期开始，PaperWeekly会不定期地分享类似的内容，以方便大家了解最新的研究成果。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;本期的PaperWeekly一共分享四篇最近arXiv上放出的高质量paper，包括：机器翻译、表示学习、推荐系统和聊天机器人。人工智能及其
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.10.31-2016.11.04</title>
@@ -1220,102 +1299,6 @@
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
       <category term="arXiv" scheme="http://rsarxiv.github.io/tags/arXiv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly第四期</title>
-    <link href="http://rsarxiv.github.io/2016/09/09/PaperWeekly%E7%AC%AC%E5%9B%9B%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/09/09/PaperWeekly第四期/</id>
-    <published>2016-09-09T19:48:42.000Z</published>
-    <updated>2016-09-10T02:52:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>2013年以来Deep mind团队相继在NIPS和Natures上发表了用深度增强（强化）学习玩Atari游戏，并取得良好的效果，随后Alpha go与李世乭的一战更使得深度增强学习家喻户晓。在游戏上取得了不错的成果后，深度增强学习也逐渐被引入NLP领域。本期介绍目前NLP领域较为热点的研究方向，基于强化学习的文本生成技术（NLG），共选择了三篇文章，分别为：</p>
-<p>(1)《Generating Text with Deep Reinforcement Learning》<br>应用Deep Q-Network作为生成模型用于改善seq2seq模型</p>
-<p>(2)    《Deep Reinforcement Learning for Dialogue Generation》<br>应用强化学习进行开放领域的文本生成任务，并对比了有监督的seq2seq加attention模型和基于最大互信息的模型</p>
-<p>(3)《Hierarchical Reinforcement Learning for Adaptive Text Generation_lshowway》<br>以任务为导向的户内导航对话系统用分层强化学习进行文本生成</p>
-<p>以下为三篇文章的主要信息：</p>
-<h1 id="Generating-Text-with-Deep-Reinforcement-Learning"><a href="#Generating-Text-with-Deep-Reinforcement-Learning" class="headerlink" title="Generating Text with Deep Reinforcement Learning"></a><a href="http://120.52.73.76/arxiv.org/pdf/1510.09202v1.pdf" target="_blank" rel="external">Generating Text with Deep Reinforcement Learning</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Hongyu Guo</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>National Research Council Canada</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Reinforcement Learning、Seq2Seq、Text Generation</p>
-<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>NIPS2015 Workshop (2015.10.30)</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文提出将Deep Q-Network作为生成模型用于改善seq2seq模型，将decoding修改为迭代式的过程，实验表明本模型具有更好的泛化性。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>对seq2seq模型改进的论文层出不穷，本文率先引入深度强化学习的思想，将DQN用于文本生成。对DQN还不了解的同学可以先阅读DeepMind的论文Playing Atari with Deep Reinforcement Learning。本文的模型如下：</p>
-<p><img src="media/14734508069657.jpg" alt=""></p>
-<p>如同一般的神经网络，我们也可以把DQN当做一个黑盒来使用。只需要准备好DQN需要的四个元素s(i),a(i),r(i),s(i+1)，分别代表i时刻下state,action,reword和i+1时刻的state。</p>
-<p>对照上图我们把算法解剖分为4个步骤：</p>
-<p>Step 1: 先是传统的seq2seq模型。通过LSTM先把输入序列encode为一个定长向量EnSen(i)，然后作为decode阶段的初始状态依次生成新的序列DeSen(i)（decoding search使用beam search算法来 expand next words）。经过第一步我们得到初始state：(EnSen(i), DeSen(i))和action集合：每个位置的hypotheses。</p>
-<p>Step 2: 接下来从hypotheses（actions）中选择一个可以获得最大reward的单词（action）作为该位置新生成的词，用新单词来代替之前的旧词，于是生成新的state：(EnSen(i), DeSen(i+1))。</p>
-<p>Step 3: 接着就是标准的DQN的部分，计算Loss函数并对其应用梯度下降。</p>
-<p>Step 4: 回到Step 2，对得到的state继续迭代，每一次迭代都只生成一个新词来代替旧词，直到迭代次数达到设好的值（作者将次数定为句子长度的两倍，同学们可以思考一下理由）。</p>
-<p>总结DQN所需的四个元素对应如下：<br>(1) i时刻下的state：(EnSen(i), DeSen(i))；<br>(2) i时刻下的action：beam search得到的每个位置的hypotheses；<br>(3) i时刻下的reword：target sentence和DeSen(i+1)的相似度（BLEU score）；<br>(4) i+1时刻下的state：(EnSen(i), DeSen(i+1))；</p>
-<p>为了更好的提取句子的特征，作者在decode阶段使用了双向LSTM。同时还在reinforcement learning中加入attention机制，可以达到先decode比较简单的部分再处理困难部分的效果。最后在生成相似句子的实验中得到了比只用LSTM decoder效果更好的结论：</p>
-<p><img src="media/14734509263452.jpg" alt=""></p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734510298695.jpg" alt=""></p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的思想其实非常符合写作的一种情况，就像贾岛推敲的故事，回想小时候刚学习写句子时，也不能一次写好，总会不断对一些词语进行修改。Google DeepMind的文章《DRAW：A Recurrent Neural Network For Image》也和本文异曲同工：画画也不是一次画好，也要不断的完善。不同之处在于本文率先引入DQN做文本生成。在机器学习各个分支下，强化学习和人类与环境的交互方式非常相似，在许多领域开始初露头角，期待看到更多将强化学习结合语言模型的应用。</p>
-<h1 id="Deep-Reinforcement-Learning-for-Dialogue-Generation"><a href="#Deep-Reinforcement-Learning-for-Dialogue-Generation" class="headerlink" title="Deep Reinforcement Learning for Dialogue Generation"></a><a href="http://120.52.73.76/arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe, Alan Ritter, Michel Galley, Jianfeng Gao, Dan Jurafsky</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>(1) Stanford University, Stanford, CA, USA<br>(2) Microsoft Research, Redmond, WA, USA<br>(3) Ohio State University, OH, USA</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Reinforcement Learning、Seq2Seq、Text Generation</p>
-<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv.org(2016.06.25)</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文提出利用强化学习进行开放领域的文本生成任务，并对比了有监督的seq2seq加attention模型和基于最大互信息的模型</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>强化学习中的reward</p>
-<p><img src="media/14734512073402.jpg" alt=""></p>
-<p>易被响应（Ease of answering），不容易出现对话僵局，其中 S 是无意义回答合集，s是某一时刻的响应</p>
-<p><img src="media/14734512278456.jpg" alt=""></p>
-<p>信息流，若开辟新的话题，有利于对话的继续发展，隐层表示 hpi 和 hpi+1 的夹角余弦</p>
-<p><img src="media/14734512443645.jpg" alt=""></p>
-<p>语义连贯性，减少与对话无关问题的影响，其中，pseq2seq(a|pi,qi) 是由上一轮状态得到响应的概率，后一项是由当前产生响应通过网络生成之前的 qi 的概率。</p>
-<p><img src="media/14734512828474.jpg" alt=""></p>
-<p>最终的reward是对三者加权求和，系数分别为：0.25、0.25、0.5.</p>
-<p>对比试验：<br>(1) 对话初始状态为一个SEQ2SEQ加attention的模型作为强化学习的初始状态。</p>
-<p>(2) 在前面的基础上将最大互信息加入其中作为reward，对于一个给定的输入[pi,qi]，可以根据模型生成一个候选回答集合A。对于A中的每一个回答a,从预训练模型中得到的概率分布上可以计算出互信息的值 m(a,[pi,qi])。</p>
-<p>(3) 将互信息训练过的模型作为初始模型，用策略梯度更新参数并加入课程学习策略，最终最多限定五轮对话。</p>
-<p><img src="media/14734513584870.jpg" alt=""></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14734513827800.jpg" alt=""></p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文作者提出了一个强化学习框架，模拟两个agent让其自动对话训练神经网络SEQ2SEQ模型，将Encoder-Decoder模型和强化学习整合，从而能保证使对话轮数增加。文中使用的模型非常简洁，reward函数定义清晰，评价指标也较为科学，可以生成信息更为丰富、易于响应的对话系统。</p>
-<h1 id="Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation"><a href="#Hierarchical-Reinforcement-Learning-for-Adaptive-Text-Generation" class="headerlink" title="Hierarchical Reinforcement Learning for Adaptive Text Generation"></a><a href="http://www.aclweb.org/anthology/W10-4204" target="_blank" rel="external">Hierarchical Reinforcement Learning for Adaptive Text Generation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Nina Dethlefs, Heriberto Cuay´ahuitl</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>University of Bremen, Germany</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NLG, 分层强化学习, 文本生成, wayfinding</p>
-<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>国际自然语言生成会议INLG(2010)</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在wayfinding（户内导航对话系统）领域利用分层强化学习进行文本生成。该方法的目标是对wayfinding的NLG任务整合进行优化，并在模拟系统中验证该方法的有效性。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文任务在wayfinding中的NLG任务有多个，且各个任务之间并非独立。从而提出应该根据用户类型，导航距离， 环境条件等作出不同的导航策略，介绍了分层强化学习。</p>
-<p>文章将户内导航对话系统的文本生成问题分为四块：</p>
-<p>(1) Content Selection：给不熟悉环境的用户的导航要比熟悉环境的用户的导航更细致<br>(2) Text Structure：根据导航距离以及用户熟悉环境程度给予不同类型的导航，如大白话的，以fisrt， second…表达或者示意性的。<br>(3) Referring Expression Generation：一间房间可以叫“A203”，也可以叫“办公室”或者“小白楼”<br>(4) Surface Realisation：往前走可以用“go”也可以用“walk”等。</p>
-<p>强化学习示意图如下，分层强化学习的思想与强化学习类似，但在强化学习的基础上加上层次，不同层次的模型处理不同层次的问题。<br><img src="media/14734516131737.jpg" alt=""></p>
-<p>agent根据当前状态，执行动作a与环境交互，之后环境产生一个新的状态s并返回给agent一个奖赏r（可正可负），强化学习的目标函数便是使agent获得奖赏r最大。</p>
-<p>分层增强学习包含L个层，每层N个模型，如Figure 1是有15个agents的hierarchy，其中不同的agent负责不同的层次。</p>
-<p><img src="media/14734516802648.jpg" alt=""></p>
-<p>每个agent定义为半马尔科夫决策过程，可以表示成一个四元组</p>
-<p><img src="media/14734517382304.jpg" alt=""></p>
-<p>分别为状态集，动作集，转换函数，奖励函数。</p>
-<p>奖励函数表示agent在时间t状态s是执行动作a转换到新的状态s’所获得的奖励。半马尔科夫的目标是找到policy π*，</p>
-<p><img src="media/14734524023811.jpg" alt=""></p>
-<p>使得在从当前状态转换到新的状态获得的累计奖励最多。</p>
-<p>本文使用两种奖励函数，一种着重在 interaction length， 另一种着重在alignment and variation之间的平衡（具体公式可见论文）。</p>
-<p>本文是在模拟环境中进行试验，其中模拟环境包括user type（熟悉环境，不熟悉环境）， information need（高，低），length of the current route（短，中长，长），next action to perform（转，直走），current focus of attention（继续走，关注标识）。baseline为为部分agent随机选择action，即不考虑用户类型，导航距离等因素。经与baseline比较，效果较好。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>词性标注工具：<a href="http://nlp.stanford.edu/software/tagger.shtml" target="_blank" rel="external">http://nlp.stanford.edu/software/tagger.shtml</a></p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>将来的工作：将分层强化学习应用于其他NLG任务<br>不足之处：实验是在模拟环境下进行的，未来应该在真实环境进行评估。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这三篇文章皆是强化学习在NLP领域的应用，第一篇主要侧重点在于应用DQN进行文本生成，并用BLUE指标进行评价，对比传统的LSTM-decoder和加入DQN之后的结果；第二篇文章侧重点在于虚拟两个Agent，在传统Seq2Seq的基础上加入强化学习从而使得聊天能够持续下去；第三篇文章侧重点在于任务驱动的对话系统应用分层强化学习，针对不同情况进行分层处理。</p>
-<p>以上为本期Paperweekly的主要内容，感谢lshowway、美好时光海苔、Tonya三位同学的整理。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;2013年以来Deep mind团队相继在NIPS和Natures上发表了用深度增强（强化）学习玩Atari游戏，并取得良好的效果，随后Alpha 
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="paperweekly" scheme="http://rsarxiv.github.io/tags/paperweekly/"/>
-    
-      <category term="chatbot" scheme="http://rsarxiv.github.io/tags/chatbot/"/>
-    
-      <category term="reinforcement learning" scheme="http://rsarxiv.github.io/tags/reinforcement-learning/"/>
     
   </entry>
   

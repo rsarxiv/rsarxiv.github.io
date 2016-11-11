@@ -65,6 +65,95 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-11T02:50:42.000Z"><a href="/2016/11/10/PaperWeekly-第十三期/">2016-11-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/10/PaperWeekly-第十三期/">PaperWeekly 第十三期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本期的PaperWeekly一共分享四篇最近arXiv上放出的高质量paper，包括：机器翻译、表示学习、推荐系统和聊天机器人。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：</p>
+<p>1、A General Framework for Content-enhanced Network Representation Learning, 2016.10</p>
+<p>2、Collaborative Recurrent Autoencoder: Recommend while Learning to Fill in the Blanks, 2016.11</p>
+<p>3、Dual Learning for Machine Translation, 2016.11</p>
+<p>4、Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems, 2016.10</p>
+<h1 id="A-General-Framework-for-Content-enhanced-Network-Representation-Learning"><a href="#A-General-Framework-for-Content-enhanced-Network-Representation-Learning" class="headerlink" title="A General Framework for Content-enhanced Network Representation Learning"></a><a href="https://arxiv.org/abs/1610.02906" target="_blank" rel="external">A General Framework for Content-enhanced Network Representation Learning</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Xiaofei Sun, Jiang Guo, Xiao Ding and Ting Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Center for Social Computing and Information Retrieval, Harbin Institute of Technology, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>network representation, content-enhanced</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>同时利用网络结构特征和文本特征来学习网络中节点的embedding</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>总的来说这篇paper的思路比较清晰，学习的方法上很大程度上参考了word2vec的方法。对于一个节点v，将与v相连的节点当做正例，不想连的节点当做负例。那么如何融入内容呢？在网络中设置虚拟的内容节点c，将描述v节点的文本内容c_v当做正例，其他的当做负例c_v’。在优化时同时考虑网络相似性和文本相似性，让v的向量靠近正例远离负例。</p>
+<p><img src="media/network-illustration.png" alt="network-illustration"></p>
+<p>总的优化函数如下所示，由两个部分L_nn(节点与节点连接)和L_nc(节点与内容连接)线性组合而成，\alpha越大则考虑网络结构越多文本内容越少。</p>
+<p><img src="media/joint-learning.png" alt="joint-learning"></p>
+<p>L_nn和L_nc大体思想如上面所言，两者损失函数一致，尽量接近正例远离反例。但是两者在描述节点概率（相似度）上会有所不同。</p>
+<p><img src="media/node-node-link.png" alt="node-node-link"></p>
+<p>对于节点与节点之间的概率，由于网络结构要考虑有向性，因此将节点的embedding切分成in和out两半，用sigmoid算两个节点的相似度。</p>
+<p><img src="media/node-node-probability.png" alt="node-node-probability"></p>
+<p>节点与内容的概率也是类似，不过内容节点的embedding是固定的，通过额外的文本模型训练出来的。这里尝试的文本model包括word2vec，RNN和BiRNN。</p>
+<p><img src="media/node-content-probability.png" alt="node-content-probability"></p>
+<p>最后在节点分类任务上进行了评测，同时结合网络结构特征和文本特征确实带来了明显的提高。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>用到的数据集是DBLP（cn.aminer.org/citation）和自己采集的知乎用户网络。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>这两年network representation的工作如雨后春笋，在DeepWalk之后有十余篇论文出现。这篇文章在相关工作里有相对全面的覆盖，对这方面工作有兴趣的同学值得参考。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>尽管相关模型层出迭见，但略感遗憾的是感觉目前并没有在network embedding之上的较为成功的应用，大多benchmark都是节点分类和链接预测，应用价值有限。十分期待一些更为新颖的benchmark的出现。</p>
+<h1 id="Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks"><a href="#Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks" class="headerlink" title="Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks"></a><a href="https://arxiv.org/pdf/1611.00454v1.pdf" target="_blank" rel="external">Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Hao Wang, Xingjian Shi, Dit-Yan Yeung</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>HKUST</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Recommendation, Collaborative Filtering, RNN</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>Arxiv, to appear at NIPS’16</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文的主要贡献是提出collaborative recurrent autoencoder (CRAE)，将CF (collaborative filtering)跟RNN结合在一起，提高推荐的准确率，并且可以用于sequence generation task。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>传统的LSTM模型没有考虑进噪声，对不足的训练数据稳定性不好，文章提出RRN (robust recurrent networks)，为RNN的加噪版本，RRN中的噪声直接在网络中向前或者向后传播，不需要分开的网络来估计latent variables的分布，更容易实现且效率高。CARE的模型如下图所示，序列处理的信息保存在cell state s_t和输出状态h_t中，两个RRN可以组合形成编码译码结构。</p>
+<p><img src="media/collaborative1.png" alt="collaborative1"></p>
+<p>Wildcard denoising的目的是缓解overfitting，做法是随机选择一些词，替换成<wildcard>，而不是直接扔掉词，实验验证准确率会提成20%左右。Beta-pooling的目的是将向量序列pool成固定长度为2K_W的单向量，帮助rating matrix的矩阵分解；因为不同序列可能需要不同大小的权重，所以需要变长的beta向量来帮助pooling，文章采用beta分布。</wildcard></p>
+<p>Learning的过程采用MAP，类似于CDL和DTR。学到矩阵U和V之后，我们可以预计评分矩阵R。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、<a href="http://www.citeulike.org/faq/data.adp" target="_blank" rel="external">CiteULike</a><br>2、<a href="http://www.wanghao.in/" target="_blank" rel="external">Netflix</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>选取当中两个比较有意思的work。<br>1、CTR (collaborative topic reguression)<br>将topic model和probabilistic matrix factorization (PMF)，但是CTR采用bag-of-words的表示形式，忽略了词序和每个词的局部语境，而这些对文章表示和word embeddings能提供有价值的信息。<br>2、CDL (collaborative deep learning)<br>将CF和probabilistic stacked denoising autoencoder (SDAE)结合起来，是一个以bag-of-words为输入的feedforward模型，并不能解决sequence generation的问题。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章将RNN用于recommendation，并且与rating matrix结合起来，比较有意思，而且考虑了数据稀疏的情况，pooling的方法也值得借鉴。</p>
+<h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia1, Di He, Tao Qin, Liwei Wang, Nenghai Yu1, Tie-Yan Liu, Wei-Ying Ma</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>1.University of Science and Technology of China<br>2.Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>3.Microsoft Research</p>
+<h2 id="关键词（必选）"><a href="#关键词（必选）" class="headerlink" title="关键词（必选）"></a>关键词（必选）</h2><p>Dual Learning, Machine Translation, Deep Reinforcement Learning</p>
+<h2 id="文章来源（必选）"><a href="#文章来源（必选）" class="headerlink" title="文章来源（必选）"></a>文章来源（必选）</h2><p>arXiv, 1 Nov 2016 </p>
+<h2 id="问题（必选）"><a href="#问题（必选）" class="headerlink" title="问题（必选）"></a>问题（必选）</h2><p>文章针对机器翻译时需要的人工标注的双语平行语料获取代价高的问题，提出了Dual Learning Model使用单语语料来进行训练，取得了比使用双语平行语料训练的模型更好的结果。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的核心思想见下图：<br><img src="media/Dual_Learning.png" alt="Dual_Learning"></p>
+<p>(注:上图来自CCL2016马维英老师PPT)<br>对上图的详细解释：<br>模型中有两个Agent，Agengt_A和Agent_B,Agent_A只能够理解A语言，Agent_B只能理解B语言，model f是将A语言翻译成B语言的翻译模型，model f是将B语言翻译成A语言的翻译模<br>型。上图的执行过程可以按照下面的解释进行：<br>1、Agent_A 发送一句A语言的自然语言的话X1<br>2、model f将X转换成为B语言的自然语言Y<br>3、Agent_B收到Y，并将Y 传送给model g<br>4、model g将Y转换成源语言A的自然语言X2<br>5、比较X1和X2的差异性，并给出反馈.并进行1到4的反复训练</p>
+<p>模型的算法过程：<br><img src="media/Dual_Learning_Algorithm.png" alt="Dual_Learning_Algorith"></p>
+<p>在step8的时候对翻译模型翻译的结果使用语言模型做了一个判定，判定一个句子在多大程度上是自然语言。step9是给communication一个reward，step10将step8和step9加权共同作为样例的reward.然后使用policy gradient进行优化。<br>需要说明的model f和model g是已有的模型或者说在刚开始的时候使用少量的双语语料进行训练得到吗，然后逐渐加大单语语料的比例。</p>
+<h2 id="资源-（可选）"><a href="#资源-（可选）" class="headerlink" title="资源 （可选）"></a>资源 （可选）</h2><p>NMT code:<a href="https://github.com/nyu-dl" target="_blank" rel="external">https://github.com/nyu-dl</a><br>compute BLEU score by the multi-bleu.perl:<a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="external">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、the standard NMT, Neural machine translation by jointly learning to align<br>and translate. ICLR, 2015.<br>2、pseudo-NMT, Improving neural machine translation models with monolingual data. In ACL, 2016.</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的思想很创新，利用了机器翻译中的dual mechinism，仅仅利用少部分双语语料和大部分单语语料就可以达到之前NMT的效果，甚至还高了2到3个百分点。<br>dual的思想不仅可以用于机器翻译中，还可以用于图片、语音、文字等多种语言的共同学习，这样的相互作用共同学习更接近于人类对周围世界认识的方式，接受来自各个方面的信心，综合进行学习。</p>
+<h1 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yiping Song, Rui Yan, Xiang Li, Dongyan Zhao, Ming Zhang</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>北京大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>对话系统、open domain、chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>对话系统中可将问题和检索的结果同时作为输入Encoder之后进行解码Decoder，再将生成的结果和原检索结果重排序</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14788352072241.jpg" alt=""><br><img src="media/14788352189655.jpg" alt=""></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14788352485111.jpg" alt=""><br><img src="media/14788352559281.jpg" alt=""></p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>作者的思路非常简单，原来的回复生成模型容易发生回复内容短或者回复信息无意义的问题，在此作者将候选结果和原来的问句同时作为RNN生成器的输入，生成结果后再将本次生成的结果加入原检索候选集中，进行重新排序，实验结果证明此种方法比单独使用检索或单独使用生成效果有大幅提升。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>新的研究成果不见得可以直接应用于工程中，但新的paper，尤其是高质量paper中，一定会有很多的创新点，每一个创新点都可能会为后续的研究、工程实现等带来启发，甚至是一些技术上的突破。从本期开始，PaperWeekly会不定期地分享类似的内容，以方便大家了解最新的研究成果。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-05T16:40:05.000Z"><a href="/2016/11/05/cs-CL-weekly-2016-10-31-2016-11-04/">2016-11-05</a></time>
       
       
@@ -3296,57 +3385,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-10T01:08:36.000Z"><a href="/2016/07/09/Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/09/Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation-PaperWeekly/">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>从今天开始后面的paper都与bot有关，除非arXiv刷出一些好玩的paper。本文是<a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a>，2016年7月4日发在arxiv上，作者是来自北京大学的博士生<a href="http://sei.pku.edu.cn/~moull12/" target="_blank" rel="external">Lili Mou</a>。</p>
-<p>这里所讲的bot是指chat bot，也是当下研究领域最火的应用之一。在实际的工程应用中使用的方法可以分为两类，基于rule、template的和基于database query的，应用范围比较窄，比如垂直领域的客服机器人，解决的问题通常都是一个闭域的问题；而真正的AI是应该可以解决开域问题的，无论问什么样的问题，都会得到一个满意的答案，当然，现在的研究水平还难以达到这样的境界。最近几年随着深度学习技术的火热，nlp领域中很多任务都得到了长足的进步，现在最流行的解决方案是seq2seq，尤其是在自然语言生成任务中得到了广泛的应用。简单bot的问题可以理解为给定一个query，生成一个reply，这样的bot是single turn，研究意义大于应用意义。更多的实际问题都是一个multi turn问题，以客服bot为例，单轮对话很难解决了客户的疑问，一般都是通过多轮对话来帮助用户得到满意的答复。关于多轮bot的文章，后面会慢慢涉及到，今天分享的paper是关于单轮、短文本的对话生成。</p>
-<p>生成式的bot比起基于rule、template和database query的bot具有更加灵活的特点，不仅仅拘泥于现有的rule、template和database，而是可以生成更加多样性的reply。但生成式的bot也有一个非常显著的问题，就是经常生成一些非常“呵呵”的reply，比如“我不知道”，“我也是”等等没有营养但绝对“安全”的话，导致了这种bot没有什么实用价值。产生这个问题可能有两个原因：一是在decoder部分以log概率最大为目标，而不是别的目标，所以容易生成一些没有意义的人类语言，因为训练语料中这样无意义的reply会经常出现，用deep learning从data中抓feature的时候就会出现这样的问题；二是query的信息量太少，encoder捕捉的意思有限，导致了生成“呵呵”的reply。</p>
-<p>本文旨在提出一种叫做content introducing的方法来生成短文本reply，一共分为两个step，如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p><b>step 1</b> 给定query之后，预测一个keyword作为reply的topic，这个topic词性是名词，这里的keyword并不能捕捉复杂的语义和语法，而只是根据query的每个词来预估出一个PMI（Pointwise Mutual Information）最高的名词作为keyword，两个单词之间的PMI由下式计算：</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>每个单词与query之间的PMI由下式计算：</p>
-<p><img src="media/3-1.png" alt="3"></p>
-<p>虽然数学上不太严谨，但后面的实验表明用这个来计算结果还是不错的。</p>
-<p><b>step 2</b> 本文的模型叫做Sequence To Backward and Forward Sequences，首先进行backward step，给定一个query，用encoder表示出来得到一个context，decoder的部分首先给定keyword作为第一个词，然后进行decoding，生成的这部分相当于keyword词前面的部分；接下来进行的是forward step，也是一个典型的seq2seq，用encoder将query表示成context，然后给定backward生成的话和keyword作为decoder的前半部分，继续decoding生成后半部分。整个的流程这样简单描述下：</p>
-<p>query + keyword =&gt; backward sequence</p>
-<p>query + keyword + backward sequence(reverse) =&gt; forward sequence</p>
-<p>reply = backward (reverse) sequence + keyword + forward sequence</p>
-<p>传统的seq2seq模型都是从第一个词生成到最后一个词，无法生成指定词，而本文的模型可以生成指定词，并且该词可以出现在reply的任意位置。</p>
-<p>数据集是从百度贴吧上爬下来的对话数据，规模有500k的query reply pairs，PMI统计是由100M的query reply paris。结果是与seq2seq进行比较，本文模型得到了更好的结果。下图展示了本文的example：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>本文用keyword来做topic的思路是一个很好的思路，会让算法生成的reply更加有营养，这个在单轮的应用背景下可以取得不错的结果。但是本文用topic的思路和处理方法太多简单，如果考虑到多轮对话的问题，我想用上下文信息来预测topic，而不是只考虑该句query的信息，而且不仅仅用一个单词来做topic，可能还会是短语，也可能是语义层面上的topic，而不仅仅是从一个候选列表中选择单词来作为topic。文章的思路很有启发性，我个人认为生成式的bot在闭域中应用是一个大趋势，传统的rule、template、database都会被替代，但真实应用场景中的bot需要将context做好处理，然后作为先验知识，来生成reply。其实难点也就在context的处理上，包括user profile，dialogue history，user current state等等各种context信息。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3380,7 +3418,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>79</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>80</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3416,7 +3454,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>97</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>98</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

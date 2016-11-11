@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第十三期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引言本期的PaperWeekly一共分享四篇最近arXiv上放出的高质量paper，包括：机器翻译、表示学习、推荐系统和聊天机器人。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：
+1、A General Framework for Con">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第十三期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-11T02:50:42.000Z"><a href="/2016/11/10/PaperWeekly-第十三期/">2016-11-10</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第十三期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本期的PaperWeekly一共分享四篇最近arXiv上放出的高质量paper，包括：机器翻译、表示学习、推荐系统和聊天机器人。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：</p>
+<p>1、A General Framework for Content-enhanced Network Representation Learning, 2016.10</p>
+<p>2、Collaborative Recurrent Autoencoder: Recommend while Learning to Fill in the Blanks, 2016.11</p>
+<p>3、Dual Learning for Machine Translation, 2016.11</p>
+<p>4、Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems, 2016.10</p>
+<h1 id="A-General-Framework-for-Content-enhanced-Network-Representation-Learning"><a href="#A-General-Framework-for-Content-enhanced-Network-Representation-Learning" class="headerlink" title="A General Framework for Content-enhanced Network Representation Learning"></a><a href="https://arxiv.org/abs/1610.02906" target="_blank" rel="external">A General Framework for Content-enhanced Network Representation Learning</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Xiaofei Sun, Jiang Guo, Xiao Ding and Ting Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Center for Social Computing and Information Retrieval, Harbin Institute of Technology, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>network representation, content-enhanced</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>同时利用网络结构特征和文本特征来学习网络中节点的embedding</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>总的来说这篇paper的思路比较清晰，学习的方法上很大程度上参考了word2vec的方法。对于一个节点v，将与v相连的节点当做正例，不想连的节点当做负例。那么如何融入内容呢？在网络中设置虚拟的内容节点c，将描述v节点的文本内容c_v当做正例，其他的当做负例c_v’。在优化时同时考虑网络相似性和文本相似性，让v的向量靠近正例远离负例。</p>
+<p><img src="media/network-illustration.png" alt="network-illustration"></p>
+<p>总的优化函数如下所示，由两个部分L_nn(节点与节点连接)和L_nc(节点与内容连接)线性组合而成，\alpha越大则考虑网络结构越多文本内容越少。</p>
+<p><img src="media/joint-learning.png" alt="joint-learning"></p>
+<p>L_nn和L_nc大体思想如上面所言，两者损失函数一致，尽量接近正例远离反例。但是两者在描述节点概率（相似度）上会有所不同。</p>
+<p><img src="media/node-node-link.png" alt="node-node-link"></p>
+<p>对于节点与节点之间的概率，由于网络结构要考虑有向性，因此将节点的embedding切分成in和out两半，用sigmoid算两个节点的相似度。</p>
+<p><img src="media/node-node-probability.png" alt="node-node-probability"></p>
+<p>节点与内容的概率也是类似，不过内容节点的embedding是固定的，通过额外的文本模型训练出来的。这里尝试的文本model包括word2vec，RNN和BiRNN。</p>
+<p><img src="media/node-content-probability.png" alt="node-content-probability"></p>
+<p>最后在节点分类任务上进行了评测，同时结合网络结构特征和文本特征确实带来了明显的提高。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>用到的数据集是DBLP（cn.aminer.org/citation）和自己采集的知乎用户网络。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>这两年network representation的工作如雨后春笋，在DeepWalk之后有十余篇论文出现。这篇文章在相关工作里有相对全面的覆盖，对这方面工作有兴趣的同学值得参考。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>尽管相关模型层出迭见，但略感遗憾的是感觉目前并没有在network embedding之上的较为成功的应用，大多benchmark都是节点分类和链接预测，应用价值有限。十分期待一些更为新颖的benchmark的出现。</p>
+<h1 id="Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks"><a href="#Collaborative-Recurrent-Autoencoder-Recommend-while-Learning-to-Fill-in-the-Blanks" class="headerlink" title="Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks"></a><a href="https://arxiv.org/pdf/1611.00454v1.pdf" target="_blank" rel="external">Collaborative Recurrent Autoencoder Recommend while Learning to Fill in the Blanks</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Hao Wang, Xingjian Shi, Dit-Yan Yeung</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>HKUST</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Recommendation, Collaborative Filtering, RNN</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>Arxiv, to appear at NIPS’16</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文的主要贡献是提出collaborative recurrent autoencoder (CRAE)，将CF (collaborative filtering)跟RNN结合在一起，提高推荐的准确率，并且可以用于sequence generation task。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>传统的LSTM模型没有考虑进噪声，对不足的训练数据稳定性不好，文章提出RRN (robust recurrent networks)，为RNN的加噪版本，RRN中的噪声直接在网络中向前或者向后传播，不需要分开的网络来估计latent variables的分布，更容易实现且效率高。CARE的模型如下图所示，序列处理的信息保存在cell state s_t和输出状态h_t中，两个RRN可以组合形成编码译码结构。</p>
+<p><img src="media/collaborative1.png" alt="collaborative1"></p>
+<p>Wildcard denoising的目的是缓解overfitting，做法是随机选择一些词，替换成<wildcard>，而不是直接扔掉词，实验验证准确率会提成20%左右。Beta-pooling的目的是将向量序列pool成固定长度为2K_W的单向量，帮助rating matrix的矩阵分解；因为不同序列可能需要不同大小的权重，所以需要变长的beta向量来帮助pooling，文章采用beta分布。</wildcard></p>
+<p>Learning的过程采用MAP，类似于CDL和DTR。学到矩阵U和V之后，我们可以预计评分矩阵R。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、<a href="http://www.citeulike.org/faq/data.adp" target="_blank" rel="external">CiteULike</a><br>2、<a href="http://www.wanghao.in/" target="_blank" rel="external">Netflix</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>选取当中两个比较有意思的work。<br>1、CTR (collaborative topic reguression)<br>将topic model和probabilistic matrix factorization (PMF)，但是CTR采用bag-of-words的表示形式，忽略了词序和每个词的局部语境，而这些对文章表示和word embeddings能提供有价值的信息。<br>2、CDL (collaborative deep learning)<br>将CF和probabilistic stacked denoising autoencoder (SDAE)结合起来，是一个以bag-of-words为输入的feedforward模型，并不能解决sequence generation的问题。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章将RNN用于recommendation，并且与rating matrix结合起来，比较有意思，而且考虑了数据稀疏的情况，pooling的方法也值得借鉴。</p>
+<h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia1, Di He, Tao Qin, Liwei Wang, Nenghai Yu1, Tie-Yan Liu, Wei-Ying Ma</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>1.University of Science and Technology of China<br>2.Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>3.Microsoft Research</p>
+<h2 id="关键词（必选）"><a href="#关键词（必选）" class="headerlink" title="关键词（必选）"></a>关键词（必选）</h2><p>Dual Learning, Machine Translation, Deep Reinforcement Learning</p>
+<h2 id="文章来源（必选）"><a href="#文章来源（必选）" class="headerlink" title="文章来源（必选）"></a>文章来源（必选）</h2><p>arXiv, 1 Nov 2016 </p>
+<h2 id="问题（必选）"><a href="#问题（必选）" class="headerlink" title="问题（必选）"></a>问题（必选）</h2><p>文章针对机器翻译时需要的人工标注的双语平行语料获取代价高的问题，提出了Dual Learning Model使用单语语料来进行训练，取得了比使用双语平行语料训练的模型更好的结果。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的核心思想见下图：<br><img src="media/Dual_Learning.png" alt="Dual_Learning"></p>
+<p>(注:上图来自CCL2016马维英老师PPT)<br>对上图的详细解释：<br>模型中有两个Agent，Agengt_A和Agent_B,Agent_A只能够理解A语言，Agent_B只能理解B语言，model f是将A语言翻译成B语言的翻译模型，model f是将B语言翻译成A语言的翻译模<br>型。上图的执行过程可以按照下面的解释进行：<br>1、Agent_A 发送一句A语言的自然语言的话X1<br>2、model f将X转换成为B语言的自然语言Y<br>3、Agent_B收到Y，并将Y 传送给model g<br>4、model g将Y转换成源语言A的自然语言X2<br>5、比较X1和X2的差异性，并给出反馈.并进行1到4的反复训练</p>
+<p>模型的算法过程：<br><img src="media/Dual_Learning_Algorithm.png" alt="Dual_Learning_Algorith"></p>
+<p>在step8的时候对翻译模型翻译的结果使用语言模型做了一个判定，判定一个句子在多大程度上是自然语言。step9是给communication一个reward，step10将step8和step9加权共同作为样例的reward.然后使用policy gradient进行优化。<br>需要说明的model f和model g是已有的模型或者说在刚开始的时候使用少量的双语语料进行训练得到吗，然后逐渐加大单语语料的比例。</p>
+<h2 id="资源-（可选）"><a href="#资源-（可选）" class="headerlink" title="资源 （可选）"></a>资源 （可选）</h2><p>NMT code:<a href="https://github.com/nyu-dl" target="_blank" rel="external">https://github.com/nyu-dl</a><br>compute BLEU score by the multi-bleu.perl:<a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="external">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、the standard NMT, Neural machine translation by jointly learning to align<br>and translate. ICLR, 2015.<br>2、pseudo-NMT, Improving neural machine translation models with monolingual data. In ACL, 2016.</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的思想很创新，利用了机器翻译中的dual mechinism，仅仅利用少部分双语语料和大部分单语语料就可以达到之前NMT的效果，甚至还高了2到3个百分点。<br>dual的思想不仅可以用于机器翻译中，还可以用于图片、语音、文字等多种语言的共同学习，这样的相互作用共同学习更接近于人类对周围世界认识的方式，接受来自各个方面的信心，综合进行学习。</p>
+<h1 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yiping Song, Rui Yan, Xiang Li, Dongyan Zhao, Ming Zhang</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>北京大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>对话系统、open domain、chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>对话系统中可将问题和检索的结果同时作为输入Encoder之后进行解码Decoder，再将生成的结果和原检索结果重排序</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14788352072241.jpg" alt=""><br><img src="media/14788352189655.jpg" alt=""></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14788352485111.jpg" alt=""><br><img src="media/14788352559281.jpg" alt=""></p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>作者的思路非常简单，原来的回复生成模型容易发生回复内容短或者回复信息无意义的问题，在此作者将候选结果和原来的问句同时作为RNN生成器的输入，生成结果后再将本次生成的结果加入原检索候选集中，进行重新排序，实验结果证明此种方法比单独使用检索或单独使用生成效果有大幅提升。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>新的研究成果不见得可以直接应用于工程中，但新的paper，尤其是高质量paper中，一定会有很多的创新点，每一个创新点都可能会为后续的研究、工程实现等带来启发，甚至是一些技术上的突破。从本期开始，PaperWeekly会不定期地分享类似的内容，以方便大家了解最新的研究成果。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/11/10/PaperWeekly-第十三期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>80</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>98</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

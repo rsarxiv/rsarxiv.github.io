@@ -89,7 +89,7 @@
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>同时利用网络结构特征和文本特征来学习网络中节点的embedding</p>
 <h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>总的来说这篇paper的思路比较清晰，学习的方法上很大程度上参考了word2vec的方法。对于一个节点v，将与v相连的节点当做正例，不想连的节点当做负例。那么如何融入内容呢？在网络中设置虚拟的内容节点c，将描述v节点的文本内容c_v当做正例，其他的当做负例c_v’。在优化时同时考虑网络相似性和文本相似性，让v的向量靠近正例远离负例。</p>
 <p><img src="media/network-illustration.png" alt="network-illustration"></p>
-<p>总的优化函数如下所示，由两个部分L_nn(节点与节点连接)和L_nc(节点与内容连接)线性组合而成，\alpha越大则考虑网络结构越多文本内容越少。</p>
+<p>总的优化函数如下所示，由两个部分L_nn(节点与节点连接)和L_nc(节点与内容连接)线性组合而成，alpha越大则考虑网络结构越多文本内容越少。</p>
 <p><img src="media/joint-learning.png" alt="joint-learning"></p>
 <p>L_nn和L_nc大体思想如上面所言，两者损失函数一致，尽量接近正例远离反例。但是两者在描述节点概率（相似度）上会有所不同。</p>
 <p><img src="media/node-node-link.png" alt="node-node-link"></p>
@@ -115,22 +115,22 @@
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章将RNN用于recommendation，并且与rating matrix结合起来，比较有意思，而且考虑了数据稀疏的情况，pooling的方法也值得借鉴。</p>
 <h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia1, Di He, Tao Qin, Liwei Wang, Nenghai Yu1, Tie-Yan Liu, Wei-Ying Ma</p>
 <h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>1.University of Science and Technology of China<br>2.Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>3.Microsoft Research</p>
-<h2 id="关键词（必选）"><a href="#关键词（必选）" class="headerlink" title="关键词（必选）"></a>关键词（必选）</h2><p>Dual Learning, Machine Translation, Deep Reinforcement Learning</p>
-<h2 id="文章来源（必选）"><a href="#文章来源（必选）" class="headerlink" title="文章来源（必选）"></a>文章来源（必选）</h2><p>arXiv, 1 Nov 2016 </p>
-<h2 id="问题（必选）"><a href="#问题（必选）" class="headerlink" title="问题（必选）"></a>问题（必选）</h2><p>文章针对机器翻译时需要的人工标注的双语平行语料获取代价高的问题，提出了Dual Learning Model使用单语语料来进行训练，取得了比使用双语平行语料训练的模型更好的结果。</p>
-<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的核心思想见下图：<br><img src="media/Dual_Learning.png" alt="Dual_Learning"></p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Dual Learning, Machine Translation, Deep Reinforcement Learning</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 1 Nov 2016 </p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>文章针对机器翻译时需要的人工标注的双语平行语料获取代价高的问题，提出了Dual Learning Model使用单语语料来进行训练，取得了比使用双语平行语料训练的模型更好的结果。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>模型的核心思想见下图：<br><img src="media/Dual_Learning.png" alt="Dual_Learning"></p>
 <p>(注:上图来自CCL2016马维英老师PPT)<br>对上图的详细解释：<br>模型中有两个Agent，Agengt_A和Agent_B,Agent_A只能够理解A语言，Agent_B只能理解B语言，model f是将A语言翻译成B语言的翻译模型，model f是将B语言翻译成A语言的翻译模<br>型。上图的执行过程可以按照下面的解释进行：<br>1、Agent_A 发送一句A语言的自然语言的话X1<br>2、model f将X转换成为B语言的自然语言Y<br>3、Agent_B收到Y，并将Y 传送给model g<br>4、model g将Y转换成源语言A的自然语言X2<br>5、比较X1和X2的差异性，并给出反馈.并进行1到4的反复训练</p>
 <p>模型的算法过程：<br><img src="media/Dual_Learning_Algorithm.png" alt="Dual_Learning_Algorith"></p>
 <p>在step8的时候对翻译模型翻译的结果使用语言模型做了一个判定，判定一个句子在多大程度上是自然语言。step9是给communication一个reward，step10将step8和step9加权共同作为样例的reward.然后使用policy gradient进行优化。<br>需要说明的model f和model g是已有的模型或者说在刚开始的时候使用少量的双语语料进行训练得到吗，然后逐渐加大单语语料的比例。</p>
-<h2 id="资源-（可选）"><a href="#资源-（可选）" class="headerlink" title="资源 （可选）"></a>资源 （可选）</h2><p>NMT code:<a href="https://github.com/nyu-dl" target="_blank" rel="external">https://github.com/nyu-dl</a><br>compute BLEU score by the multi-bleu.perl:<a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="external">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>NMT code:<a href="https://github.com/nyu-dl" target="_blank" rel="external">https://github.com/nyu-dl</a><br>compute BLEU score by the multi-bleu.perl:<a href="https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl" target="_blank" rel="external">https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl</a></p>
 <h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、the standard NMT, Neural machine translation by jointly learning to align<br>and translate. ICLR, 2015.<br>2、pseudo-NMT, Improving neural machine translation models with monolingual data. In ACL, 2016.</p>
 <h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的思想很创新，利用了机器翻译中的dual mechinism，仅仅利用少部分双语语料和大部分单语语料就可以达到之前NMT的效果，甚至还高了2到3个百分点。<br>dual的思想不仅可以用于机器翻译中，还可以用于图片、语音、文字等多种语言的共同学习，这样的相互作用共同学习更接近于人类对周围世界认识的方式，接受来自各个方面的信心，综合进行学习。</p>
 <h1 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval and Generation-Based Dialog</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yiping Song, Rui Yan, Xiang Li, Dongyan Zhao, Ming Zhang</p>
 <h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>北京大学</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>对话系统、open domain、chatbot</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>对话系统中可将问题和检索的结果同时作为输入Encoder之后进行解码Decoder，再将生成的结果和原检索结果重排序</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14788352072241.jpg" alt=""><br><img src="media/14788352189655.jpg" alt=""></p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>对话系统、open domain、chatbot</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>对话系统中可将问题和检索的结果同时作为输入Encoder之后进行解码Decoder，再将生成的结果和原检索结果重排序</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14788352072241.jpg" alt=""><br><img src="media/14788352189655.jpg" alt=""></p>
 <h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/14788352485111.jpg" alt=""><br><img src="media/14788352559281.jpg" alt=""></p>
 <h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>作者的思路非常简单，原来的回复生成模型容易发生回复内容短或者回复信息无意义的问题，在此作者将候选结果和原来的问句同时作为RNN生成器的输入，生成结果后再将本次生成的结果加入原检索候选集中，进行重新排序，实验结果证明此种方法比单独使用检索或单独使用生成效果有大幅提升。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>新的研究成果不见得可以直接应用于工程中，但新的paper，尤其是高质量paper中，一定会有很多的创新点，每一个创新点都可能会为后续的研究、工程实现等带来启发，甚至是一些技术上的突破。从本期开始，PaperWeekly会不定期地分享类似的内容，以方便大家了解最新的研究成果。</p>

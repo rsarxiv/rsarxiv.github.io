@@ -3,17 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>A Persona-Based Neural Conversation Model #PaperWeekly# | PaperWeekly</title>
+  <title>cs.CL weekly 2016.11.07-2016.11.11 | PaperWeekly</title>
   
   
-  <meta name="description" content="本文将分享的paper在生成对话时考虑了user identity，解决了多轮对话中response不一致的问题，如下图：
-
-同样的问题，换一种问法之后得到了不同的答案，而且答案不一致。paper的题目是A Persona-Based Neural Conversation Model，作者是来自斯">
+  <meta name="description" content="一周值得读Learning Recurrent Span Representations for Extractive Question Answering【机器阅读】不同的阅读理解数据集产生答案的方式不同，有的是给定N个候选答案，有的是规定从原文中的entity中进行选择，有的是从原文中的任意to">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="A Persona-Based Neural Conversation Model #PaperWeekly#"/>
+  <meta property="og:title" content="cs.CL weekly 2016.11.07-2016.11.11"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -68,32 +66,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-10T17:29:40.000Z"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">2016-07-10</a></time>
+        <time datetime="2016-11-13T19:10:19.000Z"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">2016-11-13</a></time>
       
       
   
-    <h1 class="title">A Persona-Based Neural Conversation Model #PaperWeekly#</h1>
+    <h1 class="title">cs.CL weekly 2016.11.07-2016.11.11</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本文将分享的paper在生成对话时考虑了user identity，解决了多轮对话中response不一致的问题，如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>同样的问题，换一种问法之后得到了不同的答案，而且答案不一致。paper的题目是<a href="https://arxiv.org/pdf/1603.06155.pdf" target="_blank" rel="external">A Persona-Based Neural Conversation Model</a>，作者是来自斯坦福的博士生Jiwei Li，他是一个非常高产的作者，很多文章质量都非常不错。文章最早在2016年6月8日在arxiv上发出。</p>
-<p>本文针对的问题是开头说的多轮对话中response不一致的问题，这个问题很关键，多轮对话在工程应用中的意义更大，一致性是一个基础问题，解决不好，效果就会非常地差。本文针对这个问题，将user identity（比如背景信息、用户画像，年龄等信息）考虑到model中，构建出一个个性化的seq2seq模型，为不同的user，以及同一个user对不同的对象对话生成不同风格的response。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>本文一共提出两个模型，一个是Speaker Model，一个是Speaker-Addressee Model。</p>
-<p>上图是Speaker Model的架构示意图，是一个典型的seq2seq模型，不同的地方在于在decoding部分增加了一个speaker embedding，类似于word embedding，只是说对用户进行建模。因为无法对用户的信息显式地进行建模，所以用了一种embedding的方法，通过训练来得到speaker向量，下面左边的图是speaker向量在二维平面上的表示，具有相似背景信息的user就会很接近，与word向量一个道理。decoding部分计算lstm各个gate用下式，vi表示speaker embedding。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>第二个模型是Speaker-Addressee Model，这个模型与上一个模型思想是一致的，只是考虑了一种更加细致的情况，在多人多轮对话（电视剧）中，每个人对不同的人说话style是不同的，所以应该在这类问题中需要考虑说话的对象，用V(i,j)来表示speaker i和j之间的这种关系，decoding部分计算如下式：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>seq2seq模型在最后的生成过程中，经常遇到一个问题，就是生成一些“呵呵”的话，就是指一些常见的、安全的但没有什么营养的话。针对这个问题，本文用beam search生成一个的N-Best List，用一些规则来重新排序得到更好的结果。</p>
-<p>训练语料这块，第一个模型主要是依靠Twitter的数据，第二个模型是依靠电视剧的剧本数据。关于语料这块，它是一个非常重要的问题，甚至是决定了你能够用deep learning技术来解决某个具体问题的关键。开放域的bot数据充分，但模型还有待提高；闭域的bot数据匮乏，虽然可以解决实际问题，但开发成本太高，而且横向扩展性很差，基本上都是针对一个客户做一个系统，可复用的地方并不多，大量的人工feature需要花费大量的人力、物力、财力来做，所以这个问题也是bot在实际应用中难以使用deep learning的最大原因。有一种思路是用增强学习来造数据，但前提是你得有一个质量不错的生成模型，才能不断地自学习，这个问题便成了一个先有鸡先有蛋的问题，是一个死循环。</p>
-<p>下图展示了Speaker Model在解决多轮对话一致性问题上的突出表现，User1采用了本文模型，User2是普通的seq2seq模型。</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>将用户信息建模是一个必要的部分，从本文的结果来看确实有更好的效果。多轮对话不仅仅是考虑用户信息，还要考虑大量的上下文信息，或者说是历史信息，尤其是对于具体的企业客服来说，历史信息和用户信息都非常重要。当然如果是娱乐用的机器人，用户的情绪也是一个非常有意思的信息，情感分析已经有不错的正确率，所以考虑人的情绪也是一件非常好玩的事情。本文用了类似于word embedding的思路，对user infomation进行建模表示，同样的思路可以用于情绪、上下文信息中。我相信context的建模应该也有很多人在做，后续的paper也一定会读到，届时再分享。</p>
-<p>一点思考，欢迎交流。</p>
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering"><a href="#Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering" class="headerlink" title="Learning Recurrent Span Representations for Extractive Question Answering"></a><a href="https://arxiv.org/pdf/1611.01436v1.pdf" target="_blank" rel="external">Learning Recurrent Span Representations for Extractive Question Answering</a></h2><p>【机器阅读】不同的阅读理解数据集产生答案的方式不同，有的是给定N个候选答案，有的是规定从原文中的entity中进行选择，有的是从原文中的任意token进行选择等等。本文所用的数据集是SQuAD，候选答案是原文中的任意字符串，难度较大，答案可能是一个词或者几个词都有可能。本文在前人研究的基础上提出了一种显式表示answer span的模型，取得了不错的效果。</p>
+<h2 id="Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences"><a href="#Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences" class="headerlink" title="Answering Complicated Question Intents Expressed in Decomposed Question Sequences"></a><a href="https://arxiv.org/pdf/1611.01242v1.pdf" target="_blank" rel="external">Answering Complicated Question Intents Expressed in Decomposed Question Sequences</a></h2><p>【复杂问答】基于语义分析的问答系统最近流行于解决长、难问题，本文研究的内容是如何处理多个相互关联的简单问题？（即将复杂问题分解成多个相关简答问题）并给出了一个任务数据集。这个问题的一大难点在于相互关联的问题需要共指消解的工作。本文将单轮问答对话分解成多轮问题过程，上下文的处理非常重要。建议研究聊天机器人的童鞋来精读此文。</p>
+<h2 id="Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning"><a href="#Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning" class="headerlink" title="Unsupervised Pretraining for Sequence to Sequence Learning"></a><a href="https://arxiv.org/pdf/1611.02683v1.pdf" target="_blank" rel="external">Unsupervised Pretraining for Sequence to Sequence Learning</a></h2><p>【seq2seq】【文本摘要】seq2seq是一种效果非常不错的框架，尤其是输入-输出数据非常充分的时候。但很多语言翻译问题并不能拿到非常多的训练数据，效果就会打折扣。本文针对这一问题，在原有seq2seq框架上提出了一种小改动。 encoder和decoder的初始值用训练好的语言模型来赋值，用可以获得的少量训练数据对模型进行训练和调优，本文方法的效果在机器翻译任务和abstractive式摘要任务中得到了验证。从本文中也可以看出，一个好的初值不仅可以使得训练更快，而且可以得到更好的结果。本文适合用seq2seq解决工程问题的童鞋读。</p>
+<h2 id="Sentence-Ordering-using-Recurrent-Neural-Networks"><a href="#Sentence-Ordering-using-Recurrent-Neural-Networks" class="headerlink" title="Sentence Ordering using Recurrent Neural Networks"></a><a href="https://arxiv.org/pdf/1611.02654v1.pdf" target="_blank" rel="external">Sentence Ordering using Recurrent Neural Networks</a></h2><p>【句子排序】【文本摘要】句子排序任务对于研究文档的连贯性非常有意义，而连贯性对于很多任务非常重要，比如文本摘要。本文在这个任务上用了流行的seq2seq方法，并且给出了一种可视化的句子表示效果。建议研究摘要的童鞋读。</p>
+<h2 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h2><p>【机器翻译】针对神经网络机器翻译（NMT）译文中经常出现的遗漏翻译（under-translation）和过度翻译（over-translation）问题，华为诺亚方舟实验室首次提出对覆盖率（coverage）进行建模。该方法的主要思想是为每个源端词维护一个coverage vector以表示该词被翻译（或覆盖）的程度。在解码过程中该覆盖率信息会传入attention model，以使它更关注于未被翻译的源端词，实验表示该方法能显著减少遗漏翻译和过度翻译错误数量，该工作发表在ACL 2016上。</p>
+<h2 id="Efficient-Summarization-with-Read-Again-and-Copy-Mechanism"><a href="#Efficient-Summarization-with-Read-Again-and-Copy-Mechanism" class="headerlink" title="Efficient Summarization with Read-Again and Copy Mechanism"></a><a href="https://arxiv.org/pdf/1611.03382.pdf" target="_blank" rel="external">Efficient Summarization with Read-Again and Copy Mechanism</a></h2><p>【文本摘要】本文适合研究文本摘要，尤其是用seq2seq来解决句子级摘要的童鞋进行研读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="刘知远老师在将门的talk"><a href="#刘知远老师在将门的talk" class="headerlink" title="刘知远老师在将门的talk"></a><a href="http://nlp.csai.tsinghua.edu.cn/~lzy/index_cn.html" target="_blank" rel="external">刘知远老师在将门的talk</a></h2><p>对“表示学习和知识获取”感兴趣的童鞋可以看过来。</p>
 
       
     </div>
@@ -103,7 +92,7 @@
         
   
   <div class="tags">
-    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/bot/">bot</a>, <a href="/tags/seq2seq/">seq2seq</a>
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
   </div>
 
         
@@ -146,7 +135,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

@@ -5,10 +5,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-11-11T04:21:25.000Z</updated>
+  <updated>2016-11-13T19:23:28.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cs.CL weekly 2016.11.07-2016.11.11</title>
+    <link href="http://rsarxiv.github.io/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/"/>
+    <id>http://rsarxiv.github.io/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/</id>
+    <published>2016-11-13T19:10:19.000Z</published>
+    <updated>2016-11-13T19:23:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering"><a href="#Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering" class="headerlink" title="Learning Recurrent Span Representations for Extractive Question Answering"></a><a href="https://arxiv.org/pdf/1611.01436v1.pdf" target="_blank" rel="external">Learning Recurrent Span Representations for Extractive Question Answering</a></h2><p>【机器阅读】不同的阅读理解数据集产生答案的方式不同，有的是给定N个候选答案，有的是规定从原文中的entity中进行选择，有的是从原文中的任意token进行选择等等。本文所用的数据集是SQuAD，候选答案是原文中的任意字符串，难度较大，答案可能是一个词或者几个词都有可能。本文在前人研究的基础上提出了一种显式表示answer span的模型，取得了不错的效果。</p>
+<h2 id="Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences"><a href="#Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences" class="headerlink" title="Answering Complicated Question Intents Expressed in Decomposed Question Sequences"></a><a href="https://arxiv.org/pdf/1611.01242v1.pdf" target="_blank" rel="external">Answering Complicated Question Intents Expressed in Decomposed Question Sequences</a></h2><p>【复杂问答】基于语义分析的问答系统最近流行于解决长、难问题，本文研究的内容是如何处理多个相互关联的简单问题？（即将复杂问题分解成多个相关简答问题）并给出了一个任务数据集。这个问题的一大难点在于相互关联的问题需要共指消解的工作。本文将单轮问答对话分解成多轮问题过程，上下文的处理非常重要。建议研究聊天机器人的童鞋来精读此文。</p>
+<h2 id="Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning"><a href="#Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning" class="headerlink" title="Unsupervised Pretraining for Sequence to Sequence Learning"></a><a href="https://arxiv.org/pdf/1611.02683v1.pdf" target="_blank" rel="external">Unsupervised Pretraining for Sequence to Sequence Learning</a></h2><p>【seq2seq】【文本摘要】seq2seq是一种效果非常不错的框架，尤其是输入-输出数据非常充分的时候。但很多语言翻译问题并不能拿到非常多的训练数据，效果就会打折扣。本文针对这一问题，在原有seq2seq框架上提出了一种小改动。 encoder和decoder的初始值用训练好的语言模型来赋值，用可以获得的少量训练数据对模型进行训练和调优，本文方法的效果在机器翻译任务和abstractive式摘要任务中得到了验证。从本文中也可以看出，一个好的初值不仅可以使得训练更快，而且可以得到更好的结果。本文适合用seq2seq解决工程问题的童鞋读。</p>
+<h2 id="Sentence-Ordering-using-Recurrent-Neural-Networks"><a href="#Sentence-Ordering-using-Recurrent-Neural-Networks" class="headerlink" title="Sentence Ordering using Recurrent Neural Networks"></a><a href="https://arxiv.org/pdf/1611.02654v1.pdf" target="_blank" rel="external">Sentence Ordering using Recurrent Neural Networks</a></h2><p>【句子排序】【文本摘要】句子排序任务对于研究文档的连贯性非常有意义，而连贯性对于很多任务非常重要，比如文本摘要。本文在这个任务上用了流行的seq2seq方法，并且给出了一种可视化的句子表示效果。建议研究摘要的童鞋读。</p>
+<h2 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h2><p>【机器翻译】针对神经网络机器翻译（NMT）译文中经常出现的遗漏翻译（under-translation）和过度翻译（over-translation）问题，华为诺亚方舟实验室首次提出对覆盖率（coverage）进行建模。该方法的主要思想是为每个源端词维护一个coverage vector以表示该词被翻译（或覆盖）的程度。在解码过程中该覆盖率信息会传入attention model，以使它更关注于未被翻译的源端词，实验表示该方法能显著减少遗漏翻译和过度翻译错误数量，该工作发表在ACL 2016上。</p>
+<h2 id="Efficient-Summarization-with-Read-Again-and-Copy-Mechanism"><a href="#Efficient-Summarization-with-Read-Again-and-Copy-Mechanism" class="headerlink" title="Efficient Summarization with Read-Again and Copy Mechanism"></a><a href="https://arxiv.org/pdf/1611.03382.pdf" target="_blank" rel="external">Efficient Summarization with Read-Again and Copy Mechanism</a></h2><p>【文本摘要】本文适合研究文本摘要，尤其是用seq2seq来解决句子级摘要的童鞋进行研读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="刘知远老师在将门的talk"><a href="#刘知远老师在将门的talk" class="headerlink" title="刘知远老师在将门的talk"></a><a href="http://nlp.csai.tsinghua.edu.cn/~lzy/index_cn.html" target="_blank" rel="external">刘知远老师在将门的talk</a></h2><p>对“表示学习和知识获取”感兴趣的童鞋可以看过来。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Learning-Recurrent-Span-Representations-for-Extractiv
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十三期</title>
@@ -1253,52 +1282,6 @@
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
       <category term="Representation" scheme="http://rsarxiv.github.io/tags/Representation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.09.05-2016.09.09</title>
-    <link href="http://rsarxiv.github.io/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/"/>
-    <id>http://rsarxiv.github.io/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/</id>
-    <published>2016-09-10T19:38:13.000Z</published>
-    <updated>2016-09-10T19:56:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：<br>（点击标题可看原文）</p>
-<h1 id="Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level"><a href="#Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level" class="headerlink" title="Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.00718v1.pdf" target="_blank" rel="external">Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level</a></h1><p>张潼老师的文章，通过实验对比了shallow word-level CNN（本文工作）和deep char-level CNN模型在而文本分类任务上的表现，结论是本文工作又快又准。</p>
-<p>（这篇文章对于选择char-level还是word-level做文本分类非常有指导意义）</p>
-<h1 id="Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering"><a href="#Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering" class="headerlink" title="Skipping Word: A Character-Sequential Representation based Framework for Question Answering"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00565v1.pdf" target="_blank" rel="external">Skipping Word: A Character-Sequential Representation based Framework for Question Answering</a></h1><p>本文用char-level CNN模型来做句子表示，然后进行question和answer之间的相关匹配学习，CIKM2016 short paper accepted。</p>
-<h1 id="End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00777v1.pdf" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h1><p>本文是微软研究软邓力老师的文章，构建了一种从知识图谱中形成response的聊天机器人KB-InfoBot，并且提出了一种端到端的增强学习训练方案。</p>
-<p>（本文对于构建一个端到端的KB + task-oriented chatbot非常有启发和指导意义）</p>
-<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><p>本文提出一种模型，将intent detection、slot filling和language modeling融合在一起进行学习，用于解决对话系统中的SLU task。本文是SIGDIAL 2016 paper。</p>
-<p>用到的数据集在Dropbox有一份<a href="http://t.cn/Rcbcpfl" target="_blank" rel="external">copy</a></p>
-<h1 id="Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling"><a href="#Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling" class="headerlink" title="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01454v1.pdf" target="_blank" rel="external">Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling</a></h1><p>和上一篇paper是同一个作者，解决的是同一个问题。将RNN换成了attention-based RNN，被另外一个会议录取。(有点灌水的意思)</p>
-<h1 id="Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations"><a href="#Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations" class="headerlink" title="Ask the GRU: Multi-task Learning for Deep Text Recommendations"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.02116v1.pdf" target="_blank" rel="external">Ask the GRU: Multi-task Learning for Deep Text Recommendations</a></h1><p>本文提出了用端到端的解决方案来做paper的推荐任务，用GRU将文本序列（标题、摘要等）encode到一个latent vector中。并且通过多任务学习来完成内容推荐和条目预测两个task，取得了不错的效果。</p>
-<p>以下内容为arXiv外的<b>优质内容</b>：</p>
-<h1 id="Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems"><a href="#Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems" class="headerlink" title="Discriminative Methods for Statistical Spoken Dialogue Systems"></a><a href="http://www.matthen.com/research/papers/Discriminative_Methods_for_Statistical_Spoken_Dialogue_Systems_Matthew_Henderson_PhD_Thesis.pdf" target="_blank" rel="external">Discriminative Methods for Statistical Spoken Dialogue Systems</a></h1><p>剑桥大学Spoken Dialogue System组毕业的Matthew Henderson博士，师从于Steve Young教授，研究领域是对话系统中的Dialogue State Tracking，主要特色是用transfer learning来解决discriminative model的扩展性和通用性。</p>
-<p>如果你对chatbot感兴趣，强烈建议好好研读一下这篇博士论文。</p>
-<h1 id="CONNECTING-IMAGES-AND-NATURAL-LANGUAGE"><a href="#CONNECTING-IMAGES-AND-NATURAL-LANGUAGE" class="headerlink" title="CONNECTING IMAGES AND NATURAL LANGUAGE"></a><a href="http://cs.stanford.edu/people/karpathy/main.pdf" target="_blank" rel="external">CONNECTING IMAGES AND NATURAL LANGUAGE</a></h1><p>斯坦福大学Feifei Li的博士生Andrej Karpathy的PhD thesis，Karpathy维护着几个非常流行的开源代码库，并且有着一个影响力非常大的博客。名师出高徒，这篇博士博士论文值得一看！</p>
-<p>最近，他更新了一篇博客，谈论了一些自己对读博的思考和建议。 <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="external">A Survival Guide to a PhD</a></p>
-<h1 id="Mendeley-Docs"><a href="#Mendeley-Docs" class="headerlink" title="Mendeley Docs"></a><a href="https://pan.baidu.com/share/link?shareid=317480&amp;uk=1594817379" target="_blank" rel="external">Mendeley Docs</a></h1><p>paper越看越多，一个优秀的paper管理工具就变得非常必要了，Mendeley是其中最优秀的代表之一。</p>
-<p>Easily organize your papers, read &amp; annotate your PDFs, collaborate in private or open groups, and securely access your research from everywhere.</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly</p>
-<p><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：&lt;br&gt;（点击标题可看原文）&lt;/p&gt;
-&lt;h1 id=&quot;Convolutional-Neural-Networks-for-Text-Categorization-Shallo
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="arXiv" scheme="http://rsarxiv.github.io/tags/arXiv/"/>
     
   </entry>
   

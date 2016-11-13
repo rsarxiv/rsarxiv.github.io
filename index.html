@@ -65,6 +65,45 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-13T19:10:19.000Z"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">2016-11-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">cs.CL weekly 2016.11.07-2016.11.11</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering"><a href="#Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering" class="headerlink" title="Learning Recurrent Span Representations for Extractive Question Answering"></a><a href="https://arxiv.org/pdf/1611.01436v1.pdf" target="_blank" rel="external">Learning Recurrent Span Representations for Extractive Question Answering</a></h2><p>【机器阅读】不同的阅读理解数据集产生答案的方式不同，有的是给定N个候选答案，有的是规定从原文中的entity中进行选择，有的是从原文中的任意token进行选择等等。本文所用的数据集是SQuAD，候选答案是原文中的任意字符串，难度较大，答案可能是一个词或者几个词都有可能。本文在前人研究的基础上提出了一种显式表示answer span的模型，取得了不错的效果。</p>
+<h2 id="Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences"><a href="#Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences" class="headerlink" title="Answering Complicated Question Intents Expressed in Decomposed Question Sequences"></a><a href="https://arxiv.org/pdf/1611.01242v1.pdf" target="_blank" rel="external">Answering Complicated Question Intents Expressed in Decomposed Question Sequences</a></h2><p>【复杂问答】基于语义分析的问答系统最近流行于解决长、难问题，本文研究的内容是如何处理多个相互关联的简单问题？（即将复杂问题分解成多个相关简答问题）并给出了一个任务数据集。这个问题的一大难点在于相互关联的问题需要共指消解的工作。本文将单轮问答对话分解成多轮问题过程，上下文的处理非常重要。建议研究聊天机器人的童鞋来精读此文。</p>
+<h2 id="Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning"><a href="#Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning" class="headerlink" title="Unsupervised Pretraining for Sequence to Sequence Learning"></a><a href="https://arxiv.org/pdf/1611.02683v1.pdf" target="_blank" rel="external">Unsupervised Pretraining for Sequence to Sequence Learning</a></h2><p>【seq2seq】【文本摘要】seq2seq是一种效果非常不错的框架，尤其是输入-输出数据非常充分的时候。但很多语言翻译问题并不能拿到非常多的训练数据，效果就会打折扣。本文针对这一问题，在原有seq2seq框架上提出了一种小改动。 encoder和decoder的初始值用训练好的语言模型来赋值，用可以获得的少量训练数据对模型进行训练和调优，本文方法的效果在机器翻译任务和abstractive式摘要任务中得到了验证。从本文中也可以看出，一个好的初值不仅可以使得训练更快，而且可以得到更好的结果。本文适合用seq2seq解决工程问题的童鞋读。</p>
+<h2 id="Sentence-Ordering-using-Recurrent-Neural-Networks"><a href="#Sentence-Ordering-using-Recurrent-Neural-Networks" class="headerlink" title="Sentence Ordering using Recurrent Neural Networks"></a><a href="https://arxiv.org/pdf/1611.02654v1.pdf" target="_blank" rel="external">Sentence Ordering using Recurrent Neural Networks</a></h2><p>【句子排序】【文本摘要】句子排序任务对于研究文档的连贯性非常有意义，而连贯性对于很多任务非常重要，比如文本摘要。本文在这个任务上用了流行的seq2seq方法，并且给出了一种可视化的句子表示效果。建议研究摘要的童鞋读。</p>
+<h2 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h2><p>【机器翻译】针对神经网络机器翻译（NMT）译文中经常出现的遗漏翻译（under-translation）和过度翻译（over-translation）问题，华为诺亚方舟实验室首次提出对覆盖率（coverage）进行建模。该方法的主要思想是为每个源端词维护一个coverage vector以表示该词被翻译（或覆盖）的程度。在解码过程中该覆盖率信息会传入attention model，以使它更关注于未被翻译的源端词，实验表示该方法能显著减少遗漏翻译和过度翻译错误数量，该工作发表在ACL 2016上。</p>
+<h2 id="Efficient-Summarization-with-Read-Again-and-Copy-Mechanism"><a href="#Efficient-Summarization-with-Read-Again-and-Copy-Mechanism" class="headerlink" title="Efficient Summarization with Read-Again and Copy Mechanism"></a><a href="https://arxiv.org/pdf/1611.03382.pdf" target="_blank" rel="external">Efficient Summarization with Read-Again and Copy Mechanism</a></h2><p>【文本摘要】本文适合研究文本摘要，尤其是用seq2seq来解决句子级摘要的童鞋进行研读。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="刘知远老师在将门的talk"><a href="#刘知远老师在将门的talk" class="headerlink" title="刘知远老师在将门的talk"></a><a href="http://nlp.csai.tsinghua.edu.cn/~lzy/index_cn.html" target="_blank" rel="external">刘知远老师在将门的talk</a></h2><p>对“表示学习和知识获取”感兴趣的童鞋可以看过来。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-11T02:50:42.000Z"><a href="/2016/11/10/PaperWeekly-第十三期/">2016-11-10</a></time>
       
       
@@ -3336,55 +3375,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-10T03:42:57.000Z"><a href="/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/">A Dataset for Research on Short-Text Conversation #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文是一篇2013年的bot文章，题目是<a href="http://staff.ustc.edu.cn/~cheneh/paper_pdf/2013/HaoWang.pdf" target="_blank" rel="external">A Dataset for Research on Short-Text Conversation</a>，作者来自中科大和华为诺亚方舟实验室。</p>
-<p>本文最大的贡献在于release出一个大型短文本对话语料，并且提出了一种基于检索的对话生成模型。到底是否是第一个用检索的方式来解决bot问题我不得而知，可以确定的一点是很多现在活跃在市面上的“逗逼”bot都是基于这个模型做的。</p>
-<p>语料的数据来自于新浪微博，大概的收集过程如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>首先选择10个NLP领域比较活跃的用户，然后依次作为种子用户，进行爬取，直到获得3200与NLP和ML相关的用户，然后抓取每个用户的微博和下面的评论，时间跨度为2个月。这样定向爬取的好处是选择的用户和所发表的微博涉及的领域比较窄，而不至于天马行空什么都有。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>数据准备好了之后，就是模型部分。模型一共分为两步，第一步是选择出评论候选列表，第二步是在候选列表中进行排序。候选列表选择一共分为三个baseline模型，如下：</p>
-<p>1、Post-Response Semantic Matching</p>
-<p>根据微博和评论之间的语义匹配程度选择出10个候选评论。</p>
-<p>2、Post-Response Similarity</p>
-<p>根据微博和评论之间的相似度选择出10个候选评论。</p>
-<p>3、Post-Post Similarity</p>
-<p>根据微博和微博之间的相似度选择出10个候选评论，即用相似微博的评论作为候选评论。</p>
-<p>给定一条微博之后，模型会通过三个baseline各选择10条评论，构成一个&lt;=30的评论候选列表，然后进行标注。标注工作是将评论分为两类，即suitable和unsuitable，即正样和负样。判断一个评论是否是suitable一共有三个准则：（1）semantic relevance，这个准则是判断微博和评论是否语义相关；（2）logic consistency，这个准则是判断微博和评论是否在逻辑上是一致的；（3）speech act alignment，这个准则是判断微博和评论在act方面是否是对齐的。</p>
-<p>接下来就是通过标注数据进行排序，排序学习的目标是让正例的score比负例的score更大。</p>
-<p>基于检索的bot解决方案是一种常见的方案，这种方案的重点在于知识库的质量，也就是那个database，一个query对应多个reply。如果只是简单的对话，效果会不错，而且如果知识库很有特点的话，reply经常会有一些意想不到的好玩的话，小黄鸡当年在人人网上火了好一阵子。但稍微复杂的问题，知识库的应变能力差的缺点就暴露出来了，比如query中有named entity，并且这个entity在知识库中没有出现过，这时reply就会出现牛头不对马嘴的情况，解决单轮对话都存在很大的缺陷，那么解决多轮对话就会更困难。虽然说，可以通过做query和reply、query和query之间语义层面相似度的计算，比如用一些成熟的deep learning技术来做。但根本上并没有解决这种方法的弊端，倒是非常垂直的闭域bot可以考虑用这个方案加上一些策略来解决，比如企业客服bot，因为知识库规模小，根据企业的资料和一些过往的用户对话数据可以建设一个质量不错的知识库，从而得到质量不错的bot。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3418,7 +3408,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>80</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>81</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3454,7 +3444,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>98</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>99</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

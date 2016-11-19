@@ -65,6 +65,61 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-05-12T17:20:59.000Z"><a href="/2016/05/12/自动文摘（十）/">2016-05-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/05/12/自动文摘（十）/">自动文摘（十）</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
+<p><strong> 生活不只是眼前的苟且，还有paper和远方 </strong></p>
+</blockquote>
+<p>不知不觉坚持写自动文摘系列的博客已经50天了，本篇是系列的第十篇。其实说是系列文章并不准确，只是每篇博客与自动文摘有关系，但相互之间并没有递进的关系，只是get到了一些点顺手写下来，又懒得起一些好听的名字，所以就简单地命名为系列博客。我不知道这个系列可以写到几，但探索自动文摘技术并不会停止下来。言归正传，最近读了些paper，觉得UNK问题是一个值得关注的问题，所以本文简单讨论一下UNK问题。</p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>UNK是Unknown Words的简称，在用seq2seq解决问题上经常出现，比如机器翻译任务，比如文本摘要任务。在decoder中生成某个单词的时候就会出现UNK问题。decoder本质上是一个语言模型，而语言模型本质上是一个多分类器，通过计算词汇表中的每个单词在当前条件下出现的概率，来生成该条件下的单词。为了提高计算效率，往往只选择出现频次最高的Top N个单词作为词汇表，其他的单词都用UNK来替换，这样导致decoder的时候会出现UNK。其中，很多UNK可能都是一些不常出现的但有意义的词，比如机构名、地名。</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>解决方法有以下几个：</p>
+<h2 id="Char-based"><a href="#Char-based" class="headerlink" title="Char-based"></a>Char-based</h2><p>英文字符的种类远远少于词的种类，用char来代替word可以将decoder输出层的维度降低很多，而且覆盖了所有的可能，从根本上避免了UNK的问题。在文本摘要任务中，数据中往往包括很多的人名、地名，基于word来做词汇表的话，经常会在摘要中看到大量的UNK，用基于char的模型来做，会得到不错的效果。</p>
+<p>char方法虽然缓解了output部分的计算压力，却将大量计算耗在了input部分，尤其是在处理英文问题时，会将input放大很多倍。而且处理中文问题也不太有优势，常用汉字也有3000左右的规模。</p>
+<h2 id="Vocabulary-expansion"><a href="#Vocabulary-expansion" class="headerlink" title="Vocabulary expansion"></a>Vocabulary expansion</h2><p>词汇表扩展的方法，在高频词词汇表中添加一定数量的UNK，并且编号。通过word embedding计算出带编号UNK的第一层最邻近words，如果匹配的这些词在原来词汇表中，则为有效词。有效词越多，本质上词汇表虽然规模没有增加，但表达能力会越强，在decoder生成词时遇到UNK就可以用词汇表中的高频词来替换。</p>
+<p>这个方法是一个辅助技巧，可以提升效果，但不会解决根本问题。</p>
+<h2 id="Output-layer-boost"><a href="#Output-layer-boost" class="headerlink" title="Output layer boost"></a>Output layer boost</h2><p>这个方法的思路是想办法提升输出层的效率，原始的方法是softmax，这是消耗计算资源的根源。有比如</p>
+<p>1、importance sampling : (Bengio et al., 2003)</p>
+<p>2、uniform sampling of ranking criterion : (Collobert et al., 2011)</p>
+<p>3、hierarchical softmax : (Morin et al., 2005) </p>
+<p>4、hierarchical log-bilinear model : (Mnih et al., 2009) </p>
+<p>5、structured output layer : (Le et al., 2011)</p>
+<p>6、noise-constrastive estimation : (Mnih et al., 2012)</p>
+<p>各种各样的方法来提升多分类问题的效率。效率高了，词汇表中就可以放入更多的单词，但治标不治本，只能说改善了效果。</p>
+<h2 id="Pointing-Copy"><a href="#Pointing-Copy" class="headerlink" title="Pointing/Copy"></a>Pointing/Copy</h2><p>观察人工参考摘要时会发现，摘要中有很多词都是来自于输入部分，比如机构名、地名、人名。这些词出现很少有的甚至只出现一次，如果靠语言模型来生成是不可能的。基于这个现象，有几篇paper提出用Pointing/Copy机制来生成摘要，两种模型意思上茶太不多，在decoder中存在两种模型来生成单词，一种是常规的生成方式，另一种就是拷贝方式。拷贝模型在很大程度上解决了UNK的问题，rare words都直接用原文中的词放在摘要的相应位置上。</p>
+<p>本方法从正面解决了UNK问题，而且计算效率上可能比char-based的方法更好一些，因为并没有引入太大规模的input数据，output部分规模也不大。</p>
+<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-11T14:14:52.000Z"><a href="/2016/05/11/自动文摘（九）/">2016-05-11</a></time>
       
       
@@ -977,7 +1032,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>81</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>82</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -1013,7 +1068,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>99</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>100</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

@@ -65,6 +65,82 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-19T17:58:02.000Z"><a href="/2016/11/19/PaperWeekly-第十四期/">2016-11-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/19/PaperWeekly-第十四期/">PaperWeekly 第十四期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader，FAIR Memory Networks，Danqi’s Stanford Reader, Attention Sum Reader, Gated Attention Sum Reader, Attention Over Attention Reader, etc. 这些模型关联性很大，或多或少存在相似之处。本文给大家介绍一下Toyota Technological Institute at Chicago (TTIC)在Question Answering方面的相关工作，共有3篇paper：</p>
+<p>1、Who did What: A Large-Scale Person-Centered Cloze Dataset, 2016<br>2、Broad Context Language Modeling as Reading Comprehension, 2016<br>3、Emergent Logical Structure in Vector Representations of Neural Readers, 2016</p>
+<h1 id="Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset"><a href="#Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset" class="headerlink" title="Who did What: A Large-Scale Person-Centered Cloze Dataset"></a><a href="https://tticnlp.github.io/who_did_what/" target="_blank" rel="external">Who did What: A Large-Scale Person-Centered Cloze Dataset</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Takeshi Onishi, Hai Wang, Mohit Bansal, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文章构建了一个新的Question Answering dataset，”Who did What”。</p>
+<p>sample instance如下图所示。<br><img src="media/example.png" alt="example"></p>
+<p>问题的句子总是挖掉了一些named entities，然后给出在文中出现过的别的named entities作为选项。这一个dataset的难度要高于之前的CNN/DM dataset，可以作为创建新模型的参考数据集。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>构建此数据集的方法与CNN/DM不同，问题并不是context passge的一个summary。问题与context均来自Gigaword Corpus，他们是两篇非常相关的文章。</p>
+<p>具体来说，我们先找到一篇文章，作为question文章。然后提取出文中第一句话的named entities，删除其中的一个named entity作为将要被预测的答案。然后利用这一句question sentence，我们可以利用一些Information Retrieval系统从Gigaword Corpus找到一篇相关的文章作为passage。这篇文章与question文章不同，但是包含着与question sentence非常类似的信息。</p>
+<p>有了passage之后，我们再从passage中找出named entities作为candidate answers。</p>
+<p>为了使任务难度更大，我们用一些简单的baseline (First person in passage, etc) 将一些很容易做出的问题删掉，只留下比较困难的instances。这样构建的数据比CNN/DM会困难不少。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>相信作者创建的新数据集会给Machine comprehension带来一些新的问题与挑战，是很有价值的资源。文章采用的baseline suppresion方法可以用比较小的代价加大问题的难度，值得参考。</p>
+<h1 id="Broad-Context-Language-Modeling-as-Reading-Comprehension"><a href="#Broad-Context-Language-Modeling-as-Reading-Comprehension" class="headerlink" title="Broad Context Language Modeling as Reading Comprehension"></a><a href="https://arxiv.org/abs/1610.08431" target="_blank" rel="external">Broad Context Language Modeling as Reading Comprehension</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Zewei Chu, Hai Wang, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>不久前发布的<a href="https://arxiv.org/abs/1606.06031" target="_blank" rel="external">LAMBADA dataset</a>中，作者尝试的各种baseline models都给出了比较差的结果。</p>
+<p>每一个LAMBADA instance如下图所示。</p>
+<p><img src="media/LAMBADA.png" alt="LAMBADA"></p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在观察了LAMBADA dataset之后，我们认为可以利用Reading comprehension models来提升准确率，而不必使用传统的language model。</p>
+<p>由于state of the art reading comprehension models需要给出candidate answers，然后从中选出一个作为预测的答案，我们就将所有在context中出现过的单词都作为一个candidate answer。</p>
+<p>LAMBADA给出的训练集是一些小说的文本。为了使训练集与测试集的数据类型保持一致，我们构建了一个biased training set。具体的做法是，我们将training set划分成4-5句话的context，然后保证target word在context passage中出现，只保留这样的训练数据。我们在新构建的training set上训练各种attention based models,得到了比原作者好得多的测试结果。</p>
+<p><img src="media/zewei-results.png" alt="zewei-results"></p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章中，作者利用了简单的方法和模型将LAMBADA dataset的准确率从7.3%提高到45.4%，非常简单有效。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h1 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hai Wang, Takeshi Onishi, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017 Submission</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文作者认为，当前的attention based models可以分为两类，aggregation readers(包括attentive readers和stanford readers)以及explicit reference readers(包括attention sum reader和gated attention sum reader)。</p>
+<p>这两种reader可以用如下的公式联系在一起。</p>
+<p><img src="media/formula1.png" alt="formula1"></p>
+<p>要满足上述等式，只需要满足下面的公式。</p>
+<p><img src="media/formula2.png" alt="formula2"></p>
+<p>也就是说，只有正确答案所在的hidden vector和question vector得到的inner product才能给出不为零的常数。以下实验结论支持了这一假设。</p>
+<p><img src="media/experiment.png" alt="experiment"></p>
+<p>由于CNN/DM在训练和测试中经过了anonymization，作者认为此inner product其实可以分为两部分，一部分与anonymized token ID有关，另一部分与ID无关。与ID相关的那一部分在inner product应该直接给出0的答案。如下述公式所示。</p>
+<p><img src="media/formula3.png" alt="formula3"></p>
+<p>本文的另一部分工作是在attention readers上加入一些linguistic features提升各个数据集的准确读，这里不仔细描述。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文是对于各个attetion based neural reader models很好的总结，它很好地连接了各个不同的model，说明了为何看似不同的model能够给出非常类似的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问答系统是一类大的问题，也是目前NLP应用的研究热点之一。本文作者介绍了TTIC在QA研究中的一些成果，其中第二篇是本文作者近期的paper。感谢来自芝加哥大学的@ZeweiChu童鞋辛勤的劳动。</p>
+<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>清华大学计算机系自然语言处理实验室招聘博士后</p>
+<h2 id="将从事的研究方向"><a href="#将从事的研究方向" class="headerlink" title="将从事的研究方向"></a>将从事的研究方向</h2><p>围绕自然语言处理、语义分析、统计机器翻译或社会计算开展深入的研究工作。实验室具体信息见：<a href="http://nlp.csai.tsinghua.edu.cn" target="_blank" rel="external">http://nlp.csai.tsinghua.edu.cn</a></p>
+<h2 id="应聘条件"><a href="#应聘条件" class="headerlink" title="应聘条件"></a>应聘条件</h2><p>1、具有计算机科学技术或相关学科博士学位（博士毕业两年内）；<br>2、熟悉自然语言处理或机器学习的基本理论、模型与算法，曾在国内外重要学术刊物或重要国际会议（CCF A类）上发表（含已录用）高水平学术论文；<br>3、在句法分析、语义分析方面有较好研究基础者优先；<br>4、具有较强的编程能力及项目研发能力；<br>5、责任心强，具有较好的团队合作精神和创新意识，英语阅读及写作能力较强；<br>6、符合清华大学博士后招收条件。</p>
+<h2 id="工资待遇"><a href="#工资待遇" class="headerlink" title="工资待遇"></a>工资待遇</h2><p>享受清华大学博士后待遇及课题组津贴。全力支持申请国家自然科学基金、全国博士后管委会、北京市、清华大学的相关研究计划。</p>
+<h2 id="申请材料"><a href="#申请材料" class="headerlink" title="申请材料"></a>申请材料</h2><p>1、个人简历、学位证书及成绩单复印件；<br>2、最具代表性的论文2篇；<br>3、博士后期间研究设想（简明扼要）；<br>4、其它任何支持材料。</p>
+<h2 id="导师及联系方式"><a href="#导师及联系方式" class="headerlink" title="导师及联系方式"></a>导师及联系方式</h2><p>合作导师：孙茂松教授、刘知远助理教授<br>联系人：刘知远<br>电子邮件： liuzy@tsinghua.edu.cn</p>
+<p>有意者请将申请材料发至电子邮箱，请在邮件主题中注明姓名和“申请博士后”。材料通过初选者进行面谈（面谈时间另行通知），然后走清华大学博士后申请程序。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-13T19:10:19.000Z"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">2016-11-13</a></time>
       
       
@@ -3327,54 +3403,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-10T17:29:40.000Z"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">2016-07-10</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文将分享的paper在生成对话时考虑了user identity，解决了多轮对话中response不一致的问题，如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>同样的问题，换一种问法之后得到了不同的答案，而且答案不一致。paper的题目是<a href="https://arxiv.org/pdf/1603.06155.pdf" target="_blank" rel="external">A Persona-Based Neural Conversation Model</a>，作者是来自斯坦福的博士生Jiwei Li，他是一个非常高产的作者，很多文章质量都非常不错。文章最早在2016年6月8日在arxiv上发出。</p>
-<p>本文针对的问题是开头说的多轮对话中response不一致的问题，这个问题很关键，多轮对话在工程应用中的意义更大，一致性是一个基础问题，解决不好，效果就会非常地差。本文针对这个问题，将user identity（比如背景信息、用户画像，年龄等信息）考虑到model中，构建出一个个性化的seq2seq模型，为不同的user，以及同一个user对不同的对象对话生成不同风格的response。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>本文一共提出两个模型，一个是Speaker Model，一个是Speaker-Addressee Model。</p>
-<p>上图是Speaker Model的架构示意图，是一个典型的seq2seq模型，不同的地方在于在decoding部分增加了一个speaker embedding，类似于word embedding，只是说对用户进行建模。因为无法对用户的信息显式地进行建模，所以用了一种embedding的方法，通过训练来得到speaker向量，下面左边的图是speaker向量在二维平面上的表示，具有相似背景信息的user就会很接近，与word向量一个道理。decoding部分计算lstm各个gate用下式，vi表示speaker embedding。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>第二个模型是Speaker-Addressee Model，这个模型与上一个模型思想是一致的，只是考虑了一种更加细致的情况，在多人多轮对话（电视剧）中，每个人对不同的人说话style是不同的，所以应该在这类问题中需要考虑说话的对象，用V(i,j)来表示speaker i和j之间的这种关系，decoding部分计算如下式：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>seq2seq模型在最后的生成过程中，经常遇到一个问题，就是生成一些“呵呵”的话，就是指一些常见的、安全的但没有什么营养的话。针对这个问题，本文用beam search生成一个的N-Best List，用一些规则来重新排序得到更好的结果。</p>
-<p>训练语料这块，第一个模型主要是依靠Twitter的数据，第二个模型是依靠电视剧的剧本数据。关于语料这块，它是一个非常重要的问题，甚至是决定了你能够用deep learning技术来解决某个具体问题的关键。开放域的bot数据充分，但模型还有待提高；闭域的bot数据匮乏，虽然可以解决实际问题，但开发成本太高，而且横向扩展性很差，基本上都是针对一个客户做一个系统，可复用的地方并不多，大量的人工feature需要花费大量的人力、物力、财力来做，所以这个问题也是bot在实际应用中难以使用deep learning的最大原因。有一种思路是用增强学习来造数据，但前提是你得有一个质量不错的生成模型，才能不断地自学习，这个问题便成了一个先有鸡先有蛋的问题，是一个死循环。</p>
-<p>下图展示了Speaker Model在解决多轮对话一致性问题上的突出表现，User1采用了本文模型，User2是普通的seq2seq模型。</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>将用户信息建模是一个必要的部分，从本文的结果来看确实有更好的效果。多轮对话不仅仅是考虑用户信息，还要考虑大量的上下文信息，或者说是历史信息，尤其是对于具体的企业客服来说，历史信息和用户信息都非常重要。当然如果是娱乐用的机器人，用户的情绪也是一个非常有意思的信息，情感分析已经有不错的正确率，所以考虑人的情绪也是一件非常好玩的事情。本文用了类似于word embedding的思路，对user infomation进行建模表示，同样的思路可以用于情绪、上下文信息中。我相信context的建模应该也有很多人在做，后续的paper也一定会读到，届时再分享。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3408,7 +3436,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>81</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>82</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3444,7 +3472,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>99</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>100</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

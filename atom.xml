@@ -5,10 +5,76 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-11-13T19:23:28.000Z</updated>
+  <updated>2016-11-19T18:17:17.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第十四期</title>
+    <link href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/11/19/PaperWeekly-第十四期/</id>
+    <published>2016-11-19T17:58:02.000Z</published>
+    <updated>2016-11-19T18:17:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader，FAIR Memory Networks，Danqi’s Stanford Reader, Attention Sum Reader, Gated Attention Sum Reader, Attention Over Attention Reader, etc. 这些模型关联性很大，或多或少存在相似之处。本文给大家介绍一下Toyota Technological Institute at Chicago (TTIC)在Question Answering方面的相关工作，共有3篇paper：</p>
+<p>1、Who did What: A Large-Scale Person-Centered Cloze Dataset, 2016<br>2、Broad Context Language Modeling as Reading Comprehension, 2016<br>3、Emergent Logical Structure in Vector Representations of Neural Readers, 2016</p>
+<h1 id="Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset"><a href="#Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset" class="headerlink" title="Who did What: A Large-Scale Person-Centered Cloze Dataset"></a><a href="https://tticnlp.github.io/who_did_what/" target="_blank" rel="external">Who did What: A Large-Scale Person-Centered Cloze Dataset</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Takeshi Onishi, Hai Wang, Mohit Bansal, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文章构建了一个新的Question Answering dataset，”Who did What”。</p>
+<p>sample instance如下图所示。<br><img src="media/example.png" alt="example"></p>
+<p>问题的句子总是挖掉了一些named entities，然后给出在文中出现过的别的named entities作为选项。这一个dataset的难度要高于之前的CNN/DM dataset，可以作为创建新模型的参考数据集。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>构建此数据集的方法与CNN/DM不同，问题并不是context passge的一个summary。问题与context均来自Gigaword Corpus，他们是两篇非常相关的文章。</p>
+<p>具体来说，我们先找到一篇文章，作为question文章。然后提取出文中第一句话的named entities，删除其中的一个named entity作为将要被预测的答案。然后利用这一句question sentence，我们可以利用一些Information Retrieval系统从Gigaword Corpus找到一篇相关的文章作为passage。这篇文章与question文章不同，但是包含着与question sentence非常类似的信息。</p>
+<p>有了passage之后，我们再从passage中找出named entities作为candidate answers。</p>
+<p>为了使任务难度更大，我们用一些简单的baseline (First person in passage, etc) 将一些很容易做出的问题删掉，只留下比较困难的instances。这样构建的数据比CNN/DM会困难不少。</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>相信作者创建的新数据集会给Machine comprehension带来一些新的问题与挑战，是很有价值的资源。文章采用的baseline suppresion方法可以用比较小的代价加大问题的难度，值得参考。</p>
+<h1 id="Broad-Context-Language-Modeling-as-Reading-Comprehension"><a href="#Broad-Context-Language-Modeling-as-Reading-Comprehension" class="headerlink" title="Broad Context Language Modeling as Reading Comprehension"></a><a href="https://arxiv.org/abs/1610.08431" target="_blank" rel="external">Broad Context Language Modeling as Reading Comprehension</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Zewei Chu, Hai Wang, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>不久前发布的<a href="https://arxiv.org/abs/1606.06031" target="_blank" rel="external">LAMBADA dataset</a>中，作者尝试的各种baseline models都给出了比较差的结果。</p>
+<p>每一个LAMBADA instance如下图所示。</p>
+<p><img src="media/LAMBADA.png" alt="LAMBADA"></p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在观察了LAMBADA dataset之后，我们认为可以利用Reading comprehension models来提升准确率，而不必使用传统的language model。</p>
+<p>由于state of the art reading comprehension models需要给出candidate answers，然后从中选出一个作为预测的答案，我们就将所有在context中出现过的单词都作为一个candidate answer。</p>
+<p>LAMBADA给出的训练集是一些小说的文本。为了使训练集与测试集的数据类型保持一致，我们构建了一个biased training set。具体的做法是，我们将training set划分成4-5句话的context，然后保证target word在context passage中出现，只保留这样的训练数据。我们在新构建的training set上训练各种attention based models,得到了比原作者好得多的测试结果。</p>
+<p><img src="media/zewei-results.png" alt="zewei-results"></p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章中，作者利用了简单的方法和模型将LAMBADA dataset的准确率从7.3%提高到45.4%，非常简单有效。</p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h1 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hai Wang, Takeshi Onishi, Kevin Gimpel, David McAllester</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017 Submission</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文作者认为，当前的attention based models可以分为两类，aggregation readers(包括attentive readers和stanford readers)以及explicit reference readers(包括attention sum reader和gated attention sum reader)。</p>
+<p>这两种reader可以用如下的公式联系在一起。</p>
+<p><img src="media/formula1.png" alt="formula1"></p>
+<p>要满足上述等式，只需要满足下面的公式。</p>
+<p><img src="media/formula2.png" alt="formula2"></p>
+<p>也就是说，只有正确答案所在的hidden vector和question vector得到的inner product才能给出不为零的常数。以下实验结论支持了这一假设。</p>
+<p><img src="media/experiment.png" alt="experiment"></p>
+<p>由于CNN/DM在训练和测试中经过了anonymization，作者认为此inner product其实可以分为两部分，一部分与anonymized token ID有关，另一部分与ID无关。与ID相关的那一部分在inner product应该直接给出0的答案。如下述公式所示。</p>
+<p><img src="media/formula3.png" alt="formula3"></p>
+<p>本文的另一部分工作是在attention readers上加入一些linguistic features提升各个数据集的准确读，这里不仔细描述。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文是对于各个attetion based neural reader models很好的总结，它很好地连接了各个不同的model，说明了为何看似不同的model能够给出非常类似的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问答系统是一类大的问题，也是目前NLP应用的研究热点之一。本文作者介绍了TTIC在QA研究中的一些成果，其中第二篇是本文作者近期的paper。感谢来自芝加哥大学的@ZeweiChu童鞋辛勤的劳动。</p>
+<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>清华大学计算机系自然语言处理实验室招聘博士后</p>
+<h2 id="将从事的研究方向"><a href="#将从事的研究方向" class="headerlink" title="将从事的研究方向"></a>将从事的研究方向</h2><p>围绕自然语言处理、语义分析、统计机器翻译或社会计算开展深入的研究工作。实验室具体信息见：<a href="http://nlp.csai.tsinghua.edu.cn" target="_blank" rel="external">http://nlp.csai.tsinghua.edu.cn</a></p>
+<h2 id="应聘条件"><a href="#应聘条件" class="headerlink" title="应聘条件"></a>应聘条件</h2><p>1、具有计算机科学技术或相关学科博士学位（博士毕业两年内）；<br>2、熟悉自然语言处理或机器学习的基本理论、模型与算法，曾在国内外重要学术刊物或重要国际会议（CCF A类）上发表（含已录用）高水平学术论文；<br>3、在句法分析、语义分析方面有较好研究基础者优先；<br>4、具有较强的编程能力及项目研发能力；<br>5、责任心强，具有较好的团队合作精神和创新意识，英语阅读及写作能力较强；<br>6、符合清华大学博士后招收条件。</p>
+<h2 id="工资待遇"><a href="#工资待遇" class="headerlink" title="工资待遇"></a>工资待遇</h2><p>享受清华大学博士后待遇及课题组津贴。全力支持申请国家自然科学基金、全国博士后管委会、北京市、清华大学的相关研究计划。</p>
+<h2 id="申请材料"><a href="#申请材料" class="headerlink" title="申请材料"></a>申请材料</h2><p>1、个人简历、学位证书及成绩单复印件；<br>2、最具代表性的论文2篇；<br>3、博士后期间研究设想（简明扼要）；<br>4、其它任何支持材料。</p>
+<h2 id="导师及联系方式"><a href="#导师及联系方式" class="headerlink" title="导师及联系方式"></a>导师及联系方式</h2><p>合作导师：孙茂松教授、刘知远助理教授<br>联系人：刘知远<br>电子邮件： liuzy@tsinghua.edu.cn</p>
+<p>有意者请将申请材料发至电子邮箱，请在邮件主题中注明姓名和“申请博士后”。材料通过初选者进行面谈（面谈时间另行通知），然后走清华大学博士后申请程序。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>cs.CL weekly 2016.11.07-2016.11.11</title>
@@ -1221,67 +1287,6 @@
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第五期</title>
-    <link href="http://rsarxiv.github.io/2016/09/16/PaperWeekly-%E7%AC%AC%E4%BA%94%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/09/16/PaperWeekly-第五期/</id>
-    <published>2016-09-16T18:14:40.000Z</published>
-    <updated>2016-09-16T19:44:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>Word2Vec从提出至今，已经成为了深度学习在自然语言处理中的基础部件，大大小小、形形色色的DL模型在表示词、短语、句子、段落等文本要素时都需要用word2vec来做word-level的embedding。Word2Vec的作者Tomas Mikolov是一位产出多篇高质量paper的学者，从RNNLM、Word2Vec再到最近流行的FastText都与他息息相关。一个人对同一个问题的研究可能会持续很多年，而每一年的研究成果都可能会给同行带来新的启发，本期的PaperWeekly将会分享其中三篇代表作，分别是：</p>
-<p>1、Efficient Estimation of Word Representation in Vector Space, 2013<br>2、Distributed Representations of Sentences and Documents, 2014<br>3、Enriching Word Vectors with Subword Information, 2016</p>
-<h1 id="Efficient-Estimation-of-Word-Representation-in-Vector-Space"><a href="#Efficient-Estimation-of-Word-Representation-in-Vector-Space" class="headerlink" title="Efficient Estimation of Word Representation in Vector Space"></a><a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="external">Efficient Estimation of Word Representation in Vector Space</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Google Inc., Mountain View, CA</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Word Representation, Word Embedding, Neural Network, Syntactic Similarity, and Semantic Similarity</p>
-<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201309</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何在一个大型数据集上快速、准确地学习出词表示？</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>传统的NNLM模型包含四层，即输入层、映射层、隐含层和输出层，计算复杂度很大程度上依赖于映射层到隐含层之间的计算，而且需要指定上下文的长度。RNNLM模型被提出用来改进NNLM模型，去掉了映射层，只有输入层、隐含层和输出层，计算复杂度来源于上一层的隐含层到下一层隐含层之间的计算。</p>
-<p>本文提出的两个模型CBOW (Continuous Bag-of-Words Model)和Skip-gram (Continuous Skip-gram Model)结合了上面两个模型的特点，都是只有三层，即输入层、映射层和输出层。CBOW模型与NNLM模型类似，用上下文的词向量作为输入，映射层在所有的词间共享，输出层为一个分类器，目标是使当前词的概率最大。Skip-gram模型与CBOW的输入跟输出恰好相反，输入层为当前词向量，输出层是使得上下文的预测概率最大，如下图所示。训练采用SGD。<br><img src="media/14740499814306.jpg" alt=""></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Code: <a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="external">C++代码</a><br>Dataset: <a href="https://sites.google.com/site/semeval2012task2/" target="_blank" rel="external">SemEval-2012</a>,用来评估语义相关性。</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Bengio[1]在2003年就提出了language model的思路，同样是三层（输入层，隐含层和输出层）用上下文的词向量来预测中间词，但是计算复杂度较高，对于较大的数据集运行效率低；实验中也发现将上下文的n-gram出现的频率结合进去会提高性能，这个优点体现在CBOW和Skip-gram模型的输出层中，用hierarchical softmax（with huffman trees）来计算词概率。</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的实验结果显示CBOW比NNLM在syntactic和semantic上的预测都要好，而Skip-gram在semantic上的性能要优于CBOW，但是其计算速度要低于CBOW。结果显示用较大的数据集和较少的epoch，可以取得较好的效果，并且在速度上有所提升。与LSI和LDA相比，word2vec利用了词的上下文，语义信息更加丰富。基于word2vec，出现了phrase2vec, sentence2vec和doc2vec，仿佛一下子进入了embedding的世界。NLP的这些思想也在用于recommendation等方面，并且与image结合，将image跟text之间进行转换。</p>
-<h1 id="Distributed-Representations-of-Sentences-and-Documents"><a href="#Distributed-Representations-of-Sentences-and-Documents" class="headerlink" title="Distributed Representations of Sentences and Documents"></a><a href="http://120.52.73.76/arxiv.org/pdf/1405.4053v2.pdf" target="_blank" rel="external">Distributed Representations of Sentences and Documents</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Quoc V. Le, Tomas Mikolov</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Google Inc, Mountain View, CA</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>sentence representation</p>
-<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>ICML 2014</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于word2vec的思路，如何表示sentence和document？</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/14740512129190.jpg" alt=""><br>利用one-hot的表示方法作为网络的输入，乘以词矩阵W，然后将得到的每个向量通过平均或者拼接的方法得到整个句子的表示，最后根据任务要求做一分类，而这过程中得到的W就是词向量矩阵，基本上还是word2vec的思路。</p>
-<p>接下来是段落的向量表示方法：<br><img src="media/14740512491434.jpg" alt=""><br>依旧是相同的方法，只是在这里加上了一个段落矩阵，用以表示每个段落，当这些词输入第i个段落时，通过段落id就可以从这个矩阵中得到相对应的段落表示方法。需要说明的是，在相同的段落中，段落的表示是相同的。文中这样表示的动机就是段落矩阵D可以作为一个memory记住在词的context中遗失的东西，相当于增加了一个额外的信息。这样经过训练之后，我们的就得到了段落表示D，当然这个段落就可以是一段或者一篇文章。</p>
-<p>最后一种就是没有词序的段落向量表示方法：<br><img src="media/14740512902836.jpg" alt=""><br>从图中就可以感觉到这个方法明显和skip-gram非常相似，这里只是把重点放在了段落的表示中，通过段落的表示，来预测相应的context 词的表示。最后我们依然可以得到段落矩阵D，这样就可以对段落进行向量化表示了。但是输入起码是句子级别的表示，而输出则是词的向量表示，因此个人比较怀疑这种方法的合理性。</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章是word2vec的方法提出一年后提出的方法，因此本文并没有使用目前非常流行的word2vec的训练方法来训练词向量，而是利用word2vec的思路，提出了一种更加简单的网络结构来训练任意长度的文本表示方法。这样一方面好训练，另一方面减少了参数，避免模型过拟合。优点就是在训练paragraph vector的时候加入了一个paragraph matrix，这样在训练过程中保留了一部分段落或者文档信息。这点在目前看来也是有一定优势的。但是目前深度学习发展迅速，可以处理非常大的计算量，同时word2vec以及其变种被应用得非常普遍，因此该文章提出的方法思路大于模型，思路我们可以借鉴，模型就不具有优势了。</p>
-<h1 id="Enriching-Word-Vectors-with-Subword-Information"><a href="#Enriching-Word-Vectors-with-Subword-Information" class="headerlink" title="Enriching Word Vectors with Subword Information"></a><a href="http://120.52.73.80/arxiv.org/pdf/1607.04606v1.pdf" target="_blank" rel="external">Enriching Word Vectors with Subword Information</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Piotr Bojanowski, Edouard Grave, Armand Joulin, Tomas Mikolov</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Word embedding, morphological, character n-gram</p>
-<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201607</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何解决word2vec方法中罕见词效果不佳的问题，以及如何提升词形态丰富语言的性能？</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>word2vec在词汇建模方面产生了巨大的贡献，然而其依赖于大量的文本数据进行学习，如果一个word出现次数较少那么学到的vector质量也不理想。针对这一问题作者提出使用subword信息来弥补这一问题，简单来说就是通过词缀的vector来表示词。比如unofficial是个低频词，其数据量不足以训练出高质量的vector，但是可以通过un+official这两个高频的词缀学习到不错的vector。</p>
-<p>方法上，本文沿用了word2vec的skip-gram模型，主要区别体现在特征上。word2vec使用word作为最基本的单位，即通过中心词预测其上下文中的其他词汇。而subword model使用字母n-gram作为单位，本文n取值为3~6。这样每个词汇就可以表示成一串字母n-gram，一个词的embedding表示为其所有n-gram的和。这样我们训练也从用中心词的embedding预测目标词，转变成用中心词的n-gram embedding预测目标词。</p>
-<p>实验分为三个部分，分别是（1）计算两个词之间的语义相似度，与人类标注的相似度进行相关性比较；（2）与word2vec一样的词类比实验；（3）与其他考虑morphology的方法比较。结果是本文方法在语言形态丰富的语言（土耳其语，法语等）及小数据集上表现优异，与预期一致。</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>源码公布在Facebook的fastText项目中： <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">https://github.com/facebookresearch/fastText</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>利用语言形态学来改进nlp的研究源远流长，本文提及的许多关于character-level和morphology的有趣工作值得参考。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>文章中提出的思路对于morphologically rich languages（例如土耳其语，词缀的使用极为普遍而有趣）来说十分有意义。词缀作为字母与单词之间的中层单位，本身具有一定的语义信息。通过充分利用这种中层语义来表征罕见词汇，直观上讲思路十分合理，也是应用了compositionality的思想。</p>
-<p>利用形态学改进word embedding的工作十分丰富，但中文NLP似乎很难利用这一思路。其实个人感觉中文中也有类似于词缀的单位，比如偏旁部首等等，只不过不像使用字母系统的语言那样容易处理。期待今后也有闪光的工作出现在中文环境中。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从Word2Vec到FastText，从word representation到sentence classification，Tomas Mikolov的工作影响了很多人。虽然有个别模型和实验结果曾遭受质疑，但终究瑕不掩瑜。word2vec对NLP的研究起到了极大地推动作用，其实不仅仅是在NLP领域中，在其他很多领域中都可以看到word2vec的思想和作用，也正是从word2vec开始，这个世界变得都被vector化了，person2vec，sentence2vec，paragraph2vec，anything2vec，world2vec。</p>
-<p>以上为本期Paperweekly的主要内容，感谢memray、zhkun、gcyydxf、jell四位同学的整理。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"><br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;Word2Vec从提出至今，已经成为了深度学习在自然语言处理中的基础部件，大大小小、形形色色的DL模型在表示词、短语、句子、段落等文本要素时都需要用
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="Representation" scheme="http://rsarxiv.github.io/tags/Representation/"/>
     
   </entry>
   

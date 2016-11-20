@@ -65,6 +65,107 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-11T20:03:05.000Z"><a href="/2016/07/11/Consensus-Attention-based-Neural-Networks-for-Chinese-Reading-Comprehension-PaperWeekly/">2016-07-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/11/Consensus-Attention-based-Neural-Networks-for-Chinese-Reading-Comprehension-PaperWeekly/">Consensus Attention-based Neural Networks for Chinese Reading Comprehension #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文分享的是今天刚刚刷出的一篇paper，是研究阅读理解的同学们的福音，因为要放出新的而且是中文的数据集。本文的题目是<a href="http://cn.arxiv.org/pdf/1607.02250" target="_blank" rel="external">Consensus Attention-based Neural Networks for Chinese Reading Comprehension</a>，作者均来自哈工大讯飞联合实验室。</p>
+<p>对于机器阅读理解的基本内容就不作介绍了，感兴趣的同学可以参考之前写的一篇摘要<a href="http://rsarxiv.github.io/2016/06/18/%E6%95%99%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%98%85%E8%AF%BB/">教机器学习阅读</a>。本文最大的亮点在于构建了中文机器阅读语料，语料分为两个部分，一个是训练集和自测试集，一个是领域外的测试集，包括人工的提问和自动获取的提问两种。（<a href="http://hfl.iflytek.com/chinese-rc/" target="_blank" rel="external">语料地址</a>，可能过段时间会publish出来）</p>
+<p>第一个部分是从人民日报获取的新闻语料，构建方法比较简单，先用POS工具对每篇新闻的词性进行标注，选择出现过两次以上的名词作为候选答案词。从候选词总随机选择一个词作为答案词，用包含答案词的句子作为问题query，剩下的部分作为document，从而构造出一个<document,query,answer>对。这种做法的好处是基于一个不太多的语料都可以构建出大量的<document,query,answer>对用来训练，这样也迎合了deep learning的需求。</document,query,answer></document,query,answer></p>
+<p>第二个部分也是非常有意思的部分，就是提出了用一个训练数据领域外的数据集作为测试集，构造的方法分为两种，一种是自动的方法和第一部分相同，第二种是基于人工的提问，而且是对于机器来说难度较大的问题。之所以采用领域外的数据进行测试，是为了防止新闻数据中很多问题可以通过外部知识库来进行回答，导致问题变得简单，如果用一个儿童读物的数据作为测试集，就会将这个问题变得更加纯粹和有挑战性。</p>
+<p>既然提出了新数据，baseline模型也省不了，本文提出的模型叫Consensus Attention Sum Reader，没有太多的新东西，效果也没有之前文章中Gate Attention Reader和Iterative Alternating Attention那么好，所以就不再介绍了。</p>
+<p>训练数据的自动标注和生成是deep learning应用的关键，很多领域发展缓慢或者在工程中应用不好都是因为data的量不够多，且没有太多好的方法来生成或者标注。机器阅读这个领域，相对来说，dataset的自动构建还是很容易做的，操作也比较简单，抠掉一个核心词就可以。而bot，自动文摘，在实际的工程应用中都难以用流行的data driven方案来解决，因为代价太大了。</p>
+<p>一点思考，欢迎交流。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-11T18:06:42.000Z"><a href="/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/">2016-07-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/">A Diversity-Promoting Objective Function for Neural Conversation Models #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本篇分享的文章是前一篇分享<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>的pre-paper，题目是<a href="http://arxiv.org/pdf/1510.03055v1.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a>，作者是Jiwei Li，最早于2015年10月11日发在arxiv上。</p>
+<p>本文针对的问题是seq2seq方案在解决bot问题上容易生成一些“呵呵”的reply，比如“I don’t know”之类的非常safe，grammatical的reply，但是营养太少，没有太多实际的意义。造成这种情况的原因是目标函数不合适，在最近流行的自然语言生成任务中一般都采用MLE作为目标函数，这个目标函数可以保证生成出最自然的语言，但diversity太差，当然如果在decoding部分生成大量的N-best list的话，也是有很多不错的reply但都排名很靠后。</p>
+<p>本文就是针对这样的一个问题，提出了用Maximum Mutual Information（MMI）作为目标函数来提高reply的diversity和实用性。MMI这个目标函数在Jiwei Li的多篇文章中都出现过，他很喜欢用这个来代替MLE作为目标函数来解决问题。互信息的方程如下：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>经过简单的推导，可得出下式作为目标函数：</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>而，一般的seq2seq采用MLE，如下式：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>本文方法比传统seq2seq多了后面的一项。</p>
+<p>p(T)其实是一个语言模型，为了在目标中控制reply的多样性，添加一个惩罚系数，如下式：</p>
+<p><img src="media/3-1.png" alt="3"></p>
+<p>这个式子记作(4)，经过简单的推导得到下式：</p>
+<p><img src="media/5.png" alt="5"></p>
+<p>记作(5)</p>
+<p>作者根据式子(4)和(5)提出了两种MMI，分别是MMI-antiLM和MMI-bidi。</p>
+<p>首先是antiLM，单看-log p(T)这一项，其实就是一个语言模型，anti表示反着的，因为有个负号。这一项不仅仅可以影响到你生成reply的diversity，同时也可以影响到你生成的reply是否是grammatical的，其实是一把双刃剑，需要做好控制，一般来说lambda小于1之后，后一项的影响相对较小了。</p>
+<p>本文用一个带权重的语言模型U(T)来替换当前的p(T)，如下式：</p>
+<p><img src="media/6.png" alt="6"></p>
+<p>这里g(k)是权重，k是index，g(k)的特点是随着k的增加单调递减。这样做有两个目的：</p>
+<p>1、decoding时对先生成的词的惩罚比后生成的词的惩罚对diversity的影响更大。</p>
+<p>2、随着decoding部分的输入对后续生成影响的减弱，语言模型U(T)将会占主导地位，reply后面的部分也会非常grammatical。</p>
+<p>bidi这个目标函数的思路是，先从第一项来生成N-Best List，然后用第二项对其进行排序，将diversity更好的reply放在前面。</p>
+<p>在训练过程中，仍旧是采用MLE，但在测试的时候，用本文提到的MMI来做测试。</p>
+<p>这个结果是由MMI-antiLM产生的：</p>
+<p><img src="media/7.png" alt="7"></p>
+<p>这个结果是MMI-bidi产生的：</p>
+<p><img src="media/8.png" alt="8"></p>
+<p>生成的reply确实seq2seq更加有营养。</p>
+<p>本文解决问题的一个思路是很有借鉴意义的，正如abstractive summarization中有一篇paper用MRT来替换传统的MLE作为目标函数，将评价指标考虑进了目标函数中进行优化，起码在benchmark上得到非常好的结果。这其实是一条不错的路，就是将你当前的评价指标融入到你的优化目标中进行优化学习，自然会得到比单纯地用MLE来优化要好的多，也有很多的paper在用这样的思路解决问题。我们不仅仅满足于可以生成一个grammatical的reply，我们更需要的是有意义的、有实际使用价值的bot。另外就是具体到目标函数的建模，如果你希望目标中减小哪些因素对目标的影响，就增加一项惩罚项，这也是做优化时候的一般方案，但在解决具体问题时会非常有效。本文虽然针对的是bot reply的生成问题，其实可以推广到一般的自然语言生成问题上来，只是要涉及到MLE做生成都可以换成本文的方法来提升相应的指标。</p>
+<p>一点思考，欢迎交流。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-07-10T17:29:40.000Z"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">2016-07-10</a></time>
       
       
@@ -2861,107 +2962,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-14T05:12:01.000Z"><a href="/2016/05/13/Paper翻译列表/">2016-05-13</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/13/Paper翻译列表/">Paper翻译列表</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
-<p><strong> 读万卷书，行万里路 </strong></p>
-</blockquote>
-<p>最近精读了多篇自动文摘方面的paper，并且写成了博客，感觉受益良多。接下来会读更多的好paper，并且以一种更加精炼的形式摘译和评价。如果你有兴趣可以扫码关注微信账号：</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-<h1 id="Accomplised"><a href="#Accomplised" class="headerlink" title="Accomplised"></a>Accomplised</h1><ul>
-<li><b>Generating News Headlines with Recurrent Neural Networks</b></li>
-<li><b>A Neural Attention Model for Abstractive Sentence Summarization </b></li>
-<li><b>Abstractive Sentence Summarization with Attentive Recurrent Neural Networks</b></li>
-<li><b>Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</b></li>
-<li><b>AttSum-Joint Learning of Focusing and Summarization with Neural Attention</b></li>
-<li><b>LCSTS: A Large Scale Chinese Short Text Summarization Dataset</b></li>
-</ul>
-<h1 id="To-Do"><a href="#To-Do" class="headerlink" title="To Do"></a>To Do</h1><ul>
-<li><b>Incorporating Copying Mechanism in Sequence-to-Sequence Learning</b></li>
-<li><b>Neural Headline Generation with Minimum Risk Training</b></li>
-<li><b>Toward Abstractive Summarization Using Semantic Representations</b></li>
-<li><b>Better Summarization Evaluation with Word Embeddings for ROUGE</b></li>
-</ul>
-<h1 id="Future-Work"><a href="#Future-Work" class="headerlink" title="Future Work"></a>Future Work</h1><p>在完成这文章的翻译和评价之后，会继续读nlp各顶级会议每年的best paper，一方面拓宽自己的视野，另一方面分享给同样感兴趣的童鞋。如果你也有兴趣做这件事情，可以发邮件联系我。（rsarxiv@163.com）</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-12T22:38:09.000Z"><a href="/2016/05/12/自动文摘（十一）/">2016-05-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/12/自动文摘（十一）/">自动文摘（十一）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
-<p><strong> 除了诗和远方，还有眼前的评价方法 </strong></p>
-</blockquote>
-<p>之前的博客中提到过影响一个技术发展的重要因素有几个，其中一个就是评价方法。因为评价方法是牵引，是参考，是衡量各个模型孰优孰劣的尺子。评价指标是否科学可行直接影响着这个领域能否进入一个正常的研究方向，目前在文本摘要任务中最常用的评价方法是<code>ROUGE</code>（<b>Recall-Oriented Understudy for Gisting Evaluation</b>，最细节的内容可参见Lin,2003的paper <b>Automatic Evaluation of Summaries Using N-gram Co-Occurrence Statistics</b>）。</p>
-<p>10多年前提出的方法至今都是自动文摘系统评价的主流方法，不是说它没有缺点，而是至今没有提出一个更加好的评价方法来取代它。</p>
-<p>ROUGE收到了机器翻译自动评价方法BLEU的启发，不同之处在于，采用召回率来作为指标。基本思想是将模型生成的摘要与参考摘要的n元组贡献统计量作为评判依据。这里，不同具体任务的参考文献获取方法不同，比如：DUC2003文本摘要中的参考摘要是由人工给出的，而seq2seq模型在处理Gigaword数据集时，用news headline作为摘要，中文微博短文本摘要数据集（哈工大）的参考摘要都是包含在微博内容中。</p>
-<h1 id="ROUGE评价指标"><a href="#ROUGE评价指标" class="headerlink" title="ROUGE评价指标"></a>ROUGE评价指标</h1><h2 id="ROUGE-N"><a href="#ROUGE-N" class="headerlink" title="ROUGE-N"></a>ROUGE-N</h2><p>这个指标计算生成的摘要与相应的参考摘要的n-gram召回率。</p>
-<h2 id="ROUGE-L"><a href="#ROUGE-L" class="headerlink" title="ROUGE-L"></a>ROUGE-L</h2><p>这个指标匹配两个文本单元之间的最长公共序列（LCS，Longest Common Subsequence）。</p>
-<h2 id="ROUGE-W"><a href="#ROUGE-W" class="headerlink" title="ROUGE-W"></a>ROUGE-W</h2><p>这个指标计算加权的LCS。</p>
-<h2 id="ROUGE-S"><a href="#ROUGE-S" class="headerlink" title="ROUGE-S"></a>ROUGE-S</h2><p>计算跳二元组（skip-bigram）同现统计量。</p>
-<p>ROUGE自动评测方法最大的优点是不依赖语言处理工具，缺点是死板，不够灵活，没有考虑语义层次上的匹配。可以考虑用word embedding来做语义层次上的评判，而不仅仅是n-gram的匹配。</p>
-<h1 id="ROUGE使用方法"><a href="#ROUGE使用方法" class="headerlink" title="ROUGE使用方法"></a>ROUGE使用方法</h1><p>在实际使用时，用ROUGE的开源程序，perl写的脚本，根据提示操作即可。通常用ROUGE-1,ROUGE-2指标来评测文摘的效果。</p>
-<h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>[1] <a href="http://research.microsoft.com/en-us/people/cyl/naacl2003.pdf" target="_blank" rel="external">Automatic Evaluation of Summaries Using N-gram Co-Occurrence Statistics</a></p>
-<p>[2] <a href="http://www.berouge.com/Pages/default.aspx" target="_blank" rel="external">ROUGE开源工具包</a></p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -2997,7 +2997,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>82</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>83</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3033,7 +3033,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>100</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>101</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   
@@ -3060,6 +3060,8 @@
     <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
   
     <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
   
     <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
   

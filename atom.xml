@@ -5,17 +5,80 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-11-19T18:17:17.000Z</updated>
+  <updated>2016-11-20T04:49:01.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>悉尼科技大学博士后招聘信息</title>
+    <link href="http://rsarxiv.github.io/2016/11/19/%E6%82%89%E5%B0%BC%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6%E5%8D%9A%E5%A3%AB%E5%90%8E%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF/"/>
+    <id>http://rsarxiv.github.io/2016/11/19/悉尼科技大学博士后招聘信息/</id>
+    <published>2016-11-20T04:47:55.000Z</published>
+    <updated>2016-11-20T04:49:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Hi, I am recruiting a Postdoc in Machine Learning for two (2) years. In brief, the candidate should:</p>
+<p>1 Hold a PhD in machine learning and have a good research track record.</p>
+<p>2 Have a genuine interest in mathematical modeling.</p>
+<p>3 Good communication skills and is willing to help PhD students resolving their mathematical issues.</p>
+<p>4 Excellent in programming and experimentation.</p>
+<p>The candidate will work with Dr Richard Xu (Yida.Xu@uts.edu.au), where his team’s recent research themes include: Bayesian Non-Parametric (BNP), Monte-Carlo inference, Matrix (and Tensor) factorization and Deep Learning. The application areas include both computer vision and document. There is no strict requirement that the candidate must align his/her research exactly to Richard’s existing work, i.e., the candidate can continue to work in his/her established field as long as the group benefit from his/her presence.</p>
+<p>Please contact Richard to obtain further information, and remember to check out his website:</p>
+<p><a href="http://www-staff.it.uts.edu.au/~ydxu/" target="_blank" rel="external">http://www-staff.it.uts.edu.au/~ydxu/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Hi, I am recruiting a Postdoc in Machine Learning for two (2) years. In brief, the candidate should:&lt;/p&gt;
+&lt;p&gt;1 Hold a PhD in machine learn
+    
+    </summary>
+    
+    
+      <category term="招聘" scheme="http://rsarxiv.github.io/tags/%E6%8B%9B%E8%81%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cs.CL weekly 2016.11.14-2016.11.18</title>
+    <link href="http://rsarxiv.github.io/2016/11/19/cs-CL-weekly-2016-11-14-2016-11-18/"/>
+    <id>http://rsarxiv.github.io/2016/11/19/cs-CL-weekly-2016-11-14-2016-11-18/</id>
+    <published>2016-11-20T04:30:55.000Z</published>
+    <updated>2016-11-20T04:46:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="UTCNN-a-Deep-Learning-Model-of-Stance-Classificationon-on-Social-Media-Text"><a href="#UTCNN-a-Deep-Learning-Model-of-Stance-Classificationon-on-Social-Media-Text" class="headerlink" title="UTCNN: a Deep Learning Model of Stance Classificationon on Social Media Text"></a><a href="http://t.cn/RfGR4GE" target="_blank" rel="external">UTCNN: a Deep Learning Model of Stance Classificationon on Social Media Text</a></h2><p>【文本分类】【社交网络】社交网络中蕴藏着大量的非结构化的文本，对社交网络的挖掘也是一块重要的研究内容。本文研究内容为立场分类，创新之处在于做分类时不仅仅考虑该文本信息本身，而且考虑了与该文本相关的评论、反馈、用户信息、话题等各种文本信息。模型部分没有太多的新意，是经典的CNN。本文适合做社交网络文本挖掘的童鞋来读。</p>
+<h2 id="A-Way-out-of-the-Odyssey-Analyzing-and-Combining-Recent-Insights-for-LSTMs"><a href="#A-Way-out-of-the-Odyssey-Analyzing-and-Combining-Recent-Insights-for-LSTMs" class="headerlink" title="A Way out of the Odyssey: Analyzing and Combining Recent Insights for LSTMs"></a><a href="http://t.cn/RfVSmk7" target="_blank" rel="external">A Way out of the Odyssey: Analyzing and Combining Recent Insights for LSTMs</a></h2><p>【文本分类】RNN及其扩展LSTM在文本分类中得到了广泛的应用，本文探究了多种LSTM的小变种对分类结果的影响，一些小改变对结果还是有一定影响的。本文适合工程上用LSTM解决文本分类问题的童鞋精读。</p>
+<h2 id="Linguistically-Regularized-LSTMs-for-Sentiment-Classification"><a href="#Linguistically-Regularized-LSTMs-for-Sentiment-Classification" class="headerlink" title="Linguistically Regularized LSTMs for Sentiment Classification"></a><a href="http://t.cn/Rf56bpv" target="_blank" rel="external">Linguistically Regularized LSTMs for Sentiment Classification</a></h2><p>【情感分析】本文最大的亮点在于将语言学资源，比如情感词典，否定词，表示程度的词等等以约束条件的形式融入到了现有的句子级别的LSTM分类模型中，取得了不错的效果。深度学习火起来之后，大家都推崇数据驱动的模型，希望找到一种简单粗糙的解决方案，而忽视了经典的自然语言资源和语言学的知识。经典的这些资源都是非常宝贵的东西，如何将这些知识融入到现有的深度学习模型中，是个很难但却非常有意义的事情，本文在句子级别的情感分类任务中做了相关的探索。推荐研究情感分析的童鞋精读。</p>
+<h2 id="Google’s-Multilingual-Neural-Machine-Translation-System-Enabling-Zero-Shot-Translation"><a href="#Google’s-Multilingual-Neural-Machine-Translation-System-Enabling-Zero-Shot-Translation" class="headerlink" title="Google’s Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation"></a><a href="http://t.cn/Rf5I4nw" target="_blank" rel="external">Google’s Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation</a></h2><p>【机器翻译】Google NMT系统支持Zero-Shot翻译，从训练集充足的A-&gt;B，B-&gt;C两个翻译模型中可以推出一个质量不错的A-&gt;C模型，A和C并不需要很充足的训练集。</p>
+<h2 id="Zero-resource-Machine-Translation-by-Multimodal-Encoder-decoder-Network-with-Multimedia-Pivot"><a href="#Zero-resource-Machine-Translation-by-Multimodal-Encoder-decoder-Network-with-Multimedia-Pivot" class="headerlink" title="Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot"></a><a href="http://t.cn/Rf5IB9P" target="_blank" rel="external">Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot</a></h2><p>【多模态】【机器翻译】现在的人工智能还达不到很高的智能水平，但是处理或者理解一些稍微初级的东西可能还行，比如3岁孩子的故事之类的。之前萌生一个想法，能不能针对小孩学习，比如学习英语，传统的方法可能是给一句中文，教一句英语，感觉用到的信息量还是少，能不能一边看图，一边学习英语，相当于用到了图像这个信息，孩子在学习的过程中会多一些信息维度，学习效果可能会更好一些。本文正是做了这么一件事情，借助图像作为机器翻译的桥梁。</p>
+<h2 id="Neural-Machine-Translation-with-Pivot-Languages"><a href="#Neural-Machine-Translation-with-Pivot-Languages" class="headerlink" title="Neural Machine Translation with Pivot Languages"></a><a href="http://t.cn/RftFqja" target="_blank" rel="external">Neural Machine Translation with Pivot Languages</a></h2><p>【机器翻译】很多语言的机器翻译都面临着一个语言对数据集匮乏的问题，一个比较直观的思路是，用一种常见的语言作为“桥梁”，连接起两种语言对数据集匮乏的语言。昨天Google的zero-shot也正是这么一种思路，本文也在这方面进行了研究工作，即想做A-&gt;C的翻译，需要拿一个热门语言B作为桥梁，构造一个A-&gt;B,B-&gt;C的联合训练模型，本文用英语作为B，用德语、法语、西班牙语分别作为A和C进行了两组实验，验证了模型的有效性。这种“串行”seq2seq的思路，其实可以尝试一些其他的任务，做一些seq2seq2seq…的模型出来。</p>
+<h2 id="Joint-Representation-Learning-of-Text-and-Knowledge-for-Knowledge-Graph-Completion"><a href="#Joint-Representation-Learning-of-Text-and-Knowledge-for-Knowledge-Graph-Completion" class="headerlink" title="Joint Representation Learning of Text and Knowledge for Knowledge Graph Completion"></a><a href="http://t.cn/Rf5J12U" target="_blank" rel="external">Joint Representation Learning of Text and Knowledge for Knowledge Graph Completion</a></h2><p>【知识表示】“联合学习”是个热门词，“联合学习”可以避免一些语言分析过程（比如：句法依存分析）带来的误差。本文在学习词、实体和关系表示时同时用到了text和知识图谱信息，得到了不错的效果。</p>
+<h2 id="Multi-lingual-Knowledge-Graph-Embeddings-for-Cross-lingual-Knowledge-Alignment"><a href="#Multi-lingual-Knowledge-Graph-Embeddings-for-Cross-lingual-Knowledge-Alignment" class="headerlink" title="Multi-lingual Knowledge Graph Embeddings for Cross-lingual Knowledge Alignment"></a><a href="http://t.cn/Rf5XVuD" target="_blank" rel="external">Multi-lingual Knowledge Graph Embeddings for Cross-lingual Knowledge Alignment</a></h2><p>【知识图谱】一个新模型来填坑，Trans系列的新成员——MTransE </p>
+<h2 id="End-to-End-Neural-Sentence-Ordering-Using-Pointer-Network"><a href="#End-to-End-Neural-Sentence-Ordering-Using-Pointer-Network" class="headerlink" title="End-to-End Neural Sentence Ordering Using Pointer Network"></a><a href="http://t.cn/RftkYoF" target="_blank" rel="external">End-to-End Neural Sentence Ordering Using Pointer Network</a></h2><p>【句子排序】【文本摘要】句子排序是一项重要的基本工作，尤其是在做单文档和多文档文本抽取式摘要时显得特别重要。经典的排序方法几乎都是考虑单个句子所包含的信息进行排序，忽略了句子的上下文信息。本文工作借鉴了Pointer Network的思路，提出了一种端到端排序模型，在排序时考虑句子的上下文。通过两组实验验证了本文算法的有效性。机器翻译中的seq2seq+attention已经成功的应用在了很多任务上，但针对具体任务不同的特点进行针对性地修正会带来比较理想的结果。建议研究文本摘要的童鞋读本文。</p>
+<h2 id="The-Amazing-Mysteries-of-the-Gutter-Drawing-Inferences-Between-Panels-in-Comic-Book-Narratives"><a href="#The-Amazing-Mysteries-of-the-Gutter-Drawing-Inferences-Between-Panels-in-Comic-Book-Narratives" class="headerlink" title="The Amazing Mysteries of the Gutter: Drawing Inferences Between Panels in Comic Book Narratives"></a><a href="http://t.cn/RfVoHOF" target="_blank" rel="external">The Amazing Mysteries of the Gutter: Drawing Inferences Between Panels in Comic Book Narratives</a></h2><p>【问答系统】基于上下文的问答已经有很多数据集了，基于图像的问答也有一些数据集了。漫画是一类大家小时候都喜欢的读物，包含了丰富的图像和文本数据（对话）。本文给出了一个大型数据集，包括了丰富的图像和文本，规模在120万（120GB）左右。数据给出了几个任务，基于图像的问答任务，基于对话文本的问答任务和文本排序任务。对问答感兴趣，想找一些新数据来刷一刷榜的童鞋可以看过来。</p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Highlights-of-EMNLP-2016-Dialogue-deep-learning-and-more"><a href="#Highlights-of-EMNLP-2016-Dialogue-deep-learning-and-more" class="headerlink" title="Highlights of EMNLP 2016: Dialogue, deep learning, and more"></a><a href="http://blog.aylien.com/highlights-emnlp-2016-dialogue-deeplearning-and-more/" target="_blank" rel="external">Highlights of EMNLP 2016: Dialogue, deep learning, and more</a></h2><p>NLP技术服务公司Aylien写的EMNLP 2016总结</p>
+<h1 id="一句话公益广告"><a href="#一句话公益广告" class="headerlink" title="一句话公益广告"></a>一句话公益广告</h1><p>悉尼科技大学招收机器学习博士后，感兴趣的童鞋看过来。（）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;UTCNN-a-Deep-Learning-Model-of-Stance-Classificationo
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十四期</title>
     <link href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/11/19/PaperWeekly-第十四期/</id>
     <published>2016-11-19T17:58:02.000Z</published>
-    <updated>2016-11-19T18:17:17.000Z</updated>
+    <updated>2016-11-19T18:34:07.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader，FAIR Memory Networks，Danqi’s Stanford Reader, Attention Sum Reader, Gated Attention Sum Reader, Attention Over Attention Reader, etc. 这些模型关联性很大，或多或少存在相似之处。本文给大家介绍一下Toyota Technological Institute at Chicago (TTIC)在Question Answering方面的相关工作，共有3篇paper：</p>
 <p>1、Who did What: A Large-Scale Person-Centered Cloze Dataset, 2016<br>2、Broad Context Language Modeling as Reading Comprehension, 2016<br>3、Emergent Logical Structure in Vector Representations of Neural Readers, 2016</p>
@@ -39,7 +102,7 @@
 <p>LAMBADA给出的训练集是一些小说的文本。为了使训练集与测试集的数据类型保持一致，我们构建了一个biased training set。具体的做法是，我们将training set划分成4-5句话的context，然后保证target word在context passage中出现，只保留这样的训练数据。我们在新构建的training set上训练各种attention based models,得到了比原作者好得多的测试结果。</p>
 <p><img src="media/zewei-results.png" alt="zewei-results"></p>
 <h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章中，作者利用了简单的方法和模型将LAMBADA dataset的准确率从7.3%提高到45.4%，非常简单有效。</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h1 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hai Wang, Takeshi Onishi, Kevin Gimpel, David McAllester</p>
+<h1 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hai Wang, Takeshi Onishi, Kevin Gimpel, David McAllester</p>
 <h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017 Submission</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。</p>
 <h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文作者认为，当前的attention based models可以分为两类，aggregation readers(包括attentive readers和stanford readers)以及explicit reference readers(包括attention sum reader和gated attention sum reader)。</p>
@@ -1194,92 +1257,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;本期paperweekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>paperweekly用户投票总结</title>
-    <link href="http://rsarxiv.github.io/2016/09/17/paperweekly%E7%94%A8%E6%88%B7%E6%8A%95%E7%A5%A8%E6%80%BB%E7%BB%93/"/>
-    <id>http://rsarxiv.github.io/2016/09/17/paperweekly用户投票总结/</id>
-    <published>2016-09-18T05:05:11.000Z</published>
-    <updated>2016-09-18T06:02:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>参与投票131人，远超我个人的预期，证明了发红包是一个非常有效的手段，感谢各位的参与。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>从第一个问题的回答来看，群里的童鞋基本上都喜欢读paper，并且大多数一周内可以读1-3篇，更有甚者可以读到6篇以上。关于读paper，以及从最开始做paperweekly，也是受了Ng一次采访内容的启发，他大概的意思是说，每天坚持读篇paper是一种长期投资，坚持做一年、两年之后会有显著地提高。（虽然不确定这话是不是Ng本人说的，但我比较认同这个观点）</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>第二个问题是关于paper类型的，是一个多选题。群里的童鞋有的是学生，有的是工业界的朋友，有的大厂的工程师，有的是创业公司的大拿，不同的背景决定了导向不同。从结果分布来看，工程性强、热门的paper更受欢迎，这个结果可以也比较好理解，毕竟大众化的东西是更受大家欢迎，工程性强的文章一般来说可操作性都比较强，适合复现，并且可以有选择地应用在生产环境中；热门的文章是大家热议的话题，AlphaGo热炒那会，出门不聊几句增强学习都不好意思和人打招呼，甚至这个PR行为带动了一大批人开始学习下围棋，热门、话题性是是媒体感兴趣的，也是大众喜欢津津乐道的；理论性强的paper通常来说不好读，因为很难，需要很深的基础在那儿，不是一句、两句说得清的，但正是这些理论性强的paper真正地推动着AI在往前走；每个人的兴趣点可能都不是很相同，所以有28个童鞋选择了最后一个选项，也符合小众这个词的特点。</p>
-<p>chatbot是当下可能最火的方向之一，但说句实话，10年前paper提出的方法可能在现在的系统中仍然是非常好用的，记得微博上看到过一个人说用正则可以解决大多数的问题，仔细想想rule-based是一个多么神通广大的事情啊。既然rule-based这么好，干嘛还研究那么多新东西、新概念呢？不就是因为人工智能太偏重于人工一词，离智能太远，离智障太近嘛。我一直是这么看待paper这个事儿的，paper针对的可能不是当下的问题，而是未来的问题，但不意味着当下的paper对于当下的问题没有参考和借鉴的意义。paperweekly的一个初衷是希望大家可以通过简单、清晰地描述来看看某一篇或者某几篇paper到底解决了什么问题，用了什么方法，结果如何，当然结果的可信度是另外一回事，但终究是会有启发的。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>这个问题少打两个字，但是感觉根据上下文大家应该是理解了我提的问题。我想了解，到底paperweekly写的文章有没有真正地解决了一点点需求，或者给大家带来那么一点点启发。答案告诉了我，确实有，某些细节或者思路确实很有借鉴意义，这件事情值得做。谢谢。</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>这是一个多选题，初衷是想了解下哪种方式或者哪几种方式可以让交流变得更加高效率。毫无疑问，微信群是最多的答案，说句实话，微信群排第一是因为大家对微信的依赖强，黏性大，bbs排第二，其实bbs是更加好的讨论方式，但是黏性很差，讨论起来操作会麻烦一些，所以我这边有个非常naive的想法，就是想将bbs和微信群打通，群里有几个技术大牛也愿意一起来做这件事情，希望可以有一个方便大家的东西出来。</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>复现别人paper这个事儿，我个人会选一般有。原因如下：1、首先paper的结果可能没有那么地好，只是说写的或者选的比较好而已；2、paper里的算法不见得适合你的问题；3、paper中的实验在实现过程中可能有很多的trick，并没有写明在paper中，这都是一个又一个的坑啊；4、有些paper有开源的code，可以拿来跑一跑看看效果再说。</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>这个答案也是我预想之中的，摘要就是为了解决信息过载问题的。群里每天会产生一定数量的消息（不是很多其实），但没有赶上实时聊天的话，很容易错过一些精彩的对话或者干货分享。从这个角度来看，做digest这件事情就显得很有意义了。关于如何做，群里之前也有过不错的讨论，我也尝试标注了下数据，感觉难度不小，现在的想法是，我每天晚上花点时间手工摘要出来，分享在bbs和群里。（日后有机会可以将这个事情自动化）</p>
-<p><img src="media/7.png" alt="7"></p>
-<p>这个问题的结果基本上和我上面的想法吻合了。</p>
-<p><img src="media/8.png" alt="8"></p>
-<p>目前paperweekly运营团队里有四个活跃的小组，分别是chatbot、NMT、QA和representation，每个组每周负责出一期文章，包括3-5篇paper，KG这个组建立了，但是一直不够活跃，需要大牛的加入，来写KG方面的文章。</p>
-<p>投票的结果和总结基本是这样的情况，投票可能设计的不科学也有些仓促，但基本达到了预期的目的，得到了充分的反馈，这里感谢各位的支持。谢谢大家！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;参与投票131人，远超我个人的预期，证明了发红包是一个非常有效的手段，感谢各位的参与。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;media/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;p&gt;从第一个问题的回答来看，群里的童鞋基本上都喜欢读paper，并且大多数一周内可以读1-3篇，更
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="paperweekly" scheme="http://rsarxiv.github.io/tags/paperweekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.09.12-2016.09.16</title>
-    <link href="http://rsarxiv.github.io/2016/09/16/cs-CL-weekly-2016-09-12-2016-09-16/"/>
-    <id>http://rsarxiv.github.io/2016/09/16/cs-CL-weekly-2016-09-12-2016-09-16/</id>
-    <published>2016-09-17T04:34:58.000Z</published>
-    <updated>2016-09-17T04:49:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本周（2016.09.12-2016.09.16）质量较高的arXiv cs.CL的paper如下：<br>（点击标题可看原文）</p>
-<h1 id="Dialogue-manager-domain-adaptation-using-Gaussian-process-reinforcement-learning"><a href="#Dialogue-manager-domain-adaptation-using-Gaussian-process-reinforcement-learning" class="headerlink" title="Dialogue manager domain adaptation using Gaussian process reinforcement learning"></a><a href="http://120.52.73.75/arxiv.org/pdf/1609.02846v1.pdf" target="_blank" rel="external">Dialogue manager domain adaptation using Gaussian process reinforcement learning</a></h1><p>本文是Steve Young组的一篇大作，文中详细介绍了Gaussian process reinforcement learning框架的思路和优势，并且在多个对话领域中进行了实验并得到更好的结果。</p>
-<h1 id="A-Hierarchical-Model-of-Reviews-for-Aspect-based-Sentiment-Analysis"><a href="#A-Hierarchical-Model-of-Reviews-for-Aspect-based-Sentiment-Analysis" class="headerlink" title="A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.02745v1.pdf" target="_blank" rel="external">A Hierarchical Model of Reviews for Aspect-based Sentiment Analysis</a></h1><p>本文提出用分层双向LSTM模型对网站评论数据进行观点挖掘，发表在EMNLP 2016。该作者今天在arxiv上提交了三篇同类问题不同解决方案的paper，对评论观点和情感挖掘的童鞋可作参考。</p>
-<h1 id="Knowledge-as-a-Teacher-Knowledge-Guided-Structural-Attention-Networks"><a href="#Knowledge-as-a-Teacher-Knowledge-Guided-Structural-Attention-Networks" class="headerlink" title="Knowledge as a Teacher: Knowledge-Guided Structural Attention Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.03286v1.pdf" target="_blank" rel="external">Knowledge as a Teacher: Knowledge-Guided Structural Attention Networks</a></h1><p>本文提出了用先验知识+attention network的模型，用来解决了自然语言理解存在问题：通过从少量训练数据中捕获重要子结构，来缓解测试集中的unseen data问题，同时提高理解能力。</p>
-<h1 id="Wav2Letter-an-End-to-End-ConvNet-based-Speech-Recognition-System"><a href="#Wav2Letter-an-End-to-End-ConvNet-based-Speech-Recognition-System" class="headerlink" title="Wav2Letter: an End-to-End ConvNet-based Speech Recognition System"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.03193v2.pdf" target="_blank" rel="external">Wav2Letter: an End-to-End ConvNet-based Speech Recognition System</a></h1><p>本文提出了一种语音识别的端到端模型，基于CNN和graph decoding，在不依赖因素对齐的前提下，输出letters。本文工作来自Facebook AI。</p>
-<h1 id="Multimodal-Attention-for-Neural-Machine-Translation"><a href="#Multimodal-Attention-for-Neural-Machine-Translation" class="headerlink" title="Multimodal Attention for Neural Machine Translation "></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.03976v1.pdf" target="_blank" rel="external">Multimodal Attention for Neural Machine Translation </a></h1><p>本文通过利用image caption的多模态、多语言数据构建了一个NMT模型，模型的输入不仅是source language，还有所描述的图像，输出是target language。通过输入更多的信息，得到了更好的效果。</p>
-<h1 id="Joint-Extraction-of-Events-and-Entities-within-a-Document-Context"><a href="#Joint-Extraction-of-Events-and-Entities-within-a-Document-Context" class="headerlink" title="Joint Extraction of Events and Entities within a Document Context"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.03632v1.pdf" target="_blank" rel="external">Joint Extraction of Events and Entities within a Document Context</a></h1><p>本文针对传统信息抽取方法将event和entity分开考虑的问题，提出了在docuemnt-level context下考虑event和entity之间关系进行信息抽取的新方法，取得了非常好的结果。本文发表在NAACL2016.</p>
-<h1 id="Character-Level-Language-Modeling-with-Hierarchical-Recurrent-Neural-Networks"><a href="#Character-Level-Language-Modeling-with-Hierarchical-Recurrent-Neural-Networks" class="headerlink" title="Character-Level Language Modeling with Hierarchical Recurrent Neural Networks"></a><a href="http://120.52.73.75/arxiv.org/pdf/1609.03777v1.pdf" target="_blank" rel="external">Character-Level Language Modeling with Hierarchical Recurrent Neural Networks</a></h1><p>语言模型问题上，char-level可以很好地解决OOV的问题，但效果不如word-level，本文针对该问题提出了一种分层模型，同时兼顾word-level和char-level的优势。本文发表在nips2016。</p>
-<h1 id="Neural-Machine-Translation-with-Supervised-Attention"><a href="#Neural-Machine-Translation-with-Supervised-Attention" class="headerlink" title="Neural Machine Translation with Supervised Attention"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.04186v1.pdf" target="_blank" rel="external">Neural Machine Translation with Supervised Attention</a></h1><p>attention机制可以动态地对齐source和target words，但准确率不如传统方法。本文提出了用传统方法作为teacher，来“教”model学习alignment，模型称为supervised attention。本文已投稿COLING2016，在审。</p>
-<h1 id="Efficient-softmax-approximation-for-GPUs"><a href="#Efficient-softmax-approximation-for-GPUs" class="headerlink" title="Efficient softmax approximation for GPUs"></a><a href="http://120.52.73.76/arxiv.org/pdf/1609.04309v1.pdf" target="_blank" rel="external">Efficient softmax approximation for GPUs</a></h1><p>本文提出了一种高效的softmax近似方法，并且可以方便地进行并行计算。本文称之为adaptive softmax，根据词分布进行聚类，极大地提高了计算效率并保证了不错的准确率。本文工作来自Facebook AI Research。</p>
-<p>在自然语言生成任务中常常面临word vocabulary size太大的困境，softmax的效率非常低，本文给出了一种快速计算的方法。Tomas Mikolov之前也提到过类似的思路。</p>
-<h1 id="Characterizing-the-Language-of-Online-Communities-and-its-Relation-to-Community-Reception"><a href="#Characterizing-the-Language-of-Online-Communities-and-its-Relation-to-Community-Reception" class="headerlink" title="Characterizing the Language of Online Communities and its Relation to Community Reception"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.04779v1.pdf" target="_blank" rel="external">Characterizing the Language of Online Communities and its Relation to Community Reception</a></h1><p>本文研究了在线社区语言的style和topic哪个更具代表性，这里style用复合语言模型来表示，topic用LDA来表示，通过Reddit Forum实验得到style比topic更有代表性。</p>
-<h1 id="Factored-Neural-Machine-Translation"><a href="#Factored-Neural-Machine-Translation" class="headerlink" title="Factored Neural Machine Translation"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.04621v1.pdf" target="_blank" rel="external">Factored Neural Machine Translation</a></h1><p>针对机器翻译领域中两个常见的问题：1、目标语言词汇表过大；2、OOV问题；利用了单词的词形和语法分解，提出了一种新的NMT模型，并取得了满意的效果。</p>
-<h1 id="Context-Aware-Nonnegative-Matrix-Factorization-Clustering"><a href="#Context-Aware-Nonnegative-Matrix-Factorization-Clustering" class="headerlink" title="Context Aware Nonnegative Matrix Factorization Clustering"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.04628v1.pdf" target="_blank" rel="external">Context Aware Nonnegative Matrix Factorization Clustering</a></h1><p>大多数paper都在研究NMF在聚类中的初始化和优化部分，而本文关注的点在于最后的聚类分配上。本文被 ICPR 2016全文收录。</p>
-<p>以下内容为arXiv外的优质内容：</p>
-<h1 id="SIGDIAL-2016-Accepted-Paper"><a href="#SIGDIAL-2016-Accepted-Paper" class="headerlink" title="SIGDIAL 2016 Accepted Paper"></a><a href="http://www.sigdial.org/workshops/conference17/proceedings/SIGDIAL-2016.pdf" target="_blank" rel="external">SIGDIAL 2016 Accepted Paper</a></h1><p>SIGdial是ACL下面的一个关于对话系统地特别兴趣小组，每年开一次会。今年的会议最近正在开，会议录用的所有paper都已经放出。</p>
-<h1 id="CMU-SPEECH-Team-Homepage"><a href="#CMU-SPEECH-Team-Homepage" class="headerlink" title="CMU SPEECH Team Homepage"></a><a href="http://speech.sv.cmu.edu/software.html" target="_blank" rel="external">CMU SPEECH Team Homepage</a></h1><p>CMU SPEECH Team的主页，包括他们的开源软件Yoda和publication及其开源实现。</p>
-<h1 id="Machine-Learning-WAYR-What-Are-You-Reading"><a href="#Machine-Learning-WAYR-What-Are-You-Reading" class="headerlink" title="Machine Learning - WAYR (What Are You Reading)"></a><a href="https://www.reddit.com/r/MachineLearning/comments/4zcyvk/machine_learning_wayr_what_are_you_reading_week_6/?st=ISZ6YT6D&amp;sh=02bd0722" target="_blank" rel="external">Machine Learning - WAYR (What Are You Reading)</a></h1><p>reddit上的这个帖子很有意思，和paperweekly想做的一个事情非常像，就是可以让读类似或者同一篇paper的童鞋得到充分交流。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"><br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）每天都会分享当天arXiv cs.CL板块刷新的高质量paper<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本周（2016.09.12-2016.09.16）质量较高的arXiv cs.CL的paper如下：&lt;br&gt;（点击标题可看原文）&lt;/p&gt;
-&lt;h1 id=&quot;Dialogue-manager-domain-adaptation-using-Gaussian-process-re
     
     </summary>
     

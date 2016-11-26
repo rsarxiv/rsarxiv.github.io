@@ -65,51 +65,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-26T18:38:16.922Z"><a href="/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/">2016-11-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/"></a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>文档命名方式：paper title_你的id</p>
-<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
-<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
-<p><div align="center"><br><img src="1.png" alt=""><br></div><br>其中<img src="2.png" alt=""> 表示source-to-target基于注意力的翻译模型，而<img src="3.png" alt=""> 表示target-to-source的模型。<img src="4.png" alt=""> 表示对于句子s source-to-target的alignment matrix，而<img src="5.png" alt="">表示target-to-source的。<img src="6.png" alt="">是损失函数，可以衡量两个alignment matrix之间的disagree程度。<br>对于<img src="6.png" alt="">,有几种不同的定义方法：<br>–Square of addition(SOA)</p>
-<p><div align="center"><br><img src="7.png" alt=""><br></div><br>–Square of subtraction(SOS)</p>
-<p><div align="center"><br><img src="9.png" alt=""><br></div><br>–Multiplication(MUL)</p>
-<p><div align="center"><br><img src="10.png" alt=""><br></div></p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2016-11-26T18:37:08.000Z"><a href="/2016/11/26/PaperWeekly-第十五期/">2016-11-26</a></time>
       
       
@@ -3357,6 +3312,74 @@
 <p>实验部分，选择了bot作为应用背景，得到了不错的效果。见下图：</p>
 <p><img src="media/2.png" alt="2"></p>
 <p>本文解决的不仅仅是bot领域对话生成的问题，而是整个seq2seq框架中decoder的问题，只要涉及到decoder生成的部分都可以采用本文的思想来解决问题。latent topic是一个非常有意思的东西，在LSI、推荐系统中都有非常重要的意义，矩阵分解之后得到两个降维之后的矩阵，从一组两个维度映射到了两组两个维度，也就是多了所谓的latent topic，说不清这些topic是什么，但的确可以将相似的东西聚到了一起。本文也是用latent topic来描述隐藏在utterance中那些说不清道不明的随机noise，得到了更好的效果。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-12T22:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task中，因为这类模型无法做到与数据库交互以及整合其他有用的信息，从而生成实用的response。还有一种非常流行的方案是reinforcement learning，上一篇分享的paper<a href="http://rsarxiv.github.io/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation</a>将两者有机地结合在了一起，增强学习可以使得response生成时考虑更长远的影响。</p>
+<p>本文将分享的这篇paper，针对task-oriented的bot问题，平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。paper的题目是<a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a>，本文于2016年5月20日发表于arxiv上，作者是来自剑桥大学Dialogue System Group的博士生<a href="http://mi.eng.cam.ac.uk/~thw28/" target="_blank" rel="external">Tsung-Hsien Wen</a>，该组专门研究chatbot相关技术，发表过大量与之相关的paper，后续会更多地关注该组的工作。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>上图是本文方案的架构示意图，分为五个部分。下面分别进行介绍：</p>
+<p>1、Intent Network</p>
+<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector z(t)。encoder部分分别用了lstm和cnn两种模型对该输入进行建模。这两种句子表示的方法在之前的文章中都有介绍。</p>
+<p>2、Belief Trackers</p>
+<p>这个部分又被称作是Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
+<ul>
+<li><p>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</p>
+</li>
+<li><p>追踪bot的state，避免去学习那些没有信息量的数据。</p>
+</li>
+<li><p>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</p>
+</li>
+<li><p>易扩展新的组件。</p>
+</li>
+</ul>
+<p><img src="media/2.png" alt="2"></p>
+<p>这个组件的输入时用户的input，输出是一个informable slot和requestable slot的概率分布，这里的informable slot是指food，price range和area（以订餐为例），用来约束数据库中的查询，requestable slot是指address，phone，postcode等一些可以被询问的值。这里会定义一个针对具体task的知识图谱，来表示这些slot之间的关系，每个slot都会定义一个tracker，tracker的模型如上图所示，包括一个CNN特征提取模块和一个Jordan型的RNN模块，CNN不仅仅对当前的input进行处理，还对上一轮的user input进行处理，综合起来作为RNN的输入。</p>
+<p>这个组件的意义在于获取到预先定好的知识图谱中每个slot的分布，就是说弄清楚用户在这轮对话中的需求是哪个词或者词组。</p>
+<p>3、Database Operator</p>
+<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
+<p>4、Policy Network</p>
+<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
+<p>5、Generation Network </p>
+<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。生成部分用简单的LSTM-LM可以做，用Attention Model也可以做，效果会更好。</p>
+<p>数据的准备这部分，利用了众包进行收集，一共采用了680轮对话作为训练数据，数据库中保存了99个饭馆，3个informable slots和7个requestable slots。</p>
+<p>训练分为两个阶段，第一阶段是训练belief trackers，得到模型之后，更新参数，对生成网络中的语言模型进行训练，得到full model，batch size取1。</p>
+<p>bot模型自动评价这块是一个非常难的事情，本文选择了BLEU score、entity matching rate和objective task success rate，本文模型均取得了不错的结果。另外，通过人工评价对本文模型和rule-based进行了对比，结果看下图：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>最后paper给出了一种生成的句子向量的二维图，如下图：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>几乎同一类话都被聚集到了相似的位置上，验证了模型的有效性。</p>
+<p>开放域的bot只是根据query生成一句response，虽然质量可以做到很高，但实用价值不大。面向具体业务的闭域bot一直难以应用seq2seq的解决方案在于，无法将大量的专业信息建模到模型中来，包括：历史信息，用户身份信息，业务信息等等，本文打开了一扇窗，就是将具体的业务信息和历史信息加到了模型中，并且通过将对话中的slot词转换为一些slot表示，就好比构建了很多的模板，降低了对训练数据的需求，避免了seq2seq在应用时存在的问题。如果再考虑上Jiwei Li的那篇<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>中对用户信息的建模，bot的实用价值就会更大，用data来解决真正的业务问题就会更进一步。</p>
+<p>一点思考，欢迎交流。</p>
 
       
     </div>

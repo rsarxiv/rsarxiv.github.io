@@ -1,0 +1,13 @@
+<p>文档命名方式：paper title_你的id</p>
+<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
+<p><div align = center><br><img src="1.png" alt=""><br></div><br>其中<img src="2.png" alt=""> 表示source-to-target基于注意力的翻译模型，而<img src="3.png" alt=""> 表示target-to-source的模型。<img src="4.png" alt=""> 表示对于句子s source-to-target的alignment matrix，而<img src="5.png" alt="">表示target-to-source的。<img src="6.png" alt="">是损失函数，可以衡量两个alignment matrix之间的disagree程度。<br>对于<img src="6.png" alt="">,有几种不同的定义方法：<br>–Square of addition(SOA)</p>
+<p><div align = center><br><img src="7.png" alt=""><br></div><br>–Square of subtraction(SOS)</p>
+<p><div align = center><br><img src="9.png" alt=""><br></div><br>–Multiplication(MUL)</p>
+<p><div align = center><br><img src="10.png" alt=""><br></div></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>

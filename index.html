@@ -65,6 +65,146 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-26T18:27:36.649Z"><a href="/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/">2016-11-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/"></a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>文档命名方式：paper title_你的id</p>
+<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
+<p><div align="center"><br><img src="1.png" alt=""><br></div><br>其中<img src="2.png" alt=""> 表示source-to-target基于注意力的翻译模型，而<img src="3.png" alt=""> 表示target-to-source的模型。<img src="4.png" alt=""> 表示对于句子s source-to-target的alignment matrix，而<img src="5.png" alt="">表示target-to-source的。<img src="6.png" alt="">是损失函数，可以衡量两个alignment matrix之间的disagree程度。<br>对于<img src="6.png" alt="">,有几种不同的定义方法：<br>–Square of addition(SOA)</p>
+<p><div align="center"><br><img src="7.png" alt=""><br></div><br>–Square of subtraction(SOS)</p>
+<p><div align="center"><br><img src="9.png" alt=""><br></div><br>–Multiplication(MUL)</p>
+<p><div align="center"><br><img src="10.png" alt=""><br></div></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-26T17:57:04.000Z"><a href="/2016/11/26/PaperWeekly-第十五期/">2016-11-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/26/PaperWeekly-第十五期/">PaperWeekly 第十五期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术的研究和讨论达到了顶峰。Attention模型在NLP中最早的使用正是在NMT领域出现的，包括横扫很多领域的seq2seq+attention解决方案，都是在NMT模型的基础上进行相应的一些小改动而成的。所以，本期PaperWeekly带大家看一看最近两年Attention模型在NMT领域中的研究进展，本文包括以下paper：</p>
+<p>1、Neural Machine Translation by Jointly Learning to Align and Translate, 2015<br>2、Effective approaches to attention-based neural machine translation, 2015<br>3、Modeling Coverage for Neural Machine Translation,  2016<br>4、Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation, 2016<br>5、Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation, 2016</p>
+<h1 id="Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate"><a href="#Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate" class="headerlink" title="Neural Machine Translation by Jointly Learning to Align and Translate"></a><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="external">Neural Machine Translation by Jointly Learning to Align and Translate</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Jacobs University Bremen, Germany<br><br>Universite ́ de Montre ́al</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, attention</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2015</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇论文首次提出在NMT中使用attention的机制，可以使模型自动确定源句子中和目标词语最相关的部分，相比于基本的encoder-decoder方法提高了翻译效果。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该论文使用的基本模型是一个双向RNN的encoder-decoder的结构。在这篇论文之前，encoder部分都是直接把输入句子encode成一个固定长度的上下文向量c，然后decoder再根据该向量来产生翻译。但是由于句子长度不定，这种做法对长句子的效果不理想。<br><img src="media/model.png" alt="mode"></p>
+<p>上图是这篇论文提出的模型结构，作者首次提出了在decoder中加入一种attention的机制。直观上理解，就是decoder可以决定更多地注意原句子中的某些部分，从而不必把原句子中的所有信息都encode成一个固定的向量。具体来讲，上下文向量ci由下式计算得出：<br><img src="media/ci.png" alt="ci"></p>
+<p>其中，<br><img src="media/aij.png" alt="aij"></p>
+<p>其中，<br><img src="media/eij.png" alt="eij"></p>
+<p>上式中的a便是alignment model，可以用来估计位置j附近的输入和位置i的输出之间的匹配程度。本论文中的alignment model是一个前馈神经网络，它和模型中的其它部分一起进行训练。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、英法翻译数据集 <a href="http://www.statmt.org/wmt14/translation-task.html" target="_blank" rel="external">ACL WMT ’14</a></p>
+<p>2、一个基本的RNN encoder-decoder模型的实现 <a href="https://github.com/lisa-groundhog/GroundHog." target="_blank" rel="external">GroundHog</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、2013年，一个类似的aligning的方法被提出用于手写体生成。论文：Graves(2013) Generating sequences with recurrent neural networks<br>2、2014年，seq2seq的神经网络模型用于机器翻译。论文：Sutskever(2014) Sequence to sequence learning with neural networks</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本论文创新性地在NMT中提出了attention的机制，可以使模型在每一步注意到源句子中不同的部分，从而提高了NMT的效果，该效果的提升对于长句子的翻译尤其明显。</p>
+<h1 id="Effective-approaches-to-attention-based-neural-machine-translation"><a href="#Effective-approaches-to-attention-based-neural-machine-translation" class="headerlink" title="Effective approaches to attention-based neural machine translation"></a><a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="external">Effective approaches to attention-based neural machine translation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Minh-Thang Luong, Hieu Pham, Christopher D. Manning</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Computer Science Department, Stanford University</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>NMT;Global Attention;Local Attention</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>Attention机制引入极大提升了NMT的翻译质量，但对于Attention实现架构的讨论还很少，尤其是全局Attention的计算效率问题。本文就是讨论各种优化策略，包括Global Attention, Local Attention，Input-feeding方法等。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>Global Attenion，生成上下文向量c_t时，考虑原文编码过程中的所有隐状态。<br>  <img src="media/1GlobalAttention.png" alt="1GlobalAttention"></p>
+<p>Local Attention，对于每个正在生成的译词，预测一个原文对齐的位置，只考虑该位置前后一个窗口范围内的原文编码隐状态。  </p>
+<p><img src="media/2LocalAttention.png" alt="2LocalAttention"></p>
+<p>Input-feeding，用一个额外的向量，来记住哪些词是已经翻译过的，即考虑了coverage的问题。  </p>
+<p><img src="media/3Input-Feeding.png" alt="3Input-Feeding"></p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、训练数据：WMT14 (4.5M句对，116M 英文词，110M德文词)<br>2、开发集：newstest2013 (3000句)<br>3、测试集：newstest2014(2737句)和newstest2015(2169句)<br>4、代码和模型共享在：<a href="http://nlp.stanford.edu/projects/nmt/" target="_blank" rel="external">http://nlp.stanford.edu/projects/nmt/</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>主要是follow了(Bahdanau et al., 2015; Jean et al., 2015)的工作，对Attention的机制进行了探讨和改进。  </p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>English-German的实验结果，较不用attention的方法提升了5个多点BLEU，充分证明了attention的有效性。<br>实验结果的表格详细列出了各种改进方法带来的收益，跟进者不妨仔细看看（以及第5节的分析），可以很快了解各种折腾的方向。</p>
+<p><img src="media/4ExperimentResult.png" alt="4ExperimentResult"></p>
+<h2 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>微博 @MyGod9，语智云帆创始人，机器翻译老兵，NMT追随者，weiyongpeng@lingosail.com </p>
+<h1 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Zhengdong Lu, Yang Liu, Xiaohua Liu, Hang Li</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>诺亚方舟实验室，清华大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NMT</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>解决经典神经机器翻译模型中存在的over-translation（过度翻译）和under-translation(翻译不足）的问题。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>在传统NMT模型中，加入统计机器翻译策略中的coverage方法，来追踪、判断原始句子是否被翻译，如下图、公式所示。<br><img src="media/pic1.png" alt="pi"><br><img src="media/pic2.png" alt="pi"><br><img src="media/pic3.png" alt="pi"><br>其中，C为新引入的coverage向量。</p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>前序文章：Neural Machine Translation by Jointly Learning to Align and Translate</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该文是基于Neural Machine Translation by Jointly Learning to Align and Translate之上的工作，引入了统计机器翻译中的Coverage方法来尝试避免NMT中的一些问题。根据文章的试验结果，这种方法能够提升翻译效果。由于写作此文时笔者未作实验，因此实际效果有待进一步衡量。</p>
+<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>其中<br><img src="media/2.png" alt="2">表示source-to-target基于注意力的翻译模型，而<img src="media/3.png" alt="3">表示target-to-source的模型。<img src="media/4.png" alt="4">表示对于句子s source-to-target的alignment matrix，而<img src="media/5.png" alt="5">表示target-to-source的。<img src="media/6.png" alt="6">是损失函数，可以衡量两个alignment matrix之间的disagree程度。</p>
+<p>对于<img src="media/6.png" alt="6">,有几种不同的定义方法：<br>1、Square of addition(SOA)<br><img src="media/7.png" alt="7"></p>
+<p>2、Square of subtraction(SOS)<br><img src="media/9.png" alt="9"></p>
+<p>3、Multiplication(MUL)<br><img src="media/10.png" alt="10"></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
+<h1 id="Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation"><a href="#Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation" class="headerlink" title="Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation"></a><a href="https://arxiv.org/abs/1601.03317" target="_blank" rel="external">Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Shi Feng, Shujie Liu, Nan Yang, Mu Li, Ming Zhou, Kenny Q.Zhu</p>
+<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Shanghai Jiao Tong University, Microsoft Research</p>
+<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, Attention, Fertility, Distortion</p>
+<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
+<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>使用attention机制解决NMT中调序和繁衍率的问题。</p>
+<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>模型非常简单，即在attention机制中将前一时刻的context vector c作为输入传入当前时刻attention中（命名为RecAtt）。如图：</p>
+<p><img src="media/coling.jpg" alt="coling"></p>
+<p>通过这样的RecAtt机制，attention部分的网络相当于记忆了之前时刻的context。</p>
+<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>ACL 2016李航老师组的工作 Modeling Coverage for Neural Machine Translation利用了attention机制来解决了NMT中“欠翻译”和“过翻译”的问题。</p>
+<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>该文章的创新之处在于提出将attention计算得到的context vector c作为attention的输入，这样就是的attention机制带有一种recurrent的意味。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本期PaperWeekly精选了5篇Attention模型在NMT任务上的研究工作，Attention模型的发展不仅仅推动着NMT的进步，同时也可以借鉴于其他的任务中，比如QA，比如chatbot。感谢@MyGod9 @雨神 @susie-nmt @李争 @magic282 五位童鞋的辛勤付出。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-20T04:47:55.000Z"><a href="/2016/11/19/悉尼科技大学博士后招聘信息/">2016-11-19</a></time>
       
       
@@ -3233,159 +3373,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-12T22:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task中，因为这类模型无法做到与数据库交互以及整合其他有用的信息，从而生成实用的response。还有一种非常流行的方案是reinforcement learning，上一篇分享的paper<a href="http://rsarxiv.github.io/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation</a>将两者有机地结合在了一起，增强学习可以使得response生成时考虑更长远的影响。</p>
-<p>本文将分享的这篇paper，针对task-oriented的bot问题，平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。paper的题目是<a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a>，本文于2016年5月20日发表于arxiv上，作者是来自剑桥大学Dialogue System Group的博士生<a href="http://mi.eng.cam.ac.uk/~thw28/" target="_blank" rel="external">Tsung-Hsien Wen</a>，该组专门研究chatbot相关技术，发表过大量与之相关的paper，后续会更多地关注该组的工作。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>上图是本文方案的架构示意图，分为五个部分。下面分别进行介绍：</p>
-<p>1、Intent Network</p>
-<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector z(t)。encoder部分分别用了lstm和cnn两种模型对该输入进行建模。这两种句子表示的方法在之前的文章中都有介绍。</p>
-<p>2、Belief Trackers</p>
-<p>这个部分又被称作是Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
-<ul>
-<li><p>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</p>
-</li>
-<li><p>追踪bot的state，避免去学习那些没有信息量的数据。</p>
-</li>
-<li><p>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</p>
-</li>
-<li><p>易扩展新的组件。</p>
-</li>
-</ul>
-<p><img src="media/2.png" alt="2"></p>
-<p>这个组件的输入时用户的input，输出是一个informable slot和requestable slot的概率分布，这里的informable slot是指food，price range和area（以订餐为例），用来约束数据库中的查询，requestable slot是指address，phone，postcode等一些可以被询问的值。这里会定义一个针对具体task的知识图谱，来表示这些slot之间的关系，每个slot都会定义一个tracker，tracker的模型如上图所示，包括一个CNN特征提取模块和一个Jordan型的RNN模块，CNN不仅仅对当前的input进行处理，还对上一轮的user input进行处理，综合起来作为RNN的输入。</p>
-<p>这个组件的意义在于获取到预先定好的知识图谱中每个slot的分布，就是说弄清楚用户在这轮对话中的需求是哪个词或者词组。</p>
-<p>3、Database Operator</p>
-<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
-<p>4、Policy Network</p>
-<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
-<p>5、Generation Network </p>
-<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。生成部分用简单的LSTM-LM可以做，用Attention Model也可以做，效果会更好。</p>
-<p>数据的准备这部分，利用了众包进行收集，一共采用了680轮对话作为训练数据，数据库中保存了99个饭馆，3个informable slots和7个requestable slots。</p>
-<p>训练分为两个阶段，第一阶段是训练belief trackers，得到模型之后，更新参数，对生成网络中的语言模型进行训练，得到full model，batch size取1。</p>
-<p>bot模型自动评价这块是一个非常难的事情，本文选择了BLEU score、entity matching rate和objective task success rate，本文模型均取得了不错的结果。另外，通过人工评价对本文模型和rule-based进行了对比，结果看下图：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>最后paper给出了一种生成的句子向量的二维图，如下图：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>几乎同一类话都被聚集到了相似的位置上，验证了模型的有效性。</p>
-<p>开放域的bot只是根据query生成一句response，虽然质量可以做到很高，但实用价值不大。面向具体业务的闭域bot一直难以应用seq2seq的解决方案在于，无法将大量的专业信息建模到模型中来，包括：历史信息，用户身份信息，业务信息等等，本文打开了一扇窗，就是将具体的业务信息和历史信息加到了模型中，并且通过将对话中的slot词转换为一些slot表示，就好比构建了很多的模板，降低了对训练数据的需求，避免了seq2seq在应用时存在的问题。如果再考虑上Jiwei Li的那篇<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>中对用户信息的建模，bot的实用价值就会更大，用data来解决真正的业务问题就会更进一步。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-11T23:47:50.000Z"><a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">2016-07-11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文将会分享一篇深度增强学习在bot中应用的文章，增强学习在很早的时候就应用于bot中来解决一些实际问题，最近几年开始流行深度增强学习，本文作者将其引入到最新的bot问题中。paper的题目是<a href="http://arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a>，作者是Jiwei Li，最早于2016年6月10日发在arxiv上。</p>
-<p>现在学术界中bot领域流行的解决方案是seq2seq，本文针对这种方案抛出两个问题：</p>
-<p>1、用MLE作为目标函数会导致容易生成类似于“呵呵呵”的reply，grammatical、safe但是没有营养，没有实际意义的话。</p>
-<p>2、用MLE作为目标函数容易引起对话的死循环，如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>解决这样的问题需要bot框架具备以下的能力：</p>
-<p>1、整合开发者自定义的回报函数，来达到目标。</p>
-<p>2、生成一个reply之后，可以定量地描述这个reply对后续阶段的影响。</p>
-<p>所以，本文提出用seq2seq+增强学习的思路来解决这个问题。</p>
-<p>说到增强学习，就不得不提增强学习的四元素：</p>
-<ul>
-<li>Action</li>
-</ul>
-<p>这里的action是指生成的reply，action空间是无限大的，因为可以reply可以是任意长度的文本序列。</p>
-<ul>
-<li>State</li>
-</ul>
-<p>这里的state是指[pi,qi]，即上一轮两个人的对话表示。</p>
-<ul>
-<li>Policy</li>
-</ul>
-<p>policy是指给定state之后各个action的概率分布。可以表示为：pRL(pi+1|pi, qi)</p>
-<ul>
-<li>Reward</li>
-</ul>
-<p>reward表示每个action获得的回报，本文自定义了三种reward。 </p>
-<p>1、Ease of Answering</p>
-<p>这个reward指标主要是说生成的reply一定是容易被回答的。本文用下面的公式来计算容易的程度：</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>其实就是给定这个reply之后，生成的下一个reply是dull的概率大小。这里所谓的dull就是指一些“呵呵呵”的reply，比如“I don’t know what you are talking about”等没有什么营养的话，作者手动给出了这样的一个dull列表。</p>
-<p>2、Information Flow</p>
-<p>生成的reply尽量和之前的不要重复。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>这里的h是bot的reply表示，i和i+1表示该bot的前后两轮。这个式子表示同一个bot两轮的对话越像reward越小。</p>
-<p>3、Semantic Coherence</p>
-<p>这个指标是用来衡量生成reply是否grammatical和coherent。如果只有前两个指标，很有可能会得到更高的reward，但是生成的句子并不连贯或者说不成一个自然句子。</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>这里采用互信息来确保生成的reply具有连贯性。</p>
-<p>最终的reward由这三部分加权求和计算得到。</p>
-<p>增强学习的几个要素介绍完之后，接下来就是如何仿真的问题，本文采用两个bot相互对话的方式进行。</p>
-<p><b>step 1</b> 监督学习。将数据中的每轮对话当做target，将之前的两句对话当做source进行seq2seq训练得到模型，这一步的结果作为第二步的初值。</p>
-<p><b>step 2</b> 增强学习。因为seq2seq会容易生成dull reply，如果直接用seq2seq的结果将会导致增强学习这部分产生的reply也不是非常的diversity，从而无法产生高质量的reply。所以，这里用MMI(Maximum Mutual Information，这里与之前Jiwei Li的两篇paper做法一致)来生成更加diversity的reply，然后将生成最大互信息reply的问题转换为一个增强学习问题，这里的互信息score作为reward的一部分（r3）。用第一步训练好的模型来初始化policy模型，给定输入[pi,qi]，生成一个候选列表作为action集合，集合中的每个reply都计算出其MMI score，这个score作为reward反向传播回seq2seq模型中，进行训练。整个仿真过程如下图：</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>两个bot在对话，初始的时候给定一个input message，然后bot1根据input生成5个候选reply，依次往下进行，因为每一个input都会产生5个reply，随着turn的增加，reply会指数增长，这里在每轮对话中，通过sample来选择出5个作为本轮的reply。</p>
-<p>接下来就是评价的部分，自动评价指标一共两个：</p>
-<p>1、对话轮数。<br><img src="media/6.png" alt="6"></p>
-<p>很明显，增强学习生成的对话轮数更多。</p>
-<p>2、diversity。<br><img src="media/7.png" alt="7"><br>增强学习生成的词、词组更加丰富和多样。</p>
-<p>下图给出了一个MMI seq2seq与RL方法的对比结果：</p>
-<p><img src="media/8.png" alt="8"><br>RL不仅仅在回答上一个提问，而且常常能够提出一个新的问题，让对话继续下去，所以对话轮数就会增多。原因是，RL在选择最优action的时候回考虑长远的reward，而不仅仅是当前的reward。</p>
-<p>本文是一篇探索性的文章，将seq2seq与RL整合在一起解决bot的问题是一个不错的思路，很有启发性，尤其是用RL可以将问题考虑地更加长远，获得更大的reward。用两个bot相互对话来产生大量的训练数据也非常有用，在实际工程应用背景下数据的缺乏是一个很严重的问题，如果有一定质量的bot可以不断地模拟真实用户来产生数据，将deep learning真正用在bot中解决实际问题就指日可待了。</p>
-<p>RL解决bot问题的文章在之前出现过一些，但都是人工给出一些feature来进行增强学习，随着deepmind用seq2seq+RL的思路成功地解决video games的问题，这种seq2seq的思想与RL的结合就成为了一种趋势，朝着data driven的方向更进一步。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3419,7 +3406,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>83</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>84</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3455,7 +3442,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>101</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>102</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

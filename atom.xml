@@ -5,10 +5,127 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-11-20T04:49:01.000Z</updated>
+  <updated>2016-11-26T17:53:08.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://rsarxiv.github.io/2016/11/26/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%94%E6%9C%9F/media/ement-based%20Joint%20Training%20for%20Bidirectional%20Attention-based%20Neural%20Machine%20Translation-susie-nmt/"/>
+    <id>http://rsarxiv.github.io/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/</id>
+    <published>2016-11-26T18:27:36.649Z</published>
+    <updated>2016-11-26T17:53:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>文档命名方式：paper title_你的id</p>
+<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
+<h2 id="模型-（必选）"><a href="#模型-（必选）" class="headerlink" title="模型 （必选）"></a>模型 （必选）</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
+<p><div align="center"><br><img src="1.png" alt=""><br></div><br>其中<img src="2.png" alt=""> 表示source-to-target基于注意力的翻译模型，而<img src="3.png" alt=""> 表示target-to-source的模型。<img src="4.png" alt=""> 表示对于句子s source-to-target的alignment matrix，而<img src="5.png" alt="">表示target-to-source的。<img src="6.png" alt="">是损失函数，可以衡量两个alignment matrix之间的disagree程度。<br>对于<img src="6.png" alt="">,有几种不同的定义方法：<br>–Square of addition(SOA)</p>
+<p><div align="center"><br><img src="7.png" alt=""><br></div><br>–Square of subtraction(SOS)</p>
+<p><div align="center"><br><img src="9.png" alt=""><br></div><br>–Multiplication(MUL)</p>
+<p><div align="center"><br><img src="10.png" alt=""><br></div></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文档命名方式：paper title_你的id&lt;/p&gt;
+&lt;h1 id=&quot;Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation&quot;&gt;&lt;a href=
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PaperWeekly 第十五期</title>
+    <link href="http://rsarxiv.github.io/2016/11/26/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%94%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/11/26/PaperWeekly-第十五期/</id>
+    <published>2016-11-26T17:57:04.000Z</published>
+    <updated>2016-11-26T18:26:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术的研究和讨论达到了顶峰。Attention模型在NLP中最早的使用正是在NMT领域出现的，包括横扫很多领域的seq2seq+attention解决方案，都是在NMT模型的基础上进行相应的一些小改动而成的。所以，本期PaperWeekly带大家看一看最近两年Attention模型在NMT领域中的研究进展，本文包括以下paper：</p>
+<p>1、Neural Machine Translation by Jointly Learning to Align and Translate, 2015<br>2、Effective approaches to attention-based neural machine translation, 2015<br>3、Modeling Coverage for Neural Machine Translation,  2016<br>4、Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation, 2016<br>5、Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation, 2016</p>
+<h1 id="Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate"><a href="#Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate" class="headerlink" title="Neural Machine Translation by Jointly Learning to Align and Translate"></a><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="external">Neural Machine Translation by Jointly Learning to Align and Translate</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Jacobs University Bremen, Germany<br><br>Universite ́ de Montre ́al</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, attention</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2015</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇论文首次提出在NMT中使用attention的机制，可以使模型自动确定源句子中和目标词语最相关的部分，相比于基本的encoder-decoder方法提高了翻译效果。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该论文使用的基本模型是一个双向RNN的encoder-decoder的结构。在这篇论文之前，encoder部分都是直接把输入句子encode成一个固定长度的上下文向量c，然后decoder再根据该向量来产生翻译。但是由于句子长度不定，这种做法对长句子的效果不理想。<br><img src="media/model.png" alt="mode"></p>
+<p>上图是这篇论文提出的模型结构，作者首次提出了在decoder中加入一种attention的机制。直观上理解，就是decoder可以决定更多地注意原句子中的某些部分，从而不必把原句子中的所有信息都encode成一个固定的向量。具体来讲，上下文向量ci由下式计算得出：<br><img src="media/ci.png" alt="ci"></p>
+<p>其中，<br><img src="media/aij.png" alt="aij"></p>
+<p>其中，<br><img src="media/eij.png" alt="eij"></p>
+<p>上式中的a便是alignment model，可以用来估计位置j附近的输入和位置i的输出之间的匹配程度。本论文中的alignment model是一个前馈神经网络，它和模型中的其它部分一起进行训练。</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、英法翻译数据集 <a href="http://www.statmt.org/wmt14/translation-task.html" target="_blank" rel="external">ACL WMT ’14</a></p>
+<p>2、一个基本的RNN encoder-decoder模型的实现 <a href="https://github.com/lisa-groundhog/GroundHog." target="_blank" rel="external">GroundHog</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、2013年，一个类似的aligning的方法被提出用于手写体生成。论文：Graves(2013) Generating sequences with recurrent neural networks<br>2、2014年，seq2seq的神经网络模型用于机器翻译。论文：Sutskever(2014) Sequence to sequence learning with neural networks</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本论文创新性地在NMT中提出了attention的机制，可以使模型在每一步注意到源句子中不同的部分，从而提高了NMT的效果，该效果的提升对于长句子的翻译尤其明显。</p>
+<h1 id="Effective-approaches-to-attention-based-neural-machine-translation"><a href="#Effective-approaches-to-attention-based-neural-machine-translation" class="headerlink" title="Effective approaches to attention-based neural machine translation"></a><a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="external">Effective approaches to attention-based neural machine translation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Minh-Thang Luong, Hieu Pham, Christopher D. Manning</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Computer Science Department, Stanford University</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>NMT;Global Attention;Local Attention</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>Attention机制引入极大提升了NMT的翻译质量，但对于Attention实现架构的讨论还很少，尤其是全局Attention的计算效率问题。本文就是讨论各种优化策略，包括Global Attention, Local Attention，Input-feeding方法等。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>Global Attenion，生成上下文向量c_t时，考虑原文编码过程中的所有隐状态。<br>  <img src="media/1GlobalAttention.png" alt="1GlobalAttention"></p>
+<p>Local Attention，对于每个正在生成的译词，预测一个原文对齐的位置，只考虑该位置前后一个窗口范围内的原文编码隐状态。  </p>
+<p><img src="media/2LocalAttention.png" alt="2LocalAttention"></p>
+<p>Input-feeding，用一个额外的向量，来记住哪些词是已经翻译过的，即考虑了coverage的问题。  </p>
+<p><img src="media/3Input-Feeding.png" alt="3Input-Feeding"></p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、训练数据：WMT14 (4.5M句对，116M 英文词，110M德文词)<br>2、开发集：newstest2013 (3000句)<br>3、测试集：newstest2014(2737句)和newstest2015(2169句)<br>4、代码和模型共享在：<a href="http://nlp.stanford.edu/projects/nmt/" target="_blank" rel="external">http://nlp.stanford.edu/projects/nmt/</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>主要是follow了(Bahdanau et al., 2015; Jean et al., 2015)的工作，对Attention的机制进行了探讨和改进。  </p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>English-German的实验结果，较不用attention的方法提升了5个多点BLEU，充分证明了attention的有效性。<br>实验结果的表格详细列出了各种改进方法带来的收益，跟进者不妨仔细看看（以及第5节的分析），可以很快了解各种折腾的方向。</p>
+<p><img src="media/4ExperimentResult.png" alt="4ExperimentResult"></p>
+<h2 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>微博 @MyGod9，语智云帆创始人，机器翻译老兵，NMT追随者，weiyongpeng@lingosail.com </p>
+<h1 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Zhengdong Lu, Yang Liu, Xiaohua Liu, Hang Li</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>诺亚方舟实验室，清华大学</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NMT</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL2016</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>解决经典神经机器翻译模型中存在的over-translation（过度翻译）和under-translation(翻译不足）的问题。</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>在传统NMT模型中，加入统计机器翻译策略中的coverage方法，来追踪、判断原始句子是否被翻译，如下图、公式所示。<br><img src="media/pic1.png" alt="pi"><br><img src="media/pic2.png" alt="pi"><br><img src="media/pic3.png" alt="pi"><br>其中，C为新引入的coverage向量。</p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>前序文章：Neural Machine Translation by Jointly Learning to Align and Translate</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该文是基于Neural Machine Translation by Jointly Learning to Align and Translate之上的工作，引入了统计机器翻译中的Coverage方法来尝试避免NMT中的一些问题。根据文章的试验结果，这种方法能够提升翻译效果。由于写作此文时笔者未作实验，因此实际效果有待进一步衡量。</p>
+<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>其中<br><img src="media/2.png" alt="2">表示source-to-target基于注意力的翻译模型，而<img src="media/3.png" alt="3">表示target-to-source的模型。<img src="media/4.png" alt="4">表示对于句子s source-to-target的alignment matrix，而<img src="media/5.png" alt="5">表示target-to-source的。<img src="media/6.png" alt="6">是损失函数，可以衡量两个alignment matrix之间的disagree程度。</p>
+<p>对于<img src="media/6.png" alt="6">,有几种不同的定义方法：<br>1、Square of addition(SOA)<br><img src="media/7.png" alt="7"></p>
+<p>2、Square of subtraction(SOS)<br><img src="media/9.png" alt="9"></p>
+<p>3、Multiplication(MUL)<br><img src="media/10.png" alt="10"></p>
+<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
+<h1 id="Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation"><a href="#Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation" class="headerlink" title="Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation"></a><a href="https://arxiv.org/abs/1601.03317" target="_blank" rel="external">Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Shi Feng, Shujie Liu, Nan Yang, Mu Li, Ming Zhou, Kenny Q.Zhu</p>
+<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Shanghai Jiao Tong University, Microsoft Research</p>
+<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, Attention, Fertility, Distortion</p>
+<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
+<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>使用attention机制解决NMT中调序和繁衍率的问题。</p>
+<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>模型非常简单，即在attention机制中将前一时刻的context vector c作为输入传入当前时刻attention中（命名为RecAtt）。如图：</p>
+<p><img src="media/coling.jpg" alt="coling"></p>
+<p>通过这样的RecAtt机制，attention部分的网络相当于记忆了之前时刻的context。</p>
+<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>ACL 2016李航老师组的工作 Modeling Coverage for Neural Machine Translation利用了attention机制来解决了NMT中“欠翻译”和“过翻译”的问题。</p>
+<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>该文章的创新之处在于提出将attention计算得到的context vector c作为attention的输入，这样就是的attention机制带有一种recurrent的意味。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本期PaperWeekly精选了5篇Attention模型在NMT任务上的研究工作，Attention模型的发展不仅仅推动着NMT的进步，同时也可以借鉴于其他的任务中，比如QA，比如chatbot。感谢@MyGod9 @雨神 @susie-nmt @李争 @magic282 五位童鞋的辛勤付出。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>悉尼科技大学博士后招聘信息</title>
@@ -1101,162 +1218,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;神经网络机器翻译(NMT)是seq2seq模型的典型应用，从2014年提出开始，其性能就接近于传统的基于词组的机器翻译方法，随后，研究人员不
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.09.19-2016.09.23</title>
-    <link href="http://rsarxiv.github.io/2016/09/24/cs-CL-weekly-2016-09-19-2016-09-23/"/>
-    <id>http://rsarxiv.github.io/2016/09/24/cs-CL-weekly-2016-09-19-2016-09-23/</id>
-    <published>2016-09-24T16:57:50.000Z</published>
-    <updated>2016-09-24T17:53:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Long-Term-Trends-in-the-Public-Perception-of-Artificial-Intelligence"><a href="#Long-Term-Trends-in-the-Public-Perception-of-Artificial-Intelligence" class="headerlink" title="Long-Term Trends in the Public Perception of Artificial Intelligence"></a><a href="http://120.52.73.80/arxiv.org/pdf/1609.04904v1.pdf" target="_blank" rel="external">Long-Term Trends in the Public Perception of Artificial Intelligence</a></h2><p>本文研究了30年来纽约时报对AI的报道，研究了人们这30年来对AI的兴趣、关注度和各种各样的讨论。是一篇很有意思的文章，是一种长时间段内的舆情监测和分析。</p>
-<h2 id="Distant-Supervision-for-Relation-Extraction-beyond-the-Sentence-Boundary"><a href="#Distant-Supervision-for-Relation-Extraction-beyond-the-Sentence-Boundary" class="headerlink" title="Distant Supervision for Relation Extraction beyond the Sentence Boundary"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.04873v1.pdf" target="_blank" rel="external">Distant Supervision for Relation Extraction beyond the Sentence Boundary</a></h2><p>本文研究的问题是非结构化文本中的关系抽取问题，针对传统方法在抽取关系时仅限于单个句子，本文提出了一种新的方法，从多个句子中进行关系抽取。</p>
-<h2 id="What-You-Get-Is-What-You-See-A-Visual-Markup-Decompiler"><a href="#What-You-Get-Is-What-You-See-A-Visual-Markup-Decompiler" class="headerlink" title="What You Get Is What You See: A Visual Markup Decompiler"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.04938v1.pdf" target="_blank" rel="external">What You Get Is What You See: A Visual Markup Decompiler</a></h2><p>【转发较多】本文研究的问题是如何从web页面中生成html代码，以及如何从公式图片中生成latex代码，为此作者构造了两个相关的大型数据集，用了完全数据驱动的端到端训练方法得到了不错的效果。本文工作来自Harvard。</p>
-<p>Demo|Dataset|Code: <a href="http://lstm.seas.harvard.edu/latex/" target="_blank" rel="external">http://lstm.seas.harvard.edu/latex/</a></p>
-<h2 id="Select-Additive-Learning-Improving-Cross-individual-Generalization-in-Multimodal-Sentiment-Analysis"><a href="#Select-Additive-Learning-Improving-Cross-individual-Generalization-in-Multimodal-Sentiment-Analysis" class="headerlink" title="Select-Additive Learning: Improving Cross-individual Generalization in Multimodal Sentiment Analysis"></a><a href="http://120.52.73.80/arxiv.org/pdf/1609.05244v1.pdf" target="_blank" rel="external">Select-Additive Learning: Improving Cross-individual Generalization in Multimodal Sentiment Analysis</a></h2><p>本文研究的内容是多模态情感分析，针对当前相关高质量数据集规模太小造成的情感依赖于个体特征的问题，提出了一种Select-Additive学习方法提高通用性。 </p>
-<h2 id="Interactive-Spoken-Content-Retrieval-by-Deep-Reinforcement-Learning"><a href="#Interactive-Spoken-Content-Retrieval-by-Deep-Reinforcement-Learning" class="headerlink" title="Interactive Spoken Content Retrieval by Deep Reinforcement Learning"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.05234v1.pdf" target="_blank" rel="external">Interactive Spoken Content Retrieval by Deep Reinforcement Learning</a></h2><p>本文研究的内容是DQN算法来做语音内容检索，通过人机交互来完成内容检索。DQN相比传统的RL模型明显的优势在于不依赖hand-crafted features。本文被Interspeech 2016录用。</p>
-<h2 id="Graph-Structured-Representations-for-Visual-Question-Answering"><a href="#Graph-Structured-Representations-for-Visual-Question-Answering" class="headerlink" title="Graph-Structured Representations for Visual Question Answering"></a><a href="http://arxiv.org/pdf/1609.05600v1.pdf" target="_blank" rel="external">Graph-Structured Representations for Visual Question Answering</a></h2><p>本文研究内容为VQA，VQA的主要挑战在于对visual和text两个领域都需要理解。传统的模型中常常忽略场景中的结构和问题中的语言结构，本文针对这两个问题提出了一种图模型，取得了不错的效果。</p>
-<h2 id="Context-aware-Sequential-Recommendation"><a href="#Context-aware-Sequential-Recommendation" class="headerlink" title="Context-aware Sequential Recommendation"></a><a href="http://arxiv.org/pdf/1609.05787v1.pdf" target="_blank" rel="external">Context-aware Sequential Recommendation</a></h2><p>用户行为建模是推荐系统中的一个关键部件，行为数据是序列数据，天然适合用RNN来建模。但实际应用中context信息(time,location,weahter)也很重要，本文针对这个问题提出了一种CA-RNN模型将context考虑在内，取得了不错效果。</p>
-<h2 id="ReasoNet-Learning-to-Stop-Reading-in-Machine-Comprehension"><a href="#ReasoNet-Learning-to-Stop-Reading-in-Machine-Comprehension" class="headerlink" title="ReasoNet: Learning to Stop Reading in Machine Comprehension"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.05284v1.pdf" target="_blank" rel="external">ReasoNet: Learning to Stop Reading in Machine Comprehension</a></h2><p>本文研究内容为机器阅读理解，之前效果不错的方法大多数停留在有限的几轮reasoning，本文用增强学习来动态地决定是否继续读下去或者停下来进行答案选择。本文工作来自微软研究院。</p>
-<h2 id="Enhancing-and-Combining-Sequential-and-Tree-LSTM-for-Natural-Language-Inference"><a href="#Enhancing-and-Combining-Sequential-and-Tree-LSTM-for-Natural-Language-Inference" class="headerlink" title="Enhancing and Combining Sequential and Tree LSTM for Natural Language Inference"></a><a href="http://120.52.73.76/arxiv.org/pdf/1609.06038v1.pdf" target="_blank" rel="external">Enhancing and Combining Sequential and Tree LSTM for Natural Language Inference</a></h2><p>本文研究内容为自然语言推理，作者认为LSTM类的模型潜力并没有被充分挖掘，基于此，本文在传统LSTM模型的基础上增加了syntactic parse信息，得到了更好的效果。</p>
-<h2 id="A-framework-for-mining-process-models-from-emails-logs"><a href="#A-framework-for-mining-process-models-from-emails-logs" class="headerlink" title="A framework for mining process models from emails logs"></a><a href="http://120.52.73.80/arxiv.org/pdf/1609.06127v1.pdf" target="_blank" rel="external">A framework for mining process models from emails logs</a></h2><p>本文研究的内容是邮件日志的挖掘，作者提出了一种无监督的挖掘方法，并且提出了一种半自动化的邮件标注方法。</p>
-<h2 id="Character-level-and-Multi-channel-Convolutional-Neural-Networks-for-Large-scale-Authorship-Attribution"><a href="#Character-level-and-Multi-channel-Convolutional-Neural-Networks-for-Large-scale-Authorship-Attribution" class="headerlink" title="Character-level and Multi-channel Convolutional Neural Networks for Large-scale Authorship Attribution"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.06686v1.pdf" target="_blank" rel="external">Character-level and Multi-channel Convolutional Neural Networks for Large-scale Authorship Attribution</a></h2><p>本文研究内容为authorship attribution，是一个典型的多分类任务。作者利用字符级别的多通道CNN模型对大规模dataset进行了建模，取得了不错的结果。作者之一来自aylien.com 公司，一家非常出色的NLP SaaS 公司。</p>
-<h2 id="Minimally-Supervised-Written-to-Spoken-Text-Normalization"><a href="#Minimally-Supervised-Written-to-Spoken-Text-Normalization" class="headerlink" title="Minimally Supervised Written-to-Spoken Text Normalization"></a><a href="http://120.52.73.76/arxiv.org/pdf/1609.06649v1.pdf" target="_blank" rel="external">Minimally Supervised Written-to-Spoken Text Normalization</a></h2><p>本文研究的内容是特定语言领域知识在构建text normalization system的时候应该如何做trade-off，本文作者来自Google。</p>
-<h2 id="Recognizing-Implicit-Discourse-Relations-via-Repeated-Reading-Neural-Networks-with-Multi-Level-Attention"><a href="#Recognizing-Implicit-Discourse-Relations-via-Repeated-Reading-Neural-Networks-with-Multi-Level-Attention" class="headerlink" title="Recognizing Implicit Discourse Relations via Repeated Reading: Neural Networks with Multi-Level Attention"></a><a href="http://120.52.73.76/arxiv.org/pdf/1609.06380v1.pdf" target="_blank" rel="external">Recognizing Implicit Discourse Relations via Repeated Reading: Neural Networks with Multi-Level Attention</a></h2><p>本文研究内容是如何识别隐式的discourse关系，作者提出了一种多层注意力模型，联合注意力机制和外部memory来做关系识别。本文是EMNLP2016的长文。</p>
-<h2 id="SoftTarget-Regularization-An-Effective-Technique-to-Reduce-Over-Fitting-in-Neural-Networks"><a href="#SoftTarget-Regularization-An-Effective-Technique-to-Reduce-Over-Fitting-in-Neural-Networks" class="headerlink" title="SoftTarget Regularization: An Effective Technique to Reduce Over-Fitting in Neural Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.06693v2.pdf" target="_blank" rel="external">SoftTarget Regularization: An Effective Technique to Reduce Over-Fitting in Neural Networks</a></h2><p>【转发较多】本文提出了一种新的正则化方法，通过在训练过程中调整label来实现，达到了和Dropout接近的效果。</p>
-<h2 id="The-Color-of-the-Cat-is-Gray-1-Million-Full-Sentences-Visual-Question-Answering-FSVQA"><a href="#The-Color-of-the-Cat-is-Gray-1-Million-Full-Sentences-Visual-Question-Answering-FSVQA" class="headerlink" title="The Color of the Cat is Gray: 1 Million Full-Sentences Visual Question Answering (FSVQA)"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.06657v1.pdf" target="_blank" rel="external">The Color of the Cat is Gray: 1 Million Full-Sentences Visual Question Answering (FSVQA)</a></h2><p>本文提出了一个1 million的Visual Question Answer Dataset，数据地址：<a href="http://www.mi.t.u-tokyo.ac.jp/static/projects/fsvqa/" target="_blank" rel="external">http://www.mi.t.u-tokyo.ac.jp/static/projects/fsvqa/</a></p>
-<h2 id="Knowledge-Representation-via-Joint-Learning-of-Sequential-Text-and-Knowledge-Graphs"><a href="#Knowledge-Representation-via-Joint-Learning-of-Sequential-Text-and-Knowledge-Graphs" class="headerlink" title="Knowledge Representation via Joint Learning of Sequential Text and Knowledge Graphs"></a><a href="http://arxiv.org/pdf/1609.07075v1.pdf" target="_blank" rel="external">Knowledge Representation via Joint Learning of Sequential Text and Knowledge Graphs</a></h2><p>【转发较多】当前知识表示存在两个挑战：1、如何更好地利用entity的context；2、如何发现与entity相关的句子；针对这两个问题，本文提出了一种从多个句子中学习表示的模型。给定每个entity的参考句子，首先用带池化的RNN或LSTM来encode与该entity相关的句子，然后用attention模型来衡量每个句子的信息量，最后得到entity的表示。模型在triple classification和link prediction两个任务上都取得了满意的结果。本文工作来自@刘知远THU组。</p>
-<p>刘知远：我觉得这个工作的最有意思的地方是，能够为实体找到最有信息量的句子，这些句子往往是该实体的定义或描述。这样，在构建知识图谱时，我们就可以自动为新增的实体构建对应的文本描述信息了。</p>
-<h2 id="Semantic-Tagging-with-Deep-Residual-Networks"><a href="#Semantic-Tagging-with-Deep-Residual-Networks" class="headerlink" title="Semantic Tagging with Deep Residual Networks"></a><a href="http://120.52.73.80/arxiv.org/pdf/1609.07053v1.pdf" target="_blank" rel="external">Semantic Tagging with Deep Residual Networks</a></h2><p>本文提出一种多语言智能tagger，模型采用了char-level和word-level的深度残差网络，在词性标注任务中取得了不错的效果，本文COLING 2016在审。</p>
-<h2 id="Image-embodied-Knowledge-Representation-Learning"><a href="#Image-embodied-Knowledge-Representation-Learning" class="headerlink" title="Image-embodied Knowledge Representation Learning"></a><a href="http://arxiv.org/pdf/1609.07028v1.pdf" target="_blank" rel="external">Image-embodied Knowledge Representation Learning</a></h2><p>【转发较多】entity图像中包含丰富的信息，大多数传统方法并没有利用这一点，本文提出了一种知识表示模型，利用了triples和image信息，并在知识图谱补全和triple分类两个任务中取得了不错的效果。本文是一篇典型的多信息融合的文章，非常值得思考！工作同样来自@刘知远THU老师组。</p>
-<h2 id="Twitter-Network-Topic-Model-A-Full-Bayesian-Treatment-for-Social-Network-and-Text-Modeling"><a href="#Twitter-Network-Topic-Model-A-Full-Bayesian-Treatment-for-Social-Network-and-Text-Modeling" class="headerlink" title="Twitter-Network Topic Model: A Full Bayesian Treatment for Social Network and Text Modeling"></a><a href="http://120.52.73.80/arxiv.org/pdf/1609.06791v1.pdf" target="_blank" rel="external">Twitter-Network Topic Model: A Full Bayesian Treatment for Social Network and Text Modeling</a></h2><p>推特上的推对于topic建模有以下缺点：1、短；2、非结构化；3、口语化；也有优点：1、作者；2、hashtags；3、粉丝网络。本文结合推特信息的优点提出了一种新模型。topic model是个老话题了，多源信息的融合是突破研究瓶颈一个不错的方向，本文的方法同样可借鉴于微博和其他社交网络。</p>
-<h2 id="Joint-CTC-Attention-based-End-to-End-Speech-Recognition-using-Multi-task-Learning"><a href="#Joint-CTC-Attention-based-End-to-End-Speech-Recognition-using-Multi-task-Learning" class="headerlink" title="Joint CTC-Attention based End-to-End Speech Recognition using Multi-task Learning"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.06773v1.pdf" target="_blank" rel="external">Joint CTC-Attention based End-to-End Speech Recognition using Multi-task Learning</a></h2><p>【转发较多】Attention类模型在端到端语音识别领域取得了不错的效果，但当输入噪声非常大的的时候，识别长句子效果不是很好。CTC是另外一种不错的端到端模型，本文结合两者的优势构建模型。构建了联合模型之后，克服了之前的问题。大家都在用Attention，都说Attention好，但终究还是有些情境下attention并不能如人意。那么问题来了，到底哪些场景下attention表现不好，原因是什么？想清楚这个到底之后，改进的方法大概也就在路上了。#Attention Model的缺点#</p>
-<h1 id="资源分享"><a href="#资源分享" class="headerlink" title="资源分享"></a>资源分享</h1><h2 id="Bots-Product-Hunt"><a href="#Bots-Product-Hunt" class="headerlink" title="Bots - Product Hunt"></a><a href="https://www.producthunt.com/topics/bots" target="_blank" rel="external">Bots - Product Hunt</a></h2><p>一个分享和点评各种好玩product的站点，其中一个栏目有各种各样的bot。</p>
-<h2 id="Gorgonia-is-a-library-that-helps-facilitate-machine-learning-in-Go"><a href="#Gorgonia-is-a-library-that-helps-facilitate-machine-learning-in-Go" class="headerlink" title="Gorgonia is a library that helps facilitate machine learning in Go"></a><a href="https://github.com/chewxy/gorgonia" target="_blank" rel="external">Gorgonia is a library that helps facilitate machine learning in Go</a></h2><p>用Go写的机器学习开源框架。</p>
-<h2 id="A-Thorough-Examination-of-the-CNN-Daily-Mail-Reading-Comprehension-Task"><a href="#A-Thorough-Examination-of-the-CNN-Daily-Mail-Reading-Comprehension-Task" class="headerlink" title="A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task"></a><a href="https://github.com/danqi/rc-cnn-dailymail" target="_blank" rel="external">A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task</a></h2><p>这篇paper的代码放出来了，同时包括CNN和Daily Mail的数据集。来自斯坦福Danqi Chen的工作。</p>
-<h1 id="业界新闻"><a href="#业界新闻" class="headerlink" title="业界新闻"></a>业界新闻</h1><h2 id="API-AI-is-joining-Google"><a href="#API-AI-is-joining-Google" class="headerlink" title="API.AI is joining Google!"></a><a href="https://api.ai/blog/2016/09/19/api-ai-joining-google/" target="_blank" rel="external">API.AI is joining Google!</a></h2><p>chatbot构建平台api.ai被Google收购了</p>
-<h2 id="Angel-ai-a-company-that-builds-chat-bots-acqui-hired-by-Amazon-TechCrunch"><a href="#Angel-ai-a-company-that-builds-chat-bots-acqui-hired-by-Amazon-TechCrunch" class="headerlink" title="Angel.ai, a company that builds chat bots, acqui-hired by Amazon | TechCrunch "></a><a href="https://techcrunch.com/2016/09/20/angel-ai-a-company-that-builds-chat-bots-acqui-hired-by-amazon/" target="_blank" rel="external">Angel.ai, a company that builds chat bots, acqui-hired by Amazon | TechCrunch </a></h2><p>TechCrunch报道称，继api.ai被google收购之后，一家做自然语言理解的公司angel.ai也几乎被Amazon收购。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）每天都会分享当天arXiv cs.CL板块刷新的高质量paper<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Long-Term-Trends-in-the-Public-Perception-of-Artifici
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第六期</title>
-    <link href="http://rsarxiv.github.io/2016/09/22/PaperWeekly-%E7%AC%AC%E5%85%AD%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/09/22/PaperWeekly-第六期/</id>
-    <published>2016-09-23T03:51:47.000Z</published>
-    <updated>2016-09-23T05:07:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期paperweekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解决此类dataset可以给AI理解人类语言很好的insights。问题的定义大致是，给定较长一段话的context和一个较短的问题，以及一些candidate answers，训练一些可以准确预测正确答案的模型。</p>
-<p>此问题也存在一些变种，例如context可以是非常大块的knowledge base，可以不提供candidate answers而是在所有的vocabulary中搜索答案，或者是在context中提取答案。</p>
-<p>基于(Recurrent) Neural Network的一些模型在这一类问题上给出了state of the art models，本期paperweekly就带领大家欣赏这一领域有趣的工作。</p>
-<h1 id="Attention-over-Attention-Neural-Networks-for-Reading-Comprehension"><a href="#Attention-over-Attention-Neural-Networks-for-Reading-Comprehension" class="headerlink" title="Attention-over-Attention Neural Networks for Reading Comprehension"></a><a href="https://arxiv.org/abs/1607.04423" target="_blank" rel="external">Attention-over-Attention Neural Networks for Reading Comprehension</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yiming Cui, Zhipeng Chen, Si Wei, Shijin Wang, Ting Liu and Guoping Hu</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>iFLYTEK Research, China<br>Research Center for Social Computing and Information Retrieval, Harbin Institute of Technology, China</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Attentive Readers</p>
-<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201608</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文优化了attention机制，同时apply question-to-document and document-to-question attention，提升了已有模型在Cloze-Style Question Answering Task上的准确率。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文解决的是Cloze-style question answering的问题，给定一个Document和一个Query，以及一个list的candidate answers，模型需要给出一个正确答案。</p>
-<p>已有的模型大都通过比较每一个Query + candidate answer和context document的相似性来找出正确答案，这种相似性measure大都通过把query 投射到context document每个单词及所在context的相似性来获得。本文的不同之处在于模型还计算了context投射到每个query单词的相似度，进一步丰富了context和query相似度的计算。</p>
-<p><img src="media/model_image.png" alt="model_image"></p>
-<p>首先，document和query都会被model成biGRU。<br><img src="media/embedding_and_encoding.png" alt="embedding_and_encoding"></p>
-<p>然后使用document biGRU和query biGRU的每一个position做inner product计算，可以得到一个similarity matrix。<br><img src="media/similarity_matrix.png" alt="similarity_matrix"></p>
-<p>对这个matrix做一个column-wise softmax，可以得到每个query单词在每个document单词上的similarity。<br><img src="media/column_softmax.png" alt="column_softmax"></p>
-<p>similarly，对这个matrix做一个row-wise softmax，可以得到每个document单词在每个query单词上的similarity。<br><img src="media/row_softmax.png" alt="row_softmax"></p>
-<p>取个平均就得到了每个query单词在整个context document上的similarity。<br><img src="media/average.png" alt="average"></p>
-<p>然后把alpha和beta做个inner product就得到了每个context document word的probability。<br><img src="media/context_word_probability.png" alt="context_word_probability"></p>
-<p>每个candidate answer的probability就是它出现在上述s中的probability之和。<br><img src="media/attention_sum.png" alt="attention_su"></p>
-<p>Loss Function可以定义为正确答案的log probability之和。<br><img src="media/loss_function.png" alt="loss_function"></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
-<li><a href="https://github.com/deepmind/rc-data" target="_blank" rel="external">cnn和daily mail datasets</a></li>
-<li><a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">Children’s book test</a></li>
-</ul>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>利用attentive readers解决question answering问题最早出自deep mind: teaching machines to read and comprehend。后来又有Bhuwan Dhingra: Gated-Attention Readers for Text Comprehension和Danqi Chen: A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task，以及其他相关工作，在此不一一赘述。</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文很好地完善了attentive reader的工作，同时考虑了query to document and document to query attentions，在几个data set上都取得了state of the art效果，思路非常清晰，在question answering问题上很有参考价值。</p>
-<h1 id="MACHINE-COMPREHENSION-USING-MATCH-LSTM-AND-ANSWER-POINTER"><a href="#MACHINE-COMPREHENSION-USING-MATCH-LSTM-AND-ANSWER-POINTER" class="headerlink" title="MACHINE COMPREHENSION USING MATCH-LSTM AND ANSWER POINTER"></a><a href="http://120.52.73.76/arxiv.org/pdf/1608.07905v1.pdf" target="_blank" rel="external">MACHINE COMPREHENSION USING MATCH-LSTM AND ANSWER POINTER</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Shuohang Wang, Jing Jiang</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Singapore Management University</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Machine comprehension, Match-LSTM, Pointer Net</p>
-<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv，201608</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>提出一种结合match-LSTM和Pointer Net的端到端神经网络结构，来解决SQuAD数据集这类没有候选项且答案可能是多个词的machine comprehension问题。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型结合了match-LSTM(mLSTM)和Pointer Net(Ptr-Net)两种网络结构。</p>
-<p>1、match-LSTM</p>
-<p>mLSTM是由Wang和Jiang提出的一种解决文本蕴含识别（RTE）问题的一种神经网络结构。模型结构见下图，该模型首先将premise和hypothesis两句话分别输入到两个LSTM中，用对应LSTM的隐层输出作为premise和hypothesis中每个位置对应上下文信息的一种表示（分别对应图中的Hs和Ht）。对于hypothesis中的某个词的表示ht_i，与premise中的每个词的表示Hs计算得到一个权重向量，然后再对premise中的词表示进行加权求和，得到hti对应的上下文向量a_i（attention过程）。最后把hypothesis中该词的表示ht_i和其对应的context向量a_i拼接在一起，输入到一个新的LSTM中。该模型将两个句子的文本蕴含任务拆分成词和短语级别的蕴含识别，因此可以更好地识别词之间的匹配关系。<br><img src="media/mLSTM.png" alt="mLST"></p>
-<p>2、 Pointer networks</p>
-<p>该模型与基于attention的生成模型类似。区别之处在于，pointer networks生成的结果都在输入序列中，因此pointer networks可以直接将attention得到的align向量中的每个权重直接作为预测下一个词对应的概率值。</p>
-<p>3、 Sequence Model &amp; Boundary Model</p>
-<p>本文提出的模型结构见下图，具体到本文的神经网络结构，可以简单分为下面两部分：<br><img src="media/Seq_Bound.png" alt="Seq_Bound"><br>（1）Match-LSTM层：该部分将machine comprehension任务中的question作为premise，而passage作为hypothesis。直接套用上述的mLSTM模型得到关于passage每个位置的一种表示。为了将前后方向的上下文信息全部编码进来，还用相同的方法得到一个反向mLSTM表示，将两个正反方向的表示拼接在一起作为最终passage的表示。</p>
-<p>（2）生成答案序列部分，论文中提出了两种生成方法：</p>
-<ul>
-<li><p>Sequence方法与Pointer Net相同，即根据每一个时刻attention的align向量生成一个词位置，直到生成终止符为止。</p>
-</li>
-<li><p>Boundary方法则是利用SQuAD数据集的答案均是出现在passage中连续的序列这一特点，该方法仅生成首尾两个位置，依据起始位置和终止位置来截取passage的一部分作为最终的答案。</p>
-</li>
-</ul>
-<p>本文在SQuAD数据集上进行实验，两种方法实验结果较之传统LR方法均有大幅度提升。其中Boundary方法比Sequence方法效果更好。</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><ul>
-<li><a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">SQuAD</a></li>
-</ul>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>数据集相关论文<br>SQuAD: 100,000+ Questions for Machine Comprehension of Text<br>模型相关论文<br>Learning Natural Language Inference with LSTM<br>Pointer networks</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出的模型是第一个在SQuAD语料上应用端到端神经网络的模型，该模型将Match-LSTM和Pointer Networks结合在一起，利用了文本之间的蕴含关系更好地预测答案。<br>本文提出了两种方法来生成答案，其中Boundary方法巧妙地利用SQuAD数据集的答案均是文本中出现过的连续序列这一特点，只生成答案的起始和终止位置，有效地提升了模型的效果。</p>
-<h1 id="Dataset-and-Neural-Recurrent-Sequence-Labeling-Model-for-Open-Domain-Factoid-Question-Answering"><a href="#Dataset-and-Neural-Recurrent-Sequence-Labeling-Model-for-Open-Domain-Factoid-Question-Answering" class="headerlink" title="Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering"></a><a href="https://arxiv.org/pdf/1607.06275v2.pdf" target="_blank" rel="external">Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Peng Li, Wei Li, Zhengyan He, Xuguang Wang, Ying Cao, Jie Zhou, Wei Xu</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Baidu IDL</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Sequence Labeling, CRF</p>
-<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>arXiv, 201609</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>作者给出了一个新的中文的QA数据集, 并且提出了一个非常有意思的baseline model.</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>1、WebQA Dataset</p>
-<p>作者来自百度IDL, 他们利用百度知道和一些其他的资源, 构建了这个中文的QA数据集. 这个数据集里所有的问题都是factoid类型的问题, 并且问题的答案都只包含一个entity (但是一个entity可能会包含多个单词). 对于每个问题, 数据集提供了若干个’evidence’, 这些evidence是利用搜索引擎在网络中检索的.</p>
-<p>2、Recurrent Sequence Labeling Model</p>
-<p>作者把QA类型的问题看做sequence labeling问题, 给出的模型大概分三部分:<br><img src="media/ericyuan_graph.png" alt="ericyuan_graph"></p>
-<p>（1）Question LSTM<br>这部分很简单, 就是普通的单向LSTM, 对整个Question sequence进行encoding, 之后计算self-attention, 并用attention对question encoding求加权平均作为问题的representation.</p>
-<p>（2）Evidence LSTMs<br>这部分比较有意思, 首先, 作者从数据中提取出两种feature: 每个词是否在question和evidence中共同出现, 以及每个词是否同时在多个evidence中出现. 之后, 模型用一个三层的单向LSTM对evidence/quesiton/feature进行编码. </p>
-<ul>
-<li>第一层: 将evidence/question representation/feature进行连接, 放进一个正向LSTM.</li>
-<li>第二层: 将第一层的结果放入一个反向LSTM.</li>
-<li>第三层: 将第一层和第二层的结果进行连接, 放进一个正向LSTM.</li>
-</ul>
-<p>（3）CRF<br>经过evidence LSTMs, question和evidence的representation已经揉在一起, 所以并不需要其他QA模型(主要是Attention Sum Reader)广泛用的, 用question representation和story representation进行dot product, 求cosine similarity. 这时候只需要对evidence representation的每一个time step进行分类就可以了, 这也是为什么作者将数据标注成IOB tagging的格式, 我们可以直接用一个CRF层对数据进行预测. 在一些实验中, 作者将答案之前的词用O1, 答案之后的词用O2进行标注, 这又给了模型关于非答案词的位置信息(正确答案是在这个词的前面还是后面). </p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><ul>
-<li><a href="http://idl.baidu.com/webqa.html" target="_blank" rel="external">WebQA dataset</a></li>
-<li><a href="https://github.com/baidu/Paddle" target="_blank" rel="external">Baidu Paddle</a></li>
-</ul>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><ul>
-<li>关于CRF进行序列标注的问题, 可以参考这篇文章.<br>Zhiheng Huang, Wei Xu, and Kai Yu. 2015. Bidirectional LSTM-CRF models for sequence tagging. arXiv:1508.01991v1.</li>
-<li>关于multi-word答案选择在SQuAD dataset上的模型, 可以参考这篇.<br>Shuohang Wang, Jing Jiang. 2016. Machine Comprehension Using Match_LSTM and Answer Pointer. arXiv: 1608.07905v1.</li>
-</ul>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>首先对所有release数据集的人表示感谢.<br>关于dataset部分, 百度利用了自己庞大的资源收集数据. 第一, 百度知道里的问题都是人类问的问题, 这一点相比于今年前半年比较流行的CNN/CBT等等cloze style的问题, 要强很多. 第二, 数据集中包含了很多由多个词组成的答案, 这也使数据集的难度大于CNN/CBT这种单个词作为答案的数据. 第三, 对于每个问题, 并没有给出备选答案, 这使得对于答案的搜索空间变大(可以把整个evidence看做是备选答案). 第四, 对于每一个问题, dataset中可能有多个supporting evidence, 这也迎合了最近multi-supporting story的趋势, 因为对于有些问题, 答案并不只在某一个单一的文章中(对于百度来说, 如果搜索一个问题, 那么答案并不一定在单一的搜索结果网页中), 那么一个好的model需要在有限的时间内对尽可能多的搜索结果进行检索. </p>
-<p>关于model部分, 本文尝试将QA问题看做是序列标注问题, 某种意义上解决了multiword answer的难点. 熟悉前半年QA paper的人都会对Attention Sum Reader以及延伸出来的诸多模型比较熟悉, 由于用了类似Pointer Network的机制, 一般的模型只能从文中选择story和question的cosine similarity最高的词作为答案, 这使得multiple word answer很难处理, 尤其是当multiple answer word不连续的时候, 更难处理. 而CRF是大家都熟知的简单高效的序列标注工具, 把它做成可训练的, 并且放在end to end模型中, 看起来是非常实用的. 在Evidence LSTM的部分, 加入的两个feature据作者说非常有帮助, 看起来在deep learning 模型中加入一些精心设计的feature, 或者IR的要素, 有可能能够对模型的performance给予一定的提升. 在entropy的角度, 虽然不一定是entropy reduction, 因为这些信息其实本来已经包含在question/evidence中了, 但是有可能因为你提供给模型这些信息, 它就可以把更多精力用在一些其他的特征上?</p>
-<p>另外值得一提的是, 最近Singapore Management University的Wang and Jiang也有所突破, 在SQuAD dataset(也是multiple word answer)上一度取得了state of the art的结果, 他们用的mLSTM模型也十分有趣. </p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这一类model都大量使用了Recurrent Neural Network(LSTM或者GRU)对text进行encoding，得到一个sequence的hidden state vector。然后通过inner product或者bilinear term比较不同位置hidden state vector之间的similarity来计算它们是正确答案的可能性。可见Recurrent Neural Network以及对于Similarity的定义依旧是解决此类问题的关键所在，更好地改良这一类模型也是提升准确率的主流方法。笔者认为，similarity的计算给了模型从原文中搜索答案的能力，然而模型非常缺乏的是推理和思考的能力（其实也有相关工作<a href="http://arxiv.org/abs/1508.05508" target="_blank" rel="external">Towards Neural Network-based Reasoning</a>），如果模型能够配备逻辑思考能力，那么解决问题的能力会大大增强。非常期待有新的思路能够出现在这一领域中，令AI能够更好地理解人类语言。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;本期paperweekly的主题是Question Answering Models，解决这一类问题可以很好地展现AI理解人类自然语言的能力，通过解
     
     </summary>
     

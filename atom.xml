@@ -14,7 +14,7 @@
     <title></title>
     <link href="http://rsarxiv.github.io/2016/11/26/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%94%E6%9C%9F/media/ement-based%20Joint%20Training%20for%20Bidirectional%20Attention-based%20Neural%20Machine%20Translation-susie-nmt/"/>
     <id>http://rsarxiv.github.io/2016/11/26/PaperWeekly-第十五期/media/ement-based Joint Training for Bidirectional Attention-based Neural Machine Translation-susie-nmt/</id>
-    <published>2016-11-26T18:33:39.238Z</published>
+    <published>2016-11-26T18:38:16.922Z</published>
     <updated>2016-11-26T17:53:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>文档命名方式：paper title_你的id</p>
@@ -46,8 +46,8 @@
     <title>PaperWeekly 第十五期</title>
     <link href="http://rsarxiv.github.io/2016/11/26/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%94%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/11/26/PaperWeekly-第十五期/</id>
-    <published>2016-11-26T17:57:04.000Z</published>
-    <updated>2016-11-26T18:26:48.000Z</updated>
+    <published>2016-11-26T18:37:08.000Z</published>
+    <updated>2016-11-26T18:37:48.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术的研究和讨论达到了顶峰。Attention模型在NLP中最早的使用正是在NMT领域出现的，包括横扫很多领域的seq2seq+attention解决方案，都是在NMT模型的基础上进行相应的一些小改动而成的。所以，本期PaperWeekly带大家看一看最近两年Attention模型在NMT领域中的研究进展，本文包括以下paper：</p>
 <p>1、Neural Machine Translation by Jointly Learning to Align and Translate, 2015<br>2、Effective approaches to attention-based neural machine translation, 2015<br>3、Modeling Coverage for Neural Machine Translation,  2016<br>4、Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation, 2016<br>5、Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation, 2016</p>

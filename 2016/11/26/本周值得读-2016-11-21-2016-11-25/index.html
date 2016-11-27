@@ -3,16 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Skip-Thought Vectors #PaperWeekly# | PaperWeekly</title>
+  <title>本周值得读(2016.11.21-2016.11.25) | PaperWeekly</title>
   
   
-  <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
-已经分享过多种无监督的word level表示模型，和多种有监督的sentence level表示模型，以及与word2vec模型类似的paragraph vector模型。无监督模型比有监督模型带给大家更多的惊喜，本文将会分享一篇sentence leve">
+  <meta name="description" content="一周值得读Generative Deep Neural Networks for Dialogue: A Short Review【对话系统】本文对seq2seq方法在对话系统中的应用做了一个简短的对比和综述，主要是针对几位作者提出的三种深度学习模型：HRED、VHRED和MrRNN，实验数据用了U">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Skip-Thought Vectors #PaperWeekly#"/>
+  <meta property="og:title" content="本周值得读(2016.11.21-2016.11.25)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -67,50 +66,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-05-28T15:51:24.000Z"><a href="/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">2016-05-28</a></time>
+        <time datetime="2016-11-27T06:12:34.000Z"><a href="/2016/11/26/本周值得读-2016-11-21-2016-11-25/">2016-11-26</a></time>
       
       
   
-    <h1 class="title">Skip-Thought Vectors #PaperWeekly#</h1>
+    <h1 class="title">本周值得读(2016.11.21-2016.11.25)</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>已经分享过多种无监督的word level表示模型，和多种有监督的sentence level表示模型，以及与word2vec模型类似的paragraph vector模型。无监督模型比有监督模型带给大家更多的惊喜，本文将会分享一篇sentence level的无监督表示模型，模型中用到了当下流行的seq2seq框架。paper的题目是<a href="http://cn.arxiv.org/pdf/1506.06726v1.pdf" target="_blank" rel="external">Skip-Thought Vectors</a>，作者是来自多伦多大学的<a href="http://www.cs.toronto.edu/~rkiros/" target="_blank" rel="external">Ryan Kiros</a>博士。</p>
-<p>word level表示已经有太多无监督模型，然而sentence level表示大多仍停留在监督模型的范畴内，比如之前分享过的RNN、CNN、RCNN等模型来表示一个句子，主要是针对具体的分类任务来构造句子向量，仅适用于本任务，不具有一般性。之前，Tomas Mikolov（word2vec的作者）提出了一种类似于Word2vec的paragraph vector，也是一种无监督模型，但并不能很好地扩展来用。</p>
-<p>本文旨在提出一个通用的无监督句子表示模型，借鉴了word2vec中skip-gram模型，通过一句话来预测这句话的上一句和下一句。本文的模型被称为skip-thoughts，生成的向量称为skip-thought vector。模型采用了当下流行的端到端框架，通过搜集了大量的小说作为训练数据集，将得到的模型中encoder部分作为feature extractor，可以给任意句子生成vector。</p>
-<p>当然，这里存在一个很大的问题是，如果测试数据中有未登录词，如何表示这个未登录词？针对这个问题，本文提出了一种词汇表扩展的方法来解决这个问题。</p>
-<p>首先，介绍本文的模型，参考下图来理解：</p>
-<img src="/2016/05/28/Skip-Thought-Vectors-PaperWeekly/fig1.png" width="600" height="600">
-<p>模型分为两个部分，一个是encoder，一个是两个decoder，分别decode出当前句子的上一句和下一句。</p>
-<p>encoder-decoder框架已经介绍过太多次了，这里不再赘述。本文采用了GRU-RNN作为encoder和decoder，encoder部分的最后一个词的hidden state作为decoder的输入来生成词。这里用的是最简单的网络结构，并没有考虑复杂的多层网络、双向网络等提升效果。decoder部分也只是一个考虑了encoder last hidden state的语言模型，并无其他特殊之处，只是有两个decoder，是一个one maps two的情况，但计算方法一样。模型中的目标函数也是两个部分，一个来自于预测下一句，一个来自于预测上一句。如下式：</p>
-<img src="/2016/05/28/Skip-Thought-Vectors-PaperWeekly/fig2.png" width="300" height="300">
-<p>其次，介绍下本文的另一大亮点，词汇表扩展。</p>
-<p>借鉴于Tomas Mikolov的一篇文章<a href="http://arxiv.org/pdf/1309.4168.pdf" target="_blank" rel="external">Exploiting Similarities among Languages for Machine Translation</a>中解决机器翻译missing words问题的思路，对本文训练集产生的词汇表V(RNN)进行了扩展，具体的思路可参考Mikolov的文章，达到的效果是建立了大数据集下V(Word2Vec)和本文V(RNN)之间的映射，V(Word2Vec)的规模远远大于V(RNN)，本文中V(RNN)包括了20000个词，V(Word2Vec)包括了930000多个词，成功地解决了这一问题，使得本文提出的无监督模型有大的应用价值。文中给出了一个例子，如下图：</p>
-<img src="/2016/05/28/Skip-Thought-Vectors-PaperWeekly/fig3.png" width="400" height="400">
-<p>当然，词汇表扩展有很多方法，比如不同词，而用字符来作为基本元素，这种思路在语言模型中也常常被用到。</p>
-<p>最后，作者在Semantic relateness、Paraphrase detection、Image-sentence ranking和classification任务中进行了测试和对比，验证了本文模型的效果。最后还给出了在多个数据集上对句子聚类的可视化结果，以及用decoder部分生成一段话。</p>
-<p>关于未来的改进，作者有几点想法：</p>
-<ul>
-<li><p>用更深的encoder和decoder网络。</p>
-</li>
-<li><p>用更大的窗口，而不仅仅预测上一句和下一句。</p>
-</li>
-<li><p>试着将sentence替换成paragraph。</p>
-</li>
-<li><p>换一些别的encoder来做，比如用CNN。</p>
-</li>
-</ul>
-<p>每个想法都可能会是未来另一篇牛paper的思路。</p>
-<p><code>看过了很多的decoder，有char-level，word-level和sentence-level，我有一个小小的想法是，到底哪种level生成的paragraph更出色呢？速度方面，不必比较了，sentence-level一定要快一些，但是质量方面呢？</code>文中最后给出了一个本文模型生成的demo，如下：</p>
-<img src="/2016/05/28/Skip-Thought-Vectors-PaperWeekly/fig4.png" width="600" height="600">
-<p>本文作者还开源了该模型的实现<a href="https://github.com/ryankiros/skip-thoughts" target="_blank" rel="external">代码</a>。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review"><a href="#Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review" class="headerlink" title="Generative Deep Neural Networks for Dialogue: A Short Review"></a><a href="http://t.cn/RfX2bms" target="_blank" rel="external">Generative Deep Neural Networks for Dialogue: A Short Review</a></h2><p>【对话系统】本文对seq2seq方法在对话系统中的应用做了一个简短的对比和综述，主要是针对几位作者提出的三种深度学习模型：HRED、VHRED和MrRNN，实验数据用了Ubuntu Dialogue Corpus和Twitter Corpus。不管是用seq2seq生成也好，还是套用模板也罢，对话系统的难点仍是上下文的理解和如何输出一些高质量的对话，有些应用场景对response的要求没那么高，只要可以达到一定实际效果即可，而有的则需要生成更加接近人类的对话。本文适合研究深度seq2seq的童鞋以及想看看各种seq2seq效果如何的童鞋来读。本文总结的三个模型原文链接：</p>
+<p>(a) MrRNN: <a href="https://arxiv.org/pdf/1606.00776.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1606.00776.pdf</a><br>(b) VHRED: <a href="https://arxiv.org/pdf/1605.06069v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1605.06069v3.pdf</a><br>(c) HRED: <a href="https://arxiv.org/pdf/1507.04808v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1507.04808v3.pdf</a></p>
+<h2 id="Coherent-Dialogue-with-Attention-based-Language-Models"><a href="#Coherent-Dialogue-with-Attention-based-Language-Models" class="headerlink" title="Coherent Dialogue with Attention-based Language Models"></a><a href="http://t.cn/Rfag1Jx" target="_blank" rel="external">Coherent Dialogue with Attention-based Language Models</a></h2><p>【对话系统】考虑并理解上下文是Chatbot的一大难点，也是目前绝大多数chatbot不智能的主要原因之一。本文提出了一种动态的attention模型，在理解用户请求的时候，动态地考虑历史信息。本文用到了两个开放数据集，分别是MovieTriples和Ubuntu Troubleshoot dataset。建议对chatbot感兴趣的同学可以精读此文。</p>
+<h2 id="Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><a href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks" class="headerlink" title="Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks"></a><a href="http://t.cn/RfXLHIP" target="_blank" rel="external">Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks</a></h2><p>【课程学习】Curriculum Learning是一类模拟小孩子学习过程的学习算法，简单地说是指在训练模型是从简单的样本开始，逐渐增加学习样本的难度。本文以情感分析为研究对象，对Curriculum Learning如何提升LSTM模型在情感分析任务上的效果进行了实验研究，并给出了可视化的结果。本文适合研究Curriculum Learning的童鞋以及在训练模型中想尝试下Curriculum Learning思路的童鞋研读。</p>
+<h2 id="Variable-Computation-in-Recurrent-Neural-Networks"><a href="#Variable-Computation-in-Recurrent-Neural-Networks" class="headerlink" title="Variable Computation in Recurrent Neural Networks"></a><a href="http://t.cn/RfXUmyN" target="_blank" rel="external">Variable Computation in Recurrent Neural Networks</a></h2><p>【RNN研究】RNN在解决序列建模问题有着天然的优势，但有些序列数据存在周期性的变化，或者短时间内变化并不明显，比如视频数据，因此固定不变的RNN训练方案会浪费计算资源，本文针对这一问题，提出了一种RNN变计算训练方案，即在计算下一个time step的hidden state时，不需要上一个time step所有的维度，只取一部分来计算，其他的维度复制过来即可。这篇工作的相关的前人研究包括：2014年的A Clockwork RNN，链接如下：<a href="https://arxiv.org/pdf/1402.3511.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1402.3511.pdf</a></p>
+<h2 id="Learning-to-Distill-The-Essence-Vector-Modeling-Framework"><a href="#Learning-to-Distill-The-Essence-Vector-Modeling-Framework" class="headerlink" title="Learning to Distill: The Essence Vector Modeling Framework"></a><a href="http://t.cn/RfoWk0K" target="_blank" rel="external">Learning to Distill: The Essence Vector Modeling Framework</a></h2><p>【表示学习】本文研究的内容包括两个点，一个是无监督学习，一个是文档表示。词表示、句子表示都有比较多的解决方案，但实际应用中文档级别的表示非常重要，比如情感分析、文本摘要等任务。本文提出了一种无监督的方法对文档以及背后所蕴藏的背景知识进行低维表示。自然语言随着元素级别地提升（从字、词、短语、句子到文档），研究的难度随之增加，实用程度随之减少。建议想从无监督学习方法有所突破以及想试试文档表示的童鞋可以来读本文。</p>
+<h2 id="Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks"><a href="#Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks" class="headerlink" title="Unsupervised Learning of Sentence Representations using Convolutional Neural Networks"></a><a href="http://t.cn/Rf9VNdk" target="_blank" rel="external">Unsupervised Learning of Sentence Representations using Convolutional Neural Networks</a></h2><p>【句子表示】本文的贡献在于提出了一种新的CNN-LSTM auto-encoder，作为一种无监督的句子学习模型。</p>
+<h2 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://t.cn/Rf9Vwi7" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h2><p>【问答系统】针对最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。PaperWeekly第十四期的文章有相关的paper note可以参考<a href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/">地址</a></p>
+<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>美国国立卫生研究院招博士后，研究领域包括：NLP、text mining和machine learning，感兴趣的童鞋可以看过来，详情请戳<a href="https://www.stat.washington.edu/jobs/archive/2013/may/05.20.13_NIH_E_B_NLP_Post_Doc_Ad_PDF_May_20_2013.pdf" target="_blank" rel="external">这里</a></p>
 
       
     </div>
@@ -163,7 +137,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/11/26/本周值得读-2016-11-21-2016-11-25/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

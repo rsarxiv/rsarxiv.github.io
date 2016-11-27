@@ -65,6 +65,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-11-27T06:12:34.000Z"><a href="/2016/11/26/本周值得读-2016-11-21-2016-11-25/">2016-11-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/11/26/本周值得读-2016-11-21-2016-11-25/">本周值得读(2016.11.21-2016.11.25)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review"><a href="#Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review" class="headerlink" title="Generative Deep Neural Networks for Dialogue: A Short Review"></a><a href="http://t.cn/RfX2bms" target="_blank" rel="external">Generative Deep Neural Networks for Dialogue: A Short Review</a></h2><p>【对话系统】本文对seq2seq方法在对话系统中的应用做了一个简短的对比和综述，主要是针对几位作者提出的三种深度学习模型：HRED、VHRED和MrRNN，实验数据用了Ubuntu Dialogue Corpus和Twitter Corpus。不管是用seq2seq生成也好，还是套用模板也罢，对话系统的难点仍是上下文的理解和如何输出一些高质量的对话，有些应用场景对response的要求没那么高，只要可以达到一定实际效果即可，而有的则需要生成更加接近人类的对话。本文适合研究深度seq2seq的童鞋以及想看看各种seq2seq效果如何的童鞋来读。本文总结的三个模型原文链接：</p>
+<p>(a) MrRNN: <a href="https://arxiv.org/pdf/1606.00776.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1606.00776.pdf</a><br>(b) VHRED: <a href="https://arxiv.org/pdf/1605.06069v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1605.06069v3.pdf</a><br>(c) HRED: <a href="https://arxiv.org/pdf/1507.04808v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1507.04808v3.pdf</a></p>
+<h2 id="Coherent-Dialogue-with-Attention-based-Language-Models"><a href="#Coherent-Dialogue-with-Attention-based-Language-Models" class="headerlink" title="Coherent Dialogue with Attention-based Language Models"></a><a href="http://t.cn/Rfag1Jx" target="_blank" rel="external">Coherent Dialogue with Attention-based Language Models</a></h2><p>【对话系统】考虑并理解上下文是Chatbot的一大难点，也是目前绝大多数chatbot不智能的主要原因之一。本文提出了一种动态的attention模型，在理解用户请求的时候，动态地考虑历史信息。本文用到了两个开放数据集，分别是MovieTriples和Ubuntu Troubleshoot dataset。建议对chatbot感兴趣的同学可以精读此文。</p>
+<h2 id="Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><a href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks" class="headerlink" title="Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks"></a><a href="http://t.cn/RfXLHIP" target="_blank" rel="external">Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks</a></h2><p>【课程学习】Curriculum Learning是一类模拟小孩子学习过程的学习算法，简单地说是指在训练模型是从简单的样本开始，逐渐增加学习样本的难度。本文以情感分析为研究对象，对Curriculum Learning如何提升LSTM模型在情感分析任务上的效果进行了实验研究，并给出了可视化的结果。本文适合研究Curriculum Learning的童鞋以及在训练模型中想尝试下Curriculum Learning思路的童鞋研读。</p>
+<h2 id="Variable-Computation-in-Recurrent-Neural-Networks"><a href="#Variable-Computation-in-Recurrent-Neural-Networks" class="headerlink" title="Variable Computation in Recurrent Neural Networks"></a><a href="http://t.cn/RfXUmyN" target="_blank" rel="external">Variable Computation in Recurrent Neural Networks</a></h2><p>【RNN研究】RNN在解决序列建模问题有着天然的优势，但有些序列数据存在周期性的变化，或者短时间内变化并不明显，比如视频数据，因此固定不变的RNN训练方案会浪费计算资源，本文针对这一问题，提出了一种RNN变计算训练方案，即在计算下一个time step的hidden state时，不需要上一个time step所有的维度，只取一部分来计算，其他的维度复制过来即可。这篇工作的相关的前人研究包括：2014年的A Clockwork RNN，链接如下：<a href="https://arxiv.org/pdf/1402.3511.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1402.3511.pdf</a></p>
+<h2 id="Learning-to-Distill-The-Essence-Vector-Modeling-Framework"><a href="#Learning-to-Distill-The-Essence-Vector-Modeling-Framework" class="headerlink" title="Learning to Distill: The Essence Vector Modeling Framework"></a><a href="http://t.cn/RfoWk0K" target="_blank" rel="external">Learning to Distill: The Essence Vector Modeling Framework</a></h2><p>【表示学习】本文研究的内容包括两个点，一个是无监督学习，一个是文档表示。词表示、句子表示都有比较多的解决方案，但实际应用中文档级别的表示非常重要，比如情感分析、文本摘要等任务。本文提出了一种无监督的方法对文档以及背后所蕴藏的背景知识进行低维表示。自然语言随着元素级别地提升（从字、词、短语、句子到文档），研究的难度随之增加，实用程度随之减少。建议想从无监督学习方法有所突破以及想试试文档表示的童鞋可以来读本文。</p>
+<h2 id="Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks"><a href="#Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks" class="headerlink" title="Unsupervised Learning of Sentence Representations using Convolutional Neural Networks"></a><a href="http://t.cn/Rf9VNdk" target="_blank" rel="external">Unsupervised Learning of Sentence Representations using Convolutional Neural Networks</a></h2><p>【句子表示】本文的贡献在于提出了一种新的CNN-LSTM auto-encoder，作为一种无监督的句子学习模型。</p>
+<h2 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://t.cn/Rf9Vwi7" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h2><p>【问答系统】针对最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。PaperWeekly第十四期的文章有相关的paper note可以参考<a href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/">地址</a></p>
+<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>美国国立卫生研究院招博士后，研究领域包括：NLP、text mining和machine learning，感兴趣的童鞋可以看过来，详情请戳<a href="https://www.stat.washington.edu/jobs/archive/2013/may/05.20.13_NIH_E_B_NLP_Post_Doc_Ad_PDF_May_20_2013.pdf" target="_blank" rel="external">这里</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-11-26T18:37:08.000Z"><a href="/2016/11/26/PaperWeekly-第十五期/">2016-11-26</a></time>
       
       
@@ -3328,74 +3369,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-12T22:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task中，因为这类模型无法做到与数据库交互以及整合其他有用的信息，从而生成实用的response。还有一种非常流行的方案是reinforcement learning，上一篇分享的paper<a href="http://rsarxiv.github.io/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation</a>将两者有机地结合在了一起，增强学习可以使得response生成时考虑更长远的影响。</p>
-<p>本文将分享的这篇paper，针对task-oriented的bot问题，平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。paper的题目是<a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a>，本文于2016年5月20日发表于arxiv上，作者是来自剑桥大学Dialogue System Group的博士生<a href="http://mi.eng.cam.ac.uk/~thw28/" target="_blank" rel="external">Tsung-Hsien Wen</a>，该组专门研究chatbot相关技术，发表过大量与之相关的paper，后续会更多地关注该组的工作。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>上图是本文方案的架构示意图，分为五个部分。下面分别进行介绍：</p>
-<p>1、Intent Network</p>
-<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector z(t)。encoder部分分别用了lstm和cnn两种模型对该输入进行建模。这两种句子表示的方法在之前的文章中都有介绍。</p>
-<p>2、Belief Trackers</p>
-<p>这个部分又被称作是Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
-<ul>
-<li><p>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</p>
-</li>
-<li><p>追踪bot的state，避免去学习那些没有信息量的数据。</p>
-</li>
-<li><p>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</p>
-</li>
-<li><p>易扩展新的组件。</p>
-</li>
-</ul>
-<p><img src="media/2.png" alt="2"></p>
-<p>这个组件的输入时用户的input，输出是一个informable slot和requestable slot的概率分布，这里的informable slot是指food，price range和area（以订餐为例），用来约束数据库中的查询，requestable slot是指address，phone，postcode等一些可以被询问的值。这里会定义一个针对具体task的知识图谱，来表示这些slot之间的关系，每个slot都会定义一个tracker，tracker的模型如上图所示，包括一个CNN特征提取模块和一个Jordan型的RNN模块，CNN不仅仅对当前的input进行处理，还对上一轮的user input进行处理，综合起来作为RNN的输入。</p>
-<p>这个组件的意义在于获取到预先定好的知识图谱中每个slot的分布，就是说弄清楚用户在这轮对话中的需求是哪个词或者词组。</p>
-<p>3、Database Operator</p>
-<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
-<p>4、Policy Network</p>
-<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
-<p>5、Generation Network </p>
-<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。生成部分用简单的LSTM-LM可以做，用Attention Model也可以做，效果会更好。</p>
-<p>数据的准备这部分，利用了众包进行收集，一共采用了680轮对话作为训练数据，数据库中保存了99个饭馆，3个informable slots和7个requestable slots。</p>
-<p>训练分为两个阶段，第一阶段是训练belief trackers，得到模型之后，更新参数，对生成网络中的语言模型进行训练，得到full model，batch size取1。</p>
-<p>bot模型自动评价这块是一个非常难的事情，本文选择了BLEU score、entity matching rate和objective task success rate，本文模型均取得了不错的结果。另外，通过人工评价对本文模型和rule-based进行了对比，结果看下图：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p>最后paper给出了一种生成的句子向量的二维图，如下图：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>几乎同一类话都被聚集到了相似的位置上，验证了模型的有效性。</p>
-<p>开放域的bot只是根据query生成一句response，虽然质量可以做到很高，但实用价值不大。面向具体业务的闭域bot一直难以应用seq2seq的解决方案在于，无法将大量的专业信息建模到模型中来，包括：历史信息，用户身份信息，业务信息等等，本文打开了一扇窗，就是将具体的业务信息和历史信息加到了模型中，并且通过将对话中的slot词转换为一些slot表示，就好比构建了很多的模板，降低了对训练数据的需求，避免了seq2seq在应用时存在的问题。如果再考虑上Jiwei Li的那篇<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>中对用户信息的建模，bot的实用价值就会更大，用data来解决真正的业务问题就会更进一步。</p>
-<p>一点思考，欢迎交流。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3429,7 +3402,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>84</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>85</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3465,7 +3438,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>102</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>103</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

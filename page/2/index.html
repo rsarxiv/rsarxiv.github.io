@@ -65,6 +65,74 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-12T22:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">A Network-based End-to-End Trainable Task-oriented Dialogue System #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>构建一个task-oriented的bot，比如订票，技术支持服务等等，是一件非常难的事情，因为对于特定任务，训练数据会非常非常有限。在学术界，bot领域现在最流行的解决方案之一是seq2seq，在一个非常庞大的open-domain数据集上进行训练，得到一些效果不错的模型，但难以应用到具体task中，因为这类模型无法做到与数据库交互以及整合其他有用的信息，从而生成实用的response。还有一种非常流行的方案是reinforcement learning，上一篇分享的paper<a href="http://rsarxiv.github.io/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">Deep Reinforcement Learning for Dialogue Generation</a>将两者有机地结合在了一起，增强学习可以使得response生成时考虑更长远的影响。</p>
+<p>本文将分享的这篇paper，针对task-oriented的bot问题，平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。paper的题目是<a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a>，本文于2016年5月20日发表于arxiv上，作者是来自剑桥大学Dialogue System Group的博士生<a href="http://mi.eng.cam.ac.uk/~thw28/" target="_blank" rel="external">Tsung-Hsien Wen</a>，该组专门研究chatbot相关技术，发表过大量与之相关的paper，后续会更多地关注该组的工作。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>上图是本文方案的架构示意图，分为五个部分。下面分别进行介绍：</p>
+<p>1、Intent Network</p>
+<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector z(t)。encoder部分分别用了lstm和cnn两种模型对该输入进行建模。这两种句子表示的方法在之前的文章中都有介绍。</p>
+<p>2、Belief Trackers</p>
+<p>这个部分又被称作是Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
+<ul>
+<li><p>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</p>
+</li>
+<li><p>追踪bot的state，避免去学习那些没有信息量的数据。</p>
+</li>
+<li><p>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</p>
+</li>
+<li><p>易扩展新的组件。</p>
+</li>
+</ul>
+<p><img src="media/2.png" alt="2"></p>
+<p>这个组件的输入时用户的input，输出是一个informable slot和requestable slot的概率分布，这里的informable slot是指food，price range和area（以订餐为例），用来约束数据库中的查询，requestable slot是指address，phone，postcode等一些可以被询问的值。这里会定义一个针对具体task的知识图谱，来表示这些slot之间的关系，每个slot都会定义一个tracker，tracker的模型如上图所示，包括一个CNN特征提取模块和一个Jordan型的RNN模块，CNN不仅仅对当前的input进行处理，还对上一轮的user input进行处理，综合起来作为RNN的输入。</p>
+<p>这个组件的意义在于获取到预先定好的知识图谱中每个slot的分布，就是说弄清楚用户在这轮对话中的需求是哪个词或者词组。</p>
+<p>3、Database Operator</p>
+<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
+<p>4、Policy Network</p>
+<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
+<p>5、Generation Network </p>
+<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。生成部分用简单的LSTM-LM可以做，用Attention Model也可以做，效果会更好。</p>
+<p>数据的准备这部分，利用了众包进行收集，一共采用了680轮对话作为训练数据，数据库中保存了99个饭馆，3个informable slots和7个requestable slots。</p>
+<p>训练分为两个阶段，第一阶段是训练belief trackers，得到模型之后，更新参数，对生成网络中的语言模型进行训练，得到full model，batch size取1。</p>
+<p>bot模型自动评价这块是一个非常难的事情，本文选择了BLEU score、entity matching rate和objective task success rate，本文模型均取得了不错的结果。另外，通过人工评价对本文模型和rule-based进行了对比，结果看下图：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>最后paper给出了一种生成的句子向量的二维图，如下图：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>几乎同一类话都被聚集到了相似的位置上，验证了模型的有效性。</p>
+<p>开放域的bot只是根据query生成一句response，虽然质量可以做到很高，但实用价值不大。面向具体业务的闭域bot一直难以应用seq2seq的解决方案在于，无法将大量的专业信息建模到模型中来，包括：历史信息，用户身份信息，业务信息等等，本文打开了一扇窗，就是将具体的业务信息和历史信息加到了模型中，并且通过将对话中的slot词转换为一些slot表示，就好比构建了很多的模板，降低了对训练数据的需求，避免了seq2seq在应用时存在的问题。如果再考虑上Jiwei Li的那篇<a href="http://rsarxiv.github.io/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">A Persona-Based Neural Conversation Model</a>中对用户信息的建模，bot的实用价值就会更大，用data来解决真正的业务问题就会更进一步。</p>
+<p>一点思考，欢迎交流。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-07-11T23:47:50.000Z"><a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">2016-07-11</a></time>
       
       
@@ -2892,91 +2960,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-19T00:56:53.000Z"><a href="/2016/05/18/自动文摘（十三）/">2016-05-18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/18/自动文摘（十三）/">自动文摘（十三）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><blockquote>
-<p><strong> 天下武功，唯快不破 </strong></p>
-</blockquote>
-<p>今天分享的paper是<b>Incorporating Copying Mechanism in Sequence-to-Sequence Learning</b>，作者来自香港大学和华为诺亚方舟实验室。</p>
-<p><code>本文的模型通过借鉴人类在处理难理解的文字时采用的死记硬背的方法，提出了COPYNET。将拷贝模式融入到了Seq2Seq模型中，将传统的生成模式和拷贝模式混合起来构建了新的模型，非常好地解决了OOV问题。解决问题的思路与之前的一篇有关Pointer的文章十分类似。decoder部分不断地变复杂，考虑的因素越来越多，模型的效果也越来越好。如果结合上一篇Minimum Risk Training的训练方法，相信在评价指标上会更进一步。</code></p>
-<h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>Seq2Seq技术占据了nlp多个研究任务的评测榜首，包括最早提出该技术的机器翻译，句法分析，文本摘要，对话系统。Seq2Seq本质上是一个encoder-decoder的模型，encoder部分将输入的序列变换成某一种表示，然后decoder将这种表示变换成输出序列。在Seq2Seq的基础上，首次增加注意力机制来做机器翻译的自动对齐。注意力机制在很大程度上提升了Seq2Seq的性能。</p>
-<p>本文研究了人类语言交流的另一个机制，“拷贝机制”（<code>copy mechanism</code>），定位到输入序列中的某个片段，然后将该片段拷贝到输出序列中。比如：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig1.png" width="400" height="400">
-<p>但是注意力机制严重依赖于语义的表示，在系统需要获取到命名实体或者日期时难以准确地表示。相对之下，拷贝机制更加接近于人类处理语言问题的方式。本文提出了COPYNET系统，不仅具备传统Seq2Seq生成词的能力，而且可以从输入序列中拷贝合适的片段到输出序列中。在合成数据和真实数据中均取得了不错的结果。</p>
-<h1 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h1><p>文章的这部分简单介绍了一下Seq2Seq+Attention Mechanism技术，前面的博客分享了很多这部分的内容，这里就不再赘述了。</p>
-<h1 id="COPYNET"><a href="#COPYNET" class="headerlink" title="COPYNET"></a>COPYNET</h1><p>从神经学角度来讲，拷贝机制和人类的死记硬背类似，较少地理解到了意思但保留了字面的完整。从模型的角度来讲，拷贝机制相比于soft注意力模型更加死板，所以更难整合到神经网络模型中。</p>
-<h2 id="模型综述"><a href="#模型综述" class="headerlink" title="模型综述"></a>模型综述</h2><p>COPYNET依然是一个encoder-decoder模型，如图1所示：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig2.png" width="600" height="600">
-<p>encoder采用了一个双向RNN模型，输出一个隐藏层表示的矩阵M作为decoder的输入。decoder部分与传统的Seq2Seq不同之处在于以下三部分：</p>
-<ul>
-<li><b>预测</b>：在生成词时存在两种模式，一种是生成模式，一种是拷贝模式，生成模型是一个结合两种模式的概率模型。</li>
-<li><b>状态更新</b>：用t-1时刻的预测出的词来更新t时刻的状态，COPYNET不仅仅词向量，而且使用M矩阵中特定位置的hidden state。</li>
-<li><b>读取M</b>：COPYNET也会选择性地读取M矩阵，来获取混合了内容和位置的信息。</li>
-</ul>
-<h2 id="拷贝模式和生成模式"><a href="#拷贝模式和生成模式" class="headerlink" title="拷贝模式和生成模式"></a>拷贝模式和生成模式</h2><p>首先，构造了两个词汇表，一个是高频词词汇表，另一个是只在输入序列中出现过一次的词，这部分的词用来支持COPYNET，用UNK表示超纲词（OOV），最终输入序列的词汇表是三者的并集。</p>
-<p>给定了decoder当前状态和M矩阵，生成目标单词的概率模型如下：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig3.png" width="300" height="300">
-<p>模型中g表示生成模式，c表示拷贝模式。两种模式的概率由下式给定：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig4.png" width="300" height="300">
-<p>共四种可能情况，下图会更形象一些：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig5.png" width="300" height="300">
-<p>其中生成模式的打分公式是：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig6.png" width="300" height="300">
-<p>拷贝模式的打分公式是：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig7.png" width="300" height="300">
-<h2 id="状态更新"><a href="#状态更新" class="headerlink" title="状态更新"></a>状态更新</h2><p>decoder状态更新的公式是</p>
-<img src="/2016/05/18/自动文摘（十三）/fig8.png" width="300" height="300">
-<p>不同的是这里的t-1时刻的y由下式表示：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig9.png" width="300" height="300">
-<p>后面的部分是M矩阵中与t时刻y相关的状态权重之和，如下：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig10.png" width="300" height="300">
-<h2 id="M矩阵"><a href="#M矩阵" class="headerlink" title="M矩阵"></a>M矩阵</h2><p>M矩阵中既包含了内容（语义）信息，又包含了位置信息。COPYNET在attentive read时由内容（语义）信息和语言模型来驱动，即生成模式；在拷贝模式时，由位置信息来控制。</p>
-<p>位置信息的更新方式如下图所示：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig11.png" width="300" height="300">
-<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>一共分为三个实验：</p>
-<ul>
-<li>简单规则构造的合成数据。</li>
-<li>文本摘要相关的真实数据。</li>
-<li>简单对话系统的数据。</li>
-</ul>
-<p>这里只看文本摘要实验。</p>
-<h2 id="文本摘要"><a href="#文本摘要" class="headerlink" title="文本摘要"></a>文本摘要</h2><p>数据采用LCSTS中文短文本摘要数据集，分为两个level来测试：word-level和char-level，并且以LCSTS的baseline作为对比，结果如下：</p>
-<img src="/2016/05/18/自动文摘（十三）/fig11.png" width="400" height="400">
-<p>本文的模型远远优于baseline，而且word-level的结果比char-level更好，这与当时LCSTS paper中的结论不同，一个可能的原因是，数据集中包含了大量的命名实体名词（entity name），LCSTS paper中的方法并不能很好地处理大量的UNK单词，因此baseline中的char-level效果比word-level更好，而本文的模型的优势在于处理OOV问题，所以word-level结果更好一些。</p>
-<h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p>[1] <a href="http://cn.arxiv.org/pdf/1603.06393v2.pdf" target="_blank" rel="external">Incorporating Copying Mechanism in Sequence-to-Sequence Learning Training</a></p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p><code>PaperWeekly</code>，每周会分享1-2篇人工智能领域的热门paper，内容包括摘译和评价，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3012,7 +2995,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>84</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>85</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3048,7 +3031,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>102</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>103</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

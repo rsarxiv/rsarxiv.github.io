@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>中文分词工具测评 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引言分词对于研究和应用中文自然语言处理的童鞋来说，都是一个非常非常基础的部件，分词的质量直接影响到后续词性标注、命名实体识别、句法分析等部件的准确性。作为一个基础部件，学术界对分词的研究已经非常久了，市面上流行的几大开源分词工具也被工业界的各大公司应用很多年了。最近，中文分词随着一篇博文的发表被推到">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="中文分词工具测评"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-11-29T17:49:50.000Z"><a href="/2016/11/29/中文分词工具测评/">2016-11-29</a></time>
+      
+      
+  
+    <h1 class="title">中文分词工具测评</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>分词对于研究和应用中文自然语言处理的童鞋来说，都是一个非常非常基础的部件，分词的质量直接影响到后续词性标注、命名实体识别、句法分析等部件的准确性。作为一个基础部件，学术界对分词的研究已经非常久了，市面上流行的几大开源分词工具也被工业界的各大公司应用很多年了。最近，中文分词随着一篇博文的发表被推到了风口浪尖，引发众多大牛在微博、微信群里的激烈讨论。本文并不想对这篇博文进行过多评论，只是想用公开的数据集对各大分词工具进行一个客观地测评，以供大家在选择工具时有所依据。</p>
+<h1 id="中文分词工具"><a href="#中文分词工具" class="headerlink" title="中文分词工具"></a>中文分词工具</h1><p>本文选择了4个常见的分词工具，分别是：哈工大LTP、中科院计算所NLPIR、清华大学THULAC和jieba，为了对比分词速度，选择了这四个工具的c++版本进行评测。</p>
+<p>1、LTP <a href="https://github.com/HIT-SCIR/ltp" target="_blank" rel="external">https://github.com/HIT-SCIR/ltp</a><br>2、NLPIR <a href="https://github.com/NLPIR-team/NLPIR" target="_blank" rel="external">https://github.com/NLPIR-team/NLPIR</a><br>3、THULAC <a href="https://github.com/thunlp/THULAC" target="_blank" rel="external">https://github.com/thunlp/THULAC</a><br>4、jieba <a href="https://github.com/yanyiwu/cppjieba" target="_blank" rel="external">https://github.com/yanyiwu/cppjieba</a></p>
+<h1 id="测试数据集"><a href="#测试数据集" class="headerlink" title="测试数据集"></a>测试数据集</h1><p>1、SIGHAN Bakeoff 2005 MSR, 560KB  <a href="http://sighan.cs.uchicago.edu/bakeoff2005/" target="_blank" rel="external">http://sighan.cs.uchicago.edu/bakeoff2005/</a><br>2、SIGHAN Bakeoff 2005 PKU, 510KB  <a href="http://sighan.cs.uchicago.edu/bakeoff2005/" target="_blank" rel="external">http://sighan.cs.uchicago.edu/bakeoff2005/</a><br>3、人民日报 2014, 65MB  <a href="https://pan.baidu.com/s/1hq3KKXe" target="_blank" rel="external">https://pan.baidu.com/s/1hq3KKXe</a></p>
+<p>前两个数据集是SIGHAN于2005年组织的中文分词比赛所用的数据集，也是学术界测试分词工具的标准数据集，本文用于测试各大分词工具的准确性，而最后一个数据集规模较大，用于测试分词速度。</p>
+<h1 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h1><p>用SIGHAN Bakeoff 2005比赛中所自带的score脚本、test gold数据和training words数据对4个工具进行准确性测试，具体使用方法可参考：<a href="http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip" target="_blank" rel="external">http://sighan.cs.uchicago.edu/bakeoff2005/data/icwb2-data.zip</a> 中的readme文件。</p>
+<h1 id="测试硬件"><a href="#测试硬件" class="headerlink" title="测试硬件"></a>测试硬件</h1><p>Intel Core i7-6700 CPU@3.40GHz*8</p>
+<h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><p>1、MSR测试结果<br><img src="media/1.png" alt="1"></p>
+<p>2、PKU测试结果<br><img src="media/2.png" alt="2"></p>
+<p>3、人民日报测试结果<br><img src="media/3.png" alt="3"></p>
+<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>1、一个好的分词工具不应该只能在一个数据集上得到不错的指标，而应该在各个数据集都有很不错的表现。从这一点来看，thulac和ltp都表现非常不错。</p>
+<p>2、因为分词是个基础部件，分词速度对于一个分词工具来说也至关重要。从这一点来看，thulac和jieba表现的不错。</p>
+<p>3、大家都知道，基本的分词依赖模型，但真正想用分词工具来解决应用层面上的问题，都需要借助于词库，本文测试的4个工具均支持用户自定义词库。</p>
+<p>4、特别需要强调的一点是，哈工大的ltp支持分词模型的在线训练，即在系统自带模型的基础上可以不断地增加训练数据，来得到更加丰富、更加个性化的分词模型。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>争论是一个好的事情，尤其是不同背景的人站在不同的角度对同一个事情进行争论，常常会碰撞出知识的火花，对于这个领域的发展有更好地推动作用。希望类似的争论可以多一些，让刚刚入门的或者准备入门的童鞋可以更加客观地看到一个领域的发展现状，而不是盲目地被一些热门的词蒙蔽双眼，失去判断。对于分词来说，最近几年大热的深度学习模型，并不会比之前传统的crf模型有多大性能上的突破，所以大家应该理性地看待深度学习以及人工智能，捧得越高可能摔得越惨。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>1、Zhongguo Li, Maosong Sun. Punctuation as Implicit Annotations for Chinese Word Segmentation. Computational Linguistics, vol. 35, no. 4, pp. 505-512, 2009.<br>2、Meishan Zhang, Yue Zhang, Guohong Fu. Transition-Based Neural Word Segmentation  <a href="http://www.aclweb.org/anthology/P/P16/P16-1040.pdf" target="_blank" rel="external">http://www.aclweb.org/anthology/P/P16/P16-1040.pdf</a><br>3、Meishan Zhang, Zhilong Deng，Wanxiang Che, and Ting Liu. Combining Statistical Model and Dictionary for Domain Adaption of Chinese Word Segmentation. Journal of Chinese Information Processing. 2012, 26 (2) : 8-12 (in Chinese)<br>4、Wanxiang Che, Zhenghua Li, and Ting Liu. LTP: A Chinese Language Technology Platform. In Proceedings of the Coling 2010:Demonstrations. 2010.08, pp13-16, Beijing, China.<br>5、</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/11/29/中文分词工具测评/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>86</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>104</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

@@ -65,6 +65,55 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-05-21T04:37:06.000Z"><a href="/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">2016-05-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">A Neural Probabilistic Language Model #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<blockquote>
+<p><strong> 站得高，望得远 </strong></p>
+</blockquote>
+<p>今天分享一篇年代久远但却意义重大的paper，<a href="http://www.iro.umontreal.ca/~vincentp/Publications/lm_jmlr.pdf" target="_blank" rel="external">A Neural Probabilistic Language Model</a>。作者是来自蒙特利尔大学的Yoshua Bengio教授，deep learning技术奠基人之一。</p>
+<p>本文于2003年第一次用神经网络来解决语言模型的问题，虽然在当时并没有得到太多的重视，却为后来深度学习在解决语言模型问题甚至很多别的nlp问题时奠定了坚实的基础，后人站在Yoshua Bengio的肩膀上，做出了更多的成就。包括Word2Vec的作者Tomas Mikolov在NNLM的基础上提出了RNNLM和后来的Word2Vec。文中也较早地提出将word表示一个低秩的向量，而不是one-hot。word embedding作为一个language model的副产品，在后面的研究中起到了关键作用，为研究者提供了更加宽广的思路。</p>
+<p>本文最大的贡献在于用多层感知器（<code>MLP</code>）构造了语言模型，如下图：</p>
+<img src="/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/arch.png" width="600" height="600">
+<p>模型一共三层，第一层是映射层，将n个单词映射为对应word embeddings的拼接，其实这一层就是MLP的输入层；第二层是隐藏层，激活函数用tanh；第三层是输出层，因为是语言模型，需要根据前n个单词预测下一个单词，所以是一个多分类器，用softmax。整个模型最大的计算量集中在最后一层上，因为一般来说词汇表都很大，需要计算每个单词的条件概率，是整个模型的计算瓶颈。</p>
+<p>这里，需要注意的是需要提前初始化一个word embedding矩阵，每一行表示一个单词的向量。词向量也是训练参数，在每次训练中进行更新。这里可以看出词向量是语言模型的一个附属品，因为语言模型本身的工作是为了估计给定的一句话有多像人类的话，但从后来的研究发现，语言模型成了一个非常好的工具。</p>
+<p>softmax是一个非常低效的处理方式，需要先计算每个单词的概率，并且还要计算指数，指数在计算机中都是用级数来近似的，计算复杂度很高，最后再做归一化处理。此后很多研究都针对这个问题进行了优化，比如层级softmax，比如softmax tree。</p>
+<p>当然NNLM的效果在现在看来并不算什么，但对于后面的相关研究具有非常重要的意义。文中的Future Work提到了用RNN来代替MLP作为模型可能会取得更好的效果，在后面Tomas Mikolov的博士论文中得到了验证，也就是后来的RNNLM。</p>
+<p>所以说我们赶上了一个好的时代，可以站在巨人的肩膀上，看到更远的未来。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-19T00:56:53.000Z"><a href="/2016/05/18/自动文摘（十三）/">2016-05-18</a></time>
       
       
@@ -1288,7 +1337,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>85</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>86</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -1324,7 +1373,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>103</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>104</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

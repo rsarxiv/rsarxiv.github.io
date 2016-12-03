@@ -65,6 +65,77 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-05-21T21:43:54.000Z"><a href="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/">2016-05-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/">Efficient Estimation of Word Representations in Vector Space #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>词向量是语言模型的一个副产品，但这个副产品在2013年随着一个叫做word2vec的工具包而火了起来，大家在各种场合中都在用，并且取得了不错的效果。</p>
+<p>本篇分享的文章是<a href="http://cn.arxiv.org/pdf/1301.3781v3.pdf" target="_blank" rel="external">Efficient Estimation of Word Representations in Vector Space</a>。作者是来自Google的Tomas Mikolov，也是Word2Vec和RNNLM开源软件的作者。本文的最大贡献有：</p>
+<p>1、提出了两种新的“神经网络语言模型”，这里之所以打引号，是因为其实两个模型都没有隐藏层，只是看起来像是神经网络而已。两种模型具有很高的计算效率和准确率，可谓是真正的“又好又快”。</p>
+<p>2、设计了一种验证词向量效果的测试数据，从semantic和syntactic两个维度上进行测试。</p>
+<p>首先介绍下传统模型的复杂度。</p>
+<ul>
+<li>NNLM的模型复杂度：</li>
+</ul>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f1.png" width="300" height="300">
+<p>这里，N是输入的单词数量，D是词向量维度，H是隐藏层维度，V是词汇表维度。</p>
+<ul>
+<li>RNNLM的模型复杂度：</li>
+</ul>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f3.png" width="200" height="200">
+<p>两个模型的输出层都可以用<code>hierarchical softmax</code>来替换，V的复杂度可以降为log2(V)</p>
+<p>NNLM模型的计算瓶颈在于N <em> D </em> H，而RNNLM的计算瓶颈在与H * H。</p>
+<p>本文提出的两种模型架构图如下：</p>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/arch.png" width="600" height="600">
+<p>从架构图中可以看出本文的模型并没有隐藏层，直接由输入层做一次映射，就进行分类。</p>
+<p>左图是CBOW模型,输入是指定单词的context单词（前后各取几个单词），预测的是该单词。模型复杂度如下：</p>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f5.png" width="200" height="200">
+<p>右图是Skip-gram（SG）模型，输入时某个单词，预测的是它的context。模型复杂度如下：</p>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f5.png" width="200" height="200">
+<p>这里的C表示单词距离上限，用来限制预测context的窗口大小。</p>
+<p>本文的模型和NNLM和RNNLM有着不同的使命，前者更加专注于解决词向量的问题，在保证准确率的情况下，尽量地提高计算效率；而后者更加专注于解决语言模型的问题，词向量只是其副产品，因此并没有过多地在这部分进行优化。最后的实验结果表明，sg和cbow模型在semantic和syntactic两个维度上进行相似度测试时表现远好于nnlm和rnnlm。并且，sg在semantic上表现更好，cbow更擅长做syntactic。</p>
+<p>将word映射成某个空间内的向量之后，我们可以轻松地通过cos similarity来计算word之间的相似度，并且可以做一些简单的加减运算。</p>
+<p>Paris - France + Italy = Rome</p>
+<p>Small - Smaller + Large = Larger</p>
+<p>可以将word映射到vector space中，那么是否可以将phrase，sentence，paragraph，document都映射到vector space中呢？进一步是否可以将topic也映射到vector space呢？是否任何东西都可以映射到vector space呢？</p>
+<p>丰富的想象力给了人类更大的动力去探索未知的世界，将word2vec的想法拓展到各个level的问题上。在后续的很多nlp研究中，词向量都起到了关键的作用。不仅如此，word2vec在其他领域中也有了广泛的应用，比如：app推荐，将每个user下载过的app作为word，就可以得到给user推荐类似的app（相似的word）；我在做rsarxiv时，构建了一个简单的paper graph，将authors，subjects，keywords都映射到了同一个空间中，给定一个author，很容易找到与之相关的authors，subjects，keywords。比如喜欢了这个作者，</p>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f7.png" width="300" height="300">
+<p>之后就会得到推荐：</p>
+<img src="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/f8.png" width="600" height="600">
+<p>Word2Vec一个很重要的意义在于，是无监督方法，不需要花额外的功夫去构建数据集来teach模型，只需要给入一个非常大的文本数据集，就可以得到非常好的效果。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-21T04:37:06.000Z"><a href="/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">2016-05-20</a></time>
       
       
@@ -1337,7 +1408,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>86</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>87</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -1373,7 +1444,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>104</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>105</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

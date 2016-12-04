@@ -5,17 +5,17 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-04T18:20:11.000Z</updated>
+  <updated>2016-12-04T18:22:03.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>本周值得读(2016.11.28-2016.11.02)</title>
-    <link href="http://rsarxiv.github.io/2016/12/04/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-11-28-2016-11-02/"/>
-    <id>http://rsarxiv.github.io/2016/12/04/本周值得读-2016-11-28-2016-11-02/</id>
+    <title>本周值得读(2016.11.28-2016.12.02)</title>
+    <link href="http://rsarxiv.github.io/2016/12/04/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-11-28-2016-12-02/"/>
+    <id>http://rsarxiv.github.io/2016/12/04/本周值得读-2016-11-28-2016-12-02/</id>
     <published>2016-12-04T18:06:33.000Z</published>
-    <updated>2016-12-04T18:20:11.000Z</updated>
+    <updated>2016-12-04T18:22:03.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation "></a><a href="http://t.cn/Rfj8F3k" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation </a></h2><p>【beam search】在用seq2seq做一些nlp任务的时候，解码器负责将结果一个个地解出来。解码出的结果应该具有多样性的特点，尤其是在chatbot应用中体现更为突出。传统的beam search算法在解码时常常会解出一些非常安全但是没有实际意义的response，类似于“呵呵呵”，“我认为是这样的”这里的话。本文的工作针对这一问题，提出了一种改进版的beam search算法，通过引入一个惩罚因子来影响排序结果，从而使得解码出的结果更加多样性。建议研究seq2seq或者尝试用它来解决一些问题的童鞋可以精读此文。本文来自Jiwei Li。</p>
 <h2 id="Dialogue-Learning-With-Human-In-The-Loop"><a href="#Dialogue-Learning-With-Human-In-The-Loop" class="headerlink" title="Dialogue Learning With Human-In-The-Loop "></a><a href="http://t.cn/Rf8XOcr" target="_blank" rel="external">Dialogue Learning With Human-In-The-Loop </a></h2><p>【对话系统】【在线学习】在线学习是chatbot在与人交互的过程中自动学习的一种方法，快速而且有效。本文给出了一种基于强化学习的在线交互学习方案，作者是Jiwei Li。建议研究或者做chatbot应用的童鞋可以好好研读此文。</p>

@@ -65,6 +65,52 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-12-04T18:06:33.000Z"><a href="/2016/12/04/本周值得读-2016-11-28-2016-11-02/">2016-12-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/04/本周值得读-2016-11-28-2016-11-02/">本周值得读(2016.11.28-2016.11.02)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation "></a><a href="http://t.cn/Rfj8F3k" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation </a></h2><p>【beam search】在用seq2seq做一些nlp任务的时候，解码器负责将结果一个个地解出来。解码出的结果应该具有多样性的特点，尤其是在chatbot应用中体现更为突出。传统的beam search算法在解码时常常会解出一些非常安全但是没有实际意义的response，类似于“呵呵呵”，“我认为是这样的”这里的话。本文的工作针对这一问题，提出了一种改进版的beam search算法，通过引入一个惩罚因子来影响排序结果，从而使得解码出的结果更加多样性。建议研究seq2seq或者尝试用它来解决一些问题的童鞋可以精读此文。本文来自Jiwei Li。</p>
+<h2 id="Dialogue-Learning-With-Human-In-The-Loop"><a href="#Dialogue-Learning-With-Human-In-The-Loop" class="headerlink" title="Dialogue Learning With Human-In-The-Loop "></a><a href="http://t.cn/Rf8XOcr" target="_blank" rel="external">Dialogue Learning With Human-In-The-Loop </a></h2><p>【对话系统】【在线学习】在线学习是chatbot在与人交互的过程中自动学习的一种方法，快速而且有效。本文给出了一种基于强化学习的在线交互学习方案，作者是Jiwei Li。建议研究或者做chatbot应用的童鞋可以好好研读此文。</p>
+<h2 id="Visual-Dialog"><a href="#Visual-Dialog" class="headerlink" title="Visual Dialog "></a><a href="http://t.cn/RfH7BWW" target="_blank" rel="external">Visual Dialog </a></h2><p>【多模态对话】多模态问答（VQA）是一个比较好玩的任务，本文在此基础上提出了一个更加复杂而且有意思的任务，即给定一张图像，给出若干个问和答的历史对话，提出一个新问题，要求给出正确答案。问题不仅仅需要理解图片，而且需要理解历史对话。新的任务意味着新的坑，文中给出了一些常见NN模型作为baseline，感兴趣的童鞋可以入坑。</p>
+<h2 id="Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text"><a href="#Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text" class="headerlink" title="Neural Machine Translation with Latent Semantic of Image and Text "></a><a href="http://t.cn/RfjRQMP" target="_blank" rel="external">Neural Machine Translation with Latent Semantic of Image and Text </a></h2><p>【Visual NMT】就在NMT被讨论地如火如荼的时候，还有一部分工作是结合多模态（图片）来做机器翻译，因为人类获取信息不仅仅可以通过文字，图片也是一个重要的学习资源。</p>
+<h2 id="Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling"><a href="#Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling" class="headerlink" title="Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling "></a><a href="http://t.cn/RfjELTY" target="_blank" rel="external">Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling </a></h2><p>【贝叶斯学习】通过BPTT来训练的RNN在解决问题上会存在过拟合的问题，一个主要原因是随机优化训练无法给出模型权重的概率估计，本文通过最近stochastic gradient Markov Chain Monte Carlo的研究来试着学习模型权重的概率。语言模型的实验结果和其他的相关实验结果表明本文所用的方法确实有效。</p>
+<h2 id="Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network"><a href="#Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network" class="headerlink" title="Learning Python Code Suggestion with a Sparse Pointer Network "></a><a href="http://t.cn/RfjEjY5" target="_blank" rel="external">Learning Python Code Suggestion with a Sparse Pointer Network </a></h2><p>【代码补全】本文研究的问题非常有意思，就是大家常见的IDE代码补全功能。现有的IDE对静态编程语言支持的比较好，对于动态编程语言支持的一般，而且一般都是补全某个函数或者方法之类的，而不能给出更复杂的代码。本文针对这个问题，构造了一个大型的python code数据集，并且用了比较流行的Pointer Network模型来做端到端的训练，取得了不错的效果。代码补全在实际应用中非常有用，但想做到很复杂、很智能的补全还有很长的路。不过这个topic还是一个非常有意思的东西。</p>
+<h2 id="Joint-Copying-and-Restricted-Generation-for-Paraphrase"><a href="#Joint-Copying-and-Restricted-Generation-for-Paraphrase" class="headerlink" title="Joint Copying and Restricted Generation for Paraphrase "></a><a href="http://t.cn/RfHAsim" target="_blank" rel="external">Joint Copying and Restricted Generation for Paraphrase </a></h2><p>【NLG】本文的思路与Pointer Network或者Copynet类似，在用seq2seq做自然语言生成时，增加一个判断的环节，来决定接下来的这个词是从source来copy还是用decoder来rewrite。</p>
+<h2 id="Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks"><a href="#Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Context-aware Natural Language Generation with Recurrent Neural Networks "></a><a href="http://t.cn/RfEClfC" target="_blank" rel="external">Context-aware Natural Language Generation with Recurrent Neural Networks </a></h2><p>【NLG】论文的方法、模型没有太多的值得说的地方，倒是应用的点非常有意思，根据商品的上下文来伪造评论，人工评判时有50%以上的伪造评论都通过了，90%以上骗过了现有的识别算法。有点道高一尺魔高一丈的感觉，如果这篇paper的结果确实这么牛的话，确实很有意思，值得研究一下。</p>
+<h2 id="MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset"><a href="#MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset" class="headerlink" title="MS MARCO: A Human Generated MAchine Reading COmprehension Dataset "></a><a href="http://t.cn/RfH2eXu" target="_blank" rel="external">MS MARCO: A Human Generated MAchine Reading COmprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】微软放出了一个100k规模的机器阅读理解数据集，数据来源于真实的Bing搜索query。数据包括：query、10个相关的passage和query对应的answer。</p>
+<h2 id="NewsQA-A-Machine-Comprehension-Dataset"><a href="#NewsQA-A-Machine-Comprehension-Dataset" class="headerlink" title="NewsQA: A Machine Comprehension Dataset "></a><a href="http://t.cn/Rf8MPnf" target="_blank" rel="external">NewsQA: A Machine Comprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】Maluuba公司放出一个新的机器阅读理解的数据集，规模在100k左右，数据来源为CNN新闻。通过用多个之前表现比较好的NN模型和人工结果对比，发现F1指标存在25.3%的差距，说明本数据集需要更好的模型来进行研究。数据集已公开，地址是：<a href="http://datasets.maluuba.com/NewsQA" target="_blank" rel="external">http://datasets.maluuba.com/NewsQA</a></p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="中国人工智能学会通讯"><a href="#中国人工智能学会通讯" class="headerlink" title="中国人工智能学会通讯"></a><a href="http://t.cn/Rf8Yvwn" target="_blank" rel="external">中国人工智能学会通讯</a></h2><p>《中国人工智能学会通讯》，本期为学会优秀博士论文专刊</p>
+<h2 id="C-wrapper"><a href="#C-wrapper" class="headerlink" title="C++ wrapper"></a><a href="http://t.cn/RfEIAdZ" target="_blank" rel="external">C++ wrapper</a></h2><p>TensorFlow使用swig作为C++ wrapper，最近Google又推出了pyclif，宣称“it’s much cleaner and easier” </p>
+<h2 id="智能时代的自然语言处理"><a href="#智能时代的自然语言处理" class="headerlink" title="智能时代的自然语言处理"></a><a href="http://t.cn/Rfm4hJb" target="_blank" rel="external">智能时代的自然语言处理</a></h2><p>今天ADL前沿讲习班《智能时代的自然语言处理》Zhengdong Lu的报告，题目Recent Progress on Deep Learning for NLP。</p>
+<h2 id="自然语言处理中深度学习活跃领域的课程讲义"><a href="#自然语言处理中深度学习活跃领域的课程讲义" class="headerlink" title="自然语言处理中深度学习活跃领域的课程讲义"></a><a href="http://www.zishu010.com/z/newdetail/9404521.html" target="_blank" rel="external">自然语言处理中深度学习活跃领域的课程讲义</a></h2><p>本文是纽约大学助理教授 Sam Bowman 关于自然语言处理中深度学习活跃领域的课程讲义PPT。对深度学习NLP领域最近较为活跃的研究进行了综述，其中包括Attention 模型、结构化记忆、词水平以上的无监督学习等等。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-03T18:08:45.000Z"><a href="/2016/12/03/PaperWeekly-第十六期/">2016-12-03</a></time>
       
       
@@ -3403,49 +3449,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-15T04:00:30.000Z"><a href="/2016/07/14/The-Ubuntu-Dialogue-Corpus-A-Large-Dataset-for-Research-in-Unstructured-Multi-Turn-Dialogue-Systems-PaperWeekly/">2016-07-14</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/14/The-Ubuntu-Dialogue-Corpus-A-Large-Dataset-for-Research-in-Unstructured-Multi-Turn-Dialogue-Systems-PaperWeekly/">The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文分享的paper构建了一组大型非结构化的、多轮的对话系统语料，使用的原始数据来自<a href="https://irclogs.ubuntu.com/" target="_blank" rel="external">Ubuntu IRC Logs</a>，是一些关于Ubuntu的讨论组聊天数据。paper的题目是<a href="http://arxiv.org/pdf/1506.08909v3.pdf" target="_blank" rel="external">The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems</a>，作者是来自蒙特利尔大学的博士生<a href="http://cs.mcgill.ca/~rlowe1/" target="_blank" rel="external">Ryan Lowe</a>。</p>
-<p>数据规模在100万左右，平均每组数据有8轮对话，最少包括3轮对话。之前的bot语料包括：Dialogue State Tracking Challenge(DSTC)、SwitchBoard这类结构化的数据和Twitter、Sina Weibo这种非结构化的数据，前者专注于预测用户的需求和状态，而后者数据中包括了一定数量的非“conversational in nature”，做bot的训练数据并不那么合适。本文构建的数据集是一个特定领域内的数据，ubuntu technical conversations，规模很大，对话轮数很多，质量很高，也是后续很多paper在研究bot response问题时常常采用的corpus。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>语料的构建非常有意义，大型的语料可以训练更加复杂的、偏向open domain的bot model，小型的语料可以解决具体的工程应用问题，如何从杂乱无章的unstructured data中提取出有用的信息，构造出一个适合训练、测试的数据集是一个很难却十分有意义的工作。</p>
-<p>本文需要的数据是多轮的、两人的对话数据，但原始的数据是多人无序的对话数据，作者采用了一些小的技巧，并且忽略了一些不合适的数据，将原始数据处理成一个四元组：</p>
-<p>(time,sender,recipient,utterance)</p>
-<p>在构造模型的训练和测试集时，作者将上面的四元组处理成下面的三元组：</p>
-<p>(context,response,flag)</p>
-<p>context类似于用户输入，flag表示response是否是context相关联的，关联则为1，否则为0。</p>
-<p>给定了数据集，下面就是作者提供的benchmark model，三个非常简单的model，tf-idf，rnn和lstm，目的是为了从response candidates中选择k个最适合context的response作为答案，然后计算相应的准确率。paper中给的方法是selection的方法，而不是generation，后面的很多研究都是generation，真正地从user query生成response。</p>
-<p>本文提供的ubuntu dialogue corpus对于task-oriented、response generation的研究有着非常重要的意义，相比于华为给的微博数据，有更强的conversational in nature特征，更加适合对话生成的研究。本文作者的另外一篇survey文章<a href="http://arxiv.org/pdf/1512.05742.pdf" target="_blank" rel="external">A Survey of Available Corpora for Building Data-Driven Dialogue Systems</a>,系统地介绍了各大数据集。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3479,7 +3482,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>87</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>88</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3515,7 +3518,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>105</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>106</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

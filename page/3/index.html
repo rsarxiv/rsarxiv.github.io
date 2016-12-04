@@ -65,6 +65,57 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-05-22T16:23:52.000Z"><a href="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/">2016-05-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/">GloVe: Global Vectors for Word Representation #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>Word2Vec虽然取得了很好的效果，但模型上仍然存在明显的缺陷，比如没有考虑词序，再比如没有考虑全局的统计信息。本篇分享的是<a href="http://nlp.stanford.edu/pubs/glove.pdf" target="_blank" rel="external">GloVe: Global Vectors for Word Representation</a>，作者是stanford的Jeffrey Pennington, Richard Socher(metamind CEO)和Christopher Manning。同时作者还开源了相应的工具GloVe和一些训练好的模型。</p>
+<p>本文的思路是将全局词-词共现矩阵进行了分解，训练得到词向量。整体上的思路和推荐系统当年横扫Netflix百万美元比赛的LFM模型类似，也和信息检索中LSI的思路类似。不同的地方是，本文采用的词-词共现矩阵比起词-文档矩阵更加稠密，模型中对低频词和高频词的影响做了一定地弱化处理。</p>
+<p>首先，构建词-词共现矩阵，共现是建立在一个固定窗口范围内，给定范围之后，可以得到一个V*V的矩阵，这里V是词汇表大小。（虽然矩阵的稠密程度比词-文档矩阵好一些，但大多数也都是0）</p>
+<p>然后，本文的模型如下：</p>
+<img src="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/fig1.png" width="300" height="300">
+<p>通过使该目标函数最小来得到最终的词向量，在计算误差时只考虑共现矩阵中非0的项。因为不同频次的词对目标的贡献不同，所以设定了一个权重函数f(x)，具有以下特点：</p>
+<p>1、f(0) = 0</p>
+<p>2、f(x)是增函数，这样低频词不会被over weight。</p>
+<p>3、当x很大时，f(x)相对小一些，这样高频词也不会被over weight。</p>
+<p>根据以上特性，选择下面的函数来作为f(x)：</p>
+<img src="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/fig2.png" width="400" height="400">
+<img src="/2016/05/22/GloVe-Global-Vectors-for-Word-Representation-PaperWeekly/fig3.png" width="500" height="500">
+<p>本文的模型在Word Analogy Task（Tomas Mikolov提出的测试集）中获得了75%的正确率，击败了Word2Vec。</p>
+<p>虽然paper中GloVe有着指标上的领先，但在实际使用中Word2Vec的使用率相对来说更多一些，可能的原因是Word2Vec可以更快地提供一个相对来说不错的word embedding层的初始值。从中得到的启发是，指标上的胜利有些时候只是paper上的胜利，不一定能代表在工程中也是赢家，而只有更加好的model被提出，才会真正地既赢得指标上的胜利，也赢得工程上的胜利。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-21T21:43:54.000Z"><a href="/2016/05/21/Efficient-Estimation-of-Word-Representations-in-Vector-Space-PaperWeekly/">2016-05-21</a></time>
       
       
@@ -1408,7 +1459,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>87</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>88</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -1444,7 +1495,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>105</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>106</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

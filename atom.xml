@@ -5,10 +5,46 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-03T18:36:46.000Z</updated>
+  <updated>2016-12-04T18:20:11.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2016.11.28-2016.11.02)</title>
+    <link href="http://rsarxiv.github.io/2016/12/04/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-11-28-2016-11-02/"/>
+    <id>http://rsarxiv.github.io/2016/12/04/本周值得读-2016-11-28-2016-11-02/</id>
+    <published>2016-12-04T18:06:33.000Z</published>
+    <updated>2016-12-04T18:20:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation "></a><a href="http://t.cn/Rfj8F3k" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation </a></h2><p>【beam search】在用seq2seq做一些nlp任务的时候，解码器负责将结果一个个地解出来。解码出的结果应该具有多样性的特点，尤其是在chatbot应用中体现更为突出。传统的beam search算法在解码时常常会解出一些非常安全但是没有实际意义的response，类似于“呵呵呵”，“我认为是这样的”这里的话。本文的工作针对这一问题，提出了一种改进版的beam search算法，通过引入一个惩罚因子来影响排序结果，从而使得解码出的结果更加多样性。建议研究seq2seq或者尝试用它来解决一些问题的童鞋可以精读此文。本文来自Jiwei Li。</p>
+<h2 id="Dialogue-Learning-With-Human-In-The-Loop"><a href="#Dialogue-Learning-With-Human-In-The-Loop" class="headerlink" title="Dialogue Learning With Human-In-The-Loop "></a><a href="http://t.cn/Rf8XOcr" target="_blank" rel="external">Dialogue Learning With Human-In-The-Loop </a></h2><p>【对话系统】【在线学习】在线学习是chatbot在与人交互的过程中自动学习的一种方法，快速而且有效。本文给出了一种基于强化学习的在线交互学习方案，作者是Jiwei Li。建议研究或者做chatbot应用的童鞋可以好好研读此文。</p>
+<h2 id="Visual-Dialog"><a href="#Visual-Dialog" class="headerlink" title="Visual Dialog "></a><a href="http://t.cn/RfH7BWW" target="_blank" rel="external">Visual Dialog </a></h2><p>【多模态对话】多模态问答（VQA）是一个比较好玩的任务，本文在此基础上提出了一个更加复杂而且有意思的任务，即给定一张图像，给出若干个问和答的历史对话，提出一个新问题，要求给出正确答案。问题不仅仅需要理解图片，而且需要理解历史对话。新的任务意味着新的坑，文中给出了一些常见NN模型作为baseline，感兴趣的童鞋可以入坑。</p>
+<h2 id="Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text"><a href="#Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text" class="headerlink" title="Neural Machine Translation with Latent Semantic of Image and Text "></a><a href="http://t.cn/RfjRQMP" target="_blank" rel="external">Neural Machine Translation with Latent Semantic of Image and Text </a></h2><p>【Visual NMT】就在NMT被讨论地如火如荼的时候，还有一部分工作是结合多模态（图片）来做机器翻译，因为人类获取信息不仅仅可以通过文字，图片也是一个重要的学习资源。</p>
+<h2 id="Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling"><a href="#Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling" class="headerlink" title="Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling "></a><a href="http://t.cn/RfjELTY" target="_blank" rel="external">Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling </a></h2><p>【贝叶斯学习】通过BPTT来训练的RNN在解决问题上会存在过拟合的问题，一个主要原因是随机优化训练无法给出模型权重的概率估计，本文通过最近stochastic gradient Markov Chain Monte Carlo的研究来试着学习模型权重的概率。语言模型的实验结果和其他的相关实验结果表明本文所用的方法确实有效。</p>
+<h2 id="Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network"><a href="#Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network" class="headerlink" title="Learning Python Code Suggestion with a Sparse Pointer Network "></a><a href="http://t.cn/RfjEjY5" target="_blank" rel="external">Learning Python Code Suggestion with a Sparse Pointer Network </a></h2><p>【代码补全】本文研究的问题非常有意思，就是大家常见的IDE代码补全功能。现有的IDE对静态编程语言支持的比较好，对于动态编程语言支持的一般，而且一般都是补全某个函数或者方法之类的，而不能给出更复杂的代码。本文针对这个问题，构造了一个大型的python code数据集，并且用了比较流行的Pointer Network模型来做端到端的训练，取得了不错的效果。代码补全在实际应用中非常有用，但想做到很复杂、很智能的补全还有很长的路。不过这个topic还是一个非常有意思的东西。</p>
+<h2 id="Joint-Copying-and-Restricted-Generation-for-Paraphrase"><a href="#Joint-Copying-and-Restricted-Generation-for-Paraphrase" class="headerlink" title="Joint Copying and Restricted Generation for Paraphrase "></a><a href="http://t.cn/RfHAsim" target="_blank" rel="external">Joint Copying and Restricted Generation for Paraphrase </a></h2><p>【NLG】本文的思路与Pointer Network或者Copynet类似，在用seq2seq做自然语言生成时，增加一个判断的环节，来决定接下来的这个词是从source来copy还是用decoder来rewrite。</p>
+<h2 id="Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks"><a href="#Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Context-aware Natural Language Generation with Recurrent Neural Networks "></a><a href="http://t.cn/RfEClfC" target="_blank" rel="external">Context-aware Natural Language Generation with Recurrent Neural Networks </a></h2><p>【NLG】论文的方法、模型没有太多的值得说的地方，倒是应用的点非常有意思，根据商品的上下文来伪造评论，人工评判时有50%以上的伪造评论都通过了，90%以上骗过了现有的识别算法。有点道高一尺魔高一丈的感觉，如果这篇paper的结果确实这么牛的话，确实很有意思，值得研究一下。</p>
+<h2 id="MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset"><a href="#MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset" class="headerlink" title="MS MARCO: A Human Generated MAchine Reading COmprehension Dataset "></a><a href="http://t.cn/RfH2eXu" target="_blank" rel="external">MS MARCO: A Human Generated MAchine Reading COmprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】微软放出了一个100k规模的机器阅读理解数据集，数据来源于真实的Bing搜索query。数据包括：query、10个相关的passage和query对应的answer。</p>
+<h2 id="NewsQA-A-Machine-Comprehension-Dataset"><a href="#NewsQA-A-Machine-Comprehension-Dataset" class="headerlink" title="NewsQA: A Machine Comprehension Dataset "></a><a href="http://t.cn/Rf8MPnf" target="_blank" rel="external">NewsQA: A Machine Comprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】Maluuba公司放出一个新的机器阅读理解的数据集，规模在100k左右，数据来源为CNN新闻。通过用多个之前表现比较好的NN模型和人工结果对比，发现F1指标存在25.3%的差距，说明本数据集需要更好的模型来进行研究。数据集已公开，地址是：<a href="http://datasets.maluuba.com/NewsQA" target="_blank" rel="external">http://datasets.maluuba.com/NewsQA</a></p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="中国人工智能学会通讯"><a href="#中国人工智能学会通讯" class="headerlink" title="中国人工智能学会通讯"></a><a href="http://t.cn/Rf8Yvwn" target="_blank" rel="external">中国人工智能学会通讯</a></h2><p>《中国人工智能学会通讯》，本期为学会优秀博士论文专刊</p>
+<h2 id="C-wrapper"><a href="#C-wrapper" class="headerlink" title="C++ wrapper"></a><a href="http://t.cn/RfEIAdZ" target="_blank" rel="external">C++ wrapper</a></h2><p>TensorFlow使用swig作为C++ wrapper，最近Google又推出了pyclif，宣称“it’s much cleaner and easier” </p>
+<h2 id="智能时代的自然语言处理"><a href="#智能时代的自然语言处理" class="headerlink" title="智能时代的自然语言处理"></a><a href="http://t.cn/Rfm4hJb" target="_blank" rel="external">智能时代的自然语言处理</a></h2><p>今天ADL前沿讲习班《智能时代的自然语言处理》Zhengdong Lu的报告，题目Recent Progress on Deep Learning for NLP。</p>
+<h2 id="自然语言处理中深度学习活跃领域的课程讲义"><a href="#自然语言处理中深度学习活跃领域的课程讲义" class="headerlink" title="自然语言处理中深度学习活跃领域的课程讲义"></a><a href="http://www.zishu010.com/z/newdetail/9404521.html" target="_blank" rel="external">自然语言处理中深度学习活跃领域的课程讲义</a></h2><p>本文是纽约大学助理教授 Sam Bowman 关于自然语言处理中深度学习活跃领域的课程讲义PPT。对深度学习NLP领域最近较为活跃的研究进行了综述，其中包括Attention 模型、结构化记忆、词水平以上的无监督学习等等。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-G
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十六期</title>
@@ -1126,82 +1162,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;一周值得读（偏学术）&quot;&gt;&lt;a href=&quot;#一周值得读（偏学术）&quot; class=&quot;headerlink&quot; title=&quot;一周值得读（偏学术）&quot;&gt;&lt;/a&gt;一周值得读（偏学术）&lt;/h1&gt;&lt;h2 id=&quot;Controlling-Output-Length-in-Neur
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第八期</title>
-    <link href="http://rsarxiv.github.io/2016/10/07/PaperWeekly-%E7%AC%AC%E5%85%AB%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/10/07/PaperWeekly-第八期/</id>
-    <published>2016-10-07T18:22:30.000Z</published>
-    <updated>2016-10-07T19:08:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>SIGDIAL是ACL所属的关于对话系统的兴趣小组，SIG的文章针对性比较强，但文章的质量良莠不齐，本期给大家精心挑选了4篇SIGDIAL 2016的文章，带着大家一起来看看对话系统最新的研究成果。4篇文章分别是：</p>
-<p>1、Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks, 2016<br>2、Neural Utterance Ranking Model for Conversational Dialogue Systems, 2016<br>3、A Context-aware Natural Language Generator for Dialogue Systems, 2016<br>4、Task Lineages: Dialog State Tracking for Flexible Interaction, 2016</p>
-<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Bing Liu, Ian Lane</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Carnegie Mellon University, Electrical and Computer Engineering</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Spoken Language Understanding, RNN</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何将自然语言理解的两大问题和语言模型结合在同一个模型中进行训练，以达到实时理解语言的目的？</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>特定任务下的Chatbot在理解人类语言时需要重点解决好两个问题：意图识别(Intent Detection)和槽填充(Slot Filling)，本文提出一种融合Intent Detection、Slot Filling和Language Model的模型，相比于之前的模型，本文模型的一大优势在于做自然语言理解的时候不需要等待整个word sequence完整展现，而是可以在线处理每一个arrived word。如下图：<br><img src="media/3.png" alt="3"></p>
-<p>意图识别是个典型的多分类任务，而槽填充是个典型的序列标注任务。RNN的每个step都以当前word作为输入，输出是意图class、该word的label和下一个word，每个step的隐层都包含了之前所有的word、class、label信息。此模型为基本模型，在此基础上做了一些变形，得到下面四个变种：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>文章在Airline Travel Information Systems(ATIS)数据集上进行了实验，在语言模型评测指标和意图识别分类准确率上相比之前的模型都得到了一定地提升。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>本文Code: <a href="http://speech.sv.cmu.edu/software.html" target="_blank" rel="external">http://speech.sv.cmu.edu/software.html</a><br>ATIS Dataset: <a href="https://github.com/mesnilgr/is13" target="_blank" rel="external">https://github.com/mesnilgr/is13</a></p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的创新点在于将意图分类、槽填充和语言模型三者合一，相比之前的独立模型来说，每一步产生的信息更多，在预测下一步的时候context内容更加丰富，从而提高了识别的准确率和降低了语言模型的混乱度。</p>
-<p>NLP中的很多任务都可以归纳为根据context来预测某一个word、label或者class这种范式，解决的思路也都基本类似，RNN或者GRU、LSTM作为encoder和decoder，配上attention机制来提升结果，context的信息量和质量直接影响着预测的效果，user information、user profile等等都可能作为context来构建模型，得到更好的结果。</p>
-<h1 id="Neural-Utterance-Ranking-Model-for-Conversational-Dialogue-Systems"><a href="#Neural-Utterance-Ranking-Model-for-Conversational-Dialogue-Systems" class="headerlink" title="Neural Utterance Ranking Model for Conversational Dialogue Systems"></a><a href="http://www.sigdial.org/workshops/conference17/proceedings/pdf/SIGDIAL48.pdf" target="_blank" rel="external">Neural Utterance Ranking Model for Conversational Dialogue Systems</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Michimasa Inaba, Kenichi Takahashi</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Hiroshima City University, 3-4-1 Ozukahigashi, Asaminami-ku</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Ranking Model, Utterance Selection</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>在做检索式对话时，对话语句该怎样表示，context信息该怎样引入到模型中？</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>本文实现的是一个检索式的对话模型，模型分为两部分，分别是：<br>1、Utterance Encoding<br>检索式对话，对话语句的encoding是很重要的一部分，文中使用了RNN encoder模型来实现对语句的encoding。在训练过程中，作者把encoder生成的向量，在decode成一个目标语句，即通过一个完整的seq2seq模型来训练encoder。<br>2、Ranking Candidate Utterances<br>在对候选语句排序时，作者考虑到了context的问题，他把前几次说的语句分别encode成向量，并依次输入到LSTM。如下图所示：</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>图中u1到un是整个对话中的前n句话，ai是第i个候选语句。模型中，分别把u1…un以及ai分成用户说的和系统本身输出的，在输入到各自的RNN encoder中，得到向量vu1…vu和vai。最后将向量依次输入到RNN中，得到yai作为候选语句ai在当前context中的得分。<br>因为本文是一个ranking model，更关注的是候选语句的排序，最后候选集分数列表会转换成TOP 1的概率分布。并使用cross-entropy作为loss function。</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文有两个创新点，首先通过单独训练seq2seq模型，来学习对话语句的encoder，从而降低了整个模型的学习成本，减少了需要标注的数据量。然后在排序模型中将对话的前几句语句有序输入到LSTM，达到融入了context信息的目的。</p>
-<h1 id="A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems"><a href="#A-Context-aware-Natural-Language-Generator-for-Dialogue-Systems" class="headerlink" title="A Context-aware Natural Language Generator for Dialogue Systems"></a><a href="https://arxiv.org/pdf/1608.07076" target="_blank" rel="external">A Context-aware Natural Language Generator for Dialogue Systems</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Ondrej Dusek, Filip Jurcicek</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Charles University</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Context-aware, Seq2seq</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何使得task-oriented的对话生成系统中生成更加自然的回复？</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文是ACL2016 short paper Sequence-to-Sequence Generation for Spoken Dialogue via Deep Syntax Trees and Strings一文的拓展。原文提出基于seq2seq模型的将DA(dialogue acts)生成response的方案，其中输入是三元组(DA type,slot,value)的one-hot representation，输出是对应的response。如下图：</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>延续原文的工作，作者为了使得生成的回复更加自然，将前面用户的提问也encode进来，具体是在原来模型的基础上加了两个encode的部分。Prepending context是把用户的问题和DA三元组前后拼接成新的表示再feed into encoder（这里要注意问题的dictionary和DA是不一样的）。Context encoder则是把单独把问题encode成和Prepending context相同大小的向量，再将两个encoder得到的向量拼接就得到最后的hidden states。最后decode部分仍然沿用lstm+attention的方法。如下图：</p>
-<p><img src="media/7.png" alt="7"></p>
-<p>文章在Alex Context NLG Dataset数据集上进行了实验，在BLEU/NIST scores和人工评价两方面成绩都得到了一定地提升。</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>本文Code: <a href="https://github.com/UFAL-DSG/tgen" target="_blank" rel="external">https://github.com/UFAL-DSG/tgen</a><br>Alex Context NLG Dataset: <a href="https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-1675" target="_blank" rel="external">https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-1675</a></p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文的创新点在于将用户的问题也就是context显式的加入到模型中，相比之前的模型来说，生成的回复会更符合语境。先前的工作旨在将rule-based符号和seq2seq模型结合自动生成回复，本文的改进让一部分context得到保留，使得生成的回复内容更加丰富，从而显得自然不突兀。</p>
-<h1 id="Task-Lineages-Dialog-State-Tracking-for-Flexible-Interaction"><a href="#Task-Lineages-Dialog-State-Tracking-for-Flexible-Interaction" class="headerlink" title="Task Lineages: Dialog State Tracking for Flexible Interaction"></a><a href="http://aclweb.org/anthology/W16-3602" target="_blank" rel="external">Task Lineages: Dialog State Tracking for Flexible Interaction</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Sungjin Lee, Amanda Stent</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Yahoo Research</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>SIGDIAL 2016</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>complex interactions in spoken dialog system, Task Lineage-based Dialog State Tracking</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>​如何将复杂的判别式模型来做DST，并且应用于复杂场景对话系统？</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>本文在之前Dialog State Tracking方法的基础上提出了Task Lineage-based Dialog State Tracking（TL—DST）。本模型包括三个组成部分：<br>1、Task Frame Parsing，返回K-best task frame parses， task frame parses结构如下图：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>2、Context Fetching，在不同的phenomena中，根据不同的conversation history返回不同的相关信息。<br>3、Task State Update，可以通过调节context window参数选择使用不同的dialog state tracking方法。  </p>
-<p>本文模型（TL-DST）处理流程如下图所示：<br><img src="media/2.png" alt="2"></p>
-<p>在t轮，给定句子u，利用task frame parsing生成K-best task frame parses H，给定task frame f，task lineage l， agent output m，利用context features返回相关信息c。</p>
-<p>本文在Dialog State Tracking Challenge 的DSTC2和DSTC3数据集上进行了实验，均取得了较baseline好的结果。</p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>Dialog State Tracking Challenge比赛介绍: <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf</a></p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>本文基于DST的方法来处理口语对话系统中的多任务，跨领域，复杂目标的问题，由于缺乏多任务，跨领域，复杂目标的口语对话系统的数据集，本文实验在DSTC2和DSTC3上进行， 并取得了比baseline好的效果。将来的工作是要将TL-DST方法应用于真实环境中的多领域对话评估。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统(Dialogue Systems)是当前工业界最热门的方向之一，去掉语音部分，该问题退化为聊天机器人(chatbot)问题，两者虽然在输入处理中存在一定的差异，但自然语言理解、对话管理和自然语言生成等核心部件都是一样的，面临的很多问题都是共同的，所以相关的研究或多或少都会有参考意义。上下文(context)的理解和处理是一个重要的环节，直接决定了该bot是智能还是智障，挺多的paper都是针对这一问题进行研究的，但在实际应用当中，context的处理仍然不尽如人意，过多依赖人工设置，更像是一种触发开关，存在大量的if…else…。</p>
-<p>seq2seq生成式的解决方案初见效果，但离真正应用还有很长的路要走，template-based和rule-based仍是主流解决方案，尤其是在面向具体任务的bot情景中。那么，直接生成回答很难的话，退一步来想这个问题，能否将seq2seq用在template或者rule的自动生成上？能否将paper中多信息融合（比如：user profile、dialogue context）的成果应用在当前bot的某一个阶段？能否训练一个bot simulator来丰富训练数据？每一篇paper都会有一些创新点，可能有的创新点是为了创新而创新，但总归会带来一定的思考和借鉴，尤其是针对某一个细节问题，我想这是paper对于工业界的参考意义，而不是说从paper中完全抠出一个成熟的解决方案来套，甚至把dataset和code都release出来，典型的“拿来主义”。</p>
-<p>以上为本期Paperweekly的主要内容，感谢lshowway、zhangjun、zhangboyu和suhui四位同学的整理。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;SIGDIAL是ACL所属的关于对话系统的兴趣小组，SIG的文章针对性比较强，但文章的质量良莠不齐，本期给大家精心挑选了4篇SIGDIAL 
     
     </summary>
     

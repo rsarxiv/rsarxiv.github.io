@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>本周值得读(2016.11.28-2016.11.02) | PaperWeekly</title>
+  
+  
+  <meta name="description" content="一周值得读A Simple, Fast Diverse Decoding Algorithm for Neural Generation 【beam search】在用seq2seq做一些nlp任务的时候，解码器负责将结果一个个地解出来。解码出的结果应该具有多样性的特点，尤其是在chatbot应用中">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="本周值得读(2016.11.28-2016.11.02)"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-12-04T18:06:33.000Z"><a href="/2016/12/04/本周值得读-2016-11-28-2016-11-02/">2016-12-04</a></time>
+      
+      
+  
+    <h1 class="title">本周值得读(2016.11.28-2016.11.02)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation "></a><a href="http://t.cn/Rfj8F3k" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation </a></h2><p>【beam search】在用seq2seq做一些nlp任务的时候，解码器负责将结果一个个地解出来。解码出的结果应该具有多样性的特点，尤其是在chatbot应用中体现更为突出。传统的beam search算法在解码时常常会解出一些非常安全但是没有实际意义的response，类似于“呵呵呵”，“我认为是这样的”这里的话。本文的工作针对这一问题，提出了一种改进版的beam search算法，通过引入一个惩罚因子来影响排序结果，从而使得解码出的结果更加多样性。建议研究seq2seq或者尝试用它来解决一些问题的童鞋可以精读此文。本文来自Jiwei Li。</p>
+<h2 id="Dialogue-Learning-With-Human-In-The-Loop"><a href="#Dialogue-Learning-With-Human-In-The-Loop" class="headerlink" title="Dialogue Learning With Human-In-The-Loop "></a><a href="http://t.cn/Rf8XOcr" target="_blank" rel="external">Dialogue Learning With Human-In-The-Loop </a></h2><p>【对话系统】【在线学习】在线学习是chatbot在与人交互的过程中自动学习的一种方法，快速而且有效。本文给出了一种基于强化学习的在线交互学习方案，作者是Jiwei Li。建议研究或者做chatbot应用的童鞋可以好好研读此文。</p>
+<h2 id="Visual-Dialog"><a href="#Visual-Dialog" class="headerlink" title="Visual Dialog "></a><a href="http://t.cn/RfH7BWW" target="_blank" rel="external">Visual Dialog </a></h2><p>【多模态对话】多模态问答（VQA）是一个比较好玩的任务，本文在此基础上提出了一个更加复杂而且有意思的任务，即给定一张图像，给出若干个问和答的历史对话，提出一个新问题，要求给出正确答案。问题不仅仅需要理解图片，而且需要理解历史对话。新的任务意味着新的坑，文中给出了一些常见NN模型作为baseline，感兴趣的童鞋可以入坑。</p>
+<h2 id="Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text"><a href="#Neural-Machine-Translation-with-Latent-Semantic-of-Image-and-Text" class="headerlink" title="Neural Machine Translation with Latent Semantic of Image and Text "></a><a href="http://t.cn/RfjRQMP" target="_blank" rel="external">Neural Machine Translation with Latent Semantic of Image and Text </a></h2><p>【Visual NMT】就在NMT被讨论地如火如荼的时候，还有一部分工作是结合多模态（图片）来做机器翻译，因为人类获取信息不仅仅可以通过文字，图片也是一个重要的学习资源。</p>
+<h2 id="Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling"><a href="#Scalable-Bayesian-Learning-of-Recurrent-Neural-Networks-for-Language-Modeling" class="headerlink" title="Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling "></a><a href="http://t.cn/RfjELTY" target="_blank" rel="external">Scalable Bayesian Learning of Recurrent Neural Networks for Language Modeling </a></h2><p>【贝叶斯学习】通过BPTT来训练的RNN在解决问题上会存在过拟合的问题，一个主要原因是随机优化训练无法给出模型权重的概率估计，本文通过最近stochastic gradient Markov Chain Monte Carlo的研究来试着学习模型权重的概率。语言模型的实验结果和其他的相关实验结果表明本文所用的方法确实有效。</p>
+<h2 id="Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network"><a href="#Learning-Python-Code-Suggestion-with-a-Sparse-Pointer-Network" class="headerlink" title="Learning Python Code Suggestion with a Sparse Pointer Network "></a><a href="http://t.cn/RfjEjY5" target="_blank" rel="external">Learning Python Code Suggestion with a Sparse Pointer Network </a></h2><p>【代码补全】本文研究的问题非常有意思，就是大家常见的IDE代码补全功能。现有的IDE对静态编程语言支持的比较好，对于动态编程语言支持的一般，而且一般都是补全某个函数或者方法之类的，而不能给出更复杂的代码。本文针对这个问题，构造了一个大型的python code数据集，并且用了比较流行的Pointer Network模型来做端到端的训练，取得了不错的效果。代码补全在实际应用中非常有用，但想做到很复杂、很智能的补全还有很长的路。不过这个topic还是一个非常有意思的东西。</p>
+<h2 id="Joint-Copying-and-Restricted-Generation-for-Paraphrase"><a href="#Joint-Copying-and-Restricted-Generation-for-Paraphrase" class="headerlink" title="Joint Copying and Restricted Generation for Paraphrase "></a><a href="http://t.cn/RfHAsim" target="_blank" rel="external">Joint Copying and Restricted Generation for Paraphrase </a></h2><p>【NLG】本文的思路与Pointer Network或者Copynet类似，在用seq2seq做自然语言生成时，增加一个判断的环节，来决定接下来的这个词是从source来copy还是用decoder来rewrite。</p>
+<h2 id="Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks"><a href="#Context-aware-Natural-Language-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Context-aware Natural Language Generation with Recurrent Neural Networks "></a><a href="http://t.cn/RfEClfC" target="_blank" rel="external">Context-aware Natural Language Generation with Recurrent Neural Networks </a></h2><p>【NLG】论文的方法、模型没有太多的值得说的地方，倒是应用的点非常有意思，根据商品的上下文来伪造评论，人工评判时有50%以上的伪造评论都通过了，90%以上骗过了现有的识别算法。有点道高一尺魔高一丈的感觉，如果这篇paper的结果确实这么牛的话，确实很有意思，值得研究一下。</p>
+<h2 id="MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset"><a href="#MS-MARCO-A-Human-Generated-MAchine-Reading-COmprehension-Dataset" class="headerlink" title="MS MARCO: A Human Generated MAchine Reading COmprehension Dataset "></a><a href="http://t.cn/RfH2eXu" target="_blank" rel="external">MS MARCO: A Human Generated MAchine Reading COmprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】微软放出了一个100k规模的机器阅读理解数据集，数据来源于真实的Bing搜索query。数据包括：query、10个相关的passage和query对应的answer。</p>
+<h2 id="NewsQA-A-Machine-Comprehension-Dataset"><a href="#NewsQA-A-Machine-Comprehension-Dataset" class="headerlink" title="NewsQA: A Machine Comprehension Dataset "></a><a href="http://t.cn/Rf8MPnf" target="_blank" rel="external">NewsQA: A Machine Comprehension Dataset </a></h2><p>【机器阅读理解】【数据福利】Maluuba公司放出一个新的机器阅读理解的数据集，规模在100k左右，数据来源为CNN新闻。通过用多个之前表现比较好的NN模型和人工结果对比，发现F1指标存在25.3%的差距，说明本数据集需要更好的模型来进行研究。数据集已公开，地址是：<a href="http://datasets.maluuba.com/NewsQA" target="_blank" rel="external">http://datasets.maluuba.com/NewsQA</a></p>
+<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="中国人工智能学会通讯"><a href="#中国人工智能学会通讯" class="headerlink" title="中国人工智能学会通讯"></a><a href="http://t.cn/Rf8Yvwn" target="_blank" rel="external">中国人工智能学会通讯</a></h2><p>《中国人工智能学会通讯》，本期为学会优秀博士论文专刊</p>
+<h2 id="C-wrapper"><a href="#C-wrapper" class="headerlink" title="C++ wrapper"></a><a href="http://t.cn/RfEIAdZ" target="_blank" rel="external">C++ wrapper</a></h2><p>TensorFlow使用swig作为C++ wrapper，最近Google又推出了pyclif，宣称“it’s much cleaner and easier” </p>
+<h2 id="智能时代的自然语言处理"><a href="#智能时代的自然语言处理" class="headerlink" title="智能时代的自然语言处理"></a><a href="http://t.cn/Rfm4hJb" target="_blank" rel="external">智能时代的自然语言处理</a></h2><p>今天ADL前沿讲习班《智能时代的自然语言处理》Zhengdong Lu的报告，题目Recent Progress on Deep Learning for NLP。</p>
+<h2 id="自然语言处理中深度学习活跃领域的课程讲义"><a href="#自然语言处理中深度学习活跃领域的课程讲义" class="headerlink" title="自然语言处理中深度学习活跃领域的课程讲义"></a><a href="http://www.zishu010.com/z/newdetail/9404521.html" target="_blank" rel="external">自然语言处理中深度学习活跃领域的课程讲义</a></h2><p>本文是纽约大学助理教授 Sam Bowman 关于自然语言处理中深度学习活跃领域的课程讲义PPT。对深度学习NLP领域最近较为活跃的研究进行了综述，其中包括Attention 模型、结构化记忆、词水平以上的无监督学习等等。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/12/04/本周值得读-2016-11-28-2016-11-02/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>88</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>106</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

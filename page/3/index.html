@@ -65,6 +65,57 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-05-24T19:34:00.000Z"><a href="/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">2016-05-24</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Distributed Representations of Sentences and Documents #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>继分享了一系列词向量相关的paper之后，今天分享一篇句子向量的文章，<a href="http://cn.arxiv.org/pdf/1405.4053.pdf" target="_blank" rel="external">Distributed Representations of Sentences and Documents</a>，作者是来自Google的Quoc Le和Tomas Mikolov，后者也是Word2Vec的作者。</p>
+<p>用低维向量表示了word之后，接下来要挑战地就是表示句子和段落了。传统的表示句子的方式是用词袋模型，每个句子都可以写成一个特别大维度的向量，绝大多数是0，不仅没有考虑词序的影响，而且还无法表达语义信息。本文沿用了Word2Vec的思想，提出了一种无监督模型，将变长的句子或段落表示成固定长度的向量。不仅在一定上下文范围内考虑了词序，而且非常好地表征了语义信息。</p>
+<p>首先简单回顾下word2vec的cbow模型架构图：</p>
+<img src="/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/fig1.png" width="600" height="600">
+<p>给定上下文the cat sat三个词来预测单词on。</p>
+<p>与cbow模型类似，本文提出了PV-DM（Distributed Memory Model of Paragraph Vectors），如下图：</p>
+<img src="/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/fig2.png" width="600" height="600">
+<p>不同的地方在于，输入中多了一个paragraph vector，可以看做是一个word vector，作用是用来记忆当前上下文所缺失的信息，或者说表征了该段落的主题。这里，所有的词向量在所有段落中都是共用的，而paragraph vector只在当前paragraph中做训练时才相同。后面的过程与word2vec无异。</p>
+<p>topic也好，memory也罢，感觉更像是一种刻意的说辞，本质上就是一个word，只是这个word唯一代表了这个paragraph，丰富了context vector。</p>
+<p>另外一种模型，叫做PV-DBOW（Distributed Bag of Words version of Paragraph Vector），如下图：</p>
+<img src="/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/fig3.png" width="600" height="600">
+<p>看起来和word2vec的skip-gram模型很像。</p>
+<p>用PV-DM训练出的向量有不错的效果，但在实验中采用了两种模型分别计算出的向量组合作为最终的paragraph vector，效果会更佳。在一些情感分类的问题上进行了测试，得到了不错的效果。</p>
+<p>本文的意义在于提出了一个无监督的paragraph向量表示模型，无监督的意义非常重大。有了paragraph级别的高效表示模型之后，解决类似于句子分类，检索，问答系统，文本摘要等各种问题都会带来极大地帮助。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-23T14:10:32.000Z"><a href="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/">2016-05-23</a></time>
       
       
@@ -1509,7 +1560,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>89</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>90</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -1545,7 +1596,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>107</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>108</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

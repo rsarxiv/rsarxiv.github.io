@@ -5,10 +5,39 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-10T20:07:05.000Z</updated>
+  <updated>2016-12-11T17:01:27.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2016.12.05-2016.12.09)</title>
+    <link href="http://rsarxiv.github.io/2016/12/11/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-05-2016-12-09/"/>
+    <id>http://rsarxiv.github.io/2016/12/11/本周值得读-2016-12-05-2016-12-09/</id>
+    <published>2016-12-11T16:51:29.000Z</published>
+    <updated>2016-12-11T17:01:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="End-to-End-Joint-Learning-of-Natural-Language-Understanding-and-Dialogue-Manager"><a href="#End-to-End-Joint-Learning-of-Natural-Language-Understanding-and-Dialogue-Manager" class="headerlink" title="End-to-End Joint Learning of Natural Language Understanding and Dialogue Manager "></a><a href="http://t.cn/RfDCS5X" target="_blank" rel="external">End-to-End Joint Learning of Natural Language Understanding and Dialogue Manager </a></h2><p>【对话系统】自然语言理解和对话管理通常是两个独立的任务，NLU的误差会影响到对话管理的效果。本文将两个任务联合起来进行端到端的训练，得到了不错的效果。建议研究对话系统的童鞋来读。</p>
+<h2 id="Sequential-Match-Network-A-New-Architecture-for-Multi-turn-Response-Selection-in-Retrieval-based-Chatbots"><a href="#Sequential-Match-Network-A-New-Architecture-for-Multi-turn-Response-Selection-in-Retrieval-based-Chatbots" class="headerlink" title="Sequential Match Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots "></a><a href="http://t.cn/RIhcTFP" target="_blank" rel="external">Sequential Match Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots </a></h2><p>【对话系统】本文研究的问题是基于检索的多轮对话机器人，单轮对话和多轮对话的一大区别在于后者需要考虑更多的上下文内容，本文在检索答案时除了相关性还考虑了上下文之间的关系，建议研究检索式聊天机器人的童鞋来读本文。本文还给出了一个测试数据集，地址在：<a href="http://t.cn/RIhf4Sh" target="_blank" rel="external">http://t.cn/RIhf4Sh</a></p>
+<h2 id="CER-Complementary-Entity-Recognition-via-Knowledge-Expansion-on-Large-Unlabeled-Product-Reviews"><a href="#CER-Complementary-Entity-Recognition-via-Knowledge-Expansion-on-Large-Unlabeled-Product-Reviews" class="headerlink" title="CER: Complementary Entity Recognition via Knowledge Expansion on Large Unlabeled Product Reviews "></a><a href="http://t.cn/RfDpyCm" target="_blank" rel="external">CER: Complementary Entity Recognition via Knowledge Expansion on Large Unlabeled Product Reviews </a></h2><p>【相关实体识别】本文研究的问题是产品评论数据中的相关实体识别问题，评论数据是个很有意思的数据，用户在买东西时希望可以通过对比买到更好的产品。建议做评论挖掘的童鞋读。</p>
+<h2 id="The-Evolution-of-Sentiment-Analysis-A-Review-of-Research-Topics-Venues-and-Top-Cited-Papers"><a href="#The-Evolution-of-Sentiment-Analysis-A-Review-of-Research-Topics-Venues-and-Top-Cited-Papers" class="headerlink" title="The Evolution of Sentiment Analysis - A Review of Research Topics, Venues, and Top Cited Papers "></a><a href="http://t.cn/RIvkAop" target="_blank" rel="external">The Evolution of Sentiment Analysis - A Review of Research Topics, Venues, and Top Cited Papers </a></h2><p>【情感分析】【综述】一篇很细的情感分析的综述，刚刚进入这个领域的童鞋可以来读一读。</p>
+<h2 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h2><h2 id="文本上的算法"><a href="#文本上的算法" class="headerlink" title="文本上的算法"></a><a href="http://t.cn/RhtyvzE" target="_blank" rel="external">文本上的算法</a></h2><p>《文本上的算法》v4.0：增加自然语言处理和对话系统章节；丰富了其他内容。</p>
+<h2 id="NIPS-2016-Spotlight-Videos"><a href="#NIPS-2016-Spotlight-Videos" class="headerlink" title="NIPS 2016 Spotlight Videos"></a><a href="http://t.cn/RfB5cA2" target="_blank" rel="external">NIPS 2016 Spotlight Videos</a></h2><p>【NIPS 2016 Spotlight Videos】NIPS 2016焦点视频集。神经信息处理系统大会(Conference and Workshop on Neural Information Processing Systems)，简称NIPS，是一个关于机器学习和计算神经科学的国际会议。该会议固定在每年的12月举行,由NIPS基金会主办。NIPS是机器学习领域的顶级会议 。在中国计算机学会的国际学术会议排名中，NIPS为人工智能领域的A类会议。(via @网路冷眼)</p>
+<h2 id="2016年深度学习的主要进展"><a href="#2016年深度学习的主要进展" class="headerlink" title="2016年深度学习的主要进展"></a><a href="http://t.cn/RIvuIuV" target="_blank" rel="external">2016年深度学习的主要进展</a></h2><p>2016年深度学习的主要进展，The major advancements in Deep Learning in 2016 (via @视觉机器人)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;End-to-End-Joint-Learning-of-Natural-Language-Underst
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十七期</title>
@@ -1157,77 +1186,6 @@
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第九期</title>
-    <link href="http://rsarxiv.github.io/2016/10/13/PaperWeekly-%E7%AC%AC%E4%B9%9D%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/10/13/PaperWeekly-第九期/</id>
-    <published>2016-10-14T04:09:21.000Z</published>
-    <updated>2016-10-14T16:54:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>深度生成模型基本都是以某种方式寻找并表达（多变量）数据的概率分布。有基于无向图模型（马尔可夫模型）的联合概率分布模型，另外就是基于有向图模型（贝叶斯模型）的条件概率分布。前者的模型是构建隐含层(latent)和显示层（visible)的联合概率，然后去采样。基于有向图的则是寻找latent和visible之间的条件概率分布，也就是给定一个随机采样的隐含层，模型可以生成数据。</p>
-<p>生成模型的训练是一个非监督过程，输入只需要无标签的数据。除了可以生成数据，还可以用于半监督的学习。比如，先利用大量无标签数据训练好模型，然后利用模型去提取数据特征（即从数据层到隐含层的编码过程），之后用数据特征结合标签去训练最终的网络模型。另一种方法是利用生成模型网络中的参数去初始化监督训练中的网络模型，当然，两个模型需要结构一致。</p>
-<p>由于实际中，更多的数据是无标签的，因此非监督和半监督学习非常重要，因此生成模型也非常重要。本篇主要介绍一种基于对抗模式的生成模型，GAN － 从第一篇提出此模型的论文开始，之后紧接着两篇基于它的实现以及改进。三篇文章一脉相承，可以看到结合这种模型的研究进展及方向。</p>
-<h1 id="Generative-Adversarial-Nets"><a href="#Generative-Adversarial-Nets" class="headerlink" title="Generative Adversarial Nets"></a><a href="https://arxiv.org/abs/1406.2661" target="_blank" rel="external">Generative Adversarial Nets</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, Yoshua Bengio</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Universite of Montreal</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>生成模型 （Generative model）</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2014</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>通过模拟对抗过程，提出一种新的生成模型框架</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><ul>
-<li>建模</li>
-</ul>
-<p>在对抗生成模型中，同时训练两个网络，第一个网络是生成网络，G(z)，输入z一般是来自常见概率分布函数的样本向量，维度一般比较低，比如100。生成网络输入向量z，输出图片样例，如果使用卷机网实现的话，整个网络可以看过一个反向的CNN，其中的卷积层替换成 transposed convolution layer。第二个网络是识别网络discriminator net - D(x)，输入为一张图片x，而输出为一个标量，用来代表x来自真实图片的概率。</p>
-<ul>
-<li>训练</li>
-</ul>
-<p>整个网络的loss定义为</p>
-<p>V = E’[log D(x)] + E’’[log (1 - D(G(z)) )]<br>E’ - 当x来自真实数据的期望<br>E’’ - 当x来自生成网络的期望</p>
-<p>很显然，在对抗网络中，生成模型希望能够增大D(G(z))，即，希望生成的图片越真实而让识别模型“误以为”是来自真实的图片集。</p>
-<p>如果生成网络G的参数用theta表示，识别模型的参数用theta_d表示，在使用SGD训练的时候，两组参数分别进行训练，对于D来说，需要对上面的公式求Gradient，但是只更新自己的参数。对G来说，只有第二项是相关的，而且可以等效的转换为maximize log D(G(z))。两个网络的参数更新交替进行。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>网上有很多实现，比如:</p>
-<p><a href="https://github.com/goodfeli/adversarial" target="_blank" rel="external">goodfeli/adversarial</a>: Theano GAN implementation released by the authors of the GAN paper.<br><a href="https://github.com/Newmu/dcgan_code" target="_blank" rel="external">Newmu/dcgan_code</a>: Theano DCGAN implementation released by the authors of the DCGAN paper.<br><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="external">carpedm20/DCGAN-tensorflow</a>: Unofficial TensorFlow DCGAN implementation.</p>
-<p>这些实现一般都会包含MNIST测试集。</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>其他的生成模型包括restricted Boltzmann machine (RBM), deep Boltzmann machine (DBM) 以及 variational autoencoder</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>其他生成模型中训练过程涉及intractable的计算，在实际实现时往往采取马尔可夫链模特卡洛采样(MCMC)。对抗生成模型(GAN)则不需要，整个网络的训练可以使用backpropagation来实现。</p>
-<p>缺点包括训练不稳定，生成网络会塌陷到某些数据点（比如这些数据点目前看最像真实数据，生成网络会不停生成这些数据点），接下来的几篇中将提及如何改进。</p>
-<h1 id="Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434"><a href="#Unsupervised-Representation-Learning-with-Deep-Convolutional-Generative-Adversarial-Networks-https-arxiv-org-abs-1511-06434" class="headerlink" title="[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks] (https://arxiv.org/abs/1511.06434)"></a>[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks] (<a href="https://arxiv.org/abs/1511.06434" target="_blank" rel="external">https://arxiv.org/abs/1511.06434</a>)</h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Alec Radford, Luke Metz, Soumith Chintala</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>facebook</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN, Representation Learning</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>基于深度卷积网络的生成对抗模型(DCGAN)实现</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在GAN的论文中提出的对抗模型的原型，但是对抗模型是一个大的框架，并不局限于某种网络实现。本文给出了基于卷机网的实现。</p>
-<p>生成网络<br><img src="media/gen-architecture-1.png" alt="gen-architecture"></p>
-<p>其中反卷积的过程是</p>
-<p><img src="media/padding_strides_transposed-1.gif" alt="padding_strides_transposed"></p>
-<p>识别网络是传统的CNN</p>
-<p><img src="media/discrim-architecture.png" alt="discrim-architecture"></p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文紧密承接上篇论文，描述了实现过程中的细节，比如参数设置。也提到了解决GAN中训练不稳定的措施，但是并非完全解决。文中还提到利用对抗生成网络来做半监督学习。在训练结束后，识别网络可以用来提取图片特征，输入有标签的训练图片，可以将卷基层的输出特征作为X，标签作为y做训练。</p>
-<h1 id="Improved-Techniques-for-Training-GANs"><a href="#Improved-Techniques-for-Training-GANs" class="headerlink" title="Improved Techniques for Training GANs"></a><a href="https://arxiv.org/abs/1606.03498" target="_blank" rel="external">Improved Techniques for Training GANs</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, Xi Chen</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>OpenAI</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>DCGAN</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2016</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>提出改进DCGAN的措施</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>这篇论文同样跟前文非常紧密，具体针对DCGAN中的问题，提出了改进方法。具体有</p>
-<ul>
-<li>feature matching 解决训练不稳定instability的问题</li>
-<li>minibatch discrimination 解决生成网络生成图片集中的问题，原理是让识别网络一次看一组图片，而不是一张图片</li>
-<li>如果对实现感兴趣，其他改进细节可以参见论文</li>
-</ul>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>对抗生成网络的模型很有意思，Bengio, Hinton等都表达了很高的评价。相对其他生成模式而言，对抗生成模式模型清晰简单，目前来看效果也比较不错。但是目前对抗生成网络也有很多问题，比如生成模型是通过来自概率分布的向量生成样本，而不是直接表示输入的概率分布，因此，生成的图片可能不稳定之类。此外，希望能看到GAN在语言模型中的应用。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>GAN这种模型非常新颖，从论文中的结果来看，在图像生成上取得了不错的效果，对于MNIST这种简单的图形数据集，生成的图片已经可以“以假乱真”。对于另外的图片，比如在第二篇论文中的LSUN bedroom图片集以及人脸图片集上，生成的图片效果也不错（分辨率64×64）。<br>GAN目前来看已经卷积网络图像生成中取得了不错的效果，但是还有很多问题需要继续研究改进， 比如<br>如何生成高像素高质量的图片。目前一般像素不超过64。<br>如何提高复杂图片的质量。目前在CIFAR，ILSVRC等图片集上训练生成的图片还是很糟糕。<br>如何提高整个模型的稳定性。在实际中，尤其对于复杂图形，生成器经常很快收敛到某些单个数据集，使得整个模型的训练陷入僵局。<br>如何在其他领域，比如NLP使用GAN，如何将GAN和LSTM结合的。目前来看，还没有成功的应用。原文作者在reddit上回答内容来看，由于GAN的输入是采样自连续分布，而NLP中，每个单词的表达往往是离散的，作者提到NLP可以用增强训练的方法替代。但是也不排除可以有其他方法将GAN和LSTM结合起来的，这也是以后的一个研究点。</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;深度生成模型基本都是以某种方式寻找并表达（多变量）数据的概率分布。有基于无向图模型（马尔可夫模型）的联合概率分布模型，另外就是基于有向图模型
-    
-    </summary>
-    
     
   </entry>
   

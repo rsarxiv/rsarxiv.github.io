@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第十八期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引言对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。s">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第十八期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-12-17T18:37:27.000Z"><a href="/2016/12/17/PaperWeekly-第十八期/">2016-12-17</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第十八期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
+<p>1、Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation, 2016<br>2、A Simple, Fast Diverse Decoding Algorithm for Neural Generation, 2016<br>3、DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS, 2016<br>4、A Diversity-Promoting Objective Function for Neural Conversation Models, 2015</p>
+<h1 id="Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation"><a href="#Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation" class="headerlink" title="Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation"></a><a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></h1><h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Key Laboratory of High Confidence Software Technologies (Peking University), MoE, China<br>Institute of Software, Peking University, China<br>Institute of Network Computing and Information Systems, Peking Univerity, China<br>Institute of Computer Science and Technology, Peking University, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
+<p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
+<p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Dataset：<a href="http://tieba.baidu.com" target="_blank" rel="external">http://tieba.baidu.com</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、 Dialogue Systems<br>(1) (Isbell et al., 2000; Wang et al., 2013) retrieval methods<br>(2)  (Ritter et al., 2011) phrase-based machine translation<br>(3)  (Sordoni et al., 2015; Shang et al., 2015) recurrent neural networks </p>
+<p>2、 Neural Networks for Sentence Generation<br>(1)  (Sordoni et al., 2015) bag-of-words features<br>(2)  (Shang et al., 2015) seq2seq-like neural networks<br>(3)  (Yao et al., 2015; Serban et al., 2016a) design hierarchical neural networks<br>(4)  (Li et al., 2016a) mutual information training objective</p>
+<p>##简评</p>
+<p>本文的创新点在于，不同与目前普遍存在的从句首到句尾顺序生成目标单词的方法，引入逐点互信息方法来预测回答语句中的关键词，使用seq2BF机制确保该关键词可以出现在目标回答语句的任意位置之中并确保输出的流利度，相比于seq2seq的生成方法显著地提升了对话系统的质量。</p>
+<h1 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation"></a><a href="https://arxiv.org/abs/1611.08562" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe and Dan Jurafsky</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, diversity, RL</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>seq2seq模型decoder时改进beam search，引入惩罚因子影响排序结果，并加入强化学习模型来自动学习diversity rate，使得解码出的结果更具多样性</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/18-0.png" alt="18-0"></p>
+<p>对比标准beam search，本模型引入惩罚因子，公式如下</p>
+<p><img src="media/18-1.png" alt="18-1"></p>
+<p>其中$\gamma$称为diversity rate，k’范围为[1,k]，K为beam size<br>强化学习模型中，策略为</p>
+<p><img src="media/18-2.png" alt="18-2"></p>
+<p>reward为评价指标，例如机器翻译中的BLEU值等</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、回复生成实验数据集：OpenSubtitles <a href="https://github.com/jiweil/mutual-information-for-neural-machine-translation" target="_blank" rel="external">https://github.com/jiweil/mutual-information-for-neural-machine-translation</a><br>（代码模型可从作者另外一篇文章的源码稍加改动）</p>
+<p>2、机器翻译数据集：WMT’14 <a href="http://www.statmt.org/wmt13/translation-task.html" target="_blank" rel="external">http://www.statmt.org/wmt13/translation-task.html</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/18-3.png" alt="18-3"></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本模型的创新点在于引入惩罚因子，使得decoder时对standard beam search算法进行重排序，并引入强化学习模型，自动学习diversity rate。作者分别在三个实验上进行验证，机器翻译、摘要抽取与对话回复生成，实验表明在不同的实验上有不同的表现，但是总体而言本方法能够在一定程度上解码出更具有多样性的句子。（思路简明清晰，对于传统的beam search稍加改动，原文中作者提到在Matlab代码中只改动一行即可）</p>
+<h1 id="DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS"><a href="#DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS" class="headerlink" title="DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS"></a><a href="https://arxiv.org/abs/1610.02424" target="_blank" rel="external">DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasath R. Selvaraju, Qing Sun1 Stefan Lee, David Crandall &amp; Dhruv Batra</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Virginia Tech, Blacksburg, VA, USA<br>Indiana University, Bloomington, IN, USA</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Beam Search; Diversity; Image Caption; Machine Translation; Visual Question Answer; Chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何改进beam search解码算法，使其在seq2seq模型中可以生成更加丰富的结果？</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>经典的beam search算法以最大后验概率作为优化目标函数，每一个time step只保留B个最优的状态，是一种典型的贪心算法，这个经典算法常常被用于解码可选状态数量多的情形，比如生成对话、生成图片描述、机器翻译等，每一步都有词表大小的可选状态集。seq2seq模型的流行，让这种解码算法的研究变得热门。在生成对话任务时，用经典的beam search会生成类似“我不知道”等这种没有营养的对话，虽然没有语法上的错误，而且可能在一定的评价体系内会得到不错的分数，但实际应用效果太差，因此diversity的研究变得热门。</p>
+<p>本文针对diversity的问题，提出了一种改进版的beam search算法，旨在生成更加多样性的话。</p>
+<p><img src="media/18-5.png" alt="18-5"></p>
+<p>新算法的主要思路是将经典算法中的Beam进行分组，通过引入一个惩罚机制，使得每一组的相似度尽量低，这一项保证了生成的话相互之间差异更大一些，即满足了多样性的需求，在每一组Beam中，用经典的算法进行优化搜索。具体的算法流程如下图：</p>
+<p><img src="media/18-6.png" alt="18-6"></p>
+<p>实验中，用了Image Caption、Machine Translation和VQA三个任务进行了对比，验证了本文算法的有效性，并且对算法中的几个参数进行了敏感度分析，分析了分组数对多样性的影响。</p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>1、本文算法torch实现 <a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a><br>2、本文在线demo dbs.cloudcv.org<br>3、neuraltalk2实现 <a href="https://github.com/karpathy/neuraltalk2" target="_blank" rel="external">https://github.com/karpathy/neuraltalk2</a><br>4、机器翻译开源实现dl4mt <a href="https://github.com/nyu-dl/dl4mt-tutorial" target="_blank" rel="external">https://github.com/nyu-dl/dl4mt-tutorial</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>相关的工作主要分类两类：<br>1、Diverse M-Best Lists<br>2、Diverse Decoding for RNNs<br>之前Jiwei Li将解码算法的目标函数换成了互信息进行优化解码，对diversity进行了研究。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文研究的问题是一类基础问题，beam search算法作为一种经典的近似解码算法，应用的场景非常多。但在实际应用中，尤其是具体到生成对话、生成答案等任务上，存在一些适应性的问题，比如diversity。只是生成简单而又安全的话对于实际应用没有太多的意义，所以本文的研究非常有意义。本文的实验从三个不同的任务上对改进后的beam search都做了对比验证，非常扎实的结果验证了算法的有效性，并且对几个关键参数进行了敏感度分析，有理有据。同时在github上开源了代码，并且给出了一个在线demo。在评价方面，不仅仅设计了几个自动评价指标，而且用了人工评价的方法对本文算法进行了验证，是一篇非常好的paper，值得学习。</p>
+<h1 id="A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models"><a href="#A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models" class="headerlink" title="A Diversity-Promoting Objective Function for Neural Conversation Models"></a><a href="https://arxiv.org/pdf/1510.03055.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Stanford University, Stanford, CA, USA<br>Microsoft Research, Redmond, WA, USA</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Sequence-to-sequence neural network models, conversational responses, Maximum Mutual Information(MMI)</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2015</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>使用MMI训练sequence-to-sequence model for conversational responses generation<br>传统的ML(最大似然估计)在训练sequence-to-sequence model的时候，易产生与输入无关的’safe’ responses(最大似然估计的弊病—-always try to cover all mode of input data)<br>作者通过使用MMI, 最大化输入与输出的互信息，能够有效避免与输入无关的responses，得到更为diverse的responses.</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>MMI最早在speech recognition中提出并应用(discriminative training criteria). 语音识别中，通常先用ML训练声学模型，然后再接MMI和语言模型，对声学模型进一步调优。</p>
+<p>在本文中，作者通过提出MMI用于seq-to-seq model的优化。作者提出了MMI-antiLM和MMI-bidi 两个不同的MMI的formulations. MMI在seq-to-seq的应用中存在decoding的问题。</p>
+<p>MMI-antiLM中，作者通过使用带有权重的LM以生成更为diverse的responses by penalizing first word。</p>
+<p>MMI-bidi中，搜索空间的数目过大，导致expolring所有的可能性在实际中无法实现。作者首先产生N-best list, 然后根据相应的准则函数 re-rank得到的N-best list。</p>
+<p>在MMI不同的formulation中，作者通过启发式的设计，使得decoding更为容易且产生的response更为diverse，在相关的数据集上取得了较好的BLEU且产生的response更为diverse。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>最大后验概率通常作为优化的目标函数，但很多应用场景中得到的结果并不理想。本文采用了一个新的而且也是其他领域中比较常见的目标函数来替换最大后验概率，在生成对话时得到了更加丰富的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统是一个相对高级的、综合性很强的任务，所依赖的基础任务比较多，比如分词、命名实体识别、句法分析、语义角色标注等等。对于规范的中文表达而言，句法分析仍是一个没有解决好的问题，更何况是不那么规范的人话，句法分析的准确性又要下一个level了，随之语义角色标注也得不到好的效果。经典的、基础的任务还有很长的路要走，对话系统这种更难、更复杂的任务相信不是一年、两年就可以突破的事情，虽然现在大热，做的人很多，但就目前的研究水平来看，应该还有很长的路要走。seq2seq是个逃避这些问题的好方法和好思路，但相对来说更加不成熟，而且存在着很多的问题，想通过大量的数据来覆盖所有的问题，是一种不太科学的思路。我想，seq2seq是个好方法，但传统的NLP方法也是必不可少的，而且两者应该是相互补充的。越多的人关注对话系统，就会越快地推动这个领域的发展，希望早日看到靠谱的、成熟的解决方案。感谢@Penny、@tonya、@zhangjun和@皓天 四位童鞋完成的paper notes。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/12/17/PaperWeekly-第十八期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>91</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>109</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

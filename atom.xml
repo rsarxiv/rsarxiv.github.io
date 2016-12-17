@@ -5,10 +5,88 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-11T17:01:27.000Z</updated>
+  <updated>2016-12-17T19:10:03.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第十八期</title>
+    <link href="http://rsarxiv.github.io/2016/12/17/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%85%AB%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2016/12/17/PaperWeekly-第十八期/</id>
+    <published>2016-12-17T18:37:27.000Z</published>
+    <updated>2016-12-17T19:10:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
+<p>1、Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation, 2016<br>2、A Simple, Fast Diverse Decoding Algorithm for Neural Generation, 2016<br>3、DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS, 2016<br>4、A Diversity-Promoting Objective Function for Neural Conversation Models, 2015</p>
+<h1 id="Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation"><a href="#Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation" class="headerlink" title="Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation"></a><a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></h1><h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Key Laboratory of High Confidence Software Technologies (Peking University), MoE, China<br>Institute of Software, Peking University, China<br>Institute of Network Computing and Information Systems, Peking Univerity, China<br>Institute of Computer Science and Technology, Peking University, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
+<p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
+<p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Dataset：<a href="http://tieba.baidu.com" target="_blank" rel="external">http://tieba.baidu.com</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、 Dialogue Systems<br>(1) (Isbell et al., 2000; Wang et al., 2013) retrieval methods<br>(2)  (Ritter et al., 2011) phrase-based machine translation<br>(3)  (Sordoni et al., 2015; Shang et al., 2015) recurrent neural networks </p>
+<p>2、 Neural Networks for Sentence Generation<br>(1)  (Sordoni et al., 2015) bag-of-words features<br>(2)  (Shang et al., 2015) seq2seq-like neural networks<br>(3)  (Yao et al., 2015; Serban et al., 2016a) design hierarchical neural networks<br>(4)  (Li et al., 2016a) mutual information training objective</p>
+<p>##简评</p>
+<p>本文的创新点在于，不同与目前普遍存在的从句首到句尾顺序生成目标单词的方法，引入逐点互信息方法来预测回答语句中的关键词，使用seq2BF机制确保该关键词可以出现在目标回答语句的任意位置之中并确保输出的流利度，相比于seq2seq的生成方法显著地提升了对话系统的质量。</p>
+<h1 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation"></a><a href="https://arxiv.org/abs/1611.08562" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe and Dan Jurafsky</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, diversity, RL</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>seq2seq模型decoder时改进beam search，引入惩罚因子影响排序结果，并加入强化学习模型来自动学习diversity rate，使得解码出的结果更具多样性</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/18-0.png" alt="18-0"></p>
+<p>对比标准beam search，本模型引入惩罚因子，公式如下</p>
+<p><img src="media/18-1.png" alt="18-1"></p>
+<p>其中$\gamma$称为diversity rate，k’范围为[1,k]，K为beam size<br>强化学习模型中，策略为</p>
+<p><img src="media/18-2.png" alt="18-2"></p>
+<p>reward为评价指标，例如机器翻译中的BLEU值等</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、回复生成实验数据集：OpenSubtitles <a href="https://github.com/jiweil/mutual-information-for-neural-machine-translation" target="_blank" rel="external">https://github.com/jiweil/mutual-information-for-neural-machine-translation</a><br>（代码模型可从作者另外一篇文章的源码稍加改动）</p>
+<p>2、机器翻译数据集：WMT’14 <a href="http://www.statmt.org/wmt13/translation-task.html" target="_blank" rel="external">http://www.statmt.org/wmt13/translation-task.html</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/18-3.png" alt="18-3"></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本模型的创新点在于引入惩罚因子，使得decoder时对standard beam search算法进行重排序，并引入强化学习模型，自动学习diversity rate。作者分别在三个实验上进行验证，机器翻译、摘要抽取与对话回复生成，实验表明在不同的实验上有不同的表现，但是总体而言本方法能够在一定程度上解码出更具有多样性的句子。（思路简明清晰，对于传统的beam search稍加改动，原文中作者提到在Matlab代码中只改动一行即可）</p>
+<h1 id="DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS"><a href="#DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS" class="headerlink" title="DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS"></a><a href="https://arxiv.org/abs/1610.02424" target="_blank" rel="external">DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasath R. Selvaraju, Qing Sun1 Stefan Lee, David Crandall &amp; Dhruv Batra</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Virginia Tech, Blacksburg, VA, USA<br>Indiana University, Bloomington, IN, USA</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Beam Search; Diversity; Image Caption; Machine Translation; Visual Question Answer; Chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何改进beam search解码算法，使其在seq2seq模型中可以生成更加丰富的结果？</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>经典的beam search算法以最大后验概率作为优化目标函数，每一个time step只保留B个最优的状态，是一种典型的贪心算法，这个经典算法常常被用于解码可选状态数量多的情形，比如生成对话、生成图片描述、机器翻译等，每一步都有词表大小的可选状态集。seq2seq模型的流行，让这种解码算法的研究变得热门。在生成对话任务时，用经典的beam search会生成类似“我不知道”等这种没有营养的对话，虽然没有语法上的错误，而且可能在一定的评价体系内会得到不错的分数，但实际应用效果太差，因此diversity的研究变得热门。</p>
+<p>本文针对diversity的问题，提出了一种改进版的beam search算法，旨在生成更加多样性的话。</p>
+<p><img src="media/18-5.png" alt="18-5"></p>
+<p>新算法的主要思路是将经典算法中的Beam进行分组，通过引入一个惩罚机制，使得每一组的相似度尽量低，这一项保证了生成的话相互之间差异更大一些，即满足了多样性的需求，在每一组Beam中，用经典的算法进行优化搜索。具体的算法流程如下图：</p>
+<p><img src="media/18-6.png" alt="18-6"></p>
+<p>实验中，用了Image Caption、Machine Translation和VQA三个任务进行了对比，验证了本文算法的有效性，并且对算法中的几个参数进行了敏感度分析，分析了分组数对多样性的影响。</p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>1、本文算法torch实现 <a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a><br>2、本文在线demo dbs.cloudcv.org<br>3、neuraltalk2实现 <a href="https://github.com/karpathy/neuraltalk2" target="_blank" rel="external">https://github.com/karpathy/neuraltalk2</a><br>4、机器翻译开源实现dl4mt <a href="https://github.com/nyu-dl/dl4mt-tutorial" target="_blank" rel="external">https://github.com/nyu-dl/dl4mt-tutorial</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>相关的工作主要分类两类：<br>1、Diverse M-Best Lists<br>2、Diverse Decoding for RNNs<br>之前Jiwei Li将解码算法的目标函数换成了互信息进行优化解码，对diversity进行了研究。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文研究的问题是一类基础问题，beam search算法作为一种经典的近似解码算法，应用的场景非常多。但在实际应用中，尤其是具体到生成对话、生成答案等任务上，存在一些适应性的问题，比如diversity。只是生成简单而又安全的话对于实际应用没有太多的意义，所以本文的研究非常有意义。本文的实验从三个不同的任务上对改进后的beam search都做了对比验证，非常扎实的结果验证了算法的有效性，并且对几个关键参数进行了敏感度分析，有理有据。同时在github上开源了代码，并且给出了一个在线demo。在评价方面，不仅仅设计了几个自动评价指标，而且用了人工评价的方法对本文算法进行了验证，是一篇非常好的paper，值得学习。</p>
+<h1 id="A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models"><a href="#A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models" class="headerlink" title="A Diversity-Promoting Objective Function for Neural Conversation Models"></a><a href="https://arxiv.org/pdf/1510.03055.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Stanford University, Stanford, CA, USA<br>Microsoft Research, Redmond, WA, USA</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Sequence-to-sequence neural network models, conversational responses, Maximum Mutual Information(MMI)</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2015</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>使用MMI训练sequence-to-sequence model for conversational responses generation<br>传统的ML(最大似然估计)在训练sequence-to-sequence model的时候，易产生与输入无关的’safe’ responses(最大似然估计的弊病—-always try to cover all mode of input data)<br>作者通过使用MMI, 最大化输入与输出的互信息，能够有效避免与输入无关的responses，得到更为diverse的responses.</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>MMI最早在speech recognition中提出并应用(discriminative training criteria). 语音识别中，通常先用ML训练声学模型，然后再接MMI和语言模型，对声学模型进一步调优。</p>
+<p>在本文中，作者通过提出MMI用于seq-to-seq model的优化。作者提出了MMI-antiLM和MMI-bidi 两个不同的MMI的formulations. MMI在seq-to-seq的应用中存在decoding的问题。</p>
+<p>MMI-antiLM中，作者通过使用带有权重的LM以生成更为diverse的responses by penalizing first word。</p>
+<p>MMI-bidi中，搜索空间的数目过大，导致expolring所有的可能性在实际中无法实现。作者首先产生N-best list, 然后根据相应的准则函数 re-rank得到的N-best list。</p>
+<p>在MMI不同的formulation中，作者通过启发式的设计，使得decoding更为容易且产生的response更为diverse，在相关的数据集上取得了较好的BLEU且产生的response更为diverse。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>最大后验概率通常作为优化的目标函数，但很多应用场景中得到的结果并不理想。本文采用了一个新的而且也是其他领域中比较常见的目标函数来替换最大后验概率，在生成对话时得到了更加丰富的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统是一个相对高级的、综合性很强的任务，所依赖的基础任务比较多，比如分词、命名实体识别、句法分析、语义角色标注等等。对于规范的中文表达而言，句法分析仍是一个没有解决好的问题，更何况是不那么规范的人话，句法分析的准确性又要下一个level了，随之语义角色标注也得不到好的效果。经典的、基础的任务还有很长的路要走，对话系统这种更难、更复杂的任务相信不是一年、两年就可以突破的事情，虽然现在大热，做的人很多，但就目前的研究水平来看，应该还有很长的路要走。seq2seq是个逃避这些问题的好方法和好思路，但相对来说更加不成熟，而且存在着很多的问题，想通过大量的数据来覆盖所有的问题，是一种不太科学的思路。我想，seq2seq是个好方法，但传统的NLP方法也是必不可少的，而且两者应该是相互补充的。越多的人关注对话系统，就会越快地推动这个领域的发展，希望早日看到靠谱的、成熟的解决方案。感谢@Penny、@tonya、@zhangjun和@皓天 四位童鞋完成的paper notes。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>本周值得读(2016.12.05-2016.12.09)</title>
@@ -1142,43 +1220,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h2&gt;&lt;p&gt;本期PaperWeekly的主题是基于翻译模型(Trans系列)的知识表示学习，主要用来解决知识表示和推理的问题。表示学习旨在将研究对象的语义信息表
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.10.10-2016.10.14</title>
-    <link href="http://rsarxiv.github.io/2016/10/15/cs-CL-weekly-2016-10-10-2016-10-14/"/>
-    <id>http://rsarxiv.github.io/2016/10/15/cs-CL-weekly-2016-10-10-2016-10-14/</id>
-    <published>2016-10-15T17:39:35.000Z</published>
-    <updated>2016-10-15T17:57:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Personalizing-a-Dialogue-System-with-Transfer-Learning"><a href="#Personalizing-a-Dialogue-System-with-Transfer-Learning" class="headerlink" title="Personalizing a Dialogue System with Transfer Learning"></a><a href="https://arxiv.org/pdf/1610.02891v1.pdf" target="_blank" rel="external">Personalizing a Dialogue System with Transfer Learning</a></h2><p>【对话系统】【迁移学习】面向具体任务的对话系统由于数据不充分，面临难以训练的尴尬境地。解决这一问题的方法之一是用迁移学习来做，本文提出了一种基于POMDP的迁移学习框架。并且在购买咖啡的实际场景中得到了应用，取得了不错的效果。港科大杨强老师是迁移学习领域的专家，而迁移学习是解决机器学习中领域数据过小问题的一种有效方法，现有的特有对话系统面临着这个问题，尤其是要求对话系统具有个性化的特点时。本文对于研究语音对话系统和聊天机器人都有一定的启发性。</p>
-<h2 id="Dialogue-Session-Segmentation-by-Embedding-Enhanced-TextTiling"><a href="#Dialogue-Session-Segmentation-by-Embedding-Enhanced-TextTiling" class="headerlink" title="Dialogue Session Segmentation by Embedding-Enhanced TextTiling"></a><a href="https://arxiv.org/pdf/1610.03955v1.pdf" target="_blank" rel="external">Dialogue Session Segmentation by Embedding-Enhanced TextTiling</a></h2><p>【chatbot】【上下文处理】本文研究的内容是开放域聊天机器人context处理的问题，当前聊天的内容很大程度上都会与之前的聊天内容有相关，但并不是每一句都相关，因此算好相关度很有必要。</p>
-<h2 id="Exploiting-Sentence-and-Context-Representations-in-Deep-Neural-Models-for-Spoken-Language-Understanding"><a href="#Exploiting-Sentence-and-Context-Representations-in-Deep-Neural-Models-for-Spoken-Language-Understanding" class="headerlink" title="Exploiting Sentence and Context Representations in Deep Neural Models for Spoken Language Understanding"></a><a href="https://arxiv.org/pdf/1610.04120v1.pdf" target="_blank" rel="external">Exploiting Sentence and Context Representations in Deep Neural Models for Spoken Language Understanding</a></h2><p>【对话系统】【深度学习】本文是steve young组的一篇新文，旨在探索CNN表示对话句子和LSTM表示上下文信息在对话理解问题上的效果，相比于传统方法，DNN方法鲁棒性更强。</p>
-<h2 id="Latent-Sequence-Decompositions"><a href="#Latent-Sequence-Decompositions" class="headerlink" title="Latent Sequence Decompositions"></a><a href="https://arxiv.org/pdf/1610.03035v1.pdf" target="_blank" rel="external">Latent Sequence Decompositions</a></h2><p>【seq2seq】本文研究的内容是对seq2seq框架中输入和输出序列进行有意义分解的问题，而不是简单地分解为char，提出了一种Latent Sequence Decompositions框架，在语音识别问题上取得了不错的效果。其实不仅仅是语音识别问题，在用seq2seq框架时总会遇到OOV的问题，char是一种方法，但信息量太少，如果能够将word sequence分解为更加有意义的子序列，既兼顾了信息量，又降低了词表维度。对英文系的语言效果好一些，中文效果应该不会那么明显。</p>
-<h2 id="Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models"><a href="#Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models" class="headerlink" title="Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models"></a><a href="https://arxiv.org/pdf/1610.02424v1.pdf" target="_blank" rel="external">Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models</a></h2><p>【seq2seq】seq2seq框架中在解码阶段，常常会用beam search来从左至右、贪心地生成N个最好的输出，不仅仅效率低下，而且在很多复杂任务中效果不好。本文提出了一种新的搜索算法。算法会在解空间内exploration和exploitation，通过设定diverse的目标进行训练，得到结果。相比之下，本文的方法更加高效。并且在image  caption、VQA和MT等任务中进行了验证。</p>
-<h2 id="Gated-End-to-End-Memory-Networks"><a href="#Gated-End-to-End-Memory-Networks" class="headerlink" title="Gated End-to-End Memory Networks"></a><a href="https://arxiv.org/pdf/1610.04211v1.pdf" target="_blank" rel="external">Gated End-to-End Memory Networks</a></h2><p>【seq2seq】【memory networks】端到端的记忆网络在简单的机器阅读理解任务上取得了不错的效果，但复杂的事实问答和对话理解相关的任务处理的并不好，原因在于记忆单元与模型之间交互复杂。本文针对该问题，提出了一种Gated记忆网络，取得了不错的效果。本文模型在机器阅读理解bAbI dataset和task-oriented 对话系统任务DSTC2中均取得了非常好的结果。</p>
-<h2 id="Neural-Paraphrase-Generation-with-Stacked-Residual-LSTM-Networks"><a href="#Neural-Paraphrase-Generation-with-Stacked-Residual-LSTM-Networks" class="headerlink" title="Neural Paraphrase Generation with Stacked Residual LSTM Networks"></a><a href="https://arxiv.org/pdf/1610.03098v3.pdf" target="_blank" rel="external">Neural Paraphrase Generation with Stacked Residual LSTM Networks</a></h2><p>【paraphrase】本文提出用多层残差LSTM网络来做paraphrase的任务，得到了比之前seq2seq以及seq2seq+attention更好的效果。转述在某个角度上和标题生成（句子level摘要）类似，方法可借鉴。</p>
-<h2 id="SentiHood-Targeted-Aspect-Based-Sentiment-Analysis-Dataset-for-Urban-Neighbourhoods"><a href="#SentiHood-Targeted-Aspect-Based-Sentiment-Analysis-Dataset-for-Urban-Neighbourhoods" class="headerlink" title="SentiHood: Targeted Aspect Based Sentiment Analysis Dataset for Urban Neighbourhoods"></a><a href="https://arxiv.org/pdf/1610.03771v1.pdf" target="_blank" rel="external">SentiHood: Targeted Aspect Based Sentiment Analysis Dataset for Urban Neighbourhoods</a></h2><p>【观点挖掘】【数据集】本文给出了一个观点挖掘的数据集，数据源来自Yahoo问答中与London相关的提问。这个数据集适合这样的场景，一段评论中包含了多个entity的多个aspect的观点，相互之间有一些比较。</p>
-<h2 id="Domain-specific-Question-Generation-from-a-Knowledge-Base"><a href="#Domain-specific-Question-Generation-from-a-Knowledge-Base" class="headerlink" title="Domain-specific Question Generation from a Knowledge Base"></a><a href="https://arxiv.org/pdf/1610.03807v1.pdf" target="_blank" rel="external">Domain-specific Question Generation from a Knowledge Base</a></h2><p>【问题生成】问答系统是一个热门研究领域，其关注点在于如何理解问题然后选择或者生成相应的答案。而本文研究的问题是如何根据知识图谱生成高质量的问题。提出高质量的问题难度很大，且看本文内容。</p>
-<h2 id="Compressing-Neural-Language-Models-by-Sparse-Word-Representations"><a href="#Compressing-Neural-Language-Models-by-Sparse-Word-Representations" class="headerlink" title="Compressing Neural Language Models by Sparse Word Representations"></a><a href="https://arxiv.org/pdf/1610.03950v1.pdf" target="_blank" rel="external">Compressing Neural Language Models by Sparse Word Representations</a></h2><p>【语言模型】【提升效率】本文解决的是在学习语言模型时输出层词表过大的问题，词表过大导致效率过低，本文针对这一问题，提出了一种压缩方法，常见词用dense向量来表示，而罕见词用常见词的线性组合来表示。</p>
-<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="CCL-amp-NLP-NABD-2016论文集"><a href="#CCL-amp-NLP-NABD-2016论文集" class="headerlink" title="CCL &amp; NLP-NABD 2016论文集"></a><a href="http://www.cips-cl.org/static/CCL2016/index.html" target="_blank" rel="external">CCL &amp; NLP-NABD 2016论文集</a></h2><p>由Springer出版的CCL &amp; NLP-NABD 2016论文集已经公布，并在10月10日-11月10日期间可以免费下载。免费下载方式如下：（1）访问会议首页；（2）点击该页面最新“会议论文下载”中的链接；（3）点击新页面的“Download Book (PDF, 35547KB)”按钮。</p>
-<h2 id="北京大学万小军老师组开源自动摘要小工具PKUSUMSUM"><a href="#北京大学万小军老师组开源自动摘要小工具PKUSUMSUM" class="headerlink" title="北京大学万小军老师组开源自动摘要小工具PKUSUMSUM"></a><a href="http://www.icst.pku.edu.cn/lcwm/wanxj/pkusumsum.htm" target="_blank" rel="external">北京大学万小军老师组开源自动摘要小工具PKUSUMSUM</a></h2><p>本组推出文档自动摘要小工具PKUSUMSUM，集成多种无监督摘要提取算法，支持多种摘要任务与多种语言，采用Java编写，代码完全开源，欢迎批评指正，也欢迎同行一起完善该工具。</p>
-<h2 id="斯坦福大学NLP组2016年秋季paper阅读周计划"><a href="#斯坦福大学NLP组2016年秋季paper阅读周计划" class="headerlink" title="斯坦福大学NLP组2016年秋季paper阅读周计划"></a><a href="http://nlp.stanford.edu/read/" target="_blank" rel="external">斯坦福大学NLP组2016年秋季paper阅读周计划</a></h2><p>斯坦福大学NLP组2016年秋季paper阅读周计划，挺多篇都是对话系统相关的。 </p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Personalizing-a-Dialogue-System-with-Transfer-Learnin
     
     </summary>
     

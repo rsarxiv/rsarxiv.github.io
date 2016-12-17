@@ -65,6 +65,94 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-12-17T18:37:27.000Z"><a href="/2016/12/17/PaperWeekly-第十八期/">2016-12-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/17/PaperWeekly-第十八期/">PaperWeekly 第十八期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
+<p>1、Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation, 2016<br>2、A Simple, Fast Diverse Decoding Algorithm for Neural Generation, 2016<br>3、DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS, 2016<br>4、A Diversity-Promoting Objective Function for Neural Conversation Models, 2015</p>
+<h1 id="Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation"><a href="#Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation" class="headerlink" title="Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation"></a><a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></h1><h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Key Laboratory of High Confidence Software Technologies (Peking University), MoE, China<br>Institute of Software, Peking University, China<br>Institute of Network Computing and Information Systems, Peking Univerity, China<br>Institute of Computer Science and Technology, Peking University, China</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
+<p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
+<p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Dataset：<a href="http://tieba.baidu.com" target="_blank" rel="external">http://tieba.baidu.com</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、 Dialogue Systems<br>(1) (Isbell et al., 2000; Wang et al., 2013) retrieval methods<br>(2)  (Ritter et al., 2011) phrase-based machine translation<br>(3)  (Sordoni et al., 2015; Shang et al., 2015) recurrent neural networks </p>
+<p>2、 Neural Networks for Sentence Generation<br>(1)  (Sordoni et al., 2015) bag-of-words features<br>(2)  (Shang et al., 2015) seq2seq-like neural networks<br>(3)  (Yao et al., 2015; Serban et al., 2016a) design hierarchical neural networks<br>(4)  (Li et al., 2016a) mutual information training objective</p>
+<p>##简评</p>
+<p>本文的创新点在于，不同与目前普遍存在的从句首到句尾顺序生成目标单词的方法，引入逐点互信息方法来预测回答语句中的关键词，使用seq2BF机制确保该关键词可以出现在目标回答语句的任意位置之中并确保输出的流利度，相比于seq2seq的生成方法显著地提升了对话系统的质量。</p>
+<h1 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation"></a><a href="https://arxiv.org/abs/1611.08562" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe and Dan Jurafsky</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, diversity, RL</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>seq2seq模型decoder时改进beam search，引入惩罚因子影响排序结果，并加入强化学习模型来自动学习diversity rate，使得解码出的结果更具多样性</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/18-0.png" alt="18-0"></p>
+<p>对比标准beam search，本模型引入惩罚因子，公式如下</p>
+<p><img src="media/18-1.png" alt="18-1"></p>
+<p>其中$\gamma$称为diversity rate，k’范围为[1,k]，K为beam size<br>强化学习模型中，策略为</p>
+<p><img src="media/18-2.png" alt="18-2"></p>
+<p>reward为评价指标，例如机器翻译中的BLEU值等</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、回复生成实验数据集：OpenSubtitles <a href="https://github.com/jiweil/mutual-information-for-neural-machine-translation" target="_blank" rel="external">https://github.com/jiweil/mutual-information-for-neural-machine-translation</a><br>（代码模型可从作者另外一篇文章的源码稍加改动）</p>
+<p>2、机器翻译数据集：WMT’14 <a href="http://www.statmt.org/wmt13/translation-task.html" target="_blank" rel="external">http://www.statmt.org/wmt13/translation-task.html</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/18-3.png" alt="18-3"></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本模型的创新点在于引入惩罚因子，使得decoder时对standard beam search算法进行重排序，并引入强化学习模型，自动学习diversity rate。作者分别在三个实验上进行验证，机器翻译、摘要抽取与对话回复生成，实验表明在不同的实验上有不同的表现，但是总体而言本方法能够在一定程度上解码出更具有多样性的句子。（思路简明清晰，对于传统的beam search稍加改动，原文中作者提到在Matlab代码中只改动一行即可）</p>
+<h1 id="DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS"><a href="#DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS" class="headerlink" title="DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS"></a><a href="https://arxiv.org/abs/1610.02424" target="_blank" rel="external">DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasath R. Selvaraju, Qing Sun1 Stefan Lee, David Crandall &amp; Dhruv Batra</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Virginia Tech, Blacksburg, VA, USA<br>Indiana University, Bloomington, IN, USA</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Beam Search; Diversity; Image Caption; Machine Translation; Visual Question Answer; Chatbot</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何改进beam search解码算法，使其在seq2seq模型中可以生成更加丰富的结果？</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>经典的beam search算法以最大后验概率作为优化目标函数，每一个time step只保留B个最优的状态，是一种典型的贪心算法，这个经典算法常常被用于解码可选状态数量多的情形，比如生成对话、生成图片描述、机器翻译等，每一步都有词表大小的可选状态集。seq2seq模型的流行，让这种解码算法的研究变得热门。在生成对话任务时，用经典的beam search会生成类似“我不知道”等这种没有营养的对话，虽然没有语法上的错误，而且可能在一定的评价体系内会得到不错的分数，但实际应用效果太差，因此diversity的研究变得热门。</p>
+<p>本文针对diversity的问题，提出了一种改进版的beam search算法，旨在生成更加多样性的话。</p>
+<p><img src="media/18-5.png" alt="18-5"></p>
+<p>新算法的主要思路是将经典算法中的Beam进行分组，通过引入一个惩罚机制，使得每一组的相似度尽量低，这一项保证了生成的话相互之间差异更大一些，即满足了多样性的需求，在每一组Beam中，用经典的算法进行优化搜索。具体的算法流程如下图：</p>
+<p><img src="media/18-6.png" alt="18-6"></p>
+<p>实验中，用了Image Caption、Machine Translation和VQA三个任务进行了对比，验证了本文算法的有效性，并且对算法中的几个参数进行了敏感度分析，分析了分组数对多样性的影响。</p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>1、本文算法torch实现 <a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a><br>2、本文在线demo dbs.cloudcv.org<br>3、neuraltalk2实现 <a href="https://github.com/karpathy/neuraltalk2" target="_blank" rel="external">https://github.com/karpathy/neuraltalk2</a><br>4、机器翻译开源实现dl4mt <a href="https://github.com/nyu-dl/dl4mt-tutorial" target="_blank" rel="external">https://github.com/nyu-dl/dl4mt-tutorial</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>相关的工作主要分类两类：<br>1、Diverse M-Best Lists<br>2、Diverse Decoding for RNNs<br>之前Jiwei Li将解码算法的目标函数换成了互信息进行优化解码，对diversity进行了研究。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本文研究的问题是一类基础问题，beam search算法作为一种经典的近似解码算法，应用的场景非常多。但在实际应用中，尤其是具体到生成对话、生成答案等任务上，存在一些适应性的问题，比如diversity。只是生成简单而又安全的话对于实际应用没有太多的意义，所以本文的研究非常有意义。本文的实验从三个不同的任务上对改进后的beam search都做了对比验证，非常扎实的结果验证了算法的有效性，并且对几个关键参数进行了敏感度分析，有理有据。同时在github上开源了代码，并且给出了一个在线demo。在评价方面，不仅仅设计了几个自动评价指标，而且用了人工评价的方法对本文算法进行了验证，是一篇非常好的paper，值得学习。</p>
+<h1 id="A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models"><a href="#A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models" class="headerlink" title="A Diversity-Promoting Objective Function for Neural Conversation Models"></a><a href="https://arxiv.org/pdf/1510.03055.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Stanford University, Stanford, CA, USA<br>Microsoft Research, Redmond, WA, USA</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Sequence-to-sequence neural network models, conversational responses, Maximum Mutual Information(MMI)</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2015</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>使用MMI训练sequence-to-sequence model for conversational responses generation<br>传统的ML(最大似然估计)在训练sequence-to-sequence model的时候，易产生与输入无关的’safe’ responses(最大似然估计的弊病—-always try to cover all mode of input data)<br>作者通过使用MMI, 最大化输入与输出的互信息，能够有效避免与输入无关的responses，得到更为diverse的responses.</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>MMI最早在speech recognition中提出并应用(discriminative training criteria). 语音识别中，通常先用ML训练声学模型，然后再接MMI和语言模型，对声学模型进一步调优。</p>
+<p>在本文中，作者通过提出MMI用于seq-to-seq model的优化。作者提出了MMI-antiLM和MMI-bidi 两个不同的MMI的formulations. MMI在seq-to-seq的应用中存在decoding的问题。</p>
+<p>MMI-antiLM中，作者通过使用带有权重的LM以生成更为diverse的responses by penalizing first word。</p>
+<p>MMI-bidi中，搜索空间的数目过大，导致expolring所有的可能性在实际中无法实现。作者首先产生N-best list, 然后根据相应的准则函数 re-rank得到的N-best list。</p>
+<p>在MMI不同的formulation中，作者通过启发式的设计，使得decoding更为容易且产生的response更为diverse，在相关的数据集上取得了较好的BLEU且产生的response更为diverse。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>最大后验概率通常作为优化的目标函数，但很多应用场景中得到的结果并不理想。本文采用了一个新的而且也是其他领域中比较常见的目标函数来替换最大后验概率，在生成对话时得到了更加丰富的结果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统是一个相对高级的、综合性很强的任务，所依赖的基础任务比较多，比如分词、命名实体识别、句法分析、语义角色标注等等。对于规范的中文表达而言，句法分析仍是一个没有解决好的问题，更何况是不那么规范的人话，句法分析的准确性又要下一个level了，随之语义角色标注也得不到好的效果。经典的、基础的任务还有很长的路要走，对话系统这种更难、更复杂的任务相信不是一年、两年就可以突破的事情，虽然现在大热，做的人很多，但就目前的研究水平来看，应该还有很长的路要走。seq2seq是个逃避这些问题的好方法和好思路，但相对来说更加不成熟，而且存在着很多的问题，想通过大量的数据来覆盖所有的问题，是一种不太科学的思路。我想，seq2seq是个好方法，但传统的NLP方法也是必不可少的，而且两者应该是相互补充的。越多的人关注对话系统，就会越快地推动这个领域的发展，希望早日看到靠谱的、成熟的解决方案。感谢@Penny、@tonya、@zhangjun和@皓天 四位童鞋完成的paper notes。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-11T16:51:29.000Z"><a href="/2016/12/11/本周值得读-2016-12-05-2016-12-09/">2016-12-11</a></time>
       
       
@@ -3357,150 +3445,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-17T05:02:39.000Z"><a href="/2016/07/16/也说bot/">2016-07-16</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/16/也说bot/">也说bot</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot是最近一段时间非常火的一个词或者一个应用，不仅仅各大新闻媒体在热炒bot的概念，各大巨头也投入巨大的资源进行研发，arxiv上刷出bot相关的paper也更是家常便饭。炒作归炒作，PR归PR，不得不说一个尴尬的事实是市面上确实难以找到一个真正好用的bot。bot按照涉及的领域，分为开放域(open-domain)和面向具体任务(task-oriented)的bot。开放域要做的事情很大，更像是一个什么都能搞的平台，不管你提什么样的需求，它都能够解决，有点true AI的意思，而面向任务的bot则专注做好一件事情，订机票，订餐，办护照等等。</p>
-<p>说到开放域bot，大家接触最多的也就是一些回答非常无厘头的娱乐用bot，比如很多年前活跃在各大社交网站上的小黄鸡，现在市面上活跃着很多号称掌握了bot技术，在用深度学习解决bot技术的bot公司，都是这种，解决不了什么实际问题，就是能和大家聊上两句，而且很多时候回答都是牛头不对马嘴的，十分可笑。</p>
-<p>再说task-oriented bot，市面上最多的就是客服机器人，银行也好，电商也罢，不想重复性地回答用户的问题，就用一个客服机器人来应对，且不说效果如何，开发一个具体task的bot需要费不少工夫，而且后期还要大量的维护，因为太多的hand crafted features被用到，整个bot的框架横向扩展性相对来说较差，换一个场景基本上就需要重新开发一套，人力成本太高了。</p>
-<p>bot的理想非常丰满，大公司描绘的场景也确实很美，但现实的bot却狠狠地浇了一盆冷水下来。期望越高，失望越大。如果媒体一味地吹捧bot，仿佛整个世界明天就会是bot的了，对bot的发展并无益处，捧杀只会带来气泡，破裂之后，一切如初。</p>
-<p>功能强大的、开放域的bot在短期内是比较难实现的，但是如果降低期望，将bot不应当做是一种技术层面的革命，而应当做交互层面的革新才是理性的态度，bot作为一种入口，可能大家都不再需要一个随身携带的终端，只需要找到一个可以识别身份，可以联网的硬件，比如一面镜子，就可以执行很多的task，订机票、买东西等等等等。bot这个时候起到的是一个操作的入口和背后执行各种不同task的黑箱，我们不需要看到整个执行过程，也不需要知道原理是什么，通过一些简单的语言交互，就能完成一些复杂的task，终端要做的事情就是反馈结果和接收输入，执行的过程都在云端，各种bot云。</p>
-<p>而这一切的关键是解决好task-oriented bot，用更多data driven的解决方案来代替传统的人工features和templates。</p>
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>bot是一个综合性的问题，涉及到下面三个主要问题：</p>
-<p>1、response generation(selection)</p>
-<p>对话生成是最后一个步骤，是输出的部分。简单总结下，有四种solutions：</p>
-<p><b>solution 1</b> 直接根据context来生成对话，这方面最近的paper非常地多，尤其是seq2seq+attention框架席卷了NLP的很多任务之后，对话生成的benchmark也一次又一次地被各种model刷新着。对话生成的问题，被定义为基于某个条件下的生成模型，典型的根据context来predict words，涉及到句子生成的问题，评价问题就会是一个比较难的问题。</p>
-<p><b>solution 2</b> 当然有的paper并不是将对话生成定义为语言模型问题，而是一个next utterance selection的问题，一个多选一的问题，给定一个context，给定一个utterance candidate list，从list中选择一个作为response，当然这类问题的难度会小很多，评价起来也非常容易，但是数据集准备起来要多花一些功夫，而且在实际应用中不好被借鉴。</p>
-<p><b>solution 3</b> rule-based或者说template-based，response的最终形式其实是填充了一个模板而成的，大多数的东西是给定的，只有一些具体的value需要来填充。这一类解决方案很适合做task-oriented bot，但过多的人工features和templates导致了其难以移植到其他task上。</p>
-<p><b>solution 4</b> query-based或者说example-based，response是来自于一个叫做知识库的数据库，里面包含了大量的、丰富的example，根据用户的query，找到最接近的example，将对应的response返回出来作为输出。这一类解决方案非常适合做娱乐、搞笑用的bot，核心技术在于找更多的数据来丰富知识库，来清洗知识库。但毕竟respnose是从别人那里拿出来的，可能会很搞笑，但大多数会牛头不对马嘴。</p>
-<p>2、dialog state tracking(DST)</p>
-<p>有的paper称DST为belief trackers，这个部件其实是bot的核心，它的作用在于理解或者捕捉user intention或者goal，只有当你真的知道用户需要什么，你才能做出正确的action或者response。关于这个部分，会有Dialog State Tracking Challenge比赛。一般来说都会给定一个state的范围，通过context来predict用户属于哪个state，有什么样的需求，是需要查询天气还是要查询火车票。</p>
-<p>3、user modeling</p>
-<p>bot面向具体的业务，都是和真实的user来打交道的，如果只是简单的FAQ bot，回答几个常见的问题可能不需要这块，但如果是其他更加复杂、细致的业务，都需要给用户建模，相同的问题，bot给每个人的response一定是不同的，这个道理非常简单。user modeling，需要涉及的不仅仅是简单的用户基本信息和用户的一些显式反馈信息，而更重要的是用户的history conversations，这些隐式的反馈信息。就像是推荐系统火起来之前，大家都是中规中矩地卖东西，但是有一些聪明人开始分析用户的行为，不仅是那些点赞行为，更多的是那些用户不经意间留下的“蛛丝马迹”，从而知道了用户对哪些东西潜在地感兴趣，也就是后来推荐系统在做的事情。对user进行建模，就是做一个个性化的bot，生成的每一个response都有这个user鲜明的特点。</p>
-<h1 id="语料"><a href="#语料" class="headerlink" title="语料"></a>语料</h1><p>大型的语料都是用来训练开放域bot对话生成模型的，数据源一般都是来自社交网站。而对于task-oriented bot来说，客户的数据一般规模都非常地小，这也正是难以将data driven的方案直接套用到task-oriented bot上的一个主要原因。</p>
-<p>[1]中给出了bot训练语料的survey，感兴趣的同学可以读一下这篇survey。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>图来自文章[13]，英文的语料确实比较多，Sina Weibo那个语料是华为诺亚方舟实验室release的[12]。从twitter或者微博上产生bot数据的话，“conversational in nature”效果不如从ubuntu chat logs这种聊天室产生的数据更加适合训练response生成模型，因为更加天然无公害。文章[5]也用了一个大型中文语料，数据来自百度贴吧。</p>
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p> 研究bot的paper是在太多了，这是一个非常活跃的研究领域，细分的方向也非常的多，接下来按照所针对的研究问题来分别介绍一些模型。</p>
-<h2 id="seq2seq生成模型"><a href="#seq2seq生成模型" class="headerlink" title="seq2seq生成模型"></a>seq2seq生成模型</h2><p> 现在最流行的解决方案是seq2seq+attention，encoder将user query feed进来，输出一个vector representation来表示整个query，然后作为decoder的condition，而decoder本质上就是一个语言模型，一步一步地生成response，[2]采用就是这种方案，google用了海量的参数训练出这么一个模型，得到了一个不错的bot。</p>
-<p><img src="media/8.png" alt="8"></p>
-<p> 而典型的seq2seq存在一个问题，就是说容易生成一些“呵呵”的response，即一些非常safe，grammatical但没有实际意义的response，比如”I don’t know!”之类的。原因在于传统的seq2seq在decoding过程中都是以MLE(Maximum Likelihood Estimate)为目标函数，即生成最grammatical的话，而不是最有用的话，这些safe句子大量地出现在训练语料中，模型学习了之后，无可避免地总是生成这样的response，而文章[3]借鉴了语音识别的一些经验，在decoding的时候用MMI（Maximum Mutual Information）作为目标函数，提高了response的diversity。</p>
-<p> 文章[4]认为类似于RNNLM这样的语言模型在生成人话质量不高的根本原因在于，没有处理好隐藏在utterance中的随机feature或者说noise，从而在生成next token（short term goal）和future tokens（long term goal）效果一般。</p>
-<p><img src="media/3.png" alt="3"></p>
-<p> 在生成每一个utterance时，需要用到四个部分，encoder RNN、context RNN、latent variable、decoder RNN，按顺序依次输入和输出。这里的latent variable和IR中的LSI有一点异曲同工，latent表明我们说不清他们到底具体是什么，但可能是代表一种topic或者sentiment，是一种降维的表示。</p>
-<p> 文章[5]提出了一种叫做content introducing的方法来生成短文本response。</p>
-<p><img src="media/4.png" alt="4"></p>
-<p><b>step 1</b> 给定query之后，预测一个keyword作为response的topic，这个topic词性是名词，这里的keyword并不能捕捉复杂的语义和语法，而只是根据query的每个词来预估出一个PMI（Pointwise Mutual Information）最高的名词作为keyword.</p>
-<p><b>step 2</b> [5]的模型叫做Sequence To Backward and Forward Sequences，首先进行backward step，给定一个query，用encoder表示出来得到一个context，decoder的部分首先给定keyword作为第一个词，然后进行decoding，生成的这部分相当于keyword词前面的部分；接下来进行的是forward step，也是一个典型的seq2seq，用encoder将query表示成context，然后给定backward生成的话和keyword作为decoder的前半部分，继续decoding生成后半部分。整个的流程这样简单描述下：</p>
-<p><b>step 1</b> query + keyword =&gt; backward sequence</p>
-<p><b>step 2</b> query + keyword + backward sequence(reverse) =&gt; forward sequence</p>
-<p><b>step 3</b> response = backward (reverse) sequence + keyword + forward sequence</p>
-<h2 id="user-modeling模型"><a href="#user-modeling模型" class="headerlink" title="user modeling模型"></a>user modeling模型</h2><p>文章[6]针对的问题是多轮对话中response不一致的问题，将user identity（比如背景信息、用户画像，年龄等信息）考虑到model中，构建出一个个性化的seq2seq模型，为不同的user，以及同一个user对不同的请将中生成不同风格的response。</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>[6]的模型叫Speaker Model，是一个典型的seq2seq模型，不同的地方在于在decoding部分增加了一个speaker embedding，类似于word embedding，只是说这里对用户进行建模。因为无法对用户的信息显式地进行建模，所以用了一种embedding的方法，通过训练来得到speaker向量，下面左边的图是speaker向量在二维平面上的表示，具有相似背景信息的user就会很接近，与word向量一个道理。</p>
-<h2 id="reinforcement-learning模型"><a href="#reinforcement-learning模型" class="headerlink" title="reinforcement learning模型"></a>reinforcement learning模型</h2><p>用增强学习来解决人机对话问题具有很悠久的历史，只不过随着AlphaGo的炒作，deepmind公司将增强学习重新带回了舞台上面，结合着深度学习来解决一些更难的问题。</p>
-<p>增强学习用long term reward作为目标函数，会使得模型通过训练之后可以predict出质量更高的response，文章[7]提出了一个模型框架，具有下面的能力：</p>
-<p>1、整合开发者自定义的reward函数，来达到目标。</p>
-<p>2、生成一个response之后，可以定量地描述这个response对后续阶段的影响。</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>两个bot在对话，初始的时候给定一个input message，然后bot1根据input生成5个候选response，依次往下进行，因为每一个input都会产生5个response，随着turn的增加，response会指数增长，这里在每轮对话中，通过sample来选择出5个作为本轮的response。</p>
-<p>在一个大型数据集上训练一个效果不错的seq2seq作为初始值，用增强学习来提升模型实现自定义reward函数的能力，以达到期待的效果。</p>
-<p>文章[7]的模型可以生成更多轮数的对话，而不至于过早地陷入死循环中，而且生成的对话diversity非常好。</p>
-<h2 id="task-oriented-seq2seq模型"><a href="#task-oriented-seq2seq模型" class="headerlink" title="task-oriented seq2seq模型"></a>task-oriented seq2seq模型</h2><p>现有的task-oriented bot多是采用rule-based、template-based或者example-based或者是综合起来用，用data driven的解决方案十分稀有。文章[8]和[9]就是尝试在bot的个别部件上采用深度学习的技术来做，并且给出了切实可行的方案。</p>
-<p>文章[8]先是从一个大家熟知的场景开始介绍，一个经验丰富的客服是如何带一个新入职的客服，分为四个阶段：</p>
-<p>1、告诉新客服哪些”controls”是可用的，比如：如何查找客户的信息，如何确定客户身份等等。</p>
-<p>2、新客服从老客服做出的good examples中模仿学习。</p>
-<p>3、新客服开始试着服务客户，老客服及时纠正他的错误。</p>
-<p>4、老客服放手不管，新客服独自服务客户，不断学习，不断积累经验。</p>
-<p>[8]的模型框架就是依照上面的过程进行设计的：</p>
-<p>1、开发者提供一系列备选的actions，包括response模板和一些API函数，用来被bot调用。</p>
-<p>2、由专家提供一系列example dialogues，用RNN来学习。</p>
-<p>3、用一个模拟user随机产生query，bot进行response，专家进行纠正。</p>
-<p>4、bot上线服务，与真实客户进行对话，通过反馈来提高bot服务质量。</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>一个完整的工作流程由上图描述，具体步骤看下图：</p>
-<p><img src="media/12.png" alt="12"></p>
-<p>训练的时候是用一部分高质量的数据进行监督学习SL，用增强学习RL来优化模型，得到质量更高的结果。</p>
-<p>文章[9]平衡了两种流行方案的优缺点，提出了一套有参考价值的、具有实际意义的seq2seq解决方案。</p>
-<p><img src="media/10.png" alt="10"></p>
-<p>一共五个组件：</p>
-<p>1、 Intent Network</p>
-<p>这个部分可以理解为seq2seq的encoder部分，将用户的输入encode成一个vector。</p>
-<p>2、 Belief Trackers</p>
-<p>又被称为Dialogue State Tracking(DST)，是task-oriented bot的核心部件。本文的Belief Trackers具有以下的作用：</p>
-<ul>
-<li>支持各种形式的自然语言被映射成一个有限slot-value对集合中的元素，用于在数据库中进行query。</li>
-<li>追踪bot的state，避免去学习那些没有信息量的数据。</li>
-<li>使用了一种weight tying strategy，可以极大地减少训练数据的需求。</li>
-<li>易扩展新的组件。</li>
-</ul>
-<p>3、 Database Operator</p>
-<p>数据库查询的输入来自于Belief Trackers的输出，即各种slot的概率分布，取最大的那个作为DB的输入，进行查询，获取到相应的值。</p>
-<p>4、 Policy Network</p>
-<p>这个组件是像一个胶水，起到粘合其他上面三个组件的作用。输入是上面三个组件的输出，输出是一个向量。</p>
-<p>5、 Generation Network</p>
-<p>最后一个组件是生成模型，本质上是一个语言模型，输入是Policy Network的输出，输出是生成的response，再经过一些处理之后可以返回给用户了。这里的处理主要是将response中的slot，比如s.food还原成真实的值。这一步和文章[8]的step 10一样，将具体的值还原到entity上。</p>
-<p>完全用end-to-end来解决task-oriented是不可能的事情，一定是在一个框架或者体系内用这种seq2seq的解决方案来做这件事情，文章[8]和[9]给出了很大的启发。</p>
-<h2 id="Knowledge-Sources-based模型"><a href="#Knowledge-Sources-based模型" class="headerlink" title="Knowledge Sources based模型"></a>Knowledge Sources based模型</h2><p>纯粹的seq2seq可以解决很多问题，但如果针对具体的任务，在seq2seq的基础上增加一个相关的knowledge sources会让效果好很多。这里的knowledge可以是非结构化的文本源，比如文章[10]中的ubuntu manpages，也可以是结构化的业务数据，比如文章[9]中的database，也可以是一个从源数据和业务数据中提取出的knowledge graph。</p>
-<p>文章[10]作者将bot任务定义为next utterance classification，有一点像question answering任务，给定一个context和一个response candidate list作为备选答案，通过context来从candidate list中选择正确的response。本文的贡献在于在context的基础上，引入了task相关的外部专业知识库，并且这个知识库是非结构化的。</p>
-<p><img src="media/11.png" alt="11"></p>
-<p>模型是三个rnn encoder组成，一个rnn来encode context，一个rnn来encode response，还有一个rnn来encode knowledge，然后综合起来做预测，选出最合适的response。模型被称作knowledge encoder。因为数据集采用的是ubuntu technical support相关的数据集，外部资源就选用了ubuntu manpages。</p>
-<h2 id="context-sensitive模型"><a href="#context-sensitive模型" class="headerlink" title="context sensitive模型"></a>context sensitive模型</h2><p>文章[11]的模型比较简单，但考虑的问题意义很大，history information的建模对于bot在解决实际工程应用的帮助很大，也直接决定了你的bot是否能够work。作者将history context用词袋模型表示，而不是我们经常采用的rnn，然后将context和用户query经过一个简单的FNN，得到一个输出。</p>
-<p><img src="media/9.png" alt="9"> </p>
-<h1 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h1><p>bot response评价很难，虽然说可以借鉴机器翻译的自动评价方法BLEU来做，但效果不会太好。几乎每篇paper都是会花钱雇人来做人工评价，设计一套评价机制来打分，人工的评价更具有说服力。对于实际工程应用更是如此，用户说好才是真的好。而不是简单地拿着自己提的、有偏的指标，和几个方法或者其他公司的bot进行对比，来说明自己好。</p>
-<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>读了一些paper，也和一线在做bot应用的工程师交流之后，有了一点思考，总结如下：</p>
-<p>1、要不要做bot？流行一种说法是市面上没有好用的bot，要解决bot的问题需要很多技术同时进步，可能还需要非常长的一段时间，现在用这个东西来做business，简直荒谬。我个人的看法是，解决具体task的bot，结合当前先进的技术，做一些框架性的工具，并不是那么遥远的事情，虽然不容易，但却非常有意义，解决了垂直领域的bot问题，才有可能解决open domain的bot问题。也正是因为不容易，提高了门槛，才会出现真正的机会，诞生一些很牛的技术公司。</p>
-<p>2、open domain还是task-oriented？如果是我，我会选后者，因为前者只是一个梦想，一个遥不可及的梦想，需要更多的技术层面上的大突破。task-oriented更加具体，更加实用，针对具体的业务，提供一些解决方案，已经有很多企业在做了，虽然一个通用性或者扩展性强的解决方案还没有出现，但一定是一个趋势，也是新一代做bot的公司的机会。</p>
-<p>3、task-oriented bot为什么难，该朝哪个方向来发力？end-to-end是一种理想化的模型，用深度学习模型从大量训练数据中来“捕捉”一些features，“拟合”一些函数，虽然可以得到很不错的效果，而且使用起来确实很方便，但尴尬就尴尬在具体的task中是拿不到海量数据的，数据规模小了之后，纯粹的end-to-end就变得非常鸡肋了。然而真实的场景中，很多企业又有一定的数据，也有bot的需求，所以现在成熟的解决方案就是针对你的具体业务，来设计一些features，templates和rules，当客户的业务发生更改时，需要不断地维护现有的bot系统，十分费时费力。真实的场景中往往涉及到很多结构化的业务数据，纯粹地、暴力地直接根据context生成response是不可能做到的，文章[8][9]都给出了非常有启发性的解决方案，将end-to-end应用在局部，而非整体上，配合上Information Extraction和Knowledge Graph等技术，实现一个高可用的框架体系，这个应该是task-oriented bot的发展方向。</p>
-<p>4、response的生成应该与哪些因素有关呢？response质量的好坏，需要联系到这几个features：（1）user query，用户的提问，用户在这轮对话中到底在问什么，准确地理解用户的意图，这是至关重要的。（2）user modeling，对用户进行建模，包括用户的基本信息，还有更重要的是用户history conversation logs的mining，这个工作很难，但同时也很见水平，也是一家技术公司证明自己技术牛逼的一种途径。logs的挖掘现在很常见，不见得大家都做的很好，而这里的logs不是一般的设定好的、结构化的指标，而是非结构化的文本logs，挖掘起来难度更大。另外一点，也是paper种看到的，user emotion，情感分析是nlp中研究比较多的task，用户的情绪直接关系到销售的成败，如果技术足够牛，可以考虑的因素就可以足够多，对user的分析也就足够清晰。将history生挂在模型中不是一个好办法，因为history是不断增长，会导致模型在捕捉信息时出现问题，更好的办法可能是build user profile之类的东西，将history沉淀出来，作为一个vector representation，或者一种knowledge graph来表征一个user。有了这种能力的bot，说的冠冕堂皇一点就是个性化的bot。（3）knowledge，外部知识源，涉及到具体业务的时候，业务数据也是一种knowledge，如何将knowledge建模到模型中，在生成对话的时候可以更加专业和准确也是一个非常重要的问题。bot是一个综合性的难题，不仅仅是系统框架上的难，而且是建模上的难。</p>
-<p>5、我一直觉得做人和看问题都不可以极端，世界并非非黑即白，而是介于两者之间的连续值。不可能说要么做成一个open-domain巨无霸的bot，要么就是一个什么具体功能都没有的bot，不能只看到现有的bot不成熟，以及幻想中的bot遥不可及，就开始黑这个领域，还嘲笑人家能够居然拿到投资。争吵这些毫无意义，真正有意义的是深挖这个领域，找到痛点和难点，逐个击破，不断地推进这个领域的发展，而不是像一些街边看热闹的人一样，简直无趣！在很多领域突破之前，仿佛都看不到曙光，但几年之后很多当时难以解决的问题不都是红海一片，满大街都是了么？做一个通用的bot可能很长一段时间内都是一件比较困难的事情，但做一个高可用、扩展性不错的bot解决方案还是有盼头的，不必过度自信，也不必妄自菲薄，踏踏实实地做就是了。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1] <a href="http://arxiv.org/pdf/1512.05742.pdf" target="_blank" rel="external">A Survey of Available Corpora for Building Data-Driven Dialogue Systems</a></p>
-<p>[2] <a href="http://cn.arxiv.org/pdf/1506.05869.pdf" target="_blank" rel="external">A Neural Conversational Model</a></p>
-<p>[3] <a href="http://arxiv.org/pdf/1510.03055v1.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></p>
-<p>[4] <a href="https://arxiv.org/pdf/1605.06069v3.pdf" target="_blank" rel="external">A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues</a></p>
-<p>[5] <a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></p>
-<p>[6] <a href="https://arxiv.org/pdf/1603.06155.pdf" target="_blank" rel="external">A Persona-Based Neural Conversation Model</a></p>
-<p>[7] <a href="http://arxiv.org/pdf/1606.01541v3.pdf" target="_blank" rel="external">Deep Reinforcement Learning for Dialogue Generation</a></p>
-<p>[8] <a href="http://arxiv.org/pdf/1606.01269v1.pdf" target="_blank" rel="external">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning</a></p>
-<p>[9] <a href="http://arxiv.org/pdf/1604.04562v2.pdf" target="_blank" rel="external">A Network-based End-to-End Trainable Task-oriented Dialogue System</a></p>
-<p>[10] <a href="http://media.wix.com/ugd/b6d786_137894b7b3a341a09ed0c0b45b46dbb6.pdf" target="_blank" rel="external">Incorporating Unstructured Textual Knowledge Sources into Neural Dialogue Systems</a></p>
-<p>[11] <a href="https://michaelauli.github.io/papers/chitchat.pdf" target="_blank" rel="external">A Neural Network Approach to Context-Sensitive Generation of Conversational Responses</a></p>
-<p>[12] <a href="http://staff.ustc.edu.cn/~cheneh/paper_pdf/2013/HaoWang.pdf" target="_blank" rel="external">A Dataset for Research on Short-Text Conversation</a></p>
-<p>[13] <a href="http://arxiv.org/pdf/1506.08909v3.pdf" target="_blank" rel="external">The Ubuntu Dialogue Corpus: A Large Dataset for Research in Unstructured Multi-Turn Dialogue Systems</a></p>
-<h1 id="研究组和研究人员"><a href="#研究组和研究人员" class="headerlink" title="研究组和研究人员"></a>研究组和研究人员</h1><p>bot是一个非常活跃的研究领域，全世界有很多的人都在做相关的研究。下面列的是最近所读paper的作者或者所在的group：</p>
-<p>[1] <a href="http://mi.eng.cam.ac.uk/research/dialogue/" target="_blank" rel="external">Cambridge Dialogue Systems Group</a></p>
-<p>[2] <a href="http://www.noahlab.com.hk/topics/ShortTextConversation" target="_blank" rel="external">Huawei NOAH’S ARK LAB</a></p>
-<p>[3] <a href="http://web.stanford.edu/~jiweil/" target="_blank" rel="external">Jiwei Li</a></p>
-<p>[4] <a href="http://cs.mcgill.ca/~rlowe1/" target="_blank" rel="external">Ryan Lowe</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3534,7 +3478,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>90</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>91</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3570,7 +3514,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>108</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>109</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

@@ -83,7 +83,7 @@
 <h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
 <h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model-18.png" alt="mode"></p>
 <p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
 <p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
 <p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
@@ -215,7 +215,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>91</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>92</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -251,7 +251,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>109</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>110</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

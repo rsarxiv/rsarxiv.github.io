@@ -65,6 +65,49 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-12-18T17:16:11.000Z"><a href="/2016/12/18/本周值得读-2016-12-12-2016-12-16/">2016-12-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/18/本周值得读-2016-12-12-2016-12-16/">本周值得读(2016.12.12-2016.12.16)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors"><a href="#Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors" class="headerlink" title="Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors "></a><a href="http://t.cn/RIbpc9X" target="_blank" rel="external">Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors </a></h2><p>【机器阅读理解】【数据福利】<br>本文利用一种无监督的方法构建了一组大型的机器阅读理解数据集。其中机器阅读理解问题是提供一篇新闻，从5个候选标题中选择一个正确的。无监督的方法用了Mikolov提出的Paragraph Vector（Word2Vec的文档版），用来训练和计算各个新闻标题之间的相似度，产生候选答案。本文所生成的数据集地址：<a href="https://github.com/google/mcafp" target="_blank" rel="external">https://github.com/google/mcafp</a></p>
+<h2 id="Multi-Perspective-Context-Matching-for-Machine-Comprehension"><a href="#Multi-Perspective-Context-Matching-for-Machine-Comprehension" class="headerlink" title="Multi-Perspective Context Matching for Machine Comprehension "></a><a href="http://t.cn/RIbdvXM" target="_blank" rel="external">Multi-Perspective Context Matching for Machine Comprehension </a></h2><p>【机器阅读理解】本文的研究基于SQuAD数据集，提出了一个端到端训练模型，主要的思路是passage中与问题相似的span更加倾向于是正确答案。SQuAD是这个领域中有名的数据集，相应的模型很多，本文的结果相对一般。</p>
+<h2 id="ConceptNet-5-5-An-Open-Multilingual-Graph-of-General-Knowledge"><a href="#ConceptNet-5-5-An-Open-Multilingual-Graph-of-General-Knowledge" class="headerlink" title="ConceptNet 5.5: An Open Multilingual Graph of General Knowledge "></a><a href="http://t.cn/RIbgeA5" target="_blank" rel="external">ConceptNet 5.5: An Open Multilingual Graph of General Knowledge </a></h2><p>【知识图谱】【资源推荐】本文介绍了一个通用知识图谱ConceptNet 5.5，图谱主页的地址：<a href="http://conceptnet.io/" target="_blank" rel="external">http://conceptnet.io/</a>  相关的code和文档地址： <a href="https://github.com/commonsense/conceptnet5" target="_blank" rel="external">https://github.com/commonsense/conceptnet5</a></p>
+<h2 id="Tracking-the-World-State-with-Recurrent-Entity-Networks"><a href="#Tracking-the-World-State-with-Recurrent-Entity-Networks" class="headerlink" title="Tracking the World State with Recurrent Entity Networks "></a><a href="http://t.cn/RIbsLuo" target="_blank" rel="external">Tracking the World State with Recurrent Entity Networks </a></h2><p>【Dynamic Memory】本文介绍了一种新的模型，Recurrent Entity Network (EntNet)，引用外部动态长程记忆来做推理，并在 SYNTHETIC WORLD MODEL、bAbI和CBT三个任务上得到了验证，值得关注。本文工作来自FB LeCun组。</p>
+<h2 id="Online-Sequence-to-Sequence-Reinforcement-Learning-for-Open-Domain-Conversational-Agents"><a href="#Online-Sequence-to-Sequence-Reinforcement-Learning-for-Open-Domain-Conversational-Agents" class="headerlink" title="Online Sequence-to-Sequence Reinforcement Learning for Open-Domain Conversational Agents "></a><a href="http://t.cn/RIbsrka" target="_blank" rel="external">Online Sequence-to-Sequence Reinforcement Learning for Open-Domain Conversational Agents </a></h2><p>【对话系统】用几个关键词来概括一下本文的工作：1、在线训练；2、seq2seq；3、深度增强学习；4、开放域问题。建议对对话系统感兴趣的童鞋研读。</p>
+<h2 id="Neural-Emoji-Recommendation-in-Dialogue-Systems"><a href="#Neural-Emoji-Recommendation-in-Dialogue-Systems" class="headerlink" title="Neural Emoji Recommendation in Dialogue Systems "></a><a href="http://t.cn/RIqZTsq" target="_blank" rel="external">Neural Emoji Recommendation in Dialogue Systems </a></h2><p>【对话系统】【Emoji】Emoji表情是大家在平时聊天时经常会用到的，往往一个表情胜过一句话的表达。本文研究了在多轮对话中如何通过上下文来预测和推荐emoji表情，是个很好玩的工作。如果能够分析和预测更广泛的表情包（不仅限于emoji）的话，可能是件更好玩的事情。</p>
+<h2 id="Learning-Through-Dialogue-Interactions"><a href="#Learning-Through-Dialogue-Interactions" class="headerlink" title="Learning Through Dialogue Interactions "></a><a href="http://t.cn/RI5dgWk" target="_blank" rel="external">Learning Through Dialogue Interactions </a></h2><p>【对话系统】Jiwei Li的新文章，通过和Teacher的交互（基于知识库相互问和答）来提高bot的学习能力，整体框架仍是增强学习，值得精读。代码和数据都已开放，地址：<a href="https://github.com/facebook/MemNN/tree/master/AskingQuestions" target="_blank" rel="external">https://github.com/facebook/MemNN/tree/master/AskingQuestions</a> torch实现。</p>
+<h2 id="Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models"><a href="#Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models" class="headerlink" title="Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models "></a><a href="http://t.cn/RVbp10D" target="_blank" rel="external">Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models </a></h2><p>【seq2seq多样性】【柱搜索】一篇考虑了生成内容多样性的beam search改进算法，可以应用在chatbot、nmt、image caption、vqa等各种场景中。开源代码用torch实现的，基于neuraltalk2代码。地址：<a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a>  在线demo地址：<a href="http://dbs.cloudcv.org/captioning" target="_blank" rel="external">http://dbs.cloudcv.org/captioning</a></p>
+<h2 id="Multilingual-Word-Embeddings-using-Multigraphs"><a href="#Multilingual-Word-Embeddings-using-Multigraphs" class="headerlink" title="Multilingual Word Embeddings using Multigraphs "></a><a href="http://t.cn/RIqqODu" target="_blank" rel="external">Multilingual Word Embeddings using Multigraphs </a></h2><p>【词向量】本文给了一组单语和多语的词向量学习方法，基于SkipGram模型，skipgram的context考虑比较简单，本文主要是在context上做了一些文章，添加了一些特征，比如syntactic dependencies and word alignments等。</p>
+<h2 id="FastText-zip-Compressing-text-classification-models"><a href="#FastText-zip-Compressing-text-classification-models" class="headerlink" title="FastText.zip: Compressing text classification models "></a><a href="http://t.cn/RI4uuHE" target="_blank" rel="external">FastText.zip: Compressing text classification models </a></h2><p>【模型压缩】模型过大是DL的一个问题，尤其是在部署模型时，这个问题尤其明显。本文工作来自FB，是开源分类工具fasttext的一个模型压缩版。FastText的地址：<a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">https://github.com/facebookresearch/fastText</a></p>
+<h2 id="Mining-Compatible-Incompatible-Entities-from-Question-and-Answering-via-Yes-No-Answer-Classification-using-Distant-Label-Expansion"><a href="#Mining-Compatible-Incompatible-Entities-from-Question-and-Answering-via-Yes-No-Answer-Classification-using-Distant-Label-Expansion" class="headerlink" title="Mining Compatible/Incompatible Entities from Question and Answering via Yes/No Answer Classification using Distant Label Expansion "></a><a href="http://t.cn/RIqG4QU" target="_blank" rel="external">Mining Compatible/Incompatible Entities from Question and Answering via Yes/No Answer Classification using Distant Label Expansion </a></h2><p>【评论挖掘】本文针对的应用场景是从商品评论中挖掘各种商品的兼容性，比如买了个鼠标，想知道这个鼠标和ipad、pc的兼容性如何。文中的Complementary Entity Recognition 方法来自上周同作者的一篇文章，地址是<a href="https://arxiv.org/abs/1612.01039" target="_blank" rel="external">https://arxiv.org/abs/1612.01039</a> 这个应用场景比较接地气，建议对评论挖掘感兴趣的童鞋阅读。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-17T18:37:27.000Z"><a href="/2016/12/17/PaperWeekly-第十八期/">2016-12-17</a></time>
       
       
@@ -82,7 +125,7 @@
 <h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
 <h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model-18.png" alt="mode"></p>
 <p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
 <p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
 <p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
@@ -3403,48 +3446,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-17T16:57:22.000Z"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">2016-07-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文介绍的paper一个实用性非常强的解决方案，作者来自于微软研究院，毕业于剑桥大学Spoken Dialogue Group，研究bot很多很多年了。paper的题目是<a href="http://arxiv.org/pdf/1606.01269v1.pdf" target="_blank" rel="external">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning</a>，最早发表于今年的6月3日。</p>
-<p>文章的开头很有意思，先是从一个大家熟知的场景开始介绍，一个经验丰富的客服是如何带一个新入职的客服。四个阶段：</p>
-<p>1、告诉新客服哪些”controls”是可用的，比如：如何查找客户的信息，如何确定客户身份等等。<br>2、新客服从老客服做出的good examples中模仿学习。<br>3、新客服开始试着服务客户，老客服及时纠正他的错误。<br>4、老客服放手不管，新客服独自服务客户，不断学习，不断积累经验。</p>
-<p>本文的框架就是依照上面的过程进行设计的：</p>
-<p>1、开发者提供一系列备选的actions，包括response模板和一些API函数，用来被bot调用。<br>2、由专家提供一系列example dialogues，用RNN来学习。<br>3、用一个模拟user随机产生query，bot进行response，专家进行纠正。<br>4、bot上线服务，与真实客户进行对话，通过反馈来提高bot服务质量。</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>一个完整的工作流程由上图描述:</p>
-<p><img src="media/2.png" alt="2"></p>
-<p>本文在训练的时候是用一部分高质量的数据进行监督学习SL，用增强学习RL来优化模型，得到质量更高的结果。并且文中以打电话给指定联系人为应用场景，举了一个实际的例子，来帮助理解本文的思路。</p>
-<p>一般来说，很多文章提到end-to-end的模型，都是基于大量训练数据用seq2seq来做response的生成，本文并不是这样，本文的神经网络模型是用来训练action selection的，包括后面用RL policy gradient来提升效果也都是为了选择action。虽然本文不是一个纯粹的end-to-end解决方案，但确实一个非常实用的解决方案，尤其是对于task-oriented bot的业务来说，这样的解决方案更加高效，值得复现，值得在一些细节的地方进行改善，从而真正地减少人工features和人工成本。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3478,7 +3479,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>91</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>92</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3514,7 +3515,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>109</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>110</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

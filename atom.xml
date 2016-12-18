@@ -5,17 +5,50 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-17T19:17:05.000Z</updated>
+  <updated>2016-12-18T17:28:36.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2016.12.12-2016.12.16)</title>
+    <link href="http://rsarxiv.github.io/2016/12/18/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-12-2016-12-16/"/>
+    <id>http://rsarxiv.github.io/2016/12/18/本周值得读-2016-12-12-2016-12-16/</id>
+    <published>2016-12-18T17:16:11.000Z</published>
+    <updated>2016-12-18T17:28:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors"><a href="#Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors" class="headerlink" title="Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors "></a><a href="http://t.cn/RIbpc9X" target="_blank" rel="external">Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors </a></h2><p>【机器阅读理解】【数据福利】<br>本文利用一种无监督的方法构建了一组大型的机器阅读理解数据集。其中机器阅读理解问题是提供一篇新闻，从5个候选标题中选择一个正确的。无监督的方法用了Mikolov提出的Paragraph Vector（Word2Vec的文档版），用来训练和计算各个新闻标题之间的相似度，产生候选答案。本文所生成的数据集地址：<a href="https://github.com/google/mcafp" target="_blank" rel="external">https://github.com/google/mcafp</a></p>
+<h2 id="Multi-Perspective-Context-Matching-for-Machine-Comprehension"><a href="#Multi-Perspective-Context-Matching-for-Machine-Comprehension" class="headerlink" title="Multi-Perspective Context Matching for Machine Comprehension "></a><a href="http://t.cn/RIbdvXM" target="_blank" rel="external">Multi-Perspective Context Matching for Machine Comprehension </a></h2><p>【机器阅读理解】本文的研究基于SQuAD数据集，提出了一个端到端训练模型，主要的思路是passage中与问题相似的span更加倾向于是正确答案。SQuAD是这个领域中有名的数据集，相应的模型很多，本文的结果相对一般。</p>
+<h2 id="ConceptNet-5-5-An-Open-Multilingual-Graph-of-General-Knowledge"><a href="#ConceptNet-5-5-An-Open-Multilingual-Graph-of-General-Knowledge" class="headerlink" title="ConceptNet 5.5: An Open Multilingual Graph of General Knowledge "></a><a href="http://t.cn/RIbgeA5" target="_blank" rel="external">ConceptNet 5.5: An Open Multilingual Graph of General Knowledge </a></h2><p>【知识图谱】【资源推荐】本文介绍了一个通用知识图谱ConceptNet 5.5，图谱主页的地址：<a href="http://conceptnet.io/" target="_blank" rel="external">http://conceptnet.io/</a>  相关的code和文档地址： <a href="https://github.com/commonsense/conceptnet5" target="_blank" rel="external">https://github.com/commonsense/conceptnet5</a></p>
+<h2 id="Tracking-the-World-State-with-Recurrent-Entity-Networks"><a href="#Tracking-the-World-State-with-Recurrent-Entity-Networks" class="headerlink" title="Tracking the World State with Recurrent Entity Networks "></a><a href="http://t.cn/RIbsLuo" target="_blank" rel="external">Tracking the World State with Recurrent Entity Networks </a></h2><p>【Dynamic Memory】本文介绍了一种新的模型，Recurrent Entity Network (EntNet)，引用外部动态长程记忆来做推理，并在 SYNTHETIC WORLD MODEL、bAbI和CBT三个任务上得到了验证，值得关注。本文工作来自FB LeCun组。</p>
+<h2 id="Online-Sequence-to-Sequence-Reinforcement-Learning-for-Open-Domain-Conversational-Agents"><a href="#Online-Sequence-to-Sequence-Reinforcement-Learning-for-Open-Domain-Conversational-Agents" class="headerlink" title="Online Sequence-to-Sequence Reinforcement Learning for Open-Domain Conversational Agents "></a><a href="http://t.cn/RIbsrka" target="_blank" rel="external">Online Sequence-to-Sequence Reinforcement Learning for Open-Domain Conversational Agents </a></h2><p>【对话系统】用几个关键词来概括一下本文的工作：1、在线训练；2、seq2seq；3、深度增强学习；4、开放域问题。建议对对话系统感兴趣的童鞋研读。</p>
+<h2 id="Neural-Emoji-Recommendation-in-Dialogue-Systems"><a href="#Neural-Emoji-Recommendation-in-Dialogue-Systems" class="headerlink" title="Neural Emoji Recommendation in Dialogue Systems "></a><a href="http://t.cn/RIqZTsq" target="_blank" rel="external">Neural Emoji Recommendation in Dialogue Systems </a></h2><p>【对话系统】【Emoji】Emoji表情是大家在平时聊天时经常会用到的，往往一个表情胜过一句话的表达。本文研究了在多轮对话中如何通过上下文来预测和推荐emoji表情，是个很好玩的工作。如果能够分析和预测更广泛的表情包（不仅限于emoji）的话，可能是件更好玩的事情。</p>
+<h2 id="Learning-Through-Dialogue-Interactions"><a href="#Learning-Through-Dialogue-Interactions" class="headerlink" title="Learning Through Dialogue Interactions "></a><a href="http://t.cn/RI5dgWk" target="_blank" rel="external">Learning Through Dialogue Interactions </a></h2><p>【对话系统】Jiwei Li的新文章，通过和Teacher的交互（基于知识库相互问和答）来提高bot的学习能力，整体框架仍是增强学习，值得精读。代码和数据都已开放，地址：<a href="https://github.com/facebook/MemNN/tree/master/AskingQuestions" target="_blank" rel="external">https://github.com/facebook/MemNN/tree/master/AskingQuestions</a> torch实现。</p>
+<h2 id="Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models"><a href="#Diverse-Beam-Search-Decoding-Diverse-Solutions-from-Neural-Sequence-Models" class="headerlink" title="Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models "></a><a href="http://t.cn/RVbp10D" target="_blank" rel="external">Diverse Beam Search: Decoding Diverse Solutions from Neural Sequence Models </a></h2><p>【seq2seq多样性】【柱搜索】一篇考虑了生成内容多样性的beam search改进算法，可以应用在chatbot、nmt、image caption、vqa等各种场景中。开源代码用torch实现的，基于neuraltalk2代码。地址：<a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a>  在线demo地址：<a href="http://dbs.cloudcv.org/captioning" target="_blank" rel="external">http://dbs.cloudcv.org/captioning</a></p>
+<h2 id="Multilingual-Word-Embeddings-using-Multigraphs"><a href="#Multilingual-Word-Embeddings-using-Multigraphs" class="headerlink" title="Multilingual Word Embeddings using Multigraphs "></a><a href="http://t.cn/RIqqODu" target="_blank" rel="external">Multilingual Word Embeddings using Multigraphs </a></h2><p>【词向量】本文给了一组单语和多语的词向量学习方法，基于SkipGram模型，skipgram的context考虑比较简单，本文主要是在context上做了一些文章，添加了一些特征，比如syntactic dependencies and word alignments等。</p>
+<h2 id="FastText-zip-Compressing-text-classification-models"><a href="#FastText-zip-Compressing-text-classification-models" class="headerlink" title="FastText.zip: Compressing text classification models "></a><a href="http://t.cn/RI4uuHE" target="_blank" rel="external">FastText.zip: Compressing text classification models </a></h2><p>【模型压缩】模型过大是DL的一个问题，尤其是在部署模型时，这个问题尤其明显。本文工作来自FB，是开源分类工具fasttext的一个模型压缩版。FastText的地址：<a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">https://github.com/facebookresearch/fastText</a></p>
+<h2 id="Mining-Compatible-Incompatible-Entities-from-Question-and-Answering-via-Yes-No-Answer-Classification-using-Distant-Label-Expansion"><a href="#Mining-Compatible-Incompatible-Entities-from-Question-and-Answering-via-Yes-No-Answer-Classification-using-Distant-Label-Expansion" class="headerlink" title="Mining Compatible/Incompatible Entities from Question and Answering via Yes/No Answer Classification using Distant Label Expansion "></a><a href="http://t.cn/RIqG4QU" target="_blank" rel="external">Mining Compatible/Incompatible Entities from Question and Answering via Yes/No Answer Classification using Distant Label Expansion </a></h2><p>【评论挖掘】本文针对的应用场景是从商品评论中挖掘各种商品的兼容性，比如买了个鼠标，想知道这个鼠标和ipad、pc的兼容性如何。文中的Complementary Entity Recognition 方法来自上周同作者的一篇文章，地址是<a href="https://arxiv.org/abs/1612.01039" target="_blank" rel="external">https://arxiv.org/abs/1612.01039</a> 这个应用场景比较接地气，建议对评论挖掘感兴趣的童鞋阅读。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors&quot;&gt;&lt;a href=&quot;#Building-Large-Machine-Reading-Comprehensio
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十八期</title>
     <link href="http://rsarxiv.github.io/2016/12/17/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%85%AB%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/12/17/PaperWeekly-第十八期/</id>
     <published>2016-12-17T18:37:27.000Z</published>
-    <updated>2016-12-17T19:17:05.000Z</updated>
+    <updated>2016-12-17T19:35:50.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
 <p>1、Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation, 2016<br>2、A Simple, Fast Diverse Decoding Algorithm for Neural Generation, 2016<br>3、DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS, 2016<br>4、A Diversity-Promoting Objective Function for Neural Conversation Models, 2015</p>
@@ -24,7 +57,7 @@
 <h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
 <h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model.png" alt="mode"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model-18.png" alt="mode"></p>
 <p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
 <p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
 <p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
@@ -1099,132 +1132,6 @@
     
     </summary>
     
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十期</title>
-    <link href="http://rsarxiv.github.io/2016/10/20/PaperWeekly-%E7%AC%AC%E5%8D%81%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/10/20/PaperWeekly-第十期/</id>
-    <published>2016-10-21T06:30:26.000Z</published>
-    <updated>2016-10-21T06:39:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="引"><a href="#引" class="headerlink" title="引"></a>引</h2><p>本期PaperWeekly的主题是基于翻译模型(Trans系列)的知识表示学习，主要用来解决知识表示和推理的问题。表示学习旨在将研究对象的语义信息表示为稠密低维实值向量，知识表示学习主要是面向知识图谱中的实体和关系进行表示学习。使用建模方法将实体和向量表示在低维稠密向量空间中，然后进行计算和推理。一般而言的应用任务为triplet classification 和link prediction.自从2013年TransE模型提出后，产生了一系列模型对TransE模型进行改进和补充,比如TransH、TransG等等。本期PaperWeekly主要提供了Trans系列的7篇文章供大家赏读。</p>
-<p>paper目录：<br>（1）TransE，NIPS2013，Translating embeddings for modeling multi-relational data。<br>（2）TransH，AAAI2014，Knowledge graph embedding by translating on hyperplanes。<br>（3）TransD，ACL2015，Knowledge graph embedding via dynamic mapping matrix。<br>（4）TransA，arXiv2015，An adaptive approach for knowledge graph embedding。<br>（5）TransG，arxiv2015，A Generative Mixture Model for Knowledge Graph Embedding)<br>（6）KG2E，CIKM2015，Learning to represent knowledge graphs with gaussian embedding。<br>（7）TranSparse，AAAI2016，Knowledge graph completion with adaptive sparse transfer matrix。 </p>
-<h1 id="TransE-Translating-Embeddings-for-Modeling-Multi-relational-Data"><a href="#TransE-Translating-Embeddings-for-Modeling-Multi-relational-Data" class="headerlink" title="TransE:Translating Embeddings for Modeling Multi-relational Data"></a><a href="http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf" target="_blank" rel="external">TransE:Translating Embeddings for Modeling Multi-relational Data</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>A Bordes, N Usunier, A Garcia-Duran, J Weston, O Yakhnenko</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>CNRS, Google inc.</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Embedding entities and relationships, Multi-relational data, link prediction</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2013/12</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何建立简单且易拓展的模型把知识库中的实体和关系映射到低维向量空间中，从而计算出隐含的关系？</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>传统训练知识库中三元组(head,relation,tail)建模的方法参数特别多，导致模型太复杂难以解释，并且需要很大的计算代价，很容易出现过拟合或欠拟合问题。而简单的模型在表现上与复杂的模型几乎一样，但更易拓展。TransE的训练过程如下图：</p>
-<p><img src="media/TransE_1.png" alt=""></p>
-<p>TransE模型的训练中，第12步是损失函数，对E和L做uniform初始化之后，让正确的h+l-t结果趋近于0，让错误的h‘+l-t’的结果变大，损失函数结果大于0取原值，小于0则取0，这种hinge loss function可以尽可能的将对和错分开，模型使用SGD训练，每次更新可以只更新这个batch里的三元组的向量，因为参数之间并没有冲突。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>数据集 WordNet    <a href="http://wordnet.princeton.edu/wordnet/download/" target="_blank" rel="external">http://wordnet.princeton.edu/wordnet/download/</a><br>数据集 Freebase   <a href="http://developers.google.com/freebase/" target="_blank" rel="external">http://developers.google.com/freebase/</a><br>Code: <a href="https://github.com/thunlp/KB2E" target="_blank" rel="external">https://github.com/thunlp/KB2E</a></p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文提出了一种将实体与关系嵌入到低维向量空间中的简单模型，弥补了传统方法训练复杂、不易拓展的缺点。尽管现在还不清楚是否所有的关系种类都可以被本方法建模，但目前这种方法相对于其他方法表现不错。TransE更是作为知识库vector化的基础，衍生出来了很多变体。</p>
-<h1 id="TransH-Knowledge-Graph-Embedding-by-Translating-on-Hyperplanes"><a href="#TransH-Knowledge-Graph-Embedding-by-Translating-on-Hyperplanes" class="headerlink" title="TransH:Knowledge Graph Embedding by Translating on Hyperplanes"></a><a href="http://www.aaai.org/ocs/index.php/AAAI/AAAI14/paper/view/8531" target="_blank" rel="external">TransH:Knowledge Graph Embedding by Translating on Hyperplanes</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Zhen Wang1, Jianwen Zhang2, Jianlin Feng1, Zheng Chen2</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Sun Yat-sen University<br>microsoft</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>knowledge graph embedding, Multi-relational data</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>AAAI 2014</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>对知识库中的实体关系建模,特别是一对多,多对一,多对多的关系。设计更好的建立负类的办法用于训练。 </p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>过去指示图库建模的方法参数过多, TransE在一定程度上解决了这个问题, 但是TransE过于简单，很难对一对多,多对一和多对多关系建模。所以为了平衡模型复杂度和建模效果，TransH将把关系映射到另一个空间（如下图 ）。 注意: 这种想法和Distant Model (Bordes et al. 2011)很相似，但是TransH用了更少的参数， 因为TransH假设关系是向量而不是距离。<br><img src="media/TransH_1.png" alt="TransH_1"></p>
-<p>这个模型的一个亮点就是用尽量少的参数对复杂的关系建模。 下图罗列了相关工作的模型以及复杂度。图中可以看到从TransE到TransH并没有添加太多的参数（Unstructured只是TransE简化版）。Bilinear，Single Layer， NTN对关系或者实体进行了非线性的转换，作者认为是没有必要的（增加了模型复杂度）。</p>
-<p><img src="media/TransH_2.png" alt="TransH_2"></p>
-<p>TransH模型的训练和TransE类似 （SGD优化） ，下面是损失函数（因为一些限制，后面加入了拉格朗日乘数）。论文另一个亮点是设计了一种负类抽样的方法，即一对多的时候，给head更多的抽样概率， 同样的多对一的时候，给tail更多抽样概率。<br><img src="media/TransH_3.png" alt="TransH_3"></p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>数据集 WordNet:<a href="http://wordnet.princeton.edu/wordnet/download/" target="_blank" rel="external">http://wordnet.princeton.edu/wordnet/download/</a><br>数据集 Freebase:  <a href="http://developers.google.com/freebase/" target="_blank" rel="external">http://developers.google.com/freebase/</a><br>Code:<a href="https://github.com/thunlp/KB2E" target="_blank" rel="external">https://github.com/thunlp/KB2E</a></p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>（1）TransE (Bordes et al. 2013b): 和TransH相比，它没有将关系映射到另一个空间，关系由一个向量r表示。<br>（2）Unstructured Model：简化版的TransE，假设r = 0。<br>（3）Structured Embedding：  使用了两个关系相关的矩阵，分别用于头h和尾t，评估函数为:<br><img src="media/TransH_4.PNG" alt=""><br>该方法并没有抓住实体和关系之间的关系。<br>（4）Single Layer Model(SLM)：使用了神经网络，评估函数为:<br><img src="media/TransH_5.PNG" alt=""><br>（5）Distant Model (Bordes et al. 2011)：它将实体映射到另一个空间，然后假定关系是距离而不是向量（因为用了2个不同矩阵映射实体，所以对实体关系建模并不是很好）。<br>（6）Bilinear Model (Jenatton et al. 2012; Sutskever, Tenen- baum, and Salakhutdinov 2009)，Single Layer Model (Socher et al. 2013)，NTN (Socher et al. 2013)：他们都是使用非线性函数映射实体，这样模型表达能力虽然好但是太多参数也太复杂了（容易过拟合）。</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>论文提出的TransH模型，为了解决TransE对一对多，多对一，多对多关系建模的难题。它权衡模型复杂度和模型表达能力。而且还设计了复杂取样的办法用于训练。</p>
-<h1 id="TransD-knowledge-graph-embedding-via-dynamic-mapping-matrix"><a href="#TransD-knowledge-graph-embedding-via-dynamic-mapping-matrix" class="headerlink" title="TransD: knowledge graph embedding via dynamic mapping matrix"></a><a href="http://www.aclweb.org/anthology/P15-1067.pdf" target="_blank" rel="external">TransD: knowledge graph embedding via dynamic mapping matrix</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Guoliang Ji, Shizhu He, Liheng Xu, Kang Liu and Jun Zhao</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>中国科学院自动化研究所  National Laboratory of Pattern Recognition (NLPR)</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>knowledge graph embedding, link prediction.</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL2015</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>知识图谱中的link prediction。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>在link prediction上的TransE扩展模型，函数仍然为:   </p>
-<p> <img src="media/TransD_1.PNG" alt=""> </p>
-<p>但h丄和t丄为entity向量h和entity向量t在该relation r上的投影表示。投影定义为：</p>
-<p> <img src="media/TransD_2.PNG" alt=""></p>
-<p>其中(h_p)^T为某entity的投影向量，h为该entity的表示向量。</p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>数据集 WordNet <a href="http://wordnet.princeton.edu/" target="_blank" rel="external">http://wordnet.princeton.edu/</a><br>数据集 FreeBase <a href="https://developers.google.com/freebase/" target="_blank" rel="external">https://developers.google.com/freebase/</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>如果TransD的所有投影向量为0，TransD就是TransE。类似的还有TransR/CTransR，他们对每个relation定义了一个mapping矩阵，参数更多计算复杂度更大。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>模型只涉及vector的相乘，因此计算复杂度较小，效果也取得了state-of-the-art，适合用于规模很大的知识图谱。</p>
-<h1 id="TransA-An-Adaptive-Approach-for-Knowledge-Graph-Embedding"><a href="#TransA-An-Adaptive-Approach-for-Knowledge-Graph-Embedding" class="headerlink" title="TransA:An Adaptive Approach for Knowledge Graph Embedding"></a><a href="https://arxiv.org/pdf/1509.05490v2.pdf" target="_blank" rel="external">TransA:An Adaptive Approach for Knowledge Graph Embedding</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Hao Xian, Minlin  Huang,  Hao Yu,  Xiaoyan  Zhu</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位:"></a>单位:</h2><p> 清华大学  State Key Lab on Intelligent Technology and Systems</p>
-<h2 id="关键词："><a href="#关键词：" class="headerlink" title="关键词："></a>关键词：</h2><p>knowledge graph embedding,  elliptical equipotential hypersurfaces,  metric learning.</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>如何解决了translation-based 知识表示方法存在的过于简化损失度量，没有足够竞争力去度量知识库中实体/关系的多样性和复杂性问题。</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>知识图谱在AI搜索和应用中扮演着越来越重要的角色，但是它是符号表示，有一定的逻辑性的，因此如何表示这些关系就成了一个很大的挑战，为了解决这个挑战，很多模型如TransE, TransH, TransR纷纷被提出来，在这些模型中，基于几何关系的方法是很重要的一个分支，而基于几何关系的方法是使用K维的向量表示实体或者关系，然后利用一个函数f_r(h,t)来度量三元组(h, r, t)，而他们都是基于一个准则h+r=t。<br>因此就使用了同一个损失度量h+r=t，这种损失度量其实是利用了在一个球形等价超平面，越接近中心，三元组的可信度越高，因此从未匹配的t中寻找合适的t就变得很苦难，同时这种方法也很难处理一对多，多对一，多对多的关系。因此这些方法不够灵活。<br>具体可以从图1(a)看出。同时这种方法将等价对待向量中的每一维，但实际上各个维度的重要性是不同的，只有一些维度是有效的，其他维度可以认为是噪音，会降低效果，具体见图2(a).</p>
-<p>因此作者提出了另一种损失度量函数</p>
-<p><img src="media/TransA-2.PNG" alt=""></p>
-<p>通过增加一个矩阵Wr​，首先利用了一个椭圆等价超平面，解决了上述问题1，具体见图1(b)；同时利用LDL分解，公式变为:</p>
-<p><img src="media/TransA-3.PNG" alt=""></p>
-<p>其中D_r就是一个对角阵，而对角阵中的每个值的大小，正好说明了每一维的不同重要程度，也就解决了上述问题2，具体减图2(b)。</p>
-<p><img src="media/TransA-4.JPG" alt="figure 1"><br>图1<br><img src="media/TransA-5.JPG" alt="figure 2"><br>图2</p>
-<h2 id="资源-3"><a href="#资源-3" class="headerlink" title="资源"></a>资源</h2><p>数据集 Wordnet <a href="http://wordnet.princeton.edu/" target="_blank" rel="external">http://wordnet.princeton.edu/</a><br>数据集 FreeBase <a href="https://developers.google.com/freebase/" target="_blank" rel="external">https://developers.google.com/freebase/</a></p>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>如模型部分介绍的，当前的一些现有模型都是基于一个准则h+r=t，因此就使用了同一个损失度量h_r+r=t_r，只是在h_r和t_r的表示上有不同：</p>
-<p>（1）TransE  h_r = h, t_r = t<br>（2）TransH  h_r = h - (w_r)^T.h.w_r,  t_r = t - (w_r)^T.t.w_r<br>（3）TransR  h_r = M_r.h,  t_r = M_r.t<br>（4）TransM则是预先计算了出每一个训练三元组的直接权重</p>
-<p>还有很多类似的模型，这里就不再介绍了。</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>感觉这篇文章的思路比较简单，就是针对当前模型的一些不足，更换了一个损失度量函数。但是几点还是值得学习的，首先通过图像来描述不同的损失度量函数，给人一个更直观的感觉；其次针对向量表示中的区别对待，感觉很有attention mechanism的感觉，对不同的triple关注向量表示的不同维度，以取得最好的效果，这点是非常值得借鉴参考的。</p>
-<h1 id="TransG-A-Generative-Mixture-Model-for-Knowledge-Graph-Embedding"><a href="#TransG-A-Generative-Mixture-Model-for-Knowledge-Graph-Embedding" class="headerlink" title="TransG : A Generative Mixture Model for Knowledge Graph Embedding"></a><a href="https://arxiv.org/abs/1509.05488" target="_blank" rel="external">TransG : A Generative Mixture Model for Knowledge Graph Embedding</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p> Han Xiao, Minlie Huang, Yu Hao, Xiaoyan Zhu</p>
-<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>清华大学  State Key Lab on Intelligent Technology and Systems</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>knowledge graph embedding, generative mixture model, multiple relration semantics.</p>
-<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv2015</p>
-<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>解决多关系语义(multiple relation semantics)的问题。</p>
-<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>传统的基于翻译的模型采用h_r+r= t_r(其中，h_r为头部实体，t_r为尾部实体，r为头部<br>实体跟尾部实体的关系)，仅仅对一个关系赋予一种翻译向量。<br>它们不能细分多关系语义，比如，(Atlantics, HasPart, NewYorkBay)和(Table, HasPart, Leg)两个的关系都是HasPart，但是这两个的关系在语义上不同，第一个是“部件”的关系，第二个是“位置”的关系。TransG能够解决关系的多语义问题。如图所示，多关系语义分析可以提高三元组的分类准确度。</p>
-<p><img src="media/TransG.png" alt="figure 1"></p>
-<p>TransG利用贝叶斯非参数无限混合模型对一个关系生成多个翻译部分，根据三元组的特定语义得到当中的最佳部分。最大数据相似度原理用来训练，优化采用SGD。实验结果在link prediction和triple classification这两种任务上都优于目前最好的结果，运行速度与TransE(最快的方法)成正相关，系数为关系语义部分的数目。</p>
-<h2 id="资源-4"><a href="#资源-4" class="headerlink" title="资源"></a>资源</h2><p>数据集 WordNet    <a href="http://wordnet.princeton.edu/wordnet/download/" target="_blank" rel="external">http://wordnet.princeton.edu/wordnet/download/</a><br>数据集 Freebase   <a href="http://developers.google.com/freebase/" target="_blank" rel="external">http://developers.google.com/freebase/</a></p>
-<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>大多数都已介绍，这里就只说明CTransR，其中关系的实体对被分类到不同的组，同一组的实体对共享一个关系向量。相比较而言，TransG不需要对聚类的预处理。</p>
-<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>这篇文章的idea比较重要，考虑到一种关系存在的多语义问题，相当于对关系进行了细化，就是找到关系的隐形含义，最终从细化的结果中选出一个最佳的关系语义。这个在应用中很有意义，不同的语义可能需要不同的应对方法，可以借鉴。</p>
-<h1 id="KG2E-KG2E-learning-to-represent-knowledge-graphs-with-gaussian-embedding"><a href="#KG2E-KG2E-learning-to-represent-knowledge-graphs-with-gaussian-embedding" class="headerlink" title="KG2E:KG2E_learning to represent knowledge graphs with gaussian embedding"></a><a href="http://dl.acm.org/citation.cfm?id=2806502" target="_blank" rel="external">KG2E:KG2E_learning to represent knowledge graphs with gaussian embedding</a></h1><h2 id="作者-5"><a href="#作者-5" class="headerlink" title="作者"></a>作者</h2><p>Shizhu He, Kang Liu, Guoliang Ji and Jun Zhao</p>
-<h2 id="单位-5"><a href="#单位-5" class="headerlink" title="单位"></a>单位</h2><p>National Laboratory of Pattern Recognition<br>Institute of Automation, Chinese Academy of Sciences, Beijing, 100190, China</p>
-<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>Distributed Representation, Gaussian Embedding, Knowledge Graph</p>
-<h2 id="文章来源-5"><a href="#文章来源-5" class="headerlink" title="文章来源"></a>文章来源</h2><p>CIKM 2015</p>
-<h2 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h2><p>本文所解决的问题是知识图谱的表示问题（即将知识图谱表示为低维连续向量空间），本文使用Gaussian Distribution 来表示实体和关系，提出了用Gaussian Distribution的协方差来表示实体和关系的不确定度的新思想，提升了已有模型在link prediction和triplet classification问题上的准确率。</p>
-<h2 id="模型-5"><a href="#模型-5" class="headerlink" title="模型"></a>模型</h2><p>传统的表示学习的表示学习的方法和计算比较复杂，自TransE模型诞生后，很多模型都是在TransE的基本思想上加以改进，KG2E模型也是一样。<br>KG2E模型使用高斯分布来表示实体和关系。<br>模型实例见下图：<br><img src="media/KG2E_example.png" alt="model example"></p>
-<p>每个圆圈代表不同实体与关系的表示，它们分别于“Bill Clinton”构成三元组关系，圆圈大小表示的是不同实体或关系的不确定度。</p>
-<p>模型算法流程图如下：<br><img src="media/KG2E_Algorithm.png" alt="model algorithm"></p>
-<p>算法解读：<br>输入：训练集三元组，KG中所有的实体和关系，以及其它的一些参数。<br>输出：KG中所有实体和关系建模后生成的Gaussian Embeddings.（主要包含两个部分，均值（向量）和协方差（矩阵））<br>line 1到line 4主要是数据的归一化<br>line 5到line 15是算法实现部分：模型采用的是minibatch的训练方法，每一个minibatch的训练中都会进行负采样，并将负采样的样例和正例样例混合在一起学习，然后使用评分函数进行评估，要达到的目的是正例三元组的得分比负例三元组高或者低（高低取决于具体的评分而函数的设定）。在一次一次的迭代中不断更新结果，最后将得到的means和covariance进行正则化。</p>
-<p>文章核心公式：<br>（1）评分函数<br><img src="media/KG2E_Score_function.png" alt="score function"></p>
-<p>（2）KL散度的能量函数</p>
-<p><img src="media/KG2E_KL_function.png" alt="KL energy function"></p>
-<p>（3）期望概率能量函数<br><img src="media/KG2E_EL_function.png" alt="EL energy function"></p>
-<h2 id="资源-5"><a href="#资源-5" class="headerlink" title="资源"></a>资源</h2><p>数据集：<br>    <a href="https://github.com/Mrlyk423/Relation_Extraction/blob/master/data.zip" target="_blank" rel="external">WN18</a><br>    <a href="https://github.com/dddoss/tensorflow-socher-ntn/tree/master/data/Wordnet" target="_blank" rel="external">WN11</a><br>    <a href="https://github.com/dddoss/tensorflow-socher-ntn/tree/master/data/Freebase" target="_blank" rel="external">FB13K</a><br>    <a href="https://github.com/Mrlyk423/Relation_Extraction/blob/master/data.zip" target="_blank" rel="external">FB15K</a></p>
-<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>（1）TransR，2015年AAAI，Learning entity and relation embeddings for knowledgh completition。</p>
-<h2 id="简评-5"><a href="#简评-5" class="headerlink" title="简评"></a>简评</h2><p>创新点：<br>    （1）以前的文章是属于point-based，KG2E是属于density-based的。<br>    （2）提出了(un)certainty的概念，在建模过程中融入了关系和实体语义本身的不确定性的知识，使用高斯分布的协方差表示该实体或关系的不确定度，高斯分布的均值表示实体或关系在语义空间中的中心值。<br>    （3）使用了新的score funciton：KL-divergence和expected likelihood<br>应用场景：link prediction，triplet classification,knowledge reasoning<br>不足之处：本文提出的方法在link prediction的many-to-many relations上的预测性能不是很好，主要原因是KG2E模型没有考虑实体的类型和粒度。</p>
-<p>7.TranSparse</p>
-<h1 id="Knowledge-Graph-Completion-with-Adaptive-Sparse-Transfer-Matrix"><a href="#Knowledge-Graph-Completion-with-Adaptive-Sparse-Transfer-Matrix" class="headerlink" title="Knowledge Graph Completion with Adaptive Sparse Transfer Matrix"></a><a href="https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/download/11982/11693" target="_blank" rel="external">Knowledge Graph Completion with Adaptive Sparse Transfer Matrix</a></h1><h2 id="作者-6"><a href="#作者-6" class="headerlink" title="作者"></a>作者</h2><p>Guoliang Ji, Kang Liu, Shizhu He, Jun Zhao</p>
-<h2 id="单位-6"><a href="#单位-6" class="headerlink" title="单位"></a>单位</h2><p>中科院模式识别国家重点实验室</p>
-<h2 id="关键词-5"><a href="#关键词-5" class="headerlink" title="关键词"></a>关键词</h2><p>Knowledge Graph Embedding,Sparse Matrix</p>
-<h2 id="文章来源-6"><a href="#文章来源-6" class="headerlink" title="文章来源"></a>文章来源</h2><p>AAAI 2016</p>
-<h2 id="问题-6"><a href="#问题-6" class="headerlink" title="问题"></a>问题</h2><p>针对不同难度的实体间关系，使用不同稀疏程度的矩阵（不同数量的参数）来进行表征，从而防止对复杂关系欠拟合或者对简单关系过拟合。</p>
-<h2 id="模型-6"><a href="#模型-6" class="headerlink" title="模型"></a>模型</h2><p>本文的模型与TransR类似，即对每一个关系r学习一个转换矩阵M_r,将h和t的向量映射到关系向量所在的空间。</p>
-<p>不过本文注意到knowledge graph中面临两个问题，分别是heterogeneous（有的实体关系十分复杂，连接许多不同的实体）和unbalanced（很多关系连接的head和tail数目很不对等）。如果只使用一个模型应对所有情况的话可能会导致对复杂关系underfit，对简单关系overfit。因此本文认为需要对症下药，复杂的关系就需要下猛药（用有更多的参数的复杂模型），简单关系就简单处理（较少的参数）。</p>
-<p>但是怎么实现这样灵活的建模？在方法上本文借用了SparseMatrix，如果关系比较复杂就用比较稠密的矩阵，如果关系简单则用稀疏矩阵进行表达。文章假设关系的复杂程度正比于包含该关系的triplet数目，并根据两类问题提出了对应的稀疏矩阵初始化方法。不过并没有提出同时解决两类问题的统一方案。</p>
-<ul>
-<li>针对heterogeneity问题的模型叫做TranSparse(share)，模型参数sparse degree，theta_r，是由下列公式确定:</li>
-</ul>
-<p><img src="media/TranSparse_equation1.png" alt="alt text"><br>其中N_r是该关系r所连接的triplet数目，N_r*是数据集中最大的关系triplet数目。通过这个sparse degree我们就可以确定参数矩阵的稀疏程度了。entity的向量通过下式进行转换：<br><img src="media/TranSparse_equation2.png" alt="alt text"></p>
-<ul>
-<li>针对imbalance问题提出的TranSparse(separate)方法也十分类似，即在关系的head和tail两端使用不同复杂度的matrix。sparse degree的公式与上面TranSparse(share)的几乎一样，只不过N_r和N_r*替换成了entity的个数。如果某一端要连接更多不同的entity，那么这一端就需要更复杂的模型来表征（matrix有更多非零参数）。</li>
-</ul>
-<p>确定这个sparse degree之后，我们就可以初始化对应的稀疏参数矩阵了（原文中提到了Structured与Unstructured两种矩阵形式）。目标函数以及训练过程与其他工作一致，只不过在进行训练时我们只对矩阵中的非零部分进行更新。</p>
-<p>最后模型在triplet分类和链接预测任务上进行实验，相比于先前模型取得了更好的成绩，不过相比于TranD优势并不十分明显。提出的两个模型中TranSparse(separate)的表现更好。</p>
-<h2 id="资源-6"><a href="#资源-6" class="headerlink" title="资源"></a>资源</h2><p>数据集 WordNet    <a href="http://wordnet.princeton.edu/wordnet/download/" target="_blank" rel="external">http://wordnet.princeton.edu/wordnet/download/</a><br>数据集 Freebase   <a href="http://developers.google.com/freebase/" target="_blank" rel="external">http://developers.google.com/freebase/</a></p>
-<h2 id="相关工作-5"><a href="#相关工作-5" class="headerlink" title="相关工作"></a>相关工作</h2><p>上面的相关工作已经介绍差不多了，这里不再赘述。</p>
-<h2 id="简评-6"><a href="#简评-6" class="headerlink" title="简评"></a>简评</h2><p>TranSparse模型主要是为了解决关系和实体的异质性和不平衡性而提出，问题针对性强。</p>
-<h2 id="总结与展望"><a href="#总结与展望" class="headerlink" title="总结与展望"></a>总结与展望</h2><p>最近几年人们对知识表示方法的探究一直都在进行，知识表示学习对于计算机如何理解和计算知识的意义是重大的。在2013年embedding的思想出现之前，人们基本采用one-hot的表示方法来表示实体，近几年知识表示的核心思想就是如何找到合适的方法来将知识图谱emmbedding到向量空间，从而在向量空间中进行计算，并且也在这方面取得了不错的进展。</p>
-<p>但知识表示学习仍然面临着挑战，主要包括以下几个方面：（1）对于多源知识融合的表示学习，如何将知识库中的文本等信息加入到学习中。（2）如何进行更加复杂的知识推理。（3）对于知识图谱无法表达的信息，应该进行如何表示和推理。（4）如何在知识库中融入常识信息。<br>参考文献说明：本文主要参考清华大学刘知远老师的《知识表示学习研究进展》这篇综述。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h2&gt;&lt;p&gt;本期PaperWeekly的主题是基于翻译模型(Trans系列)的知识表示学习，主要用来解决知识表示和推理的问题。表示学习旨在将研究对象的语义信息表
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     

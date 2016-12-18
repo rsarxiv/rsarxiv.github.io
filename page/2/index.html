@@ -65,6 +65,48 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-17T16:57:22.000Z"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">2016-07-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文介绍的paper一个实用性非常强的解决方案，作者来自于微软研究院，毕业于剑桥大学Spoken Dialogue Group，研究bot很多很多年了。paper的题目是<a href="http://arxiv.org/pdf/1606.01269v1.pdf" target="_blank" rel="external">End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning</a>，最早发表于今年的6月3日。</p>
+<p>文章的开头很有意思，先是从一个大家熟知的场景开始介绍，一个经验丰富的客服是如何带一个新入职的客服。四个阶段：</p>
+<p>1、告诉新客服哪些”controls”是可用的，比如：如何查找客户的信息，如何确定客户身份等等。<br>2、新客服从老客服做出的good examples中模仿学习。<br>3、新客服开始试着服务客户，老客服及时纠正他的错误。<br>4、老客服放手不管，新客服独自服务客户，不断学习，不断积累经验。</p>
+<p>本文的框架就是依照上面的过程进行设计的：</p>
+<p>1、开发者提供一系列备选的actions，包括response模板和一些API函数，用来被bot调用。<br>2、由专家提供一系列example dialogues，用RNN来学习。<br>3、用一个模拟user随机产生query，bot进行response，专家进行纠正。<br>4、bot上线服务，与真实客户进行对话，通过反馈来提高bot服务质量。</p>
+<p><img src="media/1.png" alt="1"></p>
+<p>一个完整的工作流程由上图描述:</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>本文在训练的时候是用一部分高质量的数据进行监督学习SL，用增强学习RL来优化模型，得到质量更高的结果。并且文中以打电话给指定联系人为应用场景，举了一个实际的例子，来帮助理解本文的思路。</p>
+<p>一般来说，很多文章提到end-to-end的模型，都是基于大量训练数据用seq2seq来做response的生成，本文并不是这样，本文的神经网络模型是用来训练action selection的，包括后面用RL policy gradient来提升效果也都是为了选择action。虽然本文不是一个纯粹的end-to-end解决方案，但确实一个非常实用的解决方案，尤其是对于task-oriented bot的业务来说，这样的解决方案更加高效，值得复现，值得在一些细节的地方进行改善，从而真正地减少人工features和人工成本。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-07-17T05:02:39.000Z"><a href="/2016/07/16/也说bot/">2016-07-16</a></time>
       
       
@@ -2928,73 +2970,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-26T14:17:24.000Z"><a href="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">2016-05-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">How to Generate a Good Word Embedding #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>之前介绍过几种生成word embedding的方法，那么针对具体的任务该如何选择训练数据？如何选择采用哪个模型？如何选择模型参数？本篇将分享一篇paper来回答上述问题，paper的题目是<a href="http://cn.arxiv.org/pdf/1507.05523.pdf" target="_blank" rel="external">How to Generate a Good Word Embedding</a>，作者是来自中科院大学的来斯惟博士。</p>
-<p>当前，word embedding的模型有很多，性能几乎都是各说纷纭，每个模型在自己选定的数据集和任务上都取得了state-of-the-art结果，导致学术研究和工程应用上难以做出选择。不仅仅在word embedding这个子方向上存在这样的问题，很多方向都有类似的问题，如何公平客观地评价不同的模型是一个很困难的任务。本文作者试着挑战了一下这个难题，并且给出了一些有意义的结果。</p>
-<p>本文所做研究都是一个同一个假设，即：出现在相似上下文的单词具有相似的意思。</p>
-<p>下面来看下不同模型的比较，不同word embedding模型之间主要的区别在于两点：</p>
-<p>1、目标词和上下文的关系</p>
-<p>2、上下文的表示方法</p>
-<p>本文提供探讨了6种模型，并从这两个方面对模型进行了对比，如下图：</p>
-<img src="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/fig1.png" width="500" height="500">
-<p>c表示上下文，w表示目标词。首先看w和c的关系，前五种模型均是用c来预测w，只有C&amp;W模型是给w和c的组合来打分。再看c的表示方法，Order模型是本文为了对比增加的一个虚拟模型，考虑了词序信息，将c中每个单词拼接成一个大向量作为输入，而word2vec的两个模型skip-gram和cbow都是将上下文处理为一个相同维度的向量作为输入，其中skip-gram选择上下文中的一个词作为输入，cbow将上下文的几个词向量作了平均，LBL、NNLM和C&amp;W模型都是在Order模型的基础上加了一层隐藏层，将上下文向量做了一个语义组合。具体见下表：</p>
-<img src="/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/fig2.png" width="500" height="500">
-<p>据研究估计，文本含义信息的20%来自于词序，剩下的来自于词的选择。所以忽略词序信息的模型，将会损失约20%的信息。</p>
-<p>本文做了包括三种类型的八组对比实验，分别是：</p>
-<ul>
-<li><p>研究词向量的语义特性。该类实验是为了对比词向量的语义特性，包括：WordSim353，TOEFL，analogy task：semantic和syntactic。</p>
-</li>
-<li><p>将词向量作为特征。该类实验是为了对比词向量作为处理其他任务的特征时，对该任务性能的提升。包括：文本分类和命名实体识别。前者将词向量加权平均得到文本向量来分类，权值是词频，数据集用的是IMDB；后者用CoNLL03数据集做NER任务。</p>
-</li>
-<li><p>用词向量来初始化神经网络模型。该类实验是为了研究词向量作为神经网络的初始值，对NN模型的提升。包括：CNN文本分类和词性标注。前者用了我们之前提到过的Kim的CNN模型，将句子表示成矩阵作为CNN的输入得到句子的表示，进行情感分类，数据集是Stanford Sentiment Treebank；后者用Wall Street Journal数据集进行了POS tagging任务。</p>
-</li>
-</ul>
-<p>经过大量的对比实验，作者回答了以下几个问题：</p>
-<p>Q：哪个模型最好？如何选择c和w的关系以及c的表示方法？</p>
-<p>A：对于一个小型数据集来说，类似skip-gram这样越简单的模型效果越好，对于一个大型数据集来说，稍微复杂一点的模型，比如cbow和order就可以取得非常好的效果。真实数据中，skip-gram、cbow和order这样的模型足够了。在语义任务中，通过c来预测w的模型要更优于C&amp;W这种将c和w都放在输入层的模型。</p>
-<p>Q：数据集的规模和所属领域对词向量的效果有哪些影响？</p>
-<p>A：数据集的领域远比规模重要，给定一个任务之后，选择任务相关的领域数据将会提升性能，相反，如果数据并不相关，将会导致更差的性能。当然，如果数据都属于同一领域，规模越大性能越好。</p>
-<p>Q：在训练模型时迭代多少次可以有效地避免过拟合？</p>
-<p>A：通常的做法是在测试数据集上观察误差，当误差开始上升时即可停止训练，但经过本文的研究，这种方法并不能得到最好的task结果，好的做法是用task data作为early stopping的数据。</p>
-<p>Q：词向量的维度与效果之间的关系？</p>
-<p>A：越大的维度就会有越好的效果，但在一般的任务中50就已经足够了。</p>
-<p>本文作者做了大量的工作，针对当前词向量模型的方方面面问题进行了研究，并且给出了许多有意义的结果，对今后研究和使用词向量的童鞋们搭建了一个非常坚实的平台。并且在github上开源了<a href="https://github.com/licstar/compare" target="_blank" rel="external">实验结果</a>。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3030,7 +3005,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>91</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>92</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3066,7 +3041,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>109</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>110</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

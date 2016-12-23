@@ -65,6 +65,60 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-19T00:21:22.000Z"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">2016-07-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">Attention-over-Attention Neural Networks for Reading Comprehension #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文分享的文章是arxiv今天刚刚新鲜出炉的paper，来自哈工大讯飞联合实验室。前不久，他们构建了一个大型阅读理解语料，今天也发布出来了。(<a href="http://hfl.iflytek.com/chinese-rc/" target="_blank" rel="external">下载地址</a>)</p>
+<p>Cloze-style Reading Comprehension这个领域竞争太过激烈了，半年时间把benchmark刷了一遍又一遍，今天的这篇paper又一次刷新了记录。如果对这个领域不太熟悉的话，可以读这篇<a href="http://rsarxiv.github.io/2016/06/18/%E6%95%99%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%98%85%E8%AF%BB/">教机器学习阅读</a>。</p>
+<p>本文的模型被称作Attention over Attention(AoA)，和之前的工作不同，不仅仅考虑query-to-document attention，而且考虑了document-to-query attention。模型架构示意图如下：</p>
+<p><img src="media/1.png" alt="1"></p>
+<p><b>Contextual Embedding</b> 将query和document都embedding化，用Bi-GRU将query和document分别encode，将两个方向的hidden state拼接起来作为该词的state，此时document和query可以分别用一个Dxd和Qxd的矩阵来表示，这里D是document的词数，Q是query的词数，d是embedding的维度。</p>
+<p><b>Pair-wise Matching Score</b> </p>
+<p><img src="media/2.png" alt="2"></p>
+<p>这一步是本质上就是对两个矩阵做矩阵乘法，得到所谓的Matching Score矩阵M，这里的M矩阵的维度是DxQ，矩阵中的每个元素表示对应document和query中的词之间的matching score。</p>
+<p><b>Individual Attentions</b> 对M矩阵中的每一列做softmax归一化，得到所谓的query-to-document attention，即给定一个query词，对document中每个词的attention，本文用下式进行表示：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p><b>Attention-over-Attention</b> 前三个步骤都是很多模型采用的通用做法，这一步是本文的亮点。首先，第三步是对M矩阵的每一列做了softmax归一化，这里对M矩阵的每一行做softmax归一化，即得到所谓的document-to-query attention，用下式来表示：</p>
+<p><img src="media/4.png" alt="4"></p>
+<p>然后，将document-to-query attention作平均得到最终的query-level attention，如下式：</p>
+<p><img src="media/5.png" alt="5"></p>
+<p>最后，用每个query-to-document attention和刚刚得到的query-level attention做点乘，得到document中每个词的score。</p>
+<p><b>Final Predictions</b> 将相同词的score合并，得到每个词的score，如下式：</p>
+<p><img src="media/6.png" alt="6"></p>
+<p>从而得到最终的答案。</p>
+<p>实验部分用了英文语料CNN和CBT，在没用pre-trained embedding情况下，单模型得到了state-of-the-art结果。</p>
+<p><img src="media/7.png" alt="7"></p>
+<p>本文模型最大的特点就是不仅仅考虑query到document的attention，而且考虑了document到query的attention，即所谓的attention over attention，在Cloze-style阅读理解任务中取得了更好的结果。同时，作者在未来的工作中，准备将该模型拓展到其他任务中。</p>
+<p>attention是一个非常好的机制，将很多任务的benchmark都提高到了很高的水平，是一个革命性的模型。围绕attention的变种做工作，提出各种各样的attention，虽然可以刷新各种任务，但终究不再能够将研究水平提升一个level，需要一个新的机制、新的思想来推动nlp的发展。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-07-17T16:57:22.000Z"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">2016-07-17</a></time>
       
       
@@ -2922,54 +2976,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-27T15:24:12.000Z"><a href="/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/">2016-05-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/">Recurrent Convolutional Neural Networks for Text Classification #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>介绍了CNN表示文本的模型之后，本篇将会分享一篇用CNN结合RNN的模型来表示文本。paper题目是<a href="http://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/download/9745/9552" target="_blank" rel="external">Recurrent Convolutional Neural Networks for Text Classification</a>，作者是来自中科院大学的来斯惟博士。</p>
-<p>本文要解决的问题是文本分类，文本分类最关键的问题是特征表示，传统的方法经常会忽略上下文信息和词序，无法捕捉到词义。近几年随着深度学习的火热，研究者们通过借助神经网络模型来解决传统方法存在的问题。比如：Socher提出的Recursive Neural Network（递归神经网络）模型，通过一种树结构来捕捉句子语义，取得了不错的效果，但时间复杂度是O(n2)，并且无法用一棵树来表示两个句子之间的关系。再比如：Recurrent Neural Network（循环神经网络）模型，时间复杂度是O(n)，每个单词的表示都包含了之前所有单词的信息，有很强的捕捉上下文的能力，但该模型有偏，后面的单词比前面的单词更重要，但这与常识并不相符，因为句中关键的词不一定在最后面。为了解决RNN的有偏性问题，有的研究者提出了用CNN（卷积神经网络）来表示文本，并且时间复杂度也是O(n)，但是CNN存在一个缺陷，卷积窗口的大小是固定的，并且这个窗口大小如何设置是一个问题，如果设置小了，则会损失有效信息，如果设置大了，会增加很多的参数。</p>
-<p>于是，针对上述模型存在的问题，本文提出了RCNN（循环卷积神经网络）模型，模型架构图如下：</p>
-<img src="/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/fig1.png" width="600" height="600">
-<p>首先，构造CNN的卷积层，卷积层的本质是一个BiRNN模型，通过正向和反向循环来构造一个单词的下文和上文，如下式：</p>
-<img src="/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/fig2.png" width="300" height="300">
-<p>得到单词的上下文表示之后，用拼接的方式来表示这个单词，如下式：</p>
-<img src="/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/fig3.png" width="300" height="300">
-<p>将该词向量放入一个单层神经网络中，得到所谓的潜语义向量（latent semantic vector），这里卷积层的计算结束了，时间复杂度仍是O(n)。接下来进行池化层（max-pooling），即将刚刚得到的所有单词的潜语义向量中每个维度上最大的值选出组成一个新的向量，这里采用max-pooling可以将向量中最大的特征提取出来，从而获取到整个文本的信息。池化过程时间复杂度也是O(n)，所以整个模型的时间复杂度是O(n)。得到文本特征向量之后，进行分类。</p>
-<p>为了验证模型的有效性，在四组包括中文、英文的分类任务中进行了对比实验，取得了满意的结果。</p>
-<p>本文灵活地结合RNN和CNN构造了新的模型，利用了两种模型的优点，提升了文本分类的性能。这也提供了一种研究思路，因为每一种model都有其鲜明的优点和无法回避的缺点，如何利用别的model的优点来弥补自身model的缺点，是改进model的一种重要思路。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3005,7 +3011,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>92</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>93</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3041,7 +3047,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>110</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>111</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

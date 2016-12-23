@@ -65,6 +65,84 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-12-23T18:40:03.000Z"><a href="/2016/12/23/PaperWeekly-第十九期/">2016-12-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/23/PaperWeekly-第十九期/">PaperWeekly 第十九期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期的PaperWeekly一共分享四篇最近arXiv上发布的高质量paper，包括：情感分析、机器阅读理解、知识图谱、文本分类。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：</p>
+<p>1、Linguistically Regularized LSTMs for Sentiment Classification, 2016.11<br>2、End-to-End Answer Chunk Extraction and Ranking for Reading Comprehension, 2016.10<br>3、Knowledge will Propel Machine Understanding of Content: Extrapolating from Current Examples, 2016.10<br>4、AC-BLSTM: Asymmetric Convolutional Bidirectional LSTM Networks for Text Classification, 2016.11</p>
+<h1 id="Linguistically-Regularized-LSTMs-for-Sentiment-Classification"><a href="#Linguistically-Regularized-LSTMs-for-Sentiment-Classification" class="headerlink" title="Linguistically Regularized LSTMs for Sentiment Classification"></a><a href="https://arxiv.org/pdf/1611.03949v1.pdf" target="_blank" rel="external">Linguistically Regularized LSTMs for Sentiment Classification</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Qiao Qian, Minlie Huang, Xiaoyan Zhu</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>State Key Lab. of Intelligent Technology and Systems, National Lab. for Information Science and Technology, Dept. of Computer Science and Technology, Tsinghua University</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>sentiment classification, neural network models, linguistically coherent representations,</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.11</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>利用语言资源和神经网络相结合来提升情感分类问题的精度</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>在LSTM和Bi-LSTM模型的基础上加入四种规则约束，这四种规则分别是: Non-Sentiment Regularizer,Sentiment Regularizer, Negation Regularizer, Intensity Regularizer.因此，新的loss function变为:</p>
+<p><img src="media/eqn.png" alt="eqn"></p>
+<p>不同的规则约束对应不同的L函数</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、Movie Review (MR) <a href="https://www.cs.cornell.edu/people/pabo/movie-review-data/" target="_blank" rel="external">https://www.cs.cornell.edu/people/pabo/movie-review-data/</a><br>2、Stanford Sentiment Tree- bank (SST) <a href="http://nlp.stanford.edu/sentiment/treebank.html" target="_blank" rel="external">http://nlp.stanford.edu/sentiment/treebank.html</a></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、Neural Networks for Sentiment Classification<br><a href="https://arxiv.org/abs/1412.3555" target="_blank" rel="external">Empirical evaluation of gated recurrent neural networks on sequence modeling</a><br><a href="https://pdfs.semanticscholar.org/5807/664af8e63d5207f59fb263c9e7bd3673be79.pdf" target="_blank" rel="external">Hybrid speech recognition with deep bidirectional lstm</a><br>2、Applying Linguistic Knowledge for Sentiment Classification<br><a href="http://www.site.uottawa.ca/~diana/publications/ci.pdf" target="_blank" rel="external">Sentiment classification of movie reviews using contextual valence shifters</a></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文提出了一种新的基于语言资源约束和LSTM/Bi-LSTM的模型用于情感分类，并通过在MR和SST数据集上的实验和对RNN/RNTN,LSTM,Tree-LSTM,CNN的效果对比证明了这一模型的有效性。除此之外，本文还基于不同的约束进行了实验，证明的不同的约束在提高分类精度上的作用。本文实验丰富，效果的提升虽不显著，但新的模型确实在不同程度上克服了旧模型的一些不足。</p>
+<h1 id="End-to-End-Answer-Chunk-Extraction-and-Ranking-for-Reading-Comprehension"><a href="#End-to-End-Answer-Chunk-Extraction-and-Ranking-for-Reading-Comprehension" class="headerlink" title="End-to-End Answer Chunk Extraction and Ranking for Reading Comprehension"></a><a href="https://arxiv.org/pdf/1610.09996v2.pdf" target="_blank" rel="external">End-to-End Answer Chunk Extraction and Ranking for Reading Comprehension</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Yang Yu, Wei Zhang, Kazi Hasan, Mo Yu, Bing Xiang, Bowen Zhou</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>IBM Watson</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Reading Comprehension, Chunk extraction, Ranking</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>针对答案非定长的阅读理解任务，本文提出了DCR（dynamic chunk reader）模型<br>来从给定的文档中抽取可能的候选答案并进行排序。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型结构共分为四部分，<br>1、Encoder Layer<br>如图所示，这部分是用双向GRU分别对文档（Passage）和问题（Question）进行编码。<br>2、Attention Layer<br>该层采用的方法与相关工作中的mLSTM类似，文档每个时刻的状态h<sub>j</sub><sup>p</sup>都与问题中的每个状态h<sub>k</sub><sup>q</sup>进行匹配得到一个权重向量α<sub>k</sub>，然后再根据该权重向量对问题的GRU隐层输出h<sup>p</sup>进行加权求和，得到文档中该时刻状态h<sub>j</sub><sup>p</sup>对应的上下文向量β<sub>j</sub>，两个向量h<sub>j</sub><sup>p</sup>和β<sub>j</sub>拼接在一起作为该时刻新的表示v<sub>j</sub>。最后再将上述与问题相关的新文档表示v通过双向GRU，得到文档最终的表示γ。<br><img src="media/DCR.png" alt="DC"></p>
+<p>3、Chunk-Representation Layer<br>上一部分获得了与问题相关的文档表示γ，那么这部分则是考虑如何抽取候选答案，并获得候选答案的表示向量。本文提出了两种候选答案抽取方法，第一种方法是抽取所有满足训练数据中答案对应词性标注模式的候选项，第二种方法则是简单粗暴地确定一个候选项最大长度，然后遍历所有可能的候选项。至于候选答案的表示方式，本文将候选答案前向GRU的最后一个时刻状态和反向GRU第一个时刻状态拼接在一起作为最终候选项的表示。<br>4、Ranker Layer<br>已经获得了所有候选项的表示，那么接着就是对所有候选项进行打分排序。本文中打分是采用问题的表示和候选项的表示计算内积的方式得到的，本文训练过程中没有采用常见于排序任务的Margin ranking loss，而是先用softmax对所有候选项计算一个概率值，然后采用交叉熵损失函数进行训练。</p>
+<p>本文在SQuAD数据集上进行实验，提出的方法效果比之前两篇SQuAD相关paper的方法有较大的提升。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、SQuAD <a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">https://rajpurkar.github.io/SQuAD-explorer/</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、数据集相关论文<br>SQuAD: 100,000+ Questions for Machine Comprehension of Text<br>2、模型相关论文<br>MACHINE COMPREHENSION USING MATCH-LSTM</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>在对文档和问题编码阶段，本篇论文提出的模型与之前mLSTM那篇paper有些相似。两篇论文中模型的主要区别在于：mLSTM那篇论文采用预测起始、终止位置的方法来确定答案，而本文则是先采用一些规则或Pattern的方法来抽取一些候选答案，然后再对候选答案进行排序。</p>
+<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>有DL或者NLP相关话题，欢迎讨论。destin.bxwang@gmail.com </p>
+<h1 id="Knowledge-will-Propel-Machine-Understanding-of-Content-Extrapolating-from-Current-Examples"><a href="#Knowledge-will-Propel-Machine-Understanding-of-Content-Extrapolating-from-Current-Examples" class="headerlink" title="Knowledge will Propel Machine Understanding of Content: Extrapolating from Current Examples"></a><a href="https://arxiv.org/abs/1610.07708?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="external">Knowledge will Propel Machine Understanding of Content: Extrapolating from Current Examples</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Amit Sheth, Sujan Perera, and Sanjaya Wijeratne</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Kno.e.sis Center, Wright State University Dayton, Ohio, USA</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Semantic analysis of multimodal data，Machine intelligence,Understanding complex text，EmojiNet</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>利用知识和多模态数据来解决特定情况下的复杂文本的深层理解问题</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>1、现知识库在处理特定领域问题中的局限性及解决方法<br>（1）知识库的杂乱<br>解决方法：采用自动判别技术，领域知识库索引技术，利用实体和关系的语义去判别所给定知识库领域中的相关部分。<br>（2）知识库数据的不完备和不充足<br>解决方法：使用 human-in-the-loop模型在真实的临床数据和已有的知识库中去发现更多的实体与实体之间的关系。<br>（3）知识表示技术和推理技术的局限性<br>解决方法：在单个属性的表示中加入了三元组和软逻辑的解释能力及其相关概率值和理由。</p>
+<p>2、新的研究应用<br>（1）隐实体链接<br>（2）表情符号语义消歧<br>（3）理解和分析web论坛中关于药物滥用的相关讨论<br>利用相关背景知识加强不同种类信息的信息抽取模型<br><img src="media/img1.png" alt="img1"></p>
+<p>3、在健康领域中的文本理解模型<br><img src="media/img2.png" alt="img2"></p>
+<p>4、使用感知器和文本资料了解城市交通情况<br>(1)交通领域的概念关系网模型<br>(2)概率图模型<br><img src="media/img3.png" alt="img3"></p>
+<p>使用领域知识关联不同模态下的上下文相关数据<br><img src="media/img4.png" alt="img4"></p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文主要举例说明了知识将推动机器对内容的理解。总体来看本文像一篇综述性的文章，给出了在知识库创建过程中所遇到的问题的解决方案，同时以实际案例来阐述知识在我们实际问题中应用。</p>
+<h1 id="AC-BLSTM-Asymmetric-Convolutional-Bidirectional-LSTM-Networks-for-Text-Classification"><a href="#AC-BLSTM-Asymmetric-Convolutional-Bidirectional-LSTM-Networks-for-Text-Classification" class="headerlink" title="AC-BLSTM: Asymmetric Convolutional Bidirectional LSTM Networks for Text Classification"></a><a href="https://arxiv.org/pdf/1611.01884v2.pdf" target="_blank" rel="external">AC-BLSTM: Asymmetric Convolutional Bidirectional LSTM Networks for Text Classification</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Depeng Liang and Yongdong Zhang</p>
+<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Guangdong Province Key Laboratory of Computational Science, School of Data and<br>Computer Science, Sun Yat-sen University, Guang Zhou, China</p>
+<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>ACNN; BLSTM; Text Classification</p>
+<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.11</p>
+<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>本文提出了一个新的深度学习的模型–AC-BLSTM的模型（即：将ACNN和BLSTM组合在一起），用于句子和文章层面的分类。</p>
+<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>AC-BLSTM模型可以分成四个部分,如Figure 1所示：<br>1.输入: 输入是一个sentence，使用 ( L <em> d )的矩阵表示，其中L表示句子中的L个词，d表示每个词的词向量的维度<br>2.ACNN(Asymmetric CNN): 传统的CNN采用的是 ( k </em> d ) 大小的filter，ACNN则把filter的过程分成 ( 1 <em> d ) 和 ( k </em> 1 ) 的两个过程，相当于是把 ( k <em> d ) 的filter做因式分解。<br>这一层的输入是一个 ( L </em> d ) 的矩阵，对于n个尺度为( 1 <em> d ) 和( ki </em> 1 )的卷积层的输出是一个 [ (L - ki + 1) <em> n ]的矩阵，如下图所示，本文采用了3种不同的卷积核，所以输出是3种不同的[ (L - ki + 1) </em> n ]的矩阵（图中一个彩色的小方块表示 (1 * n)的向量）<br>3.连接层: 为了给BLSTM构造输入，连接层将3种不同卷积层的输出，以Ct^i表示第1种卷积层为LSTM第t个time step贡献的输入，则LSTM网络的第t步输入Ct = [Ct^1, Ct^2, Ct^3]，其中t属于{1,2,…,L-K+1}, K = max{ki}<br>4.BLSTM: LSTM能够很好的解决long time delay 和long range context的问题，但其处理是单向的，而BLSTM能够解决given point的双边的依赖关系，因此，本文选择了BLSTM网络层来学习ACNN输入的特征的dependencies<br>5.Softmax层: 为了应用于分类问题，本文在最后使用全连接层和softmax函数来实现分类。<br><img src="media/Figure1.jpg" alt="Figure1"></p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>文章中使用的数据集<br>1、SST-1 <a href="http://nlp.stanford.edu/sentiment/index.html" target="_blank" rel="external">http://nlp.stanford.edu/sentiment/index.html</a><br>2、SST-2 <a href="http://nlp.stanford.edu/sentiment/index.html" target="_blank" rel="external">http://nlp.stanford.edu/sentiment/index.html</a><br>3、Movie Review(MR) <a href="https://www.cs.cornell.edu/people/pabo/movie-review-data/" target="_blank" rel="external">https://www.cs.cornell.edu/people/pabo/movie-review-data/</a><br>4、SUBJ <a href="https://www.cs.cornell.edu/people/pabo/movie-review-data/" target="_blank" rel="external">https://www.cs.cornell.edu/people/pabo/movie-review-data/</a><br>5、TREC <a href="http://cogcomp.cs.illinois.edu/Data/QA/QC/" target="_blank" rel="external">http://cogcomp.cs.illinois.edu/Data/QA/QC/</a><br>6、YELP13 <a href="https://www.yelp.com/dataset_challenge" target="_blank" rel="external">https://www.yelp.com/dataset_challenge</a></p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、Yoon Kim于2014年在<a href="http://www.aclweb.org/anthology/D14-1181" target="_blank" rel="external"><strong>Convolutional neural networks for sentence classification</strong></a>一文中提出将词向量和CNN结合，用于句子分类的模型。在该文中，Kim将不同长度的filter的组合在一起，且提出了static或者可以fine-tuning的word embedding模型<br>2、Zhou et al.则于2015年在<a href="https://arxiv.org/abs/1511.08630" target="_blank" rel="external"><strong>A C-LSTM neural network for text classification</strong></a>一文中提出将CNN和LSTM叠加的模型，且使用固定的word embedding<br>3、Szegedy et al.于2015年在<a href="https://arxiv.org/pdf/1512.00567v3.pdf" target="_blank" rel="external"><strong>Rethinking the Inception Architecture for Computer Vision</strong></a>中提出了ACNN模型，这减少了参数的个数且提高了模型的表征</p>
+<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>这篇文章主要贡献就是提出了一个AC-BSLTM的模型用于文本分类，亮点就在于：ACNN可以在减少参数的个数的同时通过增加更多的非线性性来提高表达能力，而BLSTM能够捕捉输入的两端的信息。两者的结合就提高了分类的精度。但事实上，这两个网络模型都是现有的，本文的工作感觉只是两个网络的连接，在本质上没有太大的改进，且在分类精度上的提高也比较有限。</p>
+<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>感谢@方嘉倩 @destin wang 和 @min279 三位童鞋的辛勤工作。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-18T17:16:11.000Z"><a href="/2016/12/18/本周值得读-2016-12-12-2016-12-16/">2016-12-18</a></time>
       
       
@@ -3392,60 +3470,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-19T00:21:22.000Z"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">2016-07-18</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">Attention-over-Attention Neural Networks for Reading Comprehension #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文分享的文章是arxiv今天刚刚新鲜出炉的paper，来自哈工大讯飞联合实验室。前不久，他们构建了一个大型阅读理解语料，今天也发布出来了。(<a href="http://hfl.iflytek.com/chinese-rc/" target="_blank" rel="external">下载地址</a>)</p>
-<p>Cloze-style Reading Comprehension这个领域竞争太过激烈了，半年时间把benchmark刷了一遍又一遍，今天的这篇paper又一次刷新了记录。如果对这个领域不太熟悉的话，可以读这篇<a href="http://rsarxiv.github.io/2016/06/18/%E6%95%99%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%98%85%E8%AF%BB/">教机器学习阅读</a>。</p>
-<p>本文的模型被称作Attention over Attention(AoA)，和之前的工作不同，不仅仅考虑query-to-document attention，而且考虑了document-to-query attention。模型架构示意图如下：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p><b>Contextual Embedding</b> 将query和document都embedding化，用Bi-GRU将query和document分别encode，将两个方向的hidden state拼接起来作为该词的state，此时document和query可以分别用一个Dxd和Qxd的矩阵来表示，这里D是document的词数，Q是query的词数，d是embedding的维度。</p>
-<p><b>Pair-wise Matching Score</b> </p>
-<p><img src="media/2.png" alt="2"></p>
-<p>这一步是本质上就是对两个矩阵做矩阵乘法，得到所谓的Matching Score矩阵M，这里的M矩阵的维度是DxQ，矩阵中的每个元素表示对应document和query中的词之间的matching score。</p>
-<p><b>Individual Attentions</b> 对M矩阵中的每一列做softmax归一化，得到所谓的query-to-document attention，即给定一个query词，对document中每个词的attention，本文用下式进行表示：</p>
-<p><img src="media/3.png" alt="3"></p>
-<p><b>Attention-over-Attention</b> 前三个步骤都是很多模型采用的通用做法，这一步是本文的亮点。首先，第三步是对M矩阵的每一列做了softmax归一化，这里对M矩阵的每一行做softmax归一化，即得到所谓的document-to-query attention，用下式来表示：</p>
-<p><img src="media/4.png" alt="4"></p>
-<p>然后，将document-to-query attention作平均得到最终的query-level attention，如下式：</p>
-<p><img src="media/5.png" alt="5"></p>
-<p>最后，用每个query-to-document attention和刚刚得到的query-level attention做点乘，得到document中每个词的score。</p>
-<p><b>Final Predictions</b> 将相同词的score合并，得到每个词的score，如下式：</p>
-<p><img src="media/6.png" alt="6"></p>
-<p>从而得到最终的答案。</p>
-<p>实验部分用了英文语料CNN和CBT，在没用pre-trained embedding情况下，单模型得到了state-of-the-art结果。</p>
-<p><img src="media/7.png" alt="7"></p>
-<p>本文模型最大的特点就是不仅仅考虑query到document的attention，而且考虑了document到query的attention，即所谓的attention over attention，在Cloze-style阅读理解任务中取得了更好的结果。同时，作者在未来的工作中，准备将该模型拓展到其他任务中。</p>
-<p>attention是一个非常好的机制，将很多任务的benchmark都提高到了很高的水平，是一个革命性的模型。围绕attention的变种做工作，提出各种各样的attention，虽然可以刷新各种任务，但终究不再能够将研究水平提升一个level，需要一个新的机制、新的思想来推动nlp的发展。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3479,7 +3503,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>92</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>93</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3515,7 +3539,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>110</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>111</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

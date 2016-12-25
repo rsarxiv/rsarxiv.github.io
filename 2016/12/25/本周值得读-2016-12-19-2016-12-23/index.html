@@ -3,15 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly# | PaperWeekly</title>
+  <title>本周值得读(2016.12.19-2016.12.23) | PaperWeekly</title>
   
   
-  <meta name="description" content="本文继续分享一篇深度增强学习在NLP中应用的paper，题目是Deep Reinforcement Learning with a Natural Language Action Space，作者是来自微软的Ji He博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。">
+  <meta name="description" content="Machine Reading with Background Knowledge【语义理解】在理解一句话的时候通常是直接分析该句话，而没有借助其他外部的知识，所以常常会产生一些歧义或者错误。本文的思路是在分析一句话时，借助一些背景知识来进行辅助，文中给出了两个任务，一个是句法分析中的介词短语消歧，">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#"/>
+  <meta property="og:title" content="本周值得读(2016.12.19-2016.12.23)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -66,40 +66,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-28T23:40:40.000Z"><a href="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/">2016-06-28</a></time>
+        <time datetime="2016-12-25T18:31:57.000Z"><a href="/2016/12/25/本周值得读-2016-12-19-2016-12-23/">2016-12-25</a></time>
       
       
   
-    <h1 class="title">Deep Reinforcement Learning with a Natural Language Action Space #PaperWeekly#</h1>
+    <h1 class="title">本周值得读(2016.12.19-2016.12.23)</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本文继续分享一篇深度增强学习在NLP中应用的paper，题目是<a href="http://arxiv.org/pdf/1511.04636v5.pdf" target="_blank" rel="external">Deep Reinforcement Learning with a Natural Language Action Space</a>，作者是来自微软的<a href="http://washington.academia.edu/JiHe" target="_blank" rel="external">Ji He</a>博士，文章最早于2015年11月发在arxiv上，2016年6月8号update。</p>
-<p>通过前两篇文章的介绍，基本对DQN在NLP中应用有了一个清晰的认识，与DQN之前应用不同的地方在于两个方面：</p>
-<p>1、actions的量级很大。</p>
-<p>2、transition tuple的具体形式随着模型来变化。</p>
-<p>本文也是以text games为研究背景，将输入从state变为(state,action)对，提出了Deep Reinforcement Relevant Network(DRRN)模型。</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig1.png" width="600" height="600">
-<p>上图中，前两个是baseline模型，第三个是本文模型，理解起来都比较简单。</p>
-<p>(a) Max-action DQN</p>
-<p>该模型适用于每一个transition中actions的最大数量是已知的情况，将每个transition中state和actions拼接成一个向量作为输入，通过一个Deep Network得到每个action的Q值。</p>
-<p>(b) Per-action DQN</p>
-<p>该模型将每一对(state,action)拼接成一个向量作为输入，通过network得到每个action的Q值。</p>
-<p>(c) DRRN</p>
-<p>本文模型分别将每对(state,action)中的state和action单独构建network，分别学习出不同的表示，然后用一种逐元素操作方法得到Q值，比如对两个向量作内积。这里，state往往是一个比较长的文本，可能是几句话，而action一般来说是一个动词短语，通过不同的网络结构进行学习，得到相同维度的表示，然后做内积，内积就是相似度的一种表征，也就是本文模型中的relevant。</p>
-<p>其实，对比着看不同DRL paper，只需要仔细对比看算法流程图，就知道哪些地方不同了，本文的如下图：</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig2.png" width="600" height="600">
-<p>本文算法中还有一个不同的地方在于，在策略选择上的trade-off，一般的方法均采用ε-greedy策略，本文用了一种softmax selection的方法来做exploration（对应着ε）策略，根据下面计算出的概率来进行选择：</p>
-<img src="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/fig3.png" width="200" height="200">
-<p>本文模型最大的优点在于可以处理比较复杂的action，不像<a href="http://rsarxiv.github.io/2016/06/27/Language-Understanding-for-Text-based-Games-using-Deep-Reinforcement-Learning-PaperWeekly/">Language Understanding for Text-based Games using Deep Reinforcement Learning</a>文章中只能处理一个action word加一个object word组成的command。</p>
-<p>本文考虑问题的角度不同，不是传统RL给定一个state，然后通过一个最优的Q来确定一个最优的action，而是将state和action放在一个层面上来做计算，虽然最后也是通过最优的Q来选择action，但通过用action和state的相关性来计算Q，使得其具有更广的应用前景。</p>
-<p>这是DQN在NLP中应用系列的最后一篇文章，文章数量比较少，所以不写综述了。整体的感觉是，应用还不太多，也没有看到特别惊艳的表现。不过，可以无穷无尽地构造训练用的样本是一个非常大的优点。三篇文章有两篇是研究text games的，只有一篇是做text generation的，并且DQN的痕迹很重，都是依着同一个框架进行修改和适应，并没有很多特别的地方。很期待，后面的研究可以将Deep Reinforcement Learning在NLP的各个任务中进行应用，像seq2seq+attention模型那样横扫整个NLP任务。</p>
-<p>如果大家觉得有写的不够清楚的地方或者错误的地方，欢迎留言交流。</p>
-<h1 id="工具推荐"><a href="#工具推荐" class="headerlink" title="工具推荐"></a>工具推荐</h1><p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献，欢迎大家扫码关注。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="650" height="650">
-<p>知乎专栏<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">paperweekly</a></p>
+        <h2 id="Machine-Reading-with-Background-Knowledge"><a href="#Machine-Reading-with-Background-Knowledge" class="headerlink" title="Machine Reading with Background Knowledge"></a><a href="http://t.cn/RIx3EjP" target="_blank" rel="external">Machine Reading with Background Knowledge</a></h2><p>【语义理解】在理解一句话的时候通常是直接分析该句话，而没有借助其他外部的知识，所以常常会产生一些歧义或者错误。本文的思路是在分析一句话时，借助一些背景知识来进行辅助，文中给出了两个任务，一个是句法分析中的介词短语消歧，一个是名词短语的关系抽取，都取得了明显的效果。本文作者包括了《机器学习》的作者Tom M. Mitchell教授。单纯地基于统计方法来做句法分析或者语义角色标注确实会遇到一些瓶颈，借助外部的背景知识是一个不错的思路。随着本文一起还开放了一个数据集 Prepositional Phrase Attachment Ambiguity (PPA) dataset <a href="http://t.cn/RIx1lEm" target="_blank" rel="external">http://t.cn/RIx1lEm</a></p>
+<h2 id="A-User-Simulator-for-Task-Completion-Dialogues"><a href="#A-User-Simulator-for-Task-Completion-Dialogues" class="headerlink" title="A User Simulator for Task-Completion Dialogues"></a><a href="http://t.cn/RI9czrW" target="_blank" rel="external">A User Simulator for Task-Completion Dialogues</a></h2><p>【对话系统】本文研究的问题非常有用，人人都在做chatbot，却苦于没有训练数据，用户模拟是一个不错的思路。本文探索了一种模拟真实用户来训练chatbot的方法，文中给出了模拟器的设计和部分代码，涉及到的领域包括找电影和订电影票。虽然效果有很大提升空间，但是个不错的尝试。推荐给研究和开发chatbot的童鞋。源代码也同时开放了，地址 <a href="http://t.cn/RICfMSB" target="_blank" rel="external">http://t.cn/RICfMSB</a> 感兴趣的童鞋可以研究下。</p>
+<h2 id="Reducing-Redundant-Computations-with-Flexible-Attention"><a href="#Reducing-Redundant-Computations-with-Flexible-Attention" class="headerlink" title="Reducing Redundant Computations with Flexible Attention"></a><a href="http://t.cn/RI9f3Bx" target="_blank" rel="external">Reducing Redundant Computations with Flexible Attention</a></h2><p>【注意力模型优化】注意力已经是一个应用比较广泛的深度学习模型，本文对decoding过程中的计算效率进行了优化，提出了一种Flexible注意力模型，在每一步解码时都会通过一个惩罚函数来过滤掉一些不重要的encoder unit，从而降低计算量。 </p>
+<h2 id="Improving-Tweet-Representations-using-Temporal-and-User-Context"><a href="#Improving-Tweet-Representations-using-Temporal-and-User-Context" class="headerlink" title="Improving Tweet Representations using Temporal and User Context"></a><a href="http://t.cn/RI9I8LS" target="_blank" rel="external">Improving Tweet Representations using Temporal and User Context</a></h2><p>【用户画像】本文在对tweet进行表示学习时，通过引入用户timeline上相邻的tweets来提高准确度。</p>
+<h2 id="Automatic-Generation-of-Grounded-Visual-Questions"><a href="#Automatic-Generation-of-Grounded-Visual-Questions" class="headerlink" title="Automatic Generation of Grounded Visual Questions"></a><a href="http://t.cn/RIKmwoo" target="_blank" rel="external">Automatic Generation of Grounded Visual Questions</a></h2><p>【VQA】【问题生成】可视化问答是个很有意思的东西，本文提出了一种新的任务，自动生成与图片内容相关的问题，有一点image caption的意思，只是说这里用来提问。感兴趣的童鞋可以关注一下。 </p>
+<h2 id="CLEVR-A-Diagnostic-Dataset-for-Compositional-Language-and-Elementary-Visual-Reasoning"><a href="#CLEVR-A-Diagnostic-Dataset-for-Compositional-Language-and-Elementary-Visual-Reasoning" class="headerlink" title="CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning"></a><a href="http://t.cn/RICIat8" target="_blank" rel="external">CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning</a></h2><p>【VQA】【数据福利】Li Feifei组发布的一组VQA数据集，100k规模的图片集，值得关注！文中提到数据和相关的处理代码近期会公开。</p>
+<h2 id="Fast-Domain-Adaptation-for-Neural-Machine-Translation"><a href="#Fast-Domain-Adaptation-for-Neural-Machine-Translation" class="headerlink" title="Fast Domain Adaptation for Neural Machine Translation"></a><a href="http://t.cn/RICJro8" target="_blank" rel="external">Fast Domain Adaptation for Neural Machine Translation</a></h2><p>【机器翻译】【迁移学习】本文的工作是将某一个领域中训练好的模型以最低的代价迁移到领域外，同时保证领域内和领域外都有不错的效果。具体的思路是：先训练出一个不错的baseline model，然后在baseline的基础上使用领域外的少量数据进行几个回合的训练，得到一个continue model，然后将baseline和continue进行mix，得到最终的model。</p>
+<h2 id="A-Context-aware-Attention-Network-for-Interactive-Question-Answering"><a href="#A-Context-aware-Attention-Network-for-Interactive-Question-Answering" class="headerlink" title="A Context-aware Attention Network for Interactive Question Answering"></a><a href="http://t.cn/RINpcT9" target="_blank" rel="external">A Context-aware Attention Network for Interactive Question Answering</a></h2><p>【交互式QA】本文的工作亮点在于做问答时提供了一种交互机制，当answer模块觉得现有的信息无法回答question的话，会生成一个更加深入的问题给用户，通过学习用户的反馈来生成答案。</p>
+<h2 id="中文信息处理发展报告"><a href="#中文信息处理发展报告" class="headerlink" title="中文信息处理发展报告"></a><a href="http://t.cn/RINHLN8" target="_blank" rel="external">中文信息处理发展报告</a></h2><p>中国中文信息学会发布2016年《中文信息处理发展报告》，值得一读！</p>
 
       
     </div>
@@ -109,7 +94,7 @@
         
   
   <div class="tags">
-    <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/DQN/">DQN</a>, <a href="/tags/NLP/">NLP</a>
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
   </div>
 
         
@@ -152,7 +137,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/12/25/本周值得读-2016-12-19-2016-12-23/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

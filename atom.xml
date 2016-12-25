@@ -5,10 +5,41 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-23T18:56:14.000Z</updated>
+  <updated>2016-12-25T18:39:11.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2016.12.19-2016.12.23)</title>
+    <link href="http://rsarxiv.github.io/2016/12/25/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-19-2016-12-23/"/>
+    <id>http://rsarxiv.github.io/2016/12/25/本周值得读-2016-12-19-2016-12-23/</id>
+    <published>2016-12-25T18:31:57.000Z</published>
+    <updated>2016-12-25T18:39:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Machine-Reading-with-Background-Knowledge"><a href="#Machine-Reading-with-Background-Knowledge" class="headerlink" title="Machine Reading with Background Knowledge"></a><a href="http://t.cn/RIx3EjP" target="_blank" rel="external">Machine Reading with Background Knowledge</a></h2><p>【语义理解】在理解一句话的时候通常是直接分析该句话，而没有借助其他外部的知识，所以常常会产生一些歧义或者错误。本文的思路是在分析一句话时，借助一些背景知识来进行辅助，文中给出了两个任务，一个是句法分析中的介词短语消歧，一个是名词短语的关系抽取，都取得了明显的效果。本文作者包括了《机器学习》的作者Tom M. Mitchell教授。单纯地基于统计方法来做句法分析或者语义角色标注确实会遇到一些瓶颈，借助外部的背景知识是一个不错的思路。随着本文一起还开放了一个数据集 Prepositional Phrase Attachment Ambiguity (PPA) dataset <a href="http://t.cn/RIx1lEm" target="_blank" rel="external">http://t.cn/RIx1lEm</a></p>
+<h2 id="A-User-Simulator-for-Task-Completion-Dialogues"><a href="#A-User-Simulator-for-Task-Completion-Dialogues" class="headerlink" title="A User Simulator for Task-Completion Dialogues"></a><a href="http://t.cn/RI9czrW" target="_blank" rel="external">A User Simulator for Task-Completion Dialogues</a></h2><p>【对话系统】本文研究的问题非常有用，人人都在做chatbot，却苦于没有训练数据，用户模拟是一个不错的思路。本文探索了一种模拟真实用户来训练chatbot的方法，文中给出了模拟器的设计和部分代码，涉及到的领域包括找电影和订电影票。虽然效果有很大提升空间，但是个不错的尝试。推荐给研究和开发chatbot的童鞋。源代码也同时开放了，地址 <a href="http://t.cn/RICfMSB" target="_blank" rel="external">http://t.cn/RICfMSB</a> 感兴趣的童鞋可以研究下。</p>
+<h2 id="Reducing-Redundant-Computations-with-Flexible-Attention"><a href="#Reducing-Redundant-Computations-with-Flexible-Attention" class="headerlink" title="Reducing Redundant Computations with Flexible Attention"></a><a href="http://t.cn/RI9f3Bx" target="_blank" rel="external">Reducing Redundant Computations with Flexible Attention</a></h2><p>【注意力模型优化】注意力已经是一个应用比较广泛的深度学习模型，本文对decoding过程中的计算效率进行了优化，提出了一种Flexible注意力模型，在每一步解码时都会通过一个惩罚函数来过滤掉一些不重要的encoder unit，从而降低计算量。 </p>
+<h2 id="Improving-Tweet-Representations-using-Temporal-and-User-Context"><a href="#Improving-Tweet-Representations-using-Temporal-and-User-Context" class="headerlink" title="Improving Tweet Representations using Temporal and User Context"></a><a href="http://t.cn/RI9I8LS" target="_blank" rel="external">Improving Tweet Representations using Temporal and User Context</a></h2><p>【用户画像】本文在对tweet进行表示学习时，通过引入用户timeline上相邻的tweets来提高准确度。</p>
+<h2 id="Automatic-Generation-of-Grounded-Visual-Questions"><a href="#Automatic-Generation-of-Grounded-Visual-Questions" class="headerlink" title="Automatic Generation of Grounded Visual Questions"></a><a href="http://t.cn/RIKmwoo" target="_blank" rel="external">Automatic Generation of Grounded Visual Questions</a></h2><p>【VQA】【问题生成】可视化问答是个很有意思的东西，本文提出了一种新的任务，自动生成与图片内容相关的问题，有一点image caption的意思，只是说这里用来提问。感兴趣的童鞋可以关注一下。 </p>
+<h2 id="CLEVR-A-Diagnostic-Dataset-for-Compositional-Language-and-Elementary-Visual-Reasoning"><a href="#CLEVR-A-Diagnostic-Dataset-for-Compositional-Language-and-Elementary-Visual-Reasoning" class="headerlink" title="CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning"></a><a href="http://t.cn/RICIat8" target="_blank" rel="external">CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning</a></h2><p>【VQA】【数据福利】Li Feifei组发布的一组VQA数据集，100k规模的图片集，值得关注！文中提到数据和相关的处理代码近期会公开。</p>
+<h2 id="Fast-Domain-Adaptation-for-Neural-Machine-Translation"><a href="#Fast-Domain-Adaptation-for-Neural-Machine-Translation" class="headerlink" title="Fast Domain Adaptation for Neural Machine Translation"></a><a href="http://t.cn/RICJro8" target="_blank" rel="external">Fast Domain Adaptation for Neural Machine Translation</a></h2><p>【机器翻译】【迁移学习】本文的工作是将某一个领域中训练好的模型以最低的代价迁移到领域外，同时保证领域内和领域外都有不错的效果。具体的思路是：先训练出一个不错的baseline model，然后在baseline的基础上使用领域外的少量数据进行几个回合的训练，得到一个continue model，然后将baseline和continue进行mix，得到最终的model。</p>
+<h2 id="A-Context-aware-Attention-Network-for-Interactive-Question-Answering"><a href="#A-Context-aware-Attention-Network-for-Interactive-Question-Answering" class="headerlink" title="A Context-aware Attention Network for Interactive Question Answering"></a><a href="http://t.cn/RINpcT9" target="_blank" rel="external">A Context-aware Attention Network for Interactive Question Answering</a></h2><p>【交互式QA】本文的工作亮点在于做问答时提供了一种交互机制，当answer模块觉得现有的信息无法回答question的话，会生成一个更加深入的问题给用户，通过学习用户的反馈来生成答案。</p>
+<h2 id="中文信息处理发展报告"><a href="#中文信息处理发展报告" class="headerlink" title="中文信息处理发展报告"></a><a href="http://t.cn/RINHLN8" target="_blank" rel="external">中文信息处理发展报告</a></h2><p>中国中文信息学会发布2016年《中文信息处理发展报告》，值得一读！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Machine-Reading-with-Background-Knowledge&quot;&gt;&lt;a href=&quot;#Machine-Reading-with-Background-Knowledge&quot; class=&quot;headerlink&quot; title=&quot;Machine Re
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第十九期</title>
@@ -1103,41 +1134,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;Memory Networks是由Facebook的Jason Weston等人提出的一个神经网络框架，通过引入长期记忆组件(long-te
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.10.17-2016.10.21</title>
-    <link href="http://rsarxiv.github.io/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/"/>
-    <id>http://rsarxiv.github.io/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/</id>
-    <published>2016-10-22T20:11:20.000Z</published>
-    <updated>2016-10-22T20:49:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification"><a href="#Cached-Long-Short-Term-Memory-Neural-Networks-for-Document-Level-Sentiment-Classification" class="headerlink" title="Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification"></a><a href="https://arxiv.org/pdf/1610.04989v1.pdf" target="_blank" rel="external">Cached Long Short-Term Memory Neural Networks for Document-Level Sentiment Classification</a></h2><p>【情感分析】RNN处理文本这样的序列数据有天然优势，但对于长文本效果却不尽人意。本文针对这个问题，提出了一种新的LSTM结构Cached LSTM。通过cache机制，来捕捉整体语义信息，将memory分成几组，对应不同的forget门，在文档集情感分析任务中取得了不错的结果。其实，RNN处理长文本信息都面临这个问题，chatbot中对context信息的处理也可以考虑借鉴这个思路。本文是FudanvNLP的工作。</p>
-<h2 id="Lexicon-Integrated-CNN-Models-with-Attention-for-Sentiment-Analysis"><a href="#Lexicon-Integrated-CNN-Models-with-Attention-for-Sentiment-Analysis" class="headerlink" title="Lexicon Integrated CNN Models with Attention for Sentiment Analysis"></a><a href="https://arxiv.org/pdf/1610.06272v1.pdf" target="_blank" rel="external">Lexicon Integrated CNN Models with Attention for Sentiment Analysis</a></h2><p>【情感分析】本文研究的内容是情感分析，论文的亮点在于提出了一种新的CNN+attention模型。本文适合在情感分析模型上有所突破的童鞋来读，从事相关工作的工程师或数据科学家也适合粗读一下。</p>
-<h2 id="A-Language-independent-and-Compositional-Model-for-Personality-Trait-Recognition-from-Short-Texts"><a href="#A-Language-independent-and-Compositional-Model-for-Personality-Trait-Recognition-from-Short-Texts" class="headerlink" title="A Language-independent and Compositional Model for Personality Trait Recognition from Short Texts"></a><a href="https://arxiv.org/pdf/1610.04345v1.pdf" target="_blank" rel="external">A Language-independent and Compositional Model for Personality Trait Recognition from Short Texts</a></h2><p>【用户画像】本文研究的问题是从短文本中学习用户画像，提出了一种深度学习模型，模型上从学术上讲没有太多亮点，适合工业界从事相关工作的童鞋阅读。</p>
-<h2 id="Neural-Machine-Translation-Advised-by-Statistical-Machine-Translation"><a href="#Neural-Machine-Translation-Advised-by-Statistical-Machine-Translation" class="headerlink" title="Neural Machine Translation Advised by Statistical Machine Translation"></a><a href="https://arxiv.org/pdf/1610.05150v1.pdf" target="_blank" rel="external">Neural Machine Translation Advised by Statistical Machine Translation</a></h2><p>【机器翻译】NMT翻译流利但有时翻译不准，SMT翻译准确但不够流利，两者各有优劣。本文结合了两种方法的优点，提出了在NMT解码阶段，用SMT来做辅助，通过一种门机制来选择用SMT还是NMT生成。</p>
-<h2 id="Interactive-Attention-for-Neural-Machine-Translation"><a href="#Interactive-Attention-for-Neural-Machine-Translation" class="headerlink" title="Interactive Attention for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1610.05011v1.pdf" target="_blank" rel="external">Interactive Attention for Neural Machine Translation</a></h2><p>【机器翻译】【注意力模型】注意力模型证明了其强大威力，本文提出了一种新的注意力模型，INTERACTIVE ATTENTION，在encoder和decoder之间通过读和写操作进行交互，实验中对比了其他注意力模型，结果不错。</p>
-<h2 id="A-General-Framework-for-Content-enhanced-Network-Representation-Learning"><a href="#A-General-Framework-for-Content-enhanced-Network-Representation-Learning" class="headerlink" title="A General Framework for Content-enhanced Network Representation Learning"></a><a href="https://arxiv.org/pdf/1610.02906v3.pdf" target="_blank" rel="external">A General Framework for Content-enhanced Network Representation Learning</a></h2><p>【社交网络】本文研究的是社交网络中各个节点的表示问题，亮点在于考虑了node（比如：用户）的相关文本信息，从文本中挖掘出node的一些特性（比如：性别、职业、爱好等），对node的刻画更精准。利用富文本信息来刻画社交网络中的各个node，在广告、推荐系统等应用方面都会带来很大的价值，这也正是nlp的价值所在，从杂乱无章的非结构文本中挖掘出大量的有用信息，本文适合研究社交网络价值、推荐系统的童鞋深入阅读。本文工作来自哈工大刘挺老师组。</p>
-<h2 id="Reasoning-with-Memory-Augmented-Neural-Networks-for-Language-Comprehension"><a href="#Reasoning-with-Memory-Augmented-Neural-Networks-for-Language-Comprehension" class="headerlink" title="Reasoning with Memory Augmented Neural Networks for Language Comprehension"></a><a href="https://arxiv.org/pdf/1610.06454v1.pdf" target="_blank" rel="external">Reasoning with Memory Augmented Neural Networks for Language Comprehension</a></h2><p>【机器阅读】本文提出了一种做假设检验的神经网络方法（Neural Semantic Encoders），并且应用在机器阅读任务上，取得了不错的效果，涉及的数据集是CBT和WDW。</p>
-<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="STC短文本对话数据"><a href="#STC短文本对话数据" class="headerlink" title="STC短文本对话数据"></a><a href="http://ntcirstc.noahlab.com.hk/STC2/stc-cn.htm" target="_blank" rel="external">STC短文本对话数据</a></h2><p>【中文对话数据】对话很热，但依然很难！华为诺亚方舟实验室在NTCIR-13组织的关于短文本对话(Short-Text Conversation)的比赛已经开始注册了，让我们一起从大数据中探求人类对话的本质！比赛有两个任务，一个是基于检索给出response，一个是直接生成response。数据来自微博，输入是微博内容，输出是评论内容。13年华为的文章提到的短文本对话数据集可能就是指该数据集，一直愁对话数据的各位可以看过来，你们等的数据来了！</p>
-<h2 id="DataHub"><a href="#DataHub" class="headerlink" title="DataHub"></a><a href="https://datahub.io/dataset" target="_blank" rel="external">DataHub</a></h2><p>一个收集各种数据集的网站。</p>
-<h2 id="t-SNE可视化工具的python和torch封装"><a href="#t-SNE可视化工具的python和torch封装" class="headerlink" title="t-SNE可视化工具的python和torch封装"></a><a href="https://github.com/DmitryUlyanov/Multicore-TSNE" target="_blank" rel="external">t-SNE可视化工具的python和torch封装</a></h2><p>DmitryUlyanov/Multicore-TSNE: Parallel t-SNE implementation with Python and Torch wrappers</p>
-<h2 id="Jiwei-Li关于聊天机器人NLG问题的slide"><a href="#Jiwei-Li关于聊天机器人NLG问题的slide" class="headerlink" title="Jiwei Li关于聊天机器人NLG问题的slide"></a><a href="http://web.stanford.edu/class/cs224u/materials/cs224u-2016-li-chatbots.pdf" target="_blank" rel="external">Jiwei Li关于聊天机器人NLG问题的slide</a></h2><p>分享一个斯坦福大学Jiwei Li关于聊天机器人NLG问题的slide，Jiwei Li是一个非常高产的作者，这个slide包括了非常多精彩的内容。 </p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly<br>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Cached-Long-Short-Term-Memory-Neural-Networks-for-Doc
     
     </summary>
     

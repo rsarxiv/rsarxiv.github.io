@@ -5,10 +5,62 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2016-12-25T18:39:11.000Z</updated>
+  <updated>2016-12-30T04:10:25.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2016年自然语言处理领域10篇值得读的Paper</title>
+    <link href="http://rsarxiv.github.io/2016/12/29/2016%E5%B9%B4%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E9%A2%86%E5%9F%9F10%E7%AF%87%E5%80%BC%E5%BE%97%E8%AF%BB%E7%9A%84Paper/"/>
+    <id>http://rsarxiv.github.io/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/</id>
+    <published>2016-12-30T04:10:12.000Z</published>
+    <updated>2016-12-30T04:10:25.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>告别2016，迎接2017</title>
+    <link href="http://rsarxiv.github.io/2016/12/29/%E5%91%8A%E5%88%AB2016%EF%BC%8C%E8%BF%8E%E6%8E%A52017/"/>
+    <id>http://rsarxiv.github.io/2016/12/29/告别2016，迎接2017/</id>
+    <published>2016-12-29T19:20:43.000Z</published>
+    <updated>2016-12-30T18:02:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>2016年即将结束，首先对支持PaperWeekly的各位童鞋表示衷心的感谢，感谢你们让我有动力将这个用来督促我自己多读paper的side project坚持一直做下来，感谢各位对自然语言处理感兴趣并且愿意牺牲一些个人时间来写paper note的小伙伴，也感谢每天坚持一起刷arXiv来保证周末推荐“每周值得读”质量的几位童鞋，感谢加入PaperWeekly交流群每天都贡献很多高质量讨论内容的各位朋友，感谢为三个交流群做消息同步机器人的种瓜同学。</p>
+<p>PaperWeekly从刚开始只有我一个人，到现在一共有50多位一起愿意分享内容的小伙伴，并且这个数字随着大家的热情参与会逐渐增加，正是有了这么多积极参与的小伙伴，才有了PaperWeekly一周敢做一个topic的底气。从9月1号重新组织PaperWeekly的内容形式，到今天为止，一共发布了17期内容，加上之前我自己写的2期内容，一共是19期内容，19期意味着19周的时间，19周的时间我们可以走过很多地方，吃过很多美食，看过很多美景，而我们选择了读19周的paper，选择了写19周的paper note，选择了推荐这19周中高质量的paper，选择了分享这19周以来大家的成长、积累与思考。</p>
+<p>19周的时间，PaperWeekly一共完成了83篇paper notes，而这83篇paper可以用19个独立的topic组织起来，比如：</p>
+<p>1、提高seq2seq生成对话的流畅性和多样性；<br>2、通过无监督/半监督的方法来做命名实体识别（NER）；<br>3、哪些ICLR2017的paper值得关注；<br>4、Attention模型在NMT任务中的应用和进展；<br>5、文本摘要技术的进展情况；<br>6、增强学习在对话生成中的应用；<br>7、GAN的研究进展；</p>
+<p>每个topic都涉及到了一个研究方向，有的内容非常热门，比如GAN，有的内容非常经典，比如NER，每个topic都会抓住一些特点来归纳几篇paper，为准备入门、正在入门、已经入门的同学提供了服务和方便。</p>
+<p>从8.25开始，PaperWeekly推出了“每周值得读”栏目，旨在充当arXiv上自然语言处理方面的人工过滤器，旨在解决信息过载问题，旨在帮助大家更快地了解到哪些paper更值得关注。</p>
+<p>从8.25开始，PaperWeekly一共推荐了153篇高质量的paper，当然每个人对于质量的理解都会有所偏差，有的paper给整个研究带来了巨大的影响，有的paper可能对某个领域有所提高，有的paper所蕴含的思想会带来很多的启发，这是一件仁者见仁智者见智的事情。</p>
+<p>在做PaperWeekly的时候，我观察到大家有一定的招聘需求，可能是公司，也可能是院校或者科研机构，但是在交流群中发的效果又不是很好，于是做了个决定，在11月中旬开始推出了一项新的服务—公益广告服务，从第一个帮助清华大学刘知远老师招博士后开始至今已经发了一些广告了，虽然还没有做效果反馈工作，但我们确实尽力在帮这些需要帮助的企业或者院校，如果您有这样的招聘需求，可以私信来联系我，如果可以与PaperWeekly合作写一期文章会更好！</p>
+<p>在做PaperWeekly的时候，我也有过一阵迷茫，就是关于PaperWeekly到底是什么的思考，记得是一个周日晚上，我到了夜里3点仍没有睡着，就爬起来写了一篇《PaperWeekly到底是什么》的文章，来好好地定义了一下我们所做的事情以及所想追求的东西。最后，我是这么定义PaperWeekly的，“PaperWeekly是一个由50多名喜欢分享知识的童鞋利用宝贵的业余时间来一起，以一周为单位、对一个topic进行多篇paper解读和对比总结的、不追求热点、不搞些噱头的爱心公益组织，旨在分享知识。”</p>
+<p>对一个东西的定位很重要，直接决定了对这个东西的态度和所应采取的方式、方法。我做不到拿一些哗众取宠的名字来命名文章标题，也做不到过分地夸大或者贬低某一个东西，我只想纯粹地做这么一件事情。各种指标对我们来说没有意义，哪怕没有人来读文章，而我们每天所读的这些paper，所学到的知识都不会减少，当然我希望大家写的东西可以分享给更多的人，让更多的人一起来感受科技的进步和学术的前沿，但我们不会刻意地去追求什么。我一直认为人能够坚持并且努力做好一件事情的最大动力是热爱，是那种没有半点虚伪、没有半点功利的热爱。因为热爱，所以纯粹。</p>
+<p>PaperWeekly不是一个完美的东西，但是一个成长的东西，是一个一直在努力变好的东西。2016快要结束了，在2017年里，我们将不断地完善文章质量，丰富文章的形式，增加一些群内的直播交流活动，比如针对某一篇、某几篇paper的讨论，不定期地邀请更多的业界大牛来讲一讲理论和技术如何在工业界落地等等。</p>
+<p>PaperWeekly是一个非常开放的组织，随时欢迎想一起写paper notes或者写分享的童鞋加入，让我们不断地努力，不断地壮大力量，在2017年书写出更多值得读的文章，产生更多高质量的讨论内容，一起为国内自然语言处理的发展贡献一点点力量。</p>
+<p>最后，感谢各位合作伙伴对PaperWeekly的大力支持，感谢机器之心、科研圈、IEEE计算科学评论、ChatbotChina、将门创投等媒体和机构的支持。</p>
+<p>2016年是一个开始，也仅仅是一个开始，2017年即将到来，PaperWeekly将与深度学习社区AI100进行深度合作，为大家提供更好的服务！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2016年即将结束，首先对支持PaperWeekly的各位童鞋表示衷心的感谢，感谢你们让我有动力将这个用来督促我自己多读paper的side project坚持一直做下来，感谢各位对自然语言处理感兴趣并且愿意牺牲一些个人时间来写paper note的小伙伴，也感谢每天坚持一
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
   
   <entry>
     <title>本周值得读(2016.12.19-2016.12.23)</title>
@@ -35,9 +87,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -103,9 +155,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -136,9 +188,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -214,9 +266,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -243,9 +295,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -337,9 +389,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -373,9 +425,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -474,9 +526,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -512,9 +564,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -543,9 +595,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -628,9 +680,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -691,9 +743,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -757,9 +809,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -786,9 +838,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -865,9 +917,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -898,9 +950,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -995,152 +1047,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.10.24-2016.10.28</title>
-    <link href="http://rsarxiv.github.io/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/"/>
-    <id>http://rsarxiv.github.io/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/</id>
-    <published>2016-10-28T23:35:04.000Z</published>
-    <updated>2016-10-28T23:46:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Iterative-Refinement-for-Machine-Translation"><a href="#Iterative-Refinement-for-Machine-Translation" class="headerlink" title="Iterative Refinement for Machine Translation"></a><a href="https://arxiv.org/pdf/1610.06602v2.pdf" target="_blank" rel="external">Iterative Refinement for Machine Translation</a></h2><p>【机器翻译】本文的研究内容针对机器翻译在解码阶段单调总是单调、不回溯地生成翻译结果的问题，作者提出了一种翻译方案，在解码时不断地回溯并且修正先前生成的结果。模型是CNN+attention。本文工作来自Facebook AI Research。</p>
-<h2 id="Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries"><a href="#Bridging-Neural-Machine-Translation-and-Bilingual-Dictionaries" class="headerlink" title="Bridging Neural Machine Translation and Bilingual Dictionaries"></a><a href="https://arxiv.org/pdf/1610.07272v1.pdf" target="_blank" rel="external">Bridging Neural Machine Translation and Bilingual Dictionaries</a></h2><p>【机器翻译】本文研究的内容是机器翻译中如何应用两门语言中罕见词和未登录词词典的问题，本文针对这一问题提出了两种方法。本文工作来自中科院@张家俊MT 老师。</p>
-<h2 id="Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems"><a href="#Two-are-Better-than-One-An-Ensemble-of-Retrieval-and-Generation-Based-Dialog-Systems" class="headerlink" title="Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems"></a><a href="https://arxiv.org/pdf/1610.07149v1.pdf" target="_blank" rel="external">Two are Better than One: An Ensemble of Retrieval- and Generation-Based Dialog Systems</a></h2><p>【chatbot】开放域聊天机器人在回复时有两种常见的思路：1、基于检索 2、基于生成。第一种方法比较简单但答案相对死板，第二种方法灵活但常常出现“呵呵”式的回答。本文提出了一种集成方法，检索到的答案和用户的query一起作为输入，喂入模型（RNN）中，然后生成回答，新生成的回答作为candidate一起重排序来决定最终的回复。实验结果证明了本文的方法要比单种方法更有效。每个模型都有其优点和缺点，这种集成式的方法将各个模型的优点集成起来，效果会很不错。</p>
-<h2 id="EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji"><a href="#EmojiNet-Building-a-Machine-Readable-Sense-Inventory-for-Emoji" class="headerlink" title="EmojiNet: Building a Machine Readable Sense Inventory for Emoji"></a><a href="https://arxiv.org/pdf/1610.07710v1.pdf" target="_blank" rel="external">EmojiNet: Building a Machine Readable Sense Inventory for Emoji</a></h2><p>【语义网】本文构建的EmojiNet类似于词的WordNet，同一个Emoji表情在不同的上下文中有着不同的意思，而社交网络非常流行Emoji表情，构建这么一个语义网非常有意义。项目地址：<a href="http://emojinet.knoesis.org./" target="_blank" rel="external">http://emojinet.knoesis.org./</a></p>
-<h2 id="Can-Active-Memory-Replace-Attention"><a href="#Can-Active-Memory-Replace-Attention" class="headerlink" title="Can Active Memory Replace Attention?"></a><a href="https://arxiv.org/pdf/1610.08613v1.pdf" target="_blank" rel="external">Can Active Memory Replace Attention?</a></h2><p>【Memory Networks】Memory Networks和Attention是解决长距离依赖问题的两大方法，Attention模型在NLP的很多任务中都有更好的表现，本文对Memory Networks类模型的缺点进行了分析，并且提出了一种改进模型。改进版的memory模型有不错的表现，并且在长句子机器翻译任务中得到了验证。本文作者来自Google Brain。建议关注自然语言处理的童鞋，不管是关注什么任务，都应该精读一下本文。</p>
-<h2 id="CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases"><a href="#CoType-Joint-Extraction-of-Typed-Entities-and-Relations-with-Knowledge-Bases" class="headerlink" title="CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases"></a><a href="https://arxiv.org/pdf/1610.08763v1.pdf" target="_blank" rel="external">CoType: Joint Extraction of Typed Entities and Relations with Knowledge Bases</a></h2><p>【信息抽取】本文提出了一种基于Distant Supervision对文本中命名实体和关系联合抽取的框架，克服了之前将两个任务分开做带来的误差影响，框架具有较强的扩展性和迁移性，建议精读。</p>
-<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="Reddit大型评论数据集"><a href="#Reddit大型评论数据集" class="headerlink" title="Reddit大型评论数据集"></a><a href="https://www.reddit.com/r/datasets/comments/59039y/updated_reddit_comment_dataset_up_to_201608/" target="_blank" rel="external">Reddit大型评论数据集</a></h2><p>【数据集】Reddit大型评论数据集，用于情感分析研究。</p>
-<h2 id="微软lightGBM框架的python接口"><a href="#微软lightGBM框架的python接口" class="headerlink" title="微软lightGBM框架的python接口"></a><a href="https://github.com/ArdalanM/pyLightGBM" target="_blank" rel="external">微软lightGBM框架的python接口</a></h2><p>【开源框架】ArdalanM/pyLightGBM: Python binding for Microsoft LightGBM </p>
-<h2 id="中文对白语料：可用作聊天机器人训练语料"><a href="#中文对白语料：可用作聊天机器人训练语料" class="headerlink" title="中文对白语料：可用作聊天机器人训练语料"></a><a href="https://github.com/rustch3n/dgk_lost_conv" target="_blank" rel="external">中文对白语料：可用作聊天机器人训练语料</a></h2><p>【数据集】chinese conversation corpus by BiNgFeng GitHub</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Iterative-Refinement-for-Machine-Translation&quot;&gt;&lt;a href
-    
-    </summary>
-    
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十一期</title>
-    <link href="http://rsarxiv.github.io/2016/10/27/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%B8%80%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/10/27/PaperWeekly-第十一期/</id>
-    <published>2016-10-28T04:54:20.000Z</published>
-    <updated>2016-10-28T04:57:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Memory Networks是由Facebook的Jason Weston等人提出的一个神经网络框架，通过引入长期记忆组件(long-term memory component)来解决神经网络长程记忆困难的问题。在此框架基础上，发展出许多Memory Networks的变体模型，本期精选了5篇Memory Networks相关的论文，分别如下：</p>
-<p>1、Memory Networks<br>2、End-To-End Memory Networks<br>3、Ask Me Anything: Dynamic Memory Networks for Natural Language Processing<br>4、THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS<br>5、Key-Value Memory Networks for Directly Reading Documents</p>
-<h1 id="Memory-Networks"><a href="#Memory-Networks" class="headerlink" title="Memory Networks"></a><a href="https://arxiv.org/abs/1410.3916" target="_blank" rel="external">Memory Networks</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jason Weston, Sumit Chopra, Antoine Bordes</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Question Answering, Memory Network</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2015</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>为解决长期记忆问题, 提出一类称为Memory Networks的模型框架, 基于该框架构造的模型可以拥有长期(大量)和易于读写的记忆。</p>
-<h2 id="模型和思路"><a href="#模型和思路" class="headerlink" title="模型和思路"></a>模型和思路</h2><p>Memory Networks可以理解为一种构造模型的框架, 该类模型由如下五部分组成:</p>
-<p>1、记忆m: 模型记忆的表示,由一个记忆槽列表[m<sub>1</sub>-m<sub>i</sub>]组成,可被G,O组件读写<br>2、组件I (input feature map): 将模型输入转化模型内部特征空间中特征表示<br>3、组件G (generalization): 在模型获取新输入时更新记忆m，可以理解为记忆存储<br>4、组件O (output feature map): 根据模型输入和记忆m输出对应于模型内部特征空间中特征表示，可以理解为读取记忆<br>5、组件R(response): 将O组件输出的内部特征空间的表示转化为特定格式，比如文本。可以理解为把读取到抽象的记忆转化为具象的表示。</p>
-<p>假设模型输入为x:</p>
-<ul>
-<li>记忆的更新过程表示为 m<sub>H(x)</sub> = G(m<sub>i</sub>, I(X), m), ∀i, H(x)为选择记忆和遗忘机制</li>
-<li>记忆的读取过程表示为 r = R(O(I(x), m))</li>
-</ul>
-<p>再次强调Memory Networks是一类模型框架, 组件I,G,R,O可以使用不同的实现</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><ul>
-<li><a href="https://github.com/facebook/MemNN" target="_blank" rel="external">facebook MemNN实现</a></li>
-</ul>
-<h2 id="相关工作及引用"><a href="#相关工作及引用" class="headerlink" title="相关工作及引用"></a>相关工作及引用</h2><ul>
-<li>Facebook AI的进一步工作, 基于Memory Networks框架和神经网络实现了End-To-End的训练学习<br>Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, Rob Fergus. End-To-End Memory Networks. arXiv:1503.08895  </li>
-</ul>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>文章提出了一个通用的解决长期记忆问题的算法框架, 框架中的每一个模块都可以变更成新的实现, 可以根据不同的应用场景进行适配。 </p>
-<h1 id="End-To-End-Memory-Networks"><a href="#End-To-End-Memory-Networks" class="headerlink" title="End-To-End Memory Networks"></a><a href="https://arxiv.org/pdf/1503.08895v5.pdf" target="_blank" rel="external">End-To-End Memory Networks</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston,  Rob Fergus</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Dept. of Computer Science Courant Institute, New York University<br>Facebook AI Research</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, End-to-end, Question Answer</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>NIPS 2015</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>本文提出了一个可以端到端训练的Memory Networks，并且在训练阶段比原始的Memory Networks需要更少的监督信息。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型包括单层和多层两种情况。下面先介绍单层情况，<br>1、单层<br>如图(a)所示，输入的序列可以通过不同的Embedding矩阵A和C分别被表示成Input和Output向量的集合。同样的，通过Embedding矩阵B，我们将Question表示成一个向量u，向量u和Input向量集合中的每个向量计算内积，然后通过softmax得到一个概率向量p（attention过程），概率向量p中的每一个概率值表示每个Output向量对应输出的权重大小。通过p和Output向量集合，对Output中的向量进行加权求和得到输出向量o，将输出向量o和问题向量u相加，再最后通过一个权值矩阵W和softmax来预测最终的label。</p>
-<p><img src="media/end_to_end.png" alt="end_to_end"></p>
-<p>2、 多层<br>多层的情况如图(b)所示，每层的输出向量o<sup>i</sup>和问题向量u<sup>i</sup>相加获得新的问题表示u<sup>i+1</sup>，然后重复上述单层的过程,直到最后一层通过softmax来预测label。</p>
-<p>本文在bAbi数据集、Penn Treebank以及Text8三个数据集上进行实验，均取得了较好的实验效果。</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><ul>
-<li>[bAbi]<br>(<a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">https://research.facebook.com/research/babi/</a>)</li>
-</ul>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Memory Networks<br>Neural Turing Machines</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出的模型是在Facebook提出的原始Memory networks基础上进行的改进。在Memory networks的框架下，将原来依赖于中间监督信息的非端到端Memory networks改进为端到端的Memory networks。基础模型之外，本文针对时序编码提出了一些有趣的trick，可作参考。</p>
-<h1 id="Ask-Me-Anything-Dynamic-Memory-Networks-for-Natural-Language-Processing"><a href="#Ask-Me-Anything-Dynamic-Memory-Networks-for-Natural-Language-Processing" class="headerlink" title="Ask Me Anything: Dynamic Memory Networks for Natural Language Processing"></a><a href="https://arxiv.org/abs/1506.07285" target="_blank" rel="external">Ask Me Anything: Dynamic Memory Networks for Natural Language Processing</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan Gulrajani, Victor Zhong, Romain Paulus, Richard Socher</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>MetaMind</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, Neural Networks, Question Answering</p>
-<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>arXiv</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>Question Answering: 给定一段Context，一个与此Context相关的Question，利用模型生成一个单词的Answer。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>下图给出了dynamic memory networks的框架。</p>
-<p><img src="media/model-image.png" alt="model-image"></p>
-<p>首先Context和Question都经过Gated Recurrent Unit(GRU)转换成成vector形式，分别作为episodic memories e和m储存下来。e代表的是一连串vectors，Context中每句话都会被转换成一个e vector，然而Question只会被转换成一个m vector。</p>
-<p>下一步是episodic memory updates，在每一个episode, 每一个e vector会和m计算一个attention，本文中使用一个two layer feed forward neural network计算attention score。然后利用attention scores来update episodic memories。</p>
-<p><img src="media/gate.png" alt="gate"></p>
-<p><img src="media/episodic-memory.png" alt="episodic-memory"></p>
-<p>输出答案也采用了一个GRU decoder</p>
-<p><img src="media/output.png" alt="output"></p>
-<p>这里的a0是最后一个memory state m。</p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p><a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">Facebook bAbI dataset</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><a href="https://arxiv.org/abs/1410.3916" target="_blank" rel="external">Memory Networks</a><br><a href="https://papers.nips.cc/paper/5846-end-to-end-memory-networks.pdf" target="_blank" rel="external">Eng-to-End Memory Networks</a><br><a href="https://arxiv.org/abs/1511.02301" target="_blank" rel="external">The Goldilocks Principle: Reading Children’s Books with Explicit Memory Representations</a></p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>总体来说这是一篇很有趣的文章。其中应用了episodically update memory的想法，期望模型能够借此学到一些logical reasoning的能力。并且模型中多次用的GRU，每一层都使用GRU的encoding或者decoding，比较有趣。</p>
-<p>然后我认为本文的写作有一些问题，比如我自始至终也没有找到e的下标究竟代表什么，我的理解是每一句话都被encode成一个e作为episodic memory，那么每次Update 其中一个e都要经过所有其他的e是为了更好的融合所有context sentences的信息吗？looks reasonable to me. </p>
-<p>那么每一层的hidden states h究竟又是什么？上一层的hidden state如何更新到下一层？文章中似乎没有给出明确的公式，也没有在model figure中展示出来，似乎写作不够明确。既然e是有h穿过层层GRU得到，我会揣测下一层的h是上一层e的一个function。总之感觉model这一块的解释不够清晰到位，变量太多有些混乱。</p>
-<p>然而总体来说，我觉得本文还是非常值得一读的。</p>
-<h1 id="THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS"><a href="#THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS" class="headerlink" title="THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS"></a><a href="https://arxiv.org/pdf/1511.02301v4.pdf" target="_blank" rel="external">THE GOLDILOCKS PRINCIPLE: READING CHILDREN’S BOOKS WITH EXPLICIT MEMORY REPRESENTATIONS</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Felix Hill, Antoine Bordes, Sumit Chopra &amp; JasonWeston</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks,self-supervised training,window-based memories,The Children’s Book Test(CBT)</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR2016</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>本文对于语言模型（RNN/LSTM/Memory Network生成）到底能够多好或者在多大程度上表示The Children’s Book做了一项测试。测试结果表面Memor　Network上的效果最好。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>文中主要对比了一系列state-of-the-art的模型，每个用不同的方式对之前已经读过的文本进行编码，然后进行CBT评比。<br>实验中使用的模型以及结果如下：</p>
-<p><img src="media/CBT.png" alt="CBT"></p>
-<p>CBT简介：数据来自Project Gutenburg所创建的数据集，里面的内容都选自儿童书籍。每20句话产生一个问题，让不同的语言模型去进行预测，看谁预测的效果更好。<br>问题产生于20句话中的某一句话抠掉一个词A。候选集产生分为如下两步:<br>(1)从构成20句话的词表中随机选出和抠掉词A具有相同词性的词集合C 。<br>(2)从C中随机抽选10个词作为答案的备选集。<br>实验最后在CNN QA的语料上进行测试，在新闻文章中识别命名实体，得到的准确率能到<br>69.4%</p>
-<h2 id="资源-3"><a href="#资源-3" class="headerlink" title="资源"></a>资源</h2><p>n-gram language model:the KenLM toolkit (Scalable modified Kneser-Ney language<br>model estimation.)</p>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>(1) MN:arXiv2015,Bordes,Large-scale simple question answering with memory networks.文中关于end to end的训练方法以及memory network的模型主要来自本篇<br>(2) NIPS2015,Sukhbaatar,End-to-end memory networks.<br>(3)EMNLP2015,Rush,A neural attention model for abstractive sentence summarization. Contextual LSTM模型的参考文章</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>本文提供了一种测试语言模型效果的测试方法，这对于语言模型的评判做出了贡献。<br>在做实验过程中，作者还发现在单层记忆表示中文本被编码的数量对结果有很大的影响：存在一个范围，使得单个词信息和整个句子的信息都得以较好的保留。</p>
-<h1 id="Key-Value-Memory-Networks-for-Directly-Reading-Documents"><a href="#Key-Value-Memory-Networks-for-Directly-Reading-Documents" class="headerlink" title="Key-Value Memory Networks for Directly Reading Documents"></a><a href="https://arxiv.org/pdf/1606.03126v2.pdf" target="_blank" rel="external">Key-Value Memory Networks for Directly Reading Documents</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Alexander H. Miller, Adam Fisch, Jesse Dodge, Amir-Hossein Karimi, Antoine Bordes, Jason Weston</p>
-<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research<br>Language Technologies Institute, Carnegie Mellon University</p>
-<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>Memory Networks, Key-Value, Question Answering, Knowledge Bases</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv 2016</p>
-<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>鉴于知识库有知识稀疏、形式受限等问题，本文提出了一种可以通过直接读取文档来解决QA问题的新方法Key-Value Memory Networks。</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>如下图所示，Key-Value Memory Networks(KV-MemNNs)模型结构与End-to-end Memory Networks(MemN2N)基本相同，区别之处在于KV-MemNNs的寻址（addressing）阶段和输出阶段采用不同的编码（key和value）。<br><img src="media/key_value.png" alt="key_value"></p>
-<p>本文主要提出了以下几种Key-value方法：</p>
-<ol>
-<li>KB Triple<br>针对知识库中的三元组(subject, relation, object),将subject和relation作为Key，object作为Value。</li>
-<li>Sentence Level<br>将文档分割成多个句子，每个句子即作为Key也作为Value，该方法与MemN2N相同。</li>
-<li>Window Level<br>以文档中每个实体词为中心开一个窗口，将整个窗口作为Key，中间的实体词作为Value。</li>
-<li>Window + Center Encoding<br>该方法与Window Level基本相同，区别之处在于中心实体词与窗口中的其他词采用不同的Embedding。</li>
-<li>Window + Titile<br>很多情况下文章的题目可能包含答案，因此在上述提出的Window方法基础上，再添加如下Key-value对：Key为窗口，Value为文档对应的title。</li>
-</ol>
-<p>本文为了比较使用知识库、信息抽取和直接采用维基百科文档方法之间的效果，构建了新的语料WIKIMOVIES。实验结果表明，KV-MemNNs直接从文档读取信息比信息抽取方法的效果好，却仍比直接利用知识库的方法差不少。其中几种Key-Value方法中，“Window + Center Encoding”方法效果最好。此外，本文还在WikiQA上进行实验，验证了KV-MemNNs的效果。</p>
-<h2 id="资源-4"><a href="#资源-4" class="headerlink" title="资源"></a>资源</h2><ul>
-<li>[WikiQA]<br>(<a href="https://www.microsoft.com/en-us/download/details.aspx?id=52419" target="_blank" rel="external">https://www.microsoft.com/en-us/download/details.aspx?id=52419</a>)</li>
-<li>[WikiMovies]<br>(<a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">https://research.facebook.com/research/babi/</a>)</li>
-</ul>
-<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>Memory Networks<br>End-TO-End Memory Networks<br>The Goldilocks Principle: Reading Children’s Books with Explicit Memory Representations</p>
-<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>本篇论文提出了一个在新的Memory Networks变体Key-Value Memory Networks，旨在探索在QA过程中，如何消除采用知识库和自由文本（维基百科）之间的效果差距（gap），并为此构建了一个新的数据集WikiMovies。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>长程记忆（long-term memory）问题一直是深度学习中的一个难点，Attention机制就是解决这一问题的经典方法。本文介绍的几篇Memory Networks试图通过构建长期存储记忆组件来解决过去神经网络无法存储过长内容的问题。如何存储大量的外部信息以及如何利用这些外部信息推断是Memory Networks乃至很多NLP任务的难点。本期引入的这几篇论文中，Memory Networks提出了一个整体的框架，End-To-End Memory Networks使memory networks可以端到端的训练学习。Key-Value Memory Networks主要解决外部信息如何存储表示，而THE GOLDILOCKS PRINCIPLE这篇论文则在推理方面有所创新，直接利用attention的打分来预测答案。目前深度学习方法中，无论是存储更新长期记忆的方法还是结合长期记忆进行推理的方法都还很初级，仍需诸君努力前行。</p>
-<p>以上为本期Paperweekly的主要内容，感谢cain、destinwang、zeweichu、chunhualiu等四位同学的整理。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;Memory Networks是由Facebook的Jason Weston等人提出的一个神经网络框架，通过引入长期记忆组件(long-te
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   

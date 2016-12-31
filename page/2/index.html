@@ -65,6 +65,92 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-07-22T20:14:05.000Z"><a href="/2016/07/22/国内bot产品试用总结/">2016-07-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/22/国内bot产品试用总结/">国内bot产品试用总结</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>理想很丰满，现实却很骨感。用这句话来形容当前国内的bot客服机器人最合适不过。本文考察了国内规模较大的6家做bot企业客服业务的公司，从功能描述、客户范围到实际案例进行一下对比和总结。</p>
+<h1 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h1><p>在各自的网站上都会介绍公司的优势，基本都会包括下面的字眼：</p>
+<p>1、海量的知识库储备</p>
+<p>2、精准的语义理解能力</p>
+<p>3、快速部署能力</p>
+<p>4、减轻人工客服压力，节约人力成本</p>
+<p>5、无缝衔接人工客服</p>
+<p>6、回答准确高极高</p>
+<p>7、多渠道</p>
+<p>看起来都是非常厉害，都是很牛的技术，理解语义没有任何难度，仿佛真正的bot已经实现了一样，但现实是这样的吗？可能还并不是，可能还需要多年的学术研究来推动这个行业的进步。</p>
+<h1 id="客户范围"><a href="#客户范围" class="headerlink" title="客户范围"></a>客户范围</h1><p>客服是一个很大的市场，在各行各业都需要大量的客服人员来做售前和售后咨询，传统的客服面临着一个很尴尬的问题是，总是在回答大量重复的问题，效率很低。很多问题的答案其实可以在企业网站上的FAQ找到，但是消费者仍是喜欢去问客服。在这个背景下，客服bot应运而生，覆盖的行业领域包括：电子商务、游戏网站、政府网站、一般企业等等各行各业。</p>
+<h1 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h1><p>使用了他们6家的案例，简单总结一下：</p>
+<p>1、大家规模不同，但有一个共同的特点是，宣传中提到为多少多少客户提供服务，但是很多客户的网站中并不能找到相应的bot服务，而且bot公司的网站上并没有给出直接的链接过去，只是说这家客户在用他们的服务。这一点来说，我觉得水分比较大，不够透明。</p>
+<p>2、采用的解决方案基本上都是example-based，即bot公司自己的通用知识库+客户的业务知识库。一个用户在使用企业的客服时，很少有无聊的人去调戏人家bot，都是来咨询相关问题的，所以一般来说，bot公司自己的知识库作用非常小，当企业的知识库回答不了现有的问题，bot公司的这种所谓“海量知识库”可以派上用场，和客户逗趣一会，但本质上没有意义。</p>
+<p>example-based方案本质上就是信息检索，根据用户的query来找到最合适的example，然后将example中的response返回给用户。用这种方法做一个企业客服bot的话，核心就在构建业务知识库，主要的技术点也在这个地方，最简单的方法是将客户给的历史聊天记录和faq经过一定预处理，生成一个高可用的知识库，扯太多的新概念就有点过分了。明明“快速建知识库”才是核心技术，非要说自己拥有超强的“语义理解”能力。What a shame！</p>
+<p>这种方案做出来的效果基本上是一个自动版的faq，可以回到非常有限的问题，如果是企业新遇到的问题，则需要添加知识库，编辑知识库就是个简单的数据库操作，并无高大上，在faq这个层面上，bot确实减少了人力成本。</p>
+<p>大多数对用户提出的在知识库范围内的问题都是可以不错地回答，其他的都是在呵呵呵了。但如果在query的理解上有更加深入地研究，比如在语义层面上对query和example进行对比，而不是简单的keyword匹配，在某种程度上会更好地提高服务质量。</p>
+<p>大多数的bot将faq写在右侧，鼓励大家选择这样的问法，这其实是一种trick，回避了自身理解query能力的欠缺。有一个网站做的不错，你每次提一个query，他会给你返回四个similar query，这四个都是example中的，让你从中选一个，4选1，正确的几率还是很大的，尤其是他的知识库做的不错的情况下。</p>
+<p>3、完全依靠bot是不现实的，毕竟知识库有限，很容易遇到新的问题，每个公司bot都会和人工服务无缝衔接，用户发现bot不靠谱了，可以直接点击人工服务与人沟通。很多企业的bot客服基本上还是主要依靠人工服务，bot的作用太有限了。</p>
+<p>4、大家的模式都差不多，可能有的公司技术稍微领先一点，资源多，拿到了一些大单子，行业的名气大，但实际效果来看，媒体的报道和其他一些场合的PR，只是在鼓吹，实际的体验还是很差的。虽然大家的单子很多，利润也可能不少，但能做的事情实在太有限了，一单接一单地做，都说自己是技术公司，但真正的前沿技术很难看到被应用上，用的技术和10年前的研究成果并无太大不同。比如，context的处理，是一个非常有必要但却没有一家做的很好的公司，用户和bot聊了几轮话了，什么信息量都保存和学习不到，只是做了个小型的搜索引擎就敢说是bot了？智能如何体现呢？有点讽刺啊！大家都说学术界太虚，出的paper难用，只能用10年前的技术来做，旧汤换新药而已，但学术界很多的研究都是前瞻性，也很有启发性，不能直接套用并不代表不能借鉴啊，一概而论地说paper无意义有一点短视，有一点为自己技术不过硬找借口了。如果只是这么简单、浮躁的bot解决方案，我觉得在市场上不会有太强的生命力和长远的发展，因为这点技术，大公司稍微做一下都会比这个强，SaaS的特点就是容易接入，技术但凡领先于现在的专业做bot的企业，自然就会取而代之。当然，如果只是为了赚点快钱，这样做是合理的。</p>
+<p>5、关于机会，我觉得bot是一个很大的机会，很多人不看好bot的原因是目前做bot采用的技术太过陈旧，效果太差导致。这么说来，机会其实也是从这里来的，正是因为大家的技术都不是太先进，所以才有机会，专注地做好新技术的研发，改善现有bot存在的问题，带给企业客户更优质的服务。先赢都不算赢，最后赢的才是真的赢。</p>
+<p>大家都很急着占一个又一个的客户，好像真的占领了这个市场一样。用了这几家的服务之后，感觉有点失望，欲速则不达。 </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-22T00:27:46.000Z"><a href="/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/">2016-07-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/">Attention with Intention for a Neural Network Conversation Model #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-07-21T18:35:27.000Z"><a href="/2016/07/21/Neural-Contextual-Conversation-Learning-with-Labeled-Question-Answering-Pairs-PaperWeekly/">2016-07-21</a></time>
       
       
@@ -2825,123 +2911,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-30T20:49:58.000Z"><a href="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/">2016-05-30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/">Learning Distributed Representations of Sentences from Unlabelled Data #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>sentence representation的文章已经分享了几篇，包括了supervise和unsupervise的方法，但并没有对各种model进行系统地对比和分析，今天分享的这篇文章对现有各种各样的distributed representations of sentences model进行了分类、对比和分析，为了增强对比效果，还提出了两种虚拟的模型。最后将所有的模型在supervised和unsupervised评价任务中进行对比，得出了一些有意义的结论。本文的题目是：<a href="http://arxiv.org/pdf/1602.03483v1.pdf" target="_blank" rel="external">Learning Distributed Representations of Sentences from Unlabelled Data</a>，作者是来自剑桥大学的<a href="https://www.cl.cam.ac.uk/~fh295/" target="_blank" rel="external">Felix Hill</a>博士。</p>
-<p>首先对现有模型进行了分类描述。</p>
-<ul>
-<li><p>直接在纯文本上进行训练的模型，模型包括：<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vector</a>、<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Paragraph Vector</a>，两种模型都在之前分享过。</p>
-</li>
-<li><p>在结构化资源上进行训练的模型，这种模型借助了一些纯文本之外的资源进行辅助训练。模型包括：DictRep、CaptionRep、NMT。</p>
-</li>
-</ul>
-<p><code>DictRep</code>是本文作者之前提出的一个模型，模型训练了一个从词典定义到预训练好的词向量之间的映射。</p>
-<p><code>CaptionRep</code>模型架构与DictRep一样，采用的数据集不同而已，这里使用了COCO数据集，训练一个从图像vector representation到图像caption的映射。</p>
-<p><code>NMT</code>是神经网络机器翻译，该模型架构与skip-thought vector模型相同，但训练数据换成了sentence-aligned翻译文本，WMT语料中的En-Fr和En-De。</p>
-<ul>
-<li>本文提出的一些新模型。为了解决当前存在模型的问题，本文设计了两种虚拟模型。包括：Sequential (Denoising) Autoencoders(SDAE、SAE)和FastSent。</li>
-</ul>
-<p><code>SDAE</code>模型是为了解决Skip-Thought Vector模型对语料中句子连贯性的依赖问题。传统的去噪自编码器（DAE）一般都是一个输入是固定尺寸图像数据的前馈神经网络，本文利用一个噪声函数将传统的DAE扩展到变长度句子中，噪声函数是N(S|p0,px)，S表示一个句子，p0,px都是一个[0,1]的数，表示概率。首先，对于每一个S中的word，N函数会以一个p0的概率来删除word，概率是相互对立的。然后，对于S中的每一对不重叠的bigram，w(i)w(i+1)，N函数会以一个px的概率来交换两个词的位置。最后用一个类似NMT的encoder-decoder模型进行训练，只不过不同的是目标函数变了，变成了使得噪声最小。这里，source是经过噪声函数处理过的sentence，target是原始的sentence。这个模型就是SDAE模型，相比于skip-thought vector，可以处理任意顺序的句子集。如果令px=0,p0=0，我们称为<code>SAE</code>模型。这里p0其实就是防止深度网络模型训练时过拟合的正则化方法<code>Dropout</code>。</p>
-<p><code>FastSent</code>模型旨在解决Skip-Thought Vector模型计算速度慢的缺点，解决的思路与word2vec突破传统多层神经网络语言模型的思路类似，只用了一个简单的log-linear层。给定一个用词袋模型表示的句子，模型来预测该句子两边相邻的句子。该模型在训练时也会学习句中每个单词的词向量，并且将句子用句中所有词的词向量之和来表示。</p>
-<p>下图给出了所有模型在性能上的比较：</p>
-<img src="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/fig1.png" width="500" height="500">
-<p>其中，OS是指是否需要保留句子在语料中的顺序；R表示需要结构化的训练资源；WO：对词序敏感；SD：句子向量维度；WD：词向量维度；TR：训练时间；TE：编码50w句子需要的时间。</p>
-<p>任务评价一共分为两类，监督学习任务和无监督学习任务。通过大量实验的比较，得出了一下的结论：</p>
-<ul>
-<li><p>不同的任务适合不同的表示模型，这听起来像一句废话，也就是说没有哪种模型可以通吃所有的任务。比如：Skip-Thought Vector模型在TREC任务中最好，是因为句子和句子之间的衔接非常好，非常适合这个模型的特点。而Paraphrase detection任务更加适合于SDAE模型。</p>
-</li>
-<li><p>监督学习和无监督学习任务的表现存在差异，在监督学习任务中表现好的模型在无监督学习模型中表现的就会很一般，带有非线性网络结构的Skip Thought Vector、SDAE、NMT模型在监督学习中表现更好，而log-linear类的模型FastSent则在无监督学习任务中表现更好。</p>
-</li>
-<li><p>额外的资源会影响到训练处模型的通用性和实用性，比如一个在线demo需要很快的查询最近邻速度，用fastsent可能就没有问题，但用其他模型就达不到快速的要求。</p>
-</li>
-<li><p>词序的重要性并没有得到体现。本文的结果给出了一个与常识相左的结论，词序在决定句子意思表示时并没有想象中的那么重要。作者说到，可能是因为当前的评价方式并不能反映出词序的重要性，所以这个问题得不出一个明确的答案。（这点很有意思，在前面分享的一篇文章<a href="http://rsarxiv.github.io/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">How to Generate a Good Word Embedding</a>中，引用了一个结论，词序信息占了语义信息的20%，那么到底词序对于句子语义有多大的影响？需要好好研究一番）</p>
-</li>
-<li><p>评价指标存在缺陷，并不能绝对准确的对比出各个模型的差异。</p>
-</li>
-</ul>
-<p>最后，展示一个各模型训练之后的应用效果。</p>
-<img src="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/fig2.png" width="600" height="600">
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-05-29T21:09:18.000Z"><a href="/2016/05/29/我以为/">2016-05-29</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/05/29/我以为/">我以为</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>周末了，给自己放一个假，今天不分享paper了，分享一些别的东西。</p>
-<p>一直认为人能够坚持并且努力做好一件事情的最大动力是热爱，是那种没有半点虚伪、没有半点功利的热爱。因为热爱，所以纯粹。于是，在经过几个月内心的煎熬和挣扎，我决定上路了，从此不再为那些不感兴趣、耗时耗力但却没有半点成就感的事情而纠结了，心中犹如放下一块巨石，终于可以静下心来做一些让自己内心感到充实的事情。</p>
-<p>从小生活在一个小县城里，没有那些IT大牛传说一般的经历，小时候爸爸妈妈也并没有给我买电脑，让我成为一个电脑神童，只是希望我快乐地活在这个世界上。第一次接触电脑是小学毕业时的暑假，拿着妈妈给的零花钱在家附近的网吧打CS，那个时候第一次从电脑中获得了一些肤浅的快乐。对“编程”有一种魔性地冲动，是在初二看了一本盗版的比尔盖茨传，里面讲着盖茨各种传奇的故事，用一台电脑创造了一个帝国，当时对他的种种经历都非常崇拜，还跟着传记里的一些描述来模仿他，困了累了的时候开始前后摇晃自己的身体。那个时候讲盖茨视为自己的偶像，是那种真正的偶像，和现在很多女孩迷小鲜肉是一种感觉。那个时候经常会幻想自己有朝一日可以写代码，可以像偶像一样建立一个帝国。然而，梦想在不正确的时间可能只适合放在心里珍藏起来。</p>
-<p>初中毕业之后，考上了省里最好高中之一，来到了省城读书，这个阶段为我打开了一扇很大很宽的门，让我走进了一个更大的世界。在这里接触到了visual basic，Pascal，机器人比赛，感受到了一个更加生动的世界，更加有趣的世界。原来学习可以不只是读书，不只是做题，还可以动手实现一个好玩的机器人，实现一个有趣的程序。三年的高中生活让我看到了一个更好玩的世界。没有辛苦地努力学习，只是因为高三参加的一次奥林匹克竞赛保送到了南方的一所985，因为一些不可控的原因，学习了一个一直想努力感兴趣却一直都没感兴趣的专业，四年除了一些竞赛成绩没有什么其他的亮点。大学的时候，抓住了一切业余时间来多写程序，也跟着刷一些学校自己online judge系统上的题目，但终究不是太系统。在大四下学期的时候，开始疯狂崇拜扎克伯格，尤其是看了《社交网络》之后，大概是因为当时自己的状态很低落，一方面考研成绩并不理想，一方面谈了三年的女朋友选择了更安稳的港湾，整个人的状态一落千丈，非常需要一些提气的东西来鼓励自己走出困境，于是用了一个开源的sns程序，php写的，在大学同学这个圈子里运营了一个社交网络，叫memory。那段时光，我开始自学一些php，每天给网站添加一些小的新功能，来满足同学们的种种好玩的需求，每天忙活到夜里一两点，却感觉到非常充实，非常有成就感。那段时光大概是大学四年里最快乐、最踏实的一段日子了。</p>
-<p>后来，因为种种不可抗拒的原因没有在学校继续深造，去了一个自己也没法选择的单位工作。工作第一年在北京长期出差，有机会接触到了真正的IT圈，看到了真实的创业，真刀真枪，也看到了推荐系统从2011年开始在国内火起来，大大小小的网站都在搜罗推荐系统方面的人才，供不应求，关于推荐系统方面的交流活动也是一个接一个，媒体也在热炒，甚至都说推荐系统有望接管了搜索引擎的地位，现在想想真是可笑。而现在，人工智能处于一个非常火热的状态，有许多家专门报道人工智能相关资讯的媒体在社交网络上也非常活跃，还有大量的自媒体，每天也都在分享着各种各样和人工智能有关的信息。仿佛，真正的人工智能就快要实现了一样，尤其是阿尔法狗事件将人工智能推向了一个新的高度，人才市场上又开始吆喝着，严重缺乏人工智能、自然语言处理、深度学习、计算机视觉等方面的人才，媒体每天也在鼓吹着各个方面的论调，有的甚至在说AI威胁论，很多做其他研究的人也随之变成了人工智能专家，深度学习专家，自然语言处理专家。现在，这个世界上最不缺少的是专家，然后就是看热闹不嫌事大的吃瓜群众。网络上充斥各种形态的网红、大V，掌握着充分的话语权，许多不明真相的群众总是特别迷信他们说的话，形成了一种不健康的氛围。屌丝迷信小V，小V迷信大V，大V迷信大大V，一个人的title远比他的内容更能让人信服；如果学术中，总是这样迷信权威或者迷信title，学术该如何进步？长江后浪该如何推前浪？毕业之后的这些年，我看到了一个更加多元化的世界，一个兼容并包的世界，一个充满机会也充满挑战的世界。</p>
-<p>我以为，一个人的胸怀和他的视野成正比，一个人的视野和他看到的世界有关系，一个人可以通过多旅行，到处看看来拓宽自己的视野，也可以通过多读书来丰富自己的内心世界。</p>
-<p>我以为，人生短暂，不应浪费自己的时间在不感兴趣的事情上，时间宝贵，谁都不应该视别人的时间如粪土，大肆去浪费别人的时间。</p>
-<p>我以为，生活的本质应该是生活本身，我们努力干活，努力拼搏，为的不就是生活中每一点一滴都过的很幸福嘛？荣誉也好、成就也罢终究是过眼云烟，敌不过内心持久的充实，充实并不是谁给你的，而是你自己对自己的一个肯定。</p>
-<p>我以为，幸福就是不打扰到别人的快乐，可能是陪爱人一起看看大海，可能是一起拍拍照，可能是一起遛遛狗，也可能是一起发发呆。幸福也是将一个又一个的心愿完成，也是拥有一辆华丽的车子，尽管可能只是一辆淘宝购物车。</p>
-<p>我以为，每天读一篇paper，写一篇博客，来丰富自己的内心和知识体系也是一件让我快乐和幸福的事情。每天可以有很多好玩的想法，并且可以通过自己的双手来实现这个想法也是一件让我快乐和幸福的事情。</p>
-<p>我以为，编程让我感觉到自己像一个造物主，在程序世界里，每一行代码，每一个变量，每一个函数都是一个活生生的人，协同地一起工作着。</p>
-<p>我以为，简单和纯粹才是这个世界上最真实的元素，纯真才是对人最大的夸奖，而不是什么帅气，漂亮，有才。</p>
-<p>我以为，陪伴才是最长情的告白，感谢我家狗子hare童鞋每一个日日夜夜的陪伴，感谢我的爱人无条件地支持我做我喜欢做的事情，并且真的敢于放弃一些已有的、很好的待遇来跟着我去完成一个梦想。谢谢！</p>
-<img src="/2016/05/29/我以为/1.jpg" width="600" height="600">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -2977,7 +2946,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>94</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>96</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3013,7 +2982,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>112</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>113</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

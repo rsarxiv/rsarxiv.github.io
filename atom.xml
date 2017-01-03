@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-01-03T02:40:14.000Z</updated>
+  <updated>2017-01-03T02:45:35.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
@@ -15,7 +15,7 @@
     <link href="http://rsarxiv.github.io/2016/12/29/2016%E5%B9%B4%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E9%A2%86%E5%9F%9F10%E7%AF%87%E5%80%BC%E5%BE%97%E8%AF%BB%E7%9A%84Paper/"/>
     <id>http://rsarxiv.github.io/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/</id>
     <published>2016-12-30T04:10:12.000Z</published>
-    <updated>2017-01-03T02:40:14.000Z</updated>
+    <updated>2017-01-03T02:45:35.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Learning-to-Compose-Neural-Networks-for-Question-Answering"><a href="#Learning-to-Compose-Neural-Networks-for-Question-Answering" class="headerlink" title="Learning to Compose Neural Networks for Question Answering"></a><a href="https://arxiv.org/abs/1601.01705" target="_blank" rel="external">Learning to Compose Neural Networks for Question Answering</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein</p>
 <h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Department of Electrical Engineering and Computer Sciences<br>University of California, Berkeley</p>
@@ -29,7 +29,7 @@
 <h1 id="Pointing-the-Unknown-Words"><a href="#Pointing-the-Unknown-Words" class="headerlink" title="Pointing the Unknown Words"></a><a href="https://arxiv.org/abs/1603.08148" target="_blank" rel="external">Pointing the Unknown Words</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Caglar Gulcehre, Sungjin Ahn, Ramesh Nallapati, Bowen Zhou, Yoshua Bengio</p>
 <h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Universite de Montr´eal<br>IBM T.J. Watson Research<br>CIFAR Senior Fellow</p>
 <h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Unknown Words</p>
-<h1 id="Sequence-to-Sequence-Learning-as-Beam-Search-Optimization"><a href="#Sequence-to-Sequence-Learning-as-Beam-Search-Optimization" class="headerlink" title="Sequence-to-Sequence Learning as Beam-Search Optimization"></a><a href="https://arxiv.org/abs/1606.02960" target="_blank" rel="external">Sequence-to-Sequence Learning as Beam-Search Optimization</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Yang Liu, Lifeng Shang, Xiaohua Liu, Hang Li</p>
+<h1 id="Sequence-to-Sequence-Learning-as-Beam-Search-Optimization"><a href="#Sequence-to-Sequence-Learning-as-Beam-Search-Optimization" class="headerlink" title="Sequence-to-Sequence Learning as Beam-Search Optimization"></a><a href="https://arxiv.org/abs/1606.02960" target="_blank" rel="external">Sequence-to-Sequence Learning as Beam-Search Optimization</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Sam Wiseman, Alexander M. Rush</p>
 <h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>School of Engineering and Applied Sciences, Harvard University</p>
 <h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>Seq2Seq; Beam Search</p>
 <h1 id="SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text"><a href="#SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text" class="headerlink" title="SQuAD: 100,000+ Questions for Machine Comprehension of Text"></a><a href="https://arxiv.org/abs/1606.05250" target="_blank" rel="external">SQuAD: 100,000+ Questions for Machine Comprehension of Text</a></h1><h2 id="作者-5"><a href="#作者-5" class="headerlink" title="作者"></a>作者</h2><p>Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, Percy Liang</p>

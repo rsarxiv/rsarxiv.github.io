@@ -5,17 +5,98 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-01-03T02:45:35.000Z</updated>
+  <updated>2017-01-06T18:49:38.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第二十期</title>
+    <link href="http://rsarxiv.github.io/2017/01/06/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2017/01/06/PaperWeekly-第二十期/</id>
+    <published>2017-01-06T18:31:23.000Z</published>
+    <updated>2017-01-06T18:49:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="GAN（Generative-Adversarial-Nets）研究进展"><a href="#GAN（Generative-Adversarial-Nets）研究进展" class="headerlink" title="GAN（Generative Adversarial Nets）研究进展"></a>GAN（Generative Adversarial Nets）研究进展</h1><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>1、Unsupervised learning</p>
+<p>首先我们从generative model说起。generattive model的目的是找到一个函数可以最大的近似数据的真实分布。如果我们用 f(X; 𝜃) 来表示这样一个函数，那么找到一个使生成的数据最像真实数据的 𝜃 就是一个maximum likelihood estimation的过程。问题在于，当数据的分布比较复杂时，我们需要的 f 也会变复杂。现在我们有深度网络结构可以表达这样一个复杂的函数（deep generative model），但是训练过程成为了关键。基于sampling的训练过程显然不是很高效的。因此，如何设计模型以便利用backpropagation来训练网络成为了一个重要的目标。当前两个比较突出的模型实现的就是这个目的，一个是variational autoencoder(VAE)，另一个就是这篇文章的主题generative adversarial nets。</p>
+<p>这篇文章会从基本的GAN模型讲起，重点讨论模型公式背后的原理。之后会讨论几篇GAN的扩展工作，希望能够扩展一下大家的思路，也可以加深对GAN模型的理解。下面的关系图大致描述了这些模型之间的继承关系。我们会按照图中的关系一个一个展开。</p>
+<p><img src="media/gan-kg.png" alt="gan-kg"></p>
+<p>2、GAN</p>
+<p>首先是最经典的GAN模型。由Ian Goodfellow和Bengio等在2014年提出。为了简明扼要，我们直接看图说话。</p>
+<p><img src="media/gan-formula.png" alt="gan-formula"></p>
+<p>图中上半部分是GAN模型的基本架构。我们先从一个简单的分布中采样一个噪声信号 z（实际中可以采用[0, 1]的均匀分布或者是标准正态分布），然后经过一个生成函数后映射为我们想要的数据分布 Xg （z 和 X 都是向量）。生成的数据和真实数据都会输入一个识别网络 D。识别网络通过判别输出一个标量，表示数据来自真实数据的<strong>概率</strong>。在实现上，G 和 D 都是可微分函数，都可以用多层神经网络实现。因此上面的整个模型的参数就可以利用backpropagation来训练得到。</p>
+<p>图中的下半部分是模型训练中的目标函数。仔细看可以发现这个公式很像cross entropy，注意D是 P(Xdata) 的近似。对于 D 而言要尽量使公式最大化（识别能力强），而对于 G 又想使之最小（生成的数据接近实际数据）。整个训练是一个迭代过程，但是在迭代中，对 D 的优化又是内循环。所以每次迭代，D 先训练 k次，G 训练一次。</p>
+<p>GAN模型最大的优势就是训练简单，但是也有缺点比如训练的稳定性。有趣的是，在这篇文章future work部分，作者提出了5个可能扩展的方向，而现在回过头来看，后续的很多工作真的就是在照着这几个思路填坑。比如第一个conditional generative model就是后面要讲的conditional GAN的思路，而最后一个determing better distribution to sample z from during training则是后面InfoGAN的思路。</p>
+<p>下面是来自twitter[9] 的一幅图，很好的总结了各种衍生模型的结构。</p>
+<p><img src="media/gan.jpeg" alt="gan"></p>
+<p>2.1 DCGAN </p>
+<p>上面Ian J. Goodfellow等人的文章提出了GAN的模型和训练框架，但是没有描述具体的实现，而DCGAN[2] 这篇文章讲的就是用deep convolutional network实现一个生成图片的GAN模型。这篇文章没有在基本模型上有所扩展，但是他描述了很多实现上细节，尤其是让GAN模型stable的方法。所以如果对于GAN的实现有兴趣，这篇文章也是必读。此外，最新NIPS2016也有最新的关于训练GAN模型的总结 [How to Train a GAN? Tips and tricks to make GANs work] (<a href="https://github.com/soumith/ganhacks" target="_blank" rel="external">https://github.com/soumith/ganhacks</a> “GAN tricks”)。</p>
+<p>3、InfoGAN</p>
+<p>在GAN模型中，生成模型的输入是一个连续的噪声信号，由于没有任何约束，即便我们得到一个有效的生成模型，z也不能被很好的解释。为了使输入包含可以解释，更有信息的意义，InfoGAN[7]的模型在z之外，又增加了一个输入c，称之为隐含输入(latent code)，然后通过约束c与生成数据之间的关系，使得c里面可以包含某些语义特征(semantic feature)，比如对MNIST数据，c可以是digit(0-9)，倾斜度，笔画厚度等。具体做法是：首先我们确定需要表达几个特征以及这些特征的数据类型，比如是类别(categorical)还是连续数值，对每个特征我们用一个维度表示ci  。</p>
+<p>接下来，利用互信息量来约束c。原理在于，如果 c 和生成的图像之间存在某种特定的对应（如果c是图像的某些特征，则有这样的函数存在），那么c和G(z,c)之间就应该有互信息量。如果是无约束的情况，比如z单独的每一个维度都跟和G(z)没有特定的关系，那么它们之间的互信息量应该接近0。所以加上这个约束之后，要优化的目标函数就变成了</p>
+<pre><code>min max V(D,G) = V(D,G) - 𝜆 I(c;G(z,c))
+</code></pre><p>接下来就是如何处理 I(c; G)​。由于 I(c;G(z,c))​ 的计算需要 p(c|x)​，而我们并不知道真实的分布。这时候，我们需要用一个 Q(c|x)​ 来近似，很显然，Q可以用神经网络来实现。此外， 可以利用reparametrization（见附录）的技巧来简化网络。</p>
+<p>在实际中，由于Q和D都是输入 x，而且识别网络D除了可以输出概率，也可以做特征提取，因此Q可以和D共享参数。在正常的D之后，额外加一层full connected layer，利用softmax等可以输出c。这也是图3中的结构。</p>
+<p>4、 Conditional GAN</p>
+<p>Conditional GAN的基本模型见图3。所谓conditional的意思就是，生成图片的模型变成了 P(X|z, c)，而c是我们额外提供的信息。这里要注意conditional GAN和Info GAN的结构区别</p>
+<ul>
+<li>Info中c信息是需要网络去学习提取的特征，而这里是需要我们输入网络的信息。</li>
+<li>Info中c只输入生成网络，而这里需要同时输入生成和识别网络，以便让网络学习到它们之间的关联。</li>
+</ul>
+<p>在Conditional GAN中，随着c的变换可以衍生出很多应用，比如输入可以是label，可以是分类。甚至是另外一个图片，比如可以做image to image的风格转换，也可以做分辨率提升super-resolution。这里我们以Text-to-Image[5] 为例，讲一下conditional GAN的一种建模方法。</p>
+<p>同样，先上图：</p>
+<p><img src="media/text2img.png" alt="text2img"></p>
+<p>模型的任务是给定一句文字描述，然后可以生成符合描述的图像。可以看到，网络的输入除了采样噪声z以外还有文字信息。整个任务分为两大部分：第一部分是要对文字进行编码(text encoding)，这部分并不是Conditonal GAN模型的一部分，可以使用RNN或者char-CNN等。文中用的是deep convolutional and recurrent text encoder[4] ，感兴趣可以去看这篇文章[4]。</p>
+<p>在模型中，文字信息同时输入 G 和 D 是关键所在，这样网络才能够将文字和图片关联起来。其次，在训练中，原GAN中 D 只需要判断两种数据：real/fake的图片。而这里，D 需要判断（输入）三种数据{real image, right text}，{real image, wrong text}以及{fake image, right text}。</p>
+<p>5、 StackGAN</p>
+<p>StackGAN[8] 模型本质就是是Conditional GAN，只不过它使用了两层conditional GAN模型，第一层模型 P(X1|z, c) 利用输入的文字信息c生成一个较低分辨率的图片。之后第二层模型 P(X|c,,X1) 基于第一层生成的图片以及文字信息生成更加优化的图片。文中给出的实验效果非常的惊人，可以生成256x256的非常真实的图片。这里不再重复细节。下图为简化的StackGAN模型。</p>
+<p><img src="media/stackGAN.png" alt="stackGAN"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Goodfellow, Ian, et al. “Generative adversarial nets.” <em>Advances in Neural Information Processing Systems</em>. 2014.</li>
+<li>Radford, Alec, Luke Metz, and Soumith Chintala. “Unsupervised representation learning with deep convolutional generative adversarial networks.” <em>arXiv preprint arXiv:1511.06434</em> (2015).</li>
+<li>Reed, Scott, et al. “Generative adversarial text to image synthesis.” <em>arXiv preprint arXiv:1605.05396</em> (2016).</li>
+<li>Reed, Scott, et al. “Learning Deep Representations of Fine-Grained Visual Descriptions.” <em>arXiv preprint arXiv:1605.05395</em> (2016).</li>
+<li>Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network</li>
+<li>Image-to-Image Translation with Conditional Adversarial Networks</li>
+<li>Chen, Xi, et al. “Infogan: Interpretable representation learning by information maximizing generative adversarial nets.” <em>Advances in Neural Information Processing Systems</em>. 2016.</li>
+<li>Zhang, Han, et al. “StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks.” <em>arXiv preprint arXiv:1612.03242</em> (2016).</li>
+<li><a href="https://twitter.com/ch402/status/793535193835417601" target="_blank" rel="external">https://twitter.com/ch402/status/793535193835417601</a></li>
+</ol>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>看了几篇关于GAN的文章，发现有几个建模的小trick</p>
+<ul>
+<li>在生成模型中，之所以可以从一个简单的分布采样，然后通过一个网络（参数需要学习）去近似数据的分布 背后的原理是</li>
+</ul>
+<blockquote>
+<p>Any distribution in d dim can be generated by taking a set of d normal distribution variables. mapping through a sufficiently complicated function. So provided powerful function approximators, we can simply learn a function mapping independent norm distribution z to whatever X.</p>
+</blockquote>
+<ul>
+<li><p>在模型中，如果目标函数中某个条件概率无法直接得到，那么可以学习一个网络Q去近似。利用KL divergence D{KL}[P||Q] = H(P,Q) - H(P) 以及<br>D{KL} &gt;= 0 可以推出一个更易优化的上/下界。</p>
+</li>
+<li><p><strong>reparametrization trick</strong> 举个例子，比如模型中用一个网络 Q(z|x) 来近似真实的 P(z|x)，我们常用正态分布来建模Q，即<br>N(μ, 𝛴)（这里 μ 和 𝛴 都是带参数的网络，通过学习得到）。当采样的 x 通过 Q 后就可以得到z。但是由于这一步是随机过程，backpropagation就会中断。这个时候我们就可以利用 N(μ, 𝛴) = N(0, I) ⨉ 𝜮 + μ 将随机过程转移到输入端。先从标准正态分布采样 z0，此时网络 Q 并不直接输出z，而是输出两个参数μ 和 𝛴，之后在通过 z=z0 ⨉ 𝛴 + μ 得到z。由于中间节点变成了常规运算，因此backpropagation可以正常传回输入端。</p>
+<p>  ​</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;GAN（Generative-Adversarial-Nets）研究进展&quot;&gt;&lt;a href=&quot;#GAN（Generative-Adversarial-Nets）研究进展&quot; class=&quot;headerlink&quot; title=&quot;GAN（Generative Adver
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
   
   <entry>
     <title>2016年自然语言处理领域15篇值得读的Paper</title>
     <link href="http://rsarxiv.github.io/2016/12/29/2016%E5%B9%B4%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E9%A2%86%E5%9F%9F10%E7%AF%87%E5%80%BC%E5%BE%97%E8%AF%BB%E7%9A%84Paper/"/>
     <id>http://rsarxiv.github.io/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/</id>
     <published>2016-12-30T04:10:12.000Z</published>
-    <updated>2017-01-03T02:45:35.000Z</updated>
+    <updated>2017-01-03T03:49:29.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Learning-to-Compose-Neural-Networks-for-Question-Answering"><a href="#Learning-to-Compose-Neural-Networks-for-Question-Answering" class="headerlink" title="Learning to Compose Neural Networks for Question Answering"></a><a href="https://arxiv.org/abs/1601.01705" target="_blank" rel="external">Learning to Compose Neural Networks for Question Answering</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein</p>
 <h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Department of Electrical Engineering and Computer Sciences<br>University of California, Berkeley</p>
@@ -47,8 +128,7 @@
 <h1 id="LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Network"><a href="#LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Network" class="headerlink" title="LightRNN Memory and Computation-Efficient Recurrent Neural Network"></a><a href="https://arxiv.org/abs/1610.09893" target="_blank" rel="external">LightRNN Memory and Computation-Efficient Recurrent Neural Network</a></h1><h2 id="作者-9"><a href="#作者-9" class="headerlink" title="作者"></a>作者</h2><p>Xiang Li, Tao Qin, Jian Yang, Tie-Yan Liu</p>
 <h2 id="单位-9"><a href="#单位-9" class="headerlink" title="单位"></a>单位</h2><p>Nanjing University of Science and Technology<br>Microsoft Research Asia</p>
 <h2 id="关键词-9"><a href="#关键词-9" class="headerlink" title="关键词"></a>关键词</h2><p>New Recurrent Neural Network</p>
-<p>#<a href="https://arxiv.org/abs/1611.00179" target="_blank" rel="external">Dual Learning for Machine Translation</a></p>
-<h2 id="作者-10"><a href="#作者-10" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
+<h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/abs/1611.00179" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-10"><a href="#作者-10" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
 <h2 id="单位-10"><a href="#单位-10" class="headerlink" title="单位"></a>单位</h2><p>University of Science and Technology of China<br>Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>Microsoft Research</p>
 <h2 id="关键词-10"><a href="#关键词-10" class="headerlink" title="关键词"></a>关键词</h2><p>Dual Learning; Neural Machine Translation</p>
 <h1 id="Neural-Machine-Translation-with-Reconstruction"><a href="#Neural-Machine-Translation-with-Reconstruction" class="headerlink" title="Neural Machine Translation with Reconstruction"></a><a href="https://arxiv.org/abs/1611.01874" target="_blank" rel="external">Neural Machine Translation with Reconstruction</a></h1><h2 id="作者-11"><a href="#作者-11" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Yang Liu, Lifeng Shang, Xiaohua Liu, Hang Li</p>
@@ -996,103 +1076,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Neural-Machine-Translation-in-Linear-Time&quot;&gt;&lt;a href=&quot;#
-    
-    </summary>
-    
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十二期</title>
-    <link href="http://rsarxiv.github.io/2016/11/03/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%8C%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/11/03/PaperWeekly-第十二期/</id>
-    <published>2016-11-04T02:47:13.000Z</published>
-    <updated>2016-11-04T03:19:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>文本摘要是自然语言处理的一大经典任务，研究的历史比较长。随着目前互联网生产出的文本数据越来越多，文本信息过载问题越来越严重，对各类文本进行一个“降维”处理显得非常必要，文本摘要便是其中一个重要的手段。传统的文本摘要方法，不管是句子级别、单文档还是多文档摘要，都严重依赖特征工程，随着深度学习的流行以及seq2seq+attention模型在机器翻译领域中的突破，文本摘要任务也迎来了一种全新的思路。本期PaperWeekly将会分享4篇在这方面做得非常出色的paper：</p>
-<p>1、A Neural Attention Model for Abstractive Sentence Summarization, 2015<br>2、Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond, 2016<br>3、Neural Summarization by Extracting Sentences and Words, 2016<br>4、AttSum: Joint Learning of Focusing and Summarization with Neural Attention, 2016</p>
-<h1 id="A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization"><a href="#A-Neural-Attention-Model-for-Abstractive-Sentence-Summarization" class="headerlink" title="A Neural Attention Model for Abstractive Sentence Summarization"></a><a href="https://aclweb.org/anthology/D/D15/D15-1044.pdf" target="_blank" rel="external">A Neural Attention Model for Abstractive Sentence Summarization</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Rush, A. M., Chopra, S., &amp; Weston, J.</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Facebook AI Research / Harvard SEAS</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Neural Attention, Abstractive Sentence Summarization</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇来自Facebook的paper的主题是基于attention based NN的生成式句子摘要/压缩。</p>
-<p><img src="media/emnlp.JPG" alt="1"></p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该工作使用提出了一种encoder-decoder框架下的句子摘要模型。</p>
-<p><img src="media/emnlp2.JPG" alt="encoder"></p>
-<p>作者在文章中介绍了三种不同的encoding方法，分别为：</p>
-<ol>
-<li>Bag-of-Words Encoder。词袋模型即将输入句子中词的词向量进行平均。</li>
-<li>CNN encoder</li>
-<li>Attention-Based Encoder。该encoder使用CNN对已生成的最近c（c为窗口大小）个词进行编码,再用编码出来的context向量对输入句子做attention，从而实现对输入的加权平均。</li>
-</ol>
-<p>模型中的decoder为修改过的NNLM，具体地：</p>
-<p><img src="media/emnlp3.JPG" alt="1"></p>
-<p>式中$$y_c$$为已生成的词中大小为c的窗口，与encoder中的Attention-Based Encoder同义。</p>
-<p>与目前主流的基于seq2seq的模型不同，该模型中encoder并未采用流行的RNN。</p>
-<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>该文章使用了English Gigaword作为语料，选择新闻中的首句作为输入，新闻标题作为输出，以此构建平行语料。<br>具体的数据构建方法参见文章。</p>
-<p>此外，该文章还使用了DUC2004作为测试集。</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>在调研范围内，该文章是使用attention机制进行摘要的第一篇。且作者提出了利用Gigaword构建大量平行句对的方法，使得利用神经网络训练成为可能，之后多篇工作都使用了该方法构建训练数据。</p>
-<h1 id="Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond"><a href="#Abstractive-Text-Summarization-using-Sequence-to-sequence-RNNs-and-Beyond" class="headerlink" title="Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond"></a><a href="https://aclweb.org/anthology/K/K16/K16-1028.pdf" target="_blank" rel="external">Abstractive Text Summarization using Sequence-to-sequence RNNs and Beyond</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Nallapati, Ramesh, et al.</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>IBM Watson</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, Summarization</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>In CoNLL 2016</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>该工作主要研究了基于seq2seq模型的生成式文本摘要。<br>该文章不仅包括了句子压缩方面的工作，还给出了一个新的文档到多句子的数据集。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/conll.JPG" alt=""></p>
-<p>该文章使用了常用的seq2seq作为基本模型，并在其基础上添加了很多feature：</p>
-<ol>
-<li>Large Vocabulary Trick。<br>参见Sébastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. 2014. On using very large target vocabulary for neural machine translation. CoRR, abs/1412.2007.</li>
-<li><p>添加feature。例如POS tag， TF、IDF， NER tag等。这些feature会被embed之后与输入句子的词向量拼接起来作为encoder的输入。</p>
-</li>
-<li><p>pointing / copy 机制。使用一个gate来判断是否要从输入句子中拷贝词或者使用decoder生成词。参见ACL 2016的两篇相关paper。</p>
-</li>
-<li><p>Hierarchical Attention。这是用于文章摘要中多句子的attention，思路借鉴了Jiwei Li的一篇auto encoder的工作。大致思路为使用句子级别的weight对句子中的词进行re-scale。</p>
-</li>
-</ol>
-<h2 id="数据-1"><a href="#数据-1" class="headerlink" title="数据"></a>数据</h2><ol>
-<li>English Gigaword</li>
-<li>DUC 2004</li>
-<li>提出了CNN/Daily Mail Corpus</li>
-</ol>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>该工作为在第一篇文章基础上的改进工作，做了大量的实验，非常扎实。文章提出的feature-rich encoder对其他工作也有参考意义，即将传统方法中的特征显示地作为神经网络的输入，提高了效果。</p>
-<h1 id="Neural-Summarization-by-Extracting-Sentences-and-Words"><a href="#Neural-Summarization-by-Extracting-Sentences-and-Words" class="headerlink" title="Neural Summarization by Extracting Sentences and Words"></a><a href="https://aclweb.org/anthology/P/P16/P16-1046.pdf" target="_blank" rel="external">Neural Summarization by Extracting Sentences and Words</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Cheng, Jianpeng, and Mirella Lapata.</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>University of Edinburgh</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Extractive Summarization, Neural Attention</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>使用神经网络进行抽取式摘要，分别为句子抽取和单词抽取。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p><img src="media/extractModel1.JPG" alt=""></p>
-<h3 id="句子抽取"><a href="#句子抽取" class="headerlink" title="句子抽取"></a>句子抽取</h3><p>由于该工作为文档的摘要，故其使用了两层encoder，分别为：</p>
-<ol>
-<li>词级别的encoder，基于CNN。即对句子做卷积再做max pooling从而获得句子的表示。</li>
-<li>句子级别的encoder，基于RNN。将句子的表示作为输入，即获得文档的表示。</li>
-</ol>
-<p>由于是抽取式摘要，其使用了一个RNN decoder，但其作用并非生成，而是用作sequence labeling，对输入的句子判断是否进行抽取，类似于pointer network。</p>
-<h3 id="词的抽取"><a href="#词的抽取" class="headerlink" title="词的抽取"></a>词的抽取</h3><p>对于词的抽取，该模型同样适用了hierarchical attention。与句子抽取不同，词的抽取更类似于生成，只是将输入文档的单词作为decoder的词表。</p>
-<h2 id="数据-2"><a href="#数据-2" class="headerlink" title="数据"></a>数据</h2><p>从DailyMail news中根据其highlight构建抽取式摘要数据集。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该工作的特别之处在于对attention机制的使用。该paper之前的许多工作中的attention机制都与Bahdanau的工作相同，即用attention对某些向量求weighted sum。该工作则直接使用attention的分数进行对文档中句子进行选择，实际上与pointer networks意思相近。</p>
-<h1 id="AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention"><a href="#AttSum-Joint-Learning-of-Focusing-and-Summarization-with-Neural-Attention" class="headerlink" title="AttSum: Joint Learning of Focusing and Summarization with Neural Attention"></a><a href="http://www4.comp.polyu.edu.hk/~cszqcao/data/attsum.pdf" target="_blank" rel="external">AttSum: Joint Learning of Focusing and Summarization with Neural Attention</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Cao, Ziqiang, et al.</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p> The Hong Kong Polytechnic University, Peking University, Microsoft Research</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Query-focused Summarization</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>Query-focused多文档抽取式摘要</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p><img src="media/coling.JPG" alt=""></p>
-<p>由于该任务为针对某个query抽取出可以回答该query的摘要，模型使用了attention机制对句子进行加权，加权的依据为文档句子对query的相关性（基于attention），从而对句子ranking，进而抽取出摘要。具体地：</p>
-<ol>
-<li>使用CNN对句子进行encoding</li>
-<li>利用query，对句子表示进行weighted sum pooling。</li>
-<li>使用cosine similarity对句子排序。</li>
-</ol>
-<h2 id="数据-3"><a href="#数据-3" class="headerlink" title="数据"></a>数据</h2><p>DUC 2005 ∼ 2007 query-focused summarization benchmark datasets</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>该文章的亮点之处在于使用attention机制对文档中句子进行weighted-sum pooling，以此完成query-focused的句子表示和ranking。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本次主要介绍了四篇文本摘要的工作，前两篇为生成式（abstractive）摘要，后两篇为抽取式（extractive）摘要。对于生成式摘要，目前主要是基于encoder-decoder模式的生成，但这种方法受限于语料的获得，而Rush等提出了利用English Gigaword（即新闻数据）构建平行句对语料库的方法。IBM在Facebook工作启发下，直接使用了seq2seq with attention模型进行摘要的生成，获得了更好的效果。对于抽取式摘要，神经网络模型的作用多用来学习句子表示进而用于后续的句子ranking。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引&quot;&gt;&lt;a href=&quot;#引&quot; class=&quot;headerlink&quot; title=&quot;引&quot;&gt;&lt;/a&gt;引&lt;/h1&gt;&lt;p&gt;文本摘要是自然语言处理的一大经典任务，研究的历史比较长。随着目前互联网生产出的文本数据越来越多，文本信息过载问题越来越严重，对各类文本进行一个“降维
     
     </summary>
     

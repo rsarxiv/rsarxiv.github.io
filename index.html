@@ -65,6 +65,97 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-01-06T18:31:23.000Z"><a href="/2017/01/06/PaperWeekly-第二十期/">2017-01-06</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/01/06/PaperWeekly-第二十期/">PaperWeekly 第二十期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="GAN（Generative-Adversarial-Nets）研究进展"><a href="#GAN（Generative-Adversarial-Nets）研究进展" class="headerlink" title="GAN（Generative Adversarial Nets）研究进展"></a>GAN（Generative Adversarial Nets）研究进展</h1><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>1、Unsupervised learning</p>
+<p>首先我们从generative model说起。generattive model的目的是找到一个函数可以最大的近似数据的真实分布。如果我们用 f(X; 𝜃) 来表示这样一个函数，那么找到一个使生成的数据最像真实数据的 𝜃 就是一个maximum likelihood estimation的过程。问题在于，当数据的分布比较复杂时，我们需要的 f 也会变复杂。现在我们有深度网络结构可以表达这样一个复杂的函数（deep generative model），但是训练过程成为了关键。基于sampling的训练过程显然不是很高效的。因此，如何设计模型以便利用backpropagation来训练网络成为了一个重要的目标。当前两个比较突出的模型实现的就是这个目的，一个是variational autoencoder(VAE)，另一个就是这篇文章的主题generative adversarial nets。</p>
+<p>这篇文章会从基本的GAN模型讲起，重点讨论模型公式背后的原理。之后会讨论几篇GAN的扩展工作，希望能够扩展一下大家的思路，也可以加深对GAN模型的理解。下面的关系图大致描述了这些模型之间的继承关系。我们会按照图中的关系一个一个展开。</p>
+<p><img src="media/gan-kg.png" alt="gan-kg"></p>
+<p>2、GAN</p>
+<p>首先是最经典的GAN模型。由Ian Goodfellow和Bengio等在2014年提出。为了简明扼要，我们直接看图说话。</p>
+<p><img src="media/gan-formula.png" alt="gan-formula"></p>
+<p>图中上半部分是GAN模型的基本架构。我们先从一个简单的分布中采样一个噪声信号 z（实际中可以采用[0, 1]的均匀分布或者是标准正态分布），然后经过一个生成函数后映射为我们想要的数据分布 Xg （z 和 X 都是向量）。生成的数据和真实数据都会输入一个识别网络 D。识别网络通过判别输出一个标量，表示数据来自真实数据的<strong>概率</strong>。在实现上，G 和 D 都是可微分函数，都可以用多层神经网络实现。因此上面的整个模型的参数就可以利用backpropagation来训练得到。</p>
+<p>图中的下半部分是模型训练中的目标函数。仔细看可以发现这个公式很像cross entropy，注意D是 P(Xdata) 的近似。对于 D 而言要尽量使公式最大化（识别能力强），而对于 G 又想使之最小（生成的数据接近实际数据）。整个训练是一个迭代过程，但是在迭代中，对 D 的优化又是内循环。所以每次迭代，D 先训练 k次，G 训练一次。</p>
+<p>GAN模型最大的优势就是训练简单，但是也有缺点比如训练的稳定性。有趣的是，在这篇文章future work部分，作者提出了5个可能扩展的方向，而现在回过头来看，后续的很多工作真的就是在照着这几个思路填坑。比如第一个conditional generative model就是后面要讲的conditional GAN的思路，而最后一个determing better distribution to sample z from during training则是后面InfoGAN的思路。</p>
+<p>下面是来自twitter[9] 的一幅图，很好的总结了各种衍生模型的结构。</p>
+<p><img src="media/gan.jpeg" alt="gan"></p>
+<p>2.1 DCGAN </p>
+<p>上面Ian J. Goodfellow等人的文章提出了GAN的模型和训练框架，但是没有描述具体的实现，而DCGAN[2] 这篇文章讲的就是用deep convolutional network实现一个生成图片的GAN模型。这篇文章没有在基本模型上有所扩展，但是他描述了很多实现上细节，尤其是让GAN模型stable的方法。所以如果对于GAN的实现有兴趣，这篇文章也是必读。此外，最新NIPS2016也有最新的关于训练GAN模型的总结 [How to Train a GAN? Tips and tricks to make GANs work] (<a href="https://github.com/soumith/ganhacks" target="_blank" rel="external">https://github.com/soumith/ganhacks</a> “GAN tricks”)。</p>
+<p>3、InfoGAN</p>
+<p>在GAN模型中，生成模型的输入是一个连续的噪声信号，由于没有任何约束，即便我们得到一个有效的生成模型，z也不能被很好的解释。为了使输入包含可以解释，更有信息的意义，InfoGAN[7]的模型在z之外，又增加了一个输入c，称之为隐含输入(latent code)，然后通过约束c与生成数据之间的关系，使得c里面可以包含某些语义特征(semantic feature)，比如对MNIST数据，c可以是digit(0-9)，倾斜度，笔画厚度等。具体做法是：首先我们确定需要表达几个特征以及这些特征的数据类型，比如是类别(categorical)还是连续数值，对每个特征我们用一个维度表示ci  。</p>
+<p>接下来，利用互信息量来约束c。原理在于，如果 c 和生成的图像之间存在某种特定的对应（如果c是图像的某些特征，则有这样的函数存在），那么c和G(z,c)之间就应该有互信息量。如果是无约束的情况，比如z单独的每一个维度都跟和G(z)没有特定的关系，那么它们之间的互信息量应该接近0。所以加上这个约束之后，要优化的目标函数就变成了</p>
+<pre><code>min max V(D,G) = V(D,G) - 𝜆 I(c;G(z,c))
+</code></pre><p>接下来就是如何处理 I(c; G)​。由于 I(c;G(z,c))​ 的计算需要 p(c|x)​，而我们并不知道真实的分布。这时候，我们需要用一个 Q(c|x)​ 来近似，很显然，Q可以用神经网络来实现。此外， 可以利用reparametrization（见附录）的技巧来简化网络。</p>
+<p>在实际中，由于Q和D都是输入 x，而且识别网络D除了可以输出概率，也可以做特征提取，因此Q可以和D共享参数。在正常的D之后，额外加一层full connected layer，利用softmax等可以输出c。这也是图3中的结构。</p>
+<p>4、 Conditional GAN</p>
+<p>Conditional GAN的基本模型见图3。所谓conditional的意思就是，生成图片的模型变成了 P(X|z, c)，而c是我们额外提供的信息。这里要注意conditional GAN和Info GAN的结构区别</p>
+<ul>
+<li>Info中c信息是需要网络去学习提取的特征，而这里是需要我们输入网络的信息。</li>
+<li>Info中c只输入生成网络，而这里需要同时输入生成和识别网络，以便让网络学习到它们之间的关联。</li>
+</ul>
+<p>在Conditional GAN中，随着c的变换可以衍生出很多应用，比如输入可以是label，可以是分类。甚至是另外一个图片，比如可以做image to image的风格转换，也可以做分辨率提升super-resolution。这里我们以Text-to-Image[5] 为例，讲一下conditional GAN的一种建模方法。</p>
+<p>同样，先上图：</p>
+<p><img src="media/text2img.png" alt="text2img"></p>
+<p>模型的任务是给定一句文字描述，然后可以生成符合描述的图像。可以看到，网络的输入除了采样噪声z以外还有文字信息。整个任务分为两大部分：第一部分是要对文字进行编码(text encoding)，这部分并不是Conditonal GAN模型的一部分，可以使用RNN或者char-CNN等。文中用的是deep convolutional and recurrent text encoder[4] ，感兴趣可以去看这篇文章[4]。</p>
+<p>在模型中，文字信息同时输入 G 和 D 是关键所在，这样网络才能够将文字和图片关联起来。其次，在训练中，原GAN中 D 只需要判断两种数据：real/fake的图片。而这里，D 需要判断（输入）三种数据{real image, right text}，{real image, wrong text}以及{fake image, right text}。</p>
+<p>5、 StackGAN</p>
+<p>StackGAN[8] 模型本质就是是Conditional GAN，只不过它使用了两层conditional GAN模型，第一层模型 P(X1|z, c) 利用输入的文字信息c生成一个较低分辨率的图片。之后第二层模型 P(X|c,,X1) 基于第一层生成的图片以及文字信息生成更加优化的图片。文中给出的实验效果非常的惊人，可以生成256x256的非常真实的图片。这里不再重复细节。下图为简化的StackGAN模型。</p>
+<p><img src="media/stackGAN.png" alt="stackGAN"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Goodfellow, Ian, et al. “Generative adversarial nets.” <em>Advances in Neural Information Processing Systems</em>. 2014.</li>
+<li>Radford, Alec, Luke Metz, and Soumith Chintala. “Unsupervised representation learning with deep convolutional generative adversarial networks.” <em>arXiv preprint arXiv:1511.06434</em> (2015).</li>
+<li>Reed, Scott, et al. “Generative adversarial text to image synthesis.” <em>arXiv preprint arXiv:1605.05396</em> (2016).</li>
+<li>Reed, Scott, et al. “Learning Deep Representations of Fine-Grained Visual Descriptions.” <em>arXiv preprint arXiv:1605.05395</em> (2016).</li>
+<li>Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network</li>
+<li>Image-to-Image Translation with Conditional Adversarial Networks</li>
+<li>Chen, Xi, et al. “Infogan: Interpretable representation learning by information maximizing generative adversarial nets.” <em>Advances in Neural Information Processing Systems</em>. 2016.</li>
+<li>Zhang, Han, et al. “StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks.” <em>arXiv preprint arXiv:1612.03242</em> (2016).</li>
+<li><a href="https://twitter.com/ch402/status/793535193835417601" target="_blank" rel="external">https://twitter.com/ch402/status/793535193835417601</a></li>
+</ol>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>看了几篇关于GAN的文章，发现有几个建模的小trick</p>
+<ul>
+<li>在生成模型中，之所以可以从一个简单的分布采样，然后通过一个网络（参数需要学习）去近似数据的分布 背后的原理是</li>
+</ul>
+<blockquote>
+<p>Any distribution in d dim can be generated by taking a set of d normal distribution variables. mapping through a sufficiently complicated function. So provided powerful function approximators, we can simply learn a function mapping independent norm distribution z to whatever X.</p>
+</blockquote>
+<ul>
+<li><p>在模型中，如果目标函数中某个条件概率无法直接得到，那么可以学习一个网络Q去近似。利用KL divergence D{KL}[P||Q] = H(P,Q) - H(P) 以及<br>D{KL} &gt;= 0 可以推出一个更易优化的上/下界。</p>
+</li>
+<li><p><strong>reparametrization trick</strong> 举个例子，比如模型中用一个网络 Q(z|x) 来近似真实的 P(z|x)，我们常用正态分布来建模Q，即<br>N(μ, 𝛴)（这里 μ 和 𝛴 都是带参数的网络，通过学习得到）。当采样的 x 通过 Q 后就可以得到z。但是由于这一步是随机过程，backpropagation就会中断。这个时候我们就可以利用 N(μ, 𝛴) = N(0, I) ⨉ 𝜮 + μ 将随机过程转移到输入端。先从标准正态分布采样 z0，此时网络 Q 并不直接输出z，而是输出两个参数μ 和 𝛴，之后在通过 z=z0 ⨉ 𝛴 + μ 得到z。由于中间节点变成了常规运算，因此backpropagation可以正常传回输入端。</p>
+<p>  ​</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-30T04:10:12.000Z"><a href="/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/">2016-12-29</a></time>
       
       
@@ -105,8 +196,7 @@
 <h1 id="LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Network"><a href="#LightRNN-Memory-and-Computation-Efficient-Recurrent-Neural-Network" class="headerlink" title="LightRNN Memory and Computation-Efficient Recurrent Neural Network"></a><a href="https://arxiv.org/abs/1610.09893" target="_blank" rel="external">LightRNN Memory and Computation-Efficient Recurrent Neural Network</a></h1><h2 id="作者-9"><a href="#作者-9" class="headerlink" title="作者"></a>作者</h2><p>Xiang Li, Tao Qin, Jian Yang, Tie-Yan Liu</p>
 <h2 id="单位-9"><a href="#单位-9" class="headerlink" title="单位"></a>单位</h2><p>Nanjing University of Science and Technology<br>Microsoft Research Asia</p>
 <h2 id="关键词-9"><a href="#关键词-9" class="headerlink" title="关键词"></a>关键词</h2><p>New Recurrent Neural Network</p>
-<p>#<a href="https://arxiv.org/abs/1611.00179" target="_blank" rel="external">Dual Learning for Machine Translation</a></p>
-<h2 id="作者-10"><a href="#作者-10" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
+<h1 id="Dual-Learning-for-Machine-Translation"><a href="#Dual-Learning-for-Machine-Translation" class="headerlink" title="Dual Learning for Machine Translation"></a><a href="https://arxiv.org/abs/1611.00179" target="_blank" rel="external">Dual Learning for Machine Translation</a></h1><h2 id="作者-10"><a href="#作者-10" class="headerlink" title="作者"></a>作者</h2><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
 <h2 id="单位-10"><a href="#单位-10" class="headerlink" title="单位"></a>单位</h2><p>University of Science and Technology of China<br>Key Laboratory of Machine Perception (MOE), School of EECS, Peking University<br>Microsoft Research</p>
 <h2 id="关键词-10"><a href="#关键词-10" class="headerlink" title="关键词"></a>关键词</h2><p>Dual Learning; Neural Machine Translation</p>
 <h1 id="Neural-Machine-Translation-with-Reconstruction"><a href="#Neural-Machine-Translation-with-Reconstruction" class="headerlink" title="Neural Machine Translation with Reconstruction"></a><a href="https://arxiv.org/abs/1611.01874" target="_blank" rel="external">Neural Machine Translation with Reconstruction</a></h1><h2 id="作者-11"><a href="#作者-11" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Yang Liu, Lifeng Shang, Xiaohua Liu, Hang Li</p>
@@ -3432,91 +3522,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-24T20:20:12.000Z"><a href="/2016/07/24/再谈bot/">2016-07-24</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/24/再谈bot/">再谈bot</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本文是一个TechCrunch最近一年有关bot新闻报道的survey，从原文中提炼了些核心观点，来研究下国外bot的发展。</p>
-<h1 id="Forget-Apps-Now-The-Bots-Take-Over"><a href="#Forget-Apps-Now-The-Bots-Take-Over" class="headerlink" title="Forget Apps, Now The Bots Take Over"></a><a href="https://techcrunch.com/2015/09/29/forget-apps-now-the-bots-take-over/" target="_blank" rel="external">Forget Apps, Now The Bots Take Over</a></h1><p>Sep 29, 2015 TechCrunch</p>
-<p>正如浏览器取代了操作系统的地位作为新的平台，网站取代了应用程序的地位，bots将会取代移动app的地位，今后将会是bot store，各种各样的bot，而不再是app store。</p>
-<p>类似于微信、Line、Facebook、Slack这样的message平台，将会成为一个新的入口。在message平台上有各种各样的bot，用户通过message与各种bot进行交互，来体会之前在手机各种app上的服务。</p>
-<p><img src="media/1.png" alt="1"></p>
-<blockquote>
-<p>It’s a brave new bot-filled world, with new possibilities and new risks.</p>
-</blockquote>
-<h1 id="Check-out-the-new-AI-powered-TechCrunch-news-bot-on-Telegram-messenger"><a href="#Check-out-the-new-AI-powered-TechCrunch-news-bot-on-Telegram-messenger" class="headerlink" title="Check out the new AI-powered TechCrunch news bot on Telegram messenger"></a><a href="https://techcrunch.com/2016/03/15/check-out-the-new-ai-powered-techcrunch-news-bot-on-telegram-messenger/" target="_blank" rel="external">Check out the new AI-powered TechCrunch news bot on Telegram messenger</a></h1><p>Mar 15, 2016 TechCrunch</p>
-<p>Techcrunch在Telegram上用<a href="https://chatfuel.com/" target="_blank" rel="external">Chatfuel</a>构建了一个news bot，用户可以通过订阅不同的topic，authors和sections，bot根据订阅内容每天会推送两次trending stories digest给用户，另外也可以进行一些问答、聊天。</p>
-<p><img src="media/2.gif" alt="2"></p>
-<h1 id="Microsoft-is-bringing-bots-to-Skype-—-and-everywhere-else"><a href="#Microsoft-is-bringing-bots-to-Skype-—-and-everywhere-else" class="headerlink" title="Microsoft is bringing bots to Skype — and everywhere else"></a><a href="https://techcrunch.com/2016/03/30/microsoft-is-bringing-bots-to-skype-and-everywhere-else/" target="_blank" rel="external">Microsoft is bringing bots to Skype — and everywhere else</a></h1><p>Mar 30, 2016 TechCrunch</p>
-<p>微软CEO Nadella说,bots是下一代应用，只需要用自然语言与bot进行talk就可以完成之前大量手机app和网站做的工作。微软在bot的研究上投入很大，成果也颇多，小冰、Tay、Cortana，和开源的bot framework，并且将很多好玩的deep learning应用与bot做了整合，比如image caption bot，bing music bot，bing news bot。</p>
-<p><img src="media/3.jpg" alt="3"></p>
-<h1 id="Chat-app-Kik-launches-a-bot-store-and-anyone-can-make-bots-for-it"><a href="#Chat-app-Kik-launches-a-bot-store-and-anyone-can-make-bots-for-it" class="headerlink" title="Chat app Kik launches a bot store and anyone can make bots for it"></a><a href="https://techcrunch.com/2016/04/05/chat-app-kik-launches-a-bot-store-and-anyone-can-make-bots-for-it/" target="_blank" rel="external">Chat app Kik launches a bot store and anyone can make bots for it</a></h1><p>Apr 5, 2016 TechCrunch</p>
-<p>Kik是一个聊天app，构建了自己的bot store，chat被认为是下一代操作系统，而聊天app则是新型的浏览器，bots是新型的网站。bot和聊天的环境类似，增加了一些特殊的trigger，用来激发一些特殊的动作。</p>
-<p><img src="media/4.png" alt="4"></p>
-<h1 id="Botlist-is-an-app-store-for-bots"><a href="#Botlist-is-an-app-store-for-bots" class="headerlink" title="Botlist is an app store for bots"></a><a href="https://techcrunch.com/2016/04/11/botlist-is-an-app-store-for-bots/" target="_blank" rel="external">Botlist is an app store for bots</a></h1><p>Apr 11, 2016 TechCrunch</p>
-<p>Botlist是一家做bot聚合的平台，和豌豆荚是类似的概念，聚合了各种message平台上的各种bot应用。</p>
-<p><img src="media/5.png" alt="5"></p>
-<h1 id="TechCrunch-launches-a-personalized-news-recommendations-bot-on-Facebook-Messenger"><a href="#TechCrunch-launches-a-personalized-news-recommendations-bot-on-Facebook-Messenger" class="headerlink" title="TechCrunch launches a personalized news recommendations bot on Facebook Messenger"></a><a href="https://techcrunch.com/2016/04/19/all-your-bots-are-belong-to-us/" target="_blank" rel="external">TechCrunch launches a personalized news recommendations bot on Facebook Messenger</a></h1><p>Apr 19, 2016 TechCrunch</p>
-<p>TechCrunch在Fb平台上的bot具备一个简单的个性化推荐的功能，根据用户的喜欢来推荐可能感兴趣的文章。</p>
-<h1 id="ToyTalk-renames-to-PullString-repositions-as-authoring-tool-for-bots"><a href="#ToyTalk-renames-to-PullString-repositions-as-authoring-tool-for-bots" class="headerlink" title="ToyTalk renames to PullString, repositions as authoring tool for bots"></a><a href="https://techcrunch.com/2016/04/26/pullstring-bot-authoring/" target="_blank" rel="external">ToyTalk renames to PullString, repositions as authoring tool for bots</a></h1><p>Apr 26, 2016 TechCrunch</p>
-<p>PullString做儿童市场，因为孩子的词汇量非常有限，而且都很容易理解，关键是孩子对那些nonsense的回答并不介意。</p>
-<p><img src="media/6.gif" alt="6"></p>
-<h1 id="Bots-Messenger-and-the-future-of-customer-service"><a href="#Bots-Messenger-and-the-future-of-customer-service" class="headerlink" title="Bots, Messenger and the future of customer service"></a><a href="https://techcrunch.com/2016/05/07/bots-messenger-and-the-future-of-customer-service/" target="_blank" rel="external">Bots, Messenger and the future of customer service</a></h1><p>May 7, 2016 TechCrunch</p>
-<p><img src="media/7.png" alt="7"></p>
-<p> 传统的客服总是给人留下低效的印象，而随着AI研究水平地不断提高，用bot来替代或者辅助人工客服将是一种趋势和潮流。</p>
-<h1 id="Penny-raises-1-2M-in-seed-funding-for-its-personal-finance-bot"><a href="#Penny-raises-1-2M-in-seed-funding-for-its-personal-finance-bot" class="headerlink" title="Penny raises $1.2M in seed funding for its personal finance bot"></a><a href="https://techcrunch.com/2016/05/23/penny-raises-1-2m-in-seed-funding-for-its-personal-finance-bot/" target="_blank" rel="external">Penny raises $1.2M in seed funding for its personal finance bot</a></h1><p> May 23, 2016 TechCrunch</p>
-<p> Penny是一个personal finance bot，通过chat来帮助用户管理finance。不过chat只能通过pre-populated messages，而不是自然语言。尽管进入了一个bot时代，但chat的方式并不是解决所有问题的最好方法，在shopping领域，传统的电商网站比bot更好用。</p>
-<p><img src="media/8.jpg" alt="8"></p>
-<h1 id="Microsoft-tries-its-hand-at-a-news-bot-with-Rowe"><a href="#Microsoft-tries-its-hand-at-a-news-bot-with-Rowe" class="headerlink" title="Microsoft tries its hand at a news bot with Rowe"></a><a href="https://techcrunch.com/2016/05/24/microsoft-tries-its-hand-at-a-news-bot-with-rowe/" target="_blank" rel="external">Microsoft tries its hand at a news bot with Rowe</a></h1><p>May 24, 2016 TechCrunch</p>
-<p>微软太钟爱bot了，在新闻领域开发了一款bot，整合了自家一个新闻App News Pro的功能，通过topic来获取相关news，获取今日头条，获取系统推荐的news。</p>
-<p> <img src="media/9.png" alt="9"></p>
-<h1 id="Workato-unveils-Personal-Workbot-to-silence-some-of-the-Slack-bot-noise"><a href="#Workato-unveils-Personal-Workbot-to-silence-some-of-the-Slack-bot-noise" class="headerlink" title="Workato unveils Personal Workbot to silence some of the Slack bot noise"></a><a href="https://techcrunch.com/2016/06/23/workato-unveils-personal-workbot-to-silence-some-of-the-slack-bot-noise/" target="_blank" rel="external">Workato unveils Personal Workbot to silence some of the Slack bot noise</a></h1><p>Jun 23, 2016 TechCrunch</p>
-<p>Workato提供一个bot服务Personal Workbot，为slack用户过滤掉channel中无关的信息，提高效率。</p>
-<p><img src="media/10.png" alt="10"></p>
-<h1 id="Zoom-ai-believes-an-automated-assistant-is-the-fix-for-a-weighty-workload"><a href="#Zoom-ai-believes-an-automated-assistant-is-the-fix-for-a-weighty-workload" class="headerlink" title="Zoom.ai believes an automated assistant is the fix for a weighty workload"></a><a href="https://techcrunch.com/2016/07/14/zoom-ai/" target="_blank" rel="external">Zoom.ai believes an automated assistant is the fix for a weighty workload</a></h1><p>Jul 14, 2016 TechCrunch</p>
-<p>Zoom.ai与之前的chat bot startups不同，目的客户是企业。创始人说，bot更像是一种UI，bot背后的技术才是真正需要解决的问题，NLP技术才是最关键的东西。</p>
-<h1 id="Legion-Analytics-is-building-bots-to-automate-your-sales-pitch"><a href="#Legion-Analytics-is-building-bots-to-automate-your-sales-pitch" class="headerlink" title="Legion Analytics is building bots to automate your sales pitch"></a><a href="https://techcrunch.com/2016/07/15/legion-analytics-kylie/" target="_blank" rel="external">Legion Analytics is building bots to automate your sales pitch</a></h1><p>Jul 15, 2016 TechCrunch</p>
-<p>Legion Analytics这家公司借助人工智能技术，帮助销售团队更加高效地工作。并不是说用bot来替代人工销售团队，而是帮助他们处理更加耗时的邮件咨询和demo演示。</p>
-<h1 id="Bot-influencers-are-the-programmatic-future-of-conversational-advertising"><a href="#Bot-influencers-are-the-programmatic-future-of-conversational-advertising" class="headerlink" title="Bot influencers are the programmatic future of conversational advertising"></a><a href="https://techcrunch.com/2016/07/21/bot-influencers-the-programmatic-future-of-conversational-advertising/" target="_blank" rel="external">Bot influencers are the programmatic future of conversational advertising</a></h1><p>Jul 21, 2016 TechCrunch</p>
-<p>conversational广告有望改善目前digital ads的缺陷，可以做的更加relevant、contextual和unobtrusive。</p>
-<h1 id="Why-do-chatbots-suck"><a href="#Why-do-chatbots-suck" class="headerlink" title="Why do chatbots suck?"></a><a href="https://techcrunch.com/2016/05/29/why-do-chatbots-suck/" target="_blank" rel="external">Why do chatbots suck?</a></h1><p>May 29, 2016 TechCrunch</p>
-<p>文中的观点基本同意，chatbot领域太广容易失败，不如做好特定领域内的服务。bot有智能的，比如微软的Tay，也有不智能的，比如Facebook平台上的CNN chatbot，设定一些button，绑定一些特定的事件。市面上没有一个真正好用的bot，很多领域为了bot而bot，用传统的app通过几个步骤就可以完成的事情，在bot中需要通过打很多的字才能完成，其实用户并不在意你的东西是不是智能，也不关心你产品背后的技术多牛，只在乎你的产品是不是简单好用效率高。一切以贴牌炒概念的bot产品都是耍流氓。现阶段，很多相关技术并不成熟，作者建议说在企业客服这个领域多做一些工作，比如把企业的产品FAQ bot做好，节约一些人力成本。（国内很多家做FAQ bot的公司）</p>
-<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>本文是考察国外bot文章系列的第一篇，全都来自TechCrunch。看了一天的新闻文章，从国外科技记者的角度看了下bot这个领域的发展和未来。</p>
-<p>1、整体来说，比较乐观，从大公司、投资人、记者、用户多个角色来看，大家都比较看好bot的发展，相信bot是下一个app的形式，就像website取代了传统桌面程序一样，bot也会取代现在的手机app。</p>
-<p>2、chat的形式就是大家来聊天，自然而然大的message平台，比如Facebook的Messenger，微信，Line，Slack，Telegram等等，就是成为bot的平台，就像现在的操作系统平台一样。</p>
-<p>3、国外的bot公司很多很多，后缀带.ai多的数不清，从这些新闻中分享的bot应用，看得出大家现在还停留在一个比较初始的bot状态，有一点像arxiv上占坑的感觉，没有太多所谓的智能，只是有一个chatbot交互的UI，基本上实现具体的功能都靠事先定制好的button来trigger，更像是交互方式的革新，而非真的人工智能。</p>
-<p>4、很多bot都在炒概念，往hot topic上靠，为了bot而bot，手机app用基本简单的点击操作就可以完成的任务，用bot却非要花费大量的时间来输入order或者人类语言，有点多此一举了。说白了，语义理解技术还不够成熟，大家将本该高度智能化的bot做成了step by step的引导，让用户使用了更加复杂的操作。当然，如果你的bot可以准确理解一句或几句简单的人话，然后完成复杂的业务处理，并反馈给用户结果，这样的bot才会让用户真的信服。</p>
-<p>5、大伙儿基本上都把bot当成下一代app了，于是出现了很多家做bot聚合和分发的平台，类似app store，豌豆荚这种角色。一个市场雏形出来了之后，大家各自定位，各吃一块蛋糕。</p>
-<p>6、客服bot是目前国内市场bot最活跃的一类，提供的功能基本上是企业产品或者业务的faq，差异化在于理解用户的query上，可能技术上略有差异。另外还有一种助手式的bot，提供了一些日常服务，比如查天气，订机票，订饭，打车等功能，基本上纯粹理解自然语言的很少，都是预先设定好套路，根据前一个context来trigger出后一个question，step by step地带着用户完成一个指定任务，因为涉及到多轮对话，context的理解和处理就显得非常重要，理解不好就显得bot非常弱智。这里，我觉得根据context做response的生成是个可以应用的点，虽然说可用的dataset规模很小，但可以考虑将已有的dataset做template化，通过template后的dataset来训练response generator。</p>
-<p>今天是系列文章的第一篇，后续会读更多的news或者discussion，以及研究国外bot的产品形式和所用技术，做更多的分享，欢迎讨论。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3550,7 +3555,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>96</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>97</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3586,7 +3591,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>113</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>114</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

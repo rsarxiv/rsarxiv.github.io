@@ -65,6 +65,47 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-01-07T06:06:34.000Z"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">2017-01-06</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">本周值得读(2016.12.26-2017.01.06)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process"><a href="#The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process" class="headerlink" title="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process"></a><a href="http://t.cn/RMwnQmN" target="_blank" rel="external">The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process</a></h1><p>【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，进而对未来事件的发生时间和类型进行预测。该模型在传统Hawkes process的基础上，用 Recurrent Neural Network 来总结事件流的历史信息，并动态地估计不同时刻不同事件之间复杂的相互影响关系，进而得出未来事件的发生时间和类型的概率分布。此模型可以用于多种事件流的分析，包括医学诊断，消费者行为，和社交网络活动的预测等，并在多个数据集上表现出了显著的优势。作者来自约翰霍普金斯大学NLP组，主页地址<a href="http://www.cs.jhu.edu/~hmei/" target="_blank" rel="external">http://www.cs.jhu.edu/~hmei/</a>  有需要讨论的可以直接联系作者本文  hmei@cs.jhu.edu</p>
+<h1 id="Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task"><a href="#Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task" class="headerlink" title="Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task"></a><a href="http://t.cn/RIYdnYx" target="_blank" rel="external">Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task</a></h1><p>【多模态】image caption任务的自动评价存在一定的弊端，本文提出了新的任务，即给定一幅图，给出n个caption选项，只有一个是正确答案，通过准确率来评价算法的效果。构建这样一个任务需要先针对每一张图生成多个难度较高的干扰选项，本文提出了一些构造方法，并且在coco数据集上生成了本文的数据集，通过人工选择获得该任务的准确率上限。数据集已开放，地址 <a href="https://github.com/google/mcic-coco" target="_blank" rel="external">https://github.com/google/mcic-coco</a></p>
+<h1 id="A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions"><a href="#A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions" class="headerlink" title="A Joint Speaker-Listener-Reinforcer Model for Referring Expressions"></a><a href="http://t.cn/RMhX58u" target="_blank" rel="external">A Joint Speaker-Listener-Reinforcer Model for Referring Expressions</a></h1><p>【多模态】本文研究的问题非常有趣，是Referring Expressions，简单点说就是给一张图和一个描述，要求找到描述中对应的object，通常包括两个任务：1、根据图片和指定object生成一个描述；2、根据图片和描述来找object。本文构建了一个联合训练模型，将两个任务一起训练，加上一层增强学习来提高所生成描述的多样性，得到了不错的结果。demo和dataset地址：<a href="https://vision.cs.unc.edu/refer/" target="_blank" rel="external">https://vision.cs.unc.edu/refer/</a></p>
+<h1 id="Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results"><a href="#Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results" class="headerlink" title="Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results"></a><a href="http://t.cn/RIYgOoK" target="_blank" rel="external">Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results</a></h1><p>【观点挖掘】【迁移学习】本文做的工作是将某一些领域中已经抽取的非常好的aspect迁移至新的领域，比如screen在苹果手机中存在这么一个aspect，其他品牌的手机也存在，其他的电子设备可能也存在，利用已有的“知识”来提高准确率。</p>
+<h1 id="Language-Modeling-with-Gated-Convolutional-Networks"><a href="#Language-Modeling-with-Gated-Convolutional-Networks" class="headerlink" title="Language Modeling with Gated Convolutional Networks"></a><a href="http://t.cn/RIYkG0b" target="_blank" rel="external">Language Modeling with Gated Convolutional Networks</a></h1><p>【CNN语言模型】本文的工作是将CNN模型和一种gate机制结合起来做语言模型，挑战了RNN在这个领域的霸主地位。工作来自Facebook，他们对CNN有非常的偏好。 </p>
+<h1 id="Understanding-Neural-Networks-through-Representation-Erasure"><a href="#Understanding-Neural-Networks-through-Representation-Erasure" class="headerlink" title="Understanding Neural Networks through Representation Erasure"></a><a href="http://t.cn/RIRFnkr" target="_blank" rel="external">Understanding Neural Networks through Representation Erasure</a></h1><p>【解释神经网络】大家都知道深度学习效果好，但原因确实解释不清楚。本文尝试着做了一些解释方面的工作，通过“erase”掉一些representation来研究结果的变化，甚至通过增强学习来研究最多“erase”掉哪些representation仍不影响最终的结果。深度学习如果有了可解释性，相信又将会是一个新的研究水平了。 </p>
+<h1 id="Shortcut-Sequence-Tagging"><a href="#Shortcut-Sequence-Tagging" class="headerlink" title="Shortcut Sequence Tagging"></a><a href="http://t.cn/RMw38iV" target="_blank" rel="external">Shortcut Sequence Tagging</a></h1><p>【新网络结构】本文针对多层RNN难训练的问题，提出了一种gate机制和shortcuts机制混合的方法，并研究了不同的组合效果。方法在序列标注问题上进行验证，从结果上来看，提高的不多，也从侧面反映出一个问题，现有的网络结构加一些排列组合或者小改动很难解决根本性的问题。</p>
+<h1 id="Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing"><a href="#Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing" class="headerlink" title="Unsupervised neural and Bayesian models for zero-resource speech processing"></a><a href="http://t.cn/RMLugMZ" target="_blank" rel="external">Unsupervised neural and Bayesian models for zero-resource speech processing</a></h1><p>【无监督】【贝叶斯】本文是一篇来自爱丁堡大学的博士论文。</p>
+<h1 id="Textual-Entailment-with-Structured-Attentions-and-Composition"><a href="#Textual-Entailment-with-Structured-Attentions-and-Composition" class="headerlink" title="Textual Entailment with Structured Attentions and Composition"></a><a href="http://t.cn/RM4seBe" target="_blank" rel="external">Textual Entailment with Structured Attentions and Composition</a></h1><p>【文本蕴含】本文的贡献在于将attention应用到了句法树上，而不是只对句子做attention。 </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-01-06T18:31:23.000Z"><a href="/2017/01/06/PaperWeekly-第二十期/">2017-01-06</a></time>
       
       
@@ -3444,84 +3485,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-25T18:39:04.000Z"><a href="/2016/07/25/bot-startups/">2016-07-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/07/25/bot-startups/">bot startups</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>罗列下各种媒体上提到的bot startups，包括：业务范围和融资情况。</p>
-<h1 id="motion-ai"><a href="#motion-ai" class="headerlink" title="motion.ai"></a><a href="motion.ai">motion.ai</a></h1><p>用可视化地手段进行构建、训练和发布一个bot。喊出的口号是，只要你会画流程图，你就可以构建一个bot，可以在各种平台上搭建属于自己的bot，比如：sms、web、email、Fb Messenger、Slack等平台。</p>
-<p>成立时间：2015.11.05<br>融资情况：$700k 种子轮<br>公司主页：<a href="http://motion.ai" target="_blank" rel="external">http://motion.ai</a></p>
-<h1 id="CareerLark"><a href="#CareerLark" class="headerlink" title="CareerLark"></a><a href="http://www.careerlark.com/" target="_blank" rel="external">CareerLark</a></h1><p>构建于Slack平台的一家bot企业，旨在通过micro-feedback来提高生产力。</p>
-<p>成立时间：未知<br>融资情况：$50k 种子轮<br>公司主页：<a href="http://www.careerlark.com/" target="_blank" rel="external">http://www.careerlark.com/</a></p>
-<h1 id="Carla"><a href="#Carla" class="headerlink" title="Carla"></a><a href="http://carla.io/" target="_blank" rel="external">Carla</a></h1><p>一款虚拟助手，用于提醒自己、朋友和家人，通过自然语言添加日程和追踪自己一天的生活。</p>
-<p>成立时间：未知<br>融资情况：未知<br>公司主页：<a href="http://carla.io/" target="_blank" rel="external">http://carla.io/</a></p>
-<h1 id="Dexter"><a href="#Dexter" class="headerlink" title="Dexter"></a><a href="https://rundexter.com/" target="_blank" rel="external">Dexter</a></h1><p>帮助企业用户快速构建bot引擎，打造属于自己的bot。</p>
-<p>成立时间：未知<br>融资情况：未知<br>公司主页：<a href="https://rundexter.com/" target="_blank" rel="external">https://rundexter.com/</a></p>
-<h1 id="kip"><a href="#kip" class="headerlink" title="kip"></a><a href="http://kipthis.com/" target="_blank" rel="external">kip</a></h1><p>办公室团购助手，将B2C搬进bot中，方便大家购物，支持多种平台。</p>
-<p>成立时间：2014.05.13<br>融资情况：$317k 两轮<br>公司主页：<a href="http://kipthis.com/" target="_blank" rel="external">http://kipthis.com/</a></p>
-<h1 id="Rollio"><a href="#Rollio" class="headerlink" title="Rollio"></a><a href="https://www.rollioforce.com/" target="_blank" rel="external">Rollio</a></h1><p>CRM智能助手，将你的销售变得更加简单，用NLP技术来挖掘客户反馈来文本和声音信息，简化CRM。</p>
-<p>成立时间：2014<br>融资情况：$670k 种子轮<br>公司主页：<a href="https://www.rollioforce.com/" target="_blank" rel="external">https://www.rollioforce.com/</a></p>
-<h1 id="Assist"><a href="#Assist" class="headerlink" title="Assist"></a><a href="http://www.assi.st/" target="_blank" rel="external">Assist</a></h1><p>将企业现有的业务搬进文本消息平台中，用bot来帮企业做生意。</p>
-<p>成立时间：未知<br>融资情况：未知<br>公司主页：<a href="http://www.assi.st/" target="_blank" rel="external">http://www.assi.st/</a></p>
-<h1 id="magic"><a href="#magic" class="headerlink" title="magic"></a><a href="https://www.getmagicnow.com/" target="_blank" rel="external">magic</a></h1><p>一个基于文本信息平台的通用bot助理，涵盖的面比较广。</p>
-<p>成立时间：2015<br>融资情况：$12M 两轮<br>公司主页：<a href="https://www.getmagicnow.com/" target="_blank" rel="external">https://www.getmagicnow.com/</a></p>
-<h1 id="Polly"><a href="#Polly" class="headerlink" title="Polly"></a><a href="https://www.polly.ai/" target="_blank" rel="external">Polly</a></h1><p>基于slack平台的bot服务，收集和分析team的数据，提供一些服务，可定制化。</p>
-<p>成立时间：2015<br>融资情况：未知<br>公司主页：<a href="https://www.polly.ai/" target="_blank" rel="external">https://www.polly.ai/</a></p>
-<h1 id="StatsBot"><a href="#StatsBot" class="headerlink" title="StatsBot"></a><a href="https://statsbot.co/" target="_blank" rel="external">StatsBot</a></h1><p>基于slack平台的bot服务，提供google analytics、mixpanel、salesforce服务。</p>
-<p>成立时间：2015<br>融资情况：未知<br>公司主页：<a href="https://statsbot.co/" target="_blank" rel="external">https://statsbot.co/</a></p>
-<h1 id="Birdly"><a href="#Birdly" class="headerlink" title="Birdly"></a><a href="https://www.getbirdly.com/" target="_blank" rel="external">Birdly</a></h1><p>基于slack平台的bot服务，沟通team和salesforce的桥梁。</p>
-<p>成立时间：2014<br>融资情况：$120k 种子轮<br>公司主页：<a href="https://www.getbirdly.com/" target="_blank" rel="external">https://www.getbirdly.com/</a></p>
-<h1 id="zoom-ai"><a href="#zoom-ai" class="headerlink" title="zoom.ai"></a><a href="http://www.zoom.ai/" target="_blank" rel="external">zoom.ai</a></h1><p>企业级的智能助手，支持多个平台和多项服务。</p>
-<p>成立时间：2016.02.22<br>融资情况：未知<br>公司主页：<a href="http://www.zoom.ai/" target="_blank" rel="external">http://www.zoom.ai/</a></p>
-<h1 id="HeyTaco"><a href="#HeyTaco" class="headerlink" title="HeyTaco!"></a><a href="https://www.heytaco.chat/" target="_blank" rel="external">HeyTaco!</a></h1><p>基于slack平台的bot服务，当你觉得team中一个人做了一件awesome的事情，可以@username + taco emoji，然后该服务会记录下team中每个成员的taco数，攒齐N个可以换一些gift。</p>
-<p>成立时间：2016.02.06<br>融资情况：未知<br>公司主页：<a href="https://www.heytaco.chat/" target="_blank" rel="external">https://www.heytaco.chat/</a></p>
-<h1 id="skylar"><a href="#skylar" class="headerlink" title="skylar"></a><a href="https://skylar.ai/" target="_blank" rel="external">skylar</a></h1><p>为团队提供多种服务的bot，整合了一些在线工具API，基于slack和messenger平台。</p>
-<p>成立时间：2015.11.17<br>融资情况：未知<br>公司主页：<a href="https://skylar.ai/" target="_blank" rel="external">https://skylar.ai/</a></p>
-<h1 id="DigitalGenius"><a href="#DigitalGenius" class="headerlink" title="DigitalGenius"></a><a href="http://digitalgenius.com/" target="_blank" rel="external">DigitalGenius</a></h1><p>bot+人工客服服务，多平台多渠道客服。</p>
-<p>成立时间：2013.12.01<br>融资情况：$8.35M 三轮<br>公司主页：<a href="http://digitalgenius.com/" target="_blank" rel="external">http://digitalgenius.com/</a></p>
-<h1 id="workbot"><a href="#workbot" class="headerlink" title="workbot"></a><a href="https://www.workato.com/workbot-slack" target="_blank" rel="external">workbot</a></h1><p>基于slack平台的bot服务，为团队提供一系列数据服务。</p>
-<p>成立时间：2016.01<br>融资情况：未知<br>公司主页：<a href="https://www.workato.com/workbot-slack" target="_blank" rel="external">https://www.workato.com/workbot-slack</a></p>
-<h1 id="poncho"><a href="#poncho" class="headerlink" title="poncho"></a><a href="http://poncho.is/" target="_blank" rel="external">poncho</a></h1><p>量身定做的天气和旅行助手。</p>
-<p>成立时间：2013.04.01<br>融资情况：$2M 种子轮<br>公司主页：<a href="http://poncho.is/" target="_blank" rel="external">http://poncho.is/</a></p>
-<h1 id="Pana"><a href="#Pana" class="headerlink" title="Pana"></a><a href="https://www.pana.com/" target="_blank" rel="external">Pana</a></h1><p>bot+AI旅行安排服务。</p>
-<p>成立时间：2015<br>融资情况：$1.45M 两轮<br>公司主页：<a href="https://www.pana.com/" target="_blank" rel="external">https://www.pana.com/</a></p>
-<h1 id="Penny"><a href="#Penny" class="headerlink" title="Penny"></a><a href="https://www.pennyapp.io/" target="_blank" rel="external">Penny</a></h1><p>私人财产顾问型bot。</p>
-<p>成立时间：2015.07<br>融资情况：$1.2M 种子轮<br>公司主页：<a href="https://www.pennyapp.io/" target="_blank" rel="external">https://www.pennyapp.io/</a></p>
-<h1 id="x-ai"><a href="#x-ai" class="headerlink" title="x.ai"></a><a href="https://x.ai" target="_blank" rel="external">x.ai</a></h1><p>帮你安排会议的私人助手。</p>
-<p>成立时间：2014.04.14<br>融资情况：$34.3M 三轮<br>公司主页：<a href="https://x.ai" target="_blank" rel="external">https://x.ai</a></p>
-<h1 id="viv-ai"><a href="#viv-ai" class="headerlink" title="viv.ai"></a><a href="http://viv.ai/" target="_blank" rel="external">viv.ai</a></h1><p>一个帮助开发者快速开发bot的技术平台，涵盖的面比较广。</p>
-<p>成立时间：未知<br>融资情况：30M 三轮<br>公司主页：<a href="http://viv.ai/" target="_blank" rel="external">http://viv.ai/</a></p>
-<h1 id="Kasisto"><a href="#Kasisto" class="headerlink" title="Kasisto"></a><a href="http://kasisto.com/kai/" target="_blank" rel="external">Kasisto</a></h1><p>bot技术平台，帮助开发者轻松搭建一个bot。</p>
-<p>成立时间：2013<br>融资情况：$2.25M<br>公司主页：<a href="http://kasisto.com/kai/" target="_blank" rel="external">http://kasisto.com/kai/</a></p>
-<p>startups信息来自<a href="crunchbase.com">CrunchBase</a>。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3555,7 +3518,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>97</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>98</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3591,7 +3554,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>114</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>115</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

@@ -3,15 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>告别2016，迎接2017 | PaperWeekly</title>
+  <title>本周值得读(2016.12.26-2017.01.06) | PaperWeekly</title>
   
   
-  <meta name="description" content="2016年即将结束，首先对支持PaperWeekly的各位童鞋表示衷心的感谢，感谢你们让我有动力将这个用来督促我自己多读paper的side project坚持一直做下来，感谢各位对自然语言处理感兴趣并且愿意牺牲一些个人时间来写paper note的小伙伴，也感谢每天坚持一起刷arXiv来保证周末推">
+  <meta name="description" content="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="告别2016，迎接2017"/>
+  <meta property="og:title" content="本周值得读(2016.12.26-2017.01.06)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -66,30 +66,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-29T19:20:43.000Z"><a href="/2016/12/29/告别2016，迎接2017/">2016-12-29</a></time>
+        <time datetime="2017-01-07T06:06:34.000Z"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">2017-01-06</a></time>
       
       
   
-    <h1 class="title">告别2016，迎接2017</h1>
+    <h1 class="title">本周值得读(2016.12.26-2017.01.06)</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>2016年即将结束，首先对支持PaperWeekly的各位童鞋表示衷心的感谢，感谢你们让我有动力将这个用来督促我自己多读paper的side project坚持一直做下来，感谢各位对自然语言处理感兴趣并且愿意牺牲一些个人时间来写paper note的小伙伴，也感谢每天坚持一起刷arXiv来保证周末推荐“每周值得读”质量的几位童鞋，感谢加入PaperWeekly交流群每天都贡献很多高质量讨论内容的各位朋友，感谢为三个交流群做消息同步机器人的种瓜同学。</p>
-<p>PaperWeekly从刚开始只有我一个人，到现在一共有50多位一起愿意分享内容的小伙伴，并且这个数字随着大家的热情参与会逐渐增加，正是有了这么多积极参与的小伙伴，才有了PaperWeekly一周敢做一个topic的底气。从9月1号重新组织PaperWeekly的内容形式，到今天为止，一共发布了17期内容，加上之前我自己写的2期内容，一共是19期内容，19期意味着19周的时间，19周的时间我们可以走过很多地方，吃过很多美食，看过很多美景，而我们选择了读19周的paper，选择了写19周的paper note，选择了推荐这19周中高质量的paper，选择了分享这19周以来大家的成长、积累与思考。</p>
-<p>19周的时间，PaperWeekly一共完成了83篇paper notes，而这83篇paper可以用19个独立的topic组织起来，比如：</p>
-<p>1、提高seq2seq生成对话的流畅性和多样性；<br>2、通过无监督/半监督的方法来做命名实体识别（NER）；<br>3、哪些ICLR2017的paper值得关注；<br>4、Attention模型在NMT任务中的应用和进展；<br>5、文本摘要技术的进展情况；<br>6、增强学习在对话生成中的应用；<br>7、GAN的研究进展；</p>
-<p>每个topic都涉及到了一个研究方向，有的内容非常热门，比如GAN，有的内容非常经典，比如NER，每个topic都会抓住一些特点来归纳几篇paper，为准备入门、正在入门、已经入门的同学提供了服务和方便。</p>
-<p>从8.25开始，PaperWeekly推出了“每周值得读”栏目，旨在充当arXiv上自然语言处理方面的人工过滤器，旨在解决信息过载问题，旨在帮助大家更快地了解到哪些paper更值得关注。</p>
-<p>从8.25开始，PaperWeekly一共推荐了153篇高质量的paper，当然每个人对于质量的理解都会有所偏差，有的paper给整个研究带来了巨大的影响，有的paper可能对某个领域有所提高，有的paper所蕴含的思想会带来很多的启发，这是一件仁者见仁智者见智的事情。</p>
-<p>在做PaperWeekly的时候，我观察到大家有一定的招聘需求，可能是公司，也可能是院校或者科研机构，但是在交流群中发的效果又不是很好，于是做了个决定，在11月中旬开始推出了一项新的服务—公益广告服务，从第一个帮助清华大学刘知远老师招博士后开始至今已经发了一些广告了，虽然还没有做效果反馈工作，但我们确实尽力在帮这些需要帮助的企业或者院校，如果您有这样的招聘需求，可以私信来联系我，如果可以与PaperWeekly合作写一期文章会更好！</p>
-<p>在做PaperWeekly的时候，我也有过一阵迷茫，就是关于PaperWeekly到底是什么的思考，记得是一个周日晚上，我到了夜里3点仍没有睡着，就爬起来写了一篇《PaperWeekly到底是什么》的文章，来好好地定义了一下我们所做的事情以及所想追求的东西。最后，我是这么定义PaperWeekly的，“PaperWeekly是一个由50多名喜欢分享知识的童鞋利用宝贵的业余时间来一起，以一周为单位、对一个topic进行多篇paper解读和对比总结的、不追求热点、不搞些噱头的爱心公益组织，旨在分享知识。”</p>
-<p>对一个东西的定位很重要，直接决定了对这个东西的态度和所应采取的方式、方法。我做不到拿一些哗众取宠的名字来命名文章标题，也做不到过分地夸大或者贬低某一个东西，我只想纯粹地做这么一件事情。各种指标对我们来说没有意义，哪怕没有人来读文章，而我们每天所读的这些paper，所学到的知识都不会减少，当然我希望大家写的东西可以分享给更多的人，让更多的人一起来感受科技的进步和学术的前沿，但我们不会刻意地去追求什么。我一直认为人能够坚持并且努力做好一件事情的最大动力是热爱，是那种没有半点虚伪、没有半点功利的热爱。因为热爱，所以纯粹。</p>
-<p>PaperWeekly不是一个完美的东西，但是一个成长的东西，是一个一直在努力变好的东西。2016快要结束了，在2017年里，我们将不断地完善文章质量，丰富文章的形式，增加一些群内的直播交流活动，比如针对某一篇、某几篇paper的讨论，不定期地邀请更多的业界大牛来讲一讲理论和技术如何在工业界落地等等。</p>
-<p>PaperWeekly是一个非常开放的组织，随时欢迎想一起写paper notes或者写分享的童鞋加入，让我们不断地努力，不断地壮大力量，在2017年书写出更多值得读的文章，产生更多高质量的讨论内容，一起为国内自然语言处理的发展贡献一点点力量。</p>
-<p>最后，感谢各位合作伙伴对PaperWeekly的大力支持，感谢机器之心、科研圈、IEEE计算科学评论、ChatbotChina、将门创投等媒体和机构的支持。</p>
-<p>2016年是一个开始，也仅仅是一个开始，2017年即将到来，PaperWeekly将与深度学习社区AI100进行深度合作，为大家提供更好的服务！</p>
+        <h1 id="The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process"><a href="#The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process" class="headerlink" title="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process"></a><a href="http://t.cn/RMwnQmN" target="_blank" rel="external">The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process</a></h1><p>【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，进而对未来事件的发生时间和类型进行预测。该模型在传统Hawkes process的基础上，用 Recurrent Neural Network 来总结事件流的历史信息，并动态地估计不同时刻不同事件之间复杂的相互影响关系，进而得出未来事件的发生时间和类型的概率分布。此模型可以用于多种事件流的分析，包括医学诊断，消费者行为，和社交网络活动的预测等，并在多个数据集上表现出了显著的优势。作者来自约翰霍普金斯大学NLP组，主页地址<a href="http://www.cs.jhu.edu/~hmei/" target="_blank" rel="external">http://www.cs.jhu.edu/~hmei/</a>  有需要讨论的可以直接联系作者本文  hmei@cs.jhu.edu</p>
+<h1 id="Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task"><a href="#Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task" class="headerlink" title="Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task"></a><a href="http://t.cn/RIYdnYx" target="_blank" rel="external">Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task</a></h1><p>【多模态】image caption任务的自动评价存在一定的弊端，本文提出了新的任务，即给定一幅图，给出n个caption选项，只有一个是正确答案，通过准确率来评价算法的效果。构建这样一个任务需要先针对每一张图生成多个难度较高的干扰选项，本文提出了一些构造方法，并且在coco数据集上生成了本文的数据集，通过人工选择获得该任务的准确率上限。数据集已开放，地址 <a href="https://github.com/google/mcic-coco" target="_blank" rel="external">https://github.com/google/mcic-coco</a></p>
+<h1 id="A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions"><a href="#A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions" class="headerlink" title="A Joint Speaker-Listener-Reinforcer Model for Referring Expressions"></a><a href="http://t.cn/RMhX58u" target="_blank" rel="external">A Joint Speaker-Listener-Reinforcer Model for Referring Expressions</a></h1><p>【多模态】本文研究的问题非常有趣，是Referring Expressions，简单点说就是给一张图和一个描述，要求找到描述中对应的object，通常包括两个任务：1、根据图片和指定object生成一个描述；2、根据图片和描述来找object。本文构建了一个联合训练模型，将两个任务一起训练，加上一层增强学习来提高所生成描述的多样性，得到了不错的结果。demo和dataset地址：<a href="https://vision.cs.unc.edu/refer/" target="_blank" rel="external">https://vision.cs.unc.edu/refer/</a></p>
+<h1 id="Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results"><a href="#Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results" class="headerlink" title="Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results"></a><a href="http://t.cn/RIYgOoK" target="_blank" rel="external">Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results</a></h1><p>【观点挖掘】【迁移学习】本文做的工作是将某一些领域中已经抽取的非常好的aspect迁移至新的领域，比如screen在苹果手机中存在这么一个aspect，其他品牌的手机也存在，其他的电子设备可能也存在，利用已有的“知识”来提高准确率。</p>
+<h1 id="Language-Modeling-with-Gated-Convolutional-Networks"><a href="#Language-Modeling-with-Gated-Convolutional-Networks" class="headerlink" title="Language Modeling with Gated Convolutional Networks"></a><a href="http://t.cn/RIYkG0b" target="_blank" rel="external">Language Modeling with Gated Convolutional Networks</a></h1><p>【CNN语言模型】本文的工作是将CNN模型和一种gate机制结合起来做语言模型，挑战了RNN在这个领域的霸主地位。工作来自Facebook，他们对CNN有非常的偏好。 </p>
+<h1 id="Understanding-Neural-Networks-through-Representation-Erasure"><a href="#Understanding-Neural-Networks-through-Representation-Erasure" class="headerlink" title="Understanding Neural Networks through Representation Erasure"></a><a href="http://t.cn/RIRFnkr" target="_blank" rel="external">Understanding Neural Networks through Representation Erasure</a></h1><p>【解释神经网络】大家都知道深度学习效果好，但原因确实解释不清楚。本文尝试着做了一些解释方面的工作，通过“erase”掉一些representation来研究结果的变化，甚至通过增强学习来研究最多“erase”掉哪些representation仍不影响最终的结果。深度学习如果有了可解释性，相信又将会是一个新的研究水平了。 </p>
+<h1 id="Shortcut-Sequence-Tagging"><a href="#Shortcut-Sequence-Tagging" class="headerlink" title="Shortcut Sequence Tagging"></a><a href="http://t.cn/RMw38iV" target="_blank" rel="external">Shortcut Sequence Tagging</a></h1><p>【新网络结构】本文针对多层RNN难训练的问题，提出了一种gate机制和shortcuts机制混合的方法，并研究了不同的组合效果。方法在序列标注问题上进行验证，从结果上来看，提高的不多，也从侧面反映出一个问题，现有的网络结构加一些排列组合或者小改动很难解决根本性的问题。</p>
+<h1 id="Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing"><a href="#Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing" class="headerlink" title="Unsupervised neural and Bayesian models for zero-resource speech processing"></a><a href="http://t.cn/RMLugMZ" target="_blank" rel="external">Unsupervised neural and Bayesian models for zero-resource speech processing</a></h1><p>【无监督】【贝叶斯】本文是一篇来自爱丁堡大学的博士论文。</p>
+<h1 id="Textual-Entailment-with-Structured-Attentions-and-Composition"><a href="#Textual-Entailment-with-Structured-Attentions-and-Composition" class="headerlink" title="Textual Entailment with Structured Attentions and Composition"></a><a href="http://t.cn/RM4seBe" target="_blank" rel="external">Textual Entailment with Structured Attentions and Composition</a></h1><p>【文本蕴含】本文的贡献在于将attention应用到了句法树上，而不是只对句子做attention。 </p>
 
       
     </div>
@@ -142,7 +137,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/12/29/告别2016，迎接2017/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/01/06/本周值得读-2016-12-26-2017-01-06/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

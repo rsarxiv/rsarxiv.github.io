@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第二十一期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引多信息融合是一个重要的研究趋势，尤其是对于训练数据缺乏的任务来说，如何融入其他相关信息来提高本任务的准确率是一个非常值得研究的问题。机器翻译是一个热门的研究领域，随着训练数据规模地增加，各种NN模型的效果也取得了突破的进展，google和百度均已部署上线NMT系统；融合图像、音频、视频、文本等各种">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第二十一期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-01-11T20:00:23.000Z"><a href="/2017/01/11/PaperWeekly-第二十一期/">2017-01-11</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第二十一期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>多信息融合是一个重要的研究趋势，尤其是对于训练数据缺乏的任务来说，如何融入其他相关信息来提高本任务的准确率是一个非常值得研究的问题。机器翻译是一个热门的研究领域，随着训练数据规模地增加，各种NN模型的效果也取得了突破的进展，google和百度均已部署上线NMT系统；融合图像、音频、视频、文本等各种模态数据的多模态研究也是一个非常热门的研究方向，本期PaperWeekly将为大家带来NMT和多模态交叉研究的paper解读，共3篇paper：</p>
+<p>1、Attention-based Multimodal Neural Machine Translation, 2016<br>2、Multimodal Attention for Neural Machine Translation, 2016<br>3、Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot, 2016</p>
+<h1 id="Attention-based-Multimodal-Neural-Machine-Translation"><a href="#Attention-based-Multimodal-Neural-Machine-Translation" class="headerlink" title="Attention-based Multimodal Neural Machine Translation"></a><a href="https://www.aclweb.org/anthology/W/W16/W16-2360.pdf" target="_blank" rel="external">Attention-based Multimodal Neural Machine Translation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Po-Yao Huang, Frederick Liu, Sz-Rung Shiang, Jean Oh, Chris Dyer</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>CMU</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Visual Features, Attention, Multimodal NMT</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL 2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>多模态神经机器翻译，在传统的seq2seq翻译模型上，利用图像特征信息帮助提高机器翻译的结果</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>在WMT16的多模态神经网络机器翻译新任务上的工作。<br>提出了3种如何将visual feature加入到seq2seq网络中的encoder，从而使得decoder更好的attention到与图像，语义相关部分的模型： global visual feature， regional visual feature，paralle threads.</p>
+<p><img src="media/global_visual.png" alt="global_visua"></p>
+<p>global visual： 直接将VGG中的fc7抽出的feature加入到encoder的first step(head)或者是last step(tail)</p>
+<p><img src="media/region_visual.png" alt="region_visua"></p>
+<p>regional visual： 先用R-CNN抽出region box的信息，再用VGG得到fc7的特征，将top4对应的region feature，以及global visual feature分别作为每一个step输入到encoder中</p>
+<p><img src="media/parallel_threads.png" alt="parallel_threads"></p>
+<p>parallel threads: 与regional visual相对应的是，每个thread只利用一个region box的feature，和global visual一样的网络，将top 4对应的4 threads和gloabl thread一起做average pooling，每个therad的参数共享; attention则对应所有threads中的所有hidden states</p>
+<p>同时本文还提出了三种rescoring translation的结果的方法， 用 1）language model 2）bilingual autoencoder 3）bilingual dictionary分别来挑选translation的句子，发现bilingual dictionary来删选翻译的句子效果最好</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>数据集： WMT2016 (En-Ge)<br>图像特征提取： VGG， R-CNN</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>在En-Ge的结果如图：<br><img src="media/en-ge.png" alt="en-ge"></p>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>NMT： Kalchbrenner and Blunsom 2013<br>Attention NMT： Bahdanau 2014<br>Joint Space Learning： Zhang 2014，Su 2015，Kiros 2014<br>多模态上相关工作目前并没有很多，值得快速入手</p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文提出了一种针对图像和文本结合的神经网络翻译模型，非常自然的将图像特征加入到seq2seq模型的encoder部分，使decoder不仅能够attention在文本上，同时也能够focus到图像上(global或者region)；并且模型的设计比较简单，没有加入太多复杂的模块。<br>不过只是简单的将图像的特征作为seq中的一个step，并没有考虑文本和图像之间的相关关系，如joint space，相信加入joint learing会有提升。</p>
+<h2 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>Lijun Wu from SYSU.</p>
+<h1 id="Multimodal-Attention-for-Neural-Machine-Translation"><a href="#Multimodal-Attention-for-Neural-Machine-Translation" class="headerlink" title="Multimodal Attention for Neural Machine Translation"></a><a href="https://arxiv.org/abs/1609.03976" target="_blank" rel="external">Multimodal Attention for Neural Machine Translation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Ozan Caglayan, Loïc Barrault, Fethi Bougares</p>
+<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>University of Le Mans, Galatasaray University</p>
+<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, Attention</p>
+<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv 2016.09</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>给定图片和源语言描述的情况下，基于attention机制,生成目标语言的图片描述。</p>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>模型有两个encoder，一个是textual encoder,是一个双向GRU，用于获取源语言文本的向量表示$A^{txt} = {a^{txt}_1,a^{txt}_2,…}$，另外一个是visual encoder,使用的是现成由ImageNet数据集训好的ResNet-50网络，用于获取图片的向量表示。$A^{im} = {a^{im}_1,a^{im}_2,…}$. Decoder部分，是两层的stakced GRU,先用attention方式，分别获取文本部分和图像部分的context向量$c^{txt}$和$c^{im}$,然后将两个向量concat在一起，作为新的context 向量$c$。<br>如图：</p>
+<p><img src="media/mul_attention.jpg" alt="mul_attention"></p>
+<p>这样decoder部分的解码翻译的时候，不仅可以考虑到源语言的文本信息，也可以考虑到原始图片的信息。</p>
+<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p><a href="https://github.com/elliottd/GroundedTranslation" target="_blank" rel="external">IAPRTC-12 dataset for English and German</a></p>
+<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>2014年Bahdanau的Neural Machine Translation by Jointly Learning to Align and Translate，使NMT超过了传统的PBMT，后来的NMT论文基本都是在这个文章基础上进行的改进。<br>2015年Elliott的工作Multi-language image description with neural sequence models. 也是在给定源语言和图片的情况下，生成目标语言。不过并没有使用attention机制。</p>
+<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>该文章的创新之处，在于对图片描述文字进行翻译的时候，考虑到了图片本身的特征信息并引入attention机制。在源语言文本生成出错的情况下，因为有图片信息参考，在一定程度上，可以减轻这种错误带来的影响。不过文章并没有利用外部英德平行语料，这可以考虑作为后面的改进方向。</p>
+<h2 id="完成人信息-1"><a href="#完成人信息-1" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>xiaose@mail.ustc.edu.cn<br>中国科学技术大学</p>
+<h1 id="Zero-resource-Machine-Translation-by-Multimodal-Encoder-decoder-Network-with-Multimedia-Pivot"><a href="#Zero-resource-Machine-Translation-by-Multimodal-Encoder-decoder-Network-with-Multimedia-Pivot" class="headerlink" title="Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot"></a><a href="https://arxiv.org/pdf/1611.04503.pdf" target="_blank" rel="external">Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hideki Nakayama，Noriki Nishida</p>
+<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>The University of Tokyo</p>
+<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>pivot, multimodal, NMT</p>
+<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.11</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在没有平行语料的情况下，用image当作pivot来实现机器翻译</p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>整体上讲，模型分成两部分。第一部分是多模态embedding，采用pairwise ranking loss来定义损失函数；第二部分是用RNN来实现的decoder,跟image caption里面的decoder类似。对这个问题来说，我们的训练数据包括$i^{s}$：源端的图片，$d^{s}$：源端图片对应的句子描述；$i^{t}$：目标端的图片，$d^{t<br>}$：目标端图片对应的句子描述，和源端用的不一样的语言。文中提出了2个模型来解决这个问题：&lt;div<br><img src="media/21-1-1.png" alt="21-1"></p>
+<p>模型1的多模态端包括了图片的encoder和源句子的encoder。图片encoder可以对源图片和目标图片通用。多模态端用$i^{s}$,$d^{s}$进行训练，损失函数为：</p>
+<p><img src="media/21-2.png" alt="21-2"></p>
+<p>$E^{v}$表示图片的encoder(比如用VGG-16提取图片的feature), $E^{s}$表示源句子的encoder(比如用RNN)，$d^{s}_{ng}$表示和源端图片不相关的描述。Decoder端用$i^{t}$,$d^{t}$进行训练，损失函数为标准的 cross-entropy loss（称作图片损失):</p>
+<p><img src="media/21-3.png" alt="21-3"></p>
+<p>模型2比模型1更复杂一点。在源端增加了一个目标句子描述的encoder。因此，在多模态embedding的学习中，损失函数增加了目标图片和目标图片描述的pairwise ranking loss.</p>
+<p><img src="media/21-4.png" alt="21-4"></p>
+<p>在decoder的学习中，模型2除了前面的公式2定义的图片损失外，还增加了目标描述的reconstruction loss，即从多模态端输入目标描述，希望通过embedding和decoder重建这个目标描述。<br><img src="media/21-5.png" alt="21-5"></p>
+<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>两个Multilingual image-description的数据集：IAPR-TC12（包含2万图片以及英语和德语的描述）和 Multi30K（包含3万图片以及英语和德语的描述)</p>
+<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>对于没有平行语料的机器翻译，多数文章是用某种常见语言作为pivot，比如“Neural Machine Translation with Pivot Languages”, 用英语作为西班牙语法语以及德语法语之间的pivot。缺点是翻译的时候还是要经过pivot那一步。 另外，还要一些工作是用一个模型实现many to many的翻译。在这种情况下，没有平行语料的语言对也能用这个模型进行翻译。不需要经过pivot那个中间层，但是效果一般会差一点。比如“Google’s Multilingual Neural Machine Translation System”这篇文章。</p>
+<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>这篇文章的思路很新颖，考虑用图片来作为pivot，实现没有平行语料的语言对之间的翻译。训练完成后可以直接从源语言到目标语言进行翻译，不需要经过图片。但是正如文中提到的，这种方法跟有语料训练出来的翻译效果比起来还是差很多，并且翻译的句子都比较短。另外，对一些图片难以表达的信息很难通过这种方式学到。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>交叉领域的研究总是会带给大家惊喜，交叉领域的交叉领域更是如此，这个领域刚刚开坑，欢迎各位有志之士跳坑。并且在2016年举办了第一届多模态机器翻译（Multimodal Machine Translation）和多语看图说话（Crosslingual Image Description）比赛，比赛主页<a href="http://www.statmt.org/wmt16/multimodal-task.html" target="_blank" rel="external">http://www.statmt.org/wmt16/multimodal-task.html</a>, 总结性的paper <a href="http://anthology.aclweb.org/W/W16/W16-2346.pdf" target="_blank" rel="external">http://anthology.aclweb.org/W/W16/W16-2346.pdf</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/nlp/">nlp</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/01/11/PaperWeekly-第二十一期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>99</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>116</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

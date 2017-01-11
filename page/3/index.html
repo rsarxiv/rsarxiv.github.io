@@ -65,6 +65,64 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-06-01T15:15:17.000Z"><a href="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/">2016-06-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/">Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>本篇将分享的文章相比于昨天那篇<a href="http://rsarxiv.github.io/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">Sequence to Sequence Learning with Neural Networks</a>更早地使用了seq2seq的框架来解决机器翻译的问题，可能上一篇来自于Google，工程性更强一些，学术性有一些不足。本文来自于学术机构，学术范更浓一些。本文的题目是<a href="http://arxiv.org/pdf/1406.1078.pdf" target="_blank" rel="external">Learning Phrase Representations using RNN Encoder–Decoder for Statistical<br>  Machine Translation</a>，作者是来自蒙特利尔大学的<a href="http://www.kyunghyuncho.me/" target="_blank" rel="external">Kyunghyun Cho</a>博士（现在在纽约大学任教），2014年6月登在arxiv上。</p>
+<p>本文最大的两个贡献是：</p>
+<p>1、提出了一种类似于LSTM的GRU结构作为RNN的hidden unit，并且具有比LSTM更少的参数，更不容易过拟合。</p>
+<p>2、较早地（据说2013年就有人提出用seq2seq思路来解决问题）将seq2seq应用在了机器翻译领域，并且取得了不错的效果。</p>
+<p>自然语言生成（NLG）领域中有很多任务，比如机器翻译，<a href="http://rsarxiv.github.io/tags/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98/">自动文摘</a>，自动问答，对话生成等，都是根据一个上下文来生成一个文本序列，这里分类两个过程，encoder部分将输入序列表示成一个context，decoder部分在context的条件下生成一个输出序列，联合训练两个部分得到最优的模型。这里的context就像是一个memory，试着保存了encoder部分的所有信息（但往往用较低的维度表示整个输入序列一定会造成信息损失）。本文的思路就是如此，具体可参看下图：</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig1.png" width="600" height="600">
+<p>本文模型将encoder部分的最后一个hidden state作为context输入给decoder，decoder中的每一个时间t的hidden state s(t)都与context,s(t-1),y(t-1)有关系，而每一个时间t的输出y(t)都与context,s(t),y(t-1)有关。当然，这种模型是非常灵活的，你的context可以有很多种选择，比如可以选encoder中所有hidden state组成的矩阵来作为context，可以用BiRNN计算出两个last hidden state进行拼接作为context；而s(t)和y(t)根据RNN结构不同，也可以将context作为s(0)依次向后传递，而不是每次都依赖于context。</p>
+<p>说完了模型部分，来说说本文最大的贡献是提出了GRU，一种更轻量级的hidden unit，效果还不输LSTM，函数结构如下图：</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig2.png" width="400" height="400">
+<p>GRU有两个门函数，reset gate和update gate，公式如下：</p>
+<p>reset gate：</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig3.png" width="300" height="300">
+<p>update gate：</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig4.png" width="300" height="300">
+<p>reset gate接近于0的时候，当前hidden state会忽略前面的hidden state，在当前输入处reset。reset gate控制了哪些信息可以通过，而update gate控制着多少信息可以通过，与LSTM中的cell扮演着相似的角色。计算出每一步的reset和update gate，即可计算出当前的hidden state，如下：</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig5.png" width="300" height="300">
+<p>这里，</p>
+<img src="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/fig6.png" width="300" height="300">
+<p>实验部分，作者利用本文模型得到了满意的结果，不再赘述。</p>
+<p>另外，本文在附录部分给出了一个比较详尽的encoder-decoder公式推导过程，大家可以参看原文。</p>
+<p>从context预测output，是一件很神奇的事情。而context又是千变万化的，当下正流行的模型attention model正是在context上做了文章，得到了更好的结果。相信，对context的变化和应用会带来更多好玩的模型。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-05-31T15:22:43.000Z"><a href="/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">2016-05-31</a></time>
       
       
@@ -2024,7 +2082,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>98</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>99</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -2060,7 +2118,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>115</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>116</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

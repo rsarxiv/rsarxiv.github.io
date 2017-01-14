@@ -113,7 +113,7 @@
 <h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>pivot, multimodal, NMT</p>
 <h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.11</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在没有平行语料的情况下，用image当作pivot来实现机器翻译</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>整体上讲，模型分成两部分。第一部分是多模态embedding，采用pairwise ranking loss来定义损失函数；第二部分是用RNN来实现的decoder,跟image caption里面的decoder类似。对这个问题来说，我们的训练数据包括$i^{s}$：源端的图片，$d^{s}$：源端图片对应的句子描述；$i^{t}$：目标端的图片，$d^{t<br>}$：目标端图片对应的句子描述，和源端用的不一样的语言。文中提出了2个模型来解决这个问题：&lt;div<br><img src="media/21-1-1.png" alt="21-1"></p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>整体上讲，模型分成两部分。第一部分是多模态embedding，采用pairwise ranking loss来定义损失函数；第二部分是用RNN来实现的decoder,跟image caption里面的decoder类似。对这个问题来说，我们的训练数据包括$i^{s}$：源端的图片，$d^{s}$：源端图片对应的句子描述；$i^{t}$：目标端的图片，$d^{t}$：目标端图片对应的句子描述，和源端用的不一样的语言。文中提出了2个模型来解决这个问题：<br><img src="media/21-1-1.png" alt="21-1"></p>
 <p>模型1的多模态端包括了图片的encoder和源句子的encoder。图片encoder可以对源图片和目标图片通用。多模态端用$i^{s}$,$d^{s}$进行训练，损失函数为：</p>
 <p><img src="media/21-2.png" alt="21-2"></p>
 <p>$E^{v}$表示图片的encoder(比如用VGG-16提取图片的feature), $E^{s}$表示源句子的encoder(比如用RNN)，$d^{s}_{ng}$表示和源端图片不相关的描述。Decoder端用$i^{t}$,$d^{t}$进行训练，损失函数为标准的 cross-entropy loss（称作图片损失):</p>
@@ -208,7 +208,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>99</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>100</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -244,7 +244,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>116</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>118</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

@@ -65,6 +65,118 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-06-03T14:06:55.000Z"><a href="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/">2016-06-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/">REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>前面几篇文章分享的都是seq2seq和attention model在机器翻译领域中的应用，在自动文摘系列文章中也分享了六七篇在<a href="http://rsarxiv.github.io/tags/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98/">自动文摘</a>领域中的应用。本文将分享的这篇文章研究了seq2seq+attention在<a href="https://en.wikipedia.org/wiki/Textual_entailment" target="_blank" rel="external">textual entailment</a>领域的应用。本文题目是<a href="http://arxiv.org/pdf/1509.06664.pdf" target="_blank" rel="external">REASONING ABOUT ENTAILMENT WITH NEURAL ATTENTION</a>，作者是来自英国伦敦大学学院的<a href="http://rockt.github.io/" target="_blank" rel="external">Tim Rocktaschel</a>博士（后面两个作者来自Google Deepmind），文章于2015年9月放在arxiv上，被ICLR 2016录用。</p>
+<p>首先，介绍一下文本蕴藏（textual entailment）是一个怎样的任务，简单点说就是用来判断两个文本序列之间的是否存在推断关系，是一个分类问题（具体可参见Wikipedia）。两个文本序列分别称为premise和hypothesis。</p>
+<p>本文最大的贡献在于：</p>
+<p>1、将end2end的思想应用到了文本蕴藏领域，取得了不错的效果。</p>
+<p>2、提出了一种seq2seq模型、两种attention模型和一种trick模型。</p>
+<p>本篇关注的重点在于四种模型的构建，来看模型架构图：</p>
+<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig1.png" width="600" height="600">
+<p>图中A是我们最熟悉的简单seq2seq模型，本文称为conditional encoding模型；B是本文提出的Attention模型，context与之前分享的都不一样；C是我们之前介绍过的attention模型，本文称为word-by-word attention模型。</p>
+<p>1、首先介绍A模型。将premise和hypothesis认为是source和target，即用encoder来处理premise，用decoder来处理hypothesis，只不过这里的decoder并不是一个语言模型，而只是一个和encoder一样的LSTM，decoder的输入是encoder的最后一个hidden state，对应图中的c5和h5。最后decoder的输出是一个联合表示premise和hypothesis的向量，用于最终的分类。</p>
+<p>2、介绍B模型。该任务和机器翻译不同，并不一定需要做所谓的soft alignment，而是只需要表示好两个句子之间的关系即可，因此这个模型的想法是将hypothesis的句子表示与premise建立注意力机制，而不是将hypothesis的每个单词都与premise做alignment。从上图中标记B的地方也可以看出，attention仅仅依赖于hypothesis的last hidden state。结果可以参看下图：</p>
+<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig2.png" width="600" height="600">
+<p>从图中可以看出hypothesis与premise中哪些词相关性更强。</p>
+<p>3、介绍C模型。这个模型与我们之前一直分享的attention模型一致，模型对hypothesis和premise每个单词做了alignment，所以这里称为word-by-word attention，从模型架构图中也可以看出，hypothesis中的每个词都与premise中对应的词进行了alignment。这里并不是生成单词，而是建立起两个文本序列之间的关系。结果可以参看下图：</p>
+<img src="/2016/06/03/REASONING-ABOUT-ENTAILMENT-WITH-NEURAL-ATTENTION-PaperWeekly/fig3.png" width="600" height="600">
+<p>图中表示的是alignment矩阵，更暗的地方表示这两个词更加相关。</p>
+<p>4、最后一种模型称为two-way模型，其实是一个trick，借鉴了BiRNN的思想，使用两个相同参数的LSTM，第一个LSTM从一个方向上对基于hypothesis的premise进行表示，而第二个LSTM从相反的方向上对基于premise的hypothesis进行表示，最终得到两个句子表示，拼接起来作为分类的输入。（过程与BiRNN类似，从两个方向上对hypothesis-premise进行了表示，可与前面的模型组合使用，从结果上来看并没有什么明显的作用）</p>
+<p>最后的实验结果表明，采用模型C，即word-by-word attention模型效果最好，其次是B模型，最差的是A模型。结果与预期基本符合，但加了two-way的效果并没有更好，反而更差。作者分析说用了相同的参数来做two-way可能会给训练给来更多的噪声影响，所以效果并不好。</p>
+<p>整体上来说，seq2seq+attention的组合给很多研究领域带来了春天，给了研究者们更多的启发，attention的形式有多种，可能针对不同的问题，不同的attention会带来不同的效果，也不好说哪一种一定更加适合某一个特定的任务，所以需要去不断地探索。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-06-02T19:30:30.000Z"><a href="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/">2016-06-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/">Neural Machine Translation by Jointly Learning to Align and Translate #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>前面的两篇文章简单介绍了seq2seq在机器翻译领域的尝试，效果令人满意。上一篇也介绍到这一类问题可以归纳为求解P(output|context)的问题，不同的地方在于context的构建思路不同，上两篇中的seq2seq将context定义为encoder的last hidden state，即认为rnn将整个input部分的信息都保存在了last hidden state中。而事实上，rnn是一个有偏的模型，越靠后的单词在last state中占据的“比例”越高，所以这样的context并不是一个非常好的办法，本文将分享的文章来解决这个问题。题目是<a href="http://arxiv.org/pdf/1409.0473.pdf" target="_blank" rel="external">Neural Machine Translation by Jointly Learning to Align and Translate</a>，作者是来自德国雅各布大学的<a href="http://minds.jacobs-university.de/dima" target="_blank" rel="external">Dzmitry Bahdanau</a>，现在是Yoshua Bengio组的一个博士生，文章于2015年4月放在arxiv上。</p>
+<p>本篇不再讨论seq2seq，如果您想了解seq2seq，可以去看<a href="http://rsarxiv.github.io/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">Sequence to Sequence Learning with Neural Networks</a>和<a href="http://rsarxiv.github.io/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder%E2%80%93Decoder-for-Statistical-Machine-Translation-PaperWeekly/">Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</a>两篇博客。本篇只讨论不同的地方。</p>
+<p>本文用encoder所有hidden state的加权平均来表示context，权重表示decoder中各state与encoder各state的相关性，简单的seq2seq认为decoder中每一个state都与input的全部信息（用last state表示）有关，而本文则认为只与相关的state有关系，即在decoder部分中，模型只将注意力放在了相关的部分，对其他部分注意很少，这一点与人类的行为很像，当人看到一段话或者一幅图的时候，往往会将注意力放在一个很小的局部，而不是全部。具体看下图：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig1.png" width="400" height="400">
+<p>decoder中预测每个输出的条件概率变为：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig2.png" width="300" height="300">
+<p>这里每个time step的state变为：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig3.png" width="300" height="300">
+<p>这里，context vector由下式计算：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig4.png" width="300" height="300">
+<p>权重用了一个最简单的mlp来计算，</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig6.png" width="300" height="300">
+<p>然后做归一化：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig5.png" width="300" height="300">
+<p>这里的权重反应了decoder中的state s(i-1)和encoder中的state h(j)之间的相关性。本文在为了得到相对来说无偏的state，在encoder部分采用了BiRNN。</p>
+<p>在机器翻译领域中，attention model可以理解为source和target words的soft alignment，像下图一样：</p>
+<img src="/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/fig7.png" width="500" height="500">
+<p>上图是英语翻译成法语的一个结果。越亮的地方表示source和target中的words相关性越强（或者说对齐地越准），图中的每一个点的亮度就是前面计算出的权重。</p>
+<p>本文最大的贡献在于提出了attention model，为今后研究对话生成，问答系统，自动文摘等任务打下了坚实的基础。context的定义也成为了一个非常有意思的研究点，rnn是一种思路，cnn同样也是一种思路，简单的word embedding也可以算是一种思路，交叉起来rnn+cnn也可以作为一种思路，将word替换成char可以作为一种思路，思路其实非常多，不同的组合有不同的模型，都可以去探索。</p>
+<p>另外，不知道是不是Yoshua Bengio组的习惯，本文也在附录附上了详细的模型推导过程。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-01T15:15:17.000Z"><a href="/2016/06/01/Learning-Phrase-Representations-using-RNN-Encoder–Decoder-for-Statistical-Machine-Translation-PaperWeekly/">2016-06-01</a></time>
       
       
@@ -2082,7 +2194,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>99</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>100</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -2118,7 +2230,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>116</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>118</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

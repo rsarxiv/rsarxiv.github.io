@@ -5,17 +5,84 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-01-11T20:26:11.000Z</updated>
+  <updated>2017-01-14T18:46:37.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2017.01.09-2017.01.13)</title>
+    <link href="http://rsarxiv.github.io/2017/01/14/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-01-09-2017-01-13/"/>
+    <id>http://rsarxiv.github.io/2017/01/14/本周值得读-2017-01-09-2017-01-13/</id>
+    <published>2017-01-14T18:27:18.000Z</published>
+    <updated>2017-01-14T18:46:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Neural-Personalized-Response-Generation-as-Domain-Adaptation"><a href="#Neural-Personalized-Response-Generation-as-Domain-Adaptation" class="headerlink" title="Neural Personalized Response Generation as Domain Adaptation"></a><a href="http://t.cn/RM6jy36" target="_blank" rel="external">Neural Personalized Response Generation as Domain Adaptation</a></h1><p>【个性化】【对话生成】  本文研究的问题是如何生成个性化的对话，模型仍是基于经典的seq2seq+attention，在该模型的基础上通过两个步骤来生成特定style的对话，第一步是initialization，第二步是adaptation。工作来自哈工大 @刘挺 老师组，他们推出了一个聊天机器人 “笨笨” （可微信搜），而且具有中文阅读理解的功能。关于生成更多样的对话内容，可以参考 PaperWeekly 第十八期 — 提高seq2seq方法所生成对话的流畅度和多样性 <a href="http://t.cn/RIVUKnr" target="_blank" rel="external">http://t.cn/RIVUKnr</a></p>
+<h1 id="RUBER-An-Unsupervised-Method-for-Automatic-Evaluation-of-Open-Domain-Dialog-Systems"><a href="#RUBER-An-Unsupervised-Method-for-Automatic-Evaluation-of-Open-Domain-Dialog-Systems" class="headerlink" title="RUBER: An Unsupervised Method for Automatic Evaluation of Open-Domain Dialog Systems"></a><a href="http://t.cn/RMKeK0L" target="_blank" rel="external">RUBER: An Unsupervised Method for Automatic Evaluation of Open-Domain Dialog Systems</a></h1><p>【对话系统】【评价】 本文研究的问题也是当前对话系统中非常关键的一个问题，如何更加准确地自动评价模型的效果，本文提出了一种新的评价方法RUBER，旨在通过生成的reply和用户的当前query来联合评判效果，建议从业者和相关研究人员精读。 </p>
+<h1 id="Generating-Long-and-Diverse-Responses-with-Neural-Conversation-Models"><a href="#Generating-Long-and-Diverse-Responses-with-Neural-Conversation-Models" class="headerlink" title="Generating Long and Diverse Responses with Neural Conversation Models"></a><a href="http://t.cn/RM9SyPf" target="_blank" rel="external">Generating Long and Diverse Responses with Neural Conversation Models</a></h1><p>【对话生成】【seq2seq】 本文研究的问题是如何生成一个又长、又多样的对话，模型仍是基于经典的seq2seq，在decoding部分，加了一个所谓的self-attention部件来保证对话长度和连贯性，在解空间中用随机beam search来搜索候选对话，然后进行重排得到最终结果。关于seq2seq生成对话，可以参看PaperWeekly 第十八期 — 提高seq2seq方法所生成对话的流畅度和多样性<a href="http://t.cn/RIVUKnr" target="_blank" rel="external">http://t.cn/RIVUKnr</a></p>
+<h1 id="Decoding-as-Continuous-Optimization-in-Neural-Machine-Translation"><a href="#Decoding-as-Continuous-Optimization-in-Neural-Machine-Translation" class="headerlink" title="Decoding as Continuous Optimization in Neural Machine Translation"></a><a href="http://t.cn/RMKeGX1" target="_blank" rel="external">Decoding as Continuous Optimization in Neural Machine Translation</a></h1><p>【seq2seq】【解码】 本文的亮点在于将seq2seq模型中的解码部分转化成一个连续优化的问题，通过比较成熟的优化算法来解决解码问题，这个思路可以被应用到所有seq2seq解决方案中。</p>
+<h1 id="OpenNMT-Open-Source-Toolkit-for-Neural-Machine-Translation"><a href="#OpenNMT-Open-Source-Toolkit-for-Neural-Machine-Translation" class="headerlink" title="OpenNMT: Open-Source Toolkit for Neural Machine Translation"></a><a href="http://t.cn/RMKex91" target="_blank" rel="external">OpenNMT: Open-Source Toolkit for Neural Machine Translation</a></h1><p>【NMT】【开源】 Harvard NLP组和SYSTRAN公司联合推出的开源机器翻译系统OpenNMT，torch实现，代码地址：<a href="https://github.com/opennmt/opennmt" target="_blank" rel="external">https://github.com/opennmt/opennmt</a> 主页地址：<a href="http://opennmt.net/" target="_blank" rel="external">http://opennmt.net/</a></p>
+<h1 id="Implicitly-Incorporating-Morphological-Information-into-Word-Embedding"><a href="#Implicitly-Incorporating-Morphological-Information-into-Word-Embedding" class="headerlink" title="Implicitly Incorporating Morphological Information into Word Embedding"></a><a href="http://t.cn/RM6Oe27" target="_blank" rel="external">Implicitly Incorporating Morphological Information into Word Embedding</a></h1><p>【词向量】将词形信息考虑在词向量模型中是一种常见的增强手段，一般的做法是将词的前缀、后缀和词根作为独立的token进行建模，而本文的思路则是用能够代表前缀、后缀意思的词来代替进行建模。</p>
+<h1 id="Real-Multi-Sense-or-Pseudo-Multi-Sense-An-Approach-to-Improve-Word-Representation"><a href="#Real-Multi-Sense-or-Pseudo-Multi-Sense-An-Approach-to-Improve-Word-Representation" class="headerlink" title="Real Multi-Sense or Pseudo Multi-Sense: An Approach to Improve Word Representation"></a><a href="http://t.cn/RM6Rsdv" target="_blank" rel="external">Real Multi-Sense or Pseudo Multi-Sense: An Approach to Improve Word Representation</a></h1><p>【真假多义词】 词向量是一个非常活跃的研究领域，word2vec提供了一种非常简单粗暴、充满问题的词向量，比如一个典型的问题是一词多义，于是很多的工作都是在解决一词多义的问题，但一个词对应的多个向量其实都指向同一个词义，本文的工作正是对这些伪一词多义进行识别，降低语言研究的复杂度。</p>
+<h1 id="Multi-level-Representations-for-Fine-Grained-Typing-of-Knowledge-Base-Entities"><a href="#Multi-level-Representations-for-Fine-Grained-Typing-of-Knowledge-Base-Entities" class="headerlink" title="Multi-level Representations for Fine-Grained Typing of Knowledge Base Entities"></a><a href="http://t.cn/RM68yGy" target="_blank" rel="external">Multi-level Representations for Fine-Grained Typing of Knowledge Base Entities</a></h1><p>【entity表示】 entity是知识图谱的基础组件，很多的entity都是罕见词（短语），entity的表示是一个相对困难的问题。本文提出了一种char-level、word-level和entity-level三种level的联合表示模型，得到了不错的效果。本文非常值得精读！数据和代码都已公开 <a href="http://cistern.cis.lmu.de/figment/" target="_blank" rel="external">http://cistern.cis.lmu.de/figment/</a></p>
+<h1 id="Task-Specific-Attentive-Pooling-of-Phrase-Alignments-Contributes-to-Sentence-Matching"><a href="#Task-Specific-Attentive-Pooling-of-Phrase-Alignments-Contributes-to-Sentence-Matching" class="headerlink" title="Task-Specific Attentive Pooling of Phrase Alignments Contributes to Sentence Matching"></a><a href="http://t.cn/RM6lxze" target="_blank" rel="external">Task-Specific Attentive Pooling of Phrase Alignments Contributes to Sentence Matching</a></h1><p>【短语对齐】 本文研究的问题是句子匹配，该问题常常被应用于文本蕴含和答案选择两个任务上，针对短语识别、表示和对齐等关键问题，本文提出了一种基于GRU的NN模型，取得了不错的效果。本文作者是@Wenpeng_Yin </p>
+<h1 id="Parsing-Universal-Dependencies-without-training"><a href="#Parsing-Universal-Dependencies-without-training" class="headerlink" title="Parsing Universal Dependencies without training"></a><a href="http://t.cn/RM9XkMy" target="_blank" rel="external">Parsing Universal Dependencies without training</a></h1><p>【依存分析】【无监督】 本文的工作是基于pagerank和一些规则来做无监督式的依存文法分析，无监督的paper总是让人眼前一亮，EACL2017。”在现今去规则化和拼语料库的机器学习型parser盛行时，少有的使用规则，无监督的Parser。每人研究都有自己支撑点，在没有被完全推翻时，自然会坚持，不为热潮激流所动，我认为这是理性研究者的主骨，我一直有敬畏之心。尽管各家学说各异，相信还是以结果优良和可发展性为最终评价标准”(观点来自微博 王伟DL)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Neural-Personalized-Response-Generation-as-Domain-Adaptation&quot;&gt;&lt;a href=&quot;#Neural-Personalized-Response-Generation-as-Domain-Adaptation
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高考机器人距离我们还有多远？</title>
+    <link href="http://rsarxiv.github.io/2017/01/13/%E9%AB%98%E8%80%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%9D%E7%A6%BB%E6%88%91%E4%BB%AC%E8%BF%98%E6%9C%89%E5%A4%9A%E8%BF%9C%EF%BC%9F/"/>
+    <id>http://rsarxiv.github.io/2017/01/13/高考机器人距离我们还有多远？/</id>
+    <published>2017-01-13T22:57:16.000Z</published>
+    <updated>2017-01-14T18:26:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>2016年初，随着AlphaGo战胜韩国棋王李世乭九段，人工智能重新被推到风口浪尖，一时间大家纷纷开始讨论人工智能将会带来什么，将会改变什么，不管是媒体还是学者纷纷将关注点转移到了人工智能上面；号称将改变人类交互方式的聊天机器人也如雨后春笋般地出现在街上、桥下和田野中；2016年末，一个叫做master的计算机程序在网络上接连战胜了几乎所有的围棋高手，经过证实正是AlphaGo的升级版；接着，德州扑克在新年伊始也被人工智能攻破。</p>
+<p>“还有谁？！”人工智能仿佛没了对手，仿佛人类的生活马上就会迎来革命性的变化，不由自由地陷入到人工智能威胁的恐惧当中。但，近日一则题为《日本AI机器人Torobo-kun放弃高考计划：阅读理解难以逾越》的新闻备受关注，给处在沸腾边缘的人工智能浪潮浇了一盆冷水。</p>
+<blockquote>
+<p>最近，日本国立情报学研究所（NII）的研究人员宣布，放弃让人工智能系统“Torobo-kun”参加东京大学入学考试的计划。作为NII开发的人工智能机器人，Torobo-kun的终极目标是通过日本顶尖高校东京大学的入学考试，而目前的研究结果表明，这一计划遇到了难以逾越的障碍。</p>
+</blockquote>
+<p>高考对于大家来说是一个充满回忆的词，也是一种相对来讲公平（但不一定科学）的评价体系，对一个学生的知识掌握程度和推理、归纳、总结等能力有比较好的评判。人工智能的研究既然达到了不错的水准，自然而然会来挑战一下高考这种高智力的测试。其实，不仅仅是日本开展了针对机器人高考的研究，国家863“超脑计划”也开展了相关的项目，准备在2017年同高中生们一同参加文科高考，考试科目分别是语文、数学和文综。</p>
+<p>如果不仅仅限于高考这种形式的话，很多的顶尖研究机构在很早的时候就开展了利用人工智能来解数学、物理、化学、生物、地理、历史等各门学科的题，比如大名鼎鼎的Halo Project和OpenAI的Aristo Project，其中有的已经宣告失败，有的仍在努力尝试。</p>
+<h1 id="高考机器人"><a href="#高考机器人" class="headerlink" title="高考机器人"></a>高考机器人</h1><h2 id="高考机器人计划（Todai-Robot-Project）"><a href="#高考机器人计划（Todai-Robot-Project）" class="headerlink" title="高考机器人计划（Todai Robot Project）"></a>高考机器人计划（Todai Robot Project）</h2><p>Todai机器人计划是日本国立情报学研究所（NII）于2011年提出的研究计划，目标是开发一套机器人系统，参加东京大学入门测试并且通过，在项目的早期研发中，顺利地通过了绝大多数的私立大学和一部分公立大学的入学考试，但水平离东京大学的要求仍有较大差距。究其原因，尽管现有的研究水平在很多任务上相比于传统的方法已经有较大的进步了，但对于真正理解人类语言，然后进行推理、归纳和总结还有很长的路要走。比如“谁是曹丕的父亲，谁是中国三国时期魏国的第一位皇帝？”，高考机器人Torobo-kun未能给出正确的答案。虽然Torobo-kun知道曹丕是曹操的儿子，但它没能想出曹操就是曹丕的父亲，因为它不理解父子关系。历时近6年的研究项目就此宣布失败，项目期间共发表了14篇相关的论文。</p>
+<h2 id="题型分析"><a href="#题型分析" class="headerlink" title="题型分析"></a>题型分析</h2><p>直观地理解，对于机器人来说，考察记忆的题目会比考察推理、归纳的题目更容易一些，选择题比填空题更容易一些，客观题比主观题更容易一些，文科的题目比理科的题目更容易一些。高考机器人是一个非常综合的任务，包括了图像识别、语音识别、自然语言处理和生成、问答系统和知识图谱等许多研究内容，而现如今流行的深度学习成功地将图像识别和语音识别的精度提升到了工业级的标准，同时也为自然语言处理的很多任务带来了全新的解决方案，但仍无法达到工业级的标准。</p>
+<p>考试题目分类众多，本文选择几个典型的题型进行分析。</p>
+<p>### </p>
+<p>### </p>
+<p>###</p>
+<p>###</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>1、失败原因（与研究难点关联）<br>2、评论（对这件事进行评论）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;2016年初，随着AlphaGo战胜韩国棋王李世乭九段，人工智能重新被推到风口浪尖，一时间大家纷纷开始讨论人工智能将会带来什么，将会改变什么
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第二十一期</title>
     <link href="http://rsarxiv.github.io/2017/01/11/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/01/11/PaperWeekly-第二十一期/</id>
     <published>2017-01-11T20:00:23.000Z</published>
-    <updated>2017-01-11T20:26:11.000Z</updated>
+    <updated>2017-01-11T21:06:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>多信息融合是一个重要的研究趋势，尤其是对于训练数据缺乏的任务来说，如何融入其他相关信息来提高本任务的准确率是一个非常值得研究的问题。机器翻译是一个热门的研究领域，随着训练数据规模地增加，各种NN模型的效果也取得了突破的进展，google和百度均已部署上线NMT系统；融合图像、音频、视频、文本等各种模态数据的多模态研究也是一个非常热门的研究方向，本期PaperWeekly将为大家带来NMT和多模态交叉研究的paper解读，共3篇paper：</p>
 <p>1、Attention-based Multimodal Neural Machine Translation, 2016<br>2、Multimodal Attention for Neural Machine Translation, 2016<br>3、Zero-resource Machine Translation by Multimodal Encoder-decoder Network with Multimedia Pivot, 2016</p>
@@ -54,7 +121,7 @@
 <h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>pivot, multimodal, NMT</p>
 <h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.11</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>在没有平行语料的情况下，用image当作pivot来实现机器翻译</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>整体上讲，模型分成两部分。第一部分是多模态embedding，采用pairwise ranking loss来定义损失函数；第二部分是用RNN来实现的decoder,跟image caption里面的decoder类似。对这个问题来说，我们的训练数据包括$i^{s}$：源端的图片，$d^{s}$：源端图片对应的句子描述；$i^{t}$：目标端的图片，$d^{t<br>}$：目标端图片对应的句子描述，和源端用的不一样的语言。文中提出了2个模型来解决这个问题：&lt;div<br><img src="media/21-1-1.png" alt="21-1"></p>
+<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>整体上讲，模型分成两部分。第一部分是多模态embedding，采用pairwise ranking loss来定义损失函数；第二部分是用RNN来实现的decoder,跟image caption里面的decoder类似。对这个问题来说，我们的训练数据包括$i^{s}$：源端的图片，$d^{s}$：源端图片对应的句子描述；$i^{t}$：目标端的图片，$d^{t}$：目标端图片对应的句子描述，和源端用的不一样的语言。文中提出了2个模型来解决这个问题：<br><img src="media/21-1-1.png" alt="21-1"></p>
 <p>模型1的多模态端包括了图片的encoder和源句子的encoder。图片encoder可以对源图片和目标图片通用。多模态端用$i^{s}$,$d^{s}$进行训练，损失函数为：</p>
 <p><img src="media/21-2.png" alt="21-2"></p>
 <p>$E^{v}$表示图片的encoder(比如用VGG-16提取图片的feature), $E^{s}$表示源句子的encoder(比如用RNN)，$d^{s}_{ng}$表示和源端图片不相关的描述。Decoder端用$i^{t}$,$d^{t}$进行训练，损失函数为标准的 cross-entropy loss（称作图片损失):</p>
@@ -971,101 +1038,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;UTCNN-a-Deep-Learning-Model-of-Stance-Classificationo
-    
-    </summary>
-    
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十四期</title>
-    <link href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/11/19/PaperWeekly-第十四期/</id>
-    <published>2016-11-19T17:58:02.000Z</published>
-    <updated>2016-11-19T18:34:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader，FAIR Memory Networks，Danqi’s Stanford Reader, Attention Sum Reader, Gated Attention Sum Reader, Attention Over Attention Reader, etc. 这些模型关联性很大，或多或少存在相似之处。本文给大家介绍一下Toyota Technological Institute at Chicago (TTIC)在Question Answering方面的相关工作，共有3篇paper：</p>
-<p>1、Who did What: A Large-Scale Person-Centered Cloze Dataset, 2016<br>2、Broad Context Language Modeling as Reading Comprehension, 2016<br>3、Emergent Logical Structure in Vector Representations of Neural Readers, 2016</p>
-<h1 id="Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset"><a href="#Who-did-What-A-Large-Scale-Person-Centered-Cloze-Dataset" class="headerlink" title="Who did What: A Large-Scale Person-Centered Cloze Dataset"></a><a href="https://tticnlp.github.io/who_did_what/" target="_blank" rel="external">Who did What: A Large-Scale Person-Centered Cloze Dataset</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Takeshi Onishi, Hai Wang, Mohit Bansal, Kevin Gimpel, David McAllester</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2016</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>文章构建了一个新的Question Answering dataset，”Who did What”。</p>
-<p>sample instance如下图所示。<br><img src="media/example.png" alt="example"></p>
-<p>问题的句子总是挖掉了一些named entities，然后给出在文中出现过的别的named entities作为选项。这一个dataset的难度要高于之前的CNN/DM dataset，可以作为创建新模型的参考数据集。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>构建此数据集的方法与CNN/DM不同，问题并不是context passge的一个summary。问题与context均来自Gigaword Corpus，他们是两篇非常相关的文章。</p>
-<p>具体来说，我们先找到一篇文章，作为question文章。然后提取出文中第一句话的named entities，删除其中的一个named entity作为将要被预测的答案。然后利用这一句question sentence，我们可以利用一些Information Retrieval系统从Gigaword Corpus找到一篇相关的文章作为passage。这篇文章与question文章不同，但是包含着与question sentence非常类似的信息。</p>
-<p>有了passage之后，我们再从passage中找出named entities作为candidate answers。</p>
-<p>为了使任务难度更大，我们用一些简单的baseline (First person in passage, etc) 将一些很容易做出的问题删掉，只留下比较困难的instances。这样构建的数据比CNN/DM会困难不少。</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>相信作者创建的新数据集会给Machine comprehension带来一些新的问题与挑战，是很有价值的资源。文章采用的baseline suppresion方法可以用比较小的代价加大问题的难度，值得参考。</p>
-<h1 id="Broad-Context-Language-Modeling-as-Reading-Comprehension"><a href="#Broad-Context-Language-Modeling-as-Reading-Comprehension" class="headerlink" title="Broad Context Language Modeling as Reading Comprehension"></a><a href="https://arxiv.org/abs/1610.08431" target="_blank" rel="external">Broad Context Language Modeling as Reading Comprehension</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Zewei Chu, Hai Wang, Kevin Gimpel, David McAllester</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>不久前发布的<a href="https://arxiv.org/abs/1606.06031" target="_blank" rel="external">LAMBADA dataset</a>中，作者尝试的各种baseline models都给出了比较差的结果。</p>
-<p>每一个LAMBADA instance如下图所示。</p>
-<p><img src="media/LAMBADA.png" alt="LAMBADA"></p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>在观察了LAMBADA dataset之后，我们认为可以利用Reading comprehension models来提升准确率，而不必使用传统的language model。</p>
-<p>由于state of the art reading comprehension models需要给出candidate answers，然后从中选出一个作为预测的答案，我们就将所有在context中出现过的单词都作为一个candidate answer。</p>
-<p>LAMBADA给出的训练集是一些小说的文本。为了使训练集与测试集的数据类型保持一致，我们构建了一个biased training set。具体的做法是，我们将training set划分成4-5句话的context，然后保证target word在context passage中出现，只保留这样的训练数据。我们在新构建的training set上训练各种attention based models,得到了比原作者好得多的测试结果。</p>
-<p><img src="media/zewei-results.png" alt="zewei-results"></p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>这篇文章中，作者利用了简单的方法和模型将LAMBADA dataset的准确率从7.3%提高到45.4%，非常简单有效。</p>
-<h1 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Hai Wang, Takeshi Onishi, Kevin Gimpel, David McAllester</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017 Submission</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文作者认为，当前的attention based models可以分为两类，aggregation readers(包括attentive readers和stanford readers)以及explicit reference readers(包括attention sum reader和gated attention sum reader)。</p>
-<p>这两种reader可以用如下的公式联系在一起。</p>
-<p><img src="media/formula1.png" alt="formula1"></p>
-<p>要满足上述等式，只需要满足下面的公式。</p>
-<p><img src="media/formula2.png" alt="formula2"></p>
-<p>也就是说，只有正确答案所在的hidden vector和question vector得到的inner product才能给出不为零的常数。以下实验结论支持了这一假设。</p>
-<p><img src="media/experiment.png" alt="experiment"></p>
-<p>由于CNN/DM在训练和测试中经过了anonymization，作者认为此inner product其实可以分为两部分，一部分与anonymized token ID有关，另一部分与ID无关。与ID相关的那一部分在inner product应该直接给出0的答案。如下述公式所示。</p>
-<p><img src="media/formula3.png" alt="formula3"></p>
-<p>本文的另一部分工作是在attention readers上加入一些linguistic features提升各个数据集的准确读，这里不仔细描述。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文是对于各个attetion based neural reader models很好的总结，它很好地连接了各个不同的model，说明了为何看似不同的model能够给出非常类似的结果。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问答系统是一类大的问题，也是目前NLP应用的研究热点之一。本文作者介绍了TTIC在QA研究中的一些成果，其中第二篇是本文作者近期的paper。感谢来自芝加哥大学的@ZeweiChu童鞋辛勤的劳动。</p>
-<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>清华大学计算机系自然语言处理实验室招聘博士后</p>
-<h2 id="将从事的研究方向"><a href="#将从事的研究方向" class="headerlink" title="将从事的研究方向"></a>将从事的研究方向</h2><p>围绕自然语言处理、语义分析、统计机器翻译或社会计算开展深入的研究工作。实验室具体信息见：<a href="http://nlp.csai.tsinghua.edu.cn" target="_blank" rel="external">http://nlp.csai.tsinghua.edu.cn</a></p>
-<h2 id="应聘条件"><a href="#应聘条件" class="headerlink" title="应聘条件"></a>应聘条件</h2><p>1、具有计算机科学技术或相关学科博士学位（博士毕业两年内）；<br>2、熟悉自然语言处理或机器学习的基本理论、模型与算法，曾在国内外重要学术刊物或重要国际会议（CCF A类）上发表（含已录用）高水平学术论文；<br>3、在句法分析、语义分析方面有较好研究基础者优先；<br>4、具有较强的编程能力及项目研发能力；<br>5、责任心强，具有较好的团队合作精神和创新意识，英语阅读及写作能力较强；<br>6、符合清华大学博士后招收条件。</p>
-<h2 id="工资待遇"><a href="#工资待遇" class="headerlink" title="工资待遇"></a>工资待遇</h2><p>享受清华大学博士后待遇及课题组津贴。全力支持申请国家自然科学基金、全国博士后管委会、北京市、清华大学的相关研究计划。</p>
-<h2 id="申请材料"><a href="#申请材料" class="headerlink" title="申请材料"></a>申请材料</h2><p>1、个人简历、学位证书及成绩单复印件；<br>2、最具代表性的论文2篇；<br>3、博士后期间研究设想（简明扼要）；<br>4、其它任何支持材料。</p>
-<h2 id="导师及联系方式"><a href="#导师及联系方式" class="headerlink" title="导师及联系方式"></a>导师及联系方式</h2><p>合作导师：孙茂松教授、刘知远助理教授<br>联系人：刘知远<br>电子邮件： liuzy@tsinghua.edu.cn</p>
-<p>有意者请将申请材料发至电子邮箱，请在邮件主题中注明姓名和“申请博士后”。材料通过初选者进行面谈（面谈时间另行通知），然后走清华大学博士后申请程序。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;PaperWeekly已经介绍过不少Question Answering的相关工作。主要有DeepMind Attentive Reader
-    
-    </summary>
-    
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cs.CL weekly 2016.11.07-2016.11.11</title>
-    <link href="http://rsarxiv.github.io/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/"/>
-    <id>http://rsarxiv.github.io/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/</id>
-    <published>2016-11-13T19:10:19.000Z</published>
-    <updated>2016-11-13T19:23:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering"><a href="#Learning-Recurrent-Span-Representations-for-Extractive-Question-Answering" class="headerlink" title="Learning Recurrent Span Representations for Extractive Question Answering"></a><a href="https://arxiv.org/pdf/1611.01436v1.pdf" target="_blank" rel="external">Learning Recurrent Span Representations for Extractive Question Answering</a></h2><p>【机器阅读】不同的阅读理解数据集产生答案的方式不同，有的是给定N个候选答案，有的是规定从原文中的entity中进行选择，有的是从原文中的任意token进行选择等等。本文所用的数据集是SQuAD，候选答案是原文中的任意字符串，难度较大，答案可能是一个词或者几个词都有可能。本文在前人研究的基础上提出了一种显式表示answer span的模型，取得了不错的效果。</p>
-<h2 id="Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences"><a href="#Answering-Complicated-Question-Intents-Expressed-in-Decomposed-Question-Sequences" class="headerlink" title="Answering Complicated Question Intents Expressed in Decomposed Question Sequences"></a><a href="https://arxiv.org/pdf/1611.01242v1.pdf" target="_blank" rel="external">Answering Complicated Question Intents Expressed in Decomposed Question Sequences</a></h2><p>【复杂问答】基于语义分析的问答系统最近流行于解决长、难问题，本文研究的内容是如何处理多个相互关联的简单问题？（即将复杂问题分解成多个相关简答问题）并给出了一个任务数据集。这个问题的一大难点在于相互关联的问题需要共指消解的工作。本文将单轮问答对话分解成多轮问题过程，上下文的处理非常重要。建议研究聊天机器人的童鞋来精读此文。</p>
-<h2 id="Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning"><a href="#Unsupervised-Pretraining-for-Sequence-to-Sequence-Learning" class="headerlink" title="Unsupervised Pretraining for Sequence to Sequence Learning"></a><a href="https://arxiv.org/pdf/1611.02683v1.pdf" target="_blank" rel="external">Unsupervised Pretraining for Sequence to Sequence Learning</a></h2><p>【seq2seq】【文本摘要】seq2seq是一种效果非常不错的框架，尤其是输入-输出数据非常充分的时候。但很多语言翻译问题并不能拿到非常多的训练数据，效果就会打折扣。本文针对这一问题，在原有seq2seq框架上提出了一种小改动。 encoder和decoder的初始值用训练好的语言模型来赋值，用可以获得的少量训练数据对模型进行训练和调优，本文方法的效果在机器翻译任务和abstractive式摘要任务中得到了验证。从本文中也可以看出，一个好的初值不仅可以使得训练更快，而且可以得到更好的结果。本文适合用seq2seq解决工程问题的童鞋读。</p>
-<h2 id="Sentence-Ordering-using-Recurrent-Neural-Networks"><a href="#Sentence-Ordering-using-Recurrent-Neural-Networks" class="headerlink" title="Sentence Ordering using Recurrent Neural Networks"></a><a href="https://arxiv.org/pdf/1611.02654v1.pdf" target="_blank" rel="external">Sentence Ordering using Recurrent Neural Networks</a></h2><p>【句子排序】【文本摘要】句子排序任务对于研究文档的连贯性非常有意义，而连贯性对于很多任务非常重要，比如文本摘要。本文在这个任务上用了流行的seq2seq方法，并且给出了一种可视化的句子表示效果。建议研究摘要的童鞋读。</p>
-<h2 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h2><p>【机器翻译】针对神经网络机器翻译（NMT）译文中经常出现的遗漏翻译（under-translation）和过度翻译（over-translation）问题，华为诺亚方舟实验室首次提出对覆盖率（coverage）进行建模。该方法的主要思想是为每个源端词维护一个coverage vector以表示该词被翻译（或覆盖）的程度。在解码过程中该覆盖率信息会传入attention model，以使它更关注于未被翻译的源端词，实验表示该方法能显著减少遗漏翻译和过度翻译错误数量，该工作发表在ACL 2016上。</p>
-<h2 id="Efficient-Summarization-with-Read-Again-and-Copy-Mechanism"><a href="#Efficient-Summarization-with-Read-Again-and-Copy-Mechanism" class="headerlink" title="Efficient Summarization with Read-Again and Copy Mechanism"></a><a href="https://arxiv.org/pdf/1611.03382.pdf" target="_blank" rel="external">Efficient Summarization with Read-Again and Copy Mechanism</a></h2><p>【文本摘要】本文适合研究文本摘要，尤其是用seq2seq来解决句子级摘要的童鞋进行研读。</p>
-<h1 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h1><h2 id="刘知远老师在将门的talk"><a href="#刘知远老师在将门的talk" class="headerlink" title="刘知远老师在将门的talk"></a><a href="http://nlp.csai.tsinghua.edu.cn/~lzy/index_cn.html" target="_blank" rel="external">刘知远老师在将门的talk</a></h2><p>对“表示学习和知识获取”感兴趣的童鞋可以看过来。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Learning-Recurrent-Span-Representations-for-Extractiv
     
     </summary>
     

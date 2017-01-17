@@ -65,6 +65,74 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-08-05T18:22:47.000Z"><a href="/2016/08/05/PaperWeekly-2016-08-05-第一期/">2016-08-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/05/PaperWeekly-2016-08-05-第一期/">PaperWeekly 2016.08.05 第一期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>学术界和工业界的需求和关注点不同，学术界更加注重未知领域的探索和方法的创新，研究的问题比较抽象，而工业界更加关注实际问题，方法不管是否创新，只要能够解决问题就是好方法，所面对的问题比paper中提炼出的数学问题更加具体，需要处理的细节更多。</p>
+<p>paper的水平也是良莠不齐，尤其是arxiv上刷出来的paper更是水平各异。但整体来说，读paper会带来很多的启发，可以跟踪学术界对某一类问题的研究进展，不断地更新技术。关注工业界技术的应用和产品的更迭，可以不断地提炼出新的需求、新的数学问题，从而促进学术地发展，两者其实关系非常紧密。</p>
+<p>本周开始，将paperweekly进行改版，从之前的每天一篇paper，改为每周一篇，内容包括多篇paper，这些paper可能相关、也可能不那么相关，但会说清每篇paper解决的问题和解决的方法，旨在拓宽视野，带来启发。本期是改版后的第一期，形式会一直不断地改进，希望工业界和学术界的朋友都能够有所收获。</p>
+<h1 id="DeepIntent-Learning-Attentions-for-Online-Advertising-with-Recurrent-Neural-Networks"><a href="#DeepIntent-Learning-Attentions-for-Online-Advertising-with-Recurrent-Neural-Networks" class="headerlink" title="DeepIntent: Learning Attentions for Online Advertising with Recurrent Neural Networks"></a><a href="http://www.kdd.org/kdd2016/papers/files/rfp0289-zhaiA.pdf" target="_blank" rel="external">DeepIntent: Learning Attentions for Online Advertising with Recurrent Neural Networks</a></h1><h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>在线广告、RNN、Attention</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>kdd2016</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何用deep learning模型挖掘click logs来理解用户Intent？</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1.png" alt="1"></p>
+<p>对于一个(query,ad)数据对，分别用LSTM encode，然后用下图的方法计算一个attention，得到最终的query和ad vector，构造loss function，取logs中(query,ad)作为正例d+，将ad替换为其他无关ad作为负例d-，训练的目标是让d+的score尽量大，让d-的score尽量小。</p>
+<p><img src="media/2.png" alt="2"></p>
+<h2 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h2><p>工业界有着学术界无法比拟的数据，大规模的真实数据是做deep learning的基础，大型商业搜索引擎积累了大量的ad click logs，利用好这些logs可以赚到更多的钱。attention机制在2015年开始逐渐成为一种流行趋势，借鉴于人类的注意力机制，让model将更多的注意力放在需要注意的地方，而不是每一个地方。本文并没有太多model上的创新，只是简单地将流行的model应用了自己研究的领域中，对工业界更有参考价值。</p>
+<h1 id="A-Neural-Knowledge-Language-Model"><a href="#A-Neural-Knowledge-Language-Model" class="headerlink" title="A Neural Knowledge Language Model"></a><a href="http://120.52.73.76/arxiv.org/pdf/1608.00318v1.pdf" target="_blank" rel="external">A Neural Knowledge Language Model</a></h1><h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>语言模型、知识图谱</p>
+<h2 id="来源-1"><a href="#来源-1" class="headerlink" title="来源"></a>来源</h2><p>arXiv cs.CL 2016.08.01</p>
+<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>在自然语言生成(NLG)问题中，出现次数非常少的entity该如何生成呢？</p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1-2.png" alt="1"></p>
+<p>四个步骤：</p>
+<p>1、Input Representation<br><img src="media/2-1.png" alt="2"></p>
+<p>输入由三个部分拼接而成，第一部分是上一个time step的fact表示，第二部分是上一个time step的词表中的词表示，第三部分是上一个time step的fact description表示，这里fact就是(subject,relation,object)，知识图谱中的一条事实，而后两个部分一定会有一个全为0，因为是二选一的关系，但为了保证每一次的输入都是等长向量，所以用拼接来做。得到输入之后，用LSTM来encode。</p>
+<p>2、Fact Prediction</p>
+<p>通过1的结果来预测当前word可能相关的fact，得到的结果是一个index，然后从topic knowledge中获得相应的表示，这里的knowledge embedding都是用transE训练好的，在整个模型训练中并不更新。</p>
+<p>3、Knowledge-Copy Switch</p>
+<p>根据1和2的结果，共同来预测当前要生成的词是从词表中获取的高频词还是从knowledge中获取的entity，典型的二分类问题。</p>
+<p>4、Word Generation</p>
+<p>根据3的结果，来生成当前time step的词。对于词表中的高频词，和之前的生成方法一致；对于fact description中的entity词，通过预测词的position来copy这个词。</p>
+<h2 id="评论-1"><a href="#评论-1" class="headerlink" title="评论"></a>评论</h2><p>语言模型是一个基本问题，传统的方法都有着一个尴尬之处是，会生成大量的<unk>出来，只要是涉及到NLU的问题，基本都会遇到这个问题。本文提供了一个很有启发性的方法，借助于知识图谱这种外部知识来帮助生成效果更好的话，单纯地靠model来提升效果是一件比较困难的事情，但增加一些外部信息进来则会带来更多的可能性。由于知识图谱的构建本身就是一件不易的事情，因此本文的学术意义远大于实际应用意义，为后续这种交叉式研究（知识图谱+深度学习）打开了一扇门，大家可以尝试更多的组合和可能。</unk></p>
+<h1 id="Neural-Sentence-Ordering"><a href="#Neural-Sentence-Ordering" class="headerlink" title="Neural Sentence Ordering"></a><a href="https://arxiv.org/pdf/1607.06952v1.pdf" target="_blank" rel="external">Neural Sentence Ordering</a></h1><h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>句子排序</p>
+<h2 id="来源-2"><a href="#来源-2" class="headerlink" title="来源"></a>来源</h2><p>arXiv cs.CL 2016.07.23</p>
+<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>给定乱序的N句话，如何将其按照逻辑排列好？（貌似是英语考试中的一种题型）</p>
+<h2 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h2><p><img src="media/1-3.png" alt="1"></p>
+<p>本文定义的问题是给定n句话，找出最优排序，将这个问题降维到二维，就是如何排列两句话的顺序。上图给出了model的思路，对两句话分别进行encode，得到两个向量表示，然后进行打分，分数表示当前顺序是正确顺序的概率。这里的encode部分，分别用了每句话中word embeddings的加权平均、RNN和CNN来表示。</p>
+<p>得到两两的排序之后，本文用beam search来得到整体最优的排序。</p>
+<h2 id="评论-2"><a href="#评论-2" class="headerlink" title="评论"></a>评论</h2><p>多文档摘要问题中通用的一种做法是从每篇文档中都提取出一句或几句重要的话，然后进行排序。在英语考试中，有一种题型是给定你打乱顺序的几段话，然后根据逻辑将其排序。本文在学术上没有什么新的东西，但本文在构建neural model的时候，用到的数据集却非常容易构建，这意味着你在工程中应用这个方法来解决排序问题是可行的方案，所以本文更加适合有句子排序应用需求的工程人员来精读。</p>
+<h1 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h1><p>计算机的会议非常多，各种level的都有，arXiv上每天都可以刷出一些paper，不同类型、不同level的paper适合不同需求的人来读，我觉得好东西的标准是适合而不是在某一个具体指标上达到最大，对你有用的东西才是适合你的好东西，有些特别牛逼的东西，有着极高学术价值的东西不见得适合工程人员来读，但也不应该是那种觉得学术上的东西离工程太远，没有什么具体用的态度，从各种各样的东西汲取养分，丰富和充实自己才是硬道理。读了一些paper，也该思考一些问题了，这里提出一些比较naive的问题，欢迎大家踊跃留言和讨论。</p>
+<p>1、<unk>这种out-of-vocabulary的问题是一个非常常见的问题，有哪些不错的思路可以来解决这个问题呢？</unk></p>
+<p>2、attention model几乎满大街都是，最早在机器翻译领域中开始用这种模型，虽然在其他nlp领域中都取得了不错的成绩，但目前的attention真的适合每一类具体问题吗？是不是有一点为了attention而attention的感觉？neural summarization和machine translation真的可以完全类比吗？或者说attention适合解决具有什么特征的问题呢？</p>
+<p>3、信息越多，model的效果一定会越好。现在外部信息非常丰富，但是如何融合到当前流行的model中来呢？如何将特定领域内构建的知识图谱完美地与特定任务中的model进行结合呢？以task-oriented bot为例，能够将客户的领域知识与bot response功能结合起来，做成一个更加高级的bot呢？</p>
+<p>这里，我抛个砖，引个玉，希望更多的人能够参与讨论和提出问题。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-02T18:54:22.000Z"><a href="/2016/08/02/旧幕落下，新幕升起/">2016-08-02</a></time>
       
       
@@ -2878,58 +2946,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-06-04T17:57:31.000Z"><a href="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/">2016-06-04</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/">A Neural Conversational Model #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>前面介绍过几篇seq2seq在机器翻译、文本蕴藏、自动文摘领域的应用，模型上每篇稍有不同，但基本的思想是接近的。本文继续分享一篇seq2seq在对话生成任务上的应用，是一篇工业界的论文，因此并没有什么理论创新。之所以选这一篇，是因为对话生成是一个非常热门的研究领域和应用领域，也可能是一个非常热门的创业领域，另外一个原因是为了充实seq2seq在各个领域中的应用这一主题。论文题目是<a href="http://cn.arxiv.org/pdf/1506.05869.pdf" target="_blank" rel="external">A Neural Conversational Model</a>，作者是来自Google Brain，毕业于UC Berkeley的<a href="http://www1.icsi.berkeley.edu/~vinyals/" target="_blank" rel="external">Oriol Vinyals</a>博士，论文最早于2015年7月放在arxiv上。</p>
-<p>模型部分不用多说，是最简单的seq2seq，架构图如下：</p>
-<img src="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/fig1.png" width="400" height="400">
-<p>本篇主要想分享的东西是结果以及一些思考。文中采用了两个数据集，IT Helpdesk Troubleshooting dataset和OpenSubtitles dataset，前者是一个关于IT类的FAQ数据集，后者是一个电影剧本的数据集。</p>
-<p>我们可以看一下训练后的模型生成的对话结果，这里只关注第二个数据集的结果：</p>
-<p>常识类问题：</p>
-<img src="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/fig2.png" width="400" height="400">
-<p>哲学类问题：</p>
-<img src="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/fig3.png" width="400" height="400">
-<p>道德类问题：</p>
-<img src="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/fig4.png" width="400" height="400">
-<p>为了对比，作者添加了一组<a href="www.cleverbot.com">cleverbot</a>(cleverbot是一个在线聊天机器人)的对比结果，如下：</p>
-<img src="/2016/06/04/A-Neural-Conversational-Model-PaperWeekly/fig5.png" width="400" height="400">
-<p>从对比结果中可以看得出，本文模型生成的结果比网上流行的在线聊天机器人要看起来更加“智能”一些，之前在知乎上回答过一个问题 <a href="https://www.zhihu.com/question/46558198/answer/102722213?group_id=720215813641998336" target="_blank" rel="external">三代聊天机器人在技术上的区别在哪里？</a>，我想cleverbot更接近于第二代，采用了对话检索，即对话是从一个很庞大的数据库中匹配检索来的，而本文的模型属于第三代，更加智能，给定输入生成输出，并不需要借助于人工特征。</p>
-<p>但bot这个领域确实还面临一些问题，就像文中作者所说，如何客观地评价生成的效果非常重要，尤其是对于一些没有标准答案的问题来说，根本无法衡量哪个结果更加好。其实不仅仅bot，在自动文摘、机器翻译等各种nlp任务中，评价都是一个很难的问题，自动评价只是从某种意义上解决了各个模型相互比较的一种需求，但在实际应用当中用户的评价更加重要，虽然有时并不是那么客观。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -2965,7 +2981,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>100</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>101</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3001,7 +3017,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>118</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>119</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

@@ -106,6 +106,7 @@
 <p><img src="media/22-11.jpg" alt=""></p>
 <p>以下为online MSCOCO testing server的结果：</p>
 <p><img src="media/22-12.jpg" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最近的Image Caption的方法，大多基于encoder-decoder框架，而且随着flickr30,mscoco等大型数据集的出现，为基于深度学习的方法提供了数据的支撑，并且为论文实验结果的比较提供了统一的标准。模型利用之前在机器翻译等任务中流行的Attention方法，来加强对图像有效区域的利用，使在decoder阶段，能够更有效地利用图像特定区域的特征[3]。模型利用图像的语义信息在decoder阶段指导单词序列的生成，避免了之前只在decoder开始阶段利用图像信息，从而导致了图像信息随着时间的增长逐渐丢失的问题[4][5]。模型为了更好的得到图像的高层语义信息，对原有的卷积神经网络进行改进，包括利用多分类和多实例学习的方法，更好的提取图像的高层语义信息，加强encoder阶段图像特征的提取[6][7]。随着增强学习，GAN等模型已经在文本生成等任务中取得了不错的效果，相信也能为Image Caption效果带来提升。</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
 <li>Vinyals O, Toshev A, Bengio S, et al. Show and tell: A neural image caption generator[J]. Computer Science, 2015:3156-3164.</li>
 <li>Fang H, Gupta S, Iandola F, et al. From captions to visual concepts and back[C]// IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2015:1473-1482.</li>

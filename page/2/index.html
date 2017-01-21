@@ -65,6 +65,61 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-08-16T23:53:50.000Z"><a href="/2016/08/16/PaperWeekly-第二期/">2016-08-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/16/PaperWeekly-第二期/">PaperWeekly 第二期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
+<p>人机对话系统通常包括上面的几个部分，task-oriented chatbot重点关注的是DST和NLG问题，其中DST是核心问题，没有太多关注这个比赛，但个人理解DST的作用类似于一张user conversation logs状态表，记录着用户当前的状态，以订机票为例，这张表的key是预先设定好的slots，比如目的地、出发地、出发时间等等，与系统背后的业务数据表中的attributes相关联，不断地从user conversation中抽取相应的values来填充这个表格，或者将其定义为一个多分类任务，不断地从对话中判断这句话中包括哪些slots和values（这里的values是多个分类结果），当状态表中的信息存在空白时，bot会根据空白的slots来提问并获取values，直到获取到足够的slots，给出用户suggestion，或者进行相应的服务。</p>
+<p>DST的问题解决之后，就是NLG的问题。传统的NLG采用rule-based或者template-based的方法，需要很多的手动设置，横向扩展性较差，维护成本高。最近流行的end-to-end方案很适合解决这个问题，给定用户的query，结合着当前DST，自动生成response，完全的data driven，不需要什么人工干预。</p>
+<p>生成response除了rule-based和end-to-end的方法之外，工业界中更加常见的是retrieve-based的方法，即从庞大的example base中进行retrieve，一方面避免了NLG生成response时常遇到的grammatical问题，另一方面当前的IR技术很容易集成到此类bot系统中，降低了门槛。</p>
+<p>本期的三篇paper中前两篇都是关于task-oriented bot的NLG问题，第三篇是在retrieve-based bot的每个细小环节中应用了deep learning技术，并且将外部的非结构化文本作为数据源，从中select responses。</p>
+<h1 id="Semantically-Conditioned-LSTM-based-Natural-Language-Generation-for-Spoken-Dialogue-Systems"><a href="#Semantically-Conditioned-LSTM-based-Natural-Language-Generation-for-Spoken-Dialogue-Systems" class="headerlink" title="Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems"></a><a href="http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP199.pdf" target="_blank" rel="external">Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems</a></h1><h2 id="关键词：NLG、bot、自定义LSTM"><a href="#关键词：NLG、bot、自定义LSTM" class="headerlink" title="关键词：NLG、bot、自定义LSTM"></a>关键词：NLG、bot、自定义LSTM</h2><h2 id="来源：EMNLP-2015"><a href="#来源：EMNLP-2015" class="headerlink" title="来源：EMNLP 2015"></a>来源：EMNLP 2015</h2><h2 id="问题：task-oriented-bot-NLG问题，给定了user-query和DST，如何生成一个更好的response？"><a href="#问题：task-oriented-bot-NLG问题，给定了user-query和DST，如何生成一个更好的response？" class="headerlink" title="问题：task-oriented bot NLG问题，给定了user query和DST，如何生成一个更好的response？"></a>问题：task-oriented bot NLG问题，给定了user query和DST，如何生成一个更好的response？</h2><h2 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h2><p>首先定义了两个概念delexicalisation和lexicalisation，前一个的意思是将句子中的slot-value用特定的token来替换，像是一种抽象，比如用food来代替对话中的各种食物名称；后一个的意思是将句子中的特定token还原回具体的value。</p>
+<p>本文最大的亮点在于将传统的LSTM重新定义，针对这个具体问题在LSTM cell部分中添加了一层，Dialogue Act Cell，通过gate机制来保留合适的信息，比如slot keywords，如下图：</p>
+<p><img src="media/2.png" alt="2"></p>
+<p>这一层cell更像是一个keyword detectors，整个NLG仍是采用encoder-decoder框架。</p>
+<h2 id="评论："><a href="#评论：" class="headerlink" title="评论："></a>评论：</h2><p>这层Dialogue Act Cell的目的是确保在decoding部分，不会遗漏任何一个slot，所以专门增加了一层cell来encoding act、slot-value信息，在生成时作为context vector。我觉得model的这个设计与attention机制有一点类似，只是attention更加地平滑，对每个word都有一个weight，而不是本文中的gate，非0即1。整体来说，自定义的cell是一个很有启发性的思路，针对具体问题的特点，修改现有的cell结构，也许会起到非常关键的作用。</p>
+<h1 id="Natural-Language-Generation-in-Dialogue-using-Lexicalized-and-Delexicalized-Data"><a href="#Natural-Language-Generation-in-Dialogue-using-Lexicalized-and-Delexicalized-Data" class="headerlink" title="Natural Language Generation in Dialogue using Lexicalized and Delexicalized Data"></a><a href="http://101.110.118.75/128.84.21.199/pdf/1606.03632v1.pdf" target="_blank" rel="external">Natural Language Generation in Dialogue using Lexicalized and Delexicalized Data</a></h1><h2 id="关键词：NLG、bot、自定义LSTM-1"><a href="#关键词：NLG、bot、自定义LSTM-1" class="headerlink" title="关键词：NLG、bot、自定义LSTM"></a>关键词：NLG、bot、自定义LSTM</h2><h2 id="来源：arXiv-2016-06-11-cs-CL"><a href="#来源：arXiv-2016-06-11-cs-CL" class="headerlink" title="来源：arXiv 2016.06.11 cs.CL"></a>来源：arXiv 2016.06.11 cs.CL</h2><h2 id="问题：task-oriented-bot-NLG问题，是第一篇的升级版。"><a href="#问题：task-oriented-bot-NLG问题，是第一篇的升级版。" class="headerlink" title="问题：task-oriented bot NLG问题，是第一篇的升级版。"></a>问题：task-oriented bot NLG问题，是第一篇的升级版。</h2><h2 id="方法：-1"><a href="#方法：-1" class="headerlink" title="方法："></a>方法：</h2><p>本文是针对第一篇文章进行的改进版，改进的地方在于不仅仅利用了delexicalisation进行训练，而且利用了lexicalisation数据，从而提高了准确率，基本的模型框架与第一篇文章类似，不同的在于输入的处理，就是dialogue act的表示，如下图：</p>
+<p><img src="media/3.png" alt="3"></p>
+<p>每一个act representation由两部分组成，一部分是act、slots的one-hot表示，与文章一类似的结构，另一部分是由value的每个word embedding组合而成。</p>
+<p>task-oriented bot NLG存在的一个更加现实的问题是data规模太小，cover的features太少，生成质量不高，本文针对这一问题，用相似domain的、大量的reviews或者其他相关数据作为corpus预训练出一个效果不错的LM，在decoding部分采用预训练好的LM模型权重进行NLG。</p>
+<h2 id="评论：-1"><a href="#评论：-1" class="headerlink" title="评论："></a>评论：</h2><p>本文中最值得借鉴的地方在于transfer learning，虽然DL效果很好，但实际应用中常常遇到data规模太小的问题，DL难以发挥作用，但如果从大量相似的domain data中学习一些表示模型，然后迁移到待解决的问题上，这是一件幸事，也就是人们常说的举一反三。混合大量的相似domain数据，会cover到更丰富的features，为DL提供了广阔的舞台。</p>
+<h1 id="DocChat-An-Information-Retrieval-Approach-for-Chatbot-Engines-Using-Unstructured-Documents"><a href="#DocChat-An-Information-Retrieval-Approach-for-Chatbot-Engines-Using-Unstructured-Documents" class="headerlink" title="DocChat: An Information Retrieval Approach for Chatbot Engines Using Unstructured Documents"></a><a href="http://aclweb.org/anthology/P16-1049" target="_blank" rel="external">DocChat: An Information Retrieval Approach for Chatbot Engines Using Unstructured Documents</a></h1><h2 id="关键词：Retrieve-Based-Bot，Unstructured-Documents"><a href="#关键词：Retrieve-Based-Bot，Unstructured-Documents" class="headerlink" title="关键词：Retrieve-Based Bot，Unstructured Documents"></a>关键词：Retrieve-Based Bot，Unstructured Documents</h2><h2 id="来源：ACL-2016"><a href="#来源：ACL-2016" class="headerlink" title="来源：ACL 2016"></a>来源：ACL 2016</h2><h2 id="问题：如何从大量非结构化文本中select出合适的response返回给用户？"><a href="#问题：如何从大量非结构化文本中select出合适的response返回给用户？" class="headerlink" title="问题：如何从大量非结构化文本中select出合适的response返回给用户？"></a>问题：如何从大量非结构化文本中select出合适的response返回给用户？</h2><h2 id="方法：-2"><a href="#方法：-2" class="headerlink" title="方法："></a>方法：</h2><p>本文研究的问题是给定大量的非结构化的documents和用户的query，从中选择并返回一个满意的response，典型的IR问题，作者将解决方案分为三步：</p>
+<p>1、response检索，根据query，从documents中找到合适的N句话作为候选。</p>
+<p>2、response排序，将候选中的utterances进行排序。</p>
+<p>本文大多数的工作在ranking model上，提出了7种level的features来对candidate进行打分，通过实验发现sentence-level feature最有区分度。</p>
+<p>3、response触发，并不是一定可以从documents找到合适的response，所以最后添加一个分类器，来判断最优的response是否合适，合适则输出，不合适则输出空。</p>
+<h2 id="评论：-2"><a href="#评论：-2" class="headerlink" title="评论："></a>评论：</h2><p>本文解决的问题思路比较简单，但中间用到了很多复杂的DL model，个人感觉有点杀鸡用牛刀。本文的思路更加适合informative式的query，并不适合娱乐和闲聊。但用外部知识，尤其是大量的非结构化的、可能还带有噪声的资源来提供response，是一个很不错的思路，弥补了只用training data或者很有限的examples存在的局限性问题，如果可以将两者进行结合，是一个非常好的实用方案。</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><p>引起大家的讨论是一件挺难的事情，所以这一期不再提出问题。之前有同学问如何读paper，这里简单分享一个简单的tip，后续的每一期可能都会分享一个tip。</p>
+<p>1、如果刚刚进入一个领域，建议读一些这个领域的survey或review类型的paper，这类型的paper基本上会将最近的方法归类进行总结，从一个较高的层次来解读每一篇paper的贡献和优缺点，对快速了解一个领域很有帮助。如果你关注的这个领域没有survey，那么恭喜你，说明你可能走到了前沿，用关键词去google一篇或者几篇相关的new paper，读Related Work那一节，相信你会有所收获。（注：这个方法是从清华大学刘知远博士那里学来的）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-16T16:06:36.000Z"><a href="/2016/08/16/pat-baby-and-bot/">2016-08-16</a></time>
       
       
@@ -2888,57 +2943,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-06-06T14:09:52.000Z"><a href="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/">2016-06-06</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/">A Hierarchical Neural Autoencoder for Paragraphs and Documents #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>本篇将会分享一篇用自动编码器(AutoEncoder)来做文档表示的文章，本文的结果会给自然语言生成、自动文摘等任务提供更多的帮助。本文作者是来自斯坦福大学的博士生<a href="http://web.stanford.edu/~jiweil/" target="_blank" rel="external">Jiwei Li</a>，简单看了下其简历，本科居然是北大生物系的，是一个跨界选手。本文的题目是<a href="http://arxiv.org/pdf/1506.01057.pdf" target="_blank" rel="external">A Hierarchical Neural Autoencoder for Paragraphs and Documents</a>，于2015年6月放在arxiv上。</p>
-<p>自动编码器之前接触的并不多，所以读了下Yoshua Bengio的deep learning一书补了一下知识。其实挺简单的，就是通过构造一个网络来学习x-&gt;x，最简单的原型就是h=f(x)，x=g(h)。如果输入和输出的x都是完全一样的话，那么就没什么意义了。一般来说，后一个x会与前一个x有一些“误差”或者说“噪声”。而且自动编码器关注的是中间层h，即对输入的表示。如果h的维度小于x的维度，学习这个表示其实就是一个降维的过程。自动编码器有很多种类型，这里就不一一赘述了。</p>
-<p>本文的贡献在于用分层LSTM模型来做自动编码器。模型分为三个，为递进关系。</p>
-<p>1、标准的LSTM，没有分层。模型结构看起来和最简单的seq2seq没有区别，只是说这里输入和输出一样。看下图：</p>
-<img src="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/fig1.png" width="600" height="600">
-<p>2、分层LSTM。这里分层的思想是用句子中的所有单词意思来表示这个句子，用文档中的所有句子意思来表示这个文档，一层接一层。看下图：</p>
-<img src="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/fig2.png" width="600" height="600">
-<p>在word这一层，用一个标准的LSTM作为encoder，每一句中的最后一个word的hidden state作为该句的state，在sentence这一层，文档中所有的句子构成一个序列，用一个标准的LSTM作为encoder，得到整个文档的表示。decoder部分同样是一个分层结构，初始state就是刚刚生成的文档表示向量，然后先decoder出sentence这一层的表示，然后再进入该sentence对其内部的word进行decoder。</p>
-<p>3、分层LSTM+Attention，这里的Attention机制和之前分享的是一样的，并且只在sentence这一层用了attention，参看下图：</p>
-<img src="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/fig3.png" width="600" height="600">
-<p>在decoder部分中生成句子表示时，会重点注意输入中与该句子相关的句子，也就是输入中与之相同的句子。这里注意力的权重与<a href="http://rsarxiv.github.io/2016/06/02/Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate-PaperWeekly/">Neural Machine Translation by Jointly Learning to Align and Translate </a>中的计算方法一样。</p>
-<p>在实验中验证了本文模型的有效性，并且经过对比验证了第三种模型的效果最好，其次是第二种，最差的第一种，也与预期的相符。</p>
-<p>昨天分享的也是一个分层模型，相比于单层的模型效果更好一些，这是否可以引起一些思考？本文也提到后面可以将本文的这种思想应用到自动文摘、对话系统、问答系统上。虽然seq2seq+attention已经在这几大领域中取得了不错的成绩，但如果改成分层模型呢，是不是可以取得更好的成绩？是不是可以将本文的input和output换作自动文摘中的input和target，然后用同样的方法来解决呢？我想应该是可以的。</p>
-<p>另外，因为我个人比较关注自动文摘技术，自动文摘中abstractive类的方法一般都会涉及到Paraphrase（转述，换句话说），本文的自动编码器模型正好很适合做Paraphrase，输入一句话或者一段话，得到一个带有“误差”的语句通顺的版本。一种最简单的思路，用传统的方法提取出文中最重要的几句话（extractive式的方法），用Paraphrase处理一下得到文本摘要。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -2974,7 +2978,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>102</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>103</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3010,7 +3014,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>120</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>121</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

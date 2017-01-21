@@ -5,10 +5,38 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-01-20T21:45:52.000Z</updated>
+  <updated>2017-01-21T18:46:53.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2017.01.16-2017.01.20)</title>
+    <link href="http://rsarxiv.github.io/2017/01/21/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-01-16-2017-01-20/"/>
+    <id>http://rsarxiv.github.io/2017/01/21/本周值得读-2017-01-16-2017-01-20/</id>
+    <published>2017-01-21T18:36:46.000Z</published>
+    <updated>2017-01-21T18:46:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Dialog Context Language Modeling with Recurrent Neural Networks"></a><a href="http://t.cn/RMRS1B8" target="_blank" rel="external">Dialog Context Language Modeling with Recurrent Neural Networks</a></h1><p>【对话语言模型】传统的基于上下文的（context dependent）语言模型多是先将前文中的信息做特征表达，例如用LDA、n-gram、或是RNN等方法做文本的特征提取，再将其加入到RNN语言模型中。这些方法比较适合于表达文档（document）的上下文信息，但他们并没有针对上下文中的交互做建模，因此并不一定适用于对话中（dialog）的上下文信息表达。本文针对如何有效表达对话中的交互做了探索，提出了两种基于RNN的上下文关联语言模型，在Switchboard Dialog Act Corpus (SwDA)上取得了一定的效果，并尝试对实验结果做了进一步分析。本文采用的数据集地址：<a href="http://compprag.christopherpotts.net/swda.html" target="_blank" rel="external">http://compprag.christopherpotts.net/swda.html</a><br>本文作者是CMU的bing liu博士，也是paperweekly的写作成员之一。</p>
+<h1 id="A-Copy-Augmented-Sequence-to-Sequence-Architecture-Gives-Good-Performance-on-Task-Oriented-Dialogue"><a href="#A-Copy-Augmented-Sequence-to-Sequence-Architecture-Gives-Good-Performance-on-Task-Oriented-Dialogue" class="headerlink" title="A Copy-Augmented Sequence-to-Sequence Architecture Gives Good Performance on Task-Oriented Dialogue"></a><a href="http://t.cn/RM8FWxc" target="_blank" rel="external">A Copy-Augmented Sequence-to-Sequence Architecture Gives Good Performance on Task-Oriented Dialogue</a></h1><p>【对话系统】【seq2seq】本文尝试了用seq2seq+attention+copynet的思路来做面向具体任务的chatbot，在所提指标上得到了不错的效果，所用数据集为DSTC2，工作来自stanford Christopher D. Manning 教授组，建议精读。 </p>
+<h1 id="Deep-Memory-Networks-for-Attitude-Identification"><a href="#Deep-Memory-Networks-for-Attitude-Identification" class="headerlink" title="Deep Memory Networks for Attitude Identification"></a><a href="http://t.cn/RM8jw6h" target="_blank" rel="external">Deep Memory Networks for Attitude Identification</a></h1><p>【观点挖掘】通过算法分析一句话中人对某一个实体的态度是一件不容易的事情，现在的方法也比较多，本文的亮点在于用Memory Network模型来做这件事情。对观点挖掘、情感分析感兴趣的童鞋可以深入读一下。 </p>
+<h1 id="Neural-Models-for-Sequence-Chunking"><a href="#Neural-Models-for-Sequence-Chunking" class="headerlink" title="Neural Models for Sequence Chunking"></a><a href="http://t.cn/RM8TgRD" target="_blank" rel="external">Neural Models for Sequence Chunking</a></h1><p>【Chunking】很多的NLP任务，比如浅层分析、slot filling、ner等等都可以当成是序列标注任务，用经典的概率图模型、RNN模型及其变种和两者的混合模型来处理，本文提出了用seq2seq+pointer的方法来解决这一经典问题，并且取得了不错的效果。关注序列标注的童鞋可以精读此文。本文工作来自IBM，被AAAI2017 accepted。</p>
+<h1 id="DyNet-The-Dynamic-Neural-Network-Toolkit"><a href="#DyNet-The-Dynamic-Neural-Network-Toolkit" class="headerlink" title="DyNet: The Dynamic Neural Network Toolkit"></a><a href="http://t.cn/RM8s6aK" target="_blank" rel="external">DyNet: The Dynamic Neural Network Toolkit</a></h1><p>【深度学习框架】 这个框架是由CMU推出的一款深度学习框架，最大的特点是动态性，尤其擅长解决自然语言处理相关问题，c++实现，python封装，代码地址：<a href="https://github.com/clab/dynet" target="_blank" rel="external">https://github.com/clab/dynet</a></p>
+<h1 id="LightNet-A-Versatile-Standalone-Matlab-based-Environment-for-Deep-Learning"><a href="#LightNet-A-Versatile-Standalone-Matlab-based-Environment-for-Deep-Learning" class="headerlink" title="LightNet: A Versatile, Standalone Matlab-based Environment for Deep Learning"></a><a href="https://arxiv.org/abs/1605.02766" target="_blank" rel="external">LightNet: A Versatile, Standalone Matlab-based Environment for Deep Learning</a></h1><p>【深度学习框架】推荐一个基于matlab的深度学习框架，包括了常见的CNN、RNN模型和各种模块以及增强学习，支持cpu和gpu两种训练模式，简单易用，方便灵活。感兴趣的童鞋可以看过来，fork一下。代码地址：<a href="https://github.com/yechengxi/LightNet" target="_blank" rel="external">https://github.com/yechengxi/LightNet</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks&quot;&gt;&lt;a href=&quot;#Dialog-Context-Language-Modeling-with-Recurrent-Neural-Ne
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第二十二期</title>
@@ -68,9 +96,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -114,9 +142,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -146,9 +174,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -252,9 +280,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -283,9 +311,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -364,9 +392,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -465,9 +493,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -496,9 +524,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -564,9 +592,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -597,9 +625,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -675,9 +703,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -704,9 +732,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -798,9 +826,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -834,9 +862,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -935,9 +963,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -973,9 +1001,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   
@@ -1004,94 +1032,9 @@
     </summary>
     
     
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十五期</title>
-    <link href="http://rsarxiv.github.io/2016/11/26/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%BA%94%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/11/26/PaperWeekly-第十五期/</id>
-    <published>2016-11-26T18:37:08.000Z</published>
-    <updated>2016-11-26T18:37:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术的研究和讨论达到了顶峰。Attention模型在NLP中最早的使用正是在NMT领域出现的，包括横扫很多领域的seq2seq+attention解决方案，都是在NMT模型的基础上进行相应的一些小改动而成的。所以，本期PaperWeekly带大家看一看最近两年Attention模型在NMT领域中的研究进展，本文包括以下paper：</p>
-<p>1、Neural Machine Translation by Jointly Learning to Align and Translate, 2015<br>2、Effective approaches to attention-based neural machine translation, 2015<br>3、Modeling Coverage for Neural Machine Translation,  2016<br>4、Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation, 2016<br>5、Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation, 2016</p>
-<h1 id="Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate"><a href="#Neural-Machine-Translation-by-Jointly-Learning-to-Align-and-Translate" class="headerlink" title="Neural Machine Translation by Jointly Learning to Align and Translate"></a><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="external">Neural Machine Translation by Jointly Learning to Align and Translate</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Dzmitry Bahdanau, KyungHyun Cho and Yoshua Bengio</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Jacobs University Bremen, Germany<br><br>Universite ́ de Montre ́al</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, attention</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2015</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>这篇论文首次提出在NMT中使用attention的机制，可以使模型自动确定源句子中和目标词语最相关的部分，相比于基本的encoder-decoder方法提高了翻译效果。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>该论文使用的基本模型是一个双向RNN的encoder-decoder的结构。在这篇论文之前，encoder部分都是直接把输入句子encode成一个固定长度的上下文向量c，然后decoder再根据该向量来产生翻译。但是由于句子长度不定，这种做法对长句子的效果不理想。<br><img src="media/model.png" alt="mode"></p>
-<p>上图是这篇论文提出的模型结构，作者首次提出了在decoder中加入一种attention的机制。直观上理解，就是decoder可以决定更多地注意原句子中的某些部分，从而不必把原句子中的所有信息都encode成一个固定的向量。具体来讲，上下文向量ci由下式计算得出：<br><img src="media/ci.png" alt="ci"></p>
-<p>其中，<br><img src="media/aij.png" alt="aij"></p>
-<p>其中，<br><img src="media/eij.png" alt="eij"></p>
-<p>上式中的a便是alignment model，可以用来估计位置j附近的输入和位置i的输出之间的匹配程度。本论文中的alignment model是一个前馈神经网络，它和模型中的其它部分一起进行训练。</p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、英法翻译数据集 <a href="http://www.statmt.org/wmt14/translation-task.html" target="_blank" rel="external">ACL WMT ’14</a></p>
-<p>2、一个基本的RNN encoder-decoder模型的实现 <a href="https://github.com/lisa-groundhog/GroundHog." target="_blank" rel="external">GroundHog</a></p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、2013年，一个类似的aligning的方法被提出用于手写体生成。论文：Graves(2013) Generating sequences with recurrent neural networks<br>2、2014年，seq2seq的神经网络模型用于机器翻译。论文：Sutskever(2014) Sequence to sequence learning with neural networks</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本论文创新性地在NMT中提出了attention的机制，可以使模型在每一步注意到源句子中不同的部分，从而提高了NMT的效果，该效果的提升对于长句子的翻译尤其明显。</p>
-<h1 id="Effective-approaches-to-attention-based-neural-machine-translation"><a href="#Effective-approaches-to-attention-based-neural-machine-translation" class="headerlink" title="Effective approaches to attention-based neural machine translation"></a><a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="external">Effective approaches to attention-based neural machine translation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Minh-Thang Luong, Hieu Pham, Christopher D. Manning</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Computer Science Department, Stanford University</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>NMT;Global Attention;Local Attention</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>EMNLP 2015</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>Attention机制引入极大提升了NMT的翻译质量，但对于Attention实现架构的讨论还很少，尤其是全局Attention的计算效率问题。本文就是讨论各种优化策略，包括Global Attention, Local Attention，Input-feeding方法等。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>Global Attenion，生成上下文向量c_t时，考虑原文编码过程中的所有隐状态。<br>  <img src="media/1GlobalAttention.png" alt="1GlobalAttention"></p>
-<p>Local Attention，对于每个正在生成的译词，预测一个原文对齐的位置，只考虑该位置前后一个窗口范围内的原文编码隐状态。  </p>
-<p><img src="media/2LocalAttention.png" alt="2LocalAttention"></p>
-<p>Input-feeding，用一个额外的向量，来记住哪些词是已经翻译过的，即考虑了coverage的问题。  </p>
-<p><img src="media/3Input-Feeding.png" alt="3Input-Feeding"></p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、训练数据：WMT14 (4.5M句对，116M 英文词，110M德文词)<br>2、开发集：newstest2013 (3000句)<br>3、测试集：newstest2014(2737句)和newstest2015(2169句)<br>4、代码和模型共享在：<a href="http://nlp.stanford.edu/projects/nmt/" target="_blank" rel="external">http://nlp.stanford.edu/projects/nmt/</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>主要是follow了(Bahdanau et al., 2015; Jean et al., 2015)的工作，对Attention的机制进行了探讨和改进。  </p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>English-German的实验结果，较不用attention的方法提升了5个多点BLEU，充分证明了attention的有效性。<br>实验结果的表格详细列出了各种改进方法带来的收益，跟进者不妨仔细看看（以及第5节的分析），可以很快了解各种折腾的方向。</p>
-<p><img src="media/4ExperimentResult.png" alt="4ExperimentResult"></p>
-<h2 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>微博 @MyGod9，语智云帆创始人，机器翻译老兵，NMT追随者，weiyongpeng@lingosail.com </p>
-<h1 id="Modeling-Coverage-for-Neural-Machine-Translation"><a href="#Modeling-Coverage-for-Neural-Machine-Translation" class="headerlink" title="Modeling Coverage for Neural Machine Translation"></a><a href="https://arxiv.org/pdf/1601.04811v6.pdf" target="_blank" rel="external">Modeling Coverage for Neural Machine Translation</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Zhaopeng Tu, Zhengdong Lu, Yang Liu, Xiaohua Liu, Hang Li</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>诺亚方舟实验室，清华大学</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>NMT</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ACL2016</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>解决经典神经机器翻译模型中存在的over-translation（过度翻译）和under-translation(翻译不足）的问题。</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>在传统NMT模型中，加入统计机器翻译策略中的coverage方法，来追踪、判断原始句子是否被翻译，如下图、公式所示。<br><img src="media/pic1.png" alt="pi"><br><img src="media/pic2.png" alt="pi"><br><img src="media/pic3.png" alt="pi"><br>其中，C为新引入的coverage向量。</p>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>前序文章：Neural Machine Translation by Jointly Learning to Align and Translate</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>该文是基于Neural Machine Translation by Jointly Learning to Align and Translate之上的工作，引入了统计机器翻译中的Coverage方法来尝试避免NMT中的一些问题。根据文章的试验结果，这种方法能够提升翻译效果。由于写作此文时笔者未作实验，因此实际效果有待进一步衡量。</p>
-<h1 id="Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation"><a href="#Agreement-based-Joint-Training-for-Bidirectional-Attention-based-Neural-Machine-Translation" class="headerlink" title="Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation"></a><a href="https://arxiv.org/abs/1512.04650" target="_blank" rel="external">Agreement-based Joint Training for Bidirectional Attention-based Neural Machine Translation</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Yong Cheng, Shiqi Shen, Zhongjun He, Wei He, Hua Wu, Maosong Sun, Yang Liu</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Tsinghua University</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Bidirectional NMT; Attention</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>IJCAI 2016</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>由于自然语言错综复杂的结构，单向的注意力模型只能引入注意力机制的部分regulization。文章提出了联合训练双向的注意力模型，尽可能使注意力在两个方向上保持一致。</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>模型的中心思想就是对于相同的training data，使source-to-target和target-to-source两个模型在alignment matrices上保持一致。这样能够去掉一些注意力噪声，使注意力更加集中、准确。更确切地说，作者引入了一个新的目标函数：</p>
-<p><img src="media/1.png" alt="1"></p>
-<p>其中<br><img src="media/2.png" alt="2">表示source-to-target基于注意力的翻译模型，而<img src="media/3.png" alt="3">表示target-to-source的模型。<img src="media/4.png" alt="4">表示对于句子s source-to-target的alignment matrix，而<img src="media/5.png" alt="5">表示target-to-source的。<img src="media/6.png" alt="6">是损失函数，可以衡量两个alignment matrix之间的disagree程度。</p>
-<p>对于<img src="media/6.png" alt="6">,有几种不同的定义方法：<br>1、Square of addition(SOA)<br><img src="media/7.png" alt="7"></p>
-<p>2、Square of subtraction(SOS)<br><img src="media/9.png" alt="9"></p>
-<p>3、Multiplication(MUL)<br><img src="media/10.png" alt="10"></p>
-<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>作者文中说的是bidirectional translation的alignment matrices要一致；还有另外一篇文章“Agreement on Target-bidirectional Neural Machine Translation”是说decoding的时候可以正向或者反向产生目标句子，把这二者进行联合训练。另外，最近也有很多关于bidirectional training或者类似思想的文章，比如“Dual Learning for Machine Translation. Computation and Language”将reinforcement的概念引入了bidirectional training当中，“Neural Machine Translation with Reconstruction” 希望能从target hidden state恢复出source sentence</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>这篇文章胜在idea,很巧妙地想到了让正反向的注意力一致来改进attention。</p>
-<h1 id="Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation"><a href="#Improving-Attention-Modeling-with-Implicit-Distortion-and-Fertility-for-Machine-Translation" class="headerlink" title="Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation"></a><a href="https://arxiv.org/abs/1601.03317" target="_blank" rel="external">Improving Attention Modeling with Implicit Distortion and Fertility for Machine Translation</a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Shi Feng, Shujie Liu, Nan Yang, Mu Li, Ming Zhou, Kenny Q.Zhu</p>
-<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Shanghai Jiao Tong University, Microsoft Research</p>
-<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>NMT, Attention, Fertility, Distortion</p>
-<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>COLING 2016</p>
-<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>使用attention机制解决NMT中调序和繁衍率的问题。</p>
-<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>模型非常简单，即在attention机制中将前一时刻的context vector c作为输入传入当前时刻attention中（命名为RecAtt）。如图：</p>
-<p><img src="media/coling.jpg" alt="coling"></p>
-<p>通过这样的RecAtt机制，attention部分的网络相当于记忆了之前时刻的context。</p>
-<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>ACL 2016李航老师组的工作 Modeling Coverage for Neural Machine Translation利用了attention机制来解决了NMT中“欠翻译”和“过翻译”的问题。</p>
-<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>该文章的创新之处在于提出将attention计算得到的context vector c作为attention的输入，这样就是的attention机制带有一种recurrent的意味。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本期PaperWeekly精选了5篇Attention模型在NMT任务上的研究工作，Attention模型的发展不仅仅推动着NMT的进步，同时也可以借鉴于其他的任务中，比如QA，比如chatbot。感谢@MyGod9 @雨神 @susie-nmt @李争 @magic282 五位童鞋的辛勤付出。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;NMT是热门研究领域之一，尤其是Google和百度都推出了自己的NMT翻译系统，在工业界、学术界和翻译界都引起了轩然大波，一时间对NMT技术
-    
-    </summary>
-    
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   

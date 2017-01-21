@@ -3,16 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Character-Aware Neural Language Models #PaperWeekly# | PaperWeekly</title>
+  <title>本周值得读(2017.01.16-2017.01.20) | PaperWeekly</title>
   
   
-  <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
-本篇分享的文章是Character-Aware Neural Language Models，作者是Yoon Kim、Alexander M. Rush。两位是HarvardNLP组的学生和老师，前者贡献了一些有意义的torch代码，比如seq2seq+at">
+  <meta name="description" content="Dialog Context Language Modeling with Recurrent Neural Networks【对话语言模型】传统的基于上下文的（context dependent）语言模型多是先将前文中的信息做特征表达，例如用LDA、n-gram、或是RNN等方法做文本的特征提取，">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Character-Aware Neural Language Models #PaperWeekly#"/>
+  <meta property="og:title" content="本周值得读(2017.01.16-2017.01.20)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -67,34 +66,22 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-05-23T14:10:32.000Z"><a href="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/">2016-05-23</a></time>
+        <time datetime="2017-01-21T18:36:46.000Z"><a href="/2017/01/21/本周值得读-2017-01-16-2017-01-20/">2017-01-21</a></time>
       
       
   
-    <h1 class="title">Character-Aware Neural Language Models #PaperWeekly#</h1>
+    <h1 class="title">本周值得读(2017.01.16-2017.01.20)</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>本篇分享的文章是<a href="http://cn.arxiv.org/pdf/1508.06615.pdf" target="_blank" rel="external">Character-Aware Neural Language Models</a>，作者是Yoon Kim、Alexander M. Rush。两位是HarvardNLP组的学生和老师，前者贡献了一些有意义的torch代码，比如<a href="https://github.com/harvardnlp/seq2seq-attn" target="_blank" rel="external">seq2seq+attn</a>，后者第一次将seq2seq的模型应用到了文本摘要。</p>
-<p>卷积神经网络之前常常用在计算机视觉领域，用来在图像中寻找features，前几年被研究者应用到了nlp任务中，在文本分类等任务中取得了不错的效果。传统的word embedding对低频词并没有太好的效果，而本文将char embedding作为CNN的输入，用CNN的输出经过一层highway层处理表示word embedding，然后作为RNNLM的输入，避免了这个问题。而且之前的神经网络语言模型中绝大多数需要优化的参数是word embedding，而本文的模型则会将优化参数减少非常多。</p>
-<p>本文模型的架构图如下：</p>
-<img src="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/arch.png" width="600" height="600">
-<p>可以分为三层，一层是charCNN，通过构建一个char embedding矩阵，将word表示成matrix，和图像类似，输入到CNN模型中提取经过filter层和max pooling层得到一个输出表示，然后将该输出放到Highway Network中，得到一个处理后的效果更好的word embedding作为输出，在第三层中是一个典型的RNN模型，后面的处理与传统方法一样了。</p>
-<p>这里需要学习的参数中char embedding规模非常小，相对比之前的模型有非常明显的优势。这里需要说明的一点是HighWay Network，在Rupesh Kumar Srivastava的paper <a href="http://cn.arxiv.org/pdf/1507.06228.pdf" target="_blank" rel="external">Training Very Deep Networks</a>被提出，受lstm解决rnn梯度衰减问题的思路启发，用来解决训练very deep networks，因为模型越深效果越好，但越难训练。本文的HighWay层如下：</p>
-<img src="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/fig1.png" width="400" height="400">
-<p>其中</p>
-<img src="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/fig2.png" width="200" height="200">
-<p>t被称为transform gate，1-t被称为carry gate。</p>
-<p>最终的实验证明，使用HighWay层效果比使用普通的MLP或者不使用该层效果更好。</p>
-<img src="/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/result.png" width="500" height="500">
-<p>本文通过将传统的word embedding降级到char level，避免了大规模的embedding计算和低频词的问题，通过Highway network技术构建更深的网络，得到了不错的结果。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+        <h1 id="Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Dialog Context Language Modeling with Recurrent Neural Networks"></a><a href="http://t.cn/RMRS1B8" target="_blank" rel="external">Dialog Context Language Modeling with Recurrent Neural Networks</a></h1><p>【对话语言模型】传统的基于上下文的（context dependent）语言模型多是先将前文中的信息做特征表达，例如用LDA、n-gram、或是RNN等方法做文本的特征提取，再将其加入到RNN语言模型中。这些方法比较适合于表达文档（document）的上下文信息，但他们并没有针对上下文中的交互做建模，因此并不一定适用于对话中（dialog）的上下文信息表达。本文针对如何有效表达对话中的交互做了探索，提出了两种基于RNN的上下文关联语言模型，在Switchboard Dialog Act Corpus (SwDA)上取得了一定的效果，并尝试对实验结果做了进一步分析。本文采用的数据集地址：<a href="http://compprag.christopherpotts.net/swda.html" target="_blank" rel="external">http://compprag.christopherpotts.net/swda.html</a><br>本文作者是CMU的bing liu博士，也是paperweekly的写作成员之一。</p>
+<h1 id="A-Copy-Augmented-Sequence-to-Sequence-Architecture-Gives-Good-Performance-on-Task-Oriented-Dialogue"><a href="#A-Copy-Augmented-Sequence-to-Sequence-Architecture-Gives-Good-Performance-on-Task-Oriented-Dialogue" class="headerlink" title="A Copy-Augmented Sequence-to-Sequence Architecture Gives Good Performance on Task-Oriented Dialogue"></a><a href="http://t.cn/RM8FWxc" target="_blank" rel="external">A Copy-Augmented Sequence-to-Sequence Architecture Gives Good Performance on Task-Oriented Dialogue</a></h1><p>【对话系统】【seq2seq】本文尝试了用seq2seq+attention+copynet的思路来做面向具体任务的chatbot，在所提指标上得到了不错的效果，所用数据集为DSTC2，工作来自stanford Christopher D. Manning 教授组，建议精读。 </p>
+<h1 id="Deep-Memory-Networks-for-Attitude-Identification"><a href="#Deep-Memory-Networks-for-Attitude-Identification" class="headerlink" title="Deep Memory Networks for Attitude Identification"></a><a href="http://t.cn/RM8jw6h" target="_blank" rel="external">Deep Memory Networks for Attitude Identification</a></h1><p>【观点挖掘】通过算法分析一句话中人对某一个实体的态度是一件不容易的事情，现在的方法也比较多，本文的亮点在于用Memory Network模型来做这件事情。对观点挖掘、情感分析感兴趣的童鞋可以深入读一下。 </p>
+<h1 id="Neural-Models-for-Sequence-Chunking"><a href="#Neural-Models-for-Sequence-Chunking" class="headerlink" title="Neural Models for Sequence Chunking"></a><a href="http://t.cn/RM8TgRD" target="_blank" rel="external">Neural Models for Sequence Chunking</a></h1><p>【Chunking】很多的NLP任务，比如浅层分析、slot filling、ner等等都可以当成是序列标注任务，用经典的概率图模型、RNN模型及其变种和两者的混合模型来处理，本文提出了用seq2seq+pointer的方法来解决这一经典问题，并且取得了不错的效果。关注序列标注的童鞋可以精读此文。本文工作来自IBM，被AAAI2017 accepted。</p>
+<h1 id="DyNet-The-Dynamic-Neural-Network-Toolkit"><a href="#DyNet-The-Dynamic-Neural-Network-Toolkit" class="headerlink" title="DyNet: The Dynamic Neural Network Toolkit"></a><a href="http://t.cn/RM8s6aK" target="_blank" rel="external">DyNet: The Dynamic Neural Network Toolkit</a></h1><p>【深度学习框架】 这个框架是由CMU推出的一款深度学习框架，最大的特点是动态性，尤其擅长解决自然语言处理相关问题，c++实现，python封装，代码地址：<a href="https://github.com/clab/dynet" target="_blank" rel="external">https://github.com/clab/dynet</a></p>
+<h1 id="LightNet-A-Versatile-Standalone-Matlab-based-Environment-for-Deep-Learning"><a href="#LightNet-A-Versatile-Standalone-Matlab-based-Environment-for-Deep-Learning" class="headerlink" title="LightNet: A Versatile, Standalone Matlab-based Environment for Deep Learning"></a><a href="https://arxiv.org/abs/1605.02766" target="_blank" rel="external">LightNet: A Versatile, Standalone Matlab-based Environment for Deep Learning</a></h1><p>【深度学习框架】推荐一个基于matlab的深度学习框架，包括了常见的CNN、RNN模型和各种模块以及增强学习，支持cpu和gpu两种训练模式，简单易用，方便灵活。感兴趣的童鞋可以看过来，fork一下。代码地址：<a href="https://github.com/yechengxi/LightNet" target="_blank" rel="external">https://github.com/yechengxi/LightNet</a></p>
 
       
     </div>
@@ -104,7 +91,7 @@
         
   
   <div class="tags">
-    <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/nlp/">nlp</a>, <a href="/tags/language-model/">language model</a>
+    <a href="/tags/PaperWeekly/">PaperWeekly</a>, <a href="/tags/nlp/">nlp</a>
   </div>
 
         
@@ -147,7 +134,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/01/21/本周值得读-2017-01-16-2017-01-20/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

@@ -65,6 +65,73 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-02-03T05:37:34.000Z"><a href="/2017/02/02/PaperWeekly-第二十三期/">2017-02-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/02/02/PaperWeekly-第二十三期/">PaperWeekly 第二十三期</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p> 什么是艺术？<br> 机器的作品能否叫艺术？<br> 机器能否取代艺术家？<br> 这些问题，相信不同的人，会有不同的答案。很多人认为机器生成的作品只是简单的模仿人类，没有创造性可言，但是人类艺术家，不也是从模仿和学习开始的吗？本文是一篇机器诗歌生成的综述文章，希望能增进大家对这个领域的了解。</p>
+<h1 id="基于传统方法的诗歌生成"><a href="#基于传统方法的诗歌生成" class="headerlink" title="基于传统方法的诗歌生成"></a>基于传统方法的诗歌生成</h1><p>  诗歌是人类文学皇冠上的明珠。我国自《诗经》以后，两千年来的诗篇灿若繁星。让机器自动生成诗歌，一直是人工智能领域一个有挑战性的工作。机器诗歌生成的工作，始于20世纪70年代。传统的诗歌生成方法，主要有以下几种：</p>
+<ul>
+<li><strong>Word Salada（词语沙拉）</strong>：最早期的诗歌生成模型，只是简单将词语进行随机组合和堆砌而不考虑语义语法要求。</li>
+<li><strong>基于模板和模式的方法</strong>：基于模板的方法类似于完形填空，将一首现有诗歌挖去一些词，作为模板，再用一些其他词进行替换，产生新的诗歌。这种方法生成的诗歌在语法上有所提升，但是灵活性太差。因此后来出现了基于模式的方法，通过对每个位置词的词性，韵律平仄进行限制，来进行诗歌生成。</li>
+<li><strong>基于遗传算法的方法</strong>：周昌乐等[1]提出并应用到宋词生成上。这里将诗歌生成看成状态空间搜索问题。先从随机诗句开始，然后借助人工定义的诗句评估函数，不断进行评估，进化的迭代，最终得到诗歌。这种方法在单句上有较好的结果，但是句子之间缺乏语义连贯性。</li>
+<li><strong>基于摘要生成的方法</strong>：严睿等[2]将诗歌生成看成给定写作意图的摘要生成问题，同时加入了诗歌相关的一些优化约束。</li>
+<li><strong>基于统计机器翻译的方法</strong>：MSRA的何晶和周明[3]将诗歌生成看成一个机器翻译问题，将上一句看成源语言，下一句看成目标语言，用统计机器翻译模型进行翻译，并加上平仄押韵等约束，得到下一句。通过不断重复这个过程，得到一首完整的诗歌。</li>
+</ul>
+<h1 id="基于深度学习技术的诗歌生成"><a href="#基于深度学习技术的诗歌生成" class="headerlink" title="基于深度学习技术的诗歌生成"></a>基于深度学习技术的诗歌生成</h1><p> 传统方法非常依赖于诗词领域的专业知识，需要专家设计大量的人工规则，对生成诗词的格律和质量进行约束。同时迁移能力也比较差，难以直接应用到其他文体（唐诗，宋词等）和语言（英文，日文等）。随着深度学习技术的发展，诗歌生成的研究进入了一个新的阶段。</p>
+<h2 id="RNNLM"><a href="#RNNLM" class="headerlink" title="RNNLM"></a>RNNLM</h2><p>基于RNN语言模型[4]的方法，将诗歌的整体内容，作为训练语料送给RNN语言模型进行训练。训练完成后，先给定一些初始内容，然后就可以按照语言模型输出的概率分布进行采样得到下一个词，不断重复这个过程就产生完整的诗歌。Karpathy有一篇文章，讲的很详细：<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a></p>
+<h2 id="Chinese-Poetry-Generation-with-Recurrent-Neural-Networks"><a href="#Chinese-Poetry-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Chinese Poetry Generation with Recurrent Neural Networks"></a>Chinese Poetry Generation with Recurrent Neural Networks</h2><p> RNNPG模型[5]，首先由用户给定的关键词生成第一句，然后由第一句话生成第二句话，由一，二句话生成第三句话，重复这个过程，直到诗歌生成完成。模型的模型由三部分组成：<br><strong>Convolutional Sentence Model（CSM）</strong>：CNN模型，用于获取一句话的向量表示。<br><strong>Recurrent Context Model(RCM)</strong>：句子级别的RNN，根据历史生成句子的向量，输出下一个要生成句子的Context向量。<br><strong>Recurrent Generation Model(RGM)</strong>：字符级别RNN，根据RCM输出的Context向量和该句之前已经生成的字符，输出下一个字符的概率分布。解码的时候根据RGM模型输出的概率和语言模型概率加权以后，生成下一句诗歌，由人工规则保证押韵。<br>模型结构如下图：</p>
+<p><img src="media/rnnpg.png" alt="rnnpg"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/rnnpg-example.png" alt="rnnpg-example"></p>
+<h2 id="Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model"><a href="#Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model" class="headerlink" title="Chinese Song Iambics Generation with Neural Attention-based Model"></a>Chinese Song Iambics Generation with Neural Attention-based Model</h2><p>模型[6]是基于attention的encoder-decoder框架，将历史已经生成的内容作为源语言序列，将下一句要生成的话作为目标语言序列。需要用户提供第一句话，然后由第一句生成第二句，第一，二句生成第三句，并不断重复这个过程，直到生成完整诗歌。 基于Attention机制配合LSTM，可以学习更长的诗歌，同时在一定程度上，可以提高前后语义的连贯性。</p>
+<p>模型结构如下图：</p>
+<p><img src="media/anmt.png" alt="anmt"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/anmt-example.png" alt="anmt-example"></p>
+<h2 id="Chinese-Poetry-Generation-with-Planning-based-Neural-Network"><a href="#Chinese-Poetry-Generation-with-Planning-based-Neural-Network" class="headerlink" title="Chinese Poetry Generation with Planning based Neural Network"></a>Chinese Poetry Generation with Planning based Neural Network</h2><p> 模型[8]是一个端到端的模型，不需要专家领域知识。它试图模仿人类写作前先规划一个写作大纲的过程。整个诗歌生成框架由两部分组成：规划模型和生成模型。<br><strong>规划模型</strong>：将代表用户写作意图的Query作为输入，生成一个写作大纲。写作大纲是一个由主题词组成的序列，第i个主题词代表第i句的主题。<br><strong>生成模型</strong>：基于encoder-decoder框架。有两个encoder,其中一个encoder处理主题词，另外一个encoder处理历史生成的句子，decoder负责生成下一句话。decoder生成的时候，利用Attention机制，对主题词和历史生成内容的向量一起做打分，由模型来决定生成的过程中各部分的重要性。<br>前面介绍的几个模型，用户的写作意图，基本只能反映在第一句，随着生成过程往后进行，后面句子和用户写作意图的关系越来越弱，就有可能发生主题漂移问题。而规划模型可以使用户的写作意图直接影响整首诗的生成，因此在一定程度上，避免了主题漂移问题，使整首诗的逻辑语义和情感更为连贯。</p>
+<p>总体框架图如下：<br><img src="media/ppg.png" alt="ppg"></p>
+<p> 生成模型框架图如下：</p>
+<p> <img src="media/ppg-2.png" alt="ppg-2"></p>
+<p> 诗歌图灵测试例子：</p>
+<p><img src="media/ppg-example1.png" alt="ppg-example1"></p>
+<p>现代概念诗歌生成例子：</p>
+<p><img src="media/ppg-example2.png" alt="ppg-example2"></p>
+<h2 id="i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema"><a href="#i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema" class="headerlink" title="i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema"></a>i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</h2><p> 模型[7]基于encoder-decoder框架，一个比较有意思的地方，是想模拟人类写诗反复修改的过程，加入了打磨机制，通过反复迭代来提高诗歌生成质量。<br><strong>encoder阶段</strong>：用户提供一个Query作为自己的写作意图,由CNN模型获取Query的向量表示。<br><strong>decoder阶段</strong>：使用了hierarchical的RNN生成框架，由句子级别和词级别两个RNN组成。 <strong>句子级别RNN</strong>：输入句子向量表示，输出下一个句子的Context向量。<strong>字符级别RNN</strong>：输入Context向量和历史生成字符，输出下一个字符的概率分布。当一句生成结束的时候，字符级别RNN的最后一个向量，作为表示这个句子的向量，送给句子级别RNN。</p>
+<p>总体框架图如下：</p>
+<p><img src="media/ipoet.png" alt="ipoet"></p>
+<h2 id="Generating-Topical-Poetry"><a href="#Generating-Topical-Poetry" class="headerlink" title="Generating Topical Poetry"></a>Generating Topical Poetry</h2><p> 模型[9]基于encoder-decoder框架，分为两步。先根据用户输入的关键词得到每句话的最后一个词，这些词都押韵且与用户输入相关。再将这些押韵词作为一个序列，送给encoder,由decoder生成整个诗歌。这种机制一方面保证了押韵，另外一方面，和之前提到的规划模型类似，在一定程度上避免了主题漂移问题。</p>
+<h2 id="SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient"><a href="#SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient" class="headerlink" title="SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient"></a>SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</h2><p> 模型[10]将图像中的对抗生成网络，用到文本生成上。生成网络是一个RNN，直接生成整首诗歌。而判别网络是一个CNN。用于判断这首诗歌是人写的，还是机器生成的，并通过强化学习的方式，将梯度回传给生成网络。<br> 模型框架图如下：<br><img src="media/seqgan.png" alt="seqgan"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从传统方法到深度学习，诗歌生成技术有了很大发展，甚至在一定程度上，已经可以产生普通人真假难辨的诗歌。但是目前诗歌生成技术，学习到的仍然只是知识的概率分布，即诗句内，诗句间的搭配规律。而没有学到诗歌蕴含思想感情。因此尽管生成的诗歌看起来有模有样，但是仍然感觉只是徒有其表，缺乏一丝人的灵性。<br> 另外一方面，诗歌不像机器翻译有BLEU作为评价指标，目前仍然依赖人工的主观评价，缺乏可靠的自动评估方法，因此模型优化的目标函数和主观的诗歌评价指标之间，存在较大的gap，也影响了诗歌生成质量的提高。AlphaGo已经可以击败顶尖人类选手，但是在诗歌生成上，机器尚有很长的路要走。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p> [1] <a href="http://www.swarma.org/files/%E8%AE%A1%E7%AE%97%E5%A3%AB2010518131655.pdf" target="_blank" rel="external">一种宋词自动生成的遗传算法及其机器实现</a><br> [2] <a href="http://homepages.inf.ed.ac.uk/mlap/Papers/IJCAI13-324-1.pdf" target="_blank" rel="external">i,Poet: Automatic Chinese Poetry Composition through a Generative Summarization Framework under Constrained Optimization</a><br> [3] <a href="https://pdfs.semanticscholar.org/acd4/cd5e964faafa59d063704d99360dfe290525.pdf" target="_blank" rel="external">Generating Chinese Classical Poems with Statistical Machine Translation Models</a><br> [4] <a href="https://pdfs.semanticscholar.org/47a8/7c2cbdd928bb081974d308b3d9cf678d257e.pdf" target="_blank" rel="external">Recurrent neural network based language model</a><br> [5] <a href="http://www.aclweb.org/anthology/D14-1074" target="_blank" rel="external">Chinese Poetry Generation with Recurrent Neural Networks</a><br> [6] <a href="https://arxiv.org/abs/1604.06274" target="_blank" rel="external">Chinese Song Iambics Generation with Neural Attention-based Model</a><br> [7] <a href="https://www.ijcai.org/Proceedings/16/Papers/319.pdf" target="_blank" rel="external">i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</a><br> [8] <a href="https://arxiv.org/abs/1610.09889" target="_blank" rel="external">Chinese Poetry Generation with Planning based Neural Network</a><br> [9] <a href="http://xingshi.me/data/pdf/EMNLP2016poem-slides.pdf" target="_blank" rel="external">Generating Topical Poetry</a><br> [10] <a href="https://arxiv.org/abs/1609.05473" target="_blank" rel="external">SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2017-01-21T18:36:46.000Z"><a href="/2017/01/21/本周值得读-2017-01-16-2017-01-20/">2017-01-21</a></time>
       
       
@@ -3434,88 +3501,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-08-22T02:05:52.000Z"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">2016-08-21</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">从api.ai工作原理来看构建简单场景chatbot的一般方法</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot无疑是当前非常火的一个研究领域和产品方向，简单地可以分为两类，开放域bot和封闭域bot，开放域bot倾向于解决所有的事情，而封闭域bot倾向于解决某一个细分领域中的事情，旨在用AI技术提高效率，提高生产力。现阶段的开放域bot我个人感觉更像是多个常用封闭域bot的叠加，当用户发起一个请求，系统会判断出属于哪个细分领域，然后转到相应的程序中去执行并给出反馈，顺着这个逻辑来看，研究简单场景下的chatbot是个重要的基础工作，这类研究或者产品的质量直接决定了复杂场景或者开放域bot的质量。当然逗乐型的bot并不属于本文讨论的范围。<br><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
-<p>chatbot是场交互革命，也是一个多技术融合的平台。上图给出了构建一个chatbot需要具备的组件，简单地说chatbot = NLU(Natural Language Understanding) + NLG(Natural Language Generation).(本文只关注NLP相关的技术，对语音识别并无讨论)</p>
-<p>对于封闭域的chatbot，NLU的工作就是DST(Dialog State Tracker)，用户给出输入之后，系统可以给出下面的形式作为state：</p>
-<p><b>Act(Slot=Value)</b></p>
-<p>Act表示用户行为的类型，比如请求、查询、打招呼等等；Slot表示用户输入中包含的某种Act下的Entity，比如查询酒店的位置、价格这些实体；Value是指Slot中Entity对应的值，比如位置在北边，价格在500-800之间等等。每一句话中可能包括多个Act-Slot-Value对，chatbot需要做的事情就是准确地识别出Act，并且抽取出相应的Slot和Value。</p>
-<p>紧接着是NLG的部分，前几天在<a href="http://rsarxiv.github.io/2016/08/16/PaperWeekly-%E7%AC%AC%E4%BA%8C%E6%9C%9F/">PaperWeekly第二期</a>中分享了三篇paper，其中两篇正是研究基于DST的NLG问题。</p>
-<p>本文首先从<a href="api.ai">api.ai</a>这家企业提供的服务说起，通过研究其提供的封闭域bot构建技术，来提炼构建简单场景chatbot的一般方法，为构建复杂场景或者找出现有chatbot存在的技术问题和面临的技术难点打下基础。</p>
-<h1 id="api-ai"><a href="#api-ai" class="headerlink" title="api.ai"></a>api.ai</h1><h2 id="api-ai公司介绍"><a href="#api-ai公司介绍" class="headerlink" title="api.ai公司介绍"></a>api.ai公司介绍</h2><blockquote>
-<p>Api.ai provides developers and companies with the advanced tools they need to build conversational user interfaces for apps and hardware devices.</p>
-</blockquote>
-<p>这家公司是一家典型的B2D公司，提供了一些工具帮助开发者轻松地开发一款bot，并且可以轻松地发布到各种message平台上。商业模式也非常简单，免费用户有一定次数的调用权限，需要大量调用的话，则付费购买，不同的权限有不同的价格，该公司也提供高级定制化服务。</p>
-<p>api.ai公司成立于2010年（数据来自<a href="https://www.crunchbase.com/organization/api-ai#/entity" target="_blank" rel="external">CrunchBase</a>），其早期业务不清楚，但可以从提供的服务中推断出早期攒了大量的用户数据，而且涉及的领域非常多，比如：<br><img src="media/2.png" alt="2"></p>
-<p>每个领域都有一个知识库，如果你要开发某个常用领域内的chatbot，那么这个知识库将会非常有用。</p>
-<h2 id="重要概念和工作原理"><a href="#重要概念和工作原理" class="headerlink" title="重要概念和工作原理"></a>重要概念和工作原理</h2><h3 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h3><p>1、Agents。这个是一个对外接口，与其他应用程序或你的app进行整合的部分。如下图：<br><img src="media/3.png" alt="3"></p>
-<p>2、Entities。这里的实体和引言中提到的Slot类似，是指某个特定领域内的实体，是一类东西的抽象概括，比如HotelName这一实体，对应着很多的酒店名字，凯宾斯基、如家等等。有Entity，就一定有value，chatbot中重要的一步正是从user input中抽取出对应预先设定好entity的value，是一个典型的Named Entity Recognition任务。</p>
-<p>这里经典的NER任务是识别出user input中的person、time、place等等几个基本元素，api.ai将这些常见的entity定义为system级的，即默认提供了训练好的识别器，当然不仅仅限于这几类基本的；而特定领域知识库的重要作用也正是在于识别该领域内的entity。除了system level的NER之外，需要developer自定义一些entity，比如菜名，而且要给定具体的菜名和相似的表达作为samples进行训练。</p>
-<p>3、Intents。这个相当于是从user input到chatbot执行某个action之间的一个映射关系，用户输入一句话之后，chatbot就可以理解其意图，是在打招呼，还是查询，还是做些别的事情。这部分api.ai提供了训练器，但是需要developer定义一些标注好的examples，标注的形式如下：<br><img src="media/4.png" alt="4"></p>
-<p>这里用户输入是book a ticket to Los Angeles on Monday，所谓标注包括两个level，一个是entity标注，一个是intent标注，前一个是为了训练NER工具，后一个是为了识别intent。这里因为LA是地名，Monday是时间，所以都会被api.ai的系统自动标注出来。</p>
-<p>4、Actions。这个是由intents进行trigger的，actions就和引言中的Act类似，是一个具体的动作，比如说查询，但执行动作的时候一般都要带上具体的参数value，用户输入：“三里屯最近的阿迪达斯店在什么位置？”，chatbot首先会提取出place-&gt;三里屯，query-&gt;阿迪达斯店，然后转换为json丢给后台的查询服务，查询到结果后给出答案。这里的value抽取其实就是第二个概念提到的entity value。</p>
-<p>5、Contexts。上下文是一个非常重要但却解决不是很好的点，api.ai提供的方式是自定义一些context condition，当condition满足时，自动trigger出context关联内容template，然后filling slots，生成response。</p>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>以RSarXiv chatbot为例，简单介绍下工作原理。<br>（注：RSarXiv是我之前写的一个arxiv paper推荐系统）</p>
-<p>step 1 自定义Entity，这里我定义了两个entities，一个是keywords和subject。keywords是为search功能提供value，而subject是为update new papers功能提供value。<br><img src="media/5.png" alt="5"><br>定义好subject entity之后，我给出了几个examples，同时也包括其synonyms，keywords entity类似。</p>
-<p>step 2  自定义Intents，这里我定义了两个Intents，分别是update和search。下图是update的examples，是我自定义的几个例子。api.ai会根据我定义好的entity进行自动标注，比如cs.CL，today是系统默认的entity所以也进行了自动标注。自动标注是为了后台的机器学习算法对标注好的examples进行学习，以提高chatbot的NLU准确率。<br><img src="media/6.png" alt="6"></p>
-<p>接下来，我需要定义下Actions，如下图：<br><img src="media/7.png" alt="7"><br>Action被称为update，必须包含的参数是subject，也就是我们上面讲到的一个entity，date参数并不是必须的。所以，这里如果用户的input被识别出是update intents的话，就必须包括subject参数，否则chatbot会trigger一个response，类似“请用户输入subject”这样的话。</p>
-<p>step 3 简单测试，在界面的右侧有一个console，用来测试当前chatbot的效果，我输入update cs.CL，得到下面的效果：<br><img src="media/8.png" alt="8"><br>chatbot识别出Intent是Update，Action是update，Parameter是date和subject，并且subject的值是cs.CL，下面的Show JSON是api.ai为developer生成的，用来与developer自己的web service进行数据交换。</p>
-<p>step 4 训练。训练包括两个部分，一是训练NER，二是训练Intent Classification。训练器是api.ai提供的，但是标注数据是developer自己提供的，当然训练数据越多，标注越准，分类器的准确率就越高，chatbot的NLU准确率越高。至于训练方法，docs中没有细说，我简单猜测一下，NER可以当做Sequence Labeling任务，和Intent Recognition类似，都可以看作是多分类问题，不管是传统的分类方法还是当下流行的deep learning方法都能得到不错的准确率。随着user logs的增多，训练数据会越来越多，chatbot通过学习就会变得越来越“聪明”。但这里有个问题，training data越多，需要标注或者修改标注的数据就会越多，也是一个麻烦事儿。</p>
-<p>step 5 整合、发布。api.ai支持的平台非常多，包括当下流行的message平台，还有各种操作系统平台。在message平台上提供了一键整合的功能，在操作系统上提供了SDK。这里我用了slack平台，api.ai打通了和slack的接口，也提供了webhook，连接了我之前写好的web service，只需要按照它给定的消息接口进行定义即可。</p>
-<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>目前RSarXiv只提供两个简单的功能，一个是update今天最新的arxiv paper，你可以通过show me new papers in cs.CL等类似的话来获取cs.CL这个领域中最新的paper；一个是search功能，你可以通过search LSTM等类似的话来获取包括LSTM这个关键词的paper。由于是一个测试用的demo，就没做什么复杂的功能。<br><img src="media/10.png" alt="10"></p>
-<p>大家如果感兴趣的话，可以留言给我或者发邮件给我(mcgrady150318@gmail.com/mcgrady150318@163.com)，我邀请大家到这个slack team中。</p>
-<h1 id="简单场景chatbot构建方法"><a href="#简单场景chatbot构建方法" class="headerlink" title="简单场景chatbot构建方法"></a>简单场景chatbot构建方法</h1><p>介绍了下api.ai提供的服务，下面简单地提炼一下。</p>
-<p>chatbot = NLU + NLG</p>
-<p>api.ai解决的重点问题是NLU的问题，NLU也是Dialogue State Tracker(DST)的核心和基础，而DST是chatbot的核心。这里的NLU包括两个问题：</p>
-<p>1、从user inputs中识别出user intent和对应的action。</p>
-<p>2、从user inputs中抽取出预先设定好的entity value，作为action的parameter。</p>
-<p>NLG在api.ai这里基本上通过developer在Intent中设定response，当识别出是哪个intent之后，response自然就有了，最多空一些slot，用结果进行填充。如果developer选择了webhook，即需要从自定义的web service中给定response。如下图：<br><img src="media/9.png" alt="9"></p>
-<p>跑了一个简单场景的chatbot demo之后，简单归纳下构建方法：</p>
-<p>1、从特定任务中归纳出Intents、Actions、Entities。</p>
-<p>2、分别编写Intents、Entities的examples，两类examples是做DST的基础，用来训练chatbot准确地识别user intents和entity parameters，至于算法，自己写也可以，用api.ai也可以。</p>
-<p>3、做好DST之后，chatbot就知道用户的意图和相应的参数，丢给后台的web service去执行，并得到执行的结果，然后填充预先定义好的templates，生成response，返回给用户。</p>
-<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>简单场景的chatbot关键之处在于做好DST，有一个叫Dialogue State Tracking Challenge的比赛正式为了解决这个问题而举办的。我们说，封闭域的chatbot涉及两个方面，一是NLU，一是NLG，前者通过大量的examples来学习一个分类器和抽取器，得到Dialogue State，而后者根据Dialogue State，生成合适的response。</p>
-<p>NLU不是一个简单的事情，尤其是标注大量的examples不是那么容易；NLG同样也不是一个好解决的问题，预先定义的template会让chatbot受限制于template的多少，手工痕迹太重，需要一种更牛的解决方案来代替。（其实挺多paper都在做这件事情，PaperWeekly也分享过几篇相关的paper，data driven的NLG方案同样需要大量的examples做训练。）</p>
-<p>Context是个挺难的事情，现有的、成熟的解决方案仍是手工来定义条件，然后根据条件来trigger。我在想，能否构建一个动态的DST，可以是一张动态hash table，也可以是一个动态graph，记录着某一个user方方面面的状态，而不仅仅是某一轮对话中抽取出的信息，而是多轮对话中的信息，不仅在intent识别中可以用到context，在生成response时也可以用到，多轮对话和个性化对话都将不是什么问题了。或者，用现在流行的表示学习思维来想这个问题的话，也许context可以是一个分布式表示，user profile也是一个表示，NLG时以context distribution为condition来做generatation。</p>
-<p>本文介绍了构建简单场景下chatbot的一般方法，用api.ai确实很容易做一个chatbot，而对于复杂场景，我觉得用api.ai来开发也没有太大问题，最费时的可能是构建context trigger。api.ai因为是面向developer的，所以对于普通的用户并不适合，但对于有一定经验的developer来说，使用起来就非常简单，提供的web界面也很好用，如果说chatbot是一个平台的话，那么api.ai正像是一个开发工具，提高了开发chatbot的效率，虽然NLG和context这两个问题可以做的更好，但整体来说降低了开发chatbot的门槛，是个很有意义和钱景的服务。</p>
-<h1 id="PaperWeekly招人广告"><a href="#PaperWeekly招人广告" class="headerlink" title="PaperWeekly招人广告"></a>PaperWeekly招人广告</h1><p>PaperWeekly每周会分享N篇当下最流行、最有趣的NLP paper，旨在用最精炼的话说明白paper的贡献和创新。目前运营在公众号和知乎专栏两个平台上，现在的形式是每周分享一篇NLP Paper周报，偶尔也会写一些NLP相关的博客，由于本人精力和水平有限，现邀请各位对NLP技术、NLP Paper感兴趣的童鞋加入一同运营，在推进国内NLP技术发展的路上贡献一份自己的力量。</p>
-<p>微信公众号：PaperWeekly</p>
-<p><img src="media/qrcode.jpg" alt="qrcode"></p>
-<p>知乎专栏：<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">PaperWeekly</a></p>
-<p>微信交流群：</p>
-<p><img src="media/paperweekly.jpg" alt="paperweekly"></p>
-<p>群已满100人，无法扫码加群，大家加zhangjun168305，我拉大家入群。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3549,7 +3534,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>103</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>104</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3585,7 +3570,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>121</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>122</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

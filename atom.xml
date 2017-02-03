@@ -5,10 +5,67 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-01-21T18:46:53.000Z</updated>
+  <updated>2017-02-03T05:44:51.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly 第二十三期</title>
+    <link href="http://rsarxiv.github.io/2017/02/02/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2017/02/02/PaperWeekly-第二十三期/</id>
+    <published>2017-02-03T05:37:34.000Z</published>
+    <updated>2017-02-03T05:44:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p> 什么是艺术？<br> 机器的作品能否叫艺术？<br> 机器能否取代艺术家？<br> 这些问题，相信不同的人，会有不同的答案。很多人认为机器生成的作品只是简单的模仿人类，没有创造性可言，但是人类艺术家，不也是从模仿和学习开始的吗？本文是一篇机器诗歌生成的综述文章，希望能增进大家对这个领域的了解。</p>
+<h1 id="基于传统方法的诗歌生成"><a href="#基于传统方法的诗歌生成" class="headerlink" title="基于传统方法的诗歌生成"></a>基于传统方法的诗歌生成</h1><p>  诗歌是人类文学皇冠上的明珠。我国自《诗经》以后，两千年来的诗篇灿若繁星。让机器自动生成诗歌，一直是人工智能领域一个有挑战性的工作。机器诗歌生成的工作，始于20世纪70年代。传统的诗歌生成方法，主要有以下几种：</p>
+<ul>
+<li><strong>Word Salada（词语沙拉）</strong>：最早期的诗歌生成模型，只是简单将词语进行随机组合和堆砌而不考虑语义语法要求。</li>
+<li><strong>基于模板和模式的方法</strong>：基于模板的方法类似于完形填空，将一首现有诗歌挖去一些词，作为模板，再用一些其他词进行替换，产生新的诗歌。这种方法生成的诗歌在语法上有所提升，但是灵活性太差。因此后来出现了基于模式的方法，通过对每个位置词的词性，韵律平仄进行限制，来进行诗歌生成。</li>
+<li><strong>基于遗传算法的方法</strong>：周昌乐等[1]提出并应用到宋词生成上。这里将诗歌生成看成状态空间搜索问题。先从随机诗句开始，然后借助人工定义的诗句评估函数，不断进行评估，进化的迭代，最终得到诗歌。这种方法在单句上有较好的结果，但是句子之间缺乏语义连贯性。</li>
+<li><strong>基于摘要生成的方法</strong>：严睿等[2]将诗歌生成看成给定写作意图的摘要生成问题，同时加入了诗歌相关的一些优化约束。</li>
+<li><strong>基于统计机器翻译的方法</strong>：MSRA的何晶和周明[3]将诗歌生成看成一个机器翻译问题，将上一句看成源语言，下一句看成目标语言，用统计机器翻译模型进行翻译，并加上平仄押韵等约束，得到下一句。通过不断重复这个过程，得到一首完整的诗歌。</li>
+</ul>
+<h1 id="基于深度学习技术的诗歌生成"><a href="#基于深度学习技术的诗歌生成" class="headerlink" title="基于深度学习技术的诗歌生成"></a>基于深度学习技术的诗歌生成</h1><p> 传统方法非常依赖于诗词领域的专业知识，需要专家设计大量的人工规则，对生成诗词的格律和质量进行约束。同时迁移能力也比较差，难以直接应用到其他文体（唐诗，宋词等）和语言（英文，日文等）。随着深度学习技术的发展，诗歌生成的研究进入了一个新的阶段。</p>
+<h2 id="RNNLM"><a href="#RNNLM" class="headerlink" title="RNNLM"></a>RNNLM</h2><p>基于RNN语言模型[4]的方法，将诗歌的整体内容，作为训练语料送给RNN语言模型进行训练。训练完成后，先给定一些初始内容，然后就可以按照语言模型输出的概率分布进行采样得到下一个词，不断重复这个过程就产生完整的诗歌。Karpathy有一篇文章，讲的很详细：<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a></p>
+<h2 id="Chinese-Poetry-Generation-with-Recurrent-Neural-Networks"><a href="#Chinese-Poetry-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Chinese Poetry Generation with Recurrent Neural Networks"></a>Chinese Poetry Generation with Recurrent Neural Networks</h2><p> RNNPG模型[5]，首先由用户给定的关键词生成第一句，然后由第一句话生成第二句话，由一，二句话生成第三句话，重复这个过程，直到诗歌生成完成。模型的模型由三部分组成：<br><strong>Convolutional Sentence Model（CSM）</strong>：CNN模型，用于获取一句话的向量表示。<br><strong>Recurrent Context Model(RCM)</strong>：句子级别的RNN，根据历史生成句子的向量，输出下一个要生成句子的Context向量。<br><strong>Recurrent Generation Model(RGM)</strong>：字符级别RNN，根据RCM输出的Context向量和该句之前已经生成的字符，输出下一个字符的概率分布。解码的时候根据RGM模型输出的概率和语言模型概率加权以后，生成下一句诗歌，由人工规则保证押韵。<br>模型结构如下图：</p>
+<p><img src="media/rnnpg.png" alt="rnnpg"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/rnnpg-example.png" alt="rnnpg-example"></p>
+<h2 id="Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model"><a href="#Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model" class="headerlink" title="Chinese Song Iambics Generation with Neural Attention-based Model"></a>Chinese Song Iambics Generation with Neural Attention-based Model</h2><p>模型[6]是基于attention的encoder-decoder框架，将历史已经生成的内容作为源语言序列，将下一句要生成的话作为目标语言序列。需要用户提供第一句话，然后由第一句生成第二句，第一，二句生成第三句，并不断重复这个过程，直到生成完整诗歌。 基于Attention机制配合LSTM，可以学习更长的诗歌，同时在一定程度上，可以提高前后语义的连贯性。</p>
+<p>模型结构如下图：</p>
+<p><img src="media/anmt.png" alt="anmt"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/anmt-example.png" alt="anmt-example"></p>
+<h2 id="Chinese-Poetry-Generation-with-Planning-based-Neural-Network"><a href="#Chinese-Poetry-Generation-with-Planning-based-Neural-Network" class="headerlink" title="Chinese Poetry Generation with Planning based Neural Network"></a>Chinese Poetry Generation with Planning based Neural Network</h2><p> 模型[8]是一个端到端的模型，不需要专家领域知识。它试图模仿人类写作前先规划一个写作大纲的过程。整个诗歌生成框架由两部分组成：规划模型和生成模型。<br><strong>规划模型</strong>：将代表用户写作意图的Query作为输入，生成一个写作大纲。写作大纲是一个由主题词组成的序列，第i个主题词代表第i句的主题。<br><strong>生成模型</strong>：基于encoder-decoder框架。有两个encoder,其中一个encoder处理主题词，另外一个encoder处理历史生成的句子，decoder负责生成下一句话。decoder生成的时候，利用Attention机制，对主题词和历史生成内容的向量一起做打分，由模型来决定生成的过程中各部分的重要性。<br>前面介绍的几个模型，用户的写作意图，基本只能反映在第一句，随着生成过程往后进行，后面句子和用户写作意图的关系越来越弱，就有可能发生主题漂移问题。而规划模型可以使用户的写作意图直接影响整首诗的生成，因此在一定程度上，避免了主题漂移问题，使整首诗的逻辑语义和情感更为连贯。</p>
+<p>总体框架图如下：<br><img src="media/ppg.png" alt="ppg"></p>
+<p> 生成模型框架图如下：</p>
+<p> <img src="media/ppg-2.png" alt="ppg-2"></p>
+<p> 诗歌图灵测试例子：</p>
+<p><img src="media/ppg-example1.png" alt="ppg-example1"></p>
+<p>现代概念诗歌生成例子：</p>
+<p><img src="media/ppg-example2.png" alt="ppg-example2"></p>
+<h2 id="i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema"><a href="#i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema" class="headerlink" title="i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema"></a>i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</h2><p> 模型[7]基于encoder-decoder框架，一个比较有意思的地方，是想模拟人类写诗反复修改的过程，加入了打磨机制，通过反复迭代来提高诗歌生成质量。<br><strong>encoder阶段</strong>：用户提供一个Query作为自己的写作意图,由CNN模型获取Query的向量表示。<br><strong>decoder阶段</strong>：使用了hierarchical的RNN生成框架，由句子级别和词级别两个RNN组成。 <strong>句子级别RNN</strong>：输入句子向量表示，输出下一个句子的Context向量。<strong>字符级别RNN</strong>：输入Context向量和历史生成字符，输出下一个字符的概率分布。当一句生成结束的时候，字符级别RNN的最后一个向量，作为表示这个句子的向量，送给句子级别RNN。</p>
+<p>总体框架图如下：</p>
+<p><img src="media/ipoet.png" alt="ipoet"></p>
+<h2 id="Generating-Topical-Poetry"><a href="#Generating-Topical-Poetry" class="headerlink" title="Generating Topical Poetry"></a>Generating Topical Poetry</h2><p> 模型[9]基于encoder-decoder框架，分为两步。先根据用户输入的关键词得到每句话的最后一个词，这些词都押韵且与用户输入相关。再将这些押韵词作为一个序列，送给encoder,由decoder生成整个诗歌。这种机制一方面保证了押韵，另外一方面，和之前提到的规划模型类似，在一定程度上避免了主题漂移问题。</p>
+<h2 id="SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient"><a href="#SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient" class="headerlink" title="SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient"></a>SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</h2><p> 模型[10]将图像中的对抗生成网络，用到文本生成上。生成网络是一个RNN，直接生成整首诗歌。而判别网络是一个CNN。用于判断这首诗歌是人写的，还是机器生成的，并通过强化学习的方式，将梯度回传给生成网络。<br> 模型框架图如下：<br><img src="media/seqgan.png" alt="seqgan"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从传统方法到深度学习，诗歌生成技术有了很大发展，甚至在一定程度上，已经可以产生普通人真假难辨的诗歌。但是目前诗歌生成技术，学习到的仍然只是知识的概率分布，即诗句内，诗句间的搭配规律。而没有学到诗歌蕴含思想感情。因此尽管生成的诗歌看起来有模有样，但是仍然感觉只是徒有其表，缺乏一丝人的灵性。<br> 另外一方面，诗歌不像机器翻译有BLEU作为评价指标，目前仍然依赖人工的主观评价，缺乏可靠的自动评估方法，因此模型优化的目标函数和主观的诗歌评价指标之间，存在较大的gap，也影响了诗歌生成质量的提高。AlphaGo已经可以击败顶尖人类选手，但是在诗歌生成上，机器尚有很长的路要走。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p> [1] <a href="http://www.swarma.org/files/%E8%AE%A1%E7%AE%97%E5%A3%AB2010518131655.pdf" target="_blank" rel="external">一种宋词自动生成的遗传算法及其机器实现</a><br> [2] <a href="http://homepages.inf.ed.ac.uk/mlap/Papers/IJCAI13-324-1.pdf" target="_blank" rel="external">i,Poet: Automatic Chinese Poetry Composition through a Generative Summarization Framework under Constrained Optimization</a><br> [3] <a href="https://pdfs.semanticscholar.org/acd4/cd5e964faafa59d063704d99360dfe290525.pdf" target="_blank" rel="external">Generating Chinese Classical Poems with Statistical Machine Translation Models</a><br> [4] <a href="https://pdfs.semanticscholar.org/47a8/7c2cbdd928bb081974d308b3d9cf678d257e.pdf" target="_blank" rel="external">Recurrent neural network based language model</a><br> [5] <a href="http://www.aclweb.org/anthology/D14-1074" target="_blank" rel="external">Chinese Poetry Generation with Recurrent Neural Networks</a><br> [6] <a href="https://arxiv.org/abs/1604.06274" target="_blank" rel="external">Chinese Song Iambics Generation with Neural Attention-based Model</a><br> [7] <a href="https://www.ijcai.org/Proceedings/16/Papers/319.pdf" target="_blank" rel="external">i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</a><br> [8] <a href="https://arxiv.org/abs/1610.09889" target="_blank" rel="external">Chinese Poetry Generation with Planning based Neural Network</a><br> [9] <a href="http://xingshi.me/data/pdf/EMNLP2016poem-slides.pdf" target="_blank" rel="external">Generating Topical Poetry</a><br> [10] <a href="https://arxiv.org/abs/1609.05473" target="_blank" rel="external">SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt; 什么是艺术？&lt;br&gt; 机器的作品能否叫艺术？&lt;br&gt; 机器能否取代艺术家？&lt;br&gt; 这些问题，相信不同的人，会有不同的答案。很多人认为机器
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>本周值得读(2017.01.16-2017.01.20)</title>
@@ -32,9 +89,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -96,9 +153,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -142,9 +199,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -174,9 +231,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -280,9 +337,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -311,9 +368,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -392,9 +449,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -493,9 +550,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -524,9 +581,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -592,9 +649,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -625,9 +682,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -703,9 +760,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -732,9 +789,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -826,9 +883,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -862,9 +919,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -963,9 +1020,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -1001,40 +1058,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
-  </entry>
-  
-  <entry>
-    <title>本周值得读(2016.11.21-2016.11.25)</title>
-    <link href="http://rsarxiv.github.io/2016/11/26/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-11-21-2016-11-25/"/>
-    <id>http://rsarxiv.github.io/2016/11/26/本周值得读-2016-11-21-2016-11-25/</id>
-    <published>2016-11-27T06:12:34.000Z</published>
-    <updated>2016-11-27T06:31:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review"><a href="#Generative-Deep-Neural-Networks-for-Dialogue-A-Short-Review" class="headerlink" title="Generative Deep Neural Networks for Dialogue: A Short Review"></a><a href="http://t.cn/RfX2bms" target="_blank" rel="external">Generative Deep Neural Networks for Dialogue: A Short Review</a></h2><p>【对话系统】本文对seq2seq方法在对话系统中的应用做了一个简短的对比和综述，主要是针对几位作者提出的三种深度学习模型：HRED、VHRED和MrRNN，实验数据用了Ubuntu Dialogue Corpus和Twitter Corpus。不管是用seq2seq生成也好，还是套用模板也罢，对话系统的难点仍是上下文的理解和如何输出一些高质量的对话，有些应用场景对response的要求没那么高，只要可以达到一定实际效果即可，而有的则需要生成更加接近人类的对话。本文适合研究深度seq2seq的童鞋以及想看看各种seq2seq效果如何的童鞋来读。本文总结的三个模型原文链接：</p>
-<p>(a) MrRNN: <a href="https://arxiv.org/pdf/1606.00776.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1606.00776.pdf</a><br>(b) VHRED: <a href="https://arxiv.org/pdf/1605.06069v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1605.06069v3.pdf</a><br>(c) HRED: <a href="https://arxiv.org/pdf/1507.04808v3.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1507.04808v3.pdf</a></p>
-<h2 id="Coherent-Dialogue-with-Attention-based-Language-Models"><a href="#Coherent-Dialogue-with-Attention-based-Language-Models" class="headerlink" title="Coherent Dialogue with Attention-based Language Models"></a><a href="http://t.cn/Rfag1Jx" target="_blank" rel="external">Coherent Dialogue with Attention-based Language Models</a></h2><p>【对话系统】考虑并理解上下文是Chatbot的一大难点，也是目前绝大多数chatbot不智能的主要原因之一。本文提出了一种动态的attention模型，在理解用户请求的时候，动态地考虑历史信息。本文用到了两个开放数据集，分别是MovieTriples和Ubuntu Troubleshoot dataset。建议对chatbot感兴趣的同学可以精读此文。</p>
-<h2 id="Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks"><a href="#Visualizing-and-Understanding-Curriculum-Learning-for-Long-Short-Term-Memory-Networks" class="headerlink" title="Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks"></a><a href="http://t.cn/RfXLHIP" target="_blank" rel="external">Visualizing and Understanding Curriculum Learning for Long Short-Term Memory Networks</a></h2><p>【课程学习】Curriculum Learning是一类模拟小孩子学习过程的学习算法，简单地说是指在训练模型是从简单的样本开始，逐渐增加学习样本的难度。本文以情感分析为研究对象，对Curriculum Learning如何提升LSTM模型在情感分析任务上的效果进行了实验研究，并给出了可视化的结果。本文适合研究Curriculum Learning的童鞋以及在训练模型中想尝试下Curriculum Learning思路的童鞋研读。</p>
-<h2 id="Variable-Computation-in-Recurrent-Neural-Networks"><a href="#Variable-Computation-in-Recurrent-Neural-Networks" class="headerlink" title="Variable Computation in Recurrent Neural Networks"></a><a href="http://t.cn/RfXUmyN" target="_blank" rel="external">Variable Computation in Recurrent Neural Networks</a></h2><p>【RNN研究】RNN在解决序列建模问题有着天然的优势，但有些序列数据存在周期性的变化，或者短时间内变化并不明显，比如视频数据，因此固定不变的RNN训练方案会浪费计算资源，本文针对这一问题，提出了一种RNN变计算训练方案，即在计算下一个time step的hidden state时，不需要上一个time step所有的维度，只取一部分来计算，其他的维度复制过来即可。这篇工作的相关的前人研究包括：2014年的A Clockwork RNN，链接如下：<a href="https://arxiv.org/pdf/1402.3511.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1402.3511.pdf</a></p>
-<h2 id="Learning-to-Distill-The-Essence-Vector-Modeling-Framework"><a href="#Learning-to-Distill-The-Essence-Vector-Modeling-Framework" class="headerlink" title="Learning to Distill: The Essence Vector Modeling Framework"></a><a href="http://t.cn/RfoWk0K" target="_blank" rel="external">Learning to Distill: The Essence Vector Modeling Framework</a></h2><p>【表示学习】本文研究的内容包括两个点，一个是无监督学习，一个是文档表示。词表示、句子表示都有比较多的解决方案，但实际应用中文档级别的表示非常重要，比如情感分析、文本摘要等任务。本文提出了一种无监督的方法对文档以及背后所蕴藏的背景知识进行低维表示。自然语言随着元素级别地提升（从字、词、短语、句子到文档），研究的难度随之增加，实用程度随之减少。建议想从无监督学习方法有所突破以及想试试文档表示的童鞋可以来读本文。</p>
-<h2 id="Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks"><a href="#Unsupervised-Learning-of-Sentence-Representations-using-Convolutional-Neural-Networks" class="headerlink" title="Unsupervised Learning of Sentence Representations using Convolutional Neural Networks"></a><a href="http://t.cn/Rf9VNdk" target="_blank" rel="external">Unsupervised Learning of Sentence Representations using Convolutional Neural Networks</a></h2><p>【句子表示】本文的贡献在于提出了一种新的CNN-LSTM auto-encoder，作为一种无监督的句子学习模型。</p>
-<h2 id="Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers"><a href="#Emergent-Logical-Structure-in-Vector-Representations-of-Neural-Readers" class="headerlink" title="Emergent Logical Structure in Vector Representations of Neural Readers"></a><a href="http://t.cn/Rf9Vwi7" target="_blank" rel="external">Emergent Logical Structure in Vector Representations of Neural Readers</a></h2><p>【问答系统】针对最近提出的各种各样的attention based reader models,本文作者做了一个比较全面的总结和分析，并且通过数学分析和实验展示了模型之间的相关性。PaperWeekly第十四期的文章有相关的paper note可以参考<a href="http://rsarxiv.github.io/2016/11/19/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%9B%9B%E6%9C%9F/">地址</a></p>
-<h1 id="公益广告"><a href="#公益广告" class="headerlink" title="公益广告"></a>公益广告</h1><p>美国国立卫生研究院招博士后，研究领域包括：NLP、text mining和machine learning，感兴趣的童鞋可以看过来，详情请戳<a href="https://www.stat.washington.edu/jobs/archive/2013/may/05.20.13_NIH_E_B_NLP_Post_Doc_Ad_PDF_May_20_2013.pdf" target="_blank" rel="external">这里</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;Generative-Deep-Neural-Networks-for-Dialogue-A-Short-
-    
-    </summary>
-    
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   

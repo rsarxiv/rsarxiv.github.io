@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>PaperWeekly 第二十三期 | PaperWeekly</title>
+  
+  
+  <meta name="description" content="引言 什么是艺术？ 机器的作品能否叫艺术？ 机器能否取代艺术家？ 这些问题，相信不同的人，会有不同的答案。很多人认为机器生成的作品只是简单的模仿人类，没有创造性可言，但是人类艺术家，不也是从模仿和学习开始的吗？本文是一篇机器诗歌生成的综述文章，希望能增进大家对这个领域的了解。
+基于传统方法的诗歌生成">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="PaperWeekly 第二十三期"/>
+  <meta property="og:site_name" content="PaperWeekly"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="PaperWeekly" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77933764-1', 'auto');
+	ga('send', 'pageview');
+
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</head>
+
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">PaperWeekly</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/atom.xml">Rss</a></li>
+    
+      <li><a href="/about/index.html">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-02-03T05:37:34.000Z"><a href="/2017/02/02/PaperWeekly-第二十三期/">2017-02-02</a></time>
+      
+      
+  
+    <h1 class="title">PaperWeekly 第二十三期</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p> 什么是艺术？<br> 机器的作品能否叫艺术？<br> 机器能否取代艺术家？<br> 这些问题，相信不同的人，会有不同的答案。很多人认为机器生成的作品只是简单的模仿人类，没有创造性可言，但是人类艺术家，不也是从模仿和学习开始的吗？本文是一篇机器诗歌生成的综述文章，希望能增进大家对这个领域的了解。</p>
+<h1 id="基于传统方法的诗歌生成"><a href="#基于传统方法的诗歌生成" class="headerlink" title="基于传统方法的诗歌生成"></a>基于传统方法的诗歌生成</h1><p>  诗歌是人类文学皇冠上的明珠。我国自《诗经》以后，两千年来的诗篇灿若繁星。让机器自动生成诗歌，一直是人工智能领域一个有挑战性的工作。机器诗歌生成的工作，始于20世纪70年代。传统的诗歌生成方法，主要有以下几种：</p>
+<ul>
+<li><strong>Word Salada（词语沙拉）</strong>：最早期的诗歌生成模型，只是简单将词语进行随机组合和堆砌而不考虑语义语法要求。</li>
+<li><strong>基于模板和模式的方法</strong>：基于模板的方法类似于完形填空，将一首现有诗歌挖去一些词，作为模板，再用一些其他词进行替换，产生新的诗歌。这种方法生成的诗歌在语法上有所提升，但是灵活性太差。因此后来出现了基于模式的方法，通过对每个位置词的词性，韵律平仄进行限制，来进行诗歌生成。</li>
+<li><strong>基于遗传算法的方法</strong>：周昌乐等[1]提出并应用到宋词生成上。这里将诗歌生成看成状态空间搜索问题。先从随机诗句开始，然后借助人工定义的诗句评估函数，不断进行评估，进化的迭代，最终得到诗歌。这种方法在单句上有较好的结果，但是句子之间缺乏语义连贯性。</li>
+<li><strong>基于摘要生成的方法</strong>：严睿等[2]将诗歌生成看成给定写作意图的摘要生成问题，同时加入了诗歌相关的一些优化约束。</li>
+<li><strong>基于统计机器翻译的方法</strong>：MSRA的何晶和周明[3]将诗歌生成看成一个机器翻译问题，将上一句看成源语言，下一句看成目标语言，用统计机器翻译模型进行翻译，并加上平仄押韵等约束，得到下一句。通过不断重复这个过程，得到一首完整的诗歌。</li>
+</ul>
+<h1 id="基于深度学习技术的诗歌生成"><a href="#基于深度学习技术的诗歌生成" class="headerlink" title="基于深度学习技术的诗歌生成"></a>基于深度学习技术的诗歌生成</h1><p> 传统方法非常依赖于诗词领域的专业知识，需要专家设计大量的人工规则，对生成诗词的格律和质量进行约束。同时迁移能力也比较差，难以直接应用到其他文体（唐诗，宋词等）和语言（英文，日文等）。随着深度学习技术的发展，诗歌生成的研究进入了一个新的阶段。</p>
+<h2 id="RNNLM"><a href="#RNNLM" class="headerlink" title="RNNLM"></a>RNNLM</h2><p>基于RNN语言模型[4]的方法，将诗歌的整体内容，作为训练语料送给RNN语言模型进行训练。训练完成后，先给定一些初始内容，然后就可以按照语言模型输出的概率分布进行采样得到下一个词，不断重复这个过程就产生完整的诗歌。Karpathy有一篇文章，讲的很详细：<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="external">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a></p>
+<h2 id="Chinese-Poetry-Generation-with-Recurrent-Neural-Networks"><a href="#Chinese-Poetry-Generation-with-Recurrent-Neural-Networks" class="headerlink" title="Chinese Poetry Generation with Recurrent Neural Networks"></a>Chinese Poetry Generation with Recurrent Neural Networks</h2><p> RNNPG模型[5]，首先由用户给定的关键词生成第一句，然后由第一句话生成第二句话，由一，二句话生成第三句话，重复这个过程，直到诗歌生成完成。模型的模型由三部分组成：<br><strong>Convolutional Sentence Model（CSM）</strong>：CNN模型，用于获取一句话的向量表示。<br><strong>Recurrent Context Model(RCM)</strong>：句子级别的RNN，根据历史生成句子的向量，输出下一个要生成句子的Context向量。<br><strong>Recurrent Generation Model(RGM)</strong>：字符级别RNN，根据RCM输出的Context向量和该句之前已经生成的字符，输出下一个字符的概率分布。解码的时候根据RGM模型输出的概率和语言模型概率加权以后，生成下一句诗歌，由人工规则保证押韵。<br>模型结构如下图：</p>
+<p><img src="media/rnnpg.png" alt="rnnpg"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/rnnpg-example.png" alt="rnnpg-example"></p>
+<h2 id="Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model"><a href="#Chinese-Song-Iambics-Generation-with-Neural-Attention-based-Model" class="headerlink" title="Chinese Song Iambics Generation with Neural Attention-based Model"></a>Chinese Song Iambics Generation with Neural Attention-based Model</h2><p>模型[6]是基于attention的encoder-decoder框架，将历史已经生成的内容作为源语言序列，将下一句要生成的话作为目标语言序列。需要用户提供第一句话，然后由第一句生成第二句，第一，二句生成第三句，并不断重复这个过程，直到生成完整诗歌。 基于Attention机制配合LSTM，可以学习更长的诗歌，同时在一定程度上，可以提高前后语义的连贯性。</p>
+<p>模型结构如下图：</p>
+<p><img src="media/anmt.png" alt="anmt"></p>
+<p>模型生成例子如下图：</p>
+<p><img src="media/anmt-example.png" alt="anmt-example"></p>
+<h2 id="Chinese-Poetry-Generation-with-Planning-based-Neural-Network"><a href="#Chinese-Poetry-Generation-with-Planning-based-Neural-Network" class="headerlink" title="Chinese Poetry Generation with Planning based Neural Network"></a>Chinese Poetry Generation with Planning based Neural Network</h2><p> 模型[8]是一个端到端的模型，不需要专家领域知识。它试图模仿人类写作前先规划一个写作大纲的过程。整个诗歌生成框架由两部分组成：规划模型和生成模型。<br><strong>规划模型</strong>：将代表用户写作意图的Query作为输入，生成一个写作大纲。写作大纲是一个由主题词组成的序列，第i个主题词代表第i句的主题。<br><strong>生成模型</strong>：基于encoder-decoder框架。有两个encoder,其中一个encoder处理主题词，另外一个encoder处理历史生成的句子，decoder负责生成下一句话。decoder生成的时候，利用Attention机制，对主题词和历史生成内容的向量一起做打分，由模型来决定生成的过程中各部分的重要性。<br>前面介绍的几个模型，用户的写作意图，基本只能反映在第一句，随着生成过程往后进行，后面句子和用户写作意图的关系越来越弱，就有可能发生主题漂移问题。而规划模型可以使用户的写作意图直接影响整首诗的生成，因此在一定程度上，避免了主题漂移问题，使整首诗的逻辑语义和情感更为连贯。</p>
+<p>总体框架图如下：<br><img src="media/ppg.png" alt="ppg"></p>
+<p> 生成模型框架图如下：</p>
+<p> <img src="media/ppg-2.png" alt="ppg-2"></p>
+<p> 诗歌图灵测试例子：</p>
+<p><img src="media/ppg-example1.png" alt="ppg-example1"></p>
+<p>现代概念诗歌生成例子：</p>
+<p><img src="media/ppg-example2.png" alt="ppg-example2"></p>
+<h2 id="i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema"><a href="#i-Poet-Automatic-Poetry-Composition-through-Recurrent-Neural-Networks-with-Iterative-Polishing-Schema" class="headerlink" title="i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema"></a>i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</h2><p> 模型[7]基于encoder-decoder框架，一个比较有意思的地方，是想模拟人类写诗反复修改的过程，加入了打磨机制，通过反复迭代来提高诗歌生成质量。<br><strong>encoder阶段</strong>：用户提供一个Query作为自己的写作意图,由CNN模型获取Query的向量表示。<br><strong>decoder阶段</strong>：使用了hierarchical的RNN生成框架，由句子级别和词级别两个RNN组成。 <strong>句子级别RNN</strong>：输入句子向量表示，输出下一个句子的Context向量。<strong>字符级别RNN</strong>：输入Context向量和历史生成字符，输出下一个字符的概率分布。当一句生成结束的时候，字符级别RNN的最后一个向量，作为表示这个句子的向量，送给句子级别RNN。</p>
+<p>总体框架图如下：</p>
+<p><img src="media/ipoet.png" alt="ipoet"></p>
+<h2 id="Generating-Topical-Poetry"><a href="#Generating-Topical-Poetry" class="headerlink" title="Generating Topical Poetry"></a>Generating Topical Poetry</h2><p> 模型[9]基于encoder-decoder框架，分为两步。先根据用户输入的关键词得到每句话的最后一个词，这些词都押韵且与用户输入相关。再将这些押韵词作为一个序列，送给encoder,由decoder生成整个诗歌。这种机制一方面保证了押韵，另外一方面，和之前提到的规划模型类似，在一定程度上避免了主题漂移问题。</p>
+<h2 id="SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient"><a href="#SeqGAN-Sequence-Generative-Adversarial-Nets-with-Policy-Gradient" class="headerlink" title="SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient"></a>SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</h2><p> 模型[10]将图像中的对抗生成网络，用到文本生成上。生成网络是一个RNN，直接生成整首诗歌。而判别网络是一个CNN。用于判断这首诗歌是人写的，还是机器生成的，并通过强化学习的方式，将梯度回传给生成网络。<br> 模型框架图如下：<br><img src="media/seqgan.png" alt="seqgan"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从传统方法到深度学习，诗歌生成技术有了很大发展，甚至在一定程度上，已经可以产生普通人真假难辨的诗歌。但是目前诗歌生成技术，学习到的仍然只是知识的概率分布，即诗句内，诗句间的搭配规律。而没有学到诗歌蕴含思想感情。因此尽管生成的诗歌看起来有模有样，但是仍然感觉只是徒有其表，缺乏一丝人的灵性。<br> 另外一方面，诗歌不像机器翻译有BLEU作为评价指标，目前仍然依赖人工的主观评价，缺乏可靠的自动评估方法，因此模型优化的目标函数和主观的诗歌评价指标之间，存在较大的gap，也影响了诗歌生成质量的提高。AlphaGo已经可以击败顶尖人类选手，但是在诗歌生成上，机器尚有很长的路要走。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p> [1] <a href="http://www.swarma.org/files/%E8%AE%A1%E7%AE%97%E5%A3%AB2010518131655.pdf" target="_blank" rel="external">一种宋词自动生成的遗传算法及其机器实现</a><br> [2] <a href="http://homepages.inf.ed.ac.uk/mlap/Papers/IJCAI13-324-1.pdf" target="_blank" rel="external">i,Poet: Automatic Chinese Poetry Composition through a Generative Summarization Framework under Constrained Optimization</a><br> [3] <a href="https://pdfs.semanticscholar.org/acd4/cd5e964faafa59d063704d99360dfe290525.pdf" target="_blank" rel="external">Generating Chinese Classical Poems with Statistical Machine Translation Models</a><br> [4] <a href="https://pdfs.semanticscholar.org/47a8/7c2cbdd928bb081974d308b3d9cf678d257e.pdf" target="_blank" rel="external">Recurrent neural network based language model</a><br> [5] <a href="http://www.aclweb.org/anthology/D14-1074" target="_blank" rel="external">Chinese Poetry Generation with Recurrent Neural Networks</a><br> [6] <a href="https://arxiv.org/abs/1604.06274" target="_blank" rel="external">Chinese Song Iambics Generation with Neural Attention-based Model</a><br> [7] <a href="https://www.ijcai.org/Proceedings/16/Papers/319.pdf" target="_blank" rel="external">i, Poet: Automatic Poetry Composition through Recurrent Neural Networks with Iterative Polishing Schema</a><br> [8] <a href="https://arxiv.org/abs/1610.09889" target="_blank" rel="external">Chinese Poetry Generation with Planning based Neural Network</a><br> [9] <a href="http://xingshi.me/data/pdf/EMNLP2016poem-slides.pdf" target="_blank" rel="external">Generating Topical Poetry</a><br> [10] <a href="https://arxiv.org/abs/1609.05473" target="_blank" rel="external">SeqGAN: Sequence Generative Adversarial Nets with Policy Gradient</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/nlp/">nlp</a>, <a href="/tags/PaperWeekly/">PaperWeekly</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/02/02/PaperWeekly-第二十三期/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:rsarxiv.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Autoencoder/">Autoencoder</a><small>1</small></li>
+  
+    <li><a href="/tags/CNN/">CNN</a><small>2</small></li>
+  
+    <li><a href="/tags/DQN/">DQN</a><small>4</small></li>
+  
+    <li><a href="/tags/Memory-Network/">Memory Network</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
+  
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>104</small></li>
+  
+    <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
+  
+    <li><a href="/tags/RNNLM/">RNNLM</a><small>1</small></li>
+  
+    <li><a href="/tags/ROUGE/">ROUGE</a><small>1</small></li>
+  
+    <li><a href="/tags/RSarXiv/">RSarXiv</a><small>1</small></li>
+  
+    <li><a href="/tags/Reading-Comprehension/">Reading Comprehension</a><small>6</small></li>
+  
+    <li><a href="/tags/Representation/">Representation</a><small>1</small></li>
+  
+    <li><a href="/tags/Text-Comprehension/">Text Comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/api-ai/">api.ai</a><small>1</small></li>
+  
+    <li><a href="/tags/arXiv/">arXiv</a><small>2</small></li>
+  
+    <li><a href="/tags/arxiv/">arxiv</a><small>2</small></li>
+  
+    <li><a href="/tags/attention/">attention</a><small>3</small></li>
+  
+    <li><a href="/tags/bot/">bot</a><small>21</small></li>
+  
+    <li><a href="/tags/chatbot/">chatbot</a><small>2</small></li>
+  
+    <li><a href="/tags/dataset/">dataset</a><small>1</small></li>
+  
+    <li><a href="/tags/deep-learning/">deep learning</a><small>1</small></li>
+  
+    <li><a href="/tags/deeplearning/">deeplearning</a><small>1</small></li>
+  
+    <li><a href="/tags/language-model/">language model</a><small>1</small></li>
+  
+    <li><a href="/tags/nlp/">nlp</a><small>122</small></li>
+  
+    <li><a href="/tags/open-source/">open source</a><small>1</small></li>
+  
+    <li><a href="/tags/paper/">paper</a><small>7</small></li>
+  
+    <li><a href="/tags/paperweekly/">paperweekly</a><small>2</small></li>
+  
+    <li><a href="/tags/reading-comprehension/">reading comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/reinforcement-learning/">reinforcement learning</a><small>1</small></li>
+  
+    <li><a href="/tags/sentence-representations/">sentence representations</a><small>1</small></li>
+  
+    <li><a href="/tags/seq2seq/">seq2seq</a><small>17</small></li>
+  
+    <li><a href="/tags/text-comprehension/">text comprehension</a><small>1</small></li>
+  
+    <li><a href="/tags/torch/">torch</a><small>1</small></li>
+  
+    <li><a href="/tags/word-embedding/">word embedding</a><small>2</small></li>
+  
+    <li><a href="/tags/word-embeddings/">word embeddings</a><small>1</small></li>
+  
+    <li><a href="/tags/word2vec/">word2vec</a><small>1</small></li>
+  
+    <li><a href="/tags/创业/">创业</a><small>1</small></li>
+  
+    <li><a href="/tags/招聘/">招聘</a><small>1</small></li>
+  
+    <li><a href="/tags/推荐系统/">推荐系统</a><small>2</small></li>
+  
+    <li><a href="/tags/综述/">综述</a><small>1</small></li>
+  
+    <li><a href="/tags/自动文摘/">自动文摘</a><small>16</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- rsarxiv -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7417238904018690"
+     data-ad-slot="4681057960"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 PaperWeekly
+  
+</div>
+<div class="clearfix"></div>
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_xiaoyou"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>

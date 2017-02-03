@@ -65,6 +65,56 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-06-07T14:11:34.000Z"><a href="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/">2016-06-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/">Semi-supervised Sequence Learning #PaperWeekly#</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
+<p>之前分享过几篇有监督的sentence表示方法，比如<a href="http://rsarxiv.github.io/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/">Recurrent Convolutional Neural Networks for Text Classification</a>、<a href="http://rsarxiv.github.io/2016/05/25/Convolutional-Neural-Networks-for-Sentence-Classification-PaperWeekly/">Convolutional Neural Networks for Sentence Classification</a>，也分享过很多几篇无监督的sentence表示方法，比如<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Distributed Representations of Sentences and Documents</a>、<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vectors</a>。本篇将分享是一篇半监督的sentence表示方法，该方法比Paragraph Vectors更容易做微调，与Skip-Thought相比，目标函数并没有它那么困难，因为Skip-Thought是用来预测相邻句子的。本文的题目是<a href="http://arxiv.org/pdf/1511.01432.pdf" target="_blank" rel="external">Semi-supervised Sequence Learning</a>，作者是来自Google的<a href="http://homepages.inf.ed.ac.uk/s0681274/About_Me.html" target="_blank" rel="external">Andrew M. Dai</a>博士。</p>
+<p>纯粹的有监督学习是通过神经网络来表示一个句子，然后通过分类任务数据集去学习网络参数；而纯粹的无监督学习是通过上文预测下文来学习句子表示，利用得到的表示进行分类任务。本文的方法将无监督学习之后的表示作为有监督训练模型的初始值，所以称为半监督。本文的有监督模型采用LSTM，无监督模型共两种，一种是自编码器，一种是循环神经网络语言模型。</p>
+<p>第一种模型称为Sequence AutoEncoder LSTM(SA-LSTM)，模型架构图如下：</p>
+<img src="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/fig1.png" width="400" height="400">
+<p>这幅图大家看着都眼熟，和<a href="http://rsarxiv.github.io/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">Sequence to Sequence Learning with Neural Networks</a>中的seq2seq架构图很相似，只不过target和input一样，即用input来预测input自己。将自编码器学习到的表示作为LSTM的初始值，进行有监督训练。一般来说用LSTM中的最后一个hidden state作为输出，但本文也尝试用了每个hidden state权重递增的线性组合作为输出。这两种思路都是将无监督和有监督分开训练，本文也提供了一种联合训练的思路作为对比，称为joint learning。</p>
+<p>第二种模型称为Language Model LSTM(LM-LSTM)，将上图中的encoder部分去掉就是LM模型。语言模型介绍过很多了，比如<a href="http://rsarxiv.github.io/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">A Neural Probabilistic Language Model</a>和<a href="http://rsarxiv.github.io/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/">Character-Aware Neural Language Models</a>，详细的可以看之前的分享，这里不再赘述了。</p>
+<p>模型部分就是这些，后面作者在情感分析、文本分类、目标分类等多组任务中进行了对比实验，均取得了不错的结果。</p>
+<p>本文的创新点在于结合了无监督和有监督学习两种思路的优点来解决一个传统问题，虽然说无监督是一种趋势所在，但有监督针对具体的问题会有更好的效果。这种融合各类模型优点的模型会更受欢迎，也是一种不错的思路。</p>
+<p>这里进行几点说明：</p>
+<p>1、为什么不对实验结果进行详细的介绍？</p>
+<p>因为我个人更加关注的是解决问题的思路，也就是模型部分；另一方面，paper中的实验结果只能在某些程度上说明问题，对比结果中的数据可能是作者精心挑选的最好数据，并不一定可以复现，所以我不会太纠结于到底哪个模型比哪个模型高几个百分点。而文中的模型思路会带给我更多的启发，所以更加有意义一些。</p>
+<p>2、为什么内容总是这么短？</p>
+<p>因为我对PaperWeekly的定位是每天一篇或者几天一篇的paper短文介绍和理解，并不是详细地剖析它，我希望内容尽可能短，大家可以用5-10分钟来明白一篇文章的贡献和创新点在哪里，更多的是为了带给大家更多的思考或者说是启发。另外一个方面，短的文章我写起来也会很快，基本上都是前一晚睡觉前来读，六点半早起来写，不影响一天的正常工作生活，却一天一天地在积累着。</p>
+<p><b>工具推荐</b></p>
+<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
+<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-06T14:09:52.000Z"><a href="/2016/06/06/A-Hierarchical-Neural-Autoencoder-for-Paragraphs-and-Documents-PaperWeekly/">2016-06-06</a></time>
       
       
@@ -2349,7 +2399,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>103</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>104</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -2385,7 +2435,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>121</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>122</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

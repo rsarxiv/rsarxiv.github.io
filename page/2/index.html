@@ -65,6 +65,88 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-08-22T02:05:52.000Z"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">2016-08-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">从api.ai工作原理来看构建简单场景chatbot的一般方法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>chatbot无疑是当前非常火的一个研究领域和产品方向，简单地可以分为两类，开放域bot和封闭域bot，开放域bot倾向于解决所有的事情，而封闭域bot倾向于解决某一个细分领域中的事情，旨在用AI技术提高效率，提高生产力。现阶段的开放域bot我个人感觉更像是多个常用封闭域bot的叠加，当用户发起一个请求，系统会判断出属于哪个细分领域，然后转到相应的程序中去执行并给出反馈，顺着这个逻辑来看，研究简单场景下的chatbot是个重要的基础工作，这类研究或者产品的质量直接决定了复杂场景或者开放域bot的质量。当然逗乐型的bot并不属于本文讨论的范围。<br><img src="media/1.png" alt="1"><br>图片来自paper <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/williams2016dstc_overview-1.pdf" target="_blank" rel="external">The Dialog State Tracking Challenge Series- A Review</a></p>
+<p>chatbot是场交互革命，也是一个多技术融合的平台。上图给出了构建一个chatbot需要具备的组件，简单地说chatbot = NLU(Natural Language Understanding) + NLG(Natural Language Generation).(本文只关注NLP相关的技术，对语音识别并无讨论)</p>
+<p>对于封闭域的chatbot，NLU的工作就是DST(Dialog State Tracker)，用户给出输入之后，系统可以给出下面的形式作为state：</p>
+<p><b>Act(Slot=Value)</b></p>
+<p>Act表示用户行为的类型，比如请求、查询、打招呼等等；Slot表示用户输入中包含的某种Act下的Entity，比如查询酒店的位置、价格这些实体；Value是指Slot中Entity对应的值，比如位置在北边，价格在500-800之间等等。每一句话中可能包括多个Act-Slot-Value对，chatbot需要做的事情就是准确地识别出Act，并且抽取出相应的Slot和Value。</p>
+<p>紧接着是NLG的部分，前几天在<a href="http://rsarxiv.github.io/2016/08/16/PaperWeekly-%E7%AC%AC%E4%BA%8C%E6%9C%9F/">PaperWeekly第二期</a>中分享了三篇paper，其中两篇正是研究基于DST的NLG问题。</p>
+<p>本文首先从<a href="api.ai">api.ai</a>这家企业提供的服务说起，通过研究其提供的封闭域bot构建技术，来提炼构建简单场景chatbot的一般方法，为构建复杂场景或者找出现有chatbot存在的技术问题和面临的技术难点打下基础。</p>
+<h1 id="api-ai"><a href="#api-ai" class="headerlink" title="api.ai"></a>api.ai</h1><h2 id="api-ai公司介绍"><a href="#api-ai公司介绍" class="headerlink" title="api.ai公司介绍"></a>api.ai公司介绍</h2><blockquote>
+<p>Api.ai provides developers and companies with the advanced tools they need to build conversational user interfaces for apps and hardware devices.</p>
+</blockquote>
+<p>这家公司是一家典型的B2D公司，提供了一些工具帮助开发者轻松地开发一款bot，并且可以轻松地发布到各种message平台上。商业模式也非常简单，免费用户有一定次数的调用权限，需要大量调用的话，则付费购买，不同的权限有不同的价格，该公司也提供高级定制化服务。</p>
+<p>api.ai公司成立于2010年（数据来自<a href="https://www.crunchbase.com/organization/api-ai#/entity" target="_blank" rel="external">CrunchBase</a>），其早期业务不清楚，但可以从提供的服务中推断出早期攒了大量的用户数据，而且涉及的领域非常多，比如：<br><img src="media/2.png" alt="2"></p>
+<p>每个领域都有一个知识库，如果你要开发某个常用领域内的chatbot，那么这个知识库将会非常有用。</p>
+<h2 id="重要概念和工作原理"><a href="#重要概念和工作原理" class="headerlink" title="重要概念和工作原理"></a>重要概念和工作原理</h2><h3 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h3><p>1、Agents。这个是一个对外接口，与其他应用程序或你的app进行整合的部分。如下图：<br><img src="media/3.png" alt="3"></p>
+<p>2、Entities。这里的实体和引言中提到的Slot类似，是指某个特定领域内的实体，是一类东西的抽象概括，比如HotelName这一实体，对应着很多的酒店名字，凯宾斯基、如家等等。有Entity，就一定有value，chatbot中重要的一步正是从user input中抽取出对应预先设定好entity的value，是一个典型的Named Entity Recognition任务。</p>
+<p>这里经典的NER任务是识别出user input中的person、time、place等等几个基本元素，api.ai将这些常见的entity定义为system级的，即默认提供了训练好的识别器，当然不仅仅限于这几类基本的；而特定领域知识库的重要作用也正是在于识别该领域内的entity。除了system level的NER之外，需要developer自定义一些entity，比如菜名，而且要给定具体的菜名和相似的表达作为samples进行训练。</p>
+<p>3、Intents。这个相当于是从user input到chatbot执行某个action之间的一个映射关系，用户输入一句话之后，chatbot就可以理解其意图，是在打招呼，还是查询，还是做些别的事情。这部分api.ai提供了训练器，但是需要developer定义一些标注好的examples，标注的形式如下：<br><img src="media/4.png" alt="4"></p>
+<p>这里用户输入是book a ticket to Los Angeles on Monday，所谓标注包括两个level，一个是entity标注，一个是intent标注，前一个是为了训练NER工具，后一个是为了识别intent。这里因为LA是地名，Monday是时间，所以都会被api.ai的系统自动标注出来。</p>
+<p>4、Actions。这个是由intents进行trigger的，actions就和引言中的Act类似，是一个具体的动作，比如说查询，但执行动作的时候一般都要带上具体的参数value，用户输入：“三里屯最近的阿迪达斯店在什么位置？”，chatbot首先会提取出place-&gt;三里屯，query-&gt;阿迪达斯店，然后转换为json丢给后台的查询服务，查询到结果后给出答案。这里的value抽取其实就是第二个概念提到的entity value。</p>
+<p>5、Contexts。上下文是一个非常重要但却解决不是很好的点，api.ai提供的方式是自定义一些context condition，当condition满足时，自动trigger出context关联内容template，然后filling slots，生成response。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>以RSarXiv chatbot为例，简单介绍下工作原理。<br>（注：RSarXiv是我之前写的一个arxiv paper推荐系统）</p>
+<p>step 1 自定义Entity，这里我定义了两个entities，一个是keywords和subject。keywords是为search功能提供value，而subject是为update new papers功能提供value。<br><img src="media/5.png" alt="5"><br>定义好subject entity之后，我给出了几个examples，同时也包括其synonyms，keywords entity类似。</p>
+<p>step 2  自定义Intents，这里我定义了两个Intents，分别是update和search。下图是update的examples，是我自定义的几个例子。api.ai会根据我定义好的entity进行自动标注，比如cs.CL，today是系统默认的entity所以也进行了自动标注。自动标注是为了后台的机器学习算法对标注好的examples进行学习，以提高chatbot的NLU准确率。<br><img src="media/6.png" alt="6"></p>
+<p>接下来，我需要定义下Actions，如下图：<br><img src="media/7.png" alt="7"><br>Action被称为update，必须包含的参数是subject，也就是我们上面讲到的一个entity，date参数并不是必须的。所以，这里如果用户的input被识别出是update intents的话，就必须包括subject参数，否则chatbot会trigger一个response，类似“请用户输入subject”这样的话。</p>
+<p>step 3 简单测试，在界面的右侧有一个console，用来测试当前chatbot的效果，我输入update cs.CL，得到下面的效果：<br><img src="media/8.png" alt="8"><br>chatbot识别出Intent是Update，Action是update，Parameter是date和subject，并且subject的值是cs.CL，下面的Show JSON是api.ai为developer生成的，用来与developer自己的web service进行数据交换。</p>
+<p>step 4 训练。训练包括两个部分，一是训练NER，二是训练Intent Classification。训练器是api.ai提供的，但是标注数据是developer自己提供的，当然训练数据越多，标注越准，分类器的准确率就越高，chatbot的NLU准确率越高。至于训练方法，docs中没有细说，我简单猜测一下，NER可以当做Sequence Labeling任务，和Intent Recognition类似，都可以看作是多分类问题，不管是传统的分类方法还是当下流行的deep learning方法都能得到不错的准确率。随着user logs的增多，训练数据会越来越多，chatbot通过学习就会变得越来越“聪明”。但这里有个问题，training data越多，需要标注或者修改标注的数据就会越多，也是一个麻烦事儿。</p>
+<p>step 5 整合、发布。api.ai支持的平台非常多，包括当下流行的message平台，还有各种操作系统平台。在message平台上提供了一键整合的功能，在操作系统上提供了SDK。这里我用了slack平台，api.ai打通了和slack的接口，也提供了webhook，连接了我之前写好的web service，只需要按照它给定的消息接口进行定义即可。</p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p>目前RSarXiv只提供两个简单的功能，一个是update今天最新的arxiv paper，你可以通过show me new papers in cs.CL等类似的话来获取cs.CL这个领域中最新的paper；一个是search功能，你可以通过search LSTM等类似的话来获取包括LSTM这个关键词的paper。由于是一个测试用的demo，就没做什么复杂的功能。<br><img src="media/10.png" alt="10"></p>
+<p>大家如果感兴趣的话，可以留言给我或者发邮件给我(mcgrady150318@gmail.com/mcgrady150318@163.com)，我邀请大家到这个slack team中。</p>
+<h1 id="简单场景chatbot构建方法"><a href="#简单场景chatbot构建方法" class="headerlink" title="简单场景chatbot构建方法"></a>简单场景chatbot构建方法</h1><p>介绍了下api.ai提供的服务，下面简单地提炼一下。</p>
+<p>chatbot = NLU + NLG</p>
+<p>api.ai解决的重点问题是NLU的问题，NLU也是Dialogue State Tracker(DST)的核心和基础，而DST是chatbot的核心。这里的NLU包括两个问题：</p>
+<p>1、从user inputs中识别出user intent和对应的action。</p>
+<p>2、从user inputs中抽取出预先设定好的entity value，作为action的parameter。</p>
+<p>NLG在api.ai这里基本上通过developer在Intent中设定response，当识别出是哪个intent之后，response自然就有了，最多空一些slot，用结果进行填充。如果developer选择了webhook，即需要从自定义的web service中给定response。如下图：<br><img src="media/9.png" alt="9"></p>
+<p>跑了一个简单场景的chatbot demo之后，简单归纳下构建方法：</p>
+<p>1、从特定任务中归纳出Intents、Actions、Entities。</p>
+<p>2、分别编写Intents、Entities的examples，两类examples是做DST的基础，用来训练chatbot准确地识别user intents和entity parameters，至于算法，自己写也可以，用api.ai也可以。</p>
+<p>3、做好DST之后，chatbot就知道用户的意图和相应的参数，丢给后台的web service去执行，并得到执行的结果，然后填充预先定义好的templates，生成response，返回给用户。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>简单场景的chatbot关键之处在于做好DST，有一个叫Dialogue State Tracking Challenge的比赛正式为了解决这个问题而举办的。我们说，封闭域的chatbot涉及两个方面，一是NLU，一是NLG，前者通过大量的examples来学习一个分类器和抽取器，得到Dialogue State，而后者根据Dialogue State，生成合适的response。</p>
+<p>NLU不是一个简单的事情，尤其是标注大量的examples不是那么容易；NLG同样也不是一个好解决的问题，预先定义的template会让chatbot受限制于template的多少，手工痕迹太重，需要一种更牛的解决方案来代替。（其实挺多paper都在做这件事情，PaperWeekly也分享过几篇相关的paper，data driven的NLG方案同样需要大量的examples做训练。）</p>
+<p>Context是个挺难的事情，现有的、成熟的解决方案仍是手工来定义条件，然后根据条件来trigger。我在想，能否构建一个动态的DST，可以是一张动态hash table，也可以是一个动态graph，记录着某一个user方方面面的状态，而不仅仅是某一轮对话中抽取出的信息，而是多轮对话中的信息，不仅在intent识别中可以用到context，在生成response时也可以用到，多轮对话和个性化对话都将不是什么问题了。或者，用现在流行的表示学习思维来想这个问题的话，也许context可以是一个分布式表示，user profile也是一个表示，NLG时以context distribution为condition来做generatation。</p>
+<p>本文介绍了构建简单场景下chatbot的一般方法，用api.ai确实很容易做一个chatbot，而对于复杂场景，我觉得用api.ai来开发也没有太大问题，最费时的可能是构建context trigger。api.ai因为是面向developer的，所以对于普通的用户并不适合，但对于有一定经验的developer来说，使用起来就非常简单，提供的web界面也很好用，如果说chatbot是一个平台的话，那么api.ai正像是一个开发工具，提高了开发chatbot的效率，虽然NLG和context这两个问题可以做的更好，但整体来说降低了开发chatbot的门槛，是个很有意义和钱景的服务。</p>
+<h1 id="PaperWeekly招人广告"><a href="#PaperWeekly招人广告" class="headerlink" title="PaperWeekly招人广告"></a>PaperWeekly招人广告</h1><p>PaperWeekly每周会分享N篇当下最流行、最有趣的NLP paper，旨在用最精炼的话说明白paper的贡献和创新。目前运营在公众号和知乎专栏两个平台上，现在的形式是每周分享一篇NLP Paper周报，偶尔也会写一些NLP相关的博客，由于本人精力和水平有限，现邀请各位对NLP技术、NLP Paper感兴趣的童鞋加入一同运营，在推进国内NLP技术发展的路上贡献一份自己的力量。</p>
+<p>微信公众号：PaperWeekly</p>
+<p><img src="media/qrcode.jpg" alt="qrcode"></p>
+<p>知乎专栏：<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">PaperWeekly</a></p>
+<p>微信交流群：</p>
+<p><img src="media/paperweekly.jpg" alt="paperweekly"></p>
+<p>群已满100人，无法扫码加群，大家加zhangjun168305，我拉大家入群。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-16T23:53:50.000Z"><a href="/2016/08/16/PaperWeekly-第二期/">2016-08-16</a></time>
       
       
@@ -2893,56 +2975,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-06-07T14:11:34.000Z"><a href="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/">2016-06-07</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/">Semi-supervised Sequence Learning #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>之前分享过几篇有监督的sentence表示方法，比如<a href="http://rsarxiv.github.io/2016/05/27/Recurrent-Convolutional-Neural-Networks-for-Text-Classification-PaperWeekly/">Recurrent Convolutional Neural Networks for Text Classification</a>、<a href="http://rsarxiv.github.io/2016/05/25/Convolutional-Neural-Networks-for-Sentence-Classification-PaperWeekly/">Convolutional Neural Networks for Sentence Classification</a>，也分享过很多几篇无监督的sentence表示方法，比如<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Distributed Representations of Sentences and Documents</a>、<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vectors</a>。本篇将分享是一篇半监督的sentence表示方法，该方法比Paragraph Vectors更容易做微调，与Skip-Thought相比，目标函数并没有它那么困难，因为Skip-Thought是用来预测相邻句子的。本文的题目是<a href="http://arxiv.org/pdf/1511.01432.pdf" target="_blank" rel="external">Semi-supervised Sequence Learning</a>，作者是来自Google的<a href="http://homepages.inf.ed.ac.uk/s0681274/About_Me.html" target="_blank" rel="external">Andrew M. Dai</a>博士。</p>
-<p>纯粹的有监督学习是通过神经网络来表示一个句子，然后通过分类任务数据集去学习网络参数；而纯粹的无监督学习是通过上文预测下文来学习句子表示，利用得到的表示进行分类任务。本文的方法将无监督学习之后的表示作为有监督训练模型的初始值，所以称为半监督。本文的有监督模型采用LSTM，无监督模型共两种，一种是自编码器，一种是循环神经网络语言模型。</p>
-<p>第一种模型称为Sequence AutoEncoder LSTM(SA-LSTM)，模型架构图如下：</p>
-<img src="/2016/06/07/Semi-supervised-Sequence-Learning-PaperWeekly/fig1.png" width="400" height="400">
-<p>这幅图大家看着都眼熟，和<a href="http://rsarxiv.github.io/2016/05/31/Sequence-to-Sequence-Learning-with-Neural-Networks-PaperWeekly/">Sequence to Sequence Learning with Neural Networks</a>中的seq2seq架构图很相似，只不过target和input一样，即用input来预测input自己。将自编码器学习到的表示作为LSTM的初始值，进行有监督训练。一般来说用LSTM中的最后一个hidden state作为输出，但本文也尝试用了每个hidden state权重递增的线性组合作为输出。这两种思路都是将无监督和有监督分开训练，本文也提供了一种联合训练的思路作为对比，称为joint learning。</p>
-<p>第二种模型称为Language Model LSTM(LM-LSTM)，将上图中的encoder部分去掉就是LM模型。语言模型介绍过很多了，比如<a href="http://rsarxiv.github.io/2016/05/20/A-Neural-Probabilistic-Language-Model-PaperWeekly/">A Neural Probabilistic Language Model</a>和<a href="http://rsarxiv.github.io/2016/05/23/Character-Aware-Neural-Language-Models-PaperWeekly/">Character-Aware Neural Language Models</a>，详细的可以看之前的分享，这里不再赘述了。</p>
-<p>模型部分就是这些，后面作者在情感分析、文本分类、目标分类等多组任务中进行了对比实验，均取得了不错的结果。</p>
-<p>本文的创新点在于结合了无监督和有监督学习两种思路的优点来解决一个传统问题，虽然说无监督是一种趋势所在，但有监督针对具体的问题会有更好的效果。这种融合各类模型优点的模型会更受欢迎，也是一种不错的思路。</p>
-<p>这里进行几点说明：</p>
-<p>1、为什么不对实验结果进行详细的介绍？</p>
-<p>因为我个人更加关注的是解决问题的思路，也就是模型部分；另一方面，paper中的实验结果只能在某些程度上说明问题，对比结果中的数据可能是作者精心挑选的最好数据，并不一定可以复现，所以我不会太纠结于到底哪个模型比哪个模型高几个百分点。而文中的模型思路会带给我更多的启发，所以更加有意义一些。</p>
-<p>2、为什么内容总是这么短？</p>
-<p>因为我对PaperWeekly的定位是每天一篇或者几天一篇的paper短文介绍和理解，并不是详细地剖析它，我希望内容尽可能短，大家可以用5-10分钟来明白一篇文章的贡献和创新点在哪里，更多的是为了带给大家更多的思考或者说是启发。另外一个方面，短的文章我写起来也会很快，基本上都是前一晚睡觉前来读，六点半早起来写，不影响一天的正常工作生活，却一天一天地在积累着。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -2978,7 +3010,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>103</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>104</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3014,7 +3046,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>121</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>122</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

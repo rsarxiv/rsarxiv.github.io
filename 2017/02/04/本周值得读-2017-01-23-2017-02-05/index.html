@@ -3,15 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>本周值得读(2016.12.26-2017.01.06) | PaperWeekly</title>
+  <title>本周值得读(2017.01.23-2017.02.05) | PaperWeekly</title>
   
   
-  <meta name="description" content="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，">
+  <meta name="description" content="Learning to Decode for Future Success【seq2seq解码】本文研究的问题是在seq2seq解决对话生成、机器翻译、文本摘要时如何用增强学习的方法高效率地进行decoding，比起经典的softmax多分类预测next word，增强学习通过Q函数对所生成的文本内">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="本周值得读(2016.12.26-2017.01.06)"/>
+  <meta property="og:title" content="本周值得读(2017.01.23-2017.02.05)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -66,25 +66,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-07T06:06:34.000Z"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">2017-01-06</a></time>
+        <time datetime="2017-02-04T20:41:10.000Z"><a href="/2017/02/04/本周值得读-2017-01-23-2017-02-05/">2017-02-04</a></time>
       
       
   
-    <h1 class="title">本周值得读(2016.12.26-2017.01.06)</h1>
+    <h1 class="title">本周值得读(2017.01.23-2017.02.05)</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1 id="The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process"><a href="#The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process" class="headerlink" title="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process"></a><a href="http://t.cn/RMwnQmN" target="_blank" rel="external">The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process</a></h1><p>【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，进而对未来事件的发生时间和类型进行预测。该模型在传统Hawkes process的基础上，用 Recurrent Neural Network 来总结事件流的历史信息，并动态地估计不同时刻不同事件之间复杂的相互影响关系，进而得出未来事件的发生时间和类型的概率分布。此模型可以用于多种事件流的分析，包括医学诊断，消费者行为，和社交网络活动的预测等，并在多个数据集上表现出了显著的优势。作者来自约翰霍普金斯大学NLP组，主页地址<a href="http://www.cs.jhu.edu/~hmei/" target="_blank" rel="external">http://www.cs.jhu.edu/~hmei/</a>  有需要讨论的可以直接联系作者本文  hmei@cs.jhu.edu</p>
-<h1 id="Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task"><a href="#Understanding-Image-and-Text-Simultaneously-a-Dual-Vision-Language-Machine-Comprehension-Task" class="headerlink" title="Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task"></a><a href="http://t.cn/RIYdnYx" target="_blank" rel="external">Understanding Image and Text Simultaneously: a Dual Vision-Language Machine Comprehension Task</a></h1><p>【多模态】image caption任务的自动评价存在一定的弊端，本文提出了新的任务，即给定一幅图，给出n个caption选项，只有一个是正确答案，通过准确率来评价算法的效果。构建这样一个任务需要先针对每一张图生成多个难度较高的干扰选项，本文提出了一些构造方法，并且在coco数据集上生成了本文的数据集，通过人工选择获得该任务的准确率上限。数据集已开放，地址 <a href="https://github.com/google/mcic-coco" target="_blank" rel="external">https://github.com/google/mcic-coco</a></p>
-<h1 id="A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions"><a href="#A-Joint-Speaker-Listener-Reinforcer-Model-for-Referring-Expressions" class="headerlink" title="A Joint Speaker-Listener-Reinforcer Model for Referring Expressions"></a><a href="http://t.cn/RMhX58u" target="_blank" rel="external">A Joint Speaker-Listener-Reinforcer Model for Referring Expressions</a></h1><p>【多模态】本文研究的问题非常有趣，是Referring Expressions，简单点说就是给一张图和一个描述，要求找到描述中对应的object，通常包括两个任务：1、根据图片和指定object生成一个描述；2、根据图片和描述来找object。本文构建了一个联合训练模型，将两个任务一起训练，加上一层增强学习来提高所生成描述的多样性，得到了不错的结果。demo和dataset地址：<a href="https://vision.cs.unc.edu/refer/" target="_blank" rel="external">https://vision.cs.unc.edu/refer/</a></p>
-<h1 id="Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results"><a href="#Supervised-Opinion-Aspect-Extraction-by-Exploiting-Past-Extraction-Results" class="headerlink" title="Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results"></a><a href="http://t.cn/RIYgOoK" target="_blank" rel="external">Supervised Opinion Aspect Extraction by Exploiting Past Extraction Results</a></h1><p>【观点挖掘】【迁移学习】本文做的工作是将某一些领域中已经抽取的非常好的aspect迁移至新的领域，比如screen在苹果手机中存在这么一个aspect，其他品牌的手机也存在，其他的电子设备可能也存在，利用已有的“知识”来提高准确率。</p>
-<h1 id="Language-Modeling-with-Gated-Convolutional-Networks"><a href="#Language-Modeling-with-Gated-Convolutional-Networks" class="headerlink" title="Language Modeling with Gated Convolutional Networks"></a><a href="http://t.cn/RIYkG0b" target="_blank" rel="external">Language Modeling with Gated Convolutional Networks</a></h1><p>【CNN语言模型】本文的工作是将CNN模型和一种gate机制结合起来做语言模型，挑战了RNN在这个领域的霸主地位。工作来自Facebook，他们对CNN有非常的偏好。 </p>
-<h1 id="Understanding-Neural-Networks-through-Representation-Erasure"><a href="#Understanding-Neural-Networks-through-Representation-Erasure" class="headerlink" title="Understanding Neural Networks through Representation Erasure"></a><a href="http://t.cn/RIRFnkr" target="_blank" rel="external">Understanding Neural Networks through Representation Erasure</a></h1><p>【解释神经网络】大家都知道深度学习效果好，但原因确实解释不清楚。本文尝试着做了一些解释方面的工作，通过“erase”掉一些representation来研究结果的变化，甚至通过增强学习来研究最多“erase”掉哪些representation仍不影响最终的结果。深度学习如果有了可解释性，相信又将会是一个新的研究水平了。 </p>
-<h1 id="Shortcut-Sequence-Tagging"><a href="#Shortcut-Sequence-Tagging" class="headerlink" title="Shortcut Sequence Tagging"></a><a href="http://t.cn/RMw38iV" target="_blank" rel="external">Shortcut Sequence Tagging</a></h1><p>【新网络结构】本文针对多层RNN难训练的问题，提出了一种gate机制和shortcuts机制混合的方法，并研究了不同的组合效果。方法在序列标注问题上进行验证，从结果上来看，提高的不多，也从侧面反映出一个问题，现有的网络结构加一些排列组合或者小改动很难解决根本性的问题。</p>
-<h1 id="Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing"><a href="#Unsupervised-neural-and-Bayesian-models-for-zero-resource-speech-processing" class="headerlink" title="Unsupervised neural and Bayesian models for zero-resource speech processing"></a><a href="http://t.cn/RMLugMZ" target="_blank" rel="external">Unsupervised neural and Bayesian models for zero-resource speech processing</a></h1><p>【无监督】【贝叶斯】本文是一篇来自爱丁堡大学的博士论文。</p>
-<h1 id="Textual-Entailment-with-Structured-Attentions-and-Composition"><a href="#Textual-Entailment-with-Structured-Attentions-and-Composition" class="headerlink" title="Textual Entailment with Structured Attentions and Composition"></a><a href="http://t.cn/RM4seBe" target="_blank" rel="external">Textual Entailment with Structured Attentions and Composition</a></h1><p>【文本蕴含】本文的贡献在于将attention应用到了句法树上，而不是只对句子做attention。 </p>
+        <h1 id="Learning-to-Decode-for-Future-Success"><a href="#Learning-to-Decode-for-Future-Success" class="headerlink" title="Learning to Decode for Future Success"></a><a href="http://t.cn/Rx4qQI5" target="_blank" rel="external">Learning to Decode for Future Success</a></h1><p>【seq2seq解码】本文研究的问题是在seq2seq解决对话生成、机器翻译、文本摘要时如何用增强学习的方法高效率地进行decoding，比起经典的softmax多分类预测next word，增强学习通过Q函数对所生成的文本内容有着更好的控制，但训练效率太低，本文的亮点在于优化和改进了传统的RL模型。建议研究机器翻译、对话生成等seq2seq任务的童鞋研读。</p>
+<h1 id="Adversarial-Learning-for-Neural-Dialogue-Generation"><a href="#Adversarial-Learning-for-Neural-Dialogue-Generation" class="headerlink" title="Adversarial Learning for Neural Dialogue Generation"></a><a href="http://t.cn/Rx4u9rm" target="_blank" rel="external">Adversarial Learning for Neural Dialogue Generation</a></h1><p>【NLG】 GAN的火热逐渐地烧到了自然语言处理中，尤其是自然语言生成NLG任务上，本文工作来自Jiwei Li，一个高产的作者。对GAN和chatbot感兴趣的童鞋可以好好读一下。</p>
+<h1 id="Incorporating-Global-Visual-Features-into-Attention-Based-Neural-Machine-Translation"><a href="#Incorporating-Global-Visual-Features-into-Attention-Based-Neural-Machine-Translation" class="headerlink" title="Incorporating Global Visual Features into Attention-Based Neural Machine Translation"></a><a href="http://t.cn/Rx413BH" target="_blank" rel="external">Incorporating Global Visual Features into Attention-Based Neural Machine Translation</a></h1><p>【多模态】【NMT】 本文的工作亮点在于将多种信息融合应用到机器翻译任务中，相比于传统方案有了一定的提升。但多模态的训练数据需要非常高的代价来准备，实用性是一个非常大的挑战。 </p>
+<h1 id="Adversarial-Evaluation-of-Dialogue-Models"><a href="#Adversarial-Evaluation-of-Dialogue-Models" class="headerlink" title="Adversarial Evaluation of Dialogue Models"></a><a href="http://t.cn/RxQ3aGR" target="_blank" rel="external">Adversarial Evaluation of Dialogue Models</a></h1><p>【对话系统】【评测】 自动评测一直是困扰对话系统研究的一个重要问题，本文尝试用了GAN的思路来对生成的对话进行效果评测，discriminator通过预测response到底是human给出的还是generator生成的来进行评测，是一个很短的文章，也是一个尝试性的工作，来自google brain和deepmind。</p>
+<h1 id="Image-Grounded-Conversations-Multimodal-Context-for-Natural-Question-and-Response-Generation"><a href="#Image-Grounded-Conversations-Multimodal-Context-for-Natural-Question-and-Response-Generation" class="headerlink" title="Image-Grounded Conversations: Multimodal Context for Natural Question and Response Generation"></a><a href="http://t.cn/RxQeJFD" target="_blank" rel="external">Image-Grounded Conversations: Multimodal Context for Natural Question and Response Generation</a></h1><p>【IGC】【对话生成】 本文的亮点在于提出了一个新的任务，有点类似VQA，比VQA更复杂一些的是对要求机器对图像的理解更加深入，然后将图像信息作为对话的context进行QA。在找新方向的童鞋可以过来看看这个任务。 </p>
+<h1 id="CommAI-Evaluating-the-first-steps-towards-a-useful-general-AI"><a href="#CommAI-Evaluating-the-first-steps-towards-a-useful-general-AI" class="headerlink" title="CommAI: Evaluating the first steps towards a useful general AI"></a><a href="http://t.cn/RxnAHZp" target="_blank" rel="external">CommAI: Evaluating the first steps towards a useful general AI</a></h1><p>【通用ai】 这是一个梦，造一个通用的ai，相比现在的针对具体领域具体任务的ai来说，本文想做的事情更加宽阔和宏观一些。工作来自facebook，并且给出了一个通用ai的框架，代码地址：<a href="https://github.com/facebookresearch/CommAI-env/" target="_blank" rel="external">https://github.com/facebookresearch/CommAI-env/</a></p>
+<h1 id="Predicting-Auction-Price-of-Vehicle-License-Plate-with-Deep-Recurrent-Neural-Network"><a href="#Predicting-Auction-Price-of-Vehicle-License-Plate-with-Deep-Recurrent-Neural-Network" class="headerlink" title="Predicting Auction Price of Vehicle License Plate with Deep Recurrent Neural Network"></a><a href="http://t.cn/RxDdYQN" target="_blank" rel="external">Predicting Auction Price of Vehicle License Plate with Deep Recurrent Neural Network</a></h1><p>【车牌拍卖预测】 车牌拍卖是个常见的事儿，很多牛逼的数字，比如88888、66666通常可以拍到很高的价钱，本文研究的问题正是用深度学习模型来预测车牌号的拍卖价格，基于char-level的预测模型，模型没有太多亮点，研究的问题有点意思。 </p>
+<h1 id="Symbolic-Distributed-and-Distributional-Representations-for-Natural-Language-Processing-in-the-Era-of-Deep-Learning-a-Survey"><a href="#Symbolic-Distributed-and-Distributional-Representations-for-Natural-Language-Processing-in-the-Era-of-Deep-Learning-a-Survey" class="headerlink" title="Symbolic, Distributed and Distributional Representations for Natural Language Processing in the Era of Deep Learning: a Survey"></a><a href="http://t.cn/RxDsDyg" target="_blank" rel="external">Symbolic, Distributed and Distributional Representations for Natural Language Processing in the Era of Deep Learning: a Survey</a></h1><p>【表示学习】【综述】本文是一篇综述，非常详细地介绍了NLP中词各种表示方法，从符号到分布式表示，比较全面。</p>
 
       
     </div>
@@ -137,7 +136,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/01/06/本周值得读-2016-12-26-2017-01-06/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/02/04/本周值得读-2017-01-23-2017-02-05/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

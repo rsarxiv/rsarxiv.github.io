@@ -5,10 +5,40 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-02-05T03:12:25.000Z</updated>
+  <updated>2017-02-12T06:54:01.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本周值得读(2017.02.06-2017.02.10)</title>
+    <link href="http://rsarxiv.github.io/2017/02/11/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-02-06-2017-02-10/"/>
+    <id>http://rsarxiv.github.io/2017/02/11/本周值得读-2017-02-06-2017-02-10/</id>
+    <published>2017-02-12T06:45:32.000Z</published>
+    <updated>2017-02-12T06:54:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="All-but-the-Top-Simple-and-Effective-Postprocessing-for-Word-Representations"><a href="#All-but-the-Top-Simple-and-Effective-Postprocessing-for-Word-Representations" class="headerlink" title="All-but-the-Top: Simple and Effective Postprocessing for Word Representations"></a><a href="http://t.cn/RJUfnMQ" target="_blank" rel="external">All-but-the-Top: Simple and Effective Postprocessing for Word Representations</a></h2><p>【词表示】本文提出了一种对已有的词向量进行预处理的方法，用来对学习到的词向量降噪。基于词向量自身的几何结构 — 均值非零以及各项不同性，本文提出了一个反直观的处理方法：从所有的词向量中移除均值，以及移除部分导致各项不同性的方向。虽然这种处理方式忽略了词向量中的部分信息，但是它可以使多种通过不同方式训练出来的词向量加强词向量中包含的语义信息。经过预处理之后的词向量在一系列intrinsic衡量方式上（similarity, analogy, concept categorization）得到了一致性地提高。同时，我们通过了不同的应用上进行了测试，试验结果表明该预处理已经在诸多neural network中有所体现，进一步证实了对词向量进行预处理的重要性。本文工作来自UIUC NLP组的Jiaqi Mu，她也是Paperweekly的作者团队成员之一。</p>
+<h2 id="Structured-Attention-Networks"><a href="#Structured-Attention-Networks" class="headerlink" title="Structured Attention Networks"></a><a href="http://t.cn/RJwoVJw" target="_blank" rel="external">Structured Attention Networks</a></h2><p>【注意力模型】 本文的工作是将Attention模型进行了structure的扩展，考虑了结构上的依赖，提出了所谓的Structured Attention Networks，测试了两种模型的效果，linear-chain CRF和基于图的parsing模型，比传统的attention效果要好。工作来自HarvardNLP组，代码已开源在<a href="https://github.com/harvardnlp/struct-attn" target="_blank" rel="external">https://github.com/harvardnlp/struct-attn</a></p>
+<h2 id="Opinion-Recommendation-using-Neural-Memory-Model"><a href="#Opinion-Recommendation-using-Neural-Memory-Model" class="headerlink" title="Opinion Recommendation using Neural Memory Model"></a><a href="https://arxiv.org/abs/1702.01517v1" target="_blank" rel="external">Opinion Recommendation using Neural Memory Model</a></h2><p>【推荐系统】本文研究的问题是如何给用户推荐合适的产品评论。推荐的问题关键在于计算user和target的相似度，这里的target是指product review或者opinion。模型新意并无太多，所解决的问题比较有意思。 </p>
+<h2 id="Comparative-Study-of-CNN-and-RNN-for-Natural-Language-Processing"><a href="#Comparative-Study-of-CNN-and-RNN-for-Natural-Language-Processing" class="headerlink" title="Comparative Study of CNN and RNN for Natural Language Processing"></a><a href="http://t.cn/RJ4wOZF" target="_blank" rel="external">Comparative Study of CNN and RNN for Natural Language Processing</a></h2><p>【CNN or RNN】 本文系统地对比了CNN和RNN在NLP各大任务上的表现，包括：情感分类、关系分类、文本蕴含、答案选择、问题关系匹配、PQA、词性标注等。RNN在大部分任务上都表现的更好，除了在关键词匹配和识别这类任务不如CNN。这篇文章有很多不错的结论，值得一读！ </p>
+<h2 id="A-Knowledge-Grounded-Neural-Conversation-Model"><a href="#A-Knowledge-Grounded-Neural-Conversation-Model" class="headerlink" title="A Knowledge-Grounded Neural Conversation Model"></a><a href="http://t.cn/RJ4bciJ" target="_blank" rel="external">A Knowledge-Grounded Neural Conversation Model</a></h2><p>【对话系统】【基于知识】 本文研究的问题是用完全数据驱动的模型生成带有知识的对话内容，在原有seq2seq模型的基础上增加了一个fact encoder来生成对话。解决方案很实用，也很有启发性，建议研读。本文工作来自Information Sciences Institute和微软研究院。 </p>
+<h2 id="Fast-and-Accurate-Sequence-Labeling-with-Iterated-Dilated-Convolutions"><a href="#Fast-and-Accurate-Sequence-Labeling-with-Iterated-Dilated-Convolutions" class="headerlink" title="Fast and Accurate Sequence Labeling with Iterated Dilated Convolutions"></a><a href="http://t.cn/RJ4qelM" target="_blank" rel="external">Fast and Accurate Sequence Labeling with Iterated Dilated Convolutions</a></h2><p>【序列标注】 本文针对RNN对GPU并行计算性能利用不够的弱点，用了一种改进版的CNN模型Iterated Dilated Convolutions来代替Bi LSTM作为CRF的feature extractor，实验结果证明该方法更快更准。</p>
+<h2 id="Semi-Supervised-QA-with-Generative-Domain-Adaptive-Nets"><a href="#Semi-Supervised-QA-with-Generative-Domain-Adaptive-Nets" class="headerlink" title="Semi-Supervised QA with Generative Domain-Adaptive Nets"></a><a href="http://t.cn/RJfadL4" target="_blank" rel="external">Semi-Supervised QA with Generative Domain-Adaptive Nets</a></h2><p>【问答系统】 本文研究的问题很有意思，用半监督方法来做问答系统，用无标签的文本来生成问题，通过联合人工给出的问题和生成的问题来一起训练问答模型，同时利用增强学习算法来尽量减小算法生成问题概率分布和人工给定问题概率分布之间的差异。 </p>
+<h2 id="Trainable-Greedy-Decoding-for-Neural-Machine-Translation"><a href="#Trainable-Greedy-Decoding-for-Neural-Machine-Translation" class="headerlink" title="Trainable Greedy Decoding for Neural Machine Translation"></a><a href="http://t.cn/RJtEvwE" target="_blank" rel="external">Trainable Greedy Decoding for Neural Machine Translation</a></h2><p>【机器翻译】【解码算法】 本文研究的是机器翻译中一个不太被重视的方向，解码算法，创新点在于用增强学习算法对解码目标函数进行优化求解。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;All-but-the-Top-Simple-and-Effective-Postprocessing-for-Word-Representations&quot;&gt;&lt;a href=&quot;#All-but-the-Top-Simple-and-Effective-Postpro
+    
+    </summary>
+    
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+  </entry>
   
   <entry>
     <title>本周值得读(2017.01.23-2017.02.05)</title>
@@ -945,107 +975,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-G
-    
-    </summary>
-    
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十六期</title>
-    <link href="http://rsarxiv.github.io/2016/12/03/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%85%AD%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/12/03/PaperWeekly-第十六期/</id>
-    <published>2016-12-03T18:08:45.000Z</published>
-    <updated>2016-12-03T18:36:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本期PaperWeekly将带着大家来看一下ICLR 2017的六篇paper，其中包括当下非常火热的GAN在NLP中的应用，开放域聊天机器人如何生成更长更丰富的回答，如何用强化学习来构建树结构的神经网络和层次化的记忆网络等内容。六篇paper分别是：</p>
-<p>1、A SELF-ATTENTIVE SENTENCE EMBEDDING<br>2、Adversarial Training Methods for Semi-Supervised Text Classification<br>3、GENERATING LONG AND DIVERSE RESPONSES WITH NEURAL CONVERSATION MODELS<br>4、Hierarchical Memory Networks<br>5、Mode Regularized Generative Adversarial Networks<br>6、Learning to compose words into sentences with reinforcement learning</p>
-<h1 id="A-SELF-ATTENTIVE-SENTENCE-EMBEDDING"><a href="#A-SELF-ATTENTIVE-SENTENCE-EMBEDDING" class="headerlink" title="A SELF-ATTENTIVE SENTENCE EMBEDDING"></a><a href="http://openreview.net/pdf?id=BJC_jUqxe" target="_blank" rel="external">A SELF-ATTENTIVE SENTENCE EMBEDDING</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Zhouhan Lin, Minwei Feng, Cicero Nogueira dos Santos, Mo Yu, Bing Xiang, Bowen Zhou &amp; Yoshua Bengio</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>IBM Watson<br>Universit´e de Montr´eal</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>self-attention, sentence embedding, author profiling, sentiment classification, textual entailment</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>本文提出一种在没有额外输入的情况下如何利用attention来提高模型表现的句子表示方法。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>本文提出的模型结构分为两部分，</p>
-<ol>
-<li>BLSTM<br>这部分采用双向LSTM对输入的文本进行处理，最后得到BLSTM的所有隐层状态H。</li>
-<li>Self-attention mechanism<br>同attention机制类似，我们需要计算一个权重向量a，然后通过对隐层状态H加权求和得到句子的表示向量。这个过程如下公式所示：<br><img src="media/equation1.png" alt="equation1"><br>但是实际任务中，我们通常可能会对一个句子语义的多个方面感兴趣，因此我们可以通过下面的公式，获得多个权重向量组成的矩阵A。<br><img src="media/equation2.png" alt="equation2"><br>然后每一个权重向量a都可以得到一个句子表示向量v，所有句子表示向量组合在一起就可以获得句子表示矩阵M。<br><img src="media/equation3.png" alt="equation3"><br>本文的模型在author profiling, sentiment classification和textual entailment三个任务上进行验证，都取得了较好的效果。</li>
-</ol>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>1、[Yelp]<br>(<a href="https://www.yelp.com/dataset" target="_blank" rel="external">https://www.yelp.com/dataset</a> challenge)<br>2、 [SNLI]<br>(<a href="http://nlp.stanford.edu/projects/snli/" target="_blank" rel="external">http://nlp.stanford.edu/projects/snli/</a>)</p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>A large annotated<br>corpus for learning natural language inference</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文提出的self-attention方法用一个matrix表示一个句子，并且matrix中的每一个vector都是句子语义某一方面的表示，增强了sentence embedding的可解释性。</p>
-<h1 id="Adversarial-Training-Methods-for-Semi-Supervised-Text-Classification"><a href="#Adversarial-Training-Methods-for-Semi-Supervised-Text-Classification" class="headerlink" title="Adversarial Training Methods for Semi-Supervised Text Classification"></a><a href="https://arxiv.org/abs/1605.07725" target="_blank" rel="external">Adversarial Training Methods for Semi-Supervised Text Classification</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Takeru Miyato, Andrew M. Dai, Ian Goodfellow</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Google Brain, Kyoto University和OpenAI</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>Adversarial training, text classification, semi-supervised learning</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>Adversarial training和virtual adversarial training都需要对输入的数字形式做小的perturbation，不适用于高维稀疏输入，比如one-hot word representations。文章扩展图像领域流行的这两种方法到文本领域，对word embedding进行perturbation来作为LSTM的输入，取代原本的输入向量。可以把这两种方法看做是正则化的方法，为输入加入噪声，可以用来实现semi-supervised的任务。</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p>以adversarial training为例，文章对word embeddings进行adversarial perturbation，而不是直接应用在输入上。假设normalized之后的输入序列为s，给定s，y的条件概率为p(y|s;theta)，其中theta为模型参数，则s上的adversarial perturbation r_adv为：<br><img src="media/16-1-1.png" alt="16-1"></p>
-<p>应用在LSTM上，如下图(b)所示。定义其adversarial loss如下：</p>
-<p><img src="media/adversarial1.png" alt="adversaria"></p>
-<p><img src="media/16-2.png" alt="16-2"></p>
-<p>其中N为labeled的例子的数目。通过随机梯度下降来进行training。</p>
-<p>文章也提供了virtual adversarial training的方法。</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、<a href="http://ai.stanford.edu/~amaas/data/sentiment/" target="_blank" rel="external">IMDB</a><br>2、<a href="http://riejohnson.com/cnn_data.html" target="_blank" rel="external">Elec</a><br>3、<a href="http://snap.stanford.edu/data/web-Amazon.html" target="_blank" rel="external">Rotten Tomatoes</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p>主要列三篇work：<br>1、2015年NIPS, SA-LSTM。Semi-supervised sequence learning<br>2、2015年NIPS，One-hot CNN。Semi-supervised convolutional neural networks for text categorization via region<br>embedding<br>3、2016年ICML，One-hot bi-LSTM。Supervised and semi-supervised text categorization using LSTM for region<br>embeddings</p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>作者将图像领域的adversarial training应用在了文本领域，改善了word embedding。传统的word embedding被语法结构影响，即使两个完全相反的词（比如”good”和”bad”）在表示形式上也是相近的，没有表示出词本身的意思。Adversarial training使得有相近语法结构但是不同意义的词能够被分开，可以用来做情感分类和sequence model等。</p>
-<h1 id="GENERATING-LONG-AND-DIVERSE-RESPONSES-WITH-NEURAL-CONVERSATION-MODELS"><a href="#GENERATING-LONG-AND-DIVERSE-RESPONSES-WITH-NEURAL-CONVERSATION-MODELS" class="headerlink" title="GENERATING LONG AND DIVERSE RESPONSES WITH NEURAL CONVERSATION MODELS"></a><a href="http://openreview.net/pdf?id=HJDdiT9gl" target="_blank" rel="external">GENERATING LONG AND DIVERSE RESPONSES WITH NEURAL CONVERSATION MODELS</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Louis Shao, Stephan Gouws, Denny Britz, Anna Goldie, Brian Strope, Ray Kurzweil1</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Google Research, Google Brain</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Long and Diverse Responses</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>开放域聊天机器人如何生成更长且较为丰富的回答？</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>本文模型是基于经典的seq2seq+attention框架，在其基础上进行了若干修改，得到了满意的效果。不同于之前模型的地方有两点：</p>
-<p>1、encoder不仅仅包括整个source，还包括一部分target，这样attention不仅仅考虑了source，而且考虑了部分target。</p>
-<p><img src="media/16-3.png" alt="16-3"></p>
-<p>经典的seq2seq+attention在decoding部分会将source中的每个token都考虑到attention中来，之前有一种做法是将整个target部分也加入到attention中，效果上虽然有一定的提升，但随着数据规模地增加，内存代价太大。本文正是针对这一个问题，提出了所谓的“glimpse”模型，如上图所示，在encoder部分加入了target的前几个token，相当于是上面两种方案的一种折中。</p>
-<p>2、提出了一种基于sampling的beam search decoding方案。</p>
-<p>经典的beam search在decoding部分，是基于MAP（最大后验概率）进行贪婪解码的，这种方案生成的responses具有简短、无信息量以及高频的特点，通俗地讲会生成很多的类似“呵呵”的话，没有太多营养和价值。(Jiwei Li,2015)在解决这个问题时，在decoding部分通过MMI（互信息）对N-best结果进行重排序，这种方法对于生成短文本效果显著，但对于生成长文本效果不佳。因为，基于MAP的beam search天然存在这样的问题，N-best和重排序都解决不了根本性的问题。针对这一问题，本文提出了一种基于sampling的beam search解码方案，sampling即在每一步解码时都sample出D个token作为候选，搜索完毕或达到预设的长度之后，生成B个候选responses，然后进行重排序。</p>
-<p>本文的另外一大亮点是用了大量的对话数据，用了很大规模参数的模型进行了实验。实验评价标准，在自动评价这部分，设计了一个N选1的实验，给定一个输入，将正确输出和错误输出混在一起，模型需要从中选择正确的输出，用选择准确率来作为自动评价指标。本文没有用到经典的BLEU指标，因为这个指标确实不适合评价对话的生成质量。为了更有说服力，本文用人工对结果进行评价。</p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>本文用到的对话数据：<br>1、<a href="https://redd.it/3bxlg7" target="_blank" rel="external">Reddit Data</a><br>2、<a href="http://opus.lingfil.uu.se/OpenSubtitles.php" target="_blank" rel="external">2009 Open Subtitles data</a><br>3、<a href="https://data.stackexchange.com/" target="_blank" rel="external">Stack Exchange data</a><br>4、本文作者从Web抽取的对话数据（待公开）</p>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>用seq2seq方法研究生成对话的质量（包括长度、多样性）的工作并不多，具有代表性的有下面两个工作：<br>1、Wu,2016 提出了用length-normalization的方案来生成更长的对话<br>2、Jiwei Li,2015 提出了在解码阶段用MMI（互信息）对N-best结果进行重排序，旨在获得信息量更大的对话。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文模型部分并没有太多的创新，因为是工业部门的paper，所以更多的是考虑实用性，即能否在大规模数据集上应用该模型，集中体现在glimpse模型上。为了生成更加长、更加多样性的对话，在原有beam search + 重排序的基础上，引入了sampling机制，给生成过程增加了更多的可能性，也是工程上的trick。对话效果的评价是一件很难的事情，人类希望bot可以生成类人的对话，回复的长度可以定量描述，但多样性、生动性、拟人化等等都难以定量描述，所以在探索生成对话的这个方向上还有很长的路要走。</p>
-<h1 id="Hierarchical-Memory-Networks"><a href="#Hierarchical-Memory-Networks" class="headerlink" title="Hierarchical Memory Networks"></a><a href="https://arxiv.org/pdf/1605.07427v1.pdf" target="_blank" rel="external">Hierarchical Memory Networks</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Sarath Chandar, Sungjin Ahn, Hugo Larochelle, Pascal Vincent, Gerald Tesauro, Yoshua Bengio</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>1、Université de Montréal, Canada.<br>2、Twitter Cortex, USA.<br>3、IBM Watson Research Center, USA.<br>4、CIFAR, Canada.  </p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Hierarchical Memory Networks，Maximum Inner Product Search (MIPS)</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>记忆网络主要包括hard attention和soft attenion两种，然而hard不能用于反向传播算法进行端到端训练，所以只能使用强化学习的方法进行训练；soft所涉及的计算参数又很大，只适合于少量Memory。本文提出Hierarchical Memory Networks(HMN)模型，算是soft和hard的一个混合模型，计算量减少且训练更加容易，<br>实验结果也很好。</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>soft attention是对所有的memory都要进行attention的计算，对全集计算使计算量很大。HMN利用层次化结构使得attention的集合缩小，利用MaximumInner Product Search(MIPS)的方法从全集中获得一个最优子集，在子集上面去做attention就大大降低计算量。这样的方式又和hard attention预测关注点的方法有些类似，将注意力放在最相关的那部分，这个的做法也更接近于人的注意力思维。  文章的核心部分在于如何获取与query最相近的子集。</p>
-<p>主实验主要包括两个:<br>1、Exact K-MIPS：计算复杂度依然和soft attention差不多。<br>2、Approximate K-MIPS：利用Maximum Cosine Similarity Search(MCSS)的方法代替MIPS的方法，牺牲一些精确度，降低复杂度和加快训练速度。  </p>
-<p>MIPS有三种方法，分别是基于hash,基于tree,基于clustering，基于上述三种方法文中又做了几组组对比实验，最后实验结果显示基于clustering的效果是最好的。</p>
-<p>文章得到的实验结果如下：<br><img src="media/HMN_Result.png" alt="HMN_Result"></p>
-<h2 id="资源-（可选）"><a href="#资源-（可选）" class="headerlink" title="资源 （可选）"></a>资源 （可选）</h2><p>1、<a href="https://www.dropbox.com/s/tohrsllcfy7rch4/SimpleQuestions_v2.tgz" target="_blank" rel="external">The SimpleQuestions dataset</a>(使用的是Large-scale simple question answering with memory networks文章中的数据集)<br>2、<a href="https://research.facebook.com/research/babi/" target="_blank" rel="external">babi</a></p>
-<h2 id="相关工作-3"><a href="#相关工作-3" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、arXiv 2014, soft attention,《Neural turing machines》<br>2、CoRR 2015, hard attention,《Reinforcement learning neural turing machine》<br>3、ICLR 2015, memory network,《Memory networks》<br>4、arXiv 2015,《End-to-end memory networks》,引入半监督记忆网络可以自学所需要的facts。<br>5、CoRR 2016, DMN, 《Dynamic memory networks for visual and textual question<br>answering》,增加了一个episodic memory 使得可以动态更新memory里面的内容。</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>文章的创新主要在于修改了两个模块：Memory和Reader。<br>1、将memory的结构从a flat of array变成了hierarchical memory structure。将memory分成若干groups,这些groups又可以在进行更高级别的组合。<br>2、reader是从MIPS选出的子集中使用soft attention。MIPS从memory中选出一<br>个group子集作为最相关的子集。</p>
-<h1 id="Mode-Regularized-Generative-Adversarial-Networks"><a href="#Mode-Regularized-Generative-Adversarial-Networks" class="headerlink" title="Mode Regularized Generative Adversarial Networks "></a><a href="http://openreview.net/pdf?id=HJKkY35le" target="_blank" rel="external">Mode Regularized Generative Adversarial Networks </a></h1><h2 id="作者-4"><a href="#作者-4" class="headerlink" title="作者"></a>作者</h2><p>Tong Che; Yanran Li</p>
-<h2 id="单位-4"><a href="#单位-4" class="headerlink" title="单位"></a>单位</h2><p>Montreal Institute for Learning Algorithms;<br>Department of Computing, The Hong Kong Polytechnic University</p>
-<h2 id="关键词-4"><a href="#关键词-4" class="headerlink" title="关键词"></a>关键词</h2><p>GAN, Regularizers</p>
-<h2 id="文章来源-4"><a href="#文章来源-4" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题-4"><a href="#问题-4" class="headerlink" title="问题"></a>问题</h2><p>本文针对的问题是：1、GAN 的训练过程很不稳定 2、GAN 生成的样本局限于训练样本中的大 model 上，不能平衡数据的分布（missing model problem）。<br>两个问题互相影响，导致训练结果不好。</p>
-<h2 id="模型-4"><a href="#模型-4" class="headerlink" title="模型"></a>模型</h2><p>针对上面的问题，作者提出了两种 regularizers 去控制 GAN 的训练过程。<br>第一个 regularizer 也被作者称为 Regularized-GAN。作者认为可以从 generator 入手，给 generator 增加 regularizer，使得其具有更好的 gradient ，这样 G 和 D 都能稳定训练。<br>具体的方法是增加一个 encoder E(x) : X → Z.即把原先的 noise vector z 改为 z = encoder(X) ，即然后再 G(encoder(X))。如下图：<br><img src="media/16-5.png" alt="16-5"></p>
-<p>这样做有两个好处。第一，原始的模型很容易出现梯度消失的情况，因为 discriminator D 特别容易区分真实数据和生成数据导致 generator 就得不到 D 的梯度。作者的模型多了一个 reconstruction 的部分，这样生成出来数据不再那样容易被 D 识别出来。所以 D 和 G 就都能一直有 gradient 去训练，从而提高稳定性。第二，对于 x ，G(E(x)) 会尽量去生成 x 原本所属的类，从而一定程度解决了 missing model problem。<br>第二个 regularizer 基于第一个 regularizer 旨在改进训练的方法，也被作者称为 manifold-diffusion GAN。分为两步，第一步 manifold step 训练 discriminator D1 ，目的是减少 G(Enc(X)) 和 X 的的差别；第二步 diffusion 就是训练 D2 让 G(Enc(X)) 和 G(z) 分布的距离接近。如下图：</p>
-<p><img src="media/16-6.png" alt="16-6"></p>
-<p>最后，作者把 GAN 的网络训练坍塌的情况考虑进去，提出了新的 evaluation metric。</p>
-<h2 id="相关工作-4"><a href="#相关工作-4" class="headerlink" title="相关工作"></a>相关工作</h2><p>本篇文章的作者李嫣然写过一篇非常棒的<a href="http://mp.weixin.qq.com/s?__biz=MzI1NTE4NTUwOQ==&amp;mid=2650325352&amp;idx=1&amp;sn=90fb15cee44fa7175a804418259d352e&amp;mpshare=1&amp;scene=1&amp;srcid=0829ixEhnGChNKAl5kgz6b9V#rd" target="_blank" rel="external">综述</a> ,在这里就不累赘阐述了。</p>
-<h2 id="简评-4"><a href="#简评-4" class="headerlink" title="简评"></a>简评</h2><p>当下 GAN 的研究非常火爆，出现了许许多多对 GAN 的改进，本篇文章的提出的两种 regularizers 非常有效的提高了 GAN 的稳定性（其中 regularizer 的思想也受到了监督学习的启发），值得对 GAN 感兴趣的同学研读。</p>
-<h2 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h2><p>professorshui@gmail.com</p>
-<h1 id="Learning-to-compose-words-into-sentences-with-reinforcement-learning"><a href="#Learning-to-compose-words-into-sentences-with-reinforcement-learning" class="headerlink" title="Learning to compose words into sentences with reinforcement learning"></a><a href="https://openreview.net/forum?id=Skvgqgqxe" target="_blank" rel="external">Learning to compose words into sentences with reinforcement learning</a></h1><h2 id="作者-5"><a href="#作者-5" class="headerlink" title="作者"></a>作者</h2><p>Dani Yogatama, Phil Blunsom, Chris Dyer, Edward Grefenstette, Wang Ling</p>
-<h2 id="单位-5"><a href="#单位-5" class="headerlink" title="单位"></a>单位</h2><p>Google</p>
-<h2 id="关键词-5"><a href="#关键词-5" class="headerlink" title="关键词"></a>关键词</h2><p>Tree-LSTM, Reinforcement Learning</p>
-<h2 id="文章来源-5"><a href="#文章来源-5" class="headerlink" title="文章来源"></a>文章来源</h2><p>ICLR 2017</p>
-<h2 id="问题-5"><a href="#问题-5" class="headerlink" title="问题"></a>问题</h2><p>使用强化学习来构建树结构的神经网络Tree-LSTM，学习自然语言的句子表示</p>
-<h2 id="模型-5"><a href="#模型-5" class="headerlink" title="模型"></a>模型</h2><p>模型分为两部分：Tree-LSTM和强化学习模型<br>应用Tree-LSTM(可以通过LSTM的忘记门机制，跳过整棵对结果影响不大的子树)，并结合{SHIFT，REDUCE}操作，SHIFT操作对应将一个节点压入栈，REDUCE对应将两个元素组合，从而建立树结构</p>
-<p>强化学习用来寻找最佳的节点组合情况，RL模型中的状态s即当前构建的树结构，a为{SHIFT，REDUCE}操作，reward对应不同downstream<br> task(例：若是用该句子表示进行分类任务，则r对应从策略网络中采样得到句子表示的分类准确性的概率)</p>
-<h2 id="资源-3"><a href="#资源-3" class="headerlink" title="资源"></a>资源</h2><p>作者将该工作进行了四组实验，情感分类，语义相关性判断，自然语言推理，句子生成<br>分别应用Stanford Sentiment Treebank，Sentences Involving Compositional Knowledge corpus，Stanford Natural Language Inference corpus，IMDB movie review corpus</p>
-<h2 id="相关工作-5"><a href="#相关工作-5" class="headerlink" title="相关工作"></a>相关工作</h2><p>与Socher等人之前提出的Recursive NN,MV-RNN,RNTN，Tree-LSTM等工作一脉相承，本文又加入了RL方式构建树形结构</p>
-<h2 id="简评-5"><a href="#简评-5" class="headerlink" title="简评"></a>简评</h2><p>将强化学习引入句子表示学习之中，学习构建树的不同方式，从左向右，从右向左，双向，有监督、半监督、预先无结构等方式去构建树结构，但是训练时间较长，在几个任务上效果提升不是特别明显。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>GAN是当下的研究热点之一，在图像领域中研究较多，本期的两篇paper探讨了GAN在NLP中的应用，值得关注和期待。最后感谢@destinwang、@gcyydxf、@chunhualiu、@tonya、@suhui和@zhangjun六位童鞋的辛勤工作。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;本期PaperWeekly将带着大家来看一下ICLR 2017的六篇paper，其中包括当下非常火热的GAN在NLP中的应用，开放域聊天机器
     
     </summary>
     

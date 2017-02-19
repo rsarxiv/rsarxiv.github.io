@@ -3,16 +3,15 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Learning Distributed Representations of Sentences from Unlabelled Data #PaperWeekly# | PaperWeekly</title>
+  <title>本周值得读(2017.02.13-2017.02.17) | PaperWeekly</title>
   
   
-  <meta name="description" content="(欢迎大家订阅本博客，订阅地址是RSS)
-sentence representation的文章已经分享了几篇，包括了supervise和unsupervise的方法，但并没有对各种model进行系统地对比和分析，今天分享的这篇文章对现有各种各样的distributed representations">
+  <meta name="description" content="Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning【对话系统】本文提出了一种特定领域对话系统的端到端训练方案，相比于传统的">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Learning Distributed Representations of Sentences from Unlabelled Data #PaperWeekly#"/>
+  <meta property="og:title" content="本周值得读(2017.02.13-2017.02.17)"/>
   <meta property="og:site_name" content="PaperWeekly"/>
 
   
@@ -67,55 +66,22 @@ sentence representation的文章已经分享了几篇，包括了supervise和uns
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-05-30T20:49:58.000Z"><a href="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/">2016-05-30</a></time>
+        <time datetime="2017-02-19T19:04:24.000Z"><a href="/2017/02/19/本周值得读-2017-02-13-2017-02-17/">2017-02-19</a></time>
       
       
   
-    <h1 class="title">Learning Distributed Representations of Sentences from Unlabelled Data #PaperWeekly#</h1>
+    <h1 class="title">本周值得读(2017.02.13-2017.02.17)</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>(欢迎大家订阅本博客，订阅地址是<a href="http://rsarxiv.github.io/atom.xml">RSS</a>)</p>
-<p>sentence representation的文章已经分享了几篇，包括了supervise和unsupervise的方法，但并没有对各种model进行系统地对比和分析，今天分享的这篇文章对现有各种各样的distributed representations of sentences model进行了分类、对比和分析，为了增强对比效果，还提出了两种虚拟的模型。最后将所有的模型在supervised和unsupervised评价任务中进行对比，得出了一些有意义的结论。本文的题目是：<a href="http://arxiv.org/pdf/1602.03483v1.pdf" target="_blank" rel="external">Learning Distributed Representations of Sentences from Unlabelled Data</a>，作者是来自剑桥大学的<a href="https://www.cl.cam.ac.uk/~fh295/" target="_blank" rel="external">Felix Hill</a>博士。</p>
-<p>首先对现有模型进行了分类描述。</p>
-<ul>
-<li><p>直接在纯文本上进行训练的模型，模型包括：<a href="http://rsarxiv.github.io/2016/05/28/Skip-Thought-Vectors-PaperWeekly/">Skip-Thought Vector</a>、<a href="http://rsarxiv.github.io/2016/05/24/Distributed-Representations-of-Sentences-and-Documents-PaperWeekly/">Paragraph Vector</a>，两种模型都在之前分享过。</p>
-</li>
-<li><p>在结构化资源上进行训练的模型，这种模型借助了一些纯文本之外的资源进行辅助训练。模型包括：DictRep、CaptionRep、NMT。</p>
-</li>
-</ul>
-<p><code>DictRep</code>是本文作者之前提出的一个模型，模型训练了一个从词典定义到预训练好的词向量之间的映射。</p>
-<p><code>CaptionRep</code>模型架构与DictRep一样，采用的数据集不同而已，这里使用了COCO数据集，训练一个从图像vector representation到图像caption的映射。</p>
-<p><code>NMT</code>是神经网络机器翻译，该模型架构与skip-thought vector模型相同，但训练数据换成了sentence-aligned翻译文本，WMT语料中的En-Fr和En-De。</p>
-<ul>
-<li>本文提出的一些新模型。为了解决当前存在模型的问题，本文设计了两种虚拟模型。包括：Sequential (Denoising) Autoencoders(SDAE、SAE)和FastSent。</li>
-</ul>
-<p><code>SDAE</code>模型是为了解决Skip-Thought Vector模型对语料中句子连贯性的依赖问题。传统的去噪自编码器（DAE）一般都是一个输入是固定尺寸图像数据的前馈神经网络，本文利用一个噪声函数将传统的DAE扩展到变长度句子中，噪声函数是N(S|p0,px)，S表示一个句子，p0,px都是一个[0,1]的数，表示概率。首先，对于每一个S中的word，N函数会以一个p0的概率来删除word，概率是相互对立的。然后，对于S中的每一对不重叠的bigram，w(i)w(i+1)，N函数会以一个px的概率来交换两个词的位置。最后用一个类似NMT的encoder-decoder模型进行训练，只不过不同的是目标函数变了，变成了使得噪声最小。这里，source是经过噪声函数处理过的sentence，target是原始的sentence。这个模型就是SDAE模型，相比于skip-thought vector，可以处理任意顺序的句子集。如果令px=0,p0=0，我们称为<code>SAE</code>模型。这里p0其实就是防止深度网络模型训练时过拟合的正则化方法<code>Dropout</code>。</p>
-<p><code>FastSent</code>模型旨在解决Skip-Thought Vector模型计算速度慢的缺点，解决的思路与word2vec突破传统多层神经网络语言模型的思路类似，只用了一个简单的log-linear层。给定一个用词袋模型表示的句子，模型来预测该句子两边相邻的句子。该模型在训练时也会学习句中每个单词的词向量，并且将句子用句中所有词的词向量之和来表示。</p>
-<p>下图给出了所有模型在性能上的比较：</p>
-<img src="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/fig1.png" width="500" height="500">
-<p>其中，OS是指是否需要保留句子在语料中的顺序；R表示需要结构化的训练资源；WO：对词序敏感；SD：句子向量维度；WD：词向量维度；TR：训练时间；TE：编码50w句子需要的时间。</p>
-<p>任务评价一共分为两类，监督学习任务和无监督学习任务。通过大量实验的比较，得出了一下的结论：</p>
-<ul>
-<li><p>不同的任务适合不同的表示模型，这听起来像一句废话，也就是说没有哪种模型可以通吃所有的任务。比如：Skip-Thought Vector模型在TREC任务中最好，是因为句子和句子之间的衔接非常好，非常适合这个模型的特点。而Paraphrase detection任务更加适合于SDAE模型。</p>
-</li>
-<li><p>监督学习和无监督学习任务的表现存在差异，在监督学习任务中表现好的模型在无监督学习模型中表现的就会很一般，带有非线性网络结构的Skip Thought Vector、SDAE、NMT模型在监督学习中表现更好，而log-linear类的模型FastSent则在无监督学习任务中表现更好。</p>
-</li>
-<li><p>额外的资源会影响到训练处模型的通用性和实用性，比如一个在线demo需要很快的查询最近邻速度，用fastsent可能就没有问题，但用其他模型就达不到快速的要求。</p>
-</li>
-<li><p>词序的重要性并没有得到体现。本文的结果给出了一个与常识相左的结论，词序在决定句子意思表示时并没有想象中的那么重要。作者说到，可能是因为当前的评价方式并不能反映出词序的重要性，所以这个问题得不出一个明确的答案。（这点很有意思，在前面分享的一篇文章<a href="http://rsarxiv.github.io/2016/05/26/How-to-Generate-a-Good-Word-Embedding-PaperWeekly/">How to Generate a Good Word Embedding</a>中，引用了一个结论，词序信息占了语义信息的20%，那么到底词序对于句子语义有多大的影响？需要好好研究一番）</p>
-</li>
-<li><p>评价指标存在缺陷，并不能绝对准确的对比出各个模型的差异。</p>
-</li>
-</ul>
-<p>最后，展示一个各模型训练之后的应用效果。</p>
-<img src="/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/fig2.png" width="600" height="600">
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+        <h1 id="Hybrid-Code-Networks-practical-and-efficient-end-to-end-dialog-control-with-supervised-and-reinforcement-learning"><a href="#Hybrid-Code-Networks-practical-and-efficient-end-to-end-dialog-control-with-supervised-and-reinforcement-learning" class="headerlink" title="Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning"></a><a href="http://t.cn/RJoQ74r" target="_blank" rel="external">Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning</a></h1><p>【对话系统】本文提出了一种特定领域对话系统的端到端训练方案，相比于传统的端到端模型来说，亮点在于用更少量的、更有效的数据进行训练，并且结合一些动作模板和API来做对话生成，探索了监督学习和增强学习两种方案。作者是来自微软研究院Jason D. Williams，本篇文章对去年的这篇End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning进行了一些新的改进。</p>
+<h1 id="Universal-Semantic-Parsing"><a href="#Universal-Semantic-Parsing" class="headerlink" title="Universal Semantic Parsing"></a><a href="http://t.cn/RJo85td" target="_blank" rel="external">Universal Semantic Parsing</a></h1><p>【语义分析】本文提出了一种语义分析框架UDepLambda，可将自然语言映射为逻辑形式，用于QA任务，取得了不错的效果。</p>
+<h1 id="Learning-to-Parse-and-Translate-Improves-Neural-Machine-Translation"><a href="#Learning-to-Parse-and-Translate-Improves-Neural-Machine-Translation" class="headerlink" title="Learning to Parse and Translate Improves Neural Machine Translation"></a><a href="http://t.cn/RJ0I35e" target="_blank" rel="external">Learning to Parse and Translate Improves Neural Machine Translation</a></h1><p>【NMT】 本文的亮点在于将语言学知识融入到了seq2seq+attention模型中，而不只是简单的端到端。如何将更多的、更丰富的先验知识构建到现有的模型中是一个重要的课题，也是一个值得思考的方向。</p>
+<h1 id="Paraconsistency-and-Word-Puzzles"><a href="#Paraconsistency-and-Word-Puzzles" class="headerlink" title="Paraconsistency and Word Puzzles"></a><a href="http://t.cn/RJTAIea" target="_blank" rel="external">Paraconsistency and Word Puzzles</a></h1><p>【问答系统】 2001年，IBM的沃森系统在Jeopardy节目中，与人类同场竞技，并且最终取得胜利。问答系统在过去20年，迅猛发展，并成为热点研究课题。然而，对于自然语言的深层理解，例如基于英文句子的逻辑推理，依然有待深入研究。<br>本文研究如何应用次协调逻辑系统(Paraconsistent logic)，表达自然语言的语义，并且进行逻辑推理。该理论可以自动地找出自然语言述中的矛盾(语义悖论)，并且在存在语义冲突的环境中进行合理的逻辑推理。本文工作来自Stony Brook University的TIANTIAN GAO同学。</p>
+<h1 id="Automated-Phrase-Mining-from-Massive-Text-Corpora"><a href="#Automated-Phrase-Mining-from-Massive-Text-Corpora" class="headerlink" title="Automated Phrase Mining from Massive Text Corpora"></a><a href="http://t.cn/RJTiu0x" target="_blank" rel="external">Automated Phrase Mining from Massive Text Corpora</a></h1><p>【信息抽取】本文解决的问题是短语抽取，亮点在于：1、利用已有的知识库（Wikipedia）做远程监督训练；2、利用词性信息来增加抽取的准确性。本文工作来自UIUC Jiawei Han老师组。 </p>
+<h1 id="Frustratingly-Short-Attention-Spans-in-Neural-Language-Modeling"><a href="#Frustratingly-Short-Attention-Spans-in-Neural-Language-Modeling" class="headerlink" title="Frustratingly Short Attention Spans in Neural Language Modeling"></a><a href="http://t.cn/RJTaPGv" target="_blank" rel="external">Frustratingly Short Attention Spans in Neural Language Modeling</a></h1><p>【语言模型】 深度学习模型做一些排列、组合和变换之后会形成无穷多的模型，本文在经典neural语言模型+attention模型的基础上，对每个time step中的output vector进行了分割，用其中一部分向量作为attention，也就是所谓的short attention。</p>
 
       
     </div>
@@ -168,7 +134,7 @@ sentence representation的文章已经分享了几篇，包括了supervise和uns
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://rsarxiv.github.io/2016/05/30/Learning-Distributed-Representations-of-Sentences-from-Unlabelled-Data-PaperWeekly/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://rsarxiv.github.io/2017/02/19/本周值得读-2017-02-13-2017-02-17/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

@@ -5,16 +5,234 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-02-19T19:08:59.000Z</updated>
+  <updated>2017-02-23T15:27:32.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>PaperWeekly 第一期Chat</title>
+    <link href="http://rsarxiv.github.io/2017/02/23/PaperWeekly-%E7%AC%AC%E4%B8%80%E6%9C%9FChat/"/>
+    <id>http://rsarxiv.github.io/2017/02/23/PaperWeekly-第一期Chat/</id>
+    <published>2017-02-23T15:25:03.000Z</published>
+    <updated>2017-02-23T15:27:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>本期Chat是PaperWeekly第一次尝试与读者进行互动交流，一共分享和解读3篇paper，均选自2016年最值得读的自然语言处理领域paper，分别是：</p>
+<ol>
+<li>End-to-End Reinforcement Learning of Dialogue Agents for Information Access</li>
+<li>Dual Learning for Machine Translation</li>
+<li>SQuAD: 100,000+ Questions for Machine Comprehension of Text</li>
+</ol>
+<h3 id="1-End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#1-End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="1. End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a>1. <a href="https://arxiv.org/abs/1609.00777" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h3><h4 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h4><p>Bhuwan Dhingra, Lihong Li, Xiujun Li, Jianfeng Gao, Yun-Nung Chen, Faisal Ahmed, Li Deng</p>
+<h4 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h4><p>School of Computer Science, Carnegie Mellon University, Pittsburgh, PA, USA<br>Microsoft Research, Redmond, WA, USA<br>National Taiwan University, Taipei, Taiwan  </p>
+<h4 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h4><p>Dialogue Agent, Reinforcement Learning</p>
+<h4 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h4><p>arXiv</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>用强化学习构造一个端到端的任务驱动的基于知识图谱的对话系统。</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>一个任务驱动的对话系统，一般通过自然语言与用户进行多轮交流，帮助用户解决一些特定问题，例如订机票或检索数据库等。一般由下面四部分组成：</p>
+<ul>
+<li>Language Understanding Module(LU): 理解用户意图并提取相关slots。例如用户想找一部电影，那么就需要提取出电影名称，演员，上映时间等相关slots信息。</li>
+<li>Dialogue State Tracker: 追踪用户的目标和对话的历史信息。</li>
+<li>Dialogue Policy: 基于当前状态选择系统的下一步action, 例如向用户询问电影上映时间的action是request(year)。</li>
+<li>Natural Language Generator(NLG):将系统的action转化成自然语言文本。例如将request(year) 转换成：电影什么时候上映的？</li>
+</ul>
+<p>在Dialogue Policy这一步，传统方法一般是生成一个类似SQL的查询语句，从数据库中检索答案，但是这会使模型不可微从而只能分开训练。本文使用了基于概率的框架，因此是可微的，从而实现了端到端的训练过程。</p>
+<p>论文中用到的数据库，是来自IMDB的电影数据库。每一行代表一部电影，每一列是一个slot，信息有可能存在缺失。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/2a97c3e0-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p>整体框架如下图：</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/3aa17290-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p>下面分别介绍各个部分：</p>
+<p><strong>Feature Extractor</strong></p>
+<p>将用户每轮的输入文本转化成一个向量，这里使用了ngram词袋模型(n=2)。</p>
+<p><strong>Belief Trackers</strong></p>
+<p>用于追踪对话状态和历史信息。</p>
+<p>这里针对每一列的slot,分别有一个belief tracker。每个belief tracker的输入是从feature extractor得到的向量，用GRU处理以后，得到一个状态向量。根据这个状态向量，分别计算得到两个输出：pj和qj。</p>
+<p>pj是当前slot下所有值的概率分布，qj是用户不知道这个slot值的概率。</p>
+<p>因为在和用户交互的过程中，应当尽可能询问用户知道的信息，询问用户不知道的信息对后面的查询没有任何意义。</p>
+<p><strong>Soft-KB Lookup</strong></p>
+<p>根据Belief Trackers的输出，计算数据库中每个值的概率分布。</p>
+<p><strong>Beliefs Summary</strong></p>
+<p>由Belief Trackers和Soft-KB Lookup,可以得到当前的对话状态向量st。st向量包含了数据库中所有值的概率分布户是否知识等信息，实在是太大了，直接送给Policy Network会导致其参数过多，难以训练。因此这一步把slot-values转化成了加权的熵统计信息。</p>
+<p><strong>Policy Network</strong></p>
+<p>这里使用策略网络，根据Beliefs Summary的输入状态向量，来输出各个action的概率分布π。具体结构是GRU+全连接层+softmax的方式。</p>
+<p><strong>Action Selection</strong></p>
+<p>这里从策略分布π采样，得到下一步的action。如果action是inform(),说明到了对话的最后一步，需要给用户返回Top k的查询结果。这里按照Soft-KB Lookup步骤中得到的每一行电影的概率，进行采样来返回Top K候选。</p>
+<p><strong>NLG</strong></p>
+<p>这里的NLG部分和上面是独立的，使用了sequence-to-sequence模型，输入action,输出包含slot的对话模板，然后进行填充，得到自然语言文本。</p>
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>这里用的基于策略梯度的强化学习模型进行训练，目标是最大化reward的期望。最后一轮inform部分的reward是由正确答案在Top K候选中的排序位置决定，排序越靠前，reward越高。如果候选没有包含正确答案，那么reward是-1。</p>
+<p>对话交互训练数据是通过一个模拟器从电影数据中采样生成得到。</p>
+<h4 id="Baselines"><a href="#Baselines" class="headerlink" title="Baselines"></a>Baselines</h4><ul>
+<li>End2End-RL：本文提出的模型。</li>
+<li>Rule-based：Belief Trackers和Policy部分都是人工规则。</li>
+<li>Simple-RL：只有Belief Trackers是人工规则，而Policy部分是基于GRU。</li>
+</ul>
+<p>实验结果如下图：</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/47ebb320-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><p>对话的相关工作很多，包括传统基于Markov Decision Processes的POMDPs, 基于Q-Learning的SimpleDS，基于API查询的方法，基于最小化熵的EMDM等等，感兴趣的读者可以查询相关文献。</p>
+<h4 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h4><p>深度强化学习在对话系统的应用越来越多，本文最大的贡献，是提出了一个可微的基于概率的框架，从而使End-to-End训练成为可能，相比传统方法各部分分别训练，联合训练可以有效的减少错误传递。而基于深度强化学习的训练方式，相比传统基于规则的方式，在高噪音输入的情况下，有着更好的表现。</p>
+<h4 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>王哲，中国科学技术大学，xiaose@mail.ustc.edu.cn。</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：我对“因此这一步把slot-values转化成了加权的熵统计信息”的合理性和物理意义有些不明，我在最近的论文中很少看到这样的做法，请问是因为效果的原因吗？</strong></p>
+<p><strong>答：</strong> 这个熵指的是信息熵，不是物理中的热力学熵。信息熵把一个系统的不确定性，按照其可能出现结果的概率分布，进行定量化计算，得到的是可以获取的信息量大小。信息熵越大，不确定性就越大，我们可以获取的信息量也就越大。任务驱动的问题系统，在得到最终查询结果前，希望尽可能多的从用户那里获取信息，减少系统本身的不确定性，因此我们在知道一个slot中各种实体概率的情况下，用信息熵来度量一个slot的不确定性，还是挺合理挺自然的。<br>熵的用法在深度学习网络中还是挺多的,例如我们经常用交叉熵做损失函数。同时文本分类任务中，经常用TFIDF值作为特征，而TFIDF值是可以由信息熵推导出来的。 </p>
+<p><strong>问：论文中提到：”Moreover, instead of defining an attention distribution directly over the KB entities, which could be very large, we instead induce it from the smaller distributions over each relation (or slot in dialogue terminology) in the KB” 这里smaller distributions ， 以及each relation怎么理解，为什么能小？</strong></p>
+<p><strong>答：</strong> 这里的relation，指的是slots,也就是表格的各个列属性，例如year,actor等。 和entities的数目相比，一个slot对应的属性值数目要小很多。entity概率计算的时候，是把各个属性的概率相乘得到的。而一个属性的概率，取决于这个属性有多少值，假设我们有3个属性，每个属性的值的数目分别是k1,k2,k3，那么entities可能的计算量就是k1 * k2 * k3。现在作者假设每个属性之间是相互独立的,因此实际计算量可以理解成k1+k2+k3，所以slots的属性分布和entities分布相比，是smaller distributions。</p>
+<p><strong>问：增强学习在chatbot研究中使用时相比监督学习有哪些优势和劣势？</strong></p>
+<p><strong>答：</strong> 先说说强化学习的优势：</p>
+<p> 监督学习当前研究比较多的，是以seq2seq为代表的生成模型。 它目前一个比较大的问题，是生成结果缺乏多样性，倾向于生成比较安全比较常见的回答，例如“谢谢”，“不知道”。 这个主要是因为，训练目标是用最大似然拟合训练数据，而经常在训练数据中出现的回答，会占一些优势，因此后续有很多工作试图改进这个问题，例如用互信息作为目标函数，在解码搜索过程中，对常见结果进行惩罚，提高生成结果的多样性等等。</p>
+<p>监督学习的另外一个问题，是训练过程和预测过程不一致。训练的时候，当我们解码生成一个句子的下一个词的时候，是基于训练语料中的正确结果，而预测的时候，我们并不知道标准答案是什么，因此解码下一个词的时候，是基于我们预测的结果。这种不一致会影响最终结果，就像考试我们遇到之前没有见过的题型，我们的考试成绩可能会变差一样。增强学习，有希望解决这两个问题的。</p>
+<p>针对第一个问题，我们借助增强学习的reward,引入一些明确的的奖励目标，用来指导对话的生成。例如，如果我们想训练一个淘宝客服的对话系统，我们可以用商品最终是否购买，来作为奖励目标，这样可以引导对话向着商品成功购买的方向发展，因此可以产生更好的对话结果。目前还有一个最新的工作，是将生成对抗网络，引入对话系统，因为当前对话系统一个很大的问题，是缺乏可靠的自动化评价指标，而对抗生成网络中，我们有一个生成模型，也就是我们的对话生成系统，还有一个判别模型，这个判别模型的目标，是判断这个对话，是机器生成的，还是人写的，这样就引入了一个比较明确的奖励目标，也更接近图灵测试，而连接生成网络和判别网络的桥梁，就是强化学习。因为NLP的词，相比图像，是离散的，我们可以借助类似AlphaGo中的蒙特卡洛搜索，来采样得到训练样本，送给判别模型。针对第二个问题，强化学习在训练的过程中，生成模型是通过采样产生样本，这个过程和预测是一致的，因此也避免了不一致带来的问题。</p>
+<p>综上所述，增强学习在对话系统中有很大的优势。</p>
+<p>下面说说他的劣势：</p>
+<p>和监督学习相比，强化学习的训练是比较困难的，因为训练的过程很不稳定。而且具体的对话系统中，reward的奖励一般是基于一个完整的句子，而如何把reward奖励分配到具体的词，是一个很大的挑战。而在多轮对话中，reward一般只出现在最后一轮，如何对前面的几轮对话分配reward,也同样是一个问题。同时为了稳定强化学习的训练过程，我们不能完全离开监督学习，一般还需要借助监督学习的方法，来做初始化训练，甚至在训练过程中，需要穿插监督学习过程，起到稳定网络的作用。<br>以上就是增强学习在对话系统中的优劣。</p>
+<p><strong>问：论文中的pr(Gj＝i｜j＝0)为什么等于1/N呢？也就是在用户不知道第值时，目标是i的概率为什么等于1/N？ </strong></p>
+<p><strong>答：</strong> 用户不知道第j个属性，也就是说，在第j个属性上，用户不能提供有效信息。那么我们从属性j的角度，看各个实体的时候，实际上是没有什么区别的。因此最保险的方式，就是假设各个实体的概率相等，因此概率是1/N。</p>
+<p><strong>问：增强学习在chatbot中的reward函数是否都是根据相应的需求来手动给出，而非学习得来？</strong></p>
+<p><strong>答：</strong> 有些是可以手动给出的，例如Bengio的<strong>An Actor-Critic Algorithm for Sequence Prediction</strong>这篇论文，就把BLEU作为reward，用于机器翻译模型的训练。reward也可以学习得来，例如GAN应用到对话系统的时候，生成模型的reward就是由判别模型给出的，而在对偶学习中，一个模型的reward由它对应的对偶模型给出。</p>
+<hr>
+<h3 id="2-Dual-Learning-for-Machine-Translation"><a href="#2-Dual-Learning-for-Machine-Translation" class="headerlink" title="2. Dual Learning for Machine Translation"></a>2. <a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h3><h4 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h4><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
+<h4 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h4><p>中科大，北大，微软亚研院</p>
+<h4 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h4><p> NMT，monolingual data, dual learning</p>
+<h4 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h4><p>NIPS 2016</p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>利用双向NMT模型，在少量双语数据，大量单语数据的情况下，如何提高NMT的性能。</p>
+<h4 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h4><p>主要的思想是通过two-agent communication game，用单语语料和语言模型来提升双向NMT的性能。利用A语言的单语语料进行学习的two-agent communication game过程如下：</p>
+<ul>
+<li>agent1读入语言A的单语句子， 通过A到B的NMT模型转换成语言B的句子，并且发送给agent2。</li>
+<li>agent2接收到agent1发送的语言B的句子，通过语言B的语言模型$LM_B$，给出一个reward $r_1$。再通过B到A的NMT模型，将句子转换成语言A并且发送给agent1。</li>
+<li>agent1接收到agent2发送的语言A的句子，和最初的单语句子做比较，给出另一个reward $r_2$。</li>
+</ul>
+<p>那么$r=\alpha r_1+(1-\alpha) r_2$，agent1和agent2就能根据reward $r$对A到B和B到A的NMT模型进行学习。</p>
+<p>如果用公式表达，这个过程的目标函数就是：</p>
+<p>$$\mathbb{E}_{\mathbf{s}_{mid}|\mathbf{s};\Theta_{A\rightarrow B}}[\alpha LM_B({\mathbf{s}_{mid}})+(1-\alpha) P(\mathbf{s}|\mathbf{s}_{mid};\Theta_{B\rightarrow A})]$$  </p>
+<p>由于$\mathbf{s}_{mid}$的sample space无穷大，需要做一些近似来求期望。 文中考虑到random sampling会有较大的variance和一些不合理的翻译，采用了N-best来近似（$N=2$, 用beam search得到）。</p>
+<p>整个训练分成3个step:</p>
+<ol>
+<li>用双语语料，普通的MLE training来学习A到B和B到A的NMT模型，作为warm start。</li>
+<li>每一个minibatch里面一部分单语语料，一部分双语语料，对双语语料用MLE作为目标函数，单语语料用上面的公式作为目标函数；随着training的进行，减少双语语料的比例。训练交替地从语言A或者语言B开始。</li>
+<li>最后完全用单语语料，通过上面的公式作为目标函数进行训练。</li>
+</ol>
+<h4 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h4><p>这篇文章和Semi-Supervised Learning for Neural Machine Translation以及Neural Machine Translation with Reconstruction比较相似，都是用双向NMT模型来互相学习增强，区别在于这篇引入了语言模型。和Minimum Risk Training for Neural Machine Translation也有一定的相关性，相当于MRT中的loss function用了语言模型和反向NMT进行定义。</p>
+<h4 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h4><p>这篇文章从reinforcement learning的角度，将单语语料很好地融入到双向NMT的训练中，在使用10%双语语料的情况下也能取得较好的翻译结果。整体上来说非常有意思，也可以推广到更多的tasks in dual form。</p>
+<h4 id="完成人信息-1"><a href="#完成人信息-1" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>陈云，香港大学，yun.chencreek@gmail.com。</p>
+<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><p>本文中使用了哪一种reinforcement learning的方法？</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：论文中的相关工作部分提到了另外两篇neural machine translation的相关工作，请问作者可否简单介绍一下那两个模型的主要方法呢？以及它们和dual learning的最大区别。</strong></p>
+<p><strong>答：</strong> 另外两篇论文分别是semi-supervised Neural Machine Translation 以及Neural Machine Translation with Reconstruction。 semi-supervised这篇是利用autoencoder，将源端和目标端的单语语料引入，进行双向NMT联合训练；reconstruction这篇，是在普通MLE目标函数的基础上，增加了从目标端的hidden state重建源句子的概率这一项。首先我谈一下他们的区别。</p>
+<p>出发的角度不一样：</p>
+<ul>
+<li>semi-supervised：如何将source和target端的单语语料引入，通过双向NMT提高NMT的性能。</li>
+<li>recosntruction：解决translation adequacy的问题, 避免翻译的句子太短或者重复翻译某一部分。利用双向NMT优化原来的MLE目标函数。</li>
+<li>dual learning：在少量平行语料，大量单语语料的情况下，如何利用双向NMT提高NMT的性能。</li>
+</ul>
+<p>语料需求不一样：</p>
+<ul>
+<li>semi-supervised: source,target端的单语语料，文中实验双语语料比单语语料多。</li>
+<li>reconstruction: 没用单语语料。</li>
+<li>dual learning: 10%的双语语料，大量单语语料。并且用了预先用单语语料训练好的语言模型。</li>
+</ul>
+<p>解释的角度不一样：</p>
+<ul>
+<li>semi-supervised: 双向NMT联合训练，目标函数包括两个方向的MLE，以及source&amp;target autoencoder的reconstruction probability。</li>
+<li>reconstruction: 目标函数在普通的MLE基础上增加了由reconstructor定义的reconstruction probability。</li>
+<li>dual learning: 基于policy gradient的增强学习。用two agents play games这样的形式来解释。</li>
+</ul>
+<p>而他们也有一些相同的地方:</p>
+<p>都是用双向NMT来提高普通MLE训练的单向NMT的性能。reconstruction一篇相当于在原来的目标函数上加了reconstruction error，由于只用了双语语料，所以目标句子y是已知的。而semi-supervised和dual learning都会处理单语语料。在处理源端单语句子时，目标端的y是未知的。这二者都可以看成是一种句子级别的模型，通过正向的NMT产生一些句子来近似整个目标端输出空间，然后通过反向NMT给出句子的feedback(dual learning同时用了LM给出的feedback)。</p>
+<p>大家可以对比一下他们的目标函数，能够比较明显地看出区别和联系来。</p>
+<p><strong>问：可以用dual-learning这样的framework来解决的其他问题吗？</strong></p>
+<p><strong>答：</strong> 有很多dual tasks都可以用这个框架，比如 speech recognization &amp; text to speech, Image captioning &amp; Image generation, Question answering &amp; Question generation, 还有 Query-document matching &amp; Query/keyword suggestion。这篇文章之前MSRA的<a href="https://v.douyu.com/show/285BAvqBEp7G4Lmy" target="_blank" rel="external">刘铁岩老师</a>和<a href="https://v.douyu.com/show/285BAvq1KqKvG4Lm" target="_blank" rel="external">秦涛博士</a>有在斗鱼上直播过，大家可以看一下。</p>
+<p><strong>问：Dual Learning 中语言模型 LM 没看到在那里有详细的说明？刚才说的 Autoencoder，是在哪里提到的呢</strong></p>
+<p><strong>答：</strong> 语言模型在文章中的第四页第二段可以看到：“This middle step has an immediate reward r1 = LMB(smid), indicating how natural the output sentence is in language B.” Reward包括r1和r2, r1就是语言模型给的reward。 语言模型是用单语语料提前训练好的，在NMT的整个training过程中固定不变。</p>
+<p>Autoencoder在dual learning这篇没有提到，是在semi-supervised那篇提到的。</p>
+<p><strong>问：请问dual learning和GAN是否有相似之处 还是完全不相关的两种思路</strong></p>
+<p><strong>答：</strong> 是有相似之处。作者之一秦涛在斗鱼直播有提到，GAN在某种程度上可以看成是dual learning的一种特殊情况。将generator看成是primal task，discriminator看成是dual task, 通过f和g共同学习来互相增强。dual task主要是为了给primal task提供feedback。个人觉得dual learning和GAN最大的区别在于对discriminator的定义不一样，GAN定义成分类问题，而dual learning定义的是一个重建问题。</p>
+<p><strong>问：论文中的算法提到了一个参数alpha，它的意义是什么呢？是需要手动调参还是一个机器学习优化得到的参数呢？</strong></p>
+<p><strong>答：</strong> 这个alpha其实是LM reward跟反向NMT reward的一个trade-off，是手动调的。 文章后面有写，设置成0.005能取得较好的效果。</p>
+<p><strong>问：reconstruction error 以前常见于投影 project 重建 rebuild，或者是编码重建 encode/decode。图像上，一般常用 residual 来表示，例如子空间算法，KSVD 分解等等。这种对偶重建的方法，有没有可能发展成一种泛化的投影重建？</strong></p>
+<p><strong>答：</strong> 我觉得你可以尝试一下，图像上的东西不太懂。如果可以做成这种对偶tasks的形式,一个task take 某个action的reward可以由另外一个task给出，应该就可以试试。</p>
+<hr>
+<h3 id="3-SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text"><a href="#3-SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text" class="headerlink" title="3. SQuAD: 100,000+ Questions for Machine Comprehension of Text"></a>3. <a href="http://nlp.stanford.edu/pubs/rajpurkar2016squad.pdf" target="_blank" rel="external">SQuAD: 100,000+ Questions for Machine Comprehension of Text</a></h3><h4 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h4><p>Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, Percy Liang</p>
+<h4 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h4><p>Computer Science Department, Stanford University</p>
+<h4 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h4><p>Question Answering, Dataset Creation</p>
+<h4 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h4><p>EMNLP 2016</p>
+<h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>创建一个large and high quality reading comprehension dataset。</p>
+<h4 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h4><p><strong>数据收集</strong></p>
+<p>用PageRanks搜寻出top 10000 English Wiki articles，然后uniformly sample 536 articles，做相关数据清洗后得到23215 paragraphs。这部分数据被分成三部分，training set(80%)，development set(10%)，test set(10%)。</p>
+<p>下一步我们将这些paragraphs都放到Amazon Mechanical Turk上让用户创建问题以及回答问题。这样我们便得到了一个新的QA数据集。</p>
+<p>为了评估human在这个QA数据集上的表现，development set和test set中的每个问题被至少发给了两个额外的crowdworkers，其中有2.6%的问题被crowdworkers标记为unanswerable。</p>
+<p><strong>数据集分析</strong></p>
+<p>我们把答案分成了两部分，numerical和non-numerical。对non-numerical answers再做一次constituency parsing和POS Tagging，发现答案分布如下图所示。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/824b6510-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p><strong>Baselines</strong><br>作者做了sliding window baseline和logistic regression baseline，用accuracy和F1 Score做评估。结果如下图所示。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/8e5117b0-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<h4 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h4><p>在<a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">Stanford Question Answering dataset</a>可以看到所有dataset的信息，test set leaderboard上有各种Model的performance。</p>
+<h4 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h4><p>Question Answering方面的dataset有不少，最近比较popular的有：MCTest by Microsoft，BAbI dataset by Facebook，WikiQA by Microsoft，CNN/Daily Mail by DeepMind, Children’s Book Test by Facebook。有兴趣的读者可以查阅相关文献。</p>
+<h4 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h4><p>SQuAD是一个高质量的Reading comprehension dataset。作者花费了大量的人力物力，让Crowdworkers根据Wikipedia Paragraph出题和答题。构建的dataset数量巨大且质量高，对未来Reading Comprehension Question Answering的研究非常有帮助。</p>
+<h4 id="完成人信息-2"><a href="#完成人信息-2" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>Zewei Chu，The University of Chicago，zeweichu@gmail.com。</p>
+<h4 id="提问-1"><a href="#提问-1" class="headerlink" title="提问"></a>提问</h4><p>作者在评估SQuAD dataset的时候，使用了哪些baseline模型，具体是如何训练和测试的？</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：请介绍一下这个reading comprehension dataset和其他dataset之间的主要区别？以及该dataset的优势是？</strong></p>
+<p><strong>答：</strong> 这篇paper相对于前面两篇内容简单一些，主要就是介绍了一个新构建的QA数据集。所以我和大家交流分享一下我比较熟悉的最近一些比较popular的QA Dataset吧。</p>
+<p>MCTest: 数据集本身质量不错，像普通的阅读理解，是根据一篇文章提出问题，然后在给定的四个选项中选出一个。但是数据集太小，现在比较主流的RC model都是基于deep learning的，数据量太小很难让model学习到有用的信息。所以个人认为小数据集上的Model多少会给人一种强凑答案的感觉。</p>
+<p>CNN/Daily Mail, CBT: 这个数据集我比较熟悉，数据集比较大，也是比较火的一个数据集。问题的答案只是一个单词或者一个entity，SQuAD的答案有比较长的phrase。the entities are anonymized。在anonymized dataset上训练的一个问题是，容易训练出没有semantics的模型来。因为训练集上的参考答案都是entity1，entity2，到了真实情况下碰到很大的vocabulary模型未必work。</p>
+<p>安利一下<a href="https://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">我同学的一篇paper</a>，分析了一下几个在CNN/DM/CBT上面比较好的几个模型attention sum/gated attention sum/stanford reader其实本质是差不多的。然后stanford reader虽然在这个数据集上效果很好但是一旦数据集不anonymize就很容易不work了。</p>
+<p>WDW dataset:Passage: 直接给一个例子。</p>
+<blockquote>
+<p>Britain’s decision on Thursday to drop extradition proceedings against Gen. Augusto Pinochet and allow him to return to Chile is understandably frustrating … Jack Straw, the home secretary, said the 84-year-old former dictator’s ability to understand the charges against him and to direct his defense had been seriously impaired by a series of strokes. … Chile’s president-elect, Ricardo Lagos, has wisely pledged to let justice run its course. But the outgoing government of President Eduardo Frei is pushing a constitutional reform that would allow Pinochet to step down from the Senate and retain parliamentary immunity from prosecution. … </p>
+<p>Question: Sources close to the presidential palace said that Fujimori declined at the last moment to leave the country and instead he will send a high level delegation to the ceremony, at which Chilean President Eduardo Frei will pass the mandate to XXX. </p>
+<p>Choices: (1) Augusto Pinochet (2) Jack Straw (3) Ricardo Lagos</p>
+</blockquote>
+<p>还有一个dataset叫wiki QA我也没有在上面实验过，也给一个例子。</p>
+<blockquote>
+<p>Question: Who wrote second Corinthians? Second Epistle to the Corinthians The Second Epistle to the Corinthians, often referred to as Second Corinthians (and written as 2 Corinthians), is the eighth book of the New Testament of the Bible. Paul the Apostle and “Timothy our brother” wrote this epistle to “the church of God which is at Corinth, with all the saints which are in all Achaia”.</p>
+</blockquote>
+<p>个人觉得open domain以及需要external knowledge的QA DATASET其实很难，但是很重要，因为可以应用在其他更多的方面。</p>
+<p>另外提一个LAMBADA dataset，虽然他的问题是last word prediction，不过我们发现用reading comprehension models也可以做出很好的效果。详细信息可以看<a href="https://arxiv.org/abs/1610.08431" target="_blank" rel="external">我的一篇paper</a>。</p>
+<p>facebook有个babi dataset，</p>
+<pre><code>1 Mary moved to the bathroom.
+2 John went to the hallway.
+3 Where is Mary?        bathroom        1
+4 Daniel went back to the hallway.
+5 Sandra moved to the garden.
+6 Where is Daniel?      hallway 4
+7 John moved to the office.
+8 Sandra journeyed to the bathroom.
+9 Where is Daniel?      hallway 4
+10 Mary moved to the hallway.
+11 Daniel travelled to the office.
+12 Where is Daniel?     office  11
+13 John went back to the garden.
+14 John moved to the bedroom.
+15 Where is Sandra?     bathroom        8
+1 Sandra travelled to the office.
+2 Sandra went to the bathroom.
+3 Where is Sandra?      bathroom        2
+</code></pre><p>需要一些logical thinking，facebook自己搞了一些memory network的模型在上面效果比较好，但是其实我觉得memory network和attention模型非常相似。</p>
+<p>至于本文构建的squad dataset主要的特点就是答案可能比较长，而且不给候选答案，所以难度应该会大一些 数据集的质量也比较高，因为都是人工出的问题和标准答案，数据量也很大，容易训练处有用的模型。</p>
+<p>个人认为构建大的，有意义的数据集对于QA的工作是很关键的。现在还是比较缺乏能够推广到实际生活中的问题的QA模型。</p>
+<p>我大致就分享这一些。给想做QA方面问题的同学一点参考。</p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;本期Chat是PaperWeekly第一次尝试与读者进行互动交流，一共分享和解读3篇paper，均选自2016年最值得读的自然语言处理领域p
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
+  
+  <entry>
     <title>本周值得读(2017.02.13-2017.02.17)</title>
     <link href="http://rsarxiv.github.io/2017/02/19/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-02-13-2017-02-17/"/>
     <id>http://rsarxiv.github.io/2017/02/19/本周值得读-2017-02-13-2017-02-17/</id>
-    <published>2017-02-19T19:04:24.000Z</published>
+    <published>2017-02-19T03:04:24.000Z</published>
     <updated>2017-02-19T19:08:59.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Hybrid-Code-Networks-practical-and-efficient-end-to-end-dialog-control-with-supervised-and-reinforcement-learning"><a href="#Hybrid-Code-Networks-practical-and-efficient-end-to-end-dialog-control-with-supervised-and-reinforcement-learning" class="headerlink" title="Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning"></a><a href="http://t.cn/RJoQ74r" target="_blank" rel="external">Hybrid Code Networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning</a></h1><p>【对话系统】本文提出了一种特定领域对话系统的端到端训练方案，相比于传统的端到端模型来说，亮点在于用更少量的、更有效的数据进行训练，并且结合一些动作模板和API来做对话生成，探索了监督学习和增强学习两种方案。作者是来自微软研究院Jason D. Williams，本篇文章对去年的这篇End-to-end LSTM-based dialog control optimized with supervised and reinforcement learning进行了一些新的改进。</p>
@@ -32,9 +250,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -42,7 +260,7 @@
     <title>PaperWeekly 第二十五期</title>
     <link href="http://rsarxiv.github.io/2017/02/16/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%94%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/02/16/PaperWeekly-第二十五期/</id>
-    <published>2017-02-17T06:07:07.000Z</published>
+    <published>2017-02-16T14:07:07.000Z</published>
     <updated>2017-02-17T06:10:09.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>第二十二期的PaperWeekly对Image Captioning进行了综述。今天这篇文章中，我们会介绍一些近期的工作。（如果你对Image Captioning这个任务不熟悉的话，请移步二十二期）</p>
@@ -98,9 +316,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -108,7 +326,7 @@
     <title>本周值得读(2017.02.06-2017.02.10)</title>
     <link href="http://rsarxiv.github.io/2017/02/11/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-02-06-2017-02-10/"/>
     <id>http://rsarxiv.github.io/2017/02/11/本周值得读-2017-02-06-2017-02-10/</id>
-    <published>2017-02-12T06:45:32.000Z</published>
+    <published>2017-02-11T14:45:32.000Z</published>
     <updated>2017-02-12T06:54:01.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="All-but-the-Top-Simple-and-Effective-Postprocessing-for-Word-Representations"><a href="#All-but-the-Top-Simple-and-Effective-Postprocessing-for-Word-Representations" class="headerlink" title="All-but-the-Top: Simple and Effective Postprocessing for Word Representations"></a><a href="http://t.cn/RJUfnMQ" target="_blank" rel="external">All-but-the-Top: Simple and Effective Postprocessing for Word Representations</a></h2><p>【词表示】本文提出了一种对已有的词向量进行预处理的方法，用来对学习到的词向量降噪。基于词向量自身的几何结构 — 均值非零以及各项不同性，本文提出了一个反直观的处理方法：从所有的词向量中移除均值，以及移除部分导致各项不同性的方向。虽然这种处理方式忽略了词向量中的部分信息，但是它可以使多种通过不同方式训练出来的词向量加强词向量中包含的语义信息。经过预处理之后的词向量在一系列intrinsic衡量方式上（similarity, analogy, concept categorization）得到了一致性地提高。同时，我们通过了不同的应用上进行了测试，试验结果表明该预处理已经在诸多neural network中有所体现，进一步证实了对词向量进行预处理的重要性。本文工作来自UIUC NLP组的Jiaqi Mu，她也是Paperweekly的作者团队成员之一。</p>
@@ -128,9 +346,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -138,7 +356,7 @@
     <title>本周值得读(2017.01.23-2017.02.05)</title>
     <link href="http://rsarxiv.github.io/2017/02/04/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-01-23-2017-02-05/"/>
     <id>http://rsarxiv.github.io/2017/02/04/本周值得读-2017-01-23-2017-02-05/</id>
-    <published>2017-02-04T20:41:10.000Z</published>
+    <published>2017-02-04T04:41:10.000Z</published>
     <updated>2017-02-05T03:12:25.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Learning-to-Decode-for-Future-Success"><a href="#Learning-to-Decode-for-Future-Success" class="headerlink" title="Learning to Decode for Future Success"></a><a href="http://t.cn/Rx4qQI5" target="_blank" rel="external">Learning to Decode for Future Success</a></h1><p>【seq2seq解码】本文研究的问题是在seq2seq解决对话生成、机器翻译、文本摘要时如何用增强学习的方法高效率地进行decoding，比起经典的softmax多分类预测next word，增强学习通过Q函数对所生成的文本内容有着更好的控制，但训练效率太低，本文的亮点在于优化和改进了传统的RL模型。建议研究机器翻译、对话生成等seq2seq任务的童鞋研读。</p>
@@ -158,9 +376,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -168,7 +386,7 @@
     <title>PaperWeekly 第二十三期</title>
     <link href="http://rsarxiv.github.io/2017/02/02/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%89%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/02/02/PaperWeekly-第二十三期/</id>
-    <published>2017-02-03T05:37:34.000Z</published>
+    <published>2017-02-02T13:37:34.000Z</published>
     <updated>2017-02-03T05:44:51.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p> 什么是艺术？<br> 机器的作品能否叫艺术？<br> 机器能否取代艺术家？<br> 这些问题，相信不同的人，会有不同的答案。很多人认为机器生成的作品只是简单的模仿人类，没有创造性可言，但是人类艺术家，不也是从模仿和学习开始的吗？本文是一篇机器诗歌生成的综述文章，希望能增进大家对这个领域的了解。</p>
@@ -215,9 +433,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -225,7 +443,7 @@
     <title>本周值得读(2017.01.16-2017.01.20)</title>
     <link href="http://rsarxiv.github.io/2017/01/21/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-01-16-2017-01-20/"/>
     <id>http://rsarxiv.github.io/2017/01/21/本周值得读-2017-01-16-2017-01-20/</id>
-    <published>2017-01-21T18:36:46.000Z</published>
+    <published>2017-01-21T02:36:46.000Z</published>
     <updated>2017-01-21T18:46:53.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Dialog Context Language Modeling with Recurrent Neural Networks"></a><a href="http://t.cn/RMRS1B8" target="_blank" rel="external">Dialog Context Language Modeling with Recurrent Neural Networks</a></h1><p>【对话语言模型】传统的基于上下文的（context dependent）语言模型多是先将前文中的信息做特征表达，例如用LDA、n-gram、或是RNN等方法做文本的特征提取，再将其加入到RNN语言模型中。这些方法比较适合于表达文档（document）的上下文信息，但他们并没有针对上下文中的交互做建模，因此并不一定适用于对话中（dialog）的上下文信息表达。本文针对如何有效表达对话中的交互做了探索，提出了两种基于RNN的上下文关联语言模型，在Switchboard Dialog Act Corpus (SwDA)上取得了一定的效果，并尝试对实验结果做了进一步分析。本文采用的数据集地址：<a href="http://compprag.christopherpotts.net/swda.html" target="_blank" rel="external">http://compprag.christopherpotts.net/swda.html</a><br>本文作者是CMU的bing liu博士，也是paperweekly的写作成员之一。</p>
@@ -243,9 +461,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -253,7 +471,7 @@
     <title>PaperWeekly 第二十二期</title>
     <link href="http://rsarxiv.github.io/2017/01/20/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%BA%8C%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/01/20/PaperWeekly-第二十二期/</id>
-    <published>2017-01-20T18:54:36.000Z</published>
+    <published>2017-01-20T02:54:36.000Z</published>
     <updated>2017-01-20T21:45:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Image Caption是一个融合计算机视觉、自然语言处理和机器学习的问题，它类似于翻译一副图片为一段描述文字。该任务对于人类来说非常容易，但是对于机器却非常具有挑战性，它不仅需要利用模型去理解图片的内容并且还需要用自然语言去表达它们之间的关系。除此之外，模型还需要能够抓住图像的语义信息，并且生成人类可读的句子。<br>随着机器翻译和大数据的兴起，出现了Image Caption的研究浪潮。当前大多数的Image Caption方法基于encoder-decoder模型。其中encoder一般为卷积神经网络，利用最后全连接层或者卷积层的特征作作为图像的特征，decoder一般为递归神经网络，主要用于图像描述的生成。由于普通RNN存在梯度下降的问题，RNN只能记忆之前有限的时间单元的内容，而LSTM是一种特殊的RNN架构，能够解决梯度消失等问题，并且其具有长期记忆，所以一般在decoder阶段采用LSTM.</p>
@@ -307,9 +525,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -317,7 +535,7 @@
     <title>近期对话系统领域高质量paper汇总</title>
     <link href="http://rsarxiv.github.io/2017/01/17/%E8%BF%91%E6%9C%9F%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F%E9%A2%86%E5%9F%9F%E9%AB%98%E8%B4%A8%E9%87%8Fpaper%E6%B1%87%E6%80%BB/"/>
     <id>http://rsarxiv.github.io/2017/01/17/近期对话系统领域高质量paper汇总/</id>
-    <published>2017-01-17T22:02:42.000Z</published>
+    <published>2017-01-17T06:02:42.000Z</published>
     <updated>2017-01-18T01:18:05.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#1-Dialog-Context-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="1 Dialog Context Language Modeling with Recurrent Neural Networks"></a>1 Dialog Context Language Modeling with Recurrent Neural Networks</h2><p>Authors: Bing Liu, Ian Lane<br>Link: <a href="https://arxiv.org/abs/1701.04056" target="_blank" rel="external">https://arxiv.org/abs/1701.04056</a><br>Tags: Context; LM</p>
@@ -353,9 +571,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -363,7 +581,7 @@
     <title>本周值得读(2017.01.09-2017.01.13)</title>
     <link href="http://rsarxiv.github.io/2017/01/14/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2017-01-09-2017-01-13/"/>
     <id>http://rsarxiv.github.io/2017/01/14/本周值得读-2017-01-09-2017-01-13/</id>
-    <published>2017-01-14T18:27:18.000Z</published>
+    <published>2017-01-14T02:27:18.000Z</published>
     <updated>2017-01-14T18:46:37.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Neural-Personalized-Response-Generation-as-Domain-Adaptation"><a href="#Neural-Personalized-Response-Generation-as-Domain-Adaptation" class="headerlink" title="Neural Personalized Response Generation as Domain Adaptation"></a><a href="http://t.cn/RM6jy36" target="_blank" rel="external">Neural Personalized Response Generation as Domain Adaptation</a></h1><p>【个性化】【对话生成】  本文研究的问题是如何生成个性化的对话，模型仍是基于经典的seq2seq+attention，在该模型的基础上通过两个步骤来生成特定style的对话，第一步是initialization，第二步是adaptation。工作来自哈工大 @刘挺 老师组，他们推出了一个聊天机器人 “笨笨” （可微信搜），而且具有中文阅读理解的功能。关于生成更多样的对话内容，可以参考 PaperWeekly 第十八期 — 提高seq2seq方法所生成对话的流畅度和多样性 <a href="http://t.cn/RIVUKnr" target="_blank" rel="external">http://t.cn/RIVUKnr</a></p>
@@ -385,9 +603,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -395,7 +613,7 @@
     <title>高考机器人距离我们还有多远？</title>
     <link href="http://rsarxiv.github.io/2017/01/13/%E9%AB%98%E8%80%83%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%B7%9D%E7%A6%BB%E6%88%91%E4%BB%AC%E8%BF%98%E6%9C%89%E5%A4%9A%E8%BF%9C%EF%BC%9F/"/>
     <id>http://rsarxiv.github.io/2017/01/13/高考机器人距离我们还有多远？/</id>
-    <published>2017-01-13T22:57:16.000Z</published>
+    <published>2017-01-13T06:57:16.000Z</published>
     <updated>2017-01-14T18:26:38.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>2016年初，随着AlphaGo战胜韩国棋王李世乭九段，人工智能重新被推到风口浪尖，一时间大家纷纷开始讨论人工智能将会带来什么，将会改变什么，不管是媒体还是学者纷纷将关注点转移到了人工智能上面；号称将改变人类交互方式的聊天机器人也如雨后春笋般地出现在街上、桥下和田野中；2016年末，一个叫做master的计算机程序在网络上接连战胜了几乎所有的围棋高手，经过证实正是AlphaGo的升级版；接着，德州扑克在新年伊始也被人工智能攻破。</p>
@@ -430,7 +648,7 @@
     <title>PaperWeekly 第二十一期</title>
     <link href="http://rsarxiv.github.io/2017/01/11/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%80%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/01/11/PaperWeekly-第二十一期/</id>
-    <published>2017-01-11T20:00:23.000Z</published>
+    <published>2017-01-11T04:00:23.000Z</published>
     <updated>2017-01-11T21:06:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>多信息融合是一个重要的研究趋势，尤其是对于训练数据缺乏的任务来说，如何融入其他相关信息来提高本任务的准确率是一个非常值得研究的问题。机器翻译是一个热门的研究领域，随着训练数据规模地增加，各种NN模型的效果也取得了突破的进展，google和百度均已部署上线NMT系统；融合图像、音频、视频、文本等各种模态数据的多模态研究也是一个非常热门的研究方向，本期PaperWeekly将为大家带来NMT和多模态交叉研究的paper解读，共3篇paper：</p>
@@ -491,9 +709,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -501,7 +719,7 @@
     <title>本周值得读(2016.12.26-2017.01.06)</title>
     <link href="http://rsarxiv.github.io/2017/01/06/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-26-2017-01-06/"/>
     <id>http://rsarxiv.github.io/2017/01/06/本周值得读-2016-12-26-2017-01-06/</id>
-    <published>2017-01-07T06:06:34.000Z</published>
+    <published>2017-01-06T14:06:34.000Z</published>
     <updated>2017-01-07T06:24:47.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process"><a href="#The-Neural-Hawkes-Process-A-Neurally-Self-Modulating-Multivariate-Point-Process" class="headerlink" title="The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process"></a><a href="http://t.cn/RMwnQmN" target="_blank" rel="external">The Neural Hawkes Process: A Neurally Self-Modulating Multivariate Point Process</a></h1><p>【时间序列模型】 本文提出了一个通用的连续时间序列模型—Neural Hawkes process，用来学习事件流中不同事件之间的影响关系，进而对未来事件的发生时间和类型进行预测。该模型在传统Hawkes process的基础上，用 Recurrent Neural Network 来总结事件流的历史信息，并动态地估计不同时刻不同事件之间复杂的相互影响关系，进而得出未来事件的发生时间和类型的概率分布。此模型可以用于多种事件流的分析，包括医学诊断，消费者行为，和社交网络活动的预测等，并在多个数据集上表现出了显著的优势。作者来自约翰霍普金斯大学NLP组，主页地址<a href="http://www.cs.jhu.edu/~hmei/" target="_blank" rel="external">http://www.cs.jhu.edu/~hmei/</a>  有需要讨论的可以直接联系作者本文  hmei@cs.jhu.edu</p>
@@ -522,9 +740,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -532,7 +750,7 @@
     <title>PaperWeekly 第二十期</title>
     <link href="http://rsarxiv.github.io/2017/01/06/PaperWeekly-%E7%AC%AC%E4%BA%8C%E5%8D%81%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2017/01/06/PaperWeekly-第二十期/</id>
-    <published>2017-01-06T18:31:23.000Z</published>
+    <published>2017-01-06T02:31:23.000Z</published>
     <updated>2017-01-06T18:49:38.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="GAN（Generative-Adversarial-Nets）研究进展"><a href="#GAN（Generative-Adversarial-Nets）研究进展" class="headerlink" title="GAN（Generative Adversarial Nets）研究进展"></a>GAN（Generative Adversarial Nets）研究进展</h1><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>1、Unsupervised learning</p>
@@ -603,9 +821,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -613,7 +831,7 @@
     <title>2016年自然语言处理领域15篇值得读的Paper</title>
     <link href="http://rsarxiv.github.io/2016/12/29/2016%E5%B9%B4%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E9%A2%86%E5%9F%9F10%E7%AF%87%E5%80%BC%E5%BE%97%E8%AF%BB%E7%9A%84Paper/"/>
     <id>http://rsarxiv.github.io/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/</id>
-    <published>2016-12-30T04:10:12.000Z</published>
+    <published>2016-12-29T12:10:12.000Z</published>
     <updated>2017-01-03T03:49:29.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Learning-to-Compose-Neural-Networks-for-Question-Answering"><a href="#Learning-to-Compose-Neural-Networks-for-Question-Answering" class="headerlink" title="Learning to Compose Neural Networks for Question Answering"></a><a href="https://arxiv.org/abs/1601.01705" target="_blank" rel="external">Learning to Compose Neural Networks for Question Answering</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Jacob Andreas, Marcus Rohrbach, Trevor Darrell, Dan Klein</p>
@@ -678,7 +896,7 @@
     <title>告别2016，迎接2017</title>
     <link href="http://rsarxiv.github.io/2016/12/29/%E5%91%8A%E5%88%AB2016%EF%BC%8C%E8%BF%8E%E6%8E%A52017/"/>
     <id>http://rsarxiv.github.io/2016/12/29/告别2016，迎接2017/</id>
-    <published>2016-12-29T19:20:43.000Z</published>
+    <published>2016-12-29T03:20:43.000Z</published>
     <updated>2016-12-30T18:02:26.000Z</updated>
     
     <content type="html"><![CDATA[<p>2016年即将结束，首先对支持PaperWeekly的各位童鞋表示衷心的感谢，感谢你们让我有动力将这个用来督促我自己多读paper的side project坚持一直做下来，感谢各位对自然语言处理感兴趣并且愿意牺牲一些个人时间来写paper note的小伙伴，也感谢每天坚持一起刷arXiv来保证周末推荐“每周值得读”质量的几位童鞋，感谢加入PaperWeekly交流群每天都贡献很多高质量讨论内容的各位朋友，感谢为三个交流群做消息同步机器人的种瓜同学。</p>
@@ -704,9 +922,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -714,7 +932,7 @@
     <title>本周值得读(2016.12.19-2016.12.23)</title>
     <link href="http://rsarxiv.github.io/2016/12/25/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-19-2016-12-23/"/>
     <id>http://rsarxiv.github.io/2016/12/25/本周值得读-2016-12-19-2016-12-23/</id>
-    <published>2016-12-25T18:31:57.000Z</published>
+    <published>2016-12-25T02:31:57.000Z</published>
     <updated>2016-12-25T18:39:11.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Machine-Reading-with-Background-Knowledge"><a href="#Machine-Reading-with-Background-Knowledge" class="headerlink" title="Machine Reading with Background Knowledge"></a><a href="http://t.cn/RIx3EjP" target="_blank" rel="external">Machine Reading with Background Knowledge</a></h2><p>【语义理解】在理解一句话的时候通常是直接分析该句话，而没有借助其他外部的知识，所以常常会产生一些歧义或者错误。本文的思路是在分析一句话时，借助一些背景知识来进行辅助，文中给出了两个任务，一个是句法分析中的介词短语消歧，一个是名词短语的关系抽取，都取得了明显的效果。本文作者包括了《机器学习》的作者Tom M. Mitchell教授。单纯地基于统计方法来做句法分析或者语义角色标注确实会遇到一些瓶颈，借助外部的背景知识是一个不错的思路。随着本文一起还开放了一个数据集 Prepositional Phrase Attachment Ambiguity (PPA) dataset <a href="http://t.cn/RIx1lEm" target="_blank" rel="external">http://t.cn/RIx1lEm</a></p>
@@ -735,9 +953,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -745,7 +963,7 @@
     <title>PaperWeekly 第十九期</title>
     <link href="http://rsarxiv.github.io/2016/12/23/PaperWeekly-%E7%AC%AC%E5%8D%81%E4%B9%9D%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/12/23/PaperWeekly-第十九期/</id>
-    <published>2016-12-23T18:40:03.000Z</published>
+    <published>2016-12-23T02:40:03.000Z</published>
     <updated>2016-12-23T18:56:14.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引"><a href="#引" class="headerlink" title="引"></a>引</h1><p>本期的PaperWeekly一共分享四篇最近arXiv上发布的高质量paper，包括：情感分析、机器阅读理解、知识图谱、文本分类。人工智能及其相关研究日新月异，本文将带着大家了解一下以上四个研究方向都有哪些最新进展。四篇paper分别是：</p>
@@ -803,9 +1021,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -813,7 +1031,7 @@
     <title>本周值得读(2016.12.12-2016.12.16)</title>
     <link href="http://rsarxiv.github.io/2016/12/18/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-12-2016-12-16/"/>
     <id>http://rsarxiv.github.io/2016/12/18/本周值得读-2016-12-12-2016-12-16/</id>
-    <published>2016-12-18T17:16:11.000Z</published>
+    <published>2016-12-18T01:16:11.000Z</published>
     <updated>2016-12-18T17:28:36.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors"><a href="#Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors" class="headerlink" title="Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors "></a><a href="http://t.cn/RIbpc9X" target="_blank" rel="external">Building Large Machine Reading-Comprehension Datasets using Paragraph Vectors </a></h2><p>【机器阅读理解】【数据福利】<br>本文利用一种无监督的方法构建了一组大型的机器阅读理解数据集。其中机器阅读理解问题是提供一篇新闻，从5个候选标题中选择一个正确的。无监督的方法用了Mikolov提出的Paragraph Vector（Word2Vec的文档版），用来训练和计算各个新闻标题之间的相似度，产生候选答案。本文所生成的数据集地址：<a href="https://github.com/google/mcafp" target="_blank" rel="external">https://github.com/google/mcafp</a></p>
@@ -836,9 +1054,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
     
   </entry>
   
@@ -846,7 +1064,7 @@
     <title>PaperWeekly 第十八期</title>
     <link href="http://rsarxiv.github.io/2016/12/17/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%85%AB%E6%9C%9F/"/>
     <id>http://rsarxiv.github.io/2016/12/17/PaperWeekly-第十八期/</id>
-    <published>2016-12-17T18:37:27.000Z</published>
+    <published>2016-12-17T02:37:27.000Z</published>
     <updated>2016-12-17T19:35:50.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
@@ -914,38 +1132,9 @@
     </summary>
     
     
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
       <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
-  </entry>
-  
-  <entry>
-    <title>本周值得读(2016.12.05-2016.12.09)</title>
-    <link href="http://rsarxiv.github.io/2016/12/11/%E6%9C%AC%E5%91%A8%E5%80%BC%E5%BE%97%E8%AF%BB-2016-12-05-2016-12-09/"/>
-    <id>http://rsarxiv.github.io/2016/12/11/本周值得读-2016-12-05-2016-12-09/</id>
-    <published>2016-12-11T16:51:29.000Z</published>
-    <updated>2016-12-11T17:01:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一周值得读"><a href="#一周值得读" class="headerlink" title="一周值得读"></a>一周值得读</h1><h2 id="End-to-End-Joint-Learning-of-Natural-Language-Understanding-and-Dialogue-Manager"><a href="#End-to-End-Joint-Learning-of-Natural-Language-Understanding-and-Dialogue-Manager" class="headerlink" title="End-to-End Joint Learning of Natural Language Understanding and Dialogue Manager "></a><a href="http://t.cn/RfDCS5X" target="_blank" rel="external">End-to-End Joint Learning of Natural Language Understanding and Dialogue Manager </a></h2><p>【对话系统】自然语言理解和对话管理通常是两个独立的任务，NLU的误差会影响到对话管理的效果。本文将两个任务联合起来进行端到端的训练，得到了不错的效果。建议研究对话系统的童鞋来读。</p>
-<h2 id="Sequential-Match-Network-A-New-Architecture-for-Multi-turn-Response-Selection-in-Retrieval-based-Chatbots"><a href="#Sequential-Match-Network-A-New-Architecture-for-Multi-turn-Response-Selection-in-Retrieval-based-Chatbots" class="headerlink" title="Sequential Match Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots "></a><a href="http://t.cn/RIhcTFP" target="_blank" rel="external">Sequential Match Network: A New Architecture for Multi-turn Response Selection in Retrieval-based Chatbots </a></h2><p>【对话系统】本文研究的问题是基于检索的多轮对话机器人，单轮对话和多轮对话的一大区别在于后者需要考虑更多的上下文内容，本文在检索答案时除了相关性还考虑了上下文之间的关系，建议研究检索式聊天机器人的童鞋来读本文。本文还给出了一个测试数据集，地址在：<a href="http://t.cn/RIhf4Sh" target="_blank" rel="external">http://t.cn/RIhf4Sh</a></p>
-<h2 id="CER-Complementary-Entity-Recognition-via-Knowledge-Expansion-on-Large-Unlabeled-Product-Reviews"><a href="#CER-Complementary-Entity-Recognition-via-Knowledge-Expansion-on-Large-Unlabeled-Product-Reviews" class="headerlink" title="CER: Complementary Entity Recognition via Knowledge Expansion on Large Unlabeled Product Reviews "></a><a href="http://t.cn/RfDpyCm" target="_blank" rel="external">CER: Complementary Entity Recognition via Knowledge Expansion on Large Unlabeled Product Reviews </a></h2><p>【相关实体识别】本文研究的问题是产品评论数据中的相关实体识别问题，评论数据是个很有意思的数据，用户在买东西时希望可以通过对比买到更好的产品。建议做评论挖掘的童鞋读。</p>
-<h2 id="The-Evolution-of-Sentiment-Analysis-A-Review-of-Research-Topics-Venues-and-Top-Cited-Papers"><a href="#The-Evolution-of-Sentiment-Analysis-A-Review-of-Research-Topics-Venues-and-Top-Cited-Papers" class="headerlink" title="The Evolution of Sentiment Analysis - A Review of Research Topics, Venues, and Top Cited Papers "></a><a href="http://t.cn/RIvkAop" target="_blank" rel="external">The Evolution of Sentiment Analysis - A Review of Research Topics, Venues, and Top Cited Papers </a></h2><p>【情感分析】【综述】一篇很细的情感分析的综述，刚刚进入这个领域的童鞋可以来读一读。</p>
-<h2 id="一周资源"><a href="#一周资源" class="headerlink" title="一周资源"></a>一周资源</h2><h2 id="文本上的算法"><a href="#文本上的算法" class="headerlink" title="文本上的算法"></a><a href="http://t.cn/RhtyvzE" target="_blank" rel="external">文本上的算法</a></h2><p>《文本上的算法》v4.0：增加自然语言处理和对话系统章节；丰富了其他内容。</p>
-<h2 id="NIPS-2016-Spotlight-Videos"><a href="#NIPS-2016-Spotlight-Videos" class="headerlink" title="NIPS 2016 Spotlight Videos"></a><a href="http://t.cn/RfB5cA2" target="_blank" rel="external">NIPS 2016 Spotlight Videos</a></h2><p>【NIPS 2016 Spotlight Videos】NIPS 2016焦点视频集。神经信息处理系统大会(Conference and Workshop on Neural Information Processing Systems)，简称NIPS，是一个关于机器学习和计算神经科学的国际会议。该会议固定在每年的12月举行,由NIPS基金会主办。NIPS是机器学习领域的顶级会议 。在中国计算机学会的国际学术会议排名中，NIPS为人工智能领域的A类会议。(via @网路冷眼)</p>
-<h2 id="2016年深度学习的主要进展"><a href="#2016年深度学习的主要进展" class="headerlink" title="2016年深度学习的主要进展"></a><a href="http://t.cn/RIvuIuV" target="_blank" rel="external">2016年深度学习的主要进展</a></h2><p>2016年深度学习的主要进展，The major advancements in Deep Learning in 2016 (via @视觉机器人)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;一周值得读&quot;&gt;&lt;a href=&quot;#一周值得读&quot; class=&quot;headerlink&quot; title=&quot;一周值得读&quot;&gt;&lt;/a&gt;一周值得读&lt;/h1&gt;&lt;h2 id=&quot;End-to-End-Joint-Learning-of-Natural-Language-Underst
-    
-    </summary>
-    
-    
       <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
     
   </entry>
   

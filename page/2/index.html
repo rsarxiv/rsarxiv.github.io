@@ -65,7 +65,60 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-09T19:48:42.000Z"><a href="/2016/09/09/PaperWeekly第四期/">2016-09-09</a></time>
+        <time datetime="2016-09-10T04:38:13.000Z"><a href="/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/">2016-09-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/">cs.CL weekly 2016.09.05-2016.09.09</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：<br>（点击标题可看原文）</p>
+<h1 id="Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level"><a href="#Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level" class="headerlink" title="Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.00718v1.pdf" target="_blank" rel="external">Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level</a></h1><p>张潼老师的文章，通过实验对比了shallow word-level CNN（本文工作）和deep char-level CNN模型在而文本分类任务上的表现，结论是本文工作又快又准。</p>
+<p>（这篇文章对于选择char-level还是word-level做文本分类非常有指导意义）</p>
+<h1 id="Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering"><a href="#Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering" class="headerlink" title="Skipping Word: A Character-Sequential Representation based Framework for Question Answering"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00565v1.pdf" target="_blank" rel="external">Skipping Word: A Character-Sequential Representation based Framework for Question Answering</a></h1><p>本文用char-level CNN模型来做句子表示，然后进行question和answer之间的相关匹配学习，CIKM2016 short paper accepted。</p>
+<h1 id="End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00777v1.pdf" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h1><p>本文是微软研究软邓力老师的文章，构建了一种从知识图谱中形成response的聊天机器人KB-InfoBot，并且提出了一种端到端的增强学习训练方案。</p>
+<p>（本文对于构建一个端到端的KB + task-oriented chatbot非常有启发和指导意义）</p>
+<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><p>本文提出一种模型，将intent detection、slot filling和language modeling融合在一起进行学习，用于解决对话系统中的SLU task。本文是SIGDIAL 2016 paper。</p>
+<p>用到的数据集在Dropbox有一份<a href="http://t.cn/Rcbcpfl" target="_blank" rel="external">copy</a></p>
+<h1 id="Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling"><a href="#Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling" class="headerlink" title="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01454v1.pdf" target="_blank" rel="external">Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling</a></h1><p>和上一篇paper是同一个作者，解决的是同一个问题。将RNN换成了attention-based RNN，被另外一个会议录取。(有点灌水的意思)</p>
+<h1 id="Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations"><a href="#Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations" class="headerlink" title="Ask the GRU: Multi-task Learning for Deep Text Recommendations"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.02116v1.pdf" target="_blank" rel="external">Ask the GRU: Multi-task Learning for Deep Text Recommendations</a></h1><p>本文提出了用端到端的解决方案来做paper的推荐任务，用GRU将文本序列（标题、摘要等）encode到一个latent vector中。并且通过多任务学习来完成内容推荐和条目预测两个task，取得了不错的效果。</p>
+<p>以下内容为arXiv外的<b>优质内容</b>：</p>
+<h1 id="Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems"><a href="#Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems" class="headerlink" title="Discriminative Methods for Statistical Spoken Dialogue Systems"></a><a href="http://www.matthen.com/research/papers/Discriminative_Methods_for_Statistical_Spoken_Dialogue_Systems_Matthew_Henderson_PhD_Thesis.pdf" target="_blank" rel="external">Discriminative Methods for Statistical Spoken Dialogue Systems</a></h1><p>剑桥大学Spoken Dialogue System组毕业的Matthew Henderson博士，师从于Steve Young教授，研究领域是对话系统中的Dialogue State Tracking，主要特色是用transfer learning来解决discriminative model的扩展性和通用性。</p>
+<p>如果你对chatbot感兴趣，强烈建议好好研读一下这篇博士论文。</p>
+<h1 id="CONNECTING-IMAGES-AND-NATURAL-LANGUAGE"><a href="#CONNECTING-IMAGES-AND-NATURAL-LANGUAGE" class="headerlink" title="CONNECTING IMAGES AND NATURAL LANGUAGE"></a><a href="http://cs.stanford.edu/people/karpathy/main.pdf" target="_blank" rel="external">CONNECTING IMAGES AND NATURAL LANGUAGE</a></h1><p>斯坦福大学Feifei Li的博士生Andrej Karpathy的PhD thesis，Karpathy维护着几个非常流行的开源代码库，并且有着一个影响力非常大的博客。名师出高徒，这篇博士博士论文值得一看！</p>
+<p>最近，他更新了一篇博客，谈论了一些自己对读博的思考和建议。 <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="external">A Survival Guide to a PhD</a></p>
+<h1 id="Mendeley-Docs"><a href="#Mendeley-Docs" class="headerlink" title="Mendeley Docs"></a><a href="https://pan.baidu.com/share/link?shareid=317480&amp;uk=1594817379" target="_blank" rel="external">Mendeley Docs</a></h1><p>paper越看越多，一个优秀的paper管理工具就变得非常必要了，Mendeley是其中最优秀的代表之一。</p>
+<p>Easily organize your papers, read &amp; annotate your PDFs, collaborate in private or open groups, and securely access your research from everywhere.</p>
+<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
+<p>微信公众号：PaperWeekly</p>
+<p><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
+<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-09T04:48:42.000Z"><a href="/2016/09/09/PaperWeekly第四期/">2016-09-09</a></time>
       
       
   
@@ -167,7 +220,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-03T17:02:40.000Z"><a href="/2016/09/03/cs-CL-weekly-2016-08-29-2016-09-02/">2016-09-03</a></time>
+        <time datetime="2016-09-03T02:02:40.000Z"><a href="/2016/09/03/cs-CL-weekly-2016-08-29-2016-09-02/">2016-09-03</a></time>
       
       
   
@@ -207,7 +260,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-01T21:58:14.000Z"><a href="/2016/09/01/PaperWeekly-第三期/">2016-09-01</a></time>
+        <time datetime="2016-09-01T06:58:14.000Z"><a href="/2016/09/01/PaperWeekly-第三期/">2016-09-01</a></time>
       
       
   
@@ -380,7 +433,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-26T16:20:19.000Z"><a href="/2016/08/26/cs-CL-weekly-2016-08-22-2016-08-26/">2016-08-26</a></time>
+        <time datetime="2016-08-26T01:20:19.000Z"><a href="/2016/08/26/cs-CL-weekly-2016-08-22-2016-08-26/">2016-08-26</a></time>
       
       
   
@@ -424,7 +477,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-22T02:05:52.000Z"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">2016-08-21</a></time>
+        <time datetime="2016-08-21T11:05:52.000Z"><a href="/2016/08/21/从api-ai工作原理来看构建简单场景chatbot的一般方法/">2016-08-21</a></time>
       
       
   
@@ -506,7 +559,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-16T23:53:50.000Z"><a href="/2016/08/16/PaperWeekly-第二期/">2016-08-16</a></time>
+        <time datetime="2016-08-16T08:53:50.000Z"><a href="/2016/08/16/PaperWeekly-第二期/">2016-08-16</a></time>
       
       
   
@@ -561,7 +614,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-16T16:06:36.000Z"><a href="/2016/08/16/pat-baby-and-bot/">2016-08-16</a></time>
+        <time datetime="2016-08-16T01:06:36.000Z"><a href="/2016/08/16/pat-baby-and-bot/">2016-08-16</a></time>
       
       
   
@@ -606,7 +659,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-05T18:22:47.000Z"><a href="/2016/08/05/PaperWeekly-2016-08-05-第一期/">2016-08-05</a></time>
+        <time datetime="2016-08-05T03:22:47.000Z"><a href="/2016/08/05/PaperWeekly-2016-08-05-第一期/">2016-08-05</a></time>
       
       
   
@@ -674,7 +727,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-02T18:54:22.000Z"><a href="/2016/08/02/旧幕落下，新幕升起/">2016-08-02</a></time>
+        <time datetime="2016-08-02T03:54:22.000Z"><a href="/2016/08/02/旧幕落下，新幕升起/">2016-08-02</a></time>
       
       
   
@@ -723,7 +776,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-26T00:06:49.000Z"><a href="/2016/07/25/如果我也做bot/">2016-07-25</a></time>
+        <time datetime="2016-07-25T09:06:49.000Z"><a href="/2016/07/25/如果我也做bot/">2016-07-25</a></time>
       
       
   
@@ -769,7 +822,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-25T23:12:32.000Z"><a href="/2016/07/25/bot-bot/">2016-07-25</a></time>
+        <time datetime="2016-07-25T08:12:32.000Z"><a href="/2016/07/25/bot-bot/">2016-07-25</a></time>
       
       
   
@@ -813,7 +866,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-25T18:39:04.000Z"><a href="/2016/07/25/bot-startups/">2016-07-25</a></time>
+        <time datetime="2016-07-25T03:39:04.000Z"><a href="/2016/07/25/bot-startups/">2016-07-25</a></time>
       
       
   
@@ -891,7 +944,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-24T20:20:12.000Z"><a href="/2016/07/24/再谈bot/">2016-07-24</a></time>
+        <time datetime="2016-07-24T05:20:12.000Z"><a href="/2016/07/24/再谈bot/">2016-07-24</a></time>
       
       
   
@@ -976,7 +1029,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-22T20:14:05.000Z"><a href="/2016/07/22/国内bot产品试用总结/">2016-07-22</a></time>
+        <time datetime="2016-07-22T05:14:05.000Z"><a href="/2016/07/22/国内bot产品试用总结/">2016-07-22</a></time>
       
       
   
@@ -1030,7 +1083,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-22T00:27:46.000Z"><a href="/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/">2016-07-21</a></time>
+        <time datetime="2016-07-21T09:27:46.000Z"><a href="/2016/07/21/Attention-with-Intention-for-a-Neural-Network-Conversation-Model-PaperWeekly/">2016-07-21</a></time>
       
       
   
@@ -1062,7 +1115,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-21T18:35:27.000Z"><a href="/2016/07/21/Neural-Contextual-Conversation-Learning-with-Labeled-Question-Answering-Pairs-PaperWeekly/">2016-07-21</a></time>
+        <time datetime="2016-07-21T03:35:27.000Z"><a href="/2016/07/21/Neural-Contextual-Conversation-Learning-with-Labeled-Question-Answering-Pairs-PaperWeekly/">2016-07-21</a></time>
       
       
   
@@ -1094,7 +1147,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-19T00:21:22.000Z"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">2016-07-18</a></time>
+        <time datetime="2016-07-18T09:21:22.000Z"><a href="/2016/07/18/Attention-over-Attention-Neural-Networks-for-Reading-Comprehension-PaperWeekly/">2016-07-18</a></time>
       
       
   
@@ -1148,7 +1201,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-17T16:57:22.000Z"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">2016-07-17</a></time>
+        <time datetime="2016-07-17T01:57:22.000Z"><a href="/2016/07/17/End-to-end-LSTM-based-dialog-control-optimized-with-supervised-and-reinforcement-learning-PaperWeekly/">2016-07-17</a></time>
       
       
   
@@ -1190,7 +1243,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-17T05:02:39.000Z"><a href="/2016/07/16/也说bot/">2016-07-16</a></time>
+        <time datetime="2016-07-16T14:02:39.000Z"><a href="/2016/07/16/也说bot/">2016-07-16</a></time>
       
       
   
@@ -1334,7 +1387,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-15T22:56:35.000Z"><a href="/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/">2016-07-15</a></time>
+        <time datetime="2016-07-15T07:56:35.000Z"><a href="/2016/07/15/A-Neural-Network-Approach-to-Context-Sensitive-Generation-of-Conversational-Responses-PaperWeekly/">2016-07-15</a></time>
       
       
   
@@ -1384,7 +1437,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-15T19:44:07.000Z"><a href="/2016/07/15/Incorporating-Unstructured-Textual-Knowledge-Sources-into-Neural-Dialogue-Systems-PaperWeekly/">2016-07-15</a></time>
+        <time datetime="2016-07-15T04:44:07.000Z"><a href="/2016/07/15/Incorporating-Unstructured-Textual-Knowledge-Sources-into-Neural-Dialogue-Systems-PaperWeekly/">2016-07-15</a></time>
       
       
   
@@ -1425,7 +1478,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-15T04:00:30.000Z"><a href="/2016/07/14/The-Ubuntu-Dialogue-Corpus-A-Large-Dataset-for-Research-in-Unstructured-Multi-Turn-Dialogue-Systems-PaperWeekly/">2016-07-14</a></time>
+        <time datetime="2016-07-14T13:00:30.000Z"><a href="/2016/07/14/The-Ubuntu-Dialogue-Corpus-A-Large-Dataset-for-Research-in-Unstructured-Multi-Turn-Dialogue-Systems-PaperWeekly/">2016-07-14</a></time>
       
       
   
@@ -1468,7 +1521,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-14T17:28:16.000Z"><a href="/2016/07/14/随笔/">2016-07-14</a></time>
+        <time datetime="2016-07-14T02:28:16.000Z"><a href="/2016/07/14/随笔/">2016-07-14</a></time>
       
       
   
@@ -1507,7 +1560,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-13T18:19:26.000Z"><a href="/2016/07/13/A-Hierarchical-Latent-Variable-Encoder-Decoder-Model-for-Generating-Dialogues-PaperWeekly/">2016-07-13</a></time>
+        <time datetime="2016-07-13T03:19:26.000Z"><a href="/2016/07/13/A-Hierarchical-Latent-Variable-Encoder-Decoder-Model-for-Generating-Dialogues-PaperWeekly/">2016-07-13</a></time>
       
       
   
@@ -1550,7 +1603,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-12T22:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
+        <time datetime="2016-07-12T07:11:19.000Z"><a href="/2016/07/12/A-Network-based-End-to-End-Trainable-Task-oriented-Dialogue-System-PaperWeekly/">2016-07-12</a></time>
       
       
   
@@ -1618,7 +1671,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-11T23:47:50.000Z"><a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">2016-07-11</a></time>
+        <time datetime="2016-07-11T08:47:50.000Z"><a href="/2016/07/11/Deep-Reinforcement-Learning-for-Dialogue-Generation-PaperWeekly/">2016-07-11</a></time>
       
       
   
@@ -1703,7 +1756,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-11T20:03:05.000Z"><a href="/2016/07/11/Consensus-Attention-based-Neural-Networks-for-Chinese-Reading-Comprehension-PaperWeekly/">2016-07-11</a></time>
+        <time datetime="2016-07-11T05:03:05.000Z"><a href="/2016/07/11/Consensus-Attention-based-Neural-Networks-for-Chinese-Reading-Comprehension-PaperWeekly/">2016-07-11</a></time>
       
       
   
@@ -1742,7 +1795,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-11T18:06:42.000Z"><a href="/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/">2016-07-11</a></time>
+        <time datetime="2016-07-11T03:06:42.000Z"><a href="/2016/07/11/A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models-PaperWeekly/">2016-07-11</a></time>
       
       
   
@@ -1804,7 +1857,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-10T17:29:40.000Z"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">2016-07-10</a></time>
+        <time datetime="2016-07-10T02:29:40.000Z"><a href="/2016/07/10/A-Persona-Based-Neural-Conversation-Model-PaperWeekly/">2016-07-10</a></time>
       
       
   
@@ -1852,7 +1905,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-10T03:42:57.000Z"><a href="/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
+        <time datetime="2016-07-09T12:42:57.000Z"><a href="/2016/07/09/A-Dataset-for-Research-on-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
       
       
   
@@ -1901,7 +1954,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-10T01:08:36.000Z"><a href="/2016/07/09/Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
+        <time datetime="2016-07-09T10:08:36.000Z"><a href="/2016/07/09/Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation-PaperWeekly/">2016-07-09</a></time>
       
       
   
@@ -1952,7 +2005,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-09T04:35:03.000Z"><a href="/2016/07/08/生活毕竟不是一场秀/">2016-07-08</a></time>
+        <time datetime="2016-07-08T13:35:03.000Z"><a href="/2016/07/08/生活毕竟不是一场秀/">2016-07-08</a></time>
       
       
   
@@ -1994,7 +2047,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-07T00:16:17.000Z"><a href="/2016/07/06/关于创业的几点思考/">2016-07-06</a></time>
+        <time datetime="2016-07-06T09:16:17.000Z"><a href="/2016/07/06/关于创业的几点思考/">2016-07-06</a></time>
       
       
   
@@ -2034,7 +2087,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-06T20:08:50.000Z"><a href="/2016/07/06/cips总结和思考/">2016-07-06</a></time>
+        <time datetime="2016-07-06T05:08:50.000Z"><a href="/2016/07/06/cips总结和思考/">2016-07-06</a></time>
       
       
   
@@ -2072,7 +2125,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-06T18:49:03.000Z"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">2016-07-06</a></time>
+        <time datetime="2016-07-06T03:49:03.000Z"><a href="/2016/07/06/Towards-Abstraction-from-Extraction-Multiple-Timescale-Gated-Recurrent-Unit-for-Summarization-PaperWeekly/">2016-07-06</a></time>
       
       
   
@@ -2118,7 +2171,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-29T17:54:35.000Z"><a href="/2016/06/29/教机器学习表示/">2016-06-29</a></time>
+        <time datetime="2016-06-29T02:54:35.000Z"><a href="/2016/06/29/教机器学习表示/">2016-06-29</a></time>
       
       
   
@@ -2222,7 +2275,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-28T23:40:40.000Z"><a href="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/">2016-06-28</a></time>
+        <time datetime="2016-06-28T08:40:40.000Z"><a href="/2016/06/28/Deep-Reinforcement-Learning-with-a-Natural-Language-Action-Space-PaperWeekly/">2016-06-28</a></time>
       
       
   
@@ -2278,7 +2331,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-28T17:19:32.000Z"><a href="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/">2016-06-28</a></time>
+        <time datetime="2016-06-28T02:19:32.000Z"><a href="/2016/06/28/Generating-Text-with-Deep-Reinforcement-Learning-PaperWeekly/">2016-06-28</a></time>
       
       
   
@@ -2331,7 +2384,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-27T15:30:10.000Z"><a href="/2016/06/27/Language-Understanding-for-Text-based-Games-using-Deep-Reinforcement-Learning-PaperWeekly/">2016-06-27</a></time>
+        <time datetime="2016-06-27T00:30:10.000Z"><a href="/2016/06/27/Language-Understanding-for-Text-based-Games-using-Deep-Reinforcement-Learning-PaperWeekly/">2016-06-27</a></time>
       
       
   
@@ -2391,7 +2444,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-25T17:59:44.000Z"><a href="/2016/06/25/教机器学习摘要/">2016-06-25</a></time>
+        <time datetime="2016-06-25T02:59:44.000Z"><a href="/2016/06/25/教机器学习摘要/">2016-06-25</a></time>
       
       
   
@@ -2501,7 +2554,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-23T18:19:43.000Z"><a href="/2016/06/23/如果我也做一家公司/">2016-06-23</a></time>
+        <time datetime="2016-06-23T03:19:43.000Z"><a href="/2016/06/23/如果我也做一家公司/">2016-06-23</a></time>
       
       
   
@@ -2547,7 +2600,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-20T03:56:21.000Z"><a href="/2016/06/19/My-first-open-source-code-in-deep-learning/">2016-06-19</a></time>
+        <time datetime="2016-06-19T12:56:21.000Z"><a href="/2016/06/19/My-first-open-source-code-in-deep-learning/">2016-06-19</a></time>
       
       
   
@@ -2593,7 +2646,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-18T17:20:27.000Z"><a href="/2016/06/18/教机器学习阅读/">2016-06-18</a></time>
+        <time datetime="2016-06-18T02:20:27.000Z"><a href="/2016/06/18/教机器学习阅读/">2016-06-18</a></time>
       
       
   
@@ -2742,7 +2795,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-17T18:13:56.000Z"><a href="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/">2016-06-17</a></time>
+        <time datetime="2016-06-17T03:13:56.000Z"><a href="/2016/06/17/Dynamic-Entity-Representation-with-Max-pooling-Improves-Machine-Reading-PaperWeekly/">2016-06-17</a></time>
       
       
   
@@ -2793,7 +2846,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-16T14:38:23.000Z"><a href="/2016/06/16/THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS-PaperWeekly/">2016-06-16</a></time>
+        <time datetime="2016-06-15T23:38:23.000Z"><a href="/2016/06/16/THE-GOLDILOCKS-PRINCIPLE-READING-CHILDREN’S-BOOKS-WITH-EXPLICIT-MEMORY-REPRESENTATIONS-PaperWeekly/">2016-06-16</a></time>
       
       
   
@@ -2845,7 +2898,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-15T04:31:36.000Z"><a href="/2016/06/14/Text-Understanding-with-the-Attention-Sum-Reader-Network-PaperWeekly/">2016-06-14</a></time>
+        <time datetime="2016-06-14T13:31:36.000Z"><a href="/2016/06/14/Text-Understanding-with-the-Attention-Sum-Reader-Network-PaperWeekly/">2016-06-14</a></time>
       
       
   
@@ -2892,7 +2945,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-14T15:36:02.000Z"><a href="/2016/06/14/A-Thorough-Examination-of-the-CNN-Daily-Mail-Reading-Comprehension-Task-PaperWeekly/">2016-06-14</a></time>
+        <time datetime="2016-06-14T00:36:02.000Z"><a href="/2016/06/14/A-Thorough-Examination-of-the-CNN-Daily-Mail-Reading-Comprehension-Task-PaperWeekly/">2016-06-14</a></time>
       
       
   
@@ -2948,7 +3001,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-13T17:57:22.000Z"><a href="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/">2016-06-13</a></time>
+        <time datetime="2016-06-13T02:57:22.000Z"><a href="/2016/06/13/Teaching-Machines-to-Read-and-Comprehend-PaperWeekly/">2016-06-13</a></time>
       
       
   
@@ -3003,7 +3056,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-06-12T17:59:52.000Z"><a href="/2016/06/12/当我们在谈论deep-learning的时候，我们在谈论什么？/">2016-06-12</a></time>
+        <time datetime="2016-06-12T02:59:52.000Z"><a href="/2016/06/12/当我们在谈论deep-learning的时候，我们在谈论什么？/">2016-06-12</a></time>
       
       
   
@@ -3061,65 +3114,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-06-12T16:33:10.000Z"><a href="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/">2016-06-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/">Gated-Attention Readers for Text Comprehension #PaperWeekly#</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>完形填空一直是各大英语考试的常见题型，读一篇短文，填20个空。那么如果是机器来做完形填空，该如何来定义问题，提出模型呢？本周开始将会介绍一系列文本理解的模型。本文分享的题目是<a href="http://cn.arxiv.org/pdf/1606.01549v1" target="_blank" rel="external">Gated-Attention Readers for Text Comprehension</a>，最早于6月5日submit于arxiv上，作者是CMU的Graduate Research Assistant <a href="https://www.cs.cmu.edu/directory/bdhingra" target="_blank" rel="external">Bhuwan Dhingra</a>。</p>
-<p>首先，介绍一下对完形填空问题的定义。问题可以表述为一个三元组(d,q,a)，这里d是指原文document，q是指完形填空的问题query（这里需要注意一点的是，与我们英语考试中的完形填空不同，更像是只用一个单词来回答的阅读理解），a是问题的答案。这个答案是来自一个固定大小的词汇表A中的一个词。即：给定一个文档-问题对(d,q)，从A中找到最合适的答案a。</p>
-<p>本文精彩的部分有两个，一个是related work写的非常漂亮，另一个是提出了一种新的注意力模型GA（Gate-Attention） Reader，并且取得了领先的结果。</p>
-<p>后续的文本理解系列的文章将会从related work中产生，包括以下几篇：</p>
-<p>[1] <a href="http://arxiv.org/pdf/1506.03340v3.pdf" target="_blank" rel="external">Teaching machines to read and comprehend</a></p>
-<p>[2] <a href="https://arxiv.org/pdf/1406.2710v1.pdf" target="_blank" rel="external">A multiplicative model for learning distributed text-based attribute representations</a></p>
-<p>[3] <a href="http://www.cl.ecei.tohoku.ac.jp/publications/2016/kobayashi-dynamic-entity-naacl2016.pdf" target="_blank" rel="external">Dynamic entity representations with max-pooling improves machine reading</a></p>
-<p>[4] <a href="http://arxiv.org/pdf/1603.01547v1.pdf" target="_blank" rel="external">Text understanding with the attention sum reader network</a></p>
-<p>[5] <a href="http://arxiv.org/pdf/1511.02301v4.pdf" target="_blank" rel="external">The goldilocks principle: Reading children’s books with explicit memory representations</a></p>
-<p>[6] <a href="http://arxiv.org/pdf/1606.02858v1.pdf" target="_blank" rel="external">A Thorough Examination of the CNN/Daily Mail Reading Comprehension Task</a></p>
-<p>下面来介绍本文的模型，结合下图来看：</p>
-<img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig1.png" width="600" height="600">
-<p><b>step 1</b> document和query通过一个Lookup层，使得每个词都表示成一个低维向量。</p>
-<p><b>step 2</b> 将document中的词向量通过一个双向GRU，将两个方向的state做拼接获得该词的新表示。同时也将query通过一个双向GRU，用两个方向上的last hidden state作为query的表示。</p>
-<p><b>step 3</b> 将document中每个词的新表示与query的新表示逐元素相乘得到下一个GRU层的输入。</p>
-<p><b>step 4</b> 重复step 2和3，直到通过设定的K层，在第K层时，document的每个词向量与query向量做内积，得到一个最终的向量。</p>
-<p><b>step 5</b> 将该向量输入到softmax层中，做概率归一化。</p>
-<p><b>step 6</b> 因为document中有重复出现的词，聚合之后得到最终的分类结果，即确定应该填哪个词。</p>
-<p>模型的计算流程还是很好理解的，下面给出一些可视化的attention结果。</p>
-<img src="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/fig2.png" width="400" height="400">
-<p>图中高亮的部分是针对问题时的最后一层注意力所关注的地方。</p>
-<p>注意力模型是一个非常热门的研究领域，很多专家都看好其在今后各大nlp任务中的应用前景，不同版本、不同结构、不同层次的注意力模型丰富了模型，也提升了效果。注意力的本质就是说你关注的输出与你的输入中的哪个元素关系更加紧密，即输出的部分应该更加注意哪个输入细节，在做完形填空、阅读理解的时候，我们也会有这样的感受，就是题目的答案往往就在某一句话或某几句话当中，并不需要回答每个问题都从全文中找一遍答案，而是定位到关键句上。这里的定位就是注意力，剩下的问题就是研究如何更加准确地定义、建模注意力，是用普通的前馈神经网络，还是用GRU，还是用分层模型都需要针对具体问题的特点。</p>
-<p>后续的几篇文章将会继续介绍文本理解，敬请关注。</p>
-<p><b>工具推荐</b></p>
-<p><code>RSarXiv</code> <b>一个好用的arxiv cs paper推荐系统</b> <a href="http://rsarxiv.science/web" target="_blank" rel="external">网站地址</a> <b>ios App下载：App Store 搜索rsarxiv即可获得 </b></p>
-<p>PaperWeekly，每周会分享N篇nlp领域好玩的paper，旨在用最少的话说明白paper的贡献。</p>
-<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3155,7 +3149,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>108</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>109</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3191,7 +3185,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>126</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>127</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

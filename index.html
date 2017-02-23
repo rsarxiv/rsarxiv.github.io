@@ -65,7 +65,235 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-19T19:04:24.000Z"><a href="/2017/02/19/本周值得读-2017-02-13-2017-02-17/">2017-02-19</a></time>
+        <time datetime="2017-02-23T15:25:03.000Z"><a href="/2017/02/23/PaperWeekly-第一期Chat/">2017-02-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/02/23/PaperWeekly-第一期Chat/">PaperWeekly 第一期Chat</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>本期Chat是PaperWeekly第一次尝试与读者进行互动交流，一共分享和解读3篇paper，均选自2016年最值得读的自然语言处理领域paper，分别是：</p>
+<ol>
+<li>End-to-End Reinforcement Learning of Dialogue Agents for Information Access</li>
+<li>Dual Learning for Machine Translation</li>
+<li>SQuAD: 100,000+ Questions for Machine Comprehension of Text</li>
+</ol>
+<h3 id="1-End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#1-End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="1. End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a>1. <a href="https://arxiv.org/abs/1609.00777" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h3><h4 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h4><p>Bhuwan Dhingra, Lihong Li, Xiujun Li, Jianfeng Gao, Yun-Nung Chen, Faisal Ahmed, Li Deng</p>
+<h4 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h4><p>School of Computer Science, Carnegie Mellon University, Pittsburgh, PA, USA<br>Microsoft Research, Redmond, WA, USA<br>National Taiwan University, Taipei, Taiwan  </p>
+<h4 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h4><p>Dialogue Agent, Reinforcement Learning</p>
+<h4 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h4><p>arXiv</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>用强化学习构造一个端到端的任务驱动的基于知识图谱的对话系统。</p>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><p>一个任务驱动的对话系统，一般通过自然语言与用户进行多轮交流，帮助用户解决一些特定问题，例如订机票或检索数据库等。一般由下面四部分组成：</p>
+<ul>
+<li>Language Understanding Module(LU): 理解用户意图并提取相关slots。例如用户想找一部电影，那么就需要提取出电影名称，演员，上映时间等相关slots信息。</li>
+<li>Dialogue State Tracker: 追踪用户的目标和对话的历史信息。</li>
+<li>Dialogue Policy: 基于当前状态选择系统的下一步action, 例如向用户询问电影上映时间的action是request(year)。</li>
+<li>Natural Language Generator(NLG):将系统的action转化成自然语言文本。例如将request(year) 转换成：电影什么时候上映的？</li>
+</ul>
+<p>在Dialogue Policy这一步，传统方法一般是生成一个类似SQL的查询语句，从数据库中检索答案，但是这会使模型不可微从而只能分开训练。本文使用了基于概率的框架，因此是可微的，从而实现了端到端的训练过程。</p>
+<p>论文中用到的数据库，是来自IMDB的电影数据库。每一行代表一部电影，每一列是一个slot，信息有可能存在缺失。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/2a97c3e0-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p>整体框架如下图：</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/3aa17290-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p>下面分别介绍各个部分：</p>
+<p><strong>Feature Extractor</strong></p>
+<p>将用户每轮的输入文本转化成一个向量，这里使用了ngram词袋模型(n=2)。</p>
+<p><strong>Belief Trackers</strong></p>
+<p>用于追踪对话状态和历史信息。</p>
+<p>这里针对每一列的slot,分别有一个belief tracker。每个belief tracker的输入是从feature extractor得到的向量，用GRU处理以后，得到一个状态向量。根据这个状态向量，分别计算得到两个输出：pj和qj。</p>
+<p>pj是当前slot下所有值的概率分布，qj是用户不知道这个slot值的概率。</p>
+<p>因为在和用户交互的过程中，应当尽可能询问用户知道的信息，询问用户不知道的信息对后面的查询没有任何意义。</p>
+<p><strong>Soft-KB Lookup</strong></p>
+<p>根据Belief Trackers的输出，计算数据库中每个值的概率分布。</p>
+<p><strong>Beliefs Summary</strong></p>
+<p>由Belief Trackers和Soft-KB Lookup,可以得到当前的对话状态向量st。st向量包含了数据库中所有值的概率分布户是否知识等信息，实在是太大了，直接送给Policy Network会导致其参数过多，难以训练。因此这一步把slot-values转化成了加权的熵统计信息。</p>
+<p><strong>Policy Network</strong></p>
+<p>这里使用策略网络，根据Beliefs Summary的输入状态向量，来输出各个action的概率分布π。具体结构是GRU+全连接层+softmax的方式。</p>
+<p><strong>Action Selection</strong></p>
+<p>这里从策略分布π采样，得到下一步的action。如果action是inform(),说明到了对话的最后一步，需要给用户返回Top k的查询结果。这里按照Soft-KB Lookup步骤中得到的每一行电影的概率，进行采样来返回Top K候选。</p>
+<p><strong>NLG</strong></p>
+<p>这里的NLG部分和上面是独立的，使用了sequence-to-sequence模型，输入action,输出包含slot的对话模板，然后进行填充，得到自然语言文本。</p>
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>这里用的基于策略梯度的强化学习模型进行训练，目标是最大化reward的期望。最后一轮inform部分的reward是由正确答案在Top K候选中的排序位置决定，排序越靠前，reward越高。如果候选没有包含正确答案，那么reward是-1。</p>
+<p>对话交互训练数据是通过一个模拟器从电影数据中采样生成得到。</p>
+<h4 id="Baselines"><a href="#Baselines" class="headerlink" title="Baselines"></a>Baselines</h4><ul>
+<li>End2End-RL：本文提出的模型。</li>
+<li>Rule-based：Belief Trackers和Policy部分都是人工规则。</li>
+<li>Simple-RL：只有Belief Trackers是人工规则，而Policy部分是基于GRU。</li>
+</ul>
+<p>实验结果如下图：</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/47ebb320-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<h4 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h4><p>对话的相关工作很多，包括传统基于Markov Decision Processes的POMDPs, 基于Q-Learning的SimpleDS，基于API查询的方法，基于最小化熵的EMDM等等，感兴趣的读者可以查询相关文献。</p>
+<h4 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h4><p>深度强化学习在对话系统的应用越来越多，本文最大的贡献，是提出了一个可微的基于概率的框架，从而使End-to-End训练成为可能，相比传统方法各部分分别训练，联合训练可以有效的减少错误传递。而基于深度强化学习的训练方式，相比传统基于规则的方式，在高噪音输入的情况下，有着更好的表现。</p>
+<h4 id="完成人信息"><a href="#完成人信息" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>王哲，中国科学技术大学，xiaose@mail.ustc.edu.cn。</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：我对“因此这一步把slot-values转化成了加权的熵统计信息”的合理性和物理意义有些不明，我在最近的论文中很少看到这样的做法，请问是因为效果的原因吗？</strong></p>
+<p><strong>答：</strong> 这个熵指的是信息熵，不是物理中的热力学熵。信息熵把一个系统的不确定性，按照其可能出现结果的概率分布，进行定量化计算，得到的是可以获取的信息量大小。信息熵越大，不确定性就越大，我们可以获取的信息量也就越大。任务驱动的问题系统，在得到最终查询结果前，希望尽可能多的从用户那里获取信息，减少系统本身的不确定性，因此我们在知道一个slot中各种实体概率的情况下，用信息熵来度量一个slot的不确定性，还是挺合理挺自然的。<br>熵的用法在深度学习网络中还是挺多的,例如我们经常用交叉熵做损失函数。同时文本分类任务中，经常用TFIDF值作为特征，而TFIDF值是可以由信息熵推导出来的。 </p>
+<p><strong>问：论文中提到：”Moreover, instead of defining an attention distribution directly over the KB entities, which could be very large, we instead induce it from the smaller distributions over each relation (or slot in dialogue terminology) in the KB” 这里smaller distributions ， 以及each relation怎么理解，为什么能小？</strong></p>
+<p><strong>答：</strong> 这里的relation，指的是slots,也就是表格的各个列属性，例如year,actor等。 和entities的数目相比，一个slot对应的属性值数目要小很多。entity概率计算的时候，是把各个属性的概率相乘得到的。而一个属性的概率，取决于这个属性有多少值，假设我们有3个属性，每个属性的值的数目分别是k1,k2,k3，那么entities可能的计算量就是k1 * k2 * k3。现在作者假设每个属性之间是相互独立的,因此实际计算量可以理解成k1+k2+k3，所以slots的属性分布和entities分布相比，是smaller distributions。</p>
+<p><strong>问：增强学习在chatbot研究中使用时相比监督学习有哪些优势和劣势？</strong></p>
+<p><strong>答：</strong> 先说说强化学习的优势：</p>
+<p> 监督学习当前研究比较多的，是以seq2seq为代表的生成模型。 它目前一个比较大的问题，是生成结果缺乏多样性，倾向于生成比较安全比较常见的回答，例如“谢谢”，“不知道”。 这个主要是因为，训练目标是用最大似然拟合训练数据，而经常在训练数据中出现的回答，会占一些优势，因此后续有很多工作试图改进这个问题，例如用互信息作为目标函数，在解码搜索过程中，对常见结果进行惩罚，提高生成结果的多样性等等。</p>
+<p>监督学习的另外一个问题，是训练过程和预测过程不一致。训练的时候，当我们解码生成一个句子的下一个词的时候，是基于训练语料中的正确结果，而预测的时候，我们并不知道标准答案是什么，因此解码下一个词的时候，是基于我们预测的结果。这种不一致会影响最终结果，就像考试我们遇到之前没有见过的题型，我们的考试成绩可能会变差一样。增强学习，有希望解决这两个问题的。</p>
+<p>针对第一个问题，我们借助增强学习的reward,引入一些明确的的奖励目标，用来指导对话的生成。例如，如果我们想训练一个淘宝客服的对话系统，我们可以用商品最终是否购买，来作为奖励目标，这样可以引导对话向着商品成功购买的方向发展，因此可以产生更好的对话结果。目前还有一个最新的工作，是将生成对抗网络，引入对话系统，因为当前对话系统一个很大的问题，是缺乏可靠的自动化评价指标，而对抗生成网络中，我们有一个生成模型，也就是我们的对话生成系统，还有一个判别模型，这个判别模型的目标，是判断这个对话，是机器生成的，还是人写的，这样就引入了一个比较明确的奖励目标，也更接近图灵测试，而连接生成网络和判别网络的桥梁，就是强化学习。因为NLP的词，相比图像，是离散的，我们可以借助类似AlphaGo中的蒙特卡洛搜索，来采样得到训练样本，送给判别模型。针对第二个问题，强化学习在训练的过程中，生成模型是通过采样产生样本，这个过程和预测是一致的，因此也避免了不一致带来的问题。</p>
+<p>综上所述，增强学习在对话系统中有很大的优势。</p>
+<p>下面说说他的劣势：</p>
+<p>和监督学习相比，强化学习的训练是比较困难的，因为训练的过程很不稳定。而且具体的对话系统中，reward的奖励一般是基于一个完整的句子，而如何把reward奖励分配到具体的词，是一个很大的挑战。而在多轮对话中，reward一般只出现在最后一轮，如何对前面的几轮对话分配reward,也同样是一个问题。同时为了稳定强化学习的训练过程，我们不能完全离开监督学习，一般还需要借助监督学习的方法，来做初始化训练，甚至在训练过程中，需要穿插监督学习过程，起到稳定网络的作用。<br>以上就是增强学习在对话系统中的优劣。</p>
+<p><strong>问：论文中的pr(Gj＝i｜j＝0)为什么等于1/N呢？也就是在用户不知道第值时，目标是i的概率为什么等于1/N？ </strong></p>
+<p><strong>答：</strong> 用户不知道第j个属性，也就是说，在第j个属性上，用户不能提供有效信息。那么我们从属性j的角度，看各个实体的时候，实际上是没有什么区别的。因此最保险的方式，就是假设各个实体的概率相等，因此概率是1/N。</p>
+<p><strong>问：增强学习在chatbot中的reward函数是否都是根据相应的需求来手动给出，而非学习得来？</strong></p>
+<p><strong>答：</strong> 有些是可以手动给出的，例如Bengio的<strong>An Actor-Critic Algorithm for Sequence Prediction</strong>这篇论文，就把BLEU作为reward，用于机器翻译模型的训练。reward也可以学习得来，例如GAN应用到对话系统的时候，生成模型的reward就是由判别模型给出的，而在对偶学习中，一个模型的reward由它对应的对偶模型给出。</p>
+<hr>
+<h3 id="2-Dual-Learning-for-Machine-Translation"><a href="#2-Dual-Learning-for-Machine-Translation" class="headerlink" title="2. Dual Learning for Machine Translation"></a>2. <a href="https://arxiv.org/pdf/1611.00179.pdf" target="_blank" rel="external">Dual Learning for Machine Translation</a></h3><h4 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h4><p>Yingce Xia, Di He, Tao Qin, Liwei Wang, Nenghai Yu, Tie-Yan Liu, Wei-Ying Ma</p>
+<h4 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h4><p>中科大，北大，微软亚研院</p>
+<h4 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h4><p> NMT，monolingual data, dual learning</p>
+<h4 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h4><p>NIPS 2016</p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>利用双向NMT模型，在少量双语数据，大量单语数据的情况下，如何提高NMT的性能。</p>
+<h4 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h4><p>主要的思想是通过two-agent communication game，用单语语料和语言模型来提升双向NMT的性能。利用A语言的单语语料进行学习的two-agent communication game过程如下：</p>
+<ul>
+<li>agent1读入语言A的单语句子， 通过A到B的NMT模型转换成语言B的句子，并且发送给agent2。</li>
+<li>agent2接收到agent1发送的语言B的句子，通过语言B的语言模型$LM_B$，给出一个reward $r_1$。再通过B到A的NMT模型，将句子转换成语言A并且发送给agent1。</li>
+<li>agent1接收到agent2发送的语言A的句子，和最初的单语句子做比较，给出另一个reward $r_2$。</li>
+</ul>
+<p>那么$r=\alpha r_1+(1-\alpha) r_2$，agent1和agent2就能根据reward $r$对A到B和B到A的NMT模型进行学习。</p>
+<p>如果用公式表达，这个过程的目标函数就是：</p>
+<p>$$\mathbb{E}_{\mathbf{s}_{mid}|\mathbf{s};\Theta_{A\rightarrow B}}[\alpha LM_B({\mathbf{s}_{mid}})+(1-\alpha) P(\mathbf{s}|\mathbf{s}_{mid};\Theta_{B\rightarrow A})]$$  </p>
+<p>由于$\mathbf{s}_{mid}$的sample space无穷大，需要做一些近似来求期望。 文中考虑到random sampling会有较大的variance和一些不合理的翻译，采用了N-best来近似（$N=2$, 用beam search得到）。</p>
+<p>整个训练分成3个step:</p>
+<ol>
+<li>用双语语料，普通的MLE training来学习A到B和B到A的NMT模型，作为warm start。</li>
+<li>每一个minibatch里面一部分单语语料，一部分双语语料，对双语语料用MLE作为目标函数，单语语料用上面的公式作为目标函数；随着training的进行，减少双语语料的比例。训练交替地从语言A或者语言B开始。</li>
+<li>最后完全用单语语料，通过上面的公式作为目标函数进行训练。</li>
+</ol>
+<h4 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h4><p>这篇文章和Semi-Supervised Learning for Neural Machine Translation以及Neural Machine Translation with Reconstruction比较相似，都是用双向NMT模型来互相学习增强，区别在于这篇引入了语言模型。和Minimum Risk Training for Neural Machine Translation也有一定的相关性，相当于MRT中的loss function用了语言模型和反向NMT进行定义。</p>
+<h4 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h4><p>这篇文章从reinforcement learning的角度，将单语语料很好地融入到双向NMT的训练中，在使用10%双语语料的情况下也能取得较好的翻译结果。整体上来说非常有意思，也可以推广到更多的tasks in dual form。</p>
+<h4 id="完成人信息-1"><a href="#完成人信息-1" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>陈云，香港大学，yun.chencreek@gmail.com。</p>
+<h4 id="提问"><a href="#提问" class="headerlink" title="提问"></a>提问</h4><p>本文中使用了哪一种reinforcement learning的方法？</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：论文中的相关工作部分提到了另外两篇neural machine translation的相关工作，请问作者可否简单介绍一下那两个模型的主要方法呢？以及它们和dual learning的最大区别。</strong></p>
+<p><strong>答：</strong> 另外两篇论文分别是semi-supervised Neural Machine Translation 以及Neural Machine Translation with Reconstruction。 semi-supervised这篇是利用autoencoder，将源端和目标端的单语语料引入，进行双向NMT联合训练；reconstruction这篇，是在普通MLE目标函数的基础上，增加了从目标端的hidden state重建源句子的概率这一项。首先我谈一下他们的区别。</p>
+<p>出发的角度不一样：</p>
+<ul>
+<li>semi-supervised：如何将source和target端的单语语料引入，通过双向NMT提高NMT的性能。</li>
+<li>recosntruction：解决translation adequacy的问题, 避免翻译的句子太短或者重复翻译某一部分。利用双向NMT优化原来的MLE目标函数。</li>
+<li>dual learning：在少量平行语料，大量单语语料的情况下，如何利用双向NMT提高NMT的性能。</li>
+</ul>
+<p>语料需求不一样：</p>
+<ul>
+<li>semi-supervised: source,target端的单语语料，文中实验双语语料比单语语料多。</li>
+<li>reconstruction: 没用单语语料。</li>
+<li>dual learning: 10%的双语语料，大量单语语料。并且用了预先用单语语料训练好的语言模型。</li>
+</ul>
+<p>解释的角度不一样：</p>
+<ul>
+<li>semi-supervised: 双向NMT联合训练，目标函数包括两个方向的MLE，以及source&amp;target autoencoder的reconstruction probability。</li>
+<li>reconstruction: 目标函数在普通的MLE基础上增加了由reconstructor定义的reconstruction probability。</li>
+<li>dual learning: 基于policy gradient的增强学习。用two agents play games这样的形式来解释。</li>
+</ul>
+<p>而他们也有一些相同的地方:</p>
+<p>都是用双向NMT来提高普通MLE训练的单向NMT的性能。reconstruction一篇相当于在原来的目标函数上加了reconstruction error，由于只用了双语语料，所以目标句子y是已知的。而semi-supervised和dual learning都会处理单语语料。在处理源端单语句子时，目标端的y是未知的。这二者都可以看成是一种句子级别的模型，通过正向的NMT产生一些句子来近似整个目标端输出空间，然后通过反向NMT给出句子的feedback(dual learning同时用了LM给出的feedback)。</p>
+<p>大家可以对比一下他们的目标函数，能够比较明显地看出区别和联系来。</p>
+<p><strong>问：可以用dual-learning这样的framework来解决的其他问题吗？</strong></p>
+<p><strong>答：</strong> 有很多dual tasks都可以用这个框架，比如 speech recognization &amp; text to speech, Image captioning &amp; Image generation, Question answering &amp; Question generation, 还有 Query-document matching &amp; Query/keyword suggestion。这篇文章之前MSRA的<a href="https://v.douyu.com/show/285BAvqBEp7G4Lmy" target="_blank" rel="external">刘铁岩老师</a>和<a href="https://v.douyu.com/show/285BAvq1KqKvG4Lm" target="_blank" rel="external">秦涛博士</a>有在斗鱼上直播过，大家可以看一下。</p>
+<p><strong>问：Dual Learning 中语言模型 LM 没看到在那里有详细的说明？刚才说的 Autoencoder，是在哪里提到的呢</strong></p>
+<p><strong>答：</strong> 语言模型在文章中的第四页第二段可以看到：“This middle step has an immediate reward r1 = LMB(smid), indicating how natural the output sentence is in language B.” Reward包括r1和r2, r1就是语言模型给的reward。 语言模型是用单语语料提前训练好的，在NMT的整个training过程中固定不变。</p>
+<p>Autoencoder在dual learning这篇没有提到，是在semi-supervised那篇提到的。</p>
+<p><strong>问：请问dual learning和GAN是否有相似之处 还是完全不相关的两种思路</strong></p>
+<p><strong>答：</strong> 是有相似之处。作者之一秦涛在斗鱼直播有提到，GAN在某种程度上可以看成是dual learning的一种特殊情况。将generator看成是primal task，discriminator看成是dual task, 通过f和g共同学习来互相增强。dual task主要是为了给primal task提供feedback。个人觉得dual learning和GAN最大的区别在于对discriminator的定义不一样，GAN定义成分类问题，而dual learning定义的是一个重建问题。</p>
+<p><strong>问：论文中的算法提到了一个参数alpha，它的意义是什么呢？是需要手动调参还是一个机器学习优化得到的参数呢？</strong></p>
+<p><strong>答：</strong> 这个alpha其实是LM reward跟反向NMT reward的一个trade-off，是手动调的。 文章后面有写，设置成0.005能取得较好的效果。</p>
+<p><strong>问：reconstruction error 以前常见于投影 project 重建 rebuild，或者是编码重建 encode/decode。图像上，一般常用 residual 来表示，例如子空间算法，KSVD 分解等等。这种对偶重建的方法，有没有可能发展成一种泛化的投影重建？</strong></p>
+<p><strong>答：</strong> 我觉得你可以尝试一下，图像上的东西不太懂。如果可以做成这种对偶tasks的形式,一个task take 某个action的reward可以由另外一个task给出，应该就可以试试。</p>
+<hr>
+<h3 id="3-SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text"><a href="#3-SQuAD-100-000-Questions-for-Machine-Comprehension-of-Text" class="headerlink" title="3. SQuAD: 100,000+ Questions for Machine Comprehension of Text"></a>3. <a href="http://nlp.stanford.edu/pubs/rajpurkar2016squad.pdf" target="_blank" rel="external">SQuAD: 100,000+ Questions for Machine Comprehension of Text</a></h3><h4 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h4><p>Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, Percy Liang</p>
+<h4 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h4><p>Computer Science Department, Stanford University</p>
+<h4 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h4><p>Question Answering, Dataset Creation</p>
+<h4 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h4><p>EMNLP 2016</p>
+<h4 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h4><p>创建一个large and high quality reading comprehension dataset。</p>
+<h4 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h4><p><strong>数据收集</strong></p>
+<p>用PageRanks搜寻出top 10000 English Wiki articles，然后uniformly sample 536 articles，做相关数据清洗后得到23215 paragraphs。这部分数据被分成三部分，training set(80%)，development set(10%)，test set(10%)。</p>
+<p>下一步我们将这些paragraphs都放到Amazon Mechanical Turk上让用户创建问题以及回答问题。这样我们便得到了一个新的QA数据集。</p>
+<p>为了评估human在这个QA数据集上的表现，development set和test set中的每个问题被至少发给了两个额外的crowdworkers，其中有2.6%的问题被crowdworkers标记为unanswerable。</p>
+<p><strong>数据集分析</strong></p>
+<p>我们把答案分成了两部分，numerical和non-numerical。对non-numerical answers再做一次constituency parsing和POS Tagging，发现答案分布如下图所示。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/824b6510-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<p><strong>Baselines</strong><br>作者做了sliding window baseline和logistic regression baseline，用accuracy和F1 Score做评估。结果如下图所示。</p>
+<p><img src="http://7xpvay.com1.z0.glb.clouddn.com/8e5117b0-eed6-11e6-84e7-e10a993fa4d1" alt="enter image description here"></p>
+<h4 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h4><p>在<a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="external">Stanford Question Answering dataset</a>可以看到所有dataset的信息，test set leaderboard上有各种Model的performance。</p>
+<h4 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h4><p>Question Answering方面的dataset有不少，最近比较popular的有：MCTest by Microsoft，BAbI dataset by Facebook，WikiQA by Microsoft，CNN/Daily Mail by DeepMind, Children’s Book Test by Facebook。有兴趣的读者可以查阅相关文献。</p>
+<h4 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h4><p>SQuAD是一个高质量的Reading comprehension dataset。作者花费了大量的人力物力，让Crowdworkers根据Wikipedia Paragraph出题和答题。构建的dataset数量巨大且质量高，对未来Reading Comprehension Question Answering的研究非常有帮助。</p>
+<h4 id="完成人信息-2"><a href="#完成人信息-2" class="headerlink" title="完成人信息"></a>完成人信息</h4><p>Zewei Chu，The University of Chicago，zeweichu@gmail.com。</p>
+<h4 id="提问-1"><a href="#提问-1" class="headerlink" title="提问"></a>提问</h4><p>作者在评估SQuAD dataset的时候，使用了哪些baseline模型，具体是如何训练和测试的？</p>
+<hr>
+<p>####Chat实录</p>
+<p><strong>问：请介绍一下这个reading comprehension dataset和其他dataset之间的主要区别？以及该dataset的优势是？</strong></p>
+<p><strong>答：</strong> 这篇paper相对于前面两篇内容简单一些，主要就是介绍了一个新构建的QA数据集。所以我和大家交流分享一下我比较熟悉的最近一些比较popular的QA Dataset吧。</p>
+<p>MCTest: 数据集本身质量不错，像普通的阅读理解，是根据一篇文章提出问题，然后在给定的四个选项中选出一个。但是数据集太小，现在比较主流的RC model都是基于deep learning的，数据量太小很难让model学习到有用的信息。所以个人认为小数据集上的Model多少会给人一种强凑答案的感觉。</p>
+<p>CNN/Daily Mail, CBT: 这个数据集我比较熟悉，数据集比较大，也是比较火的一个数据集。问题的答案只是一个单词或者一个entity，SQuAD的答案有比较长的phrase。the entities are anonymized。在anonymized dataset上训练的一个问题是，容易训练出没有semantics的模型来。因为训练集上的参考答案都是entity1，entity2，到了真实情况下碰到很大的vocabulary模型未必work。</p>
+<p>安利一下<a href="https://openreview.net/pdf?id=ryWKREqxx" target="_blank" rel="external">我同学的一篇paper</a>，分析了一下几个在CNN/DM/CBT上面比较好的几个模型attention sum/gated attention sum/stanford reader其实本质是差不多的。然后stanford reader虽然在这个数据集上效果很好但是一旦数据集不anonymize就很容易不work了。</p>
+<p>WDW dataset:Passage: 直接给一个例子。</p>
+<blockquote>
+<p>Britain’s decision on Thursday to drop extradition proceedings against Gen. Augusto Pinochet and allow him to return to Chile is understandably frustrating … Jack Straw, the home secretary, said the 84-year-old former dictator’s ability to understand the charges against him and to direct his defense had been seriously impaired by a series of strokes. … Chile’s president-elect, Ricardo Lagos, has wisely pledged to let justice run its course. But the outgoing government of President Eduardo Frei is pushing a constitutional reform that would allow Pinochet to step down from the Senate and retain parliamentary immunity from prosecution. … </p>
+<p>Question: Sources close to the presidential palace said that Fujimori declined at the last moment to leave the country and instead he will send a high level delegation to the ceremony, at which Chilean President Eduardo Frei will pass the mandate to XXX. </p>
+<p>Choices: (1) Augusto Pinochet (2) Jack Straw (3) Ricardo Lagos</p>
+</blockquote>
+<p>还有一个dataset叫wiki QA我也没有在上面实验过，也给一个例子。</p>
+<blockquote>
+<p>Question: Who wrote second Corinthians? Second Epistle to the Corinthians The Second Epistle to the Corinthians, often referred to as Second Corinthians (and written as 2 Corinthians), is the eighth book of the New Testament of the Bible. Paul the Apostle and “Timothy our brother” wrote this epistle to “the church of God which is at Corinth, with all the saints which are in all Achaia”.</p>
+</blockquote>
+<p>个人觉得open domain以及需要external knowledge的QA DATASET其实很难，但是很重要，因为可以应用在其他更多的方面。</p>
+<p>另外提一个LAMBADA dataset，虽然他的问题是last word prediction，不过我们发现用reading comprehension models也可以做出很好的效果。详细信息可以看<a href="https://arxiv.org/abs/1610.08431" target="_blank" rel="external">我的一篇paper</a>。</p>
+<p>facebook有个babi dataset，</p>
+<pre><code>1 Mary moved to the bathroom.
+2 John went to the hallway.
+3 Where is Mary?        bathroom        1
+4 Daniel went back to the hallway.
+5 Sandra moved to the garden.
+6 Where is Daniel?      hallway 4
+7 John moved to the office.
+8 Sandra journeyed to the bathroom.
+9 Where is Daniel?      hallway 4
+10 Mary moved to the hallway.
+11 Daniel travelled to the office.
+12 Where is Daniel?     office  11
+13 John went back to the garden.
+14 John moved to the bedroom.
+15 Where is Sandra?     bathroom        8
+1 Sandra travelled to the office.
+2 Sandra went to the bathroom.
+3 Where is Sandra?      bathroom        2
+</code></pre><p>需要一些logical thinking，facebook自己搞了一些memory network的模型在上面效果比较好，但是其实我觉得memory network和attention模型非常相似。</p>
+<p>至于本文构建的squad dataset主要的特点就是答案可能比较长，而且不给候选答案，所以难度应该会大一些 数据集的质量也比较高，因为都是人工出的问题和标准答案，数据量也很大，容易训练处有用的模型。</p>
+<p>个人认为构建大的，有意义的数据集对于QA的工作是很关键的。现在还是比较缺乏能够推广到实际生活中的问题的QA模型。</p>
+<p>我大致就分享这一些。给想做QA方面问题的同学一点参考。</p>
+<hr>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-02-19T03:04:24.000Z"><a href="/2017/02/19/本周值得读-2017-02-13-2017-02-17/">2017-02-19</a></time>
       
       
   
@@ -103,7 +331,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-17T06:07:07.000Z"><a href="/2017/02/16/PaperWeekly-第二十五期/">2017-02-16</a></time>
+        <time datetime="2017-02-16T14:07:07.000Z"><a href="/2017/02/16/PaperWeekly-第二十五期/">2017-02-16</a></time>
       
       
   
@@ -179,7 +407,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-12T06:45:32.000Z"><a href="/2017/02/11/本周值得读-2017-02-06-2017-02-10/">2017-02-11</a></time>
+        <time datetime="2017-02-11T14:45:32.000Z"><a href="/2017/02/11/本周值得读-2017-02-06-2017-02-10/">2017-02-11</a></time>
       
       
   
@@ -219,7 +447,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-04T20:41:10.000Z"><a href="/2017/02/04/本周值得读-2017-01-23-2017-02-05/">2017-02-04</a></time>
+        <time datetime="2017-02-04T04:41:10.000Z"><a href="/2017/02/04/本周值得读-2017-01-23-2017-02-05/">2017-02-04</a></time>
       
       
   
@@ -259,7 +487,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-02-03T05:37:34.000Z"><a href="/2017/02/02/PaperWeekly-第二十三期/">2017-02-02</a></time>
+        <time datetime="2017-02-02T13:37:34.000Z"><a href="/2017/02/02/PaperWeekly-第二十三期/">2017-02-02</a></time>
       
       
   
@@ -326,7 +554,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-21T18:36:46.000Z"><a href="/2017/01/21/本周值得读-2017-01-16-2017-01-20/">2017-01-21</a></time>
+        <time datetime="2017-01-21T02:36:46.000Z"><a href="/2017/01/21/本周值得读-2017-01-16-2017-01-20/">2017-01-21</a></time>
       
       
   
@@ -364,7 +592,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-20T18:54:36.000Z"><a href="/2017/01/20/PaperWeekly-第二十二期/">2017-01-20</a></time>
+        <time datetime="2017-01-20T02:54:36.000Z"><a href="/2017/01/20/PaperWeekly-第二十二期/">2017-01-20</a></time>
       
       
   
@@ -438,7 +666,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-17T22:02:42.000Z"><a href="/2017/01/17/近期对话系统领域高质量paper汇总/">2017-01-17</a></time>
+        <time datetime="2017-01-17T06:02:42.000Z"><a href="/2017/01/17/近期对话系统领域高质量paper汇总/">2017-01-17</a></time>
       
       
   
@@ -494,7 +722,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-14T18:27:18.000Z"><a href="/2017/01/14/本周值得读-2017-01-09-2017-01-13/">2017-01-14</a></time>
+        <time datetime="2017-01-14T02:27:18.000Z"><a href="/2017/01/14/本周值得读-2017-01-09-2017-01-13/">2017-01-14</a></time>
       
       
   
@@ -536,7 +764,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-13T22:57:16.000Z"><a href="/2017/01/13/高考机器人距离我们还有多远？/">2017-01-13</a></time>
+        <time datetime="2017-01-13T06:57:16.000Z"><a href="/2017/01/13/高考机器人距离我们还有多远？/">2017-01-13</a></time>
       
       
   
@@ -583,7 +811,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-11T20:00:23.000Z"><a href="/2017/01/11/PaperWeekly-第二十一期/">2017-01-11</a></time>
+        <time datetime="2017-01-11T04:00:23.000Z"><a href="/2017/01/11/PaperWeekly-第二十一期/">2017-01-11</a></time>
       
       
   
@@ -664,7 +892,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-07T06:06:34.000Z"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">2017-01-06</a></time>
+        <time datetime="2017-01-06T14:06:34.000Z"><a href="/2017/01/06/本周值得读-2016-12-26-2017-01-06/">2017-01-06</a></time>
       
       
   
@@ -705,7 +933,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2017-01-06T18:31:23.000Z"><a href="/2017/01/06/PaperWeekly-第二十期/">2017-01-06</a></time>
+        <time datetime="2017-01-06T02:31:23.000Z"><a href="/2017/01/06/PaperWeekly-第二十期/">2017-01-06</a></time>
       
       
   
@@ -796,7 +1024,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-30T04:10:12.000Z"><a href="/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/">2016-12-29</a></time>
+        <time datetime="2016-12-29T12:10:12.000Z"><a href="/2016/12/29/2016年自然语言处理领域10篇值得读的Paper/">2016-12-29</a></time>
       
       
   
@@ -873,7 +1101,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-29T19:20:43.000Z"><a href="/2016/12/29/告别2016，迎接2017/">2016-12-29</a></time>
+        <time datetime="2016-12-29T03:20:43.000Z"><a href="/2016/12/29/告别2016，迎接2017/">2016-12-29</a></time>
       
       
   
@@ -919,7 +1147,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-25T18:31:57.000Z"><a href="/2016/12/25/本周值得读-2016-12-19-2016-12-23/">2016-12-25</a></time>
+        <time datetime="2016-12-25T02:31:57.000Z"><a href="/2016/12/25/本周值得读-2016-12-19-2016-12-23/">2016-12-25</a></time>
       
       
   
@@ -960,7 +1188,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-23T18:40:03.000Z"><a href="/2016/12/23/PaperWeekly-第十九期/">2016-12-23</a></time>
+        <time datetime="2016-12-23T02:40:03.000Z"><a href="/2016/12/23/PaperWeekly-第十九期/">2016-12-23</a></time>
       
       
   
@@ -1038,7 +1266,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-18T17:16:11.000Z"><a href="/2016/12/18/本周值得读-2016-12-12-2016-12-16/">2016-12-18</a></time>
+        <time datetime="2016-12-18T01:16:11.000Z"><a href="/2016/12/18/本周值得读-2016-12-12-2016-12-16/">2016-12-18</a></time>
       
       
   
@@ -1081,7 +1309,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-17T18:37:27.000Z"><a href="/2016/12/17/PaperWeekly-第十八期/">2016-12-17</a></time>
+        <time datetime="2016-12-17T02:37:27.000Z"><a href="/2016/12/17/PaperWeekly-第十八期/">2016-12-17</a></time>
       
       
   
@@ -1169,7 +1397,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-11T16:51:29.000Z"><a href="/2016/12/11/本周值得读-2016-12-05-2016-12-09/">2016-12-11</a></time>
+        <time datetime="2016-12-11T00:51:29.000Z"><a href="/2016/12/11/本周值得读-2016-12-05-2016-12-09/">2016-12-11</a></time>
       
       
   
@@ -1208,7 +1436,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-10T18:16:44.000Z"><a href="/2016/12/10/PaperWeekly-第十七期/">2016-12-10</a></time>
+        <time datetime="2016-12-10T02:16:44.000Z"><a href="/2016/12/10/PaperWeekly-第十七期/">2016-12-10</a></time>
       
       
   
@@ -1312,7 +1540,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-04T18:06:33.000Z"><a href="/2016/12/04/本周值得读-2016-11-28-2016-12-02/">2016-12-04</a></time>
+        <time datetime="2016-12-04T02:06:33.000Z"><a href="/2016/12/04/本周值得读-2016-11-28-2016-12-02/">2016-12-04</a></time>
       
       
   
@@ -1358,7 +1586,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-12-03T18:08:45.000Z"><a href="/2016/12/03/PaperWeekly-第十六期/">2016-12-03</a></time>
+        <time datetime="2016-12-03T02:08:45.000Z"><a href="/2016/12/03/PaperWeekly-第十六期/">2016-12-03</a></time>
       
       
   
@@ -1469,7 +1697,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-29T17:49:50.000Z"><a href="/2016/11/29/中文分词工具测评/">2016-11-29</a></time>
+        <time datetime="2016-11-29T01:49:50.000Z"><a href="/2016/11/29/中文分词工具测评/">2016-11-29</a></time>
       
       
   
@@ -1517,7 +1745,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-27T06:12:34.000Z"><a href="/2016/11/26/本周值得读-2016-11-21-2016-11-25/">2016-11-26</a></time>
+        <time datetime="2016-11-26T14:12:34.000Z"><a href="/2016/11/26/本周值得读-2016-11-21-2016-11-25/">2016-11-26</a></time>
       
       
   
@@ -1558,7 +1786,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-26T18:37:08.000Z"><a href="/2016/11/26/PaperWeekly-第十五期/">2016-11-26</a></time>
+        <time datetime="2016-11-26T02:37:08.000Z"><a href="/2016/11/26/PaperWeekly-第十五期/">2016-11-26</a></time>
       
       
   
@@ -1653,7 +1881,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-20T04:47:55.000Z"><a href="/2016/11/19/悉尼科技大学博士后招聘信息/">2016-11-19</a></time>
+        <time datetime="2016-11-19T12:47:55.000Z"><a href="/2016/11/19/悉尼科技大学博士后招聘信息/">2016-11-19</a></time>
       
       
   
@@ -1693,7 +1921,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-20T04:30:55.000Z"><a href="/2016/11/19/cs-CL-weekly-2016-11-14-2016-11-18/">2016-11-19</a></time>
+        <time datetime="2016-11-19T12:30:55.000Z"><a href="/2016/11/19/cs-CL-weekly-2016-11-14-2016-11-18/">2016-11-19</a></time>
       
       
   
@@ -1737,7 +1965,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-19T17:58:02.000Z"><a href="/2016/11/19/PaperWeekly-第十四期/">2016-11-19</a></time>
+        <time datetime="2016-11-19T01:58:02.000Z"><a href="/2016/11/19/PaperWeekly-第十四期/">2016-11-19</a></time>
       
       
   
@@ -1813,7 +2041,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-13T19:10:19.000Z"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">2016-11-13</a></time>
+        <time datetime="2016-11-13T03:10:19.000Z"><a href="/2016/11/13/cs-CL-weekly-2016-11-07-2016-11-11/">2016-11-13</a></time>
       
       
   
@@ -1852,7 +2080,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-11T02:50:42.000Z"><a href="/2016/11/10/PaperWeekly-第十三期/">2016-11-10</a></time>
+        <time datetime="2016-11-10T10:50:42.000Z"><a href="/2016/11/10/PaperWeekly-第十三期/">2016-11-10</a></time>
       
       
   
@@ -1941,7 +2169,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-05T16:40:05.000Z"><a href="/2016/11/05/cs-CL-weekly-2016-10-31-2016-11-04/">2016-11-05</a></time>
+        <time datetime="2016-11-05T01:40:05.000Z"><a href="/2016/11/05/cs-CL-weekly-2016-10-31-2016-11-04/">2016-11-05</a></time>
       
       
   
@@ -1984,7 +2212,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-11-04T02:47:13.000Z"><a href="/2016/11/03/PaperWeekly-第十二期/">2016-11-03</a></time>
+        <time datetime="2016-11-03T11:47:13.000Z"><a href="/2016/11/03/PaperWeekly-第十二期/">2016-11-03</a></time>
       
       
   
@@ -2091,7 +2319,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-28T23:35:04.000Z"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">2016-10-28</a></time>
+        <time datetime="2016-10-28T08:35:04.000Z"><a href="/2016/10/28/cs-CL-weekly-2016-10-24-2016-10-28/">2016-10-28</a></time>
       
       
   
@@ -2132,7 +2360,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-28T04:54:20.000Z"><a href="/2016/10/27/PaperWeekly-第十一期/">2016-10-27</a></time>
+        <time datetime="2016-10-27T13:54:20.000Z"><a href="/2016/10/27/PaperWeekly-第十一期/">2016-10-27</a></time>
       
       
   
@@ -2254,7 +2482,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-22T20:11:20.000Z"><a href="/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/">2016-10-22</a></time>
+        <time datetime="2016-10-22T05:11:20.000Z"><a href="/2016/10/22/cs-CL-weekly-2016-10-17-2016-10-21/">2016-10-22</a></time>
       
       
   
@@ -2299,7 +2527,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-22T00:42:53.000Z"><a href="/2016/10/21/PaperWeekly十期总结/">2016-10-21</a></time>
+        <time datetime="2016-10-21T09:42:53.000Z"><a href="/2016/10/21/PaperWeekly十期总结/">2016-10-21</a></time>
       
       
   
@@ -2368,7 +2596,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-21T06:30:26.000Z"><a href="/2016/10/20/PaperWeekly-第十期/">2016-10-20</a></time>
+        <time datetime="2016-10-20T15:30:26.000Z"><a href="/2016/10/20/PaperWeekly-第十期/">2016-10-20</a></time>
       
       
   
@@ -2504,7 +2732,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-15T17:39:35.000Z"><a href="/2016/10/15/cs-CL-weekly-2016-10-10-2016-10-14/">2016-10-15</a></time>
+        <time datetime="2016-10-15T02:39:35.000Z"><a href="/2016/10/15/cs-CL-weekly-2016-10-10-2016-10-14/">2016-10-15</a></time>
       
       
   
@@ -2551,7 +2779,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-14T04:09:21.000Z"><a href="/2016/10/13/PaperWeekly-第九期/">2016-10-13</a></time>
+        <time datetime="2016-10-13T13:09:21.000Z"><a href="/2016/10/13/PaperWeekly-第九期/">2016-10-13</a></time>
       
       
   
@@ -2636,7 +2864,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-08T02:06:28.000Z"><a href="/2016/10/07/cs-CL-weekly-2016-10-03-2016-10-07/">2016-10-07</a></time>
+        <time datetime="2016-10-07T11:06:28.000Z"><a href="/2016/10/07/cs-CL-weekly-2016-10-03-2016-10-07/">2016-10-07</a></time>
       
       
   
@@ -2681,7 +2909,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-10-07T18:22:30.000Z"><a href="/2016/10/07/PaperWeekly-第八期/">2016-10-07</a></time>
+        <time datetime="2016-10-07T03:22:30.000Z"><a href="/2016/10/07/PaperWeekly-第八期/">2016-10-07</a></time>
       
       
   
@@ -2767,7 +2995,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-30T23:11:04.000Z"><a href="/2016/09/30/cs-CL-weekly-2016-09-26-2016-09-30/">2016-09-30</a></time>
+        <time datetime="2016-09-30T08:11:04.000Z"><a href="/2016/09/30/cs-CL-weekly-2016-09-26-2016-09-30/">2016-09-30</a></time>
       
       
   
@@ -2813,7 +3041,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-30T00:58:47.000Z"><a href="/2016/09/29/PaperWeekly-第七期/">2016-09-29</a></time>
+        <time datetime="2016-09-29T09:58:47.000Z"><a href="/2016/09/29/PaperWeekly-第七期/">2016-09-29</a></time>
       
       
   
@@ -2941,7 +3169,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-24T16:57:50.000Z"><a href="/2016/09/24/cs-CL-weekly-2016-09-19-2016-09-23/">2016-09-24</a></time>
+        <time datetime="2016-09-24T01:57:50.000Z"><a href="/2016/09/24/cs-CL-weekly-2016-09-19-2016-09-23/">2016-09-24</a></time>
       
       
   
@@ -3003,7 +3231,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-23T03:51:47.000Z"><a href="/2016/09/22/PaperWeekly-第六期/">2016-09-22</a></time>
+        <time datetime="2016-09-22T12:51:47.000Z"><a href="/2016/09/22/PaperWeekly-第六期/">2016-09-22</a></time>
       
       
   
@@ -3117,7 +3345,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-18T05:05:11.000Z"><a href="/2016/09/17/paperweekly用户投票总结/">2016-09-17</a></time>
+        <time datetime="2016-09-17T14:05:11.000Z"><a href="/2016/09/17/paperweekly用户投票总结/">2016-09-17</a></time>
       
       
   
@@ -3168,7 +3396,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-17T04:34:58.000Z"><a href="/2016/09/16/cs-CL-weekly-2016-09-12-2016-09-16/">2016-09-16</a></time>
+        <time datetime="2016-09-16T13:34:58.000Z"><a href="/2016/09/16/cs-CL-weekly-2016-09-12-2016-09-16/">2016-09-16</a></time>
       
       
   
@@ -3220,7 +3448,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-09-16T18:14:40.000Z"><a href="/2016/09/16/PaperWeekly-第五期/">2016-09-16</a></time>
+        <time datetime="2016-09-16T03:14:40.000Z"><a href="/2016/09/16/PaperWeekly-第五期/">2016-09-16</a></time>
       
       
   
@@ -3283,59 +3511,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-10T19:38:13.000Z"><a href="/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/">2016-09-10</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/09/10/cs-CL-weekly-2016-09-05-2016-09-09/">cs.CL weekly 2016.09.05-2016.09.09</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>本周（2016.09.05-2016.09.09）质量较高的arXiv cs.CL的paper如下：<br>（点击标题可看原文）</p>
-<h1 id="Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level"><a href="#Convolutional-Neural-Networks-for-Text-Categorization-Shallow-Word-level-vs-Deep-Character-level" class="headerlink" title="Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.00718v1.pdf" target="_blank" rel="external">Convolutional Neural Networks for Text Categorization: Shallow Word-level vs. Deep Character-level</a></h1><p>张潼老师的文章，通过实验对比了shallow word-level CNN（本文工作）和deep char-level CNN模型在而文本分类任务上的表现，结论是本文工作又快又准。</p>
-<p>（这篇文章对于选择char-level还是word-level做文本分类非常有指导意义）</p>
-<h1 id="Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering"><a href="#Skipping-Word-A-Character-Sequential-Representation-based-Framework-for-Question-Answering" class="headerlink" title="Skipping Word: A Character-Sequential Representation based Framework for Question Answering"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00565v1.pdf" target="_blank" rel="external">Skipping Word: A Character-Sequential Representation based Framework for Question Answering</a></h1><p>本文用char-level CNN模型来做句子表示，然后进行question和answer之间的相关匹配学习，CIKM2016 short paper accepted。</p>
-<h1 id="End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access"><a href="#End-to-End-Reinforcement-Learning-of-Dialogue-Agents-for-Information-Access" class="headerlink" title="End-to-End Reinforcement Learning of Dialogue Agents for Information Access"></a><a href="http://120.52.73.78/arxiv.org/pdf/1609.00777v1.pdf" target="_blank" rel="external">End-to-End Reinforcement Learning of Dialogue Agents for Information Access</a></h1><p>本文是微软研究软邓力老师的文章，构建了一种从知识图谱中形成response的聊天机器人KB-InfoBot，并且提出了一种端到端的增强学习训练方案。</p>
-<p>（本文对于构建一个端到端的KB + task-oriented chatbot非常有启发和指导意义）</p>
-<h1 id="Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks"><a href="#Joint-Online-Spoken-Language-Understanding-and-Language-Modeling-with-Recurrent-Neural-Networks" class="headerlink" title="Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01462v1.pdf" target="_blank" rel="external">Joint Online Spoken Language Understanding and Language Modeling with Recurrent Neural Networks</a></h1><p>本文提出一种模型，将intent detection、slot filling和language modeling融合在一起进行学习，用于解决对话系统中的SLU task。本文是SIGDIAL 2016 paper。</p>
-<p>用到的数据集在Dropbox有一份<a href="http://t.cn/Rcbcpfl" target="_blank" rel="external">copy</a></p>
-<h1 id="Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling"><a href="#Attention-Based-Recurrent-Neural-Network-Models-for-Joint-Intent-Detection-and-Slot-Filling" class="headerlink" title="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling"></a><a href="http://120.52.73.79/arxiv.org/pdf/1609.01454v1.pdf" target="_blank" rel="external">Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling</a></h1><p>和上一篇paper是同一个作者，解决的是同一个问题。将RNN换成了attention-based RNN，被另外一个会议录取。(有点灌水的意思)</p>
-<h1 id="Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations"><a href="#Ask-the-GRU-Multi-task-Learning-for-Deep-Text-Recommendations" class="headerlink" title="Ask the GRU: Multi-task Learning for Deep Text Recommendations"></a><a href="http://120.52.73.77/arxiv.org/pdf/1609.02116v1.pdf" target="_blank" rel="external">Ask the GRU: Multi-task Learning for Deep Text Recommendations</a></h1><p>本文提出了用端到端的解决方案来做paper的推荐任务，用GRU将文本序列（标题、摘要等）encode到一个latent vector中。并且通过多任务学习来完成内容推荐和条目预测两个task，取得了不错的效果。</p>
-<p>以下内容为arXiv外的<b>优质内容</b>：</p>
-<h1 id="Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems"><a href="#Discriminative-Methods-for-Statistical-Spoken-Dialogue-Systems" class="headerlink" title="Discriminative Methods for Statistical Spoken Dialogue Systems"></a><a href="http://www.matthen.com/research/papers/Discriminative_Methods_for_Statistical_Spoken_Dialogue_Systems_Matthew_Henderson_PhD_Thesis.pdf" target="_blank" rel="external">Discriminative Methods for Statistical Spoken Dialogue Systems</a></h1><p>剑桥大学Spoken Dialogue System组毕业的Matthew Henderson博士，师从于Steve Young教授，研究领域是对话系统中的Dialogue State Tracking，主要特色是用transfer learning来解决discriminative model的扩展性和通用性。</p>
-<p>如果你对chatbot感兴趣，强烈建议好好研读一下这篇博士论文。</p>
-<h1 id="CONNECTING-IMAGES-AND-NATURAL-LANGUAGE"><a href="#CONNECTING-IMAGES-AND-NATURAL-LANGUAGE" class="headerlink" title="CONNECTING IMAGES AND NATURAL LANGUAGE"></a><a href="http://cs.stanford.edu/people/karpathy/main.pdf" target="_blank" rel="external">CONNECTING IMAGES AND NATURAL LANGUAGE</a></h1><p>斯坦福大学Feifei Li的博士生Andrej Karpathy的PhD thesis，Karpathy维护着几个非常流行的开源代码库，并且有着一个影响力非常大的博客。名师出高徒，这篇博士博士论文值得一看！</p>
-<p>最近，他更新了一篇博客，谈论了一些自己对读博的思考和建议。 <a href="http://karpathy.github.io/2016/09/07/phd/" target="_blank" rel="external">A Survival Guide to a PhD</a></p>
-<h1 id="Mendeley-Docs"><a href="#Mendeley-Docs" class="headerlink" title="Mendeley Docs"></a><a href="https://pan.baidu.com/share/link?shareid=317480&amp;uk=1594817379" target="_blank" rel="external">Mendeley Docs</a></h1><p>paper越看越多，一个优秀的paper管理工具就变得非常必要了，Mendeley是其中最优秀的代表之一。</p>
-<p>Easily organize your papers, read &amp; annotate your PDFs, collaborate in private or open groups, and securely access your research from everywhere.</p>
-<h1 id="广告时间"><a href="#广告时间" class="headerlink" title="广告时间"></a>广告时间</h1><p>PaperWeekly是一个分享知识和交流学问的民间组织，关注的领域是NLP的各个方向。如果你也经常读paper，也喜欢分享知识，也喜欢和大家一起讨论和学习的话，请速速来加入我们吧。</p>
-<p>微信公众号：PaperWeekly</p>
-<p><img src="media/qrcode_for_gh_5138cebd4585_430%20-2-.jpg" alt="qrcode_for_gh_5138cebd4585_430 -2-"></p>
-<p>微博账号：PaperWeekly（<a href="http://weibo.com/u/2678093863" target="_blank" rel="external">http://weibo.com/u/2678093863</a> ）<br>知乎专栏：PaperWeekly（<a href="https://zhuanlan.zhihu.com/paperweekly" target="_blank" rel="external">https://zhuanlan.zhihu.com/paperweekly</a> ）<br>微信交流群：微信+ zhangjun168305（请备注：加群 or 加入paperweekly）</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -3369,7 +3544,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>108</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>109</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -3405,7 +3580,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>126</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>127</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   

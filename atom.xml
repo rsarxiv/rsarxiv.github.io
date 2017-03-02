@@ -5,10 +5,88 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://rsarxiv.github.io/"/>
-  <updated>2017-02-23T15:27:32.000Z</updated>
+  <updated>2017-03-02T13:06:07.000Z</updated>
   <id>http://rsarxiv.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PaperWeekly第二十七期</title>
+    <link href="http://rsarxiv.github.io/2017/03/02/PaperWeekly%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B8%83%E6%9C%9F/"/>
+    <id>http://rsarxiv.github.io/2017/03/02/PaperWeekly第二十七期/</id>
+    <published>2017-03-02T12:44:13.000Z</published>
+    <updated>2017-03-02T13:06:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>提及 Generative Models，Variational Autoencoder(VAE) 和 GAN 可以说是两座大山头。上上期的《 GAN for NLP》 一文中对 GAN 在 NLP 中的进展做了详细的介绍，推荐错过的朋友不要再错过。虽然 GAN 在图像生成上效果显著（当然 VAE 也很强），但在 NLP 方面暂时还是 VAE 较为work。今天的分享作为姊妹篇（捂脸），对 VAE 在 NLP 的应用里选取几篇最具有代表性的 paper 进行介绍。我会尽量梳理论文之间的联系，希望对大家有所帮助。本期涉及的论文有：</p>
+<ol>
+<li>《Generating Sentences From a Continuous Spaces》. ICLR 2016</li>
+<li>《Neural Variational Inference for Text Processing》. ICML 2016</li>
+<li>《Language as a Latent Variable: Discrete Generative Models for Sentence Compression》. EMNLP 2016</li>
+<li>《A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues》. AAAI 2017</li>
+<li>其他</li>
+</ol>
+<p><img src="media/14884594923368.jpg" alt=""></p>
+<p>在展开之前，我先带大家简单回顾一下 VAE 的核心。<br>1)    如上图所示，VAE 可以看做是 Standard autoencoder 的 regularized version（在 autoencoder 的架构上引入随机 latent variable ）。<br>2)    VAE 从 data 学到的是在 latent space 的 region，而不是单个点。换句话说是 encode 学到了一个概率分布 q(z|x)。<br>3)    引入 KL divergence 让后验 q(z|x) 接近先验 p(z)。这里的 motivation 在于如果仅用 reconstruction loss，q(z|x) 的 variances 还是会很小（又和原有的单个点差不多了）。<br>VAE 详细推导这里就不展开，各种 tutorial 也非常多。只要掌握变分推断和理解 reparametrization trick 就基本 ok 了。<br>下面进入正题。</p>
+<ol>
+<li>Generating Sentences From a Continuous Spaces<br>论文链接: <a href="https://aclweb.org/anthology/K/K16/K16-1002.pdf" target="_blank" rel="external">https://aclweb.org/anthology/K/K16/K16-1002.pdf</a></li>
+</ol>
+<p>这篇文章对后面很多 paper 影响很大而且我也很喜欢，所以重点介绍一下。paper 最早发表在 ICLR 2016 上，motivation 在于作者为了弥补传统的 RNNLM 结构缺少的一些 global feature（其实可以理解为想要 sentence representation）。其实抛开 generative model，之前也有一些比较成功的 non-generative 的方法，比如 sequence autoencoders[1]，skip-thought[2] 和 paragraph vector[3]。但随着 VAE 的加入，generative model 也开始在文本上有更多的可能性。</p>
+<p><img src="media/14884595350366.jpg" alt=""></p>
+<p>Loss 的组成还是和 VAE 一样。具体模型上，encoder 和 decoder 都采用单层的 LSTM，decoder 可以看做是特殊的 RNNLM，其 initial state 是这个 hidden code z（latent variable），z 采样自 Gaussian 分布 G，G 的参数由 encoder 后面加的一层 linear layer 得到。这里的 z 就是作者想要的 global latent sentence representation，被赋予了先验diagonal Gaussians，同时 G 就是学到的后验。</p>
+<p>模型很简单，但实际训练时有一个很严重的问题：KL 会迅速降到0，后验失效了。原因在于，由于 RNN-based 的 decoder 有着非常强的 modeling power，直接导致即使依赖很少的 history 信息也可以让 reconstruction errors 降得很低，换句话说，decoder 不依赖 encoder 提供的这个 z 了，模型等同于退化成 RNNLM（摊手）。顺便一提，本文最后有一篇 paper 也是为了解决这个问题。</p>
+<p>先看这篇 paper 提出的解决方法：KL cost annealing 和 Word dropout。</p>
+<p>1)    KL cost annealing</p>
+<p><img src="media/14884595826613.jpg" alt=""></p>
+<p>作者引入一个权重 w 来控制这个 KL 项，并让 w 从 0 开始随着训练逐渐慢慢增大。作者的意思是一开始让模型学会 encode 更多信息到 z 里，然后随着 w 增大再 smooth encodings。其实从工程/代码的角度看，因为 KL 这项更容易降低，模型会优先去优化 KL，于是 KL 很快就降成 0。但如果我们乘以一开始很小的 w，模型就会选择忽视 KL（这项整体很小不用降低了），选择优先去降低 reconstruction errors。当 w 慢慢增大，模型也慢慢开始关注降低 KL 这项了。这个技巧在调参中其实也非常实用。</p>
+<p>2)    Word dropout</p>
+<p><img src="media/14884596013285.jpg" alt=""></p>
+<p>既然问题是 RNN-based 的 decoder 能力太强，那我们就来弱化它好了。具体方法是把 input 的词替换成 UNK（我可能是个假的 decoder），模型被迫只能去多多依赖 z。当然保留多少 input 也需要尝试，我们把全都不保留的叫做inputless decoder，实验表明，inputless VAE 比起 inputless RNN language model 不知道好到哪里去了。</p>
+<p>受到 GAN 的启发，作者还提出了一个 Adversarial evaluation，用一半真一半假的数据作为样本训练出一个分类器，再对比不同模型生成的句子有多少能骗过这个分类器，这个 evaluation 被用在 Imputing missing words 这个任务上，VAE 的表现同样比 RNNLM 出色。</p>
+<p>最后，作者展示模型的确学到了平滑的 sentence representation。选取两个sentence 的code z1和z2，z1 和 z2 可以看做向量空间的两个点，这两个点连线之间的点对应的句子也都符合语法且 high-level 的信息也保持局部一致。</p>
+<p><img src="media/14884596232937.jpg" alt=""></p>
+<ol>
+<li>Neural Variational Inference for Text Processing</li>
+</ol>
+<p>论文链接：<a href="https://arxiv.org/pdf/1511.06038.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1511.06038.pdf</a></p>
+<p>其实这篇 paper 和第一篇是一起投的 ICLR，后来转投了 ICML 2016，所以时间上其实和第一篇是一样的（两篇文章也有互相引用）。不同于第一篇，作者的出发点是构建一个 generative neural variational framework。为了证明  framework 的优越性，分别在 unsupervised 和 supervised 的任务上提出了两个模型，结果也很令人满意。</p>
+<p><img src="media/14884596452354.jpg" alt=""></p>
+<p>第一个任务是 unsupervised document modeling，模型叫 Neural Variational Document Model（NVDM）。h 和第一篇的 z 一样，在这里代表 latent document semantics，但 document 是以 bag-of-words 的形式（个人以为这里作者主要还是受到 LDA 的影响）。encoder 采用 MLP, decoder 是一层 softmax。</p>
+<p>第二个任务是 supervised answer selection，模型叫 Neural Answer Selection Model（NASM）。文本的建模方式采用 LSTM（在第二个任务用 LSTM，第一个任务用词袋，可能为了证明普适性）。h 代表 latent question semantics。如上图所示，Zq 和 Za 用来表示 question 和 answer，y 代表 answer 是不是正确答案，用 Zq 和 Za 预测 y。那么 Zq 和 Za 是怎么得到的呢？ Zq 延用 LSTM 的 last state，而 Za 则较为复杂，所谓脱离问题谈答案都是耍流氓，所以对 Za 建模时要显式的放入 question的信息。可这里该怎么表示 question 呢？如果还用 Zq，模型很容易 overfitting。这里我们的 latent h 终于可以出场了，引入 h 不仅起到了 muti-modal 的效果，还让模型更 robust，再把基于 attention 的 c(a,h) 和 answer 的 LSTM last state 组和得到 Za。这种做法对我们在寻找 representation 时有很好的借鉴作用。最后通过推导 variational lower bound 确定 h 的先验是 p(h|q)（第一个任务中先验是 p(h)）, 这里就不赘述了。</p>
+<ol>
+<li>Language as a Latent Variable: Discrete Generative Models for Sentence Compression</li>
+</ol>
+<p>论文链接：<a href="https://arxiv.org/pdf/1609.07317v1.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1609.07317v1.pdf</a></p>
+<p>这篇 paper 发表在 EMNLP 2016，同样出自第二篇 paper 的作者。传统的 VAE 是把数据 encode 成 continuous latent variable，这篇 paper 的贡献在于提出了一个 generative model 用来学到 language 的 discrete representation——一个带有 sequential discrete latent variable 的 VAE。所谓的 discrete latent variable 就是指一个单词，加上 sequential 其实就是一个句子，由于 VAE 本身是压缩数据的，换句话说是用短一点的句子来表示原来的句子，也就是句子压缩。我觉得作者的 intuition 在于每个句子可以有多个缩写，且都可以表示原句，有一点点 distribution 的意思，所以用 latent variable 很合适。</p>
+<p><img src="media/14884596801523.jpg" alt=""></p>
+<p>原句和压缩句分别是 s 和 c ，模型整体是 encoder -&gt; compressor -&gt; decoder。我们分解开看，encoder -&gt; compressor 采用 pointer network[4] 只从 s 里选取合适的词而不是整个词典，从而大大减少了 search space。compressor -&gt; decoder 是一个带 soft attention 的 seq2seq。这个模型的好处是不需要 label 数据，但是如果我们有足够的 label 数据（真实数据里 c 里的词可不仅仅来自 s），需要额外加个 softmax 从整个词典里选词，同时再定义一个 latent factor判断是从 s（pointer network）还是从词典里选，更加符合任务需求。</p>
+<p><img src="media/14884596956747.jpg" alt=""></p>
+<p>值得一提的是 Variational lower bound 里的 p(c) 是 pre-train 好的 language model。因为 Language model 的一个特点是比较喜欢短句子，很适合句子压缩的场景。由于 reparameterisation trick 并不适用 discrete latent variable，作者还采用了 REINFORCE[5] 的方法（凡是 discrete 的问题，GAN/VAE 都可以采用 REINFORCE）。</p>
+<ol>
+<li>A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues</li>
+</ol>
+<p>论文链接：<a href="https://arxiv.org/pdf/1605.06069.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1605.06069.pdf</a></p>
+<p>这是第一篇把 VAE 的思想引入到 dialogue 的 paper。和普通的 VAE 区别在于 dialogue 的 reconstruction 是生成的下一句 utterance，而不是 input 自身。这篇 paper 的前身是 HRED[6]，HRED 的核心思想是，把 dialogue 看做是 two-level：dialogue 是 utterance 的组合，utterance 是 words 的组合。HRED 由3个 RNN 组成：encode RNN 把每个 utterance 变成 real-valued 的向量 u，context RNN 把每个 turn 里的 u 作为输入变成向量 c，最后把 c 交给 deocde RNN 生成下一个 utterance。</p>
+<p><img src="media/14884597239728.jpg" alt=""></p>
+<p>VHRED 在 HRED 的基础上每个 turn 里引入一个 latent variable z，z 由context RNN 的 c 生成。z 的意义比较笼统，sentiment/topic 怎么解释都行。模型的训练技巧如 KL annealing 等大量借鉴了第一篇 paper 的思想，特别要注意训练时的 z 从后验采样（保证 decode 的正确性），测试时再从先验采样（KL 已经把分布拉近）。实验表明， latent variable 有助于生成更加 diverse 的回复。</p>
+<ol>
+<li>其他</li>
+</ol>
+<p>第一次将 VAE 引入机器翻译：<br>《Variational neural machine translation》EMNLP 2016<br>论文链接：<a href="https://arxiv.org/pdf/1605.07869.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1605.07869.pdf</a><br>为了改进 KL 迅速降到0，提出 convolutional 和 recurrent 结合的 VAE：<br>《A Hybrid Convolutional Variational Autoencoder for Text Generation》<br>论文链接：<a href="https://arxiv.org/pdf/1702.02390.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1702.02390.pdf</a></p>
+<p>[1] Semi-supervised sequence learning<br>[2] Skip-thought vectors<br>[3] Distributed representations of sentences and documents<br>[4] Pointer Networks<br>[5] Recurrent models of visual attention<br>[6] Building End-To-End Dialogue Systems Using Generative Hierarchical Neural Network Models</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;提及 Generative Models，Variational Autoencoder(VAE) 和 GAN 可以说是两座大山头。上上期的《 GAN for NLP》 一文中对 GAN 在 NLP 中的进展做了详细的介绍，推荐错过的朋友不要再错过。虽然 GAN 在图像生成
+    
+    </summary>
+    
+    
+      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
+    
+      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
+    
+  </entry>
   
   <entry>
     <title>PaperWeekly 第一期Chat</title>
@@ -1050,84 +1128,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;Building-Large-Machine-Reading-Comprehension-Datasets-using-Paragraph-Vectors&quot;&gt;&lt;a href=&quot;#Building-Large-Machine-Reading-Comprehensio
-    
-    </summary>
-    
-    
-      <category term="nlp" scheme="http://rsarxiv.github.io/tags/nlp/"/>
-    
-      <category term="PaperWeekly" scheme="http://rsarxiv.github.io/tags/PaperWeekly/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PaperWeekly 第十八期</title>
-    <link href="http://rsarxiv.github.io/2016/12/17/PaperWeekly-%E7%AC%AC%E5%8D%81%E5%85%AB%E6%9C%9F/"/>
-    <id>http://rsarxiv.github.io/2016/12/17/PaperWeekly-第十八期/</id>
-    <published>2016-12-17T02:37:27.000Z</published>
-    <updated>2016-12-17T19:35:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还是对企业的，将对话系统这一应用推到了一个新的高度。seq2seq是当前流行的算法框架，给定一个输入，模型自动给出一个不错的输出，听起来都是一件美好的事情。seq2seq在对话系统中的研究比较多，本期PaperWeekly分享4篇非常新的paper notes，涉及到如何提高所生成对话的流畅度和多样性，使得对话系统能够更加接近人类的对话。4篇paper如下：</p>
-<p>1、Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation, 2016<br>2、A Simple, Fast Diverse Decoding Algorithm for Neural Generation, 2016<br>3、DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS, 2016<br>4、A Diversity-Promoting Objective Function for Neural Conversation Models, 2015</p>
-<h1 id="Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation"><a href="#Sequence-to-Backward-and-Forward-Sequences-A-Content-Introducing-Approach-to-Generative-Short-Text-Conversation" class="headerlink" title="Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation"></a><a href="http://cn.arxiv.org/pdf/1607.00970" target="_blank" rel="external">Sequence to Backward and Forward Sequences: A Content-Introducing Approach to Generative Short-Text Conversation</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Lili Mou, Yiping Song, Rui Yan, Ge Li, Lu Zhang, Zhi Jin</p>
-<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Key Laboratory of High Confidence Software Technologies (Peking University), MoE, China<br>Institute of Software, Peking University, China<br>Institute of Network Computing and Information Systems, Peking Univerity, China<br>Institute of Computer Science and Technology, Peking University, China</p>
-<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>content-introducing approach<br>neural network-based<br>generative dialogue systems<br>seq2BF</p>
-<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用引入内容方法，用于处理基于神经网络的生成式对话系统</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="media/model-18.png" alt="mode"></p>
-<p>该模型由两部分组成：<br>1、use PMI to predict a keyword for the reply<br>使用逐点互信息(PMI)进行预测，选取PMI值最大的单词作为回答中的关键词，该关键词可以出现在回答语句中的任意位置。<br><img src="media/%E5%85%AC%E5%BC%8F.png" alt="公式"></p>
-<p>2、generate a reply conditioned on the keyword as well as the query<br>使用sequence to backward and forward sequences(seq2BF)模型来生成包含关键词的回答。以该关键词为基点，将回答语句划分为两个序列：<br>(1) 反向序列：关键词左侧的所有单词以逆序排列<br>(2) 正向序列：关键词右侧的所有单词以顺序排列</p>
-<p>seq2BF模型具体工作如下：<br>(1) 使用seq2seq神经网络将问题编码，仅对关键词左侧的单词进行解码，逆序输出每个单词<br>(2) 使用另一个seq2seq模型将问题再次编码，在给定上步中解码后的逆序单词序列下，对回答中的剩余单词进行顺序解码，输出最终单词序列<br><img src="media/%E5%85%AC%E5%BC%8F3.png" alt="公式3"></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>Dataset：<a href="http://tieba.baidu.com" target="_blank" rel="external">http://tieba.baidu.com</a></p>
-<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>1、 Dialogue Systems<br>(1) (Isbell et al., 2000; Wang et al., 2013) retrieval methods<br>(2)  (Ritter et al., 2011) phrase-based machine translation<br>(3)  (Sordoni et al., 2015; Shang et al., 2015) recurrent neural networks </p>
-<p>2、 Neural Networks for Sentence Generation<br>(1)  (Sordoni et al., 2015) bag-of-words features<br>(2)  (Shang et al., 2015) seq2seq-like neural networks<br>(3)  (Yao et al., 2015; Serban et al., 2016a) design hierarchical neural networks<br>(4)  (Li et al., 2016a) mutual information training objective</p>
-<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>本文的创新点在于，不同与目前普遍存在的从句首到句尾顺序生成目标单词的方法，引入逐点互信息方法来预测回答语句中的关键词，使用seq2BF机制确保该关键词可以出现在目标回答语句的任意位置之中并确保输出的流利度，相比于seq2seq的生成方法显著地提升了对话系统的质量。</p>
-<h1 id="A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation"><a href="#A-Simple-Fast-Diverse-Decoding-Algorithm-for-Neural-Generation" class="headerlink" title="A Simple, Fast Diverse Decoding Algorithm for Neural Generation"></a><a href="https://arxiv.org/abs/1611.08562" target="_blank" rel="external">A Simple, Fast Diverse Decoding Algorithm for Neural Generation</a></h1><h2 id="作者-1"><a href="#作者-1" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Will Monroe and Dan Jurafsky</p>
-<h2 id="单位-1"><a href="#单位-1" class="headerlink" title="单位"></a>单位</h2><p>Stanford</p>
-<h2 id="关键词-1"><a href="#关键词-1" class="headerlink" title="关键词"></a>关键词</h2><p>seq2seq, diversity, RL</p>
-<h2 id="文章来源-1"><a href="#文章来源-1" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016</p>
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>seq2seq模型decoder时改进beam search，引入惩罚因子影响排序结果，并加入强化学习模型来自动学习diversity rate，使得解码出的结果更具多样性</p>
-<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="media/18-0.png" alt="18-0"></p>
-<p>对比标准beam search，本模型引入惩罚因子，公式如下</p>
-<p><img src="media/18-1.png" alt="18-1"></p>
-<p>其中$\gamma$称为diversity rate，k’范围为[1,k]，K为beam size<br>强化学习模型中，策略为</p>
-<p><img src="media/18-2.png" alt="18-2"></p>
-<p>reward为评价指标，例如机器翻译中的BLEU值等</p>
-<h2 id="资源-1"><a href="#资源-1" class="headerlink" title="资源"></a>资源</h2><p>1、回复生成实验数据集：OpenSubtitles <a href="https://github.com/jiweil/mutual-information-for-neural-machine-translation" target="_blank" rel="external">https://github.com/jiweil/mutual-information-for-neural-machine-translation</a><br>（代码模型可从作者另外一篇文章的源码稍加改动）</p>
-<p>2、机器翻译数据集：WMT’14 <a href="http://www.statmt.org/wmt13/translation-task.html" target="_blank" rel="external">http://www.statmt.org/wmt13/translation-task.html</a></p>
-<h2 id="相关工作-1"><a href="#相关工作-1" class="headerlink" title="相关工作"></a>相关工作</h2><p><img src="media/18-3.png" alt="18-3"></p>
-<h2 id="简评-1"><a href="#简评-1" class="headerlink" title="简评"></a>简评</h2><p>本模型的创新点在于引入惩罚因子，使得decoder时对standard beam search算法进行重排序，并引入强化学习模型，自动学习diversity rate。作者分别在三个实验上进行验证，机器翻译、摘要抽取与对话回复生成，实验表明在不同的实验上有不同的表现，但是总体而言本方法能够在一定程度上解码出更具有多样性的句子。（思路简明清晰，对于传统的beam search稍加改动，原文中作者提到在Matlab代码中只改动一行即可）</p>
-<h1 id="DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS"><a href="#DIVERSE-BEAM-SEARCH-DECODING-DIVERSE-SOLUTIONS-FROM-NEURAL-SEQUENCE-MODELS" class="headerlink" title="DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS"></a><a href="https://arxiv.org/abs/1610.02424" target="_blank" rel="external">DIVERSE BEAM SEARCH: DECODING DIVERSE SOLUTIONS FROM NEURAL SEQUENCE MODELS</a></h1><h2 id="作者-2"><a href="#作者-2" class="headerlink" title="作者"></a>作者</h2><p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasath R. Selvaraju, Qing Sun1 Stefan Lee, David Crandall &amp; Dhruv Batra</p>
-<h2 id="单位-2"><a href="#单位-2" class="headerlink" title="单位"></a>单位</h2><p>Virginia Tech, Blacksburg, VA, USA<br>Indiana University, Bloomington, IN, USA</p>
-<h2 id="关键词-2"><a href="#关键词-2" class="headerlink" title="关键词"></a>关键词</h2><p>Beam Search; Diversity; Image Caption; Machine Translation; Visual Question Answer; Chatbot</p>
-<h2 id="文章来源-2"><a href="#文章来源-2" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2016.10</p>
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>如何改进beam search解码算法，使其在seq2seq模型中可以生成更加丰富的结果？</p>
-<h2 id="模型-2"><a href="#模型-2" class="headerlink" title="模型"></a>模型</h2><p>经典的beam search算法以最大后验概率作为优化目标函数，每一个time step只保留B个最优的状态，是一种典型的贪心算法，这个经典算法常常被用于解码可选状态数量多的情形，比如生成对话、生成图片描述、机器翻译等，每一步都有词表大小的可选状态集。seq2seq模型的流行，让这种解码算法的研究变得热门。在生成对话任务时，用经典的beam search会生成类似“我不知道”等这种没有营养的对话，虽然没有语法上的错误，而且可能在一定的评价体系内会得到不错的分数，但实际应用效果太差，因此diversity的研究变得热门。</p>
-<p>本文针对diversity的问题，提出了一种改进版的beam search算法，旨在生成更加多样性的话。</p>
-<p><img src="media/18-5.png" alt="18-5"></p>
-<p>新算法的主要思路是将经典算法中的Beam进行分组，通过引入一个惩罚机制，使得每一组的相似度尽量低，这一项保证了生成的话相互之间差异更大一些，即满足了多样性的需求，在每一组Beam中，用经典的算法进行优化搜索。具体的算法流程如下图：</p>
-<p><img src="media/18-6.png" alt="18-6"></p>
-<p>实验中，用了Image Caption、Machine Translation和VQA三个任务进行了对比，验证了本文算法的有效性，并且对算法中的几个参数进行了敏感度分析，分析了分组数对多样性的影响。</p>
-<h2 id="资源-2"><a href="#资源-2" class="headerlink" title="资源"></a>资源</h2><p>1、本文算法torch实现 <a href="https://github.com/ashwinkalyan/dbs" target="_blank" rel="external">https://github.com/ashwinkalyan/dbs</a><br>2、本文在线demo dbs.cloudcv.org<br>3、neuraltalk2实现 <a href="https://github.com/karpathy/neuraltalk2" target="_blank" rel="external">https://github.com/karpathy/neuraltalk2</a><br>4、机器翻译开源实现dl4mt <a href="https://github.com/nyu-dl/dl4mt-tutorial" target="_blank" rel="external">https://github.com/nyu-dl/dl4mt-tutorial</a></p>
-<h2 id="相关工作-2"><a href="#相关工作-2" class="headerlink" title="相关工作"></a>相关工作</h2><p>相关的工作主要分类两类：<br>1、Diverse M-Best Lists<br>2、Diverse Decoding for RNNs<br>之前Jiwei Li将解码算法的目标函数换成了互信息进行优化解码，对diversity进行了研究。</p>
-<h2 id="简评-2"><a href="#简评-2" class="headerlink" title="简评"></a>简评</h2><p>本文研究的问题是一类基础问题，beam search算法作为一种经典的近似解码算法，应用的场景非常多。但在实际应用中，尤其是具体到生成对话、生成答案等任务上，存在一些适应性的问题，比如diversity。只是生成简单而又安全的话对于实际应用没有太多的意义，所以本文的研究非常有意义。本文的实验从三个不同的任务上对改进后的beam search都做了对比验证，非常扎实的结果验证了算法的有效性，并且对几个关键参数进行了敏感度分析，有理有据。同时在github上开源了代码，并且给出了一个在线demo。在评价方面，不仅仅设计了几个自动评价指标，而且用了人工评价的方法对本文算法进行了验证，是一篇非常好的paper，值得学习。</p>
-<h1 id="A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models"><a href="#A-Diversity-Promoting-Objective-Function-for-Neural-Conversation-Models" class="headerlink" title="A Diversity-Promoting Objective Function for Neural Conversation Models"></a><a href="https://arxiv.org/pdf/1510.03055.pdf" target="_blank" rel="external">A Diversity-Promoting Objective Function for Neural Conversation Models</a></h1><h2 id="作者-3"><a href="#作者-3" class="headerlink" title="作者"></a>作者</h2><p>Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, Bill Dolan</p>
-<h2 id="单位-3"><a href="#单位-3" class="headerlink" title="单位"></a>单位</h2><p>Stanford University, Stanford, CA, USA<br>Microsoft Research, Redmond, WA, USA</p>
-<h2 id="关键词-3"><a href="#关键词-3" class="headerlink" title="关键词"></a>关键词</h2><p>Sequence-to-sequence neural network models, conversational responses, Maximum Mutual Information(MMI)</p>
-<h2 id="文章来源-3"><a href="#文章来源-3" class="headerlink" title="文章来源"></a>文章来源</h2><p>arXiv, 2015</p>
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p>使用MMI训练sequence-to-sequence model for conversational responses generation<br>传统的ML(最大似然估计)在训练sequence-to-sequence model的时候，易产生与输入无关的’safe’ responses(最大似然估计的弊病—-always try to cover all mode of input data)<br>作者通过使用MMI, 最大化输入与输出的互信息，能够有效避免与输入无关的responses，得到更为diverse的responses.</p>
-<h2 id="模型-3"><a href="#模型-3" class="headerlink" title="模型"></a>模型</h2><p>MMI最早在speech recognition中提出并应用(discriminative training criteria). 语音识别中，通常先用ML训练声学模型，然后再接MMI和语言模型，对声学模型进一步调优。</p>
-<p>在本文中，作者通过提出MMI用于seq-to-seq model的优化。作者提出了MMI-antiLM和MMI-bidi 两个不同的MMI的formulations. MMI在seq-to-seq的应用中存在decoding的问题。</p>
-<p>MMI-antiLM中，作者通过使用带有权重的LM以生成更为diverse的responses by penalizing first word。</p>
-<p>MMI-bidi中，搜索空间的数目过大，导致expolring所有的可能性在实际中无法实现。作者首先产生N-best list, 然后根据相应的准则函数 re-rank得到的N-best list。</p>
-<p>在MMI不同的formulation中，作者通过启发式的设计，使得decoding更为容易且产生的response更为diverse，在相关的数据集上取得了较好的BLEU且产生的response更为diverse。</p>
-<h2 id="简评-3"><a href="#简评-3" class="headerlink" title="简评"></a>简评</h2><p>最大后验概率通常作为优化的目标函数，但很多应用场景中得到的结果并不理想。本文采用了一个新的而且也是其他领域中比较常见的目标函数来替换最大后验概率，在生成对话时得到了更加丰富的结果。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对话系统是一个相对高级的、综合性很强的任务，所依赖的基础任务比较多，比如分词、命名实体识别、句法分析、语义角色标注等等。对于规范的中文表达而言，句法分析仍是一个没有解决好的问题，更何况是不那么规范的人话，句法分析的准确性又要下一个level了，随之语义角色标注也得不到好的效果。经典的、基础的任务还有很长的路要走，对话系统这种更难、更复杂的任务相信不是一年、两年就可以突破的事情，虽然现在大热，做的人很多，但就目前的研究水平来看，应该还有很长的路要走。seq2seq是个逃避这些问题的好方法和好思路，但相对来说更加不成熟，而且存在着很多的问题，想通过大量的数据来覆盖所有的问题，是一种不太科学的思路。我想，seq2seq是个好方法，但传统的NLP方法也是必不可少的，而且两者应该是相互补充的。越多的人关注对话系统，就会越快地推动这个领域的发展，希望早日看到靠谱的、成熟的解决方案。感谢@Penny、@tonya、@zhangjun和@皓天 四位童鞋完成的paper notes。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;p&gt;对话系统是当前的研究热点，也是风险投资的热点，从2016年初开始，成立了无数家做chatbot、语音助手等类似产品的公司，不管是对用户的，还
     
     </summary>
     

@@ -65,6 +65,70 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-06-12T02:59:52.000Z"><a href="/2016/06/12/当我们在谈论deep-learning的时候，我们在谈论什么？/">2016-06-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/06/12/当我们在谈论deep-learning的时候，我们在谈论什么？/">当我们在谈论deep learning的时候，我们在谈论什么？</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>标题起的有一点装x了，昨天看到微博上刘知远老师对关于deep learning哪年火的问题的讨论，突然有一些自己的感触就写了下来。</p>
+<p>从接触nlp到现在大概过去了4个月的时间，最初的动机是要用word2vec工具包来给自己写的app(rsarxiv)添加一个paper knowledge graph的功能。当时用word2vec的感受时，参数太多了，不知道这些参数到底是什么意思，所以就想着看看paper，看看源代码来试着理解下每个参数到底起什么作用，以方便我使用它。就是从这个时候开始算是接触了nlp。</p>
+<p>因为觉得自动文摘是一个非常炫酷的功能，同时也是想给自己的app添加一个根据查询结果自动生成文献综述的功能，所以开始看一些自动文摘方面的paper，正好微博上找到了一个paper list，里面列出了近两年abstractive summarization相关的paper，加上自己买的一些书中介绍了很多传统的extractive的方法，经过了一个月时间的学习，自己从这些资料中学到了很多关于自动文摘的东西，为了记录下所学到的东西和理解到的东西，就写了一个系列博客——<a href="http://rsarxiv.github.io/tags/%E8%87%AA%E5%8A%A8%E6%96%87%E6%91%98/">自动文摘</a>。在看abstractive思路的时候，接触到了当前研究的一个热门方法，seq2seq+attention，这个组合几乎席卷了nlp的所有任务，一次又一次地刷新着排行榜。seq2seq的思路其实并不复杂，没有太多晦涩难懂的数学公式，看着模型图和下面的解释基本就能看懂思路是怎样的，attention也没有多么难，只是在seq2seq的接触上将输出与输入之间的关系考虑更加全面了，而不是简单地认为输出的每一个部分都与整个输入有关，而应该是将注意力放在相关的输入上。</p>
+<p>因为看自动文摘的paper比较过瘾，就想着可以不可以做一个公众号来督促自己每天读一篇paper，写一篇博客。这样既可以养成一个读paper的好习惯，又可以提高自己的写作水平，同时也能够分享给可能感兴趣的童鞋。于是乎开始了PaperWeekly这个side project，前一天晚上睡觉前读paper，理解了其中模型的思路，第二天早上早起，开始写作，希望用尽量短的话介绍清楚该篇paper的模型思路和贡献。关于公众号如何做的问题，和另外一个账号的作者讨论过。他认为发布频率不应该太高，一天一篇太高了，而且要写长文，写干活，写高质量的东西，这样才能提供给用户最好的服务。我觉得他的话没有一点瑕疵，但我做PaperWeekly的初衷还是以自己为主，希望自己每天可以读一篇，写一篇，用最概括的话、图来讲清楚paper的贡献，当然不排除有的用户不喜欢这种方式，那么我只能说您不适合我这个公众号，我也不会因此去改变。于是，这个side project坚持了一个多月，现在有文章22篇+自动文章8篇一共30篇。当然读过的paper不止这些，30篇是写下来的。<code>今后的形式可能是这样，工作日时间较短，所以写单篇，周末的话，时间充裕，写综述，所以每周末都会将下周的5篇文章选好，尽量是相似topic的，这样方便写综述。</code>我觉得这是一个好习惯，长此以往坚持下来，一定会有很大的收获，这一点我坚信。</p>
+<p>看了很多paper，也明白了很多的model，剩下的部分应该就是动手实践了。在选择框架的路上走过一些弯路，最开始用纯python写过一些简单的nnlm这样的模型，后来觉得用框架效率更高一些，于是尝试了keras，一个基于theano和tensorflow的框架，使用方法和torch差不多。如果只是解决一些常用的model结构的话，用keras非常地easy，代码量非常小，非常容易上手，比如rnn，cnn等等。但如果你想实现一个稍微复杂的model，对灵活性要求比较高的model，keras就有点捉襟见肘了，毕竟是一个框架上的框架，灵活性肯定好不了。后来就决定试一下theano，毕竟是deep learning发源地之一出的框架，github上开源了很多的程序都是用theano写的，而且自己也比较擅长python，于是就开始了theano的学习之路，其中最吸引我的是自动求导的功能，但最终导致我放弃theano的一个重要的原因是每次报错都让我特别头疼，因为根本没法找到错误的地方。挣扎了几天，通过重新调研，我选择了Torch，Torch是用lua封装的，意味着我得先学习lua，然后就开始torch，习惯了python的简单，用lua时感觉特别恶心，说不出原因的恶心，后来强忍着开始看一些demo，当初给自己的一个目标是用torch写出seq2seq+attention，然后做一些好玩的事情，于是找了HarvardNLP开源的代码<a href="https://github.com/harvardnlp/seq2seq-attn" target="_blank" rel="external">seq2seq-attn</a>，这个组非常年轻，但非常nice，paper的code都会开源供大家学习。第一次看这个代码就觉得，写的好他么凌乱啊，根本没法读，现在来读的话也觉得很恶心，感觉写代码的人没有太多的规范，想到哪里写到哪里，于是就放弃了这个demo。后来跟着oxford的<a href="https://github.com/oxford-cs-ml-2015/practical6" target="_blank" rel="external">课程代码</a>开始一步一步地学习torch，这个project是实现一个char-level语言模型，里面的功能虽然不够完善，但从最基础的东西开始写起，并没有用类似于rnn，dp这样的框架来做，非常适合入门学习和打基础。跟着这个project，也看着<a href="https://github.com/karpathy/char-rnn" target="_blank" rel="external">char-rnn</a>，其实char-rnn也是跟着oxford的这个程序学着写的，很多的套路和源码都一样。经过了一段时间的挣扎，从0开始写起，实现了一个seq2seq+attention的torch源码，我个人认为比seq2seq-attn那个代码更加清晰和简洁，过段时间整理下会放在Github上。torch有很多的缺点，比如需要学习lua，处理文本不方便，demo不给力。所以，在文本处理这一块，我用了python+hdf5的方式来解决，因为用python处理文本太方便了，然后将处理好的结果放入hdf5中，让torch去调用。demo这块是一个很大的关，只要自己可以动手写出一个完整的project之后，后面的事情就好办了。最近一段时间，tensorflow在网上非常火，有很多的文章和微博大号都在热推他，我觉得框架各有各好，坚持用好一个就会很了不起了，不必盲目跟风。</p>
+<p>以上的部分是我从接触nlp开始，到现在的一个学习过程，下面的部分谈谈我的一些感触。</p>
+<p>deep learning从哪年火起来，并不重要，重要的是它还能火多久？会不会遭遇另一个寒冬？媒体的热捧是跟风、炒作还是客观？现在如果你不聊两句deep learning都不好意思出门。我认为对一个知识的理解大概有三个level：是什么？怎么样？为什么？</p>
+<p>第一个level，是什么的问题。RNN、CNN、RCNN、CRNN、FNN、DNN各种各样的NN充斥在各大媒体上，每天都有大量的文章来介绍各种NN做了什么牛逼的事情，哪些牛逼的机构提出了一种新的NN，将会给人类带来前所未有的方便等等等等。大家通过看一些博客，看一些新闻媒体都会了解到这些NN的概念和作用，以及类似于端到端、注意力模型的这样的概念。</p>
+<p>第二个level，是怎么样的问题。知道概念并不难，做出来才是真好汉！如何提出一个自己的模型，然后用熟悉的框架编程实现它，跑分排名发paper。这个level应该是比较难的level，可能也是一些学生处于的level。之前记得王威廉老师发过一个讨论帖：</p>
+<blockquote>
+<p><strong>跟大家探讨几个开放式问题：大家认为到底计算机科学(Science)与工程(Engineering)的边界在哪里？以深度学习来说，学术界和工业界的着重点应该有什么不同与相同之处？如果本科毕业生也能玩转Theano/TensorFlow/Torch等平台的话，那么深度学习的博士优势到底何在？</strong></p>
+</blockquote>
+<p>如果大家可以玩转torch之类的框架，并且实现自己提出的模型，然后跑分刷榜发paper，那么做深度学习研究的博士优势又会在哪里呢？</p>
+<p>另外一种流传于网络的说法是，deep learning就是比谁更会调参数，这里不得不祭出这张图：</p>
+<img src="http://ww2.sinaimg.cn/mw690/ba115fdfjw1f4nwmxwkn4j20ak05x74m.jpg" width="400" height="400">
+<p>非常地讽刺，我想应该不是这么简单。</p>
+<p>还有一点是model这部分，可能是文章看的不够深，看到的paper都是从model这个层次来创新的，基本搞清楚整个数据流，输入和输出然后就会比较清楚了，而文章中一般也会用一张图把model的数据流讲解地非常清楚。在基本的model上添加gate，用hierarchical来做，套用seq2seq加attention，用copy mechanism等等方式来提出新model，获得更好的结果，亦或者是将人工feature添加到模型中。model是一个非常灵活的东西，记得本科时参加数学建模竞赛就是在做这样的一件事情，根据问题来提出自己模型，往往都是从已有模型中进行一些改进。</p>
+<p>第三个level，是为什么的问题。我个人认为Phd应该能够回答出自己所研究领域的各种各样的为什么，回答出不同level的人提出的为什么，而不仅仅是会用一个框架，提出几个model，然后刷几篇顶会就博士毕业了。更重要的是对问题的思考和理解，尤其是深度地理解。我觉得一个Phd应该具备的能力是提出一个问题，分析一个问题，解决一个问题的能力，而不仅仅是简单重复别人的东西，或者是简单改进下别人的model。调参数是一个基本工作，属于工程型的范畴，为了达到一个更好的效果，需要具备这个基本能力，但并不等同于说deep learning就是调参数，这种说法太过荒唐可笑。框架也只是一个工具，至于你用torch，用tensorflow或者是自己手写都只是一种工具而已，也是一个基本能力，但并不是说deep learning就是用框架。这种说法同样很可笑。一个升级版的model也可以发paper，但是否你的model真的改变了研究现状，带来了革命，而或者只是在原来model的基础上添加了一些小的想法，刷了一下排行榜，这里引用下不久前ACL主席Christopher D. Manning在文章中写过一句话：</p>
+<blockquote>
+<p><strong>However, I would encourage everyone to think about problems, architectures, cognitive science, and the details of human language, how it is learned, processed, and how it changes, rather than just chasing state-of-the-art numbers on a benchmark task.</strong></p>
+</blockquote>
+<p>只是刷分并没有意义，研究的意义应该是对问题本身的认识。虽然deep learning看着热闹，会议非常多，隔一段时间就会出现一个会议论文集，但仔细想想有仅仅有几篇paper是在做更大更重要的事情，大量的paper还是处于model创新这个level。当然，毕业对论文的要求是一个很大的压力，所以这样的现象也并不奇怪。数量的增加必定会带来质量的下降，浮躁的气息必定会让大家都变得急功近利。</p>
+<p>以上是一个初学者对deep learning的一个非常浅薄的认识，很多观点只是这一阶段的观点，可能随着学习的深入会有不同的想法。看paper也有一段时间了，心中一直有些疑问，比如：</p>
+<p>1、gate函数的提出是基于怎样的一种情况，为什么要用gate而不是别的？lstm，gru等单元都采用了gate函数，通过这个函数成功地解决了rnn的长程依赖问题。</p>
+<p>2、miniBatch中batch的大小为什么会影响结果的优劣，包括其他的超参数，可不可以给出一些偏理论的分析，而不只是说大家都这么用，这就是经验这样的说法。</p>
+<p>3、hierarchical是不是都会比non-hierarchical更好呢？分层之后的什么导致了更好的结果？</p>
+<p>4、optimization是一个数学味道非常浓的学科，那么很多的model都采用sgd，或者是adam，或者是rmsprop，区别在哪里？哪种算法适合哪种model。</p>
+<p>5、deep learning到底多deep算deep，越deep越好？还是说到了一定的deep就ok了，神经网络是用来近似非线性函数的，那么可不可以计算出多深的网络可以以最低的误差来拟合函数？</p>
+<p>等等等等，心中有太多的疑惑，虽然现在可以提自己的model，也可以用框架来编程实现，但仍然回答不出上面的问题，那些为什么的问题。</p>
+<p>路漫漫其修远兮，吾将上下而求索。</p>
+<p>最后是广告时间，如果您对PaperWeekly做的事情感兴趣，可以关注下面的公众号，或者<a href="http://rsarxiv.github.io/atom.xml">订阅</a>本博客。</p>
+<img src="/2016/05/13/Paper翻译列表/qrcode.jpg" width="350" height="350">
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-12T01:33:10.000Z"><a href="/2016/06/12/Gated-Attention-Readers-for-Text-Comprehension-PaperWeekly/">2016-06-12</a></time>
       
       
@@ -2672,7 +2736,7 @@
   
     <li><a href="/tags/NLP/">NLP</a><small>2</small></li>
   
-    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>109</small></li>
+    <li><a href="/tags/PaperWeekly/">PaperWeekly</a><small>110</small></li>
   
     <li><a href="/tags/RNN/">RNN</a><small>1</small></li>
   
@@ -2708,7 +2772,7 @@
   
     <li><a href="/tags/language-model/">language model</a><small>1</small></li>
   
-    <li><a href="/tags/nlp/">nlp</a><small>127</small></li>
+    <li><a href="/tags/nlp/">nlp</a><small>128</small></li>
   
     <li><a href="/tags/open-source/">open source</a><small>1</small></li>
   
